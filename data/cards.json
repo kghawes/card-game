@@ -1,0 +1,37 @@
+{
+  "IRON_LONGSWORD": {
+    "name": "Iron Longsword",
+    "damage": 2,
+    "cost": 2
+  }
+  "IRON_DAGGER": {
+    "name": "Iron Dagger",
+    "damage": 1,
+    "cost": 1
+  }
+  "MISS": {
+    "name": "Miss",
+    "damage": 0,
+    "cost": 0
+  }
+  "RAZOR_BEAK": {
+    "name": "Razor Beak",
+    "damage": 2,
+    "cost": 2
+  }
+  "SHARP_TAIL": {
+    "name": "Sharp Tail",
+    "damage": 1,
+    "cost": 1
+  }
+  "FLAP": {
+    "name": "Flap",
+    "damage": 0,
+    "cost": 1
+  }
+  "SHARP_TEETH": {
+    "name": "Sharp Teeth",
+    "damage": 1,
+    "cost": 1
+  }
+}
