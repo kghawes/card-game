@@ -1,21 +1,32 @@
-import json
+from utils import Prototype
 
 class Card:
-    def __init__(self, name: str, damage: int, cost: int):
+    def __init__(self, name, damage, cost):
         self.name = name
         self.damage = damage
         self.cost = cost
 
-def load_cards(filename: str):
-    with open(filename, "r") as file:
-        data = json.load(file)
-    cards = {}
-    for card_id, card_data in data.items():
-        if not all(k in card_data for k in ("name", "damage", "cost")):
-            raise ValueError(f"Card {card_id} is missing required fields.")
-        cards[card_id] = Card(
-            name=card_data["name"],
-            damage=card_data["damage"],
-            cost=card_data["cost"]
+    def __repr__(self):
+        return f"Card(name={self.name}, damage={self.damage}, cost={self.cost})"
+
+class CardPrototype(Card, Prototype):
+    required_fields = ["name", "damage", "cost"]
+
+    def clone(self):
+        return Card(self.name, self.damage, self.cost)
+
+class CardCache:
+    def __init__(self, filename):
+        self.card_prototypes = CardPrototype.load_prototypes(
+            filename=filename,
+            required_fields=CardPrototype.required_fields,
+            prototype_class=CardPrototype
         )
-    return cards
+
+    def create_card(self, card_id: str) -> Card:
+        if card_id not in self.card_prototypes:
+            raise KeyError(f"Card ID '{card_id}' not found.")
+        return self.card_prototypes[card_id].clone()
+
+    def list_cards(self):
+        return list(self.card_prototypes.keys())
