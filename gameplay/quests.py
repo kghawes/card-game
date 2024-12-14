@@ -6,7 +6,7 @@ class Quest:
         self.description = description
         self.encounters = []
         for encounter in encounters:
-            self.encounters.append()
+            self.encounters.append(Encounter(enemy_cache.create_enemy(encounter)))
 
 class QuestCache:
     def __init__(self, quests_path, enemy_cache):
