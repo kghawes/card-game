@@ -1,5 +1,5 @@
 from gameplay.combat_manager import CombatManager
-from gameplay.quests import Quest
+from gameplay.quests import Quest, QuestCache
 from gameplay.encounters import Encounter
 from core.cards import CardCache
 from core.enemies import EnemyCache
@@ -13,11 +13,14 @@ class Game:
         self.text_interface = TextInterface()
         self.card_cache = CardCache(constants.CARDS_PATH)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH, self.card_cache)
+        self.quest_cache = QuestCache(constants.QUESTS_PATH, self.enemy_cache)
         self.player = Player(self.card_cache)
         
     def game_loop(self):
-        enemy = self.enemy_cache.create_enemy("CLIFF_RACER")
-        quest = Quest("Embarking on a test quest.", Encounter(enemy))
+        enemy1 = self.enemy_cache.create_enemy("CLIFF_RACER")
+        enemy2 = self.enemy_cache.create_enemy("RAT")
+        encounters = [Encounter(enemy1), Encounter(enemy2)]
+        quest = Quest("Embarking on a test quest.", encounters)
 
         self.text_interface.send_message(constants.SPLASH_MESSAGE)
         self.player.name = self.text_interface.name_prompt()

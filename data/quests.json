@@ -1,0 +1,6 @@
+{
+  "TEST_QUEST": {
+    "ENCOUNTERS": ["CLIFF_RACER", "RAT"],
+    "DESCRIPTION": "You are embarking on a test quest."
+  }
+}

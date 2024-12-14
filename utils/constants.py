@@ -11,6 +11,7 @@ MAX_NAME_LENGTH = 20
 CARDS_PATH = "data/cards.json"
 ENEMIES_PATH = "data/enemies.json"
 STARTING_DECKS_PATH = "data/starting_decks.json"
+QUESTS_PATH = "data/quests.json"
 
 SPLASH_MESSAGE = "Welcome to the game!"
 PROMPT_NAME = "What is your character’s name? "
