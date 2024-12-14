@@ -1,12 +1,12 @@
-from constants import Resources
-import CardManager
+from utils.constants import Resources
+from card_manager import CardManager
 
 class Combatant:
     def __init__(self, name, max_health, max_stamina, starting_deck):
         self.name = name
         self.max_health = max_health
         self.max_stamina = max_stamina
-        self.card_manager = CardManager(starting_deck.clone())
+        self.card_manager = CardManager(starting_deck)
         self.replenish_health()
         self.replenish_stamina()
         
@@ -36,14 +36,3 @@ class Combatant:
 
     def try_spend_stamina(self, amount) -> bool:
         return self.try_spend_resource(Resources.STAMINA.value, amount)
-
-class Player(Combatant):
-    def __init__(self):
-        super().__init__("", )
-        self.gold = 0
-        
-    def gain_gold(self, amount):
-        self.gold += amount
-        
-    def try_spend_gold(self, amount):
-        return self.try_spend_resource(Resources.GOLD.value, amount)

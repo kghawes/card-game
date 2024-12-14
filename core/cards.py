@@ -1,4 +1,4 @@
-from utils import Prototype
+from utils.utils import Prototype
 
 class Card:
     def __init__(self, name, damage, cost):

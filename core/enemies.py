@@ -1,6 +1,5 @@
 from copy import copy
-from utils.prototype import Prototype
-from utils.data_loader import load_json
+from utils.utils import Prototype, load_json
 from combatants import Combatant
 
 class Enemy(Combatant):
