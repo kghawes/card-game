@@ -15,6 +15,7 @@ QUESTS_PATH = "data/quests.json"
 
 SPLASH_MESSAGE = "Welcome to the game!"
 PROMPT_NAME = "What is your character’s name? "
+ENTER_TOWN_MESSAGE = "Entering Seyda Neen."
 VICTORY_MESSAGE = "You won!"
 DEFEAT_MESSAGE = "Game over!"
 BEAT_GAME_MESSAGE = "You beat the game!"

@@ -10,7 +10,7 @@ class TextInterface:
             response = input(constants.PROMPT_NAME)
         return response
 
-    def display_turn_info(self, enemy, player):
+    def display_turn_info(self, player, enemy):
         print(constants.DISPLAY_TURN_INFO.format(
             constants.TEXT_DIVIDER,
             enemy.name, enemy.health, enemy.max_health,
