@@ -1,12 +1,12 @@
 from utils.constants import Resources
-from card_manager import CardManager
+from gameplay.card_manager import CardManager
 
 class Combatant:
-    def __init__(self, name, max_health, max_stamina, starting_deck):
+    def __init__(self, name, max_health, max_stamina, starting_deck, card_cache):
         self.name = name
         self.max_health = max_health
         self.max_stamina = max_stamina
-        self.card_manager = CardManager(starting_deck)
+        self.card_manager = CardManager(starting_deck, card_cache)
         self.replenish_health()
         self.replenish_stamina()
         
@@ -18,7 +18,7 @@ class Combatant:
         
     def take_damage(self, amount) -> bool:
         self.health = max(self.health - amount, 0)
-        return self.is_alive(self)
+        return self.is_alive()
     
     def is_alive(self) -> bool:
         return self.health > 0

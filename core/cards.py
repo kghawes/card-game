@@ -6,9 +6,6 @@ class Card:
         self.damage = damage
         self.cost = cost
 
-    def __repr__(self):
-        return f"Card(name={self.name}, damage={self.damage}, cost={self.cost})"
-
 class CardPrototype(Card, Prototype):
     required_fields = ["name", "damage", "cost"]
 

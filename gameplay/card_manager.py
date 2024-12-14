@@ -1,10 +1,19 @@
 import random
 
 class CardManager:
-    def __init__(self, starting_deck):
-        self.deck = starting_deck[:]
+    def __init__(self, starting_deck, card_cache):
+        self.deck = self._create_deck(starting_deck, card_cache)
         self.hand = []
         self.discard_pile = []
+    
+    def _create_deck(self, deck_list, card_cache):
+        deck = []
+        for entry in deck_list:
+            card_id = entry.get("card")
+            quantity = entry.get("quantity")
+            for _ in range(quantity):
+                deck.append(card_cache.create_card(card_id))
+        return deck
 
     def shuffle(self):
         random.shuffle(self.deck)

@@ -1,29 +1,33 @@
 from copy import copy
 from utils.utils import Prototype, load_json
-from combatants import Combatant
+from core.combatants import Combatant
+from gameplay.treasure import Treasure
 
 class Enemy(Combatant):
-    def __init__(self, loot):
-        self.loot = loot
+    def __init__(self, name, max_health, max_stamina, deck, card_cache, loot):
+        super().__init__(name, max_health, max_stamina, deck, card_cache)
+        self.loot = Treasure(loot)
 
 class EnemyPrototype(Enemy, Prototype):
     def clone(self):
         return copy(self)
 
 class EnemyCache:
-    def __init__(self, filename):
-        self.enemy_prototypes = self._load_enemy_prototypes(filename)
+    def __init__(self, filename, card_cache):
+        self.enemy_prototypes = self._load_enemy_prototypes(filename, card_cache)
 
-    def _load_enemy_prototypes(self, filename: str) -> dict:
+    def _load_enemy_prototypes(self, filename: str, cards) -> dict:
         enemy_data = load_json(filename)
         prototypes = {}
         for enemy_id, data in enemy_data.items():
-            if not all(key in data for key in ["name", "health", "stamina", "loot"]):
+            if not all(key in data for key in ["name", "max_health", "max_stamina", "deck", "loot"]):
                 raise ValueError(f"Enemy '{enemy_id}' is missing required fields.")
             prototypes[enemy_id] = EnemyPrototype(
                 name=data["name"],
-                health=data["damage"],
-                stamina=data["stamina"],
+                max_health=data["max_health"],
+                max_stamina=data["max_stamina"],
+                deck=data["deck"],
+                card_cache=cards,
                 loot=data["loot"]
             )
         return prototypes

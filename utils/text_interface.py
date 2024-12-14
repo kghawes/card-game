@@ -1,4 +1,4 @@
-import constants
+import utils.constants as constants
 
 class TextInterface:
     def send_message(self, message):

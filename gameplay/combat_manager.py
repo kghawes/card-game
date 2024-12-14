@@ -44,7 +44,7 @@ class CombatManager:
 
     def play_card(self, combatant, opponent, card, text_interface):
         combatant.card_manager.discard(card)
-        combatant.spend_stamina(card.cost)
+        combatant.try_spend_stamina(card.cost)
         opponent.take_damage(card.damage)
         text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(
             combatant.name, card.name, opponent.name, opponent.health
