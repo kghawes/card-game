@@ -1,28 +1,29 @@
-class StatusManager():
+class StatusManager:
+    REMOVE_ALL = None
+
     def __init__(self):
-        self.statuses = dict()
-    
+        self.statuses = {}
+
     def has_status(self, status_id) -> bool:
-        if status_id in self.statuses:
-            if self.statuses[status_id] > 0:
-                return True
-            else:
-                self.remove(status_id)
-        return False
-    
+        return status_id in self.statuses and self.statuses[status_id] > 0
+
     def apply(self, status_id, level):
-        if self.has_status(status_id):
-            self.statuses[status_id] += level
-        else:
-            self.statuses[status_id] = level
-    
-    def remove(self, status_id, levels):
-        if self.has_status(status_id):
-            if self.statuses[status_id] > levels:
-                self.statuses[status_id] -= levels
-            else:
+        self.statuses[status_id] = self.statuses.get(status_id, 0) + level
+
+    def remove(self, status_id, levels_to_remove=REMOVE_ALL):
+        if status_id in self.statuses:
+            if levels_to_remove is self.REMOVE_ALL or self.statuses[status_id] <= levels_to_remove:
                 del self.statuses[status_id]
-    
+            else:
+                self.statuses[status_id] -= levels_to_remove
+
     def decrement_statuses(self):
-        for status in self.statuses.keys():
-            self.remove(status, 1)
+        for status_id in list(self.statuses.keys()):
+            self.remove(status_id, 1)
+
+    def trigger_statuses(self, status_registry, subject, *args, **kwargs) -> bool:
+        for status_id, level in self.statuses.items():
+            status = status_registry.get_status(status_id)
+            if status.trigger_on_turn(subject, level, *args, **kwargs):
+                return True
+        return False

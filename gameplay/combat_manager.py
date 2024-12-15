@@ -22,10 +22,16 @@ class CombatManager:
             turn_ended = self.do_player_action(player, enemy, text_interface)
         player.card_manager.discard_hand()
 
-    def beginning_of_turn(self, combatant):
+    def beginning_of_turn(self, combatant) -> bool: # returns whether a status effect ended combat
         combatant.card_manager.shuffle()
         combatant.card_manager.draw()
+        
+        if combatant.status_manager.trigger_statuses():
+            return True
+        combatant.status_manager.decrement_statuses()
+        
         combatant.replenish_stamina()
+        combatant.replenish_magicka()
 
     def do_player_action(self, player, enemy, text_interface) -> bool:
         selection = text_interface.turn_options_prompt()

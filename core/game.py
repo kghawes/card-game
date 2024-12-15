@@ -2,6 +2,7 @@ from gameplay.combat_manager import CombatManager
 from gameplay.quests import QuestCache
 from gameplay.town import Town
 from core.effects import EffectRegistry
+from core.statuses import StatusRegistry
 from core.cards import CardCache
 from core.enemies import EnemyCache
 from core.player import Player
@@ -12,6 +13,7 @@ class Game:
     def __init__(self):
         self.text_interface = TextInterface()
         self.effect_registry = EffectRegistry()
+        self.status_registry = StatusRegistry()
         self.card_cache = CardCache(constants.CARDS_PATH)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH, self.card_cache)
         self.quest_cache = QuestCache(constants.QUESTS_PATH, self.enemy_cache)
@@ -20,9 +22,12 @@ class Game:
         
     def game_loop(self):
         self.town.enter_town(self.text_interface)
+        self.text_interface.send_message(constants.SPLASH_MESSAGE)
+        self.player.name = self.text_interface.name_prompt()
+        
         for quest in self.quest_cache.quests:
-            self.text_interface.send_message(constants.SPLASH_MESSAGE)
-            self.player.name = self.text_interface.name_prompt()
+            self.player.replenish_health()
+            
             self.text_interface.send_message(quest.description)
     
             for encounter in quest.encounters:
