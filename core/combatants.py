@@ -2,16 +2,16 @@ from utils.constants import Resources
 from gameplay.card_manager import CardManager
 
 class Combatant:
-    def __init__(self, name, max_health, max_stamina, starting_deck, card_cache):
+    def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache):
         self.name = name
         self.max_health = max_health
         self.max_stamina = max_stamina
-        # self.max_magicka = max_magicka
+        self.max_magicka = max_magicka
         self.card_manager = CardManager(starting_deck, card_cache)
+        self.status_manager = StatusManager()
         self.replenish_health()
         self.replenish_stamina()
-        # self.replenish_magicka()
-        self.statuses = []
+        self.replenish_magicka()
         
     def replenish_health(self):
         self.health = self.max_health
@@ -19,8 +19,8 @@ class Combatant:
     def replenish_stamina(self):
         self.stamina = self.max_stamina
     
-    # def replenish_magicka(self):
-    #     self.magicka = self.max_magicka
+    def replenish_magicka(self):
+        self.magicka = self.max_magicka
     
     def gain_health(self, amount):
         self.health = min(self.max_health, self.health + amount)
@@ -28,8 +28,8 @@ class Combatant:
     def gain_stamina(self, amount):
         self.stamina = min(self.max_stamina, self.stamina + amount)
         
-    # def gain_magicka(self, amount):
-    #     self.magicka = min(self.max_magicka, self.magicka + amount)
+    def gain_magicka(self, amount):
+        self.magicka = min(self.max_magicka, self.magicka + amount)
         
     def take_damage(self, amount, damage_type) -> bool:
         # check for weakness or resistance

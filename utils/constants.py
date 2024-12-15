@@ -16,16 +16,15 @@ class DamageTypes(Enum):
 class EffectNames(Enum):
     DAMAGE = "Damage"
     RESTORE = "Restore"
-    CURE = "Cure"
+    PICKPOCKET = "Pickpocket"
+
+class StatusNames(Enum):
+    DEFENSE = "Defense"
+    POISON = "Poison"
 
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3
 MAX_NAME_LENGTH = 20
-
-DEFAULT_NAME = ""
-DEFAULT_EFFECTIVENESS = 1
-DEFAULT_COSTLINESS = 1
-DEFAULT_RARITY = 1
 
 CARDS_PATH = "data/cards.json"
 ENEMIES_PATH = "data/enemies.json"
