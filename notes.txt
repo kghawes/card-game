@@ -1,0 +1,394 @@
+Game Mechanics
+
+Card
+Name
+Type (Weapon, Armor, Spell, Item, Skill, Consumable, Conjured)
+Weapons, Armor, and Skills cost stamina and are partly class-restricted (by Style, Material/Weight, and Specialization respectively)
+  Weapons deal physical damage plus other effects
+  Armor adds defense plus other effects
+  Spells cost magicka and have various effects
+  Items are free to play but may have downside effects, may be weak, or may be expensive/rare
+  Consumables are free to play but can only be used once per combat encounter and may be expensive/rare
+  Conjured cards (like a bound mace) cost stamina and last until used or the end of combat, after which they are permanently deleted
+Cost (stamina or magicka)
+  Modified cost (temporary)
+Effects
+  Imbued Effects (temporary)
+Value (gold)
+
+Weapon
+Style (Long Blade, Blunt Weapon, Short Blade, Marksman, Staff)
+  Fighter: can use Long Blade, Blunt Weapon
+  Thief: can use Short Blade, Marksman
+  Mage: can use Staff
+Substyle
+Long blade: longsword, claymore
+Blunt weapon: mace, warhammer
+Short blade: dagger, shortsword
+Marksman: throwing star, bow
+(Staff: none)
+
+Armor
+Weight (Light, Medium or Heavy)
+Fighter: can use Medium or Heavy
+Thief: can use Light or Medium
+Mage: can use none
+
+Spells
+School
+  Alteration
+   Defense for mages
+   Own hand control (draw and cost reduction)
+   Synergy with illusion for big power plays
+  Conjuration
+   Alternative to destruction/provides physical type damage for mages
+  Destruction
+   Damage and debuff
+  Illusion
+   Opponent interaction
+  Mysticism
+   Unusual or combat-ending effects
+  Restoration
+   Restore and buff
+   Sundry synergies using situational buffs
+All classes can use spells, but mages get the best starting magicka, their starting deck contains mostly spells where other classes have to find them, and mage skill cards that buff spells are mostly unavailable to other classes.
+
+Skills
+Specialization (Combat, Stealth, or Magic)
+Out-of-class skills can be purchased and used but never appear as treasure rewards and may be difficult to find
+Skills usually don’t deal damage or provide defense to avoid overlap with weapons and armor (which also cost stamina), but can overlap with spell effects since those cost magicka
+
+Items
+Cost nothing to play
+Mundane items may be useless (merchant fodder) or provide minimal benefits
+Enchanted items are rare and valuable, and will never have astoundingly good effects
+Examples include clothing items, tools, books, and clutter
+
+Consumables
+Consumables cost nothing to play and go to a special “consumed” pile when played (and cannot be played again until next combat).
+Potions
+  Cheaper and less powerful than scrolls, with simpler effects
+  Spoiled potions and liquors with drawback effects will be available in the early game, e.g. for when you need that extra bit of stamina to deal the killing blow and can afford to become more vulnerable
+  Potions provide healing options for non-spellcasters
+  Potion effects can be boosted by the alchemist status
+Scrolls
+  Later-game cards that have big one-time effects to change the course of combat
+  Scroll effects can be boosted by the enchanter status
+
+Generic cards (modifiers)
+A modifier changes a card’s name, cost, value, and effects.
+By card type:
+  Weapons can have a material modifier, a substyle modifier, and an enchantment modifier.
+    Staves have some different materials and enchantments and no substyle.
+  Armors can have a material modifier and a piece modifier.
+  Items can have a fashion modifier and an article modifier.
+  Consumables (potions) can have a quality modifier.
+Materials: chitin, netch leather, glass, bonemold, orcish, adamantium, iron, steel, ebony, daedric
+  Staff-only materials: wooden, silver
+Substyles: longsword, claymore, mace, warhammer, dagger, shortsword, throwing star, bow
+Enchantments: flame, shard, spark, viper, fire, frost, storm, poison
+  Staff-only enchantments: chastening, judgment, reckoning, shaming, war, peace, ancestors 
+Pieces: gauntlets, helm, boots, cuirass, shield
+Fashions: common, expensive, extravagant, exquisite
+Articles: gloves, hood, shoes, robe, belt, ring, amulet
+Qualities: bargain, cheap, standard, quality, exclusive
+
+Effects
+Apply status (to self or opponent)
+Remove status (from self)
+Restore stat (health, stamina, magicka) X
+  Increase stat by up to X, or to max.
+Drain stat X
+  Decrease stat by up to X, or to 0.
+  Your stamina and magicka can only be drained during your own turn.
+  Since it is not damage, drain health is not blocked by defense.
+Drain attribute (strength, endurance, intelligence, agility, speed, willpower, luck)
+  Reduce attribute status level by up to X points or remove it.
+Draw X
+Discard X
+  Select up to X cards to discard, or discard hand.
+Shield X
+  Apply defense X or increase defense status level by X points.
+Imbue effect
+  Add an imbued effect to another card(s).
+Jump X
+  Reduce the cost of your most costly card in hand by up to X.
+Pickpocket X
+  Look at the top X cards in your opponent’s deck and pick one of them to play immediately as your own card (it goes to your opponent’s discard pile). Your opponent discards the rest.
+Scry X
+  Look at the top X cards in your deck and pick one of them to add to your hand. Discard the rest.
+Dispel X
+  Reduce each of your active statuses’ levels by up to X or remove them.
+Divine intervention
+  Immediately end combat and return to town where quest can be retried (reduce gold by up to 100, or down to 0).
+Almsivi intervention
+  Immediately end combat and return to town where quest can be retried (reduce experience towards next level by up to 100, or down to 0).
+Recall
+  Immediately end combat and return to quest where enemy encounter can be .
+ Absorb health X
+  Reduce opponent health by up to X and restore your health by that much.
+Conjure card
+  Add a conjured card to your hand.
+
+Statuses
+Decrement X by 1 each beginning of turn, or remove the status if X is zero.
+Statuses go into effect immediately, but some may have immediate effects and others may trigger at each beginning of the turn.
+Defense X
+  Take X less damage from a card and if you do, reduce defense by up to X or remove it.
+Burden X
+  Skills cost X more stamina
+Feather X
+  Skills cost up to X less stamina, or 0 stamina
+Levitate X
+  For X turns, when you draw for turn the cost of each card is set to the average cost of the cards in your hand (rounded up).
+  Applies after other statuses that change cost.
+Locked X
+  For X turns, the opponent cannot interact with your deck.
+Waterwalking X
+  For X turns, cards you play don’t get discarded.
+  Doesn't apply to conjured or pickpocketed cards.
+Waterbreathing X
+  Select up to X cards from your discard pile and add them to your hand.
+Swift Swim X
+  For X turns, after you draw for turn, you may discard any number of cards then draw that many cards.
+Poison X
+  Take X poison damage each turn.
+  Applies after other statuses that change health or max health.
+Weakness to damage type (physical, fire, frost, shock, poison) X
+  Take 1+0.25X times damage from that type.
+Damage strength X
+  Your weapons do (0.75)^X times damage (minimum 1 damage).
+Damage endurance X
+  Your armor provides (0.75)^X times defense (minimum 0 defense).
+Damage intelligence X
+  Reduce max magicka by up to X (min 0).
+Damage agility X
+  Reduce max stamina by up to X (min 0).
+Damage speed X
+  Draw up to X fewer cards each turn (min 2).
+Damage willpower X
+  Your spells do (0.75)^X times damage (min 1 for spells that deal damage).
+Damage luck X
+  If you have this status at the end of combat, receive the minimum possible treasure rewards.
+Common disease X
+  Cannot play more than 4 cards per turn for X turns.
+  Applies to pickpocketed cards.
+Blight disease X
+  Cannot play more than 2 cards per turn for X turns.
+  Applies to pickpocketed cards.
+Regenerate X
+  Restore X health each turn.
+  Applies after statuses that change health.
+Resistance to damage type X
+  Take (0.75)^X times damage from that type (min 0).
+Immune to damage type X
+  Take no damage from type for X turns.
+Fortify strength
+  Your weapons do 1+0.25X times damage.
+Fortify endurance
+  Your armor provides 1+0.25X times defense.
+Fortify intelligence X
+  Max magicka +X.
+Fortify agility X
+  Max stamina +X.
+Fortify speed X
+  Draw X additional cards each turn.
+Fortify willpower X
+  Your spells deal 1+0.25X times damage.
+Fortify luck X
+  If you have this status at the end of combat, receive the maximum treasure rewards.
+Fortify magic school X (alteration, conjuration, destruction, illusion, mysticism, restoration)
+  Spells of this school cost up to X less magicka (min 0).
+Fortify armor weight (light, medium, heavy)
+  Armor of this weight cost up to X less stamina (min 0).
+Fortify weapon style (long blade, blunt weapon, short blade, marksman weapon, staff)
+  Weapons of this style cost up to X less stamina (min 0).
+Silence X
+  Cannot play spells for X turns.
+Blind X
+  Cannot play weapons for X turns.
+Paralyze X
+  Cannot play any card type except consumable cards for X turns.
+Evasion X
+  0.1X chance to receive 0 damage when a card would deal damage to you.
+Undetected X
+  0.1X chance to skip the opponent’s next turn.
+Frenzy X
+  Cards you play have no effects except dealing damage for X turns.
+Calm X
+  Cards you play deal 0 damage for X turns.
+Commanded (one turn only)
+  Your turn is controlled by your opponent.
+Reflect X
+  When your opponent deals elemental damage (fire, frost, shock, poison) to you, you take (0.9)^X times less damage and your opponent takes damage of the same type equal to the damage blocked.
+Spell absorption
+  When your opponent deals elemental damage to you, you take (0.9)^X times less damage and you get fortify intelligence equal to the number of points of damage blocked.
+Soul trap X
+  If the player plays a soul gem while the enemy has this status, player’s soul gem card will be replaced with a filled soul gem card.
+Mark X
+  If you play a card with an intervention effect while you have this status, you will resume the quest at this encounter rather than starting over.
+Alchemist X
+  Your potions are 1+0.25X times more effective.
+Enchanter X
+  Your scrolls are 1+0.25X times more effective.
+Poisoner X
+  Your poison potions are 1+0.25X times more effective.
+Connoisseur X
+  Your liquor potions are 1+0.25X times more effective.
+Skooma Fiend (one turn only)
+  Skooma is twice as effective this turn.
+Comments and examples:
+  If you apply poison 1 to the enemy during your turn, they take 1 poison damage at the start of their next turn, then poison is decremented to 0 and gets removed. If you were to apply poison 1 to yourself during your turn, it has no immediate effect and activates at the start of your next turn. If you apply fortify strength 1 to yourself, weapon cards you play this turn are more effective and the status will be removed before you can play cards on your next turn.
+  Statuses that lower a number stack multiplicatively, while statuses that raise a number stack additively. This is to ensure the effects neither max out nor blow up in their effectiveness, but scale with status level.
+  Statuses that lower a number should round that number down (floor), while statuses that raise a number should round that number up (ceiling).
+
+Player Character 
+Name
+Class
+Race
+Birthsign
+Level
+  Upon level up, +1 to health, stamina, or magicka
+Experience towards next level
+  Don't record total experience
+Powers (“permanent” status effects that don't decrement but can be temporarily drained or dispelled)
+Gold
+Deck
+Library (card storage)
+
+Player Character Classes and Races
+Fighter
+  Hits for big damage and tanks damage well
+  Starts with 10 health, 6 stamina and 0 magicka
+  Nord
+    Resist frost 2
+    Fortify endurance 1
+    Fortify blunt weapon 1
+  Orc
+    Fortify strength 1
+    Fortify endurance 1
+    Max health +1
+  Redguard
+    Fortify strength 2
+    Fortify agility 1
+    Fortify long blade 1
+Thief
+  Lots of small hits and defend by dodging and trickery
+   Starts with 9 health, 5 stamina and 2 magicka
+  Argonian
+    Immune to poison damage
+    Cannot have poison status
+    Cannot have common disease status
+    Cannot have blight disease status
+    Cannot have paralyze status
+    Fortify light armor 1
+  Bosmer
+    Fortify agility 1
+    Fortify intelligence 1
+    Evasion 1
+  Khajiit
+    Fortify agility 2
+    Undetected 1
+ Mage  
+  Versatile, strategic
+  Starts with 7 health, 1 stamina and 7 magicka
+  Altmer
+    Weakness to fire 1
+    Weakness to frost 1
+    Weakness to shock 1
+    Fortify intelligence 3
+  Breton
+    Resist fire 1
+    Resist frost 1
+    Resist shock 1
+  Dunmer
+    Resist fire 2
+    Fortify agility 1
+(Any)
+  Imperial
+    Starts with 10 health, 3 stamina and 3 magicka
+    +20% gold from treasure
+
+Player Character Birthsigns
+The Warrior
+  Fortify strength 1
+The Thief
+  Fortify agility 1
+The Mage
+  Fortify intelligence 1
+The Serpent
+  Immune to poison
+  Add poison power spell card to starting deck
+    Power spells are free to cast
+The Lady
+  Fortify endurance 2
+The Steed
+  Fortify Speed 1
+The Lord
+  Regeneration 1
+  Weakness to Fire 3
+The Apprentice
+  Weakness to Fire 1
+  Weakness to Frost 1
+  Weakness to Shock 1
+  Starting max magicka +3
+    This is different from fortify intelligence because that is a status that can be removed during combat (it will be reapplied at the beginning of next combat)
+The Atronach
+  Resist Fire 2
+  Resist Frost 2
+  Resist Shock 2
+The Ritual
+  Resist Physical 3
+The Lover
+  Add paralyze power spell card to starting deck
+The Shadow
+  Add invisibility power spell card to deck
+The Tower
+  +30% gold from treasure
+
+Example: 
+An orc born under the ritual starts with 11 health, 6 stamina, 0 magicka, resist physical damage 3, and the fighter starting deck.
+A khajiit born under the thief starts with 9 health, 5+3 stamina, 2 magicka, undetected 1, and the thief starting deck.
+An altmer born under the apprentice starts with 7 health, 1 stamina, 7+6 magicka, weaknesses to fire, frost, and shock at level 2, and the mage starting deck.
+An imperial born under the tower starts with 10 health, 3 stamina, 3 magicka, +50% gold from treasure, and any starting deck.
+
+Game loop and progression
+Start in Town
+  Visit Merchants
+  Adjust Deck and Library
+  Acquire Quest
+Embark on Quest
+  Encounter an Enemy, Event, or Treasure
+  Repeat
+Return to Town for Treasure
+
+Quests
+A quest is a sequence of encounters. Health is maintained between encounters.
+An encounter can be an enemy, a treasure, or an event.
+Enemy encounters lead to combat.
+Treasure encounters give the player rewards.
+Events can have atmospheric descriptions or NPC dialogue, and can potentially involve some choices and consequences.
+A quest ends with an enemy boss encounter. In the early game boss enemies are tougher regular enemies.
+Eventually: different questlines per class (guild quests)
+
+Combat
+Combat is turn-based with the Player always going first.
+Turn phases
+  Start of Turn
+    Handle status effects
+    Replenish magicka and stamina to max
+    Draw 6 cards for turn
+  Main
+    Play cards
+  End of Turn
+    Discard Hand
+Enemy turns proceed similarly. Combat ends when one combatant reaches 0 health, or an intervention or recall effect resolves. If the player wins, they get treasure.
+
+Treasure
+Can contain gold, experience, and/or card rewards
+Gold and card rewards should be partially random
+
+Merchants
+Merchants will buy cards at 80% value and sell cards at 120% value. Stock is possibly random.
+Maybe have different merchants that sell different types of cards
+Someday: disposition discount system?

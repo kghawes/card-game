@@ -1,0 +1,9 @@
+{
+  "WEAPON_TEMPLATE": {
+    "NAME": "",
+    "CARD_TYPE": "WEAPON",
+    "EFFECTS": { 
+    "PHYSICAL_DAMAGE": 1
+    }
+  }
+}
