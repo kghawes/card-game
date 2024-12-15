@@ -1,0 +1,34 @@
+{
+  "RAZOR_BEAK": {
+    "NAME": "Razor Beak",
+    "TYPE": "WEAPON",
+    "STYLE": "NATURAL",
+    "COST": 2,
+    "VALUE": 0,
+    "EFFECTS": { "PHYSICAL_DAMAGE": 2 },
+  },
+  "SHARP_TAIL": {
+    "NAME": "Sharp Tail",
+    "TYPE": "WEAPON",
+    "STYLE": "NATURAL",
+    "COST": 1,
+    "VALUE": 0,
+    "EFFECTS": { "PHYSICAL_DAMAGE": 1 }
+  },
+  "FLAP": {
+    "NAME": "Flap",
+    "TYPE": "WEAPON",
+    "STYLE": "NATURAL",
+    "COST": 1,
+    "VALUE": 0,
+    "EFFECTS": { "NO_EFFECT": 0 }
+  },
+  "SHARP_TEETH": {
+    "NAME": "Sharp Teeth",
+    "TYPE": "WEAPON",
+    "STYLE": "NATURAL",
+    "COST": 1,
+    "VALUE": 0,
+    "EFFECTS": { "PHYSICAL_DAMAGE": 1 }
+  }
+}

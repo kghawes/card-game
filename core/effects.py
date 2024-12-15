@@ -16,6 +16,13 @@ class Effect(ABC):
     def format_name(self, first_part, second_part) -> str:
         return first_part + " " + second_part
 
+class NoEffect(Effect):
+    def __init__(self):
+        super().__init__(EffectNames.NO_EFFECT.name, EffectNames.NO_EFFECT.value)
+    
+    def resolve(self, source, target) -> bool:
+        return False
+
 class DamageEffect(Effect):
     def __init__(self, damage_type):
         effect_id = self.format_id(damage_type.name, EffectNames.DAMAGE.name)

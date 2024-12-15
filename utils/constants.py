@@ -17,6 +17,7 @@ class EffectNames(Enum):
     DAMAGE = "Damage"
     RESTORE = "Restore"
     PICKPOCKET = "Pickpocket"
+    GAIN_DEFENSE = "Gain Defense"
 
 class StatusNames(Enum):
     DEFENSE = "Defense"

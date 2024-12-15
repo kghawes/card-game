@@ -45,11 +45,11 @@ class CombatManager:
     def play_card(self, combatant, opponent, card, text_interface) -> bool:
         combatant.card_manager.discard(card)
         combatant.try_spend_stamina(card.cost)
-        opponent.take_damage(card.damage)
+        opponent.take_damage(card.damage, "")
         text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(
             combatant.name, card.name, opponent.name, opponent.health
         ))
-        return not opponent.is_alive
+        return not opponent.is_alive()
 
     def do_enemy_turn(self, player, enemy, text_interface):
         self.beginning_of_turn(enemy)

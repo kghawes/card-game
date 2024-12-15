@@ -41,7 +41,8 @@ class Combatant:
         return self.health > 0
     
     def try_spend_resource(self, resource, amount) -> bool:
-        current_value = getattr(self, resource.lower(), None)
+        resource = resource.lower()
+        current_value = getattr(self, resource, None)
         if current_value is None:
             raise AttributeError(f"'{resource}' is not a valid resource.")
         
@@ -52,7 +53,8 @@ class Combatant:
         return True
 
     def try_spend_stamina(self, amount) -> bool:
-        return self.try_spend_resource(Resources.STAMINA.name, amount)
+        x = Resources.STAMINA.value
+        return self.try_spend_resource(x, amount)
     
     def try_spend_magicka(self, amount) -> bool:
-        return self.try_spend_resource(Resources.MAGICKA.name, amount)
+        return self.try_spend_resource(Resources.MAGICKA.value, amount)
