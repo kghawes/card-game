@@ -1,0 +1,15 @@
+{
+  "DAMAGE": {
+    "PHYSICAL_DAMAGE": "Physical Damage",
+    "FIRE_DAMAGE": "Fire Damage",
+    "FROST_DAMAGE": "Frost Damage",
+    "SHOCK_DAMAGE": "Shock Damage",
+    "POISON_DAMAGE": "Poison Damage"
+  },
+  "RESTORE": {
+    "RESTORE_HEALTH": "Restore Health",
+    "RESTORE_STAMINA": "Restore Stamina",
+    "RESTORE_MAGICKA": "Restore Magicka"
+  }
+  "DEFENSE": { "DEFENSE": "Gain Defense" },
+}

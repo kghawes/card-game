@@ -1,8 +1,10 @@
 {
   "IRON_LONGSWORD": {
-    "name": "Iron Longsword",
-    "damage": 2,
-    "cost": 2
+    "NAME": "Iron Longsword",
+    "TYPE": "WEAPON",
+    "STYLE": "LONG_BLADE",
+    "COST": 2
+    "EFFECTS": { "PHYSICAL_DAMAGE": 2 }
   },
   "IRON_DAGGER": {
     "name": "Iron Dagger",

@@ -4,12 +4,12 @@ Card
 Name
 Type (Weapon, Armor, Spell, Item, Skill, Consumable, Conjured)
 Weapons, Armor, and Skills cost stamina and are partly class-restricted (by Style, Material/Weight, and Specialization respectively)
-  Weapons deal physical damage plus other effects
-  Armor adds defense plus other effects
+  Weapons deal physical damage plus possibly other effects
+  Armor adds defense plus possibly other effects
   Spells cost magicka and have various effects
   Items are free to play but may have downside effects, may be weak, or may be expensive/rare
   Consumables are free to play but can only be used once per combat encounter and may be expensive/rare
-  Conjured cards (like a bound mace) cost stamina and last until used or the end of combat, after which they are permanently deleted
+  Conjured cards (like a bound mace) cost stamina and last until used or the end of combat, after which they are permanently deleted. They can only be acquired through a card effect.
 Cost (stamina or magicka)
   Modified cost (temporary)
 Effects
@@ -55,8 +55,8 @@ All classes can use spells, but mages get the best starting magicka, their start
 
 Skills
 Specialization (Combat, Stealth, or Magic)
-Out-of-class skills can be purchased and used but never appear as treasure rewards and may be difficult to find
-Skills usually don’t deal damage or provide defense to avoid overlap with weapons and armor (which also cost stamina), but can overlap with spell effects since those cost magicka
+Out-of-class skills can be purchased and used but never appear as treasure rewards and may be difficult to find.
+Skills usually don’t deal damage or provide defense to avoid overlap with weapons and armor (which also cost stamina), but can overlap with spell effects since those cost magicka.
 
 Items
 Cost nothing to play
@@ -75,14 +75,7 @@ Scrolls
   Later-game cards that have big one-time effects to change the course of combat
   Scroll effects can be boosted by the enchanter status
 
-Generic cards (modifiers)
-A modifier changes a card’s name, cost, value, and effects.
-By card type:
-  Weapons can have a material modifier, a substyle modifier, and an enchantment modifier.
-    Staves have some different materials and enchantments and no substyle.
-  Armors can have a material modifier and a piece modifier.
-  Items can have a fashion modifier and an article modifier.
-  Consumables (potions) can have a quality modifier.
+Generic cards
 Materials: chitin, netch leather, glass, bonemold, orcish, adamantium, iron, steel, ebony, daedric
   Staff-only materials: wooden, silver
 Substyles: longsword, claymore, mace, warhammer, dagger, shortsword, throwing star, bow
@@ -93,12 +86,26 @@ Fashions: common, expensive, extravagant, exquisite
 Articles: gloves, hood, shoes, robe, belt, ring, amulet
 Qualities: bargain, cheap, standard, quality, exclusive
 
+Non-generic cards
+Weapons
+  Fiend Katana (long blade with conjure longsword effect)
+Potions
+  Liquors (shein, mazte, sujamma, greef, cyrodilic brandy, flin, vintage brandy, skooma)
+Items
+  Tools and apparatuses
+  Gems (pearl, ruby, emerald, diamond)
+Scrolls
+Skills
+Spells
+Conjured cards
+
 Effects
+Deal damage of type (physical, fire, frost, shock, poison)
 Apply status (to self or opponent)
 Remove status (from self)
 Restore stat (health, stamina, magicka) X
   Increase stat by up to X, or to max.
-Drain stat X
+?Drain stat X
   Decrease stat by up to X, or to 0.
   Your stamina and magicka can only be drained during your own turn.
   Since it is not damage, drain health is not blocked by defense.
