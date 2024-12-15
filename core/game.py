@@ -1,6 +1,7 @@
 from gameplay.combat_manager import CombatManager
 from gameplay.quests import QuestCache
 from gameplay.town import Town
+from core.effects import EffectRegistry
 from core.cards import CardCache
 from core.enemies import EnemyCache
 from core.player import Player
@@ -10,6 +11,7 @@ import utils.constants as constants
 class Game:
     def __init__(self):
         self.text_interface = TextInterface()
+        self.effect_registry = EffectRegistry()
         self.card_cache = CardCache(constants.CARDS_PATH)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH, self.card_cache)
         self.quest_cache = QuestCache(constants.QUESTS_PATH, self.enemy_cache)

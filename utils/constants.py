@@ -1,8 +1,21 @@
 from enum import Enum
 
 class Resources(Enum):
-    STAMINA = "stamina"
-    GOLD = "gold"
+    HEALTH = "Health"
+    STAMINA = "Stamina"
+    MAGICKA = "Magicka"
+    GOLD = "Gold"
+
+class DamageTypes(Enum):
+    PHYSICAL = "Physical"
+    FIRE = "Fire"
+    FROST = "Frost"
+    SHOCK = "Shock"
+    POISON = "Poison"
+
+class Effects(Enum):
+    DAMAGE = "Damage"
+    RESTORE = "Restore"
 
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3

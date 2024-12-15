@@ -6,17 +6,33 @@ class Combatant:
         self.name = name
         self.max_health = max_health
         self.max_stamina = max_stamina
+        # self.max_magicka = max_magicka
         self.card_manager = CardManager(starting_deck, card_cache)
         self.replenish_health()
         self.replenish_stamina()
+        # self.replenish_magicka()
+        self.statuses = []
         
     def replenish_health(self):
         self.health = self.max_health
     
     def replenish_stamina(self):
         self.stamina = self.max_stamina
+    
+    # def replenish_magicka(self):
+    #     self.magicka = self.max_magicka
+    
+    def gain_health(self, amount):
+        self.health = min(self.max_health, self.health + amount)
         
-    def take_damage(self, amount) -> bool:
+    def gain_stamina(self, amount):
+        self.stamina = min(self.max_stamina, self.stamina + amount)
+        
+    # def gain_magicka(self, amount):
+    #     self.magicka = min(self.max_magicka, self.magicka + amount)
+        
+    def take_damage(self, amount, damage_type) -> bool:
+        # check for weakness or resistance
         self.health = max(self.health - amount, 0)
         return self.is_alive()
     
@@ -36,3 +52,6 @@ class Combatant:
 
     def try_spend_stamina(self, amount) -> bool:
         return self.try_spend_resource(Resources.STAMINA.value, amount)
+    
+    def try_spend_magicka(self, amount) -> bool:
+        return self.try_spend_resource(Resources.MAGICKA.value, amount)
