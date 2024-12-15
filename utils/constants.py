@@ -13,9 +13,10 @@ class DamageTypes(Enum):
     SHOCK = "Shock"
     POISON = "Poison"
 
-class Effects(Enum):
+class EffectNames(Enum):
     DAMAGE = "Damage"
     RESTORE = "Restore"
+    CURE = "Cure"
 
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3

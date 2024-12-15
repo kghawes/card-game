@@ -26,10 +26,6 @@ class DamageEffect(Effect):
     def resolve(self, source, target, amount = 0):
         target.take_damage(amount, self.damage_type)
 
-class FireDamageEffect(DamageEffect):
-    def __init__(self):
-        super().__init__(DamageTypes.FIRE)
-
 class RestoreEffect(Effect):
     def __init__(self, resource):
         effect_id = self.format_id(EffectNames.RESTORE.name, resource.name)
@@ -44,6 +40,19 @@ class RestoreEffect(Effect):
         # elif self.stat == Resources.MAGICKA.value:
         #     source.gain_magicka(amount)
 
-class RestoreHealthEffect(RestoreEffect):
+class EffectRegistry:
     def __init__(self):
-        super().__init__(Resources.HEALTH)
+        self.effects = self._initialize_effects()
+    
+    def _initialize_effects() -> dict:
+        physical_damage_effect = DamageEffect(DamageTypes.PHYSICAL)
+        fire_damage_effect = DamageEffect(DamageTypes.FIRE)
+        restore_health_effect = RestoreEffect(Resources.HEALTH)
+        
+        effects = {
+            physical_damage_effect.effect_id: physical_damage_effect,
+            fire_damage_effect.effect_id: fire_damage_effect,
+            restore_health_effect.effect_id: restore_health_effect
+            }
+        
+        return effects
