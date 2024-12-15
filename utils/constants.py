@@ -24,6 +24,7 @@ class StatusNames(Enum):
 
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3
+STARTING_MAGICKA = 3
 MAX_NAME_LENGTH = 20
 
 CARDS_PATH = "data/cards.json"

@@ -1,27 +1,8 @@
 {
   "IRON_LONGSWORD": {
-    "NAME": "Iron Longsword",
-    "TYPE": "WEAPON",
-    "STYLE": "LONG_BLADE",
-    "COST": 2,
-    "VALUE": 25,
-    "EFFECTS": { "PHYSICAL_DAMAGE": 2 },
-  },
-  "STEEL_FLAMESWORD": {
-    "NAME": "Steel Flamesword",
-    "TYPE": "WEAPON",
-    "STYLE": "LONG_BLADE",
-    "COST": 2,
-    "VALUE": 80,
-    "EFFECTS": { "PHYSICAL_DAMAGE": 3 },
-    "ENCHANTMENT": "FLAME"
-  },
-  "EBONY_HELM": {
-    "NAME": "Ebony Helm",
-    "WEIGHT": "HEAVY",
-    "COST": 6,
-    "VALUE": 700,
-    "EFFECTS": { "GAIN_DEFENSE": 4 }
+    "name": "Iron Longsword",
+    "damage": 2,
+    "cost": 2
   },
   "IRON_DAGGER": {
     "name": "Iron Dagger",

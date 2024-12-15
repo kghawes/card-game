@@ -4,8 +4,8 @@ from core.combatants import Combatant
 from gameplay.treasure import Treasure
 
 class Enemy(Combatant):
-    def __init__(self, name, max_health, max_stamina, deck, card_cache, loot):
-        super().__init__(name, max_health, max_stamina, deck, card_cache)
+    def __init__(self, name, max_health, max_stamina, max_magicka, deck, card_cache, loot):
+        super().__init__(name, max_health, max_stamina, max_magicka, deck, card_cache)
         self.loot = Treasure(loot)
 
 class EnemyPrototype(Enemy, Prototype):
@@ -26,6 +26,7 @@ class EnemyCache:
                 name=data["name"],
                 max_health=data["max_health"],
                 max_stamina=data["max_stamina"],
+                max_magicka=0,
                 deck=data["deck"],
                 card_cache=cards,
                 loot=data["loot"]

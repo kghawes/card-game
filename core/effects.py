@@ -62,7 +62,7 @@ class EffectRegistry:
     def __init__(self):
         self.effects = self._initialize_effects()
     
-    def _initialize_effects() -> dict:
+    def _initialize_effects(self) -> dict:
         physical_damage_effect = DamageEffect(DamageTypes.PHYSICAL)
         fire_damage_effect = DamageEffect(DamageTypes.FIRE)
         frost_damage_effect = DamageEffect(DamageTypes.FROST)

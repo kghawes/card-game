@@ -19,8 +19,8 @@ class Game:
         self.town = Town()
         
     def game_loop(self):
-        self.town.enter_town()
-        for quest in self.quest_cache:
+        self.town.enter_town(self.text_interface)
+        for quest in self.quest_cache.quests:
             self.text_interface.send_message(constants.SPLASH_MESSAGE)
             self.player.name = self.text_interface.name_prompt()
             self.text_interface.send_message(quest.description)

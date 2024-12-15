@@ -1,5 +1,6 @@
 from utils.constants import Resources
 from gameplay.card_manager import CardManager
+from gameplay.status_manager import StatusManager
 
 class Combatant:
     def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache):
@@ -40,7 +41,7 @@ class Combatant:
         return self.health > 0
     
     def try_spend_resource(self, resource, amount) -> bool:
-        current_value = getattr(self, resource, None)
+        current_value = getattr(self, resource.lower(), None)
         if current_value is None:
             raise AttributeError(f"'{resource}' is not a valid resource.")
         
@@ -51,7 +52,7 @@ class Combatant:
         return True
 
     def try_spend_stamina(self, amount) -> bool:
-        return self.try_spend_resource(Resources.STAMINA.value, amount)
+        return self.try_spend_resource(Resources.STAMINA.name, amount)
     
     def try_spend_magicka(self, amount) -> bool:
-        return self.try_spend_resource(Resources.MAGICKA.value, amount)
+        return self.try_spend_resource(Resources.MAGICKA.name, amount)
