@@ -1,4 +1,3 @@
-from copy import copy
 from utils.utils import Prototype, load_json
 from core.combatants import Combatant
 from gameplay.treasure import Treasure
@@ -8,15 +7,31 @@ class Enemy(Combatant):
         super().__init__(name, max_health, max_stamina, max_magicka, deck, card_cache)
         self.loot = Treasure(loot)
 
-class EnemyPrototype(Enemy, Prototype):
-    def clone(self):
-        return copy(self)
+class EnemyPrototype(Prototype):
+    def __init__(self, name, max_health, max_stamina, max_magicka, deck, loot):
+        self.name = name
+        self.max_health = max_health
+        self.max_stamina = max_stamina
+        self.max_magicka = max_magicka
+        self.deck = deck  # Save raw deck data
+        self.loot = loot
+
+    def clone(self, card_cache):
+        return Enemy(
+            name=self.name,
+            max_health=self.max_health,
+            max_stamina=self.max_stamina,
+            max_magicka=self.max_magicka,
+            deck=self.deck,  # Pass raw deck to Enemy
+            card_cache=card_cache,
+            loot=self.loot
+        )
 
 class EnemyCache:
-    def __init__(self, filename, card_cache):
-        self.enemy_prototypes = self._load_enemy_prototypes(filename, card_cache)
+    def __init__(self, filename):
+        self.enemy_prototypes = self._load_enemy_prototypes(filename)
 
-    def _load_enemy_prototypes(self, filename: str, cards) -> dict:
+    def _load_enemy_prototypes(self, filename) -> dict:
         enemy_data = load_json(filename)
         prototypes = {}
         for enemy_id, data in enemy_data.items():
@@ -27,16 +42,16 @@ class EnemyCache:
                 max_health=data["max_health"],
                 max_stamina=data["max_stamina"],
                 max_magicka=0,
-                deck=data["deck"],
-                card_cache=cards,
+                deck=data["deck"],  # Pass raw deck
                 loot=data["loot"]
             )
         return prototypes
 
-    def create_enemy(self, enemy_id: str) -> Enemy:
+    def create_enemy(self, enemy_id, card_cache) -> Enemy:
         if enemy_id not in self.enemy_prototypes:
             raise KeyError(f"Enemy ID '{enemy_id}' not found.")
-        return self.enemy_prototypes[enemy_id].clone()
+        return self.enemy_prototypes[enemy_id].clone(card_cache)
 
     def list_enemy_prototypes(self) -> list:
         return list(self.enemy_prototypes.keys())
+

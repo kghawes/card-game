@@ -21,9 +21,10 @@ class StatusManager:
         for status_id in list(self.statuses.keys()):
             self.remove(status_id, 1)
 
-    def trigger_statuses(self, status_registry, subject, *args, **kwargs) -> bool:
+    def trigger_statuses(self, subject, status_registry):
         for status_id, level in self.statuses.items():
             status = status_registry.get_status(status_id)
-            if status.trigger_on_turn(subject, level, *args, **kwargs):
-                return True
-        return False
+            status.trigger_on_turn(subject, level)
+            if not subject.is_alive():
+                return
+        return

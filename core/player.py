@@ -7,6 +7,7 @@ class Player(Combatant):
         deck_list = load_json(constants.STARTING_DECKS_PATH).get("STARTING_DECK")
         super().__init__("", constants.STARTING_HEALTH, constants.STARTING_STAMINA, constants.STARTING_MAGICKA, deck_list, card_cache)
         self.gold = 0
+        self.level = 1
         
     def gain_gold(self, amount):
         self.gold += amount

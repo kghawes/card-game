@@ -23,7 +23,6 @@ class PoisonStatus(Status):
         super().__init__(StatusNames.POISON.name, StatusNames.POISON.value)
     
     def trigger_on_turn(self, subject, level) -> bool:
-        # Poison deals damage based on its level
         return subject.take_damage(level, DamageTypes.POISON)
 
 class StatusRegistry:

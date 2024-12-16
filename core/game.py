@@ -14,9 +14,10 @@ class Game:
         self.text_interface = TextInterface()
         self.effect_registry = EffectRegistry()
         self.status_registry = StatusRegistry()
+        self.combat_manager = CombatManager()
         self.card_cache = CardCache(constants.CARD_PATHS)
-        self.enemy_cache = EnemyCache(constants.ENEMIES_PATH, self.card_cache)
-        self.quest_cache = QuestCache(constants.QUESTS_PATH, self.enemy_cache)
+        self.enemy_cache = EnemyCache(constants.ENEMIES_PATH)
+        self.quest_cache = QuestCache(constants.QUESTS_PATH, self.enemy_cache, self.card_cache)
         self.player = Player(self.card_cache)
         self.town = Town()
         
@@ -32,7 +33,13 @@ class Game:
     
             for encounter in quest.encounters:
                 self.text_interface.send_message(encounter.enemy.name + " appeared! Entering combat!")
-                if CombatManager().do_combat(self.player, encounter.enemy, self.text_interface, self.status_registry, self.effect_registry):
+                self.combat_manager.do_combat(
+                    self.player, encounter.enemy,
+                    self.text_interface,
+                    self.status_registry,
+                    self.effect_registry
+                )
+                if self.player.is_alive():
                     self.text_interface.send_message(constants.VICTORY_MESSAGE)
                     self.player.gain_gold(encounter.enemy.loot.gold)
                 else:
