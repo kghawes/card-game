@@ -1,22 +1,14 @@
 {
-  "FLAME": {
-    "EFFECT": "DAMAGE",
-    "PARAMETERS": "FIRE",
-    "LEVEL": 1
-  },
-  "SHARD": {
-    "EFFECT": "DAMAGE",
-    "PARAMETERS": "FROST",
-    "LEVEL": 1
-  },
-  "SPARK": {
-    "EFFECT": "DAMAGE",
-    "PARAMETERS": "SHOCK",
-    "LEVEL": 1
-  },
-  "VIPER": {
-    "EFFECT": "DAMAGE",
-    "PARAMETERS": "POISON",
-    "LEVEL": 1
-  },
+  "FLAME": [
+    "FIRE_DAMAGE": 1
+  ],
+  "SHARD": [
+    "FROST_DAMAGE": 1
+  ],
+  "SPARK": [
+    "SHOCK_DAMAGE": 1
+  ],
+  "VIPER": [
+    "POISON_DAMAGE": 1
+  ]
 }

@@ -47,7 +47,7 @@ School
   Restoration
    Restore and buff
    Sundry synergies using situational buffs
-All classes can use spells, but mages get the best starting magicka, their starting deck contains mostly spells where other classes have to find them in game, and mage skill cards that buff spells are mostly unavailable to other classes. Late-game spells would be impractical without these buffs, and it would be improbable for another class to acquire both a powerful spell and the out-of-class buff needed to cast it. Though mages are the most restricted in weapons and armor, they are more versatile with their access to spells.
+All classes can use spells, but mages get the best starting magicka, their starting deck contains mostly spells where other classes have to find them in game, and mage skill cards that buff spells are mostly unavailable to other classes. Late-game spells would be impractical without these buffs, and it would be improbable for another class to acquire both a powerful spell and the out-of-class buff needed to cast it. Though mages are the most restricted in weapons, armor, and skills, they are more versatile with their access to spells.
 
 Skills
 Specialization (Combat, Stealth, or Magic)

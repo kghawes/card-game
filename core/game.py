@@ -32,7 +32,7 @@ class Game:
     
             for encounter in quest.encounters:
                 self.text_interface.send_message(encounter.enemy.name + " appeared! Entering combat!")
-                if CombatManager().do_combat(self.player, encounter.enemy, self.text_interface, self.status_registry):
+                if CombatManager().do_combat(self.player, encounter.enemy, self.text_interface, self.status_registry, self.effect_registry):
                     self.text_interface.send_message(constants.VICTORY_MESSAGE)
                     self.player.gain_gold(encounter.enemy.loot.gold)
                 else:

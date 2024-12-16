@@ -23,6 +23,12 @@ class StatusNames(Enum):
     DEFENSE = "Defense"
     POISON = "Poison"
 
+class EnchantmentNames(Enum):
+    FLAME = "Flame"
+    SHARD = "Shard"
+    SPARK = "Spark"
+    VIPER = "Viper"
+
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3
 STARTING_MAGICKA = 3

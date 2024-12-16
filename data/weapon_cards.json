@@ -1,26 +1,22 @@
 {
   "IRON_LONGSWORD": {
-    "NAME": "Iron Longsword",
-    "TYPE": "WEAPON",
-    "STYLE": "LONG_BLADE",
-    "COST": 2,
-    "VALUE": 25,
-    "EFFECTS": { "PHYSICAL_DAMAGE": 2 },
+    "name": "Iron Longsword",
+    "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
+    "cost": 2,
+    "value": 25,
+    "effects": { "PHYSICAL_DAMAGE": 2 },
+    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "enchanted_name": "Iron {}sword"
   },
-  "STEEL_FLAMESWORD": {
-    "NAME": "Steel Flamesword",
-    "TYPE": "WEAPON",
-    "STYLE": "LONG_BLADE",
-    "COST": 2,
-    "VALUE": 80,
-    "EFFECTS": { "PHYSICAL_DAMAGE": 3 },
-    "ENCHANTMENT": "FLAME"
-  },
-  "EBONY_HELM": {
-    "NAME": "Ebony Helm",
-    "WEIGHT": "HEAVY",
-    "COST": 6,
-    "VALUE": 700,
-    "EFFECTS": { "GAIN_DEFENSE": 4 }
+  "STEEL_LONGSWORD": {
+    "name": "Steel Longsword",
+    "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
+    "cost": 2,
+    "value": 40,
+    "effects": { "PHYSICAL_DAMAGE": 2 },
+    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "enchanted_name": "Steel {}sword"
   }
 }

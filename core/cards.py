@@ -1,16 +1,19 @@
+from copy import copy
 from utils.utils import Prototype
 
 class Card:
-    def __init__(self, name, damage, cost):
+    def __init__(self, name, card_type, cost, value, effects):
         self.name = name
-        self.damage = damage
+        self.card_type = card_type
         self.cost = cost
+        self.value = value
+        self.effects = copy(effects)
 
 class CardPrototype(Card, Prototype):
-    required_fields = ["name", "damage", "cost"]
+    required_fields = ["name", "card_type", "cost", "value", "effects"]
 
     def clone(self):
-        return Card(self.name, self.damage, self.cost)
+        return Card(self.name, self.card_type, self.cost, self.value, self.effects)
 
 class CardCache:
     def __init__(self, filename):
