@@ -1,29 +1,28 @@
-from abc import ABC, abstractmethod
 from utils.constants import StatusNames, DamageTypes
 
-class Status(ABC):
+class Status:
     def __init__(self, status_id, name):
         self.status_id = status_id
         self.name = name
     
-    @abstractmethod
-    def trigger_on_turn(self, subject, level, *args, **kwargs) -> bool:
-        """Triggers the status effect for the subject. Returns whether it ends combat."""
-        pass
+    def trigger_on_turn(self, subject, level) -> bool: # returns whether the status effect ended combat
+        return False
 
 class DefenseStatus(Status):
     def __init__(self):
         super().__init__(StatusNames.DEFENSE.name, StatusNames.DEFENSE.value)
     
-    def trigger_on_turn(self, subject, level, *args, **kwargs) -> bool:
-        # Defense doesn't trigger any combat-ending effect
+    def trigger_instantly(self, subject, level, incoming_damage, damage_type) -> bool:
+        if not subject.take_damage(incoming_damage - level, damage_type):
+            return True
+        subject.status_manager.remove(self.status_id, incoming_damage)
         return False
 
 class PoisonStatus(Status):
     def __init__(self):
         super().__init__(StatusNames.POISON.name, StatusNames.POISON.value)
     
-    def trigger_on_turn(self, subject, level, *args, **kwargs) -> bool:
+    def trigger_on_turn(self, subject, level) -> bool:
         # Poison deals damage based on its level
         return subject.take_damage(level, DamageTypes.POISON)
 

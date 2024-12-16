@@ -1,14 +1,12 @@
-from abc import ABC, abstractmethod
 from utils.constants import Resources, DamageTypes, EffectNames, StatusNames
 
-class Effect(ABC):
+class Effect:
     def __init__(self, effect_id, name):
         self.effect_id = effect_id
         self.name = name
     
-    @abstractmethod
-    def resolve(self, source, target, *args, **kwargs) -> bool: # return whether the effect ended combat
-        pass
+    def resolve(self, source, target, level = 1) -> bool: # return whether the effect ended combat
+        return False
     
     def format_id(self, first_part, second_part) -> str:
         return first_part + "_" + second_part
@@ -30,8 +28,8 @@ class DamageEffect(Effect):
         super().__init__(effect_id, name)
         self.damage_type = damage_type
         
-    def resolve(self, source, target, amount = 0) -> bool:
-        return target.take_damage(amount, self.damage_type)
+    def resolve(self, source, target, level) -> bool:
+        return target.take_damage(level, self.damage_type)
 
 class RestoreEffect(Effect):
     def __init__(self, resource):
@@ -39,20 +37,20 @@ class RestoreEffect(Effect):
         name = self.format_name(EffectNames.RESTORE.value, resource.value) 
         super().__init__(effect_id, name)
     
-    def resolve(self, source, target, amount = 0) -> bool:
+    def resolve(self, source, target, level) -> bool:
         if self.stat == Resources.HEALTH.value:
-            source.gain_health(amount)
+            source.gain_health(level)
         elif self.stat == Resources.STAMINA.value:
-            source.gain_stamina(amount)
+            source.gain_stamina(level)
         elif self.stat == Resources.MAGICKA.value:
-            source.gain_magicka(amount)
+            source.gain_magicka(level)
         return False
 
 class PickpocketEffect(Effect):
     def __init__(self):
         super().__init__(EffectNames.PICKPOCKET.name, EffectNames.PICKPOCKET.value)
     
-    def resolve(self, source, target, level = 1) -> bool:
+    def resolve(self, source, target, level) -> bool:
         # target.card_manager.show_top_cards_in_deck(level)
         # ....
         return False
@@ -79,6 +77,8 @@ class EffectRegistry:
         restore_health_effect = RestoreEffect(Resources.HEALTH)
         restore_stamina_effect = RestoreEffect(Resources.STAMINA)
         
+        gain_defense_effect = GainDefenseEffect()
+        
         effects = {
             physical_damage_effect.effect_id: physical_damage_effect,
             fire_damage_effect.effect_id: fire_damage_effect,
@@ -86,7 +86,8 @@ class EffectRegistry:
             shock_damage_effect.effect_id: shock_damage_effect,
             poison_damage_effect.effect_id: poison_damage_effect,
             restore_health_effect.effect_id: restore_health_effect,
-            restore_stamina_effect.effect_id: restore_stamina_effect
+            restore_stamina_effect.effect_id: restore_stamina_effect,
+            gain_defense_effect.effect_id: gain_defense_effect
             }
         
         return effects

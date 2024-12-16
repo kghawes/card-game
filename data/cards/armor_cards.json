@@ -1,0 +1,9 @@
+{
+  "IRON_CUIRASS": {
+    "name": "Iron Cuirass",
+    "card_type": "ARMOR",
+    "cost": 3,
+    "value": 20,
+    "effects": { "GAIN_DEFENSE": 4 }
+  }
+}

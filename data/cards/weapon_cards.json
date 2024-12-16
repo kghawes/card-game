@@ -13,6 +13,20 @@
     "value": 15,
     "effects": { "PHYSICAL_DAMAGE": 1 }
   },
+  "STEEL_LONGSWORD": {
+    "name": "Steel Longsword",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 40,
+    "effects": { "PHYSICAL_DAMAGE": 3 }
+  },
+  "STEEL_DAGGER": {
+    "name": "Steel Dagger",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 32,
+    "effects": { "PHYSICAL_DAMAGE": 2 }
+  },
   "MISS": {
     "name": "Miss",
     "card_type": "WEAPON",
