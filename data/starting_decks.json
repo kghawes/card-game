@@ -1,7 +1,7 @@
 {
   "STARTING_DECK": [
     { "card": "IRON_LONGSWORD", "quantity": 2 },
-    { "card": "IRON_DAGGER", "quantity": 3 },
+    { "card": "IRON_SPARKSWORD", "quantity": 3 },
     { "card": "MISS", "quantity": 2 }
   ]
 }

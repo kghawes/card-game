@@ -6,6 +6,13 @@
     "value": 25,
     "effects": { "PHYSICAL_DAMAGE": 2 }
   },
+  "IRON_SPARKSWORD": {
+    "name": "Iron Sparksword",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 50,
+    "effects": { "PHYSICAL_DAMAGE": 2, "SHOCK_DAMAGE": 1 }
+  },
   "IRON_DAGGER": {
     "name": "Iron Dagger",
     "card_type": "WEAPON",

@@ -10,7 +10,7 @@ class TextInterface:
             response = input(constants.PROMPT_NAME)
         return response
 
-    def display_turn_info(self, player, enemy):
+    def display_turn_info(self, player, enemy, effect_registry):
         print(constants.DISPLAY_TURN_INFO.format(
             constants.TEXT_DIVIDER,
             enemy.name, enemy.health, enemy.max_health,
@@ -21,7 +21,10 @@ class TextInterface:
             len(player.card_manager.deck), len(player.card_manager.discard_pile)
         ))
         for idx, card in enumerate(player.card_manager.hand):
-            print(constants.DISPLAY_CARD.format(idx, card.name, card.cost, card.effects["PHYSICAL_DAMAGE"]))
+            print(constants.DISPLAY_CARD.format(idx, card.name, card.cost))
+            for effect_id, effect_level in card.effects.items():
+                effect = effect_registry.get_effect(effect_id)
+                print(constants.DISPLAY_CARD_EFFECT.format(effect_level, effect.name))
         print(constants.TEXT_DIVIDER)
 
     def turn_options_prompt(self):

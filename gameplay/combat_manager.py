@@ -19,7 +19,7 @@ class CombatManager:
             return
         turn_ended = False
         while not turn_ended and not self.is_combat_over(player, enemy):
-            text_interface.display_turn_info(player, enemy)
+            text_interface.display_turn_info(player, enemy, effect_registry)
             turn_ended = self.do_player_action(player, enemy, text_interface, effect_registry)
         player.card_manager.discard_hand()
 
