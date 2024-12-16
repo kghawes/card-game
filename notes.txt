@@ -1,7 +1,5 @@
 Game Mechanics Plan
 
-Long term plan - details like specific numbers are sure to change and some features are more ambitious than others, but my intention is to implement features more or less one-by-one (not in the order presented below) and have a functioning game between each feature addition.
-
 Card
 Name
 Type (Weapon, Armor, Spell, Item, Skill, Consumable, Conjured)

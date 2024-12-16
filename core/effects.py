@@ -53,7 +53,7 @@ class PickpocketEffect(Effect):
         super().__init__(EffectNames.PICKPOCKET.name, EffectNames.PICKPOCKET.value)
     
     def resolve(self, source, target, level = 1) -> bool:
-        target.card_manager.show_top_cards_in_deck(level)
+        # target.card_manager.show_top_cards_in_deck(level)
         # ....
         return False
 

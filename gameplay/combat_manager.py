@@ -4,29 +4,29 @@ class CombatManager:
     def is_combat_over(self, player, enemy) -> bool:
         return not (player.is_alive() and enemy.is_alive())
 
-    def do_combat(self, player, enemy, text_interface) -> bool:
+    def do_combat(self, player, enemy, text_interface, status_registry) -> bool:
         while True:
-            self.do_player_turn(player, enemy, text_interface)
+            self.do_player_turn(player, enemy, text_interface, status_registry)
             if self.is_combat_over(player, enemy):
                 break
-            self.do_enemy_turn(player, enemy, text_interface)
+            self.do_enemy_turn(player, enemy, text_interface, status_registry)
             if self.is_combat_over(player, enemy):
                 break
         return player.is_alive()
 
-    def do_player_turn(self, player, enemy, text_interface):
-        self.beginning_of_turn(player)
+    def do_player_turn(self, player, enemy, text_interface, status_registry):
+        self.beginning_of_turn(player, status_registry)
         text_interface.display_turn_info(player, enemy)
         turn_ended = False
         while not turn_ended:
             turn_ended = self.do_player_action(player, enemy, text_interface)
         player.card_manager.discard_hand()
 
-    def beginning_of_turn(self, combatant) -> bool: # returns whether a status effect ended combat
+    def beginning_of_turn(self, combatant, status_registry) -> bool: # returns whether a status effect ended combat
         combatant.card_manager.shuffle()
         combatant.card_manager.draw()
         
-        if combatant.status_manager.trigger_statuses():
+        if combatant.status_manager.trigger_statuses(status_registry, combatant):
             return True
         combatant.status_manager.decrement_statuses()
         
@@ -57,8 +57,8 @@ class CombatManager:
         ))
         return not opponent.is_alive()
 
-    def do_enemy_turn(self, player, enemy, text_interface):
-        self.beginning_of_turn(enemy)
+    def do_enemy_turn(self, player, enemy, text_interface, status_registry):
+        self.beginning_of_turn(enemy, status_registry)
         playable_card_exists = True
         while playable_card_exists:
             playable_card_exists = False
