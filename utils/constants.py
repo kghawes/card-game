@@ -12,6 +12,7 @@ class DamageTypes(Enum):
     FROST = "Frost"
     SHOCK = "Shock"
     POISON = "Poison"
+    MAGIC = "Magic"
 
 class EffectNames(Enum):
     DAMAGE = "Damage"

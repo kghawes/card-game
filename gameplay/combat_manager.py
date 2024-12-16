@@ -4,7 +4,7 @@ class CombatManager:
     def is_combat_over(self, player, enemy) -> bool:
         return not (player.is_alive() and enemy.is_alive())
 
-    def do_combat(self, player, enemy, text_interface, status_registry, effect_registry) -> bool:
+    def do_combat(self, player, enemy, text_interface, status_registry, effect_registry) -> bool: # returns whether the player won or lost
         while True:
             self.do_player_turn(player, enemy, text_interface, status_registry, effect_registry)
             if self.is_combat_over(player, enemy):
@@ -15,7 +15,8 @@ class CombatManager:
         return player.is_alive()
 
     def do_player_turn(self, player, enemy, text_interface, status_registry, effect_registry):
-        self.beginning_of_turn(player, status_registry)
+        if self.beginning_of_turn(player, status_registry):
+            return
         text_interface.display_turn_info(player, enemy, effect_registry)
         turn_ended = False
         while not turn_ended:
@@ -26,14 +27,15 @@ class CombatManager:
         combatant.card_manager.shuffle()
         combatant.card_manager.draw()
         
-        if combatant.status_manager.trigger_statuses(status_registry, combatant):
+        if combatant.status_manager.trigger_statuses(combatant, status_registry):
             return True
         combatant.status_manager.decrement_statuses()
         
         combatant.replenish_stamina()
         combatant.replenish_magicka()
+        return False
 
-    def do_player_action(self, player, enemy, text_interface, effect_registry) -> bool:
+    def do_player_action(self, player, enemy, text_interface, effect_registry) -> bool: # returns whether the action ended combat
         selection = text_interface.turn_options_prompt()
         if selection < 0:
             return True
@@ -48,7 +50,7 @@ class CombatManager:
         text_interface.display_turn_info(player, enemy, effect_registry)
         return False
 
-    def play_card(self, combatant, opponent, card, text_interface, effect_registry) -> bool:
+    def play_card(self, combatant, opponent, card, text_interface, effect_registry) -> bool: # returns whether the card ended combat
         combatant.card_manager.discard(card)
         combatant.try_spend_stamina(card.cost)
         
