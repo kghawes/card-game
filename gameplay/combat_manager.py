@@ -9,7 +9,7 @@ class CombatManager:
             self.do_player_turn(player, enemy, text_interface, status_registry, effect_registry)
             if self.is_combat_over(player, enemy):
                 break
-            self.do_enemy_turn(player, enemy, text_interface, status_registry)
+            self.do_enemy_turn(player, enemy, text_interface, status_registry, effect_registry)
             if self.is_combat_over(player, enemy):
                 break
         return player.is_alive()
@@ -43,21 +43,25 @@ class CombatManager:
         if card.cost > player.stamina:
             text_interface.send_message(constants.NOT_ENOUGH_STAMINA_MESSAGE)
             return False
-        if self.play_card(player, enemy, card, text_interface):
+        if self.play_card(player, enemy, card, text_interface, effect_registry):
             return True
         text_interface.display_turn_info(player, enemy, effect_registry)
         return False
 
-    def play_card(self, combatant, opponent, card, text_interface) -> bool:
+    def play_card(self, combatant, opponent, card, text_interface, effect_registry) -> bool:
         combatant.card_manager.discard(card)
         combatant.try_spend_stamina(card.cost)
-        opponent.take_damage(card.effects["PHYSICAL_DAMAGE"], "")
+        
+        for effect_id, effect_level in card.effects.items():
+            effect = effect_registry.get_effect(effect_id)
+            effect.resolve(combatant, opponent, effect_level)
+        
         text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(
             combatant.name, card.name, opponent.name, opponent.health
         ))
         return not opponent.is_alive()
 
-    def do_enemy_turn(self, player, enemy, text_interface, status_registry):
+    def do_enemy_turn(self, player, enemy, text_interface, status_registry, effect_registry):
         self.beginning_of_turn(enemy, status_registry)
         playable_card_exists = True
         while playable_card_exists:
@@ -65,7 +69,7 @@ class CombatManager:
             for card in enemy.card_manager.hand:
                 if card.cost <= enemy.stamina:
                     playable_card_exists = True
-                    if self.play_card(enemy, player, card, text_interface):
+                    if self.play_card(enemy, player, card, text_interface, effect_registry):
                         return
                     break
         text_interface.send_message(constants.ENEMY_PASSES_MESSAGE.format(enemy.name))

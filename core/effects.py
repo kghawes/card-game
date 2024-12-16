@@ -41,11 +41,11 @@ class RestoreEffect(Effect):
     
     def resolve(self, source, target, amount = 0) -> bool:
         if self.stat == Resources.HEALTH.value:
-            target.gain_health(amount)
+            source.gain_health(amount)
         elif self.stat == Resources.STAMINA.value:
-            target.gain_stamina(amount)
+            source.gain_stamina(amount)
         elif self.stat == Resources.MAGICKA.value:
-            target.gain_magicka(amount)
+            source.gain_magicka(amount)
         return False
 
 class PickpocketEffect(Effect):
@@ -90,3 +90,8 @@ class EffectRegistry:
             }
         
         return effects
+    
+    def get_effect(self, effect_id) -> Effect:
+        if effect_id not in self.effects:
+            raise KeyError(f"Effect ID '{effect_id}' not found.")
+        return self.effects[effect_id]
