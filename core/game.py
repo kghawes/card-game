@@ -14,7 +14,7 @@ class Game:
         self.text_interface = TextInterface()
         self.effect_registry = EffectRegistry()
         self.status_registry = StatusRegistry()
-        self.card_cache = CardCache(constants.CARDS_PATH)
+        self.card_cache = CardCache(constants.CARD_PATHS)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH, self.card_cache)
         self.quest_cache = QuestCache(constants.QUESTS_PATH, self.enemy_cache)
         self.player = Player(self.card_cache)

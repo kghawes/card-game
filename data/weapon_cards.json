@@ -2,21 +2,22 @@
   "IRON_LONGSWORD": {
     "name": "Iron Longsword",
     "card_type": "WEAPON",
-    "subtype": "LONG_BLADE",
     "cost": 2,
     "value": 25,
-    "effects": { "PHYSICAL_DAMAGE": 2 },
-    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
-    "enchanted_name": "Iron {}sword"
+    "effects": { "PHYSICAL_DAMAGE": 2 }
   },
-  "STEEL_LONGSWORD": {
-    "name": "Steel Longsword",
+  "IRON_DAGGER": {
+    "name": "Iron Dagger",
     "card_type": "WEAPON",
-    "subtype": "LONG_BLADE",
-    "cost": 2,
-    "value": 40,
-    "effects": { "PHYSICAL_DAMAGE": 2 },
-    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
-    "enchanted_name": "Steel {}sword"
+    "cost": 1,
+    "value": 15,
+    "effects": { "PHYSICAL_DAMAGE": 1 }
+  },
+  "MISS": {
+    "name": "Miss",
+    "card_type": "WEAPON",
+    "cost": 0,
+    "value": 1,
+    "effects": { "PHYSICAL_DAMAGE": 0 }
   }
 }

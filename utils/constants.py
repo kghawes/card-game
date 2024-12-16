@@ -34,7 +34,7 @@ STARTING_STAMINA = 3
 STARTING_MAGICKA = 3
 MAX_NAME_LENGTH = 20
 
-CARDS_PATH = "data/cards.json"
+CARD_PATHS = [ "data/weapon_cards.json", "data/enemy_cards.json" ]
 ENEMIES_PATH = "data/enemies.json"
 STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"

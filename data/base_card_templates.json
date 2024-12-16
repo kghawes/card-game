@@ -1,30 +1,22 @@
-
-
 {
   "IRON_LONGSWORD": {
-    "NAME": "Iron Longsword",
-    "TYPE": "WEAPON",
-    "STYLE": "LONG_BLADE",
-    "COST": 2,
-    "EFFECTS": { "PHYSICAL_DAMAGE": 2 },
-    "VALUE": 25
+    "name": "Iron Longsword",
+    "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
+    "cost": 2,
+    "value": 25,
+    "effects": { "PHYSICAL_DAMAGE": 2 },
+    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "enchanted_name": "Iron {}sword"
+  },
+  "STEEL_LONGSWORD": {
+    "name": "Steel Longsword",
+    "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
+    "cost": 2,
+    "value": 40,
+    "effects": { "PHYSICAL_DAMAGE": 2 },
+    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "enchanted_name": "Steel {}sword"
+  }
 }
-
-Weapon materials: iron, steel, orcish, glass, ebony, daedric
-Weapon enchantments (still do physical damage):
-  1 [damage type]: flame (fire), shard (frost), spark (shock), viper (poison)
-Long blades:
-  Longsword naming scheme: "[material] Longsword" or "[material] [enchantment]sword"
-  Claymore naming scheme: "[material] Claymore" or "[material] [enchantment]slayer"
-
-Define a card for each kind of weapon, for each material, a normal version and versions for each enchantment. I believe this should be 60 cards. Leave cost, physical damage, and value as 0, I will define these myself. Group cards first by weapon type, then by material, so for example all the glass claymores should be listed together.
-
-Blunt weapons:
-  Mace naming scheme: "[material] Mace" or "[material] [enchantment]mace"
-  Warhammer naming scheme: "[material] Warhammer" or "[material] [enchantment]mauler"
-Short blades:
-  Dagger naming scheme: "[material] Dagger" or "Dire [material] [enchantment]blade"
-  Shortsword naming scheme: "[material] Shortsword" or "Cruel [material] [enchantment]blade"
-Marksman weapons:
-  Throwing star naming scheme: "[material] Throwing Star" or "[material] [enchantment]star"
-  Bow naming scheme: "[material] Bow" or "[material] Bow of [enchantment]"

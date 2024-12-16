@@ -16,12 +16,21 @@ class CardPrototype(Card, Prototype):
         return Card(self.name, self.card_type, self.cost, self.value, self.effects)
 
 class CardCache:
-    def __init__(self, filename):
-        self.card_prototypes = CardPrototype.load_prototypes(
+    def __init__(self, filenames):
+        self.card_prototypes = {}
+        for filename in filenames:
+            self._load_prototypes_from_file(filename)
+
+    def _load_prototypes_from_file(self, filename):
+        prototypes = CardPrototype.load_prototypes(
             filename=filename,
             required_fields=CardPrototype.required_fields,
             prototype_class=CardPrototype
         )
+        for card_id, prototype in prototypes.items():
+            if card_id in self.card_prototypes:
+                raise ValueError(f"Duplicate card ID '{card_id}' found in file '{filename}'.")
+            self.card_prototypes[card_id] = prototype
 
     def create_card(self, card_id: str) -> Card:
         if card_id not in self.card_prototypes:
