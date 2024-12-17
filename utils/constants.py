@@ -19,9 +19,11 @@ class EffectNames(Enum):
     RESTORE = "Restore"
     PICKPOCKET = "Pickpocket"
     GAIN_DEFENSE = "Gain Defense"
+    REMOVE = "Remove"
 
 class StatusNames(Enum):
     DEFENSE = "Defense"
+    EVASION = "Evasion"
     POISON = "Poison"
 
 STARTING_HEALTH = 10

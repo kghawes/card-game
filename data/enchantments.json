@@ -18,5 +18,35 @@
     "NAME": "Viper",
     "EFFECTS": { "POISON_DAMAGE": 1 },
     "VALUE_MULTIPLIER": 2
+  },
+  "CHASTENING": {
+    "NAME": "Chastening",
+    "EFFECTS": { "REMOVE_EVASION": 2 },
+    "VALUE_MULTIPLIER": 1.5
+  },
+  "JUDGMENT": {
+    "NAME": "Judgment",
+    "EFFECTS": { "DAMAGE_ENDURANCE": 2 },
+    "VALUE_MULTIPLIER": 2
+  },
+  "RECKONING": {
+    "NAME": "Reckoning",
+    "EFFECTS": { "DAMAGE_SPEED": 1 },
+    "VALUE_MULTIPLIER": 3
+  },
+  "SHAMING": {
+    "NAME": "Shaming",
+    "EFFECTS": { "DAMAGE_INTELLIGENCE": 2 },
+    "VALUE_MULTIPLIER": 2.5
+  },
+  "WAR": {
+    "NAME": "War",
+    "EFFECTS": { "FIRE_DAMAGE": 2, "FROST_DAMAGE": 2, "SHOCK_DAMAGE": 2 },
+    "VALUE_MULTIPLIER": 4
+  },
+  "PEACE": {
+    "NAME": "Peace",
+    "EFFECTS": { "PARALYZE": 1 },
+    "VALUE_MULTIPLIER": 5
   }
 }

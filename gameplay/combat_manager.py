@@ -56,6 +56,8 @@ class CombatManager:
         for effect_id, effect_level in card.effects.items():
             effect = effect_registry.get_effect(effect_id)
             effect.resolve(combatant, opponent, effect_level)
+            if self.is_combat_over(combatant, opponent):
+                return
 
         text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(
             combatant.name, card.name, opponent.name, opponent.health

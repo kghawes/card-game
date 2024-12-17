@@ -18,6 +18,24 @@ class NoEffect(Effect):
     def __init__(self):
         super().__init__(EffectNames.NO_EFFECT.name, EffectNames.NO_EFFECT.value)
 
+class ApplyStatusEffect(Effect):
+    def __init__(self, effect_id, name, status_id):
+        super().__init__(effect_id, name)  
+        self.status_id = status_id
+
+    def resolve(self, source, target, level=1):
+        target.status_manager.apply(self.status_id, level)
+
+class RemoveStatusEffect(Effect):
+    def __init__(self, status_id):
+        effect_id = self.format_id(EffectNames.REMOVE.name, status_id)
+        name = self.format_name(EffectNames.REMOVE.value, StatusNames[status_id].value)
+        super().__init__(effect_id, name)
+        self.status_id = status_id
+    
+    def resolve(self, source, target, level=1):
+        target.status_manager.remove(self.status_id, level)
+        
 class DamageEffect(Effect):
     def __init__(self, damage_type):
         effect_id = self.format_id(damage_type.name, EffectNames.DAMAGE.name)
@@ -49,21 +67,17 @@ class PickpocketEffect(Effect):
     def resolve(self, source, target, level):
         # target.card_manager.show_top_cards_in_deck(level)
         # ....
-        return False
-
-class GainDefenseEffect(Effect):
-    def __init__(self):
-        super().__init__(EffectNames.GAIN_DEFENSE.name, EffectNames.GAIN_DEFENSE.value)
-    
-    def resolve(self, source, target, amount = 0):
-        target.status_manager.apply(StatusNames.DEFENSE.name)
-        return False
+        pass
 
 class EffectRegistry:
     def __init__(self):
         self.effects = self._initialize_effects()
     
     def _initialize_effects(self) -> dict:
+        gain_defense_effect = ApplyStatusEffect(EffectNames.GAIN_DEFENSE.name, EffectNames.GAIN_DEFENSE.value, StatusNames.DEFENSE.name)
+        
+        remove_evasion_effect = RemoveStatusEffect(StatusNames.EVASION.name)
+        
         physical_damage_effect = DamageEffect(DamageTypes.PHYSICAL)
         fire_damage_effect = DamageEffect(DamageTypes.FIRE)
         frost_damage_effect = DamageEffect(DamageTypes.FROST)
@@ -73,17 +87,17 @@ class EffectRegistry:
         restore_health_effect = RestoreEffect(Resources.HEALTH)
         restore_stamina_effect = RestoreEffect(Resources.STAMINA)
         
-        gain_defense_effect = GainDefenseEffect()
         
         effects = {
+            gain_defense_effect.effect_id: gain_defense_effect,
+            remove_evasion_effect.effect_id: remove_evasion_effect,
             physical_damage_effect.effect_id: physical_damage_effect,
             fire_damage_effect.effect_id: fire_damage_effect,
             frost_damage_effect.effect_id: frost_damage_effect,
             shock_damage_effect.effect_id: shock_damage_effect,
             poison_damage_effect.effect_id: poison_damage_effect,
             restore_health_effect.effect_id: restore_health_effect,
-            restore_stamina_effect.effect_id: restore_stamina_effect,
-            gain_defense_effect.effect_id: gain_defense_effect
+            restore_stamina_effect.effect_id: restore_stamina_effect
             }
         
         return effects

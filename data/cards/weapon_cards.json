@@ -3,45 +3,914 @@
     "name": "Iron Longsword",
     "card_type": "WEAPON",
     "cost": 2,
-    "value": 25,
-    "effects": { "PHYSICAL_DAMAGE": 2 },
-    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "value": 20,
+    "effects": {
+      "PHYSICAL_DAMAGE": 2
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
     "enchanted_name": "Iron {}sword"
-  },
-  "IRON_DAGGER": {
-    "name": "Iron Dagger",
-    "card_type": "WEAPON",
-    "cost": 1,
-    "value": 15,
-    "effects": { "PHYSICAL_DAMAGE": 1 },
-    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
-    "enchanted_name": "Cruel Iron {}blade"
   },
   "STEEL_LONGSWORD": {
     "name": "Steel Longsword",
     "card_type": "WEAPON",
     "cost": 2,
-    "value": 40,
-    "effects": { "PHYSICAL_DAMAGE": 3 },
-    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "value": 45,
+    "effects": {
+      "PHYSICAL_DAMAGE": 3
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
     "enchanted_name": "Steel {}sword"
+  },
+  "ORCISH_LONGSWORD": {
+    "name": "Orcish Longsword",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 270,
+    "effects": {
+      "PHYSICAL_DAMAGE": 5
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Orcish {}sword"
+  },
+  "ADAMANTIUM_LONGSWORD": {
+    "name": "Adamantium Longsword",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 350,
+    "effects": {
+      "PHYSICAL_DAMAGE": 6
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Adamantium {}sword"
+  },
+  "GLASS_LONGSWORD": {
+    "name": "Glass Longsword",
+    "card_type": "WEAPON",
+    "cost": 4,
+    "value": 900,
+    "effects": {
+      "PHYSICAL_DAMAGE": 8
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Glass {}sword"
+  },
+  "EBONY_LONGSWORD": {
+    "name": "Ebony Longsword",
+    "card_type": "WEAPON",
+    "cost": 5,
+    "value": 3000,
+    "effects": {
+      "PHYSICAL_DAMAGE": 9
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Ebony {}sword"
+  },
+  "DAEDRIC_LONGSWORD": {
+    "name": "Daedric Longsword",
+    "card_type": "WEAPON",
+    "cost": 6,
+    "value": 10000,
+    "effects": {
+      "PHYSICAL_DAMAGE": 15
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Daedric {}sword"
+  },
+  "IRON_CLAYMORE": {
+    "name": "Iron Claymore",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 30,
+    "effects": {
+      "PHYSICAL_DAMAGE": 3
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Iron {}slayer"
+  },
+  "STEEL_CLAYMORE": {
+    "name": "Steel Claymore",
+    "card_type": "WEAPON",
+    "cost": 4,
+    "value": 100,
+    "effects": {
+      "PHYSICAL_DAMAGE": 5
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Steel {}slayer"
+  },
+  "ORCISH_CLAYMORE": {
+    "name": "Orcish Claymore",
+    "card_type": "WEAPON",
+    "cost": 5,
+    "value": 400,
+    "effects": {
+      "PHYSICAL_DAMAGE": 7
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Orcish {}slayer"
+  },
+  "ADAMANTIUM_CLAYMORE": {
+    "name": "Adamantium Claymore",
+    "card_type": "WEAPON",
+    "cost": 5,
+    "value": 600,
+    "effects": {
+      "PHYSICAL_DAMAGE": 7
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Adamantium {}slayer"
+  },
+  "GLASS_CLAYMORE": {
+    "name": "Glass Claymore",
+    "card_type": "WEAPON",
+    "cost": 6,
+    "value": 1100,
+    "effects": {
+      "PHYSICAL_DAMAGE": 10
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Glass {}slayer"
+  },
+  "EBONY_CLAYMORE": {
+    "name": "Ebony Claymore",
+    "card_type": "WEAPON",
+    "cost": 8,
+    "value": 3400,
+    "effects": {
+      "PHYSICAL_DAMAGE": 12
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Ebony {}slayer"
+  },
+  "DAEDRIC_CLAYMORE": {
+    "name": "Daedric Claymore",
+    "card_type": "WEAPON",
+    "cost": 10,
+    "value": 11000,
+    "effects": {
+      "PHYSICAL_DAMAGE": 19
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Daedric {}slayer"
+  },
+  "IRON_MACE": {
+    "name": "Iron Mace",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 15,
+    "effects": {
+      "PHYSICAL_DAMAGE": 2
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Iron {}mace"
+  },
+  "STEEL_MACE": {
+    "name": "Steel Mace",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 90,
+    "effects": {
+      "PHYSICAL_DAMAGE": 3
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Steel {}mace"
+  },
+  "ORCISH_MACE": {
+    "name": "Orcish Mace",
+    "card_type": "WEAPON",
+    "cost": 4,
+    "value": 360,
+    "effects": {
+      "PHYSICAL_DAMAGE": 6
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Orcish {}mace"
+  },
+  "ADAMANTIUM_MACE": {
+    "name": "Adamantium Mace",
+    "card_type": "WEAPON",
+    "cost": 4,
+    "value": 500,
+    "effects": {
+      "PHYSICAL_DAMAGE": 7
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Adamantium {}mace"
+  },
+  "GLASS_MACE": {
+    "name": "Glass Mace",
+    "card_type": "WEAPON",
+    "cost": 6,
+    "value": 3100,
+    "effects": {
+      "PHYSICAL_DAMAGE": 12
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Glass {}mace"
+  },
+  "EBONY_MACE": {
+    "name": "Ebony Mace",
+    "card_type": "WEAPON",
+    "cost": 7,
+    "value": 3100,
+    "effects": {
+      "PHYSICAL_DAMAGE": 12
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Ebony {}mace"
+  },
+  "DAEDRIC_MACE": {
+    "name": "Daedric Mace",
+    "card_type": "WEAPON",
+    "cost": 8,
+    "value": 16,
+    "effects": {
+      "PHYSICAL_DAMAGE": 0
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Daedric {}mace"
+  },
+  "IRON_WARHAMMER": {
+    "name": "Iron Warhammer",
+    "card_type": "WEAPON",
+    "cost": 4,
+    "value": 25,
+    "effects": {
+      "PHYSICAL_DAMAGE": 3
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Iron {}mauler"
+  },
+  "STEEL_WARHAMMER": {
+    "name": "Steel Warhammer",
+    "card_type": "WEAPON",
+    "cost": 6,
+    "value": 100,
+    "effects": {
+      "PHYSICAL_DAMAGE": 6
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Steel {}mauler"
+  },
+  "ORCISH_WARHAMMER": {
+    "name": "Orcish Warhammer",
+    "card_type": "WEAPON",
+    "cost": 7,
+    "value": 420,
+    "effects": {
+      "PHYSICAL_DAMAGE": 8
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Orcish {}mauler"
+  },
+  "ADAMANTIUM_WARHAMMER": {
+    "name": "Adamantium Warhammer",
+    "card_type": "WEAPON",
+    "cost": 7,
+    "value": 580,
+    "effects": {
+      "PHYSICAL_DAMAGE": 9
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Adamantium {}mauler"
+  },
+  "GLASS_WARHAMMER": {
+    "name": "Glass Warhammer",
+    "card_type": "WEAPON",
+    "cost": 8,
+    "value": 1200,
+    "effects": {
+      "PHYSICAL_DAMAGE": 11
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Glass {}mauler"
+  },
+  "EBONY_WARHAMMER": {
+    "name": "Ebony Warhammer",
+    "card_type": "WEAPON",
+    "cost": 8,
+    "value": 3500,
+    "effects": {
+      "PHYSICAL_DAMAGE": 13
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Ebony {}mauler"
+  },
+  "DAEDRIC_WARHAMMER": {
+    "name": "Daedric Warhammer",
+    "card_type": "WEAPON",
+    "cost": 12,
+    "value": 12000,
+    "effects": {
+      "PHYSICAL_DAMAGE": 21
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Daedric {}mauler"
+  },
+  "IRON_DAGGER": {
+    "name": "Iron Dagger",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 10,
+    "effects": {
+      "PHYSICAL_DAMAGE": 1
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Cruel Iron {}blade"
   },
   "STEEL_DAGGER": {
     "name": "Steel Dagger",
     "card_type": "WEAPON",
     "cost": 1,
-    "value": 32,
-    "effects": { "PHYSICAL_DAMAGE": 2 },
-    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "value": 50,
+    "effects": {
+      "PHYSICAL_DAMAGE": 2
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
     "enchanted_name": "Cruel Steel {}blade"
   },
-  "MISS": {
-    "name": "Miss",
+  "ORCISH_DAGGER": {
+    "name": "Orcish Dagger",
     "card_type": "WEAPON",
-    "cost": 0,
-    "value": 1,
-    "effects": { "PHYSICAL_DAMAGE": 0 },
-    "enchantments": [],
-    "enchanted_name": ""
+    "cost": 2,
+    "value": 200,
+    "effects": {
+      "PHYSICAL_DAMAGE": 3
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Cruel Orcish {}blade"
+  },
+  "ADAMANTIUM_DAGGER": {
+    "name": "Adamantium Dagger",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 350,
+    "effects": {
+      "PHYSICAL_DAMAGE": 4
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Cruel Adamantium {}blade"
+  },
+  "GLASS_DAGGER": {
+    "name": "Glass Dagger",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 700,
+    "effects": {
+      "PHYSICAL_DAMAGE": 5
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Cruel Glass {}blade"
+  },
+  "EBONY_DAGGER": {
+    "name": "Ebony Dagger",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 2800,
+    "effects": {
+      "PHYSICAL_DAMAGE": 6
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Cruel Ebony {}blade"
+  },
+  "DAEDRIC_DAGGER": {
+    "name": "Daedric Dagger",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 9500,
+    "effects": {
+      "PHYSICAL_DAMAGE": 8
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Cruel Daedric {}blade"
+  },
+  "IRON_SHORTSWORD": {
+    "name": "Iron Shortsword",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 20,
+    "effects": {
+      "PHYSICAL_DAMAGE": 1
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Dire Iron {}blade"
+  },
+  "STEEL_SHORTSWORD": {
+    "name": "Steel Shortsword",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 50,
+    "effects": {
+      "PHYSICAL_DAMAGE": 2
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Dire Steel {}blade"
+  },
+  "ORCISH_SHORTSWORD": {
+    "name": "Orcish Shortsword",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 270,
+    "effects": {
+      "PHYSICAL_DAMAGE": 4
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Dire Orcish {}blade"
+  },
+  "ADAMANTIUM_SHORTSWORD": {
+    "name": "Adamantium Shortsword",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 400,
+    "effects": {
+      "PHYSICAL_DAMAGE": 5
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Dire Adamantium {}blade"
+  },
+  "GLASS_SHORTSWORD": {
+    "name": "Glass Shortsword",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 800,
+    "effects": {
+      "PHYSICAL_DAMAGE": 7
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Dire Glass {}blade"
+  },
+  "EBONY_SHORTSWORD": {
+    "name": "Ebony Shortsword",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 2900,
+    "effects": {
+      "PHYSICAL_DAMAGE": 8
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Dire Ebony {}blade"
+  },
+  "DAEDRIC_SHORTSWORD": {
+    "name": "Daedric Shortsword",
+    "card_type": "WEAPON",
+    "cost": 4,
+    "value": 9750,
+    "effects": {
+      "PHYSICAL_DAMAGE": 11
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Dire Daedric {}blade"
+  },
+  "IRON_THROWING_STAR": {
+    "name": "Iron Throwing Star",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 8,
+    "effects": {
+      "PHYSICAL_DAMAGE": 1
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Iron {}star"
+  },
+  "STEEL_THROWING_STAR": {
+    "name": "Steel Throwing Star",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 20,
+    "effects": {
+      "PHYSICAL_DAMAGE": 2
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Steel {}star"
+  },
+  "ORCISH_THROWING_STAR": {
+    "name": "Orcish Throwing Star",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 90,
+    "effects": {
+      "PHYSICAL_DAMAGE": 3
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Orcish {}star"
+  },
+  "ADAMANTIUM_THROWING_STAR": {
+    "name": "Adamantium Throwing Star",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 600,
+    "effects": {
+      "PHYSICAL_DAMAGE": 3
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Adamantium {}star"
+  },
+  "GLASS_THROWING_STAR": {
+    "name": "Glass Throwing Star",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 500,
+    "effects": {
+      "PHYSICAL_DAMAGE": 4
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Glass {}star"
+  },
+  "EBONY_THROWING_STAR": {
+    "name": "Ebony Throwing Star",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 1000,
+    "effects": {
+      "PHYSICAL_DAMAGE": 5
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Ebony {}star"
+  },
+  "DAEDRIC_THROWING_STAR": {
+    "name": "Daedric Throwing Star",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 2200,
+    "effects": {
+      "PHYSICAL_DAMAGE": 6
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Daedric {}star"
+  },
+  "SHORTBOW": {
+    "name": "Shortbow",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 25,
+    "effects": {
+      "PHYSICAL_DAMAGE": 2
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Shortbow ({}arrows)"
+  },
+  "LONGBOW": {
+    "name": "Longbow",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 100,
+    "effects": {
+      "PHYSICAL_DAMAGE": 3
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Longbow ({}arrows)"
+  },
+  "ORCISH_BOW": {
+    "name": "Orcish Bow ({}arrows)",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 300,
+    "effects": {
+      "PHYSICAL_DAMAGE": 4
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Orcish Bow ({}arrows)"
+  },
+  "ADAMANTIUM_BOW": {
+    "name": "Adamantium Bow",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 535,
+    "effects": {
+      "PHYSICAL_DAMAGE": 5
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Adamantium Bow ({}arrows)"
+  },
+  "GLASS_BOW": {
+    "name": "Glass Bow",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 850,
+    "effects": {
+      "PHYSICAL_DAMAGE": 6
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Glass Bow ({}arrows)"
+  },
+  "EBONY_BOW": {
+    "name": "Ebony Bow",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 2800,
+    "effects": {
+      "PHYSICAL_DAMAGE": 7
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Ebony Bow ({}arrows)"
+  },
+  "DAEDRIC_BOW": {
+    "name": "Daedric Bow",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 12000,
+    "effects": {
+      "PHYSICAL_DAMAGE": 11
+    },
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER"
+    ],
+    "enchanted_name": "Daedric Bow ({}arrows)"
+  },
+  "WOODEN_STAFF": {
+    "name": "Wooden Staff",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 3,
+    "effects": {
+      "PHYSICAL_DAMAGE": 1
+    },
+    "enchantments": [
+      "CHASTENING",
+      "JUDGMENT",
+      "RECKONING",
+      "SHAMING",
+      "WAR",
+      "PEACE"
+    ],
+    "enchanted_name": "Wooden Staff of {}"
   }
 }
