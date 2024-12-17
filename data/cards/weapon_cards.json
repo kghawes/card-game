@@ -4,41 +4,44 @@
     "card_type": "WEAPON",
     "cost": 2,
     "value": 25,
-    "effects": { "PHYSICAL_DAMAGE": 2 }
-  },
-  "IRON_SPARKSWORD": {
-    "name": "Iron Sparksword",
-    "card_type": "WEAPON",
-    "cost": 2,
-    "value": 50,
-    "effects": { "PHYSICAL_DAMAGE": 2, "SHOCK_DAMAGE": 1 }
+    "effects": { "PHYSICAL_DAMAGE": 2 },
+    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "enchanted_name": "Iron {}sword"
   },
   "IRON_DAGGER": {
     "name": "Iron Dagger",
     "card_type": "WEAPON",
     "cost": 1,
     "value": 15,
-    "effects": { "PHYSICAL_DAMAGE": 1 }
+    "effects": { "PHYSICAL_DAMAGE": 1 },
+    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "enchanted_name": "Cruel Iron {}blade"
   },
   "STEEL_LONGSWORD": {
     "name": "Steel Longsword",
     "card_type": "WEAPON",
     "cost": 2,
     "value": 40,
-    "effects": { "PHYSICAL_DAMAGE": 3 }
+    "effects": { "PHYSICAL_DAMAGE": 3 },
+    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "enchanted_name": "Steel {}sword"
   },
   "STEEL_DAGGER": {
     "name": "Steel Dagger",
     "card_type": "WEAPON",
     "cost": 1,
     "value": 32,
-    "effects": { "PHYSICAL_DAMAGE": 2 }
+    "effects": { "PHYSICAL_DAMAGE": 2 },
+    "enchantments": [ "FLAME", "SHARD", "SPARK", "VIPER" ],
+    "enchanted_name": "Cruel Steel {}blade"
   },
   "MISS": {
     "name": "Miss",
     "card_type": "WEAPON",
     "cost": 0,
     "value": 1,
-    "effects": { "PHYSICAL_DAMAGE": 0 }
+    "effects": { "PHYSICAL_DAMAGE": 0 },
+    "enchantments": [],
+    "enchanted_name": ""
   }
 }

@@ -1,14 +1,22 @@
 {
-  "FLAME": [
-    "FIRE_DAMAGE": 1
-  ],
-  "SHARD": [
-    "FROST_DAMAGE": 1
-  ],
-  "SPARK": [
-    "SHOCK_DAMAGE": 1
-  ],
-  "VIPER": [
-    "POISON_DAMAGE": 1
-  ]
+  "FLAME": {
+    "NAME": "Flame",
+    "EFFECTS": { "FIRE_DAMAGE": 1 },
+    "VALUE_MULTIPLIER": 2
+  },
+  "SHARD": {
+    "NAME": "Shard",
+    "EFFECTS": { "FROST_DAMAGE": 1 },
+    "VALUE_MULTIPLIER": 2
+  },
+  "SPARK": {
+    "NAME": "Spark",
+    "EFFECTS": { "SHOCK_DAMAGE": 1 },
+    "VALUE_MULTIPLIER": 2
+  },
+  "VIPER": {
+    "NAME": "Viper",
+    "EFFECTS": { "POISON_DAMAGE": 1 },
+    "VALUE_MULTIPLIER": 2
+  }
 }

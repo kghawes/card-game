@@ -24,12 +24,6 @@ class StatusNames(Enum):
     DEFENSE = "Defense"
     POISON = "Poison"
 
-class EnchantmentNames(Enum):
-    FLAME = "Flame"
-    SHARD = "Shard"
-    SPARK = "Spark"
-    VIPER = "Viper"
-
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3
 STARTING_MAGICKA = 3
@@ -44,6 +38,7 @@ CARD_PATHS = [
 ENEMIES_PATH = "data/enemies.json"
 STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"
+ENCHANTMENTS_PATH = "data/enchantments.json"
 
 SPLASH_MESSAGE = "Welcome to the game!"
 PROMPT_NAME = "What is your character’s name? "

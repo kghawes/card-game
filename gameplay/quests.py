@@ -8,7 +8,7 @@ class Quest:
         for encounter in encounters:
             self.encounters.append(Encounter(enemy_cache.create_enemy(encounter, card_cache)))
 
-class QuestCache:
+class QuestRegistry:
     def __init__(self, quests_path, enemy_cache, card_cache):
         self.quests = []
         quest_data = load_json(quests_path)

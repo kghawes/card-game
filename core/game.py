@@ -1,8 +1,9 @@
 from gameplay.combat_manager import CombatManager
-from gameplay.quests import QuestCache
+from gameplay.quests import QuestRegistry
 from gameplay.town import Town
 from core.effects import EffectRegistry
 from core.statuses import StatusRegistry
+from core.enchantments import EnchantmentRegistry
 from core.cards import CardCache
 from core.enemies import EnemyCache
 from core.player import Player
@@ -14,10 +15,11 @@ class Game:
         self.text_interface = TextInterface()
         self.effect_registry = EffectRegistry()
         self.status_registry = StatusRegistry()
+        self.enchantment_registry = EnchantmentRegistry(self.effect_registry, constants.ENCHANTMENTS_PATH)
         self.combat_manager = CombatManager()
-        self.card_cache = CardCache(constants.CARD_PATHS)
+        self.card_cache = CardCache(constants.CARD_PATHS, self.enchantment_registry)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH)
-        self.quest_cache = QuestCache(constants.QUESTS_PATH, self.enemy_cache, self.card_cache)
+        self.quest_registry = QuestRegistry(constants.QUESTS_PATH, self.enemy_cache, self.card_cache)
         self.player = Player(self.card_cache)
         self.town = Town()
         
@@ -26,7 +28,7 @@ class Game:
         self.text_interface.send_message(constants.SPLASH_MESSAGE)
         self.player.name = self.text_interface.name_prompt()
         
-        for quest in self.quest_cache.quests:
+        for quest in self.quest_registry.quests:
             self.player.replenish_health()
             
             self.text_interface.send_message(quest.description)
