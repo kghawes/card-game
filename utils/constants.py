@@ -18,13 +18,24 @@ class EffectNames(Enum):
     DAMAGE = "Damage"
     RESTORE = "Restore"
     PICKPOCKET = "Pickpocket"
-    GAIN_DEFENSE = "Gain Defense"
-    REMOVE = "Remove"
+    GAIN_STATUS = "Gain"
+    INFLICT_STATUS = "Inflict"
+    CURE_STATUS = "Cure"
+    REMOVE_STATUS = "Remove"
 
-class StatusNames(Enum):
+class StatusNames:
     DEFENSE = "Defense"
-    EVASION = "Evasion"
     POISON = "Poison"
+    PARALYSIS = "Paralysis"
+    ATTRIBUTES = ["STRENGTH", "AGILITY", "INTELLIGENCE", "WILLPOWER", "ENDURANCE", "SPEED", "LUCK"]
+    for attribute in ATTRIBUTES:
+        locals()[f"FORTIFY_{attribute}"] = f"Fortify {attribute.capitalize()}"
+        locals()[f"DAMAGE_{attribute}"] = f"Damage {attribute.capitalize()}"
+
+# Example access
+print(StatusNames.FORTIFY_STRENGTH)  # Outputs: Fortify Strength
+print(StatusNames.DAMAGE_LUCK)       # Outputs: Damage Luck
+
 
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3

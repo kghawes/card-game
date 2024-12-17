@@ -5,7 +5,10 @@
     "cost": 2,
     "value": 20,
     "effects": {
-      "PHYSICAL_DAMAGE": 2
+      "PHYSICAL_DAMAGE": {
+        "level": 2,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -21,7 +24,10 @@
     "cost": 2,
     "value": 45,
     "effects": {
-      "PHYSICAL_DAMAGE": 3
+      "PHYSICAL_DAMAGE": {
+        "level": 3,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -37,7 +43,10 @@
     "cost": 3,
     "value": 270,
     "effects": {
-      "PHYSICAL_DAMAGE": 5
+      "PHYSICAL_DAMAGE": {
+        "level": 5,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -53,7 +62,10 @@
     "cost": 3,
     "value": 350,
     "effects": {
-      "PHYSICAL_DAMAGE": 6
+      "PHYSICAL_DAMAGE": {
+        "level": 6,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -69,7 +81,10 @@
     "cost": 4,
     "value": 900,
     "effects": {
-      "PHYSICAL_DAMAGE": 8
+      "PHYSICAL_DAMAGE": {
+        "level": 8,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -85,7 +100,10 @@
     "cost": 5,
     "value": 3000,
     "effects": {
-      "PHYSICAL_DAMAGE": 9
+      "PHYSICAL_DAMAGE": {
+        "level": 9,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -101,7 +119,10 @@
     "cost": 6,
     "value": 10000,
     "effects": {
-      "PHYSICAL_DAMAGE": 15
+      "PHYSICAL_DAMAGE": {
+        "level": 15,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -117,7 +138,10 @@
     "cost": 3,
     "value": 30,
     "effects": {
-      "PHYSICAL_DAMAGE": 3
+      "PHYSICAL_DAMAGE": {
+        "level": 3,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -133,7 +157,10 @@
     "cost": 4,
     "value": 100,
     "effects": {
-      "PHYSICAL_DAMAGE": 5
+      "PHYSICAL_DAMAGE": {
+        "level": 5,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -149,7 +176,10 @@
     "cost": 5,
     "value": 400,
     "effects": {
-      "PHYSICAL_DAMAGE": 7
+      "PHYSICAL_DAMAGE": {
+        "level": 7,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -165,7 +195,10 @@
     "cost": 5,
     "value": 600,
     "effects": {
-      "PHYSICAL_DAMAGE": 7
+      "PHYSICAL_DAMAGE": {
+        "level": 7,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -181,7 +214,10 @@
     "cost": 6,
     "value": 1100,
     "effects": {
-      "PHYSICAL_DAMAGE": 10
+      "PHYSICAL_DAMAGE": {
+        "level": 10,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -197,7 +233,10 @@
     "cost": 8,
     "value": 3400,
     "effects": {
-      "PHYSICAL_DAMAGE": 12
+      "PHYSICAL_DAMAGE": {
+        "level": 12,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -213,7 +252,10 @@
     "cost": 10,
     "value": 11000,
     "effects": {
-      "PHYSICAL_DAMAGE": 19
+      "PHYSICAL_DAMAGE": {
+        "level": 19,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -229,7 +271,10 @@
     "cost": 3,
     "value": 15,
     "effects": {
-      "PHYSICAL_DAMAGE": 2
+      "PHYSICAL_DAMAGE": {
+        "level": 2,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -245,7 +290,10 @@
     "cost": 3,
     "value": 90,
     "effects": {
-      "PHYSICAL_DAMAGE": 3
+      "PHYSICAL_DAMAGE": {
+        "level": 3,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -261,7 +309,10 @@
     "cost": 4,
     "value": 360,
     "effects": {
-      "PHYSICAL_DAMAGE": 6
+      "PHYSICAL_DAMAGE": {
+        "level": 6,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -277,7 +328,10 @@
     "cost": 4,
     "value": 500,
     "effects": {
-      "PHYSICAL_DAMAGE": 7
+      "PHYSICAL_DAMAGE": {
+        "level": 7,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -293,7 +347,10 @@
     "cost": 6,
     "value": 3100,
     "effects": {
-      "PHYSICAL_DAMAGE": 12
+      "PHYSICAL_DAMAGE": {
+        "level": 12,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -309,7 +366,10 @@
     "cost": 7,
     "value": 3100,
     "effects": {
-      "PHYSICAL_DAMAGE": 12
+      "PHYSICAL_DAMAGE": {
+        "level": 12,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -325,7 +385,10 @@
     "cost": 8,
     "value": 16,
     "effects": {
-      "PHYSICAL_DAMAGE": 0
+      "PHYSICAL_DAMAGE": {
+        "level": 0,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -341,7 +404,10 @@
     "cost": 4,
     "value": 25,
     "effects": {
-      "PHYSICAL_DAMAGE": 3
+      "PHYSICAL_DAMAGE": {
+        "level": 3,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -357,7 +423,10 @@
     "cost": 6,
     "value": 100,
     "effects": {
-      "PHYSICAL_DAMAGE": 6
+      "PHYSICAL_DAMAGE": {
+        "level": 6,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -373,7 +442,10 @@
     "cost": 7,
     "value": 420,
     "effects": {
-      "PHYSICAL_DAMAGE": 8
+      "PHYSICAL_DAMAGE": {
+        "level": 8,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -389,7 +461,10 @@
     "cost": 7,
     "value": 580,
     "effects": {
-      "PHYSICAL_DAMAGE": 9
+      "PHYSICAL_DAMAGE": {
+        "level": 9,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -405,7 +480,10 @@
     "cost": 8,
     "value": 1200,
     "effects": {
-      "PHYSICAL_DAMAGE": 11
+      "PHYSICAL_DAMAGE": {
+        "level": 11,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -421,7 +499,10 @@
     "cost": 8,
     "value": 3500,
     "effects": {
-      "PHYSICAL_DAMAGE": 13
+      "PHYSICAL_DAMAGE": {
+        "level": 13,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -437,7 +518,10 @@
     "cost": 12,
     "value": 12000,
     "effects": {
-      "PHYSICAL_DAMAGE": 21
+      "PHYSICAL_DAMAGE": {
+        "level": 21,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -453,7 +537,10 @@
     "cost": 1,
     "value": 10,
     "effects": {
-      "PHYSICAL_DAMAGE": 1
+      "PHYSICAL_DAMAGE": {
+        "level": 1,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -469,7 +556,10 @@
     "cost": 1,
     "value": 50,
     "effects": {
-      "PHYSICAL_DAMAGE": 2
+      "PHYSICAL_DAMAGE": {
+        "level": 2,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -485,7 +575,10 @@
     "cost": 2,
     "value": 200,
     "effects": {
-      "PHYSICAL_DAMAGE": 3
+      "PHYSICAL_DAMAGE": {
+        "level": 3,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -501,7 +594,10 @@
     "cost": 2,
     "value": 350,
     "effects": {
-      "PHYSICAL_DAMAGE": 4
+      "PHYSICAL_DAMAGE": {
+        "level": 4,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -517,7 +613,10 @@
     "cost": 2,
     "value": 700,
     "effects": {
-      "PHYSICAL_DAMAGE": 5
+      "PHYSICAL_DAMAGE": {
+        "level": 5,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -533,7 +632,10 @@
     "cost": 2,
     "value": 2800,
     "effects": {
-      "PHYSICAL_DAMAGE": 6
+      "PHYSICAL_DAMAGE": {
+        "level": 6,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -549,7 +651,10 @@
     "cost": 3,
     "value": 9500,
     "effects": {
-      "PHYSICAL_DAMAGE": 8
+      "PHYSICAL_DAMAGE": {
+        "level": 8,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -565,7 +670,10 @@
     "cost": 1,
     "value": 20,
     "effects": {
-      "PHYSICAL_DAMAGE": 1
+      "PHYSICAL_DAMAGE": {
+        "level": 1,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -581,7 +689,10 @@
     "cost": 2,
     "value": 50,
     "effects": {
-      "PHYSICAL_DAMAGE": 2
+      "PHYSICAL_DAMAGE": {
+        "level": 2,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -597,7 +708,10 @@
     "cost": 2,
     "value": 270,
     "effects": {
-      "PHYSICAL_DAMAGE": 4
+      "PHYSICAL_DAMAGE": {
+        "level": 4,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -613,7 +727,10 @@
     "cost": 2,
     "value": 400,
     "effects": {
-      "PHYSICAL_DAMAGE": 5
+      "PHYSICAL_DAMAGE": {
+        "level": 5,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -629,7 +746,10 @@
     "cost": 3,
     "value": 800,
     "effects": {
-      "PHYSICAL_DAMAGE": 7
+      "PHYSICAL_DAMAGE": {
+        "level": 7,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -645,7 +765,10 @@
     "cost": 3,
     "value": 2900,
     "effects": {
-      "PHYSICAL_DAMAGE": 8
+      "PHYSICAL_DAMAGE": {
+        "level": 8,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -661,7 +784,10 @@
     "cost": 4,
     "value": 9750,
     "effects": {
-      "PHYSICAL_DAMAGE": 11
+      "PHYSICAL_DAMAGE": {
+        "level": 11,
+        "target": "ENEMY"
+      }
     },
     "enchantments": [
       "FLAME",
@@ -677,14 +803,12 @@
     "cost": 1,
     "value": 8,
     "effects": {
-      "PHYSICAL_DAMAGE": 1
+      "PHYSICAL_DAMAGE": {
+        "level": 1,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Iron {}star"
   },
   "STEEL_THROWING_STAR": {
@@ -693,14 +817,12 @@
     "cost": 1,
     "value": 20,
     "effects": {
-      "PHYSICAL_DAMAGE": 2
+      "PHYSICAL_DAMAGE": {
+        "level": 2,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Steel {}star"
   },
   "ORCISH_THROWING_STAR": {
@@ -709,14 +831,12 @@
     "cost": 1,
     "value": 90,
     "effects": {
-      "PHYSICAL_DAMAGE": 3
+      "PHYSICAL_DAMAGE": {
+        "level": 3,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Orcish {}star"
   },
   "ADAMANTIUM_THROWING_STAR": {
@@ -725,14 +845,12 @@
     "cost": 1,
     "value": 600,
     "effects": {
-      "PHYSICAL_DAMAGE": 3
+      "PHYSICAL_DAMAGE": {
+        "level": 3,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Adamantium {}star"
   },
   "GLASS_THROWING_STAR": {
@@ -741,14 +859,12 @@
     "cost": 1,
     "value": 500,
     "effects": {
-      "PHYSICAL_DAMAGE": 4
+      "PHYSICAL_DAMAGE": {
+        "level": 4,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Glass {}star"
   },
   "EBONY_THROWING_STAR": {
@@ -757,14 +873,12 @@
     "cost": 2,
     "value": 1000,
     "effects": {
-      "PHYSICAL_DAMAGE": 5
+      "PHYSICAL_DAMAGE": {
+        "level": 5,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Ebony {}star"
   },
   "DAEDRIC_THROWING_STAR": {
@@ -773,14 +887,12 @@
     "cost": 2,
     "value": 2200,
     "effects": {
-      "PHYSICAL_DAMAGE": 6
+      "PHYSICAL_DAMAGE": {
+        "level": 6,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Daedric {}star"
   },
   "SHORTBOW": {
@@ -789,14 +901,12 @@
     "cost": 1,
     "value": 25,
     "effects": {
-      "PHYSICAL_DAMAGE": 2
+      "PHYSICAL_DAMAGE": {
+        "level": 2,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Shortbow ({}arrows)"
   },
   "LONGBOW": {
@@ -805,14 +915,12 @@
     "cost": 2,
     "value": 100,
     "effects": {
-      "PHYSICAL_DAMAGE": 3
+      "PHYSICAL_DAMAGE": {
+        "level": 3,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Longbow ({}arrows)"
   },
   "ORCISH_BOW": {
@@ -821,14 +929,12 @@
     "cost": 2,
     "value": 300,
     "effects": {
-      "PHYSICAL_DAMAGE": 4
+      "PHYSICAL_DAMAGE": {
+        "level": 4,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Orcish Bow ({}arrows)"
   },
   "ADAMANTIUM_BOW": {
@@ -837,14 +943,12 @@
     "cost": 2,
     "value": 535,
     "effects": {
-      "PHYSICAL_DAMAGE": 5
+      "PHYSICAL_DAMAGE": {
+        "level": 5,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Adamantium Bow ({}arrows)"
   },
   "GLASS_BOW": {
@@ -853,14 +957,12 @@
     "cost": 2,
     "value": 850,
     "effects": {
-      "PHYSICAL_DAMAGE": 6
+      "PHYSICAL_DAMAGE": {
+        "level": 6,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Glass Bow ({}arrows)"
   },
   "EBONY_BOW": {
@@ -869,14 +971,12 @@
     "cost": 2,
     "value": 2800,
     "effects": {
-      "PHYSICAL_DAMAGE": 7
+      "PHYSICAL_DAMAGE": {
+        "level": 7,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Ebony Bow ({}arrows)"
   },
   "DAEDRIC_BOW": {
@@ -885,14 +985,12 @@
     "cost": 3,
     "value": 12000,
     "effects": {
-      "PHYSICAL_DAMAGE": 11
+      "PHYSICAL_DAMAGE": {
+        "level": 11,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "FLAME",
-      "SHARD",
-      "SPARK",
-      "VIPER"
-    ],
+    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
     "enchanted_name": "Daedric Bow ({}arrows)"
   },
   "WOODEN_STAFF": {
@@ -901,16 +999,12 @@
     "cost": 1,
     "value": 3,
     "effects": {
-      "PHYSICAL_DAMAGE": 1
+      "PHYSICAL_DAMAGE": {
+        "level": 1,
+        "target": "ENEMY"
+      }
     },
-    "enchantments": [
-      "CHASTENING",
-      "JUDGMENT",
-      "RECKONING",
-      "SHAMING",
-      "WAR",
-      "PEACE"
-    ],
+    "enchantments": ["CHASTENING", "JUDGMENT", "RECKONING", "SHAMING", "WAR", "PEACE"],
     "enchanted_name": "Wooden Staff of {}"
   }
 }

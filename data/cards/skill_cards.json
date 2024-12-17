@@ -1,0 +1,9 @@
+{
+  "PICKPOCKET": {
+    "name": "Pickpocket",
+    "card_type": "SKILL",
+    "cost": 3,
+    "value": 200,
+    "effects": { "PICKPOCKET": 3 }
+  }
+}

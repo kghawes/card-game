@@ -74,7 +74,7 @@ class EffectRegistry:
         self.effects = self._initialize_effects()
     
     def _initialize_effects(self) -> dict:
-        gain_defense_effect = ApplyStatusEffect(EffectNames.GAIN_DEFENSE.name, EffectNames.GAIN_DEFENSE.value, StatusNames.DEFENSE.name)
+        gain_defense_effect = ApplyStatusEffect(EffectNames.GAIN_DEFENSE.name, EffectNames.GAIN_DEFENSE.value, StatusNames.DEFENSE)
         
         remove_evasion_effect = RemoveStatusEffect(StatusNames.EVASION.name)
         
