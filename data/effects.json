@@ -1,0 +1,31 @@
+{
+  "NO_EFFECT": {
+    "TYPE": "NoEffect",
+    "TARGET_TYPE": "SELF"
+  },
+  "GAIN_DEFENSE": {
+    "TYPE": "APPLY_STATUS",
+    "TARGET_TYPE": "SELF",
+    "STATUS": "DEFENSE"
+  },
+  "REMOVE_EVASION": {
+    "TYPE": "REMOVE_STATUS",
+    "TARGET_TYPE": "TARGET",
+    "STATUS": "EVASION"
+  },
+  "PHYSICAL_DAMAGE": {
+    "TYPE": "DAMAGE",
+    "TARGET_TYPE": "TARGET",
+    "DAMAGE_TYPE": "PHYSICAL"
+  },
+  "FIRE_DAMAGE": {
+    "TYPE": "DAMAGE",
+    "TARGET_TYPE": "TARGET",
+    "DAMAGE_TYPE": "FIRE"
+  },
+  "RESTORE_HEALTH": {
+    "TYPE": "RESTORE",
+    "TARGET_TYPE": "SELF",
+    "RESOURCE": "HEALTH"
+  }
+}

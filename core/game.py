@@ -17,7 +17,7 @@ class Game:
         self.status_registry = StatusRegistry()
         self.enchantment_registry = EnchantmentRegistry(self.effect_registry, constants.ENCHANTMENTS_PATH)
         self.combat_manager = CombatManager()
-        self.card_cache = CardCache(constants.CARD_PATHS, self.enchantment_registry)
+        self.card_cache = CardCache(constants.CARD_PATHS, self.enchantment_registry, self.effect_registry)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH)
         self.quest_registry = QuestRegistry(constants.QUESTS_PATH, self.enemy_cache, self.card_cache)
         self.player = Player(self.card_cache)

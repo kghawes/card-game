@@ -1,107 +1,110 @@
-from utils.constants import Resources, DamageTypes, EffectNames, StatusNames
+from utils.constants import Resources, DamageTypes, EffectNames, StatusNames, TargetTypes
+from utils.utils import load_json
 
 class Effect:
-    def __init__(self, effect_id, name):
+    def __init__(self, effect_id, name, target_type_enum):
         self.effect_id = effect_id
         self.name = name
+        self.target_type_enum = target_type_enum
     
-    def resolve(self, source, target, level = 1):
+    def resolve(self, source, opponent, level=1):
         return
     
-    def format_id(self, first_part, second_part) -> str:
-        return first_part + "_" + second_part
+    def get_target_combatant(self, source, opponent):
+        return opponent if self.target_type == TargetTypes.TARGET else source
     
-    def format_name(self, first_part, second_part) -> str:
-        return first_part + " " + second_part
+    def format_string(self, separator, *strings) -> str:
+        return separator.join(strings)
+    
+    def format_id(self, *strings) -> str:
+        return self.format_string("_", *strings, self.target_type_enum.name)
+    
+    def format_name(self, *strings) -> str:
+        return self.format_string(" ", *strings, self.target_type_enum.value)
 
 class NoEffect(Effect):
     def __init__(self):
-        super().__init__(EffectNames.NO_EFFECT.name, EffectNames.NO_EFFECT.value)
+        super().__init__(EffectNames.NO_EFFECT.name, EffectNames.NO_EFFECT.value, None)
 
-class ApplyStatusEffect(Effect):
-    def __init__(self, effect_id, name, status_id):
-        super().__init__(effect_id, name)  
-        self.status_id = status_id
-
-    def resolve(self, source, target, level=1):
-        target.status_manager.apply(self.status_id, level)
-
-class RemoveStatusEffect(Effect):
-    def __init__(self, status_id):
-        effect_id = self.format_id(EffectNames.REMOVE.name, status_id)
-        name = self.format_name(EffectNames.REMOVE.value, StatusNames[status_id].value)
-        super().__init__(effect_id, name)
-        self.status_id = status_id
+class ChangeStatusEffect(Effect):
+    def __init__(self, effect_name_enum, target_type_enum, status_enum):
+        self.target_type_enum = target_type_enum
+        self.effect_id = self.format_id(effect_name_enum.name, status_enum.name)
+        self.name = self.format_name(effect_name_enum.value + status_enum.value)
+        super().__init__(self.effect_id, self.name, target_type_enum)  
     
-    def resolve(self, source, target, level=1):
-        target.status_manager.remove(self.status_id, level)
-        
+    def resolve(self, source, opponent, level):
+        subject = self.get_target_combatant(source, opponent)
+        subject.status_manager.change_status(self.status_id, level)
+
 class DamageEffect(Effect):
-    def __init__(self, damage_type):
-        effect_id = self.format_id(damage_type.name, EffectNames.DAMAGE.name)
-        name = self.format_name(damage_type.value, EffectNames.DAMAGE.value)
-        super().__init__(effect_id, name)
-        self.damage_type = damage_type
+    def __init__(self, target_type_enum, damage_type_enum):
+        self.target_type_enum = target_type_enum
+        self.damage_type_enum = damage_type_enum
+        effect_id = self.format_id(damage_type_enum.name, EffectNames.DAMAGE.name)
+        name = self.format_name(damage_type_enum.value, EffectNames.DAMAGE.value)
+        super().__init__(effect_id, name, target_type_enum)
         
-    def resolve(self, source, target, level):
-        target.take_damage(level, self.damage_type)
+    def resolve(self, source, opponent, level):
+        subject = self.get_target_combatant(source, opponent)
+        subject.take_damage(level, self.damage_type)
 
 class RestoreEffect(Effect):
-    def __init__(self, resource):
-        effect_id = self.format_id(EffectNames.RESTORE.name, resource.name)
-        name = self.format_name(EffectNames.RESTORE.value, resource.value) 
-        super().__init__(effect_id, name)
+    def __init__(self, target_type_enum, resource_enum):
+        self.resource_enum = resource_enum
+        self.target_type_enum = target_type_enum
+        effect_id = self.format_id(EffectNames.RESTORE.name, resource_enum.name)
+        name = self.format_name(EffectNames.RESTORE.value, resource_enum.value.display) 
+        super().__init__(effect_id, name, target_type_enum)
     
-    def resolve(self, source, target, level):
-        if self.stat == Resources.HEALTH.value:
-            source.gain_health(level)
-        elif self.stat == Resources.STAMINA.value:
-            source.gain_stamina(level)
-        elif self.stat == Resources.MAGICKA.value:
-            source.gain_magicka(level)
+    def resolve(self, source, opponent, level):
+        subject = self.get_target_combatant(source, opponent)
+        subject.gain_resource(self.resource_enum, level)
 
 class PickpocketEffect(Effect):
     def __init__(self):
         super().__init__(EffectNames.PICKPOCKET.name, EffectNames.PICKPOCKET.value)
     
-    def resolve(self, source, target, level):
+    def resolve(self, source, opponent, level):
         # target.card_manager.show_top_cards_in_deck(level)
         # ....
         pass
 
 class EffectRegistry:
-    def __init__(self):
-        self.effects = self._initialize_effects()
-    
-    def _initialize_effects(self) -> dict:
-        gain_defense_effect = ApplyStatusEffect(EffectNames.GAIN_DEFENSE.name, EffectNames.GAIN_DEFENSE.value, StatusNames.DEFENSE)
+    def __init__(self, effects_path):
+        self.effects = self._register_effects(effects_path)
+
+    def _create_effect(self, effect_id, data):
+        effect_type = data["TYPE"]
+        target_type = TargetTypes[data["TARGET_TYPE"].upper()]
         
-        remove_evasion_effect = RemoveStatusEffect(StatusNames.EVASION.name)
-        
-        physical_damage_effect = DamageEffect(DamageTypes.PHYSICAL)
-        fire_damage_effect = DamageEffect(DamageTypes.FIRE)
-        frost_damage_effect = DamageEffect(DamageTypes.FROST)
-        shock_damage_effect = DamageEffect(DamageTypes.SHOCK)
-        poison_damage_effect = DamageEffect(DamageTypes.POISON)
-        
-        restore_health_effect = RestoreEffect(Resources.HEALTH)
-        restore_stamina_effect = RestoreEffect(Resources.STAMINA)
-        
-        
-        effects = {
-            gain_defense_effect.effect_id: gain_defense_effect,
-            remove_evasion_effect.effect_id: remove_evasion_effect,
-            physical_damage_effect.effect_id: physical_damage_effect,
-            fire_damage_effect.effect_id: fire_damage_effect,
-            frost_damage_effect.effect_id: frost_damage_effect,
-            shock_damage_effect.effect_id: shock_damage_effect,
-            poison_damage_effect.effect_id: poison_damage_effect,
-            restore_health_effect.effect_id: restore_health_effect,
-            restore_stamina_effect.effect_id: restore_stamina_effect
-            }
-        
+        if effect_type == EffectNames.APPLY_STATUS.name:
+            status_id = StatusNames[data["STATUS"].upper()]
+            return ChangeStatusEffect(EffectNames.APPLY_STATUS, target_type, status_id)
+        elif effect_type == EffectNames.REMOVE_STATUS.name:
+            status_id = StatusNames[data["STATUS"].upper()]
+            return ChangeStatusEffect(EffectNames.REMOVE_STATUS, target_type, status_id)
+        elif effect_type == EffectNames.DAMAGE.name:
+            damage_type = DamageTypes[data["DAMAGE_TYPE"].upper()]
+            return DamageEffect(target_type, damage_type)
+        elif effect_type == EffectNames.RESTORE.name:
+            resource = Resources[data["RESOURCE"].upper()]
+            return RestoreEffect(target_type, resource)
+        elif effect_type == EffectNames.PICKPOCKET.name:
+            return PickpocketEffect(target_type)
+        else:
+            raise ValueError(f"Unknown effect type '{effect_type}'.")
+
+    def _register_effects(self, path):
+        effects = {}
+        data = load_json(path)
+
+        for effect_id, effect_data in data.items():
+            effect = self._create_effect(effect_id, effect_data)
+            effects[effect_id] = effect
+
         return effects
-    
+
     def get_effect(self, effect_id) -> Effect:
         if effect_id not in self.effects:
             raise KeyError(f"Effect ID '{effect_id}' not found.")

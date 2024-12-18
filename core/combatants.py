@@ -1,4 +1,3 @@
-from utils.constants import Resources
 from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
 
@@ -23,14 +22,17 @@ class Combatant:
     def replenish_magicka(self):
         self.magicka = self.max_magicka
     
-    def gain_health(self, amount):
-        self.health = min(self.max_health, self.health + amount)
+    def gain_resource(self, resource_enum, amount):
+        resource = resource_enum.value.attribute_name
+        current_value = getattr(self, resource, None)
+        if current_value is None:
+            raise AttributeError(f"'{resource}' is not a valid resource.")
         
-    def gain_stamina(self, amount):
-        self.stamina = min(self.max_stamina, self.stamina + amount)
-        
-    def gain_magicka(self, amount):
-        self.magicka = min(self.max_magicka, self.magicka + amount)
+        max_value = getattr(self, resource_enum.value.max_attribute)
+        new_value = current_value + amount
+        if max_value is not None:
+            new_value = min(new_value, max_value)
+        setattr(self, resource, new_value)
         
     def take_damage(self, amount, damage_type) -> bool:
         # check for weakness or resistance
@@ -51,10 +53,3 @@ class Combatant:
         
         setattr(self, resource, current_value - amount)
         return True
-
-    def try_spend_stamina(self, amount) -> bool:
-        x = Resources.STAMINA.value
-        return self.try_spend_resource(x, amount)
-    
-    def try_spend_magicka(self, amount) -> bool:
-        return self.try_spend_resource(Resources.MAGICKA.value, amount)

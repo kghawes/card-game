@@ -1,10 +1,16 @@
 from enum import Enum
 
+class ResourceData:
+    def __init__(self, name):
+        self.attribute_name = name.lower()
+        self.display = name.capitalize()
+        self.max_attribute = f"max_{name.lower()}"
+
 class Resources(Enum):
-    HEALTH = "Health"
-    STAMINA = "Stamina"
-    MAGICKA = "Magicka"
-    GOLD = "Gold"
+    HEALTH = ResourceData("health")
+    STAMINA = ResourceData("stamina")
+    MAGICKA = ResourceData("magicka")
+    GOLD = ResourceData("gold")
 
 class DamageTypes(Enum):
     PHYSICAL = "Physical"
@@ -18,24 +24,32 @@ class EffectNames(Enum):
     DAMAGE = "Damage"
     RESTORE = "Restore"
     PICKPOCKET = "Pickpocket"
-    GAIN_STATUS = "Gain"
-    INFLICT_STATUS = "Inflict"
-    CURE_STATUS = "Cure"
-    REMOVE_STATUS = "Remove"
+    APPLY_STATUS = "+"
+    REMOVE_STATUS = "–"
+    
+class TargetTypes(Enum):
+    SELF = "on Self"
+    TARGET = "on Target"
 
-class StatusNames:
+class StatusNames(Enum):
     DEFENSE = "Defense"
     POISON = "Poison"
     PARALYSIS = "Paralysis"
-    ATTRIBUTES = ["STRENGTH", "AGILITY", "INTELLIGENCE", "WILLPOWER", "ENDURANCE", "SPEED", "LUCK"]
-    for attribute in ATTRIBUTES:
-        locals()[f"FORTIFY_{attribute}"] = f"Fortify {attribute.capitalize()}"
-        locals()[f"DAMAGE_{attribute}"] = f"Damage {attribute.capitalize()}"
-
-# Example access
-print(StatusNames.FORTIFY_STRENGTH)  # Outputs: Fortify Strength
-print(StatusNames.DAMAGE_LUCK)       # Outputs: Damage Luck
-
+    EVASION = "Evasion"
+    FORTIFY_STRENGTH = "Fortify Strength"
+    DAMAGE_STRENGTH = "Damage Strength"
+    FORTIFY_AGILITY = "Fortify Agility"
+    DAMAGE_AGILITY = "Damage Agility"
+    FORTIFY_INTELLIGENCE = "Fortify Intelligence"
+    DAMAGE_INTELLIGENCE = "Damage Intelligence"
+    FORTIFY_WILLPOWER = "Fortify Willpower"
+    DAMAGE_WILLPOWER = "Damage Willpower"
+    FORTIFY_ENDURANCE = "Fortify Endurance"
+    DAMAGE_ENDURANCE = "Damage Endurance"
+    FORTIFY_SPEED = "Fortify Speed"
+    DAMAGE_SPEED = "Damage Speed"
+    FORTIFY_LUCK = "Fortify Luck"
+    DAMAGE_LUCK = "Damage Luck"
 
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3

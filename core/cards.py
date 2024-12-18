@@ -1,4 +1,4 @@
-from copy import copy
+from copy import deepcopy
 from utils.utils import Prototype
 
 class Card:
@@ -7,7 +7,7 @@ class Card:
         self.card_type = card_type
         self.cost = cost
         self.value = value
-        self.effects = copy(effects)
+        self.effects = deepcopy(effects)
 
 class CardPrototype(Card, Prototype):
     def __init__(self, name, card_type, cost, value, effects, enchantments = None, enchanted_name = None):
@@ -21,12 +21,12 @@ class CardPrototype(Card, Prototype):
         return Card(self.name, self.card_type, self.cost, self.value, self.effects)
 
 class CardCache:
-    def __init__(self, filenames, enchantment_registry):
+    def __init__(self, filenames, enchantment_registry, effect_registry):
         self.card_prototypes = {}
         for filename in filenames:
-            self._load_prototypes_from_file(filename, enchantment_registry)
+            self._load_prototypes_from_file(filename, enchantment_registry, effect_registry)
 
-    def _load_prototypes_from_file(self, filename, enchantment_registry):
+    def _load_prototypes_from_file(self, filename, enchantment_registry, effect_registry):
         raw_prototypes = CardPrototype.load_prototypes(
             filename=filename,
             required_fields=CardPrototype.required_fields,
@@ -42,12 +42,12 @@ class CardCache:
 
             # Generate enchanted versions if specified
             if prototype.enchantments is not None:
-                self._generate_enchanted_prototypes(card_id, prototype, enchantment_registry)
+                self._generate_enchanted_prototypes(card_id, prototype, enchantment_registry, effect_registry)
 
-    def _generate_enchanted_prototypes(self, base_card_id, prototype, enchantment_registry):
+    def _generate_enchanted_prototypes(self, base_card_id, prototype, enchantment_registry, effect_registry):
         for enchantment_id in prototype.enchantments:
             enchantment = enchantment_registry.get_enchantment(enchantment_id)
-            enchanted_card = enchantment.create_enchanted_card(prototype)
+            enchanted_card = enchantment.create_enchanted_card(prototype, effect_registry)
 
             if enchanted_card.card_id in self.card_prototypes:
                 raise ValueError(f"Duplicate card ID '{enchanted_card.card_id}' generated for '{base_card_id}'.")

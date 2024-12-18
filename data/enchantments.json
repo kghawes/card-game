@@ -2,90 +2,70 @@
   "FLAME": {
     "NAME": "Flame",
     "EFFECTS": { 
-      "effect_id": "FIRE_DAMAGE",
-      "target": "ENEMY",
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2
   },
   "SHARD": {
     "NAME": "Shard",
     "EFFECTS": { 
-      "effect_id": "FIRE_DAMAGE",
-      "target": "ENEMY",
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2
   },
   "SPARK": {
     "NAME": "Spark",
     "EFFECTS": { 
-      "effect_id": "FIRE_DAMAGE",
-      "target": "ENEMY",
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2
   },
   "VIPER": {
     "NAME": "Viper",
     "EFFECTS": { 
-      "effect_id": "FIRE_DAMAGE",
-      "target": "ENEMY",
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2
   },
   "CHASTENING": {
     "NAME": "Chastening",
     "EFFECTS": {
-      "effect_id": "FIRE_DAMAGE",
-      "target": "ENEMY",
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 1.5
   },
   "JUDGMENT": {
     "NAME": "Judgment",
     "EFFECTS": { 
-      "effect_id": "FIRE_DAMAGE", 
-      "target": "ENEMY", 
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2
   },
   "RECKONING": {
     "NAME": "Reckoning",
     "EFFECTS": { 
-      "effect_id": "FIRE_DAMAGE", 
-      "target": "ENEMY", 
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 3
   },
   "SHAMING": {
     "NAME": "Shaming",
     "EFFECTS": { 
-      "effect_id": "FIRE_DAMAGE", 
-      "target": "ENEMY", 
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2.5
   },
   "WAR": {
     "NAME": "War",
     "EFFECTS": { 
-    "effect_id": "FIRE_DAMAGE", 
-    "target": "ENEMY", 
-    "level": 1 
+    "FIRE_DAMAGE_TARGET": 1 
     },
     "VALUE_MULTIPLIER": 4
   },
   "PEACE": {
     "NAME": "Peace",
     "EFFECTS": { 
-      "effect_id": "FIRE_DAMAGE", 
-      "target": "ENEMY", 
-      "level": 1 
+      "FIRE_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 5
   }
