@@ -48,7 +48,7 @@ class DamageEffect(Effect):
         
     def resolve(self, source, opponent, level):
         subject = self.get_target_combatant(source, opponent)
-        subject.take_damage(level, self.damage_type)
+        subject.take_damage(level, self.damage_type_enum)
 
 class RestoreEffect(Effect):
     def __init__(self, target_type_enum, resource_enum):

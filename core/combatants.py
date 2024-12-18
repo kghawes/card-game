@@ -34,7 +34,7 @@ class Combatant:
             new_value = min(new_value, max_value)
         setattr(self, resource, new_value)
         
-    def take_damage(self, amount, damage_type) -> bool:
+    def take_damage(self, amount, damage_type_enum) -> bool:
         # check for weakness or resistance
         self.health = max(self.health - amount, 0)
         return self.is_alive()
