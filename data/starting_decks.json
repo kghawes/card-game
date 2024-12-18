@@ -1,6 +1,6 @@
 {
   "STARTING_DECK": [
     { "card": "IRON_CUIRASS", "quantity": 3 },
-    { "card": "STEEL_SPARKSWORD", "quantity": 3 }
+    { "card": "TEST_SPELL", "quantity": 3 }
   ]
 }

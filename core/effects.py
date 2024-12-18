@@ -32,10 +32,12 @@ class ChangeStatusEffect(Effect):
         self.status_enum = status_enum
         self.effect_id = self.format_id(effect_name_enum.name, status_enum.name)
         self.name = self.format_name(effect_name_enum.value + status_enum.value)
-        super().__init__(self.effect_id, self.name, target_type_enum)  
+        super().__init__(self.effect_id, self.name, target_type_enum)
     
     def resolve(self, source, opponent, level):
         subject = self.get_target_combatant(source, opponent)
+        if EffectNames.REMOVE_STATUS.name in self.effect_id:
+            level *= -1
         subject.status_manager.change_status(self.status_enum.name, level)
 
 class DamageEffect(Effect):

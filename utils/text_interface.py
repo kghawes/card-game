@@ -26,6 +26,8 @@ class TextInterface:
                 effect = effect_registry.get_effect(effect_id)
                 print(constants.DISPLAY_CARD_EFFECT.format(effect_level, effect.name))
         print(constants.TEXT_DIVIDER)
+        
+        print(player.status_manager.statuses)
 
     def turn_options_prompt(self):
         while True:
