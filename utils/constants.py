@@ -21,6 +21,7 @@ class DamageTypes(Enum):
     MAGIC = "Magic"
 
 class EffectNames(Enum):
+    NO_EFFECT = "No Effect"
     DAMAGE = "Damage"
     RESTORE = "Restore"
     PICKPOCKET = "Pickpocket"
@@ -66,6 +67,7 @@ ENEMIES_PATH = "data/enemies.json"
 STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"
 ENCHANTMENTS_PATH = "data/enchantments.json"
+EFFECTS_PATH = "data/effects.json"
 
 SPLASH_MESSAGE = "Welcome to the game!"
 PROMPT_NAME = "What is your character’s name? "

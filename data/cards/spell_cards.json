@@ -4,27 +4,27 @@
     "card_type": "SPELL",
     "cost": 1,
     "value": 20,
-    "effects": { "FIRE_DAMAGE": 1 }
+    "effects": { "FIRE_DAMAGE_TARGET": 1 }
   },
   "SHIELD": {
     "name": "Shield",
     "card_type": "SPELL",
     "cost": 2,
     "value": 30,
-    "effects": { "GAIN_DEFENSE": 2 }
+    "effects": { "APPLY_DEFENSE_SELF": 2 }
   },
   "ABSORB": {
     "name": "Absorb",
     "card_type": "SPELL",
     "cost": 3,
     "value": 35,
-    "effects": { "POISON_DAMAGE": 1, "RESTORE_HEALTH": 1 }
+    "effects": { "POISON_DAMAGE_TARGET": 1, "RESTORE_HEALTH_SELF": 1 }
   },
   "ENERGY": {
     "name": "Energy",
     "card_type": "SPELL",
     "cost": 1,
     "value": 30,
-    "effects": { "RESTORE_STAMINA": 2 }
+    "effects": { "RESTORE_STAMINA_SELF": 2 }
   }
 }

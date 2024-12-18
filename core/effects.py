@@ -2,7 +2,7 @@ from utils.constants import Resources, DamageTypes, EffectNames, StatusNames, Ta
 from utils.utils import load_json
 
 class Effect:
-    def __init__(self, effect_id, name, target_type_enum):
+    def __init__(self, effect_id, name, target_type_enum=None):
         self.effect_id = effect_id
         self.name = name
         self.target_type_enum = target_type_enum
@@ -11,7 +11,7 @@ class Effect:
         return
     
     def get_target_combatant(self, source, opponent):
-        return opponent if self.target_type == TargetTypes.TARGET else source
+        return opponent if self.target_type_enum == TargetTypes.TARGET else source
     
     def format_string(self, separator, *strings) -> str:
         return separator.join(strings)
@@ -29,13 +29,14 @@ class NoEffect(Effect):
 class ChangeStatusEffect(Effect):
     def __init__(self, effect_name_enum, target_type_enum, status_enum):
         self.target_type_enum = target_type_enum
+        self.status_enum = status_enum
         self.effect_id = self.format_id(effect_name_enum.name, status_enum.name)
         self.name = self.format_name(effect_name_enum.value + status_enum.value)
         super().__init__(self.effect_id, self.name, target_type_enum)  
     
     def resolve(self, source, opponent, level):
         subject = self.get_target_combatant(source, opponent)
-        subject.status_manager.change_status(self.status_id, level)
+        subject.status_manager.change_status(self.status_enum.name, level)
 
 class DamageEffect(Effect):
     def __init__(self, target_type_enum, damage_type_enum):
@@ -78,7 +79,9 @@ class EffectRegistry:
         effect_type = data["TYPE"]
         target_type = TargetTypes[data["TARGET_TYPE"].upper()]
         
-        if effect_type == EffectNames.APPLY_STATUS.name:
+        if effect_type == EffectNames.NO_EFFECT.name:
+            return NoEffect()
+        elif effect_type == EffectNames.APPLY_STATUS.name:
             status_id = StatusNames[data["STATUS"].upper()]
             return ChangeStatusEffect(EffectNames.APPLY_STATUS, target_type, status_id)
         elif effect_type == EffectNames.REMOVE_STATUS.name:
@@ -91,7 +94,7 @@ class EffectRegistry:
             resource = Resources[data["RESOURCE"].upper()]
             return RestoreEffect(target_type, resource)
         elif effect_type == EffectNames.PICKPOCKET.name:
-            return PickpocketEffect(target_type)
+            return PickpocketEffect()
         else:
             raise ValueError(f"Unknown effect type '{effect_type}'.")
 

@@ -43,7 +43,6 @@ class Combatant:
         return self.health > 0
     
     def try_spend_resource(self, resource, amount) -> bool:
-        resource = resource.lower()
         current_value = getattr(self, resource, None)
         if current_value is None:
             raise AttributeError(f"'{resource}' is not a valid resource.")

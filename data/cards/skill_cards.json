@@ -4,6 +4,6 @@
     "card_type": "SKILL",
     "cost": 3,
     "value": 200,
-    "effects": { "PICKPOCKET": 3 }
+    "effects": { "PICKPOCKET_TARGET": 3 }
   }
 }

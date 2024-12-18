@@ -3,7 +3,10 @@
     "name": "Miss",
     "card_type": "WEAPON",
     "cost": 1,
-    "value": 0
+    "value": 0,
+    "effects": {
+      "NO_EFFECT": 0
+    }
   },
   "IRON_LONGSWORD": {
     "name": "Iron Longsword",

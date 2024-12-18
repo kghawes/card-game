@@ -13,7 +13,7 @@ import utils.constants as constants
 class Game:
     def __init__(self):
         self.text_interface = TextInterface()
-        self.effect_registry = EffectRegistry()
+        self.effect_registry = EffectRegistry(constants.EFFECTS_PATH)
         self.status_registry = StatusRegistry()
         self.enchantment_registry = EnchantmentRegistry(self.effect_registry, constants.ENCHANTMENTS_PATH)
         self.combat_manager = CombatManager()

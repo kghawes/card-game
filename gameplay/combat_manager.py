@@ -51,7 +51,7 @@ class CombatManager:
 
     def play_card(self, combatant, opponent, card, text_interface, effect_registry):
         combatant.card_manager.discard(card)
-        combatant.try_spend_stamina(card.cost)
+        combatant.try_spend_resource(constants.Resources.STAMINA.value.attribute_name, card.cost)
 
         for effect_id, effect_level in card.effects.items():
             effect = effect_registry.get_effect(effect_id)

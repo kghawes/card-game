@@ -1,31 +1,35 @@
 {
   "NO_EFFECT": {
-    "TYPE": "NoEffect",
+    "TYPE": "NO_EFFECT",
     "TARGET_TYPE": "SELF"
   },
-  "GAIN_DEFENSE": {
+  "APPLY_DEFENSE_SELF": {
     "TYPE": "APPLY_STATUS",
     "TARGET_TYPE": "SELF",
     "STATUS": "DEFENSE"
   },
-  "REMOVE_EVASION": {
+  "REMOVE_EVASION_TARGET": {
     "TYPE": "REMOVE_STATUS",
     "TARGET_TYPE": "TARGET",
     "STATUS": "EVASION"
   },
-  "PHYSICAL_DAMAGE": {
+  "PHYSICAL_DAMAGE_TARGET": {
     "TYPE": "DAMAGE",
     "TARGET_TYPE": "TARGET",
     "DAMAGE_TYPE": "PHYSICAL"
   },
-  "FIRE_DAMAGE": {
+  "FIRE_DAMAGE_TARGET": {
     "TYPE": "DAMAGE",
     "TARGET_TYPE": "TARGET",
     "DAMAGE_TYPE": "FIRE"
   },
-  "RESTORE_HEALTH": {
+  "RESTORE_HEALTH_SELF": {
     "TYPE": "RESTORE",
     "TARGET_TYPE": "SELF",
     "RESOURCE": "HEALTH"
+  },
+  "PICKPOCKET": {
+    "TYPE": "PICKPOCKET",
+    "TARGET_TYPE": "TARGET"
   }
 }
