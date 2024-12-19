@@ -1,32 +1,52 @@
-from utils.constants import StatusNames, DamageTypes
+import random
+from utils.constants import StatusNames, DamageTypes, StatusParameters
 
 class Status:
-    def __init__(self, status_id, name):
-        self.status_id = status_id
-        self.name = name
+    def __init__(self, status_enum):
+        self.status_id = status_enum.name
+        self.name = status_enum.value
     
-    def trigger_on_turn(self, subject, level) -> bool: # returns whether the status effect ended combat
-        return False
+    def trigger_on_turn(self, subject, level):
+        # Perform the actions the status needs done
+        return
+    
+    def modify_value(self, subject, level, *args, **kwargs) -> int:
+        # Do some calculations without changing anything aside from the status itself
+        return kwargs.get("default", 0)
 
 class DefenseStatus(Status):
     def __init__(self):
-        super().__init__(StatusNames.DEFENSE.name, StatusNames.DEFENSE.value)
+        super().__init__(StatusNames.DEFENSE)
     
-    def trigger_instantly(self, subject, level, incoming_damage, damage_type) -> bool:
-        if not subject.take_damage(incoming_damage - level, damage_type):
-            return True
-        subject.status_manager.remove(self.status_id, incoming_damage)
-        return False
+    def modify_value(self, subject, level, *args, **kwargs) -> int:
+        incoming_damage = kwargs.get("incoming_damage", 0)
+        net_damage = max(incoming_damage - level, 0)
+        if incoming_damage >= 0:
+            status_change = incoming_damage * -1
+            subject.status_manager.change_status(self.status_id, status_change)
+        else:
+            raise ValueError("Damage should not be negative")
+        return net_damage
 
 class PoisonStatus(Status):
     def __init__(self):
-        super().__init__(StatusNames.POISON.name, StatusNames.POISON.value)
+        super().__init__(StatusNames.POISON)
     
-    def trigger_on_turn(self, subject, level) -> bool:
-        return subject.take_damage(level, DamageTypes.POISON)
+    def trigger_on_turn(self, subject, level):
+        subject.take_damage(level, DamageTypes.POISON)
+        
+class EvasionStatus(Status):
+    def __init__(self):
+        super().__init__(StatusNames.EVASION)
+    
+    def modify_value(self, subject, level, *args, **kwargs) -> int:
+        incoming_damage = kwargs.get("damage", 0)
+        success_probability = min(StatusParameters.BASE_EVASION_PROBABILITY * level, 1.0)
+        roll = random.random()
+        return 0 if roll >= success_probability else incoming_damage
 
 class StatusRegistry:
-    def __init__(self):
+    def __init__(self, statuses_path):
         self.statuses = self._initialize_statuses()
     
     def _initialize_statuses(self) -> dict:

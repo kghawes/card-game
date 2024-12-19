@@ -1,5 +1,6 @@
 from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
+from utils.constants import StatusNames
 
 class Combatant:
     def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache):
@@ -34,8 +35,9 @@ class Combatant:
             new_value = min(new_value, max_value)
         setattr(self, resource, new_value)
         
-    def take_damage(self, amount, damage_type_enum) -> bool:
+    def take_damage(self, amount, damage_type_enum, status_registry) -> bool:
         # check for weakness or resistance
+        amount = self.status_manager.get_modified_value(self, StatusNames.DEFENSE.name, status_registry, default=amount, incoming_damage=amount)
         self.health = max(self.health - amount, 0)
         return self.is_alive()
     

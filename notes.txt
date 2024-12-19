@@ -1,35 +1,41 @@
-JOURNEYS IN THE LAND OF ASH
-(Land of Ash)
+Slay the Spire-Inspired Morrowin Fan Game Project
+I'm developing a card game based in the setting of TES III: Morrowind with game mechanics inspired by Slay the Spire. The player starts as a new recruit of either the Fighters Guild, the Thieves Guild, or the Mages Guild (this determines the player's class and starting deck). Through a series of encounter-filled quests, the player acquires new cards and gains experience, becoming stronger. When defeated, the player receives a reward that will benefit future runs.
 
-Game Mechanics Plan
+Genre: roguelike singleplayer deckbuilding card game
 
-Card
-Name
-Type (Weapon, Armor, Spell, Item, Skill, Consumable, Conjured)
-Weapons, Armor, and Skills cost stamina and are partly class-restricted (by Style, Material/Weight, and Specialization respectively)
-  Weapons deal physical damage plus possibly other effects
-  Armor adds defense plus possibly other effects
-  Spells cost magicka and have various effects
-  Items are free to play but may have downside effects, may be weak, or may be expensive/rare
-  Consumables are free to play but can only be used once per combat encounter and may be expensive/rare
-  Conjured cards (like a bound mace) cost stamina and last until used or the end of combat, after which they are permanently deleted. They can only be acquired during battle through a card effect.
-Cost (stamina or magicka)
-  Modified cost (temporary)
-Effects
-  Imbued Effects (temporary)
-Value (gold)
+This is a personal project and not currently intended for release or publication.
 
-Weapon
-Style (Long Blade, Blunt Weapon, Short Blade, Marksman Weapon, Staff, Natural)
-  Fighter: can use Long Blade, Blunt Weapon
-  Thief: can use Short Blade, Marksman
-  Mage: can use Staff
+Key Features:
+Turn-based combat
+Interacting status effects that decay over time
+Everything is cards (no other items)
+Dual stamina and magicka resource system
+Cards and card effects inspired by Morrowind game mechanics (in addition to others)
+
+Working Title: JOURNEYS IN THE LAND OF ASH ("Land of Ash")
+
+Game Mechanics Plan:
+
+Cards
+Card types
+  Weapon: Costs stamina. Deals physical damage and can have other effects if enchanted.
+  Armor: Costs stamina. Grants defense status and can have other effects if enchanted.
+  Skill: Costs stamina. Can have a variety of effects, but not dealing physical damage or granting defense status.
+  Spell: Costs magicka. Can have a wide variety of effects.
+  Item: Costs nothing to play. Can have a wide variety of effects. Typically either very weak or powerful but extremely rare.
+  Consumables: Costs nothing to play. Can have a wide variety of effects. Consists of potions and scrolls. When played, the card is "consumed" (like "exhausted" cards in Slay the Spire)
+
+Weapons
+Style (Long Blade, Blunt Weapon, Short Blade, Marksman Weapon, Staff, Natural Weapon)
+  Fighter: can use long blade, blunt weapon
+  Thief: can use short blade, marksman weapon
+  Mage: can use staff
   Only enemies can use natural weapons
 
 Armor
 Weight (Light, Medium, Heavy, or Natural)
-  Fighter: can use Medium or Heavy
-  Thief: can use Light or Medium
+  Fighter: can use medium or heavy
+  Thief: can use light or medium
   Mage: can use none
   Only enemies can use natural armor
 
@@ -148,6 +154,8 @@ Absorb health X
   Reduce opponent health by up to X and restore your health by that much (opponent takes magic damage).
 Conjure card
   Add a conjured card to your hand.
+  Leveled effect?
+
 
 Statuses
 Decrement X by 1 each beginning of turn, or remove the status if X is zero.
@@ -174,11 +182,11 @@ Poison X
   Take X poison damage each turn.
   Applies before or after other statuses that change health or max health depending on the order they were originally applied.
 Weakness to damage type (physical, fire, frost, shock, poison) X
-  Take 1+0.25X times damage from that type.
+  Take 1+0.2x times damage from that type.
 Damage strength X
-  Your weapons do (0.75)^X times damage (minimum 1 damage).
+  Your weapons do 1-0.2x times damage (minimum 1 damage).
 Damage endurance X
-  Your armor provides (0.75)^X times defense.
+  Your armor provides 1-0.2x times defense.
 Damage intelligence X
   Reduce max magicka by up to X (min 0).
 Damage agility X
@@ -186,7 +194,7 @@ Damage agility X
 Damage speed X
   Draw up to X fewer cards each turn (draw 2 cards minimum).
 Damage willpower X
-  Your spells do (0.75)^X times damage (min 1 for spells that deal damage).
+  Your spells do 1-0.2x times damage (min 1 for spells that deal damage).
 Damage luck X
   If you have this status at the end of combat, receive the minimum possible treasure rewards. Lasts X turns.
 Common disease X
@@ -199,13 +207,13 @@ Regenerate X
   Restore X health each turn.
   Applies before or after statuses that change health depending on order.
 Resistance to damage type X
-  Take (0.75)^X times damage from that type.
+  Take 1-0.2x times damage from that type.
 Immune to damage type X
   Take no damage from that type for X turns.
 Fortify strength
-  Your weapons do 1+0.25X times damage.
+  Your weapons do 1+0.2x times damage.
 Fortify endurance
-  Your armor provides 1+0.25X times defense.
+  Your armor provides 1+0.2x times defense.
 Fortify intelligence X
   Max magicka +X.
 Fortify agility X
@@ -213,7 +221,7 @@ Fortify agility X
 Fortify speed X
   Draw X additional cards each turn.
 Fortify willpower X
-  Your spells deal 1+0.25X times damage.
+  Your spells deal 1+0.2X times damage.
 Fortify luck X
   If you have this status at the end of combat, receive the maximum treasure rewards. Lasts X turns.
 Fortify magic school X (alteration, conjuration, destruction, illusion, mysticism, restoration)
@@ -230,7 +238,7 @@ Paralyze X
   Cannot play any card type except consumable cards for X turns.
 Evasion X
   0.1X chance to take 0 damage when a card would deal damage to you.
-Undetected X
+Hidden X
   0.1X chance to skip the opponent’s next turn.
 Frenzy X
   Cards you play have none of their effects except dealing damage for X turns.
@@ -247,13 +255,13 @@ Soul trap X
 Mark X
   If you play a card with an intervention effect while you have this status, you will resume the quest at this encounter rather than starting over. 
 Alchemist X
-  Your potions are 1+0.25X times as effective.
+  Your potions are 1+0.2X times as effective.
 Enchanter X
-  Your scrolls are 1+0.25X times as effective.
+  Your scrolls are 1+0.2X times as effective.
 Poisoner X
-  Your poison potions are 1+0.25X times as effective.
+  Your poison potions are 1+0.2X times as effective.
 Connoisseur X
-  Your liquor potions are 1+0.25X times as effective.
+  Your liquor potions are 1+0.2X times as effective.
 Skooma Fiend X
   Your skooma is 2X times as effective. Take 5X points of physical damage at the end of each turn you don't play a skooma.
 Comments and examples:
@@ -265,8 +273,6 @@ Comments and examples:
     [Consumable] Poison of Paralyze / no cost / Effect: Inflict Paralyze 1. (Tooltip: "Paralyze 1: You can only play Consumable cards. Status effects decrease by 1 each turn.")
     [Consumable] Potion of Metagaming / no cost / Effect: Gain Alchemist 2. (Tooltip: "Alchemist 2: Your potions are 50% more effective. Status effects decrease by 1 each turn.")
     [Item] Salamander Ring / no cost / Effect: Gain Resist Fire 2. (Tooltip: "Resist Fire 2: You take 44% less Fire Damage. Status effects decrease by 1 each turn.")
-  Statuses that lower a number stack multiplicatively, while statuses that raise a number stack additively. This is to ensure the effects neither max out nor blow up in their effectiveness, but scale at a reasonable rate with their status level.
-  Statuses that lower a number should round that number down (floor), while statuses that raise a number should round that number up (ceiling). This is to ensure that any nonzero effect will change the number by at least 1 point.
 
 Player Character 
 Name

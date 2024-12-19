@@ -11,7 +11,11 @@ class StatusManager:
         self._kill_zombie(status_id)
         return status_id in self.statuses
     
+    def get_status_level(self, status_id) -> int:
+        return self.statuses.get(status_id, 0)
+    
     def change_status(self, status_id, level, remove_all_levels=False):
+        print(str(self.statuses.get(status_id, 0)) + "+" + str(level))
         if remove_all_levels and status_id in self.statuses:
             del self.statuses[status_id]
         else:
@@ -25,10 +29,17 @@ class StatusManager:
     def remove_all_statuses(self):
         self.statuses.clear()
 
-    def trigger_statuses(self, subject, status_registry):
+    def trigger_statuses_on_turn(self, subject, status_registry):
         for status_id, level in self.statuses.items():
             status = status_registry.get_status(status_id)
             status.trigger_on_turn(subject, level)
             if not subject.is_alive():
                 return
         return
+    
+    def get_modified_value(self, subject, status_id, status_registry, default, *args, **kwargs) -> int:
+        if status_id not in self.statuses: 
+            return default
+        status = status_registry.get_status(status_id)
+        level = self.get_status_level(status_id)
+        return status.modify_value(subject, level, default=default, *args, **kwargs)

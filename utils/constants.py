@@ -24,9 +24,18 @@ class EffectNames(Enum):
     NO_EFFECT = "No Effect"
     DAMAGE = "Damage"
     RESTORE = "Restore"
-    PICKPOCKET = "Pickpocket"
     APPLY_STATUS = "+"
     REMOVE_STATUS = "–"
+    FORTIFY_ATTRIBUTE = "Fortify"
+    DAMAGE_ATTRIBUTE = "Damage"
+    DRAIN_ATTRIBUTE = "Drain"
+    DRAW = "Draw"
+    DISCARD = "Discard"
+    JUMP = "Jump"
+    SCRY = "Scry"
+    PICKPOCKET = "Pickpocket"
+    DISPEL = "Dispel"
+    CONJURE_CARD = "Conjure"
     
 class TargetTypes(Enum):
     SELF = "on Self"
@@ -34,9 +43,27 @@ class TargetTypes(Enum):
 
 class StatusNames(Enum):
     DEFENSE = "Defense"
+    REGENERATION = "Regenerate Health"
     POISON = "Poison"
     PARALYSIS = "Paralysis"
+    SILENCE = "Silence"
+    BLIND = "Blind"
+    FRENZY = "Frenzy"
+    CALM = "Calm"
     EVASION = "Evasion"
+    HIDDEN = "Hidden"
+    BURDEN = "Burden"
+    FEATHER = "Feather"
+    WATERWALKING = "Waterwalking"
+    WATERBREATHING = "Waterbreathing"
+    SWIFT_SWIM = "Swift Swim"
+    WEAKNESS = "Weakness to"
+    RESISTANCE = "Resist"
+    DISEASE = "Common Disease"
+    BLIGHT = "Blight Disease"
+    REFLECT = "Reflect"
+    SPELL_ABSORPTION = "Spell Absorption"
+    ALCHEMIST = "Alchemist"
     FORTIFY_STRENGTH = "Fortify Strength"
     DAMAGE_STRENGTH = "Damage Strength"
     FORTIFY_AGILITY = "Fortify Agility"
@@ -51,6 +78,9 @@ class StatusNames(Enum):
     DAMAGE_SPEED = "Damage Speed"
     FORTIFY_LUCK = "Fortify Luck"
     DAMAGE_LUCK = "Damage Luck"
+
+class StatusParameters(Enum):
+    BASE_EVASION_PROBABILITY = 0.1
 
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3
@@ -68,6 +98,7 @@ STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"
 ENCHANTMENTS_PATH = "data/enchantments.json"
 EFFECTS_PATH = "data/effects.json"
+STATUSES_PATH = "data/statuses.json"
 
 SPLASH_MESSAGE = "Welcome to the game!"
 PROMPT_NAME = "What is your character’s name? "

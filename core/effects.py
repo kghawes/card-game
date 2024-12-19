@@ -7,7 +7,7 @@ class Effect:
         self.name = name
         self.target_type_enum = target_type_enum
     
-    def resolve(self, source, opponent, level=1):
+    def resolve(self, source, opponent, level=1, *args, **kwargs):
         return
     
     def get_target_combatant(self, source, opponent):
@@ -34,7 +34,7 @@ class ChangeStatusEffect(Effect):
         self.name = self.format_name(effect_name_enum.value + status_enum.value)
         super().__init__(self.effect_id, self.name, target_type_enum)
     
-    def resolve(self, source, opponent, level):
+    def resolve(self, source, opponent, level, *args, **kwargs):
         subject = self.get_target_combatant(source, opponent)
         if EffectNames.REMOVE_STATUS.name in self.effect_id:
             level *= -1
@@ -48,9 +48,10 @@ class DamageEffect(Effect):
         name = self.format_name(damage_type_enum.value, EffectNames.DAMAGE.value)
         super().__init__(effect_id, name, target_type_enum)
         
-    def resolve(self, source, opponent, level):
+    def resolve(self, source, opponent, level, *args, **kwargs):
+        status_registry = kwargs["status_registry"]
         subject = self.get_target_combatant(source, opponent)
-        subject.take_damage(level, self.damage_type_enum)
+        subject.take_damage(level, self.damage_type_enum, status_registry)
 
 class RestoreEffect(Effect):
     def __init__(self, target_type_enum, resource_enum):
@@ -60,20 +61,24 @@ class RestoreEffect(Effect):
         name = self.format_name(EffectNames.RESTORE.value, resource_enum.value.display) 
         super().__init__(effect_id, name, target_type_enum)
     
-    def resolve(self, source, opponent, level):
+    def resolve(self, source, opponent, level, *args, **kwargs):
         subject = self.get_target_combatant(source, opponent)
         subject.gain_resource(self.resource_enum, level)
+        
+class ChangeAttributeEffect(Effect):
+    def __init__(self, effect_id, name):
+        pass
 
 class PickpocketEffect(Effect):
     def __init__(self):
         super().__init__(EffectNames.PICKPOCKET.name, EffectNames.PICKPOCKET.value)
     
-    def resolve(self, source, opponent, level):
+    def resolve(self, source, opponent, level, *args, **kwargs):
         # target.card_manager.show_top_cards_in_deck(level)
         # ....
         pass
 
-class EffectRegistry:
+class EffectRegistry: # TODO split registries to separate modules
     def __init__(self, effects_path):
         self.effects = self._register_effects(effects_path)
 

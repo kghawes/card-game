@@ -4,7 +4,7 @@
     "card_type": "SPELL",
     "cost": 0,
     "value": 20,
-    "effects": { "REMOVE_DEFENSE_SELF": 7 }
+    "effects": { "REMOVE_DEFENSE_SELF": 2 }
   },
   "FIREBOLT": {
     "name": "Firebolt",
