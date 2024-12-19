@@ -20,6 +20,8 @@ class DamageTypes(Enum):
     POISON = "Poison"
     MAGIC = "Magic"
 
+ELEMENTAL_DAMAGE = [DamageTypes.FIRE, DamageTypes.FROST, DamageTypes.SHOCK]
+
 class EffectNames(Enum):
     NO_EFFECT = "No Effect"
     DAMAGE = "Damage"

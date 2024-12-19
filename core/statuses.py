@@ -1,5 +1,6 @@
 import random
 from utils.constants import StatusNames, DamageTypes, StatusParameters
+from gameplay.modifiers import Modifier
 
 class Status:
     def __init__(self, status_enum):
@@ -17,6 +18,7 @@ class Status:
 class DefenseStatus(Status):
     def __init__(self):
         super().__init__(StatusNames.DEFENSE)
+        self.modifier = Modifier(StatusNames.DEFENSE, 0.2, 1)
     
     def modify_value(self, subject, level, *args, **kwargs) -> int:
         incoming_damage = kwargs.get("incoming_damage", 0)
