@@ -21,8 +21,8 @@ class FlatModifier(Modifier):
         self.is_adding = is_adding
         self.minimum_result = minimum_result
     
-    def modify_value(self, level, value) -> int:
+    def modify_value(self, level, old_value) -> int:
         if self.is_adding:
-            return value + level
+            return old_value + level
         else:
-            return max(value - level, self.minimum_result)
+            return max(old_value - level, self.minimum_result)

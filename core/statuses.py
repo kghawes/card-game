@@ -43,6 +43,18 @@ class EvasionStatus(Status):
         roll = random.random()
         return 0 if roll >= success_probability else incoming_damage
 
+class ModifyCostStatus(Status):
+    def __init__(self, status_enum, affected_cards_enum, is_cost_increase):
+        super().__init__(status_enum)
+        self.affected_cards_enum = affected_cards_enum
+        self.is_cost_increase = is_cost_increase
+        self.modifier = modifiers.FlatModifier(status_enum, is_cost_increase)
+        
+    def trigger_on_turn(self, subject, level):
+        for card in subject.card_manager.hand:
+            if card.has_property(self.status_enum):
+                card.set_cost(self.modifier.modify_value(level, card.get_cost()))
+
 class StatusRegistry:
     def __init__(self, statuses_path):
         self.statuses = self._initialize_statuses()

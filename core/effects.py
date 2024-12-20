@@ -64,10 +64,6 @@ class RestoreEffect(Effect):
     def resolve(self, source, opponent, level, *args, **kwargs):
         subject = self.get_target_combatant(source, opponent)
         subject.gain_resource(self.resource_enum, level)
-        
-class ChangeAttributeEffect(Effect):
-    def __init__(self, effect_id, name):
-        pass
 
 class PickpocketEffect(Effect):
     def __init__(self):

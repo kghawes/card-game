@@ -1,9 +1,58 @@
 {
-  "PICKPOCKET": {
-    "name": "Pickpocket",
+  "FORTSTRTEST": {
+    "name": "Fort. Str. Test",
     "card_type": "SKILL",
-    "cost": 3,
+    "cost": 0,
     "value": 200,
-    "effects": { "PICKPOCKET_TARGET": 3 }
+    "effects": { "FORTIFY_STRENGTH_SELF": 3 }
+  },
+  "FORTENDTEST": {
+    "name": "Fort. Str. Test",
+    "card_type": "SKILL",
+    "cost": 0,
+    "value": 200,
+    "effects": { "FORTIFY_ENDURANCE_SELF": 3 }
+  },
+  "FORTAGITEST": {
+    "name": "Fort. Agi. Test",
+    "card_type": "SKILL",
+    "cost": 0,
+    "value": 200,
+    "effects": { "FORTIFY_AGILITY_SELF": 3 }
+  },
+  "FORTSPDTEST": {
+    "name": "Fort. Spd. Test",
+    "card_type": "SKILL",
+    "cost": 0,
+    "value": 200,
+    "effects": { "FORTIFY_SPEED_SELF": 3 }
+  },
+  "FORTINTTEST": {
+    "name": "Fort. Int. Test",
+    "card_type": "SKILL",
+    "cost": 0,
+    "value": 200,
+    "effects": { "FORTIFY_INTELLIGENCE_SELF": 3 }
+  },
+  "FORTWILTEST": {
+    "name": "Fort. Wil. Test",
+    "card_type": "SKILL",
+    "cost": 0,
+    "value": 200,
+    "effects": { "FORTIFY_WILLPOWER_SELF": 3 }
+  },
+  "FEATHERTEST": {
+    "name": "Feather Test",
+    "card_type": "SKILL",
+    "cost": 0,
+    "value": 200,
+    "effects": { "FEATHER_SELF": 3 }
+  },
+  "BURDENTEST": {
+    "name": "Fort. Str. Test",
+    "card_type": "SKILL",
+    "cost": 0,
+    "value": 200,
+    "effects": { "BURDEN_SELF": 3 }
   }
 }

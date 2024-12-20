@@ -1,5 +1,35 @@
 from enum import Enum
 
+class CardTypes(Enum):
+    WEAPON = "Weapon"
+    ARMOR = "Armor"
+    SKILL = "Skill"
+    SPELL = "Spell"
+    ITEM = "Item"
+    CONSUMABLE = "Consumable"
+
+class CardSubtypes(Enum):
+    LONG_BLADE = "Long Blade"
+    BLUNT_WEAPON = "Blunt Weapon"
+    SHORT_BLADE = "Short Blade"
+    MARKSMAN_WEAPON = "Marksman Weapon"
+    HEAVY_ARMOR = "Heavy Armor"
+    MEDIUM_ARMOR = "Medium Armor"
+    LIGHT_ARMOR = "Light Armor"
+    COMBAT = "Combat"
+    STEALTH = "Stealth"
+    MAGIC = "Magic"
+    ALTERATION = "Alteration"
+    CONJURATION = "Conjuration"
+    DESTRUCTION = "Destruction"
+    ILLUSION = "Illusion"
+    MYSTICISM = "Mysticism"
+    RESTORATION = "Restoration"
+
+class ConsumableCategories(Enum):
+    SCROLL = "Scroll"
+    POTION = "Potion"
+    
 class ResourceData:
     def __init__(self, name):
         self.attribute_name = name.lower()

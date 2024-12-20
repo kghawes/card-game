@@ -1,13 +1,30 @@
 from copy import deepcopy
 from utils.utils import Prototype
+from utils.constants import CardTypes, CardSubtypes
 
 class Card:
-    def __init__(self, name, card_type, cost, value, effects):
+    def __init__(self, name, card_type, cost, value, effects, subtype=None):
         self.name = name
         self.card_type = card_type
         self.cost = cost
+        self.modified_cost = cost
         self.value = value
         self.effects = deepcopy(effects)
+        self.subtype = subtype
+        
+    def get_cost(self):
+        return self.modified_cost
+    
+    def set_cost(self, new_cost):
+        self.modified_cost = new_cost
+        
+    def has_property(self, card_property) -> bool:
+        if card_property in CardTypes:
+            return self.card_type == card_property.name
+        elif card_property in CardSubtypes:
+            return self.subtype == card_property.name
+        else:
+            return False
 
 class CardPrototype(Card, Prototype):
     def __init__(self, name, card_type, cost, value, effects, enchantments = None, enchanted_name = None):

@@ -43,25 +43,24 @@ class CombatManager:
         if selection >= len(player.card_manager.hand):
             return False
         card = player.card_manager.hand[selection]
-        if card.cost > player.stamina:
-            text_interface.send_message(constants.NOT_ENOUGH_STAMINA_MESSAGE)
-            return False
         self.play_card(player, enemy, card, text_interface, registries)
         return self.is_combat_over(player, enemy)
 
     def play_card(self, combatant, opponent, card, text_interface, registries):
-        combatant.card_manager.discard(card)
-        combatant.try_spend_resource(constants.Resources.STAMINA.value.attribute_name, card.cost)
+        resource = constants.Resources.STAMINA.value
+        if card.card_type == constants.CardTypes.SPELL.name:
+            resource = constants.Resources.MAGICKA.value
+        if not combatant.try_spend_resource(resource.attribute_name, card.get_cost()):
+            text_interface.send_message("Not enough " + resource.display)
+            return
 
+        combatant.card_manager.discard(card)
+        
         for effect_id, effect_level in card.effects.items():
             effect = registries.effects.get_effect(effect_id)
             effect.resolve(combatant, opponent, effect_level, status_registry=registries.statuses)
-            if self.is_combat_over(combatant, opponent):
-                return
 
-        text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(
-            combatant.name, card.name, opponent.name, opponent.health
-        ))
+        text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(combatant.name, card.name, opponent.name, opponent.health))
 
     def do_enemy_turn(self, player, enemy, text_interface, registries):
         self.beginning_of_turn(enemy, player, registries)
@@ -69,7 +68,7 @@ class CombatManager:
         while playable_card_exists and not self.is_combat_over(player, enemy):
             playable_card_exists = False
             for card in enemy.card_manager.hand:
-                if card.cost <= enemy.stamina:
+                if card.cost <= enemy.stamina: ###
                     playable_card_exists = True
                     self.play_card(enemy, player, card, text_interface, registries)
                     if self.is_combat_over(player, enemy):
