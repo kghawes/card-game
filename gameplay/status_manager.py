@@ -37,9 +37,9 @@ class StatusManager:
                 return
         return
     
-    def get_modified_value(self, subject, status_id, status_registry, default, *args, **kwargs) -> int:
+    def trigger_status_instantly(self, subject, status_id, status_registry, default, *args, **kwargs) -> int:
         if status_id not in self.statuses: 
             return default
         status = status_registry.get_status(status_id)
         level = self.get_status_level(status_id)
-        return status.modify_value(subject, level, default=default, *args, **kwargs)
+        return status.trigger_instantly(subject, level, default=default, *args, **kwargs)

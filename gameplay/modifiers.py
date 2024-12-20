@@ -16,7 +16,7 @@ class ScalingModifier(Modifier):
         return round(multiplier * value)
 
 class FlatModifier(Modifier):
-    def __init__(self, modifier_id, is_adding, minimum_result=0):
+    def __init__(self, modifier_id, is_adding=False, minimum_result=0):
         super().__init__(modifier_id)
         self.is_adding = is_adding
         self.minimum_result = minimum_result

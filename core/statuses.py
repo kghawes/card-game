@@ -1,6 +1,6 @@
 import random
 from utils.constants import StatusNames, DamageTypes, StatusParameters
-from gameplay.modifiers import Modifier
+import gameplay.modifiers as modifiers
 
 class Status:
     def __init__(self, status_enum):
@@ -11,23 +11,19 @@ class Status:
         # Perform the actions the status needs done
         return
     
-    def modify_value(self, subject, level, *args, **kwargs) -> int:
-        # Do some calculations without changing anything aside from the status itself
+    def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
         return kwargs.get("default", 0)
 
 class DefenseStatus(Status):
     def __init__(self):
         super().__init__(StatusNames.DEFENSE)
-        self.modifier = Modifier(StatusNames.DEFENSE, 0.2, 1)
+        self.modifier = modifiers.FlatModifier(StatusNames.DEFENSE)
     
-    def modify_value(self, subject, level, *args, **kwargs) -> int:
+    def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
         incoming_damage = kwargs.get("incoming_damage", 0)
-        net_damage = max(incoming_damage - level, 0)
-        if incoming_damage >= 0:
-            status_change = incoming_damage * -1
-            subject.status_manager.change_status(self.status_id, status_change)
-        else:
-            raise ValueError("Damage should not be negative")
+        net_damage = self.modifier.modify_value(level, incoming_damage)
+        defense_to_remove = net_damage - incoming_damage
+        subject.status_manager.change_status(self.status_id, defense_to_remove)
         return net_damage
 
 class PoisonStatus(Status):
@@ -41,7 +37,7 @@ class EvasionStatus(Status):
     def __init__(self):
         super().__init__(StatusNames.EVASION)
     
-    def modify_value(self, subject, level, *args, **kwargs) -> int:
+    def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
         incoming_damage = kwargs.get("damage", 0)
         success_probability = min(StatusParameters.BASE_EVASION_PROBABILITY * level, 1.0)
         roll = random.random()

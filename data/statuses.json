@@ -3,10 +3,6 @@
     "NAME": "Defense",
     "DESCRIPTION": "Block up to {} Damage and if you do, lose that much Defense."
   },
-  "FORTIFY_STRENGTH": {
-    "NAME": "Fortify Strength",
-    "DESCRIPTION": "Weapons you play deal {}% more Damage."
-  },
   "POISON": {
     "NAME": "Poison",
     "DESCRIPTION": "At the start of each turn, take {} Poison Damage."

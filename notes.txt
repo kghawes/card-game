@@ -175,9 +175,9 @@ Waterwalking X
   For X turns, cards you play don’t get discarded.
   Doesn't apply to conjured or pickpocketed cards, nor any other card that would not go to your discard pile.
 Waterbreathing X
-  Select up to X cards from your discard pile and add them to your hand.
+  At the start of your turn, when you would draw cards, select up to X cards from your discard pile and add them to your hand. Then draw the rest of your cards from your deck.
 Swift Swim X
-  For X turns, at the start of your turn, you may discard any number of cards then draw that many cards.
+  For X turns, at the start of your turn, after drawing cards, you may discard any number of cards then draw that many cards.
 Poison X
   Take X poison damage each turn.
   Applies before or after other statuses that change health or max health depending on the order they were originally applied.

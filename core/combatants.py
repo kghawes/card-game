@@ -37,7 +37,7 @@ class Combatant:
         
     def take_damage(self, amount, damage_type_enum, status_registry) -> bool:
         # check for weakness or resistance
-        amount = self.status_manager.get_modified_value(self, StatusNames.DEFENSE.name, status_registry, default=amount, incoming_damage=amount)
+        amount = self.status_manager.trigger_status_instantly(self, StatusNames.DEFENSE.name, status_registry, default=amount, incoming_damage=amount)
         self.health = max(self.health - amount, 0)
         return self.is_alive()
     

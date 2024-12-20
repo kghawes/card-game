@@ -3,6 +3,7 @@
     "name": "Cliff Racer",
     "max_health": 5,
     "max_stamina": 2,
+    "max_magicka": 0,
     "deck": [
       {"card": "RAZOR_BEAK", "quantity": 6},
       {"card": "SHARP_TAIL", "quantity": 2},
@@ -14,6 +15,7 @@
     "name": "Rat",
     "max_health": 3,
     "max_stamina": 2,
+    "max_magicka": 0,
     "deck": [
       {"card": "SHARP_TEETH", "quantity": 6},
       {"card": "MISS", "quantity": 2}

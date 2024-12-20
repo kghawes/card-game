@@ -35,13 +35,13 @@ class EnemyCache:
         enemy_data = load_json(filename)
         prototypes = {}
         for enemy_id, data in enemy_data.items():
-            if not all(key in data for key in ["name", "max_health", "max_stamina", "deck", "loot"]):
+            if not all(key in data for key in ["name", "max_health", "max_stamina", "max_magicka", "deck", "loot"]):
                 raise ValueError(f"Enemy '{enemy_id}' is missing required fields.")
             prototypes[enemy_id] = EnemyPrototype(
                 name=data["name"],
                 max_health=data["max_health"],
                 max_stamina=data["max_stamina"],
-                max_magicka=0,
+                max_magicka=data["max_magicka"],
                 deck=data["deck"],  # Pass raw deck
                 loot=data["loot"]
             )
