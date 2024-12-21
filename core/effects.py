@@ -73,6 +73,22 @@ class PickpocketEffect(Effect):
         # target.card_manager.show_top_cards_in_deck(level)
         # ....
         pass
+    
+class HandEffect(Effect):
+    def __init__(self, effect_name_enum, target_type_enum, is_draw_effect):
+        effect_id = effect_name_enum.name
+        name = effect_name_enum.value
+        super().__init__(effect_id, name, target_type_enum)
+        self.is_draw_effect = is_draw_effect
+    
+    def resolve(self, source, opponent, level, *args, **kwargs):
+        subject = self.get_target_combatant(source, opponent)
+        if level == 0: 
+            return
+        if self.is_draw_effect:
+            subject.card_manager.draw(level)
+        else:
+            pass
 
 class EffectRegistry: # TODO split registries to separate modules
     def __init__(self, effects_path):

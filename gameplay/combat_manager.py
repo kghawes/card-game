@@ -6,6 +6,7 @@ class CombatManager:
         return not (player.is_alive() and enemy.is_alive())
 
     def do_combat(self, player, enemy, text_interface, registries):
+        player.card_manager.reset_effect_levels()
         while True:
             self.do_player_turn(player, enemy, text_interface, registries)
             if self.is_combat_over(player, enemy):
@@ -58,7 +59,8 @@ class CombatManager:
         
         for effect_id, effect_level in card.effects.items():
             effect = registries.effects.get_effect(effect_id)
-            effect.resolve(combatant, opponent, effect_level, status_registry=registries.statuses)
+            level = effect_level.modified_level
+            effect.resolve(combatant, opponent, level, status_registry=registries.statuses)
 
         text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(combatant.name, card.name, opponent.name, opponent.health))
 

@@ -1,4 +1,3 @@
-from copy import deepcopy
 from utils.utils import Prototype
 from utils.constants import CardTypes, CardSubtypes
 
@@ -9,8 +8,13 @@ class Card:
         self.cost = cost
         self.modified_cost = cost
         self.value = value
-        self.effects = deepcopy(effects)
         self.subtype = subtype
+        self.effects = {}
+        
+        for effect, level in effects.items():
+            if type(level) is EffectLevel:
+                level = level.base_level
+            self.effects[effect] = EffectLevel(level)
         
     def get_cost(self):
         return self.modified_cost
@@ -25,6 +29,20 @@ class Card:
             return self.subtype == card_property.name
         else:
             return False
+
+class EffectLevel():
+    def __init__(self, base_level):
+        self.base_level = base_level
+        self.modified_level = base_level
+        
+    def get_level(self):
+        return self.modified_level
+    
+    def set_level(self, level):
+        self.modified_level = level
+    
+    def reset(self):
+        self.modified_level = self.base_level
 
 class CardPrototype(Card, Prototype):
     def __init__(self, name, card_type, cost, value, effects, enchantments = None, enchanted_name = None):

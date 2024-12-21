@@ -1,4 +1,5 @@
 import random
+from copy import deepcopy
 from utils.constants import CardTypes, CardSubtypes, StatusNames, DamageTypes, StatusParameters
 import gameplay.modifiers as modifiers
 
@@ -49,11 +50,33 @@ class ModifyCostStatus(Status):
         self.affected_cards_enum = affected_cards_enum
         self.is_cost_increase = is_cost_increase
         self.modifier = modifiers.FlatModifier(status_enum, is_cost_increase)
+    
+    def modify_card_cost(self, card, level) -> int:
+        if card.matches(self.status_enum):
+            return self.modifier.modify_value(level, card.get_cost())
         
     def trigger_on_turn(self, subject, level):
         for card in subject.card_manager.hand:
-            if card.matches(self.status_enum):
-                card.set_cost(self.modifier.modify_value(level, card.get_cost()))
+            card.set_cost(self.modify_card_cost(card, level))
+    
+    def trigger_instantly(self, subject, level, card, *args, **kwargs) -> int:
+        return self.modify_card_cost(card, level)
+
+class ModifyEffectStatus(Status):
+    def __init__(self, status_enum, affected_cards_enum, effects, is_effectiveness_buff):
+        super().__init__(status_enum)
+        self.affected_cards_enum = affected_cards_enum
+        self.effects = deepcopy(effects)
+        self.is_effectiveness_buff = is_effectiveness_buff
+        
+    def modify_effect_level():
+        pass
+    
+    def trigger_on_turn(self, subject, level):
+        pass
+    
+    def trigger_instantly(self, subject, level, *args, **kwargs):
+        pass
 
 class StatusRegistry:
     def __init__(self, statuses_path):

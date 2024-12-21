@@ -29,7 +29,8 @@ class TextInterface:
             print(f"{idx}. {card.name} (Cost: {card.cost})")
             for effect_id, effect_level in card.effects.items():
                 effect = effect_registry.get_effect(effect_id)
-                print(f"     Level {effect_level} {effect.name}")
+                level = effect_level.get_level()
+                print(f"     Level {level} {effect.name}")
     
         # Divider and status display
         print(constants.TEXT_DIVIDER)

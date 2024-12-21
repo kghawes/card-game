@@ -18,8 +18,7 @@ class CardManager:
     def shuffle(self):
         random.shuffle(self.deck)
 
-    def draw(self):
-        cards_to_draw = 6
+    def draw(self, cards_to_draw=6):
         while cards_to_draw > 0:
             if len(self.deck) == 0:
                 self.deck = self.discard_pile[:]
@@ -37,3 +36,8 @@ class CardManager:
     def discard_hand(self):
         self.discard_pile.extend(self.hand)
         self.hand = []
+        
+    def reset_effect_levels(self):
+        for card in self.deck:
+            for effect_level in card.effects.values():
+                effect_level.reset()
