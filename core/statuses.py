@@ -1,5 +1,5 @@
 import random
-from utils.constants import StatusNames, DamageTypes, StatusParameters
+from utils.constants import CardTypes, CardSubtypes, StatusNames, DamageTypes, StatusParameters
 import gameplay.modifiers as modifiers
 
 class Status:
@@ -52,7 +52,7 @@ class ModifyCostStatus(Status):
         
     def trigger_on_turn(self, subject, level):
         for card in subject.card_manager.hand:
-            if card.has_property(self.status_enum):
+            if card.matches(self.status_enum):
                 card.set_cost(self.modifier.modify_value(level, card.get_cost()))
 
 class StatusRegistry:
@@ -63,9 +63,19 @@ class StatusRegistry:
         defense_status = DefenseStatus()
         poison_status = PoisonStatus()
         
+        ftfy_agi_status = ModifyCostStatus(StatusNames.FORTIFY_AGILITY, CardTypes.SKILL, False)
+        dmge_agi_status = ModifyCostStatus(StatusNames.DAMAGE_AGILITY, CardTypes.SKILL, True)
+        
+        ftfy_longblade_status = ModifyCostStatus(StatusNames.FORTIFY_LONG_BLADE, CardSubtypes.LONG_BLADE, False)
+        ftfy_destruction_status = ModifyCostStatus(StatusNames.FORTIFY_DESTRUCTION, CardSubtypes.DESTRUCTION, False)
+        
         return {
             defense_status.status_id: defense_status,
-            poison_status.status_id: poison_status
+            poison_status.status_id: poison_status,
+            ftfy_agi_status.status_id: ftfy_agi_status,
+            dmge_agi_status.status_id: dmge_agi_status,
+            ftfy_longblade_status.status_id: ftfy_longblade_status,
+            ftfy_destruction_status.status_id: ftfy_destruction_status
         }
     
     def get_status(self, status_id) -> Status:

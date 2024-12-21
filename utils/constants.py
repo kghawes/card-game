@@ -110,6 +110,8 @@ class StatusNames(Enum):
     DAMAGE_SPEED = "Damage Speed"
     FORTIFY_LUCK = "Fortify Luck"
     DAMAGE_LUCK = "Damage Luck"
+    FORTIFY_LONG_BLADE = "Fortify Long Blade skill"
+    FORTIFY_DESTRUCTION = "Fortify Destruction skill"
 
 class StatusParameters(Enum):
     BASE_EVASION_PROBABILITY = 0.1

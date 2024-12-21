@@ -18,7 +18,7 @@ class Card:
     def set_cost(self, new_cost):
         self.modified_cost = new_cost
         
-    def has_property(self, card_property) -> bool:
+    def matches(self, card_property) -> bool:
         if card_property in CardTypes:
             return self.card_type == card_property.name
         elif card_property in CardSubtypes:
