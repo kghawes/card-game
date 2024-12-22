@@ -1,0 +1,6 @@
+When you are attacked, your Resistances and Weaknesses apply before your Defense does.
+
+Status effects that activate at the beginning of your turn do so in the order they were originally applied.
+
+Weapons, Armor, and Skills cost Stamina to play. Spells cost Magicka. Items cost nothing.
+

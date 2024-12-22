@@ -1,3 +1,5 @@
+import utils.constants as constants
+
 class Modifier:
     def __init__(self, modifier_id):
         self.modifier_id = modifier_id
@@ -6,14 +8,13 @@ class Modifier:
         return value
 
 class ScalingModifier(Modifier):
-    def __init__(self, modifier_id, scale_factor, base_multiplier=1):
+    def __init__(self, modifier_id, is_buff=False, minimum_result=0):
         super().__init__(modifier_id)
-        self.m = scale_factor
-        self.b = base_multiplier
+        self.multiplier = constants.SCALING_BUFF_MULTIPLIER if is_buff else constants.SCALING_DEBUFF_MULTIPLIER
+        self.minimum_result = minimum_result
     
     def modify_value(self, level, value) -> int:
-        multiplier = self.m * level + self.b
-        return round(multiplier * value)
+        return round(self.multiplier ** level * value)
 
 class FlatModifier(Modifier):
     def __init__(self, modifier_id, is_adding=False, minimum_result=0):

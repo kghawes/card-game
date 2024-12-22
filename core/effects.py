@@ -21,6 +21,9 @@ class Effect:
     
     def format_name(self, *strings) -> str:
         return self.format_string(" ", *strings, self.target_type_enum.value)
+    
+    def matches(self, effect_id) -> bool:
+        return effect_id in self.effect_id
 
 class NoEffect(Effect):
     def __init__(self):
@@ -90,7 +93,7 @@ class HandEffect(Effect):
         else:
             pass
 
-class EffectRegistry: # TODO split registries to separate modules
+class EffectRegistry:
     def __init__(self, effects_path):
         self.effects = self._register_effects(effects_path)
 

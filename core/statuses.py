@@ -1,6 +1,6 @@
 import random
 from copy import deepcopy
-from utils.constants import CardTypes, CardSubtypes, StatusNames, DamageTypes, StatusParameters
+from utils.constants import CardTypes, CardSubtypes, StatusNames, EffectNames, DamageTypes, StatusParameters
 import gameplay.modifiers as modifiers
 
 class Status:
@@ -49,34 +49,40 @@ class ModifyCostStatus(Status):
         super().__init__(status_enum)
         self.affected_cards_enum = affected_cards_enum
         self.is_cost_increase = is_cost_increase
-        self.modifier = modifiers.FlatModifier(status_enum, is_cost_increase)
+        self.modifier = modifiers.FlatModifier(status_enum.name, is_cost_increase)
     
-    def modify_card_cost(self, card, level) -> int:
-        if card.matches(self.status_enum):
-            return self.modifier.modify_value(level, card.get_cost())
+    def modify_card_cost(self, card, level):
+        if card.matches(self.affected_cards_enum):
+            card.set_cost(self.modifier.modify_value(level, card.get_cost()))
         
     def trigger_on_turn(self, subject, level):
         for card in subject.card_manager.hand:
-            card.set_cost(self.modify_card_cost(card, level))
+            self.modify_card_cost(card, level)
     
     def trigger_instantly(self, subject, level, card, *args, **kwargs) -> int:
-        return self.modify_card_cost(card, level)
+        self.modify_card_cost(card, level)
+        return 1
 
 class ModifyEffectStatus(Status):
-    def __init__(self, status_enum, affected_cards_enum, effects, is_effectiveness_buff):
+    def __init__(self, status_enum, affected_cards_enum, affected_effect, is_effectiveness_buff):
         super().__init__(status_enum)
         self.affected_cards_enum = affected_cards_enum
-        self.effects = deepcopy(effects)
-        self.is_effectiveness_buff = is_effectiveness_buff
+        self.affected_effect = affected_effect
+        self.modifier = modifiers.ScalingModifier(status_enum.name, is_effectiveness_buff)
         
-    def modify_effect_level():
-        pass
+    def modify_effect_level(self, card, status_level):
+        if card.matches(self.affected_cards_enum):
+            for effect_id, effect_level in card.effects.items():
+                if effect_id in self.affected_effect:
+                    effect_level.set_level(self.modifier.modify_value(status_level, effect_level.get_level()))
     
     def trigger_on_turn(self, subject, level):
-        pass
+        for card in subject.card_manager.hand:
+            self.modify_effect_level(card, level)
     
-    def trigger_instantly(self, subject, level, *args, **kwargs):
-        pass
+    def trigger_instantly(self, subject, level, card, *args, **kwargs) -> int:
+        self.modify_effect_level(card, level)
+        return 1
 
 class StatusRegistry:
     def __init__(self, statuses_path):
@@ -89,6 +95,9 @@ class StatusRegistry:
         ftfy_agi_status = ModifyCostStatus(StatusNames.FORTIFY_AGILITY, CardTypes.SKILL, False)
         dmge_agi_status = ModifyCostStatus(StatusNames.DAMAGE_AGILITY, CardTypes.SKILL, True)
         
+        ftfy_str_status = ModifyEffectStatus(StatusNames.FORTIFY_STRENGTH, CardTypes.WEAPON, EffectNames.DAMAGE.name, True)
+        dmge_str_status = ModifyEffectStatus(StatusNames.DAMAGE_STRENGTH, CardTypes.WEAPON, EffectNames.DAMAGE.name, False)
+        
         ftfy_longblade_status = ModifyCostStatus(StatusNames.FORTIFY_LONG_BLADE, CardSubtypes.LONG_BLADE, False)
         ftfy_destruction_status = ModifyCostStatus(StatusNames.FORTIFY_DESTRUCTION, CardSubtypes.DESTRUCTION, False)
         
@@ -97,6 +106,8 @@ class StatusRegistry:
             poison_status.status_id: poison_status,
             ftfy_agi_status.status_id: ftfy_agi_status,
             dmge_agi_status.status_id: dmge_agi_status,
+            ftfy_str_status.status_id: ftfy_str_status,
+            dmge_str_status.status_id: dmge_str_status,
             ftfy_longblade_status.status_id: ftfy_longblade_status,
             ftfy_destruction_status.status_id: ftfy_destruction_status
         }

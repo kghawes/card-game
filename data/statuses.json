@@ -1,10 +1,14 @@
 {
   "DEFENSE": {
     "NAME": "Defense",
-    "DESCRIPTION": "Block up to {} Damage and if you do, lose that much Defense."
+    "DESCRIPTION": "Block up to {} Damage and if you do, lose that much Defense.",
+    "TRIGGER_TIMING": "Instant",
+    "MODIFIER_TYPE": "Flat"
   },
   "POISON": {
     "NAME": "Poison",
     "DESCRIPTION": "At the start of each turn, take {} Poison Damage."
+    "TRIGGER_TIMING": "Turn",
+    "MODIFIER_TYPE": "None"
   }
 }

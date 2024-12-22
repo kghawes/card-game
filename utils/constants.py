@@ -113,6 +113,9 @@ class StatusNames(Enum):
     FORTIFY_LONG_BLADE = "Fortify Long Blade skill"
     FORTIFY_DESTRUCTION = "Fortify Destruction skill"
 
+SCALING_BUFF_MULTIPLIER = 1.2
+SCALING_DEBUFF_MULTIPLIER = 0.8
+
 class StatusParameters(Enum):
     BASE_EVASION_PROBABILITY = 0.1
 
@@ -125,6 +128,7 @@ CARD_PATHS = [
     "data/cards/weapon_cards.json",
     "data/cards/armor_cards.json",
     "data/cards/spell_cards.json",
+    "data/cards/skill_cards.json",
     "data/cards/enemy_cards.json" 
     ]
 ENEMIES_PATH = "data/enemies.json"
