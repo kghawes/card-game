@@ -16,11 +16,14 @@ class Card:
                 level = level.base_level
             self.effects[effect] = EffectLevel(level)
         
-    def get_cost(self):
+    def get_cost(self) -> int:
         return self.modified_cost
     
     def set_cost(self, new_cost):
         self.modified_cost = new_cost
+        
+    def reset_cost(self):
+        self.modified_cost = self.cost
         
     def matches(self, card_property) -> bool:
         if card_property in CardTypes:

@@ -6,7 +6,9 @@ class CombatManager:
         return not (player.is_alive() and enemy.is_alive())
 
     def do_combat(self, player, enemy, text_interface, registries):
-        player.card_manager.reset_effect_levels()
+        player.card_manager.reset_cards()
+        player.card_manager.shuffle()
+        enemy.card_manager.shuffle()
         while True:
             self.do_player_turn(player, enemy, text_interface, registries)
             if self.is_combat_over(player, enemy):
@@ -25,7 +27,7 @@ class CombatManager:
         player.card_manager.discard_hand()
 
     def beginning_of_turn(self, combatant, opponent, registries):
-        combatant.card_manager.shuffle()
+        combatant.card_manager.reset_cards()
         combatant.card_manager.draw()
 
         combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)

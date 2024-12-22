@@ -23,7 +23,7 @@ class Enchantment:
 
 
 class EnchantmentRegistry:
-    def __init__(self, effect_registry, enchantments_path):
+    def __init__(self, enchantments_path, effect_registry):
         self.enchantments = self._register_enchantments(effect_registry, enchantments_path)
 
     def _create_enchantment(self, enchantment_id, data, effect_registry):

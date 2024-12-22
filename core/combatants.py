@@ -23,7 +23,7 @@ class Combatant:
     def replenish_magicka(self):
         self.magicka = self.max_magicka
     
-    def gain_resource(self, resource_enum, amount):
+    def change_resource(self, resource_enum, amount):
         resource = resource_enum.value.attribute_name
         current_value = getattr(self, resource, None)
         if current_value is None:
@@ -33,6 +33,7 @@ class Combatant:
         new_value = current_value + amount
         if max_value is not None:
             new_value = min(new_value, max_value)
+        new_value = max(new_value, 0)
         setattr(self, resource, new_value)
         
     def take_damage(self, amount, damage_type_enum, status_registry) -> bool:

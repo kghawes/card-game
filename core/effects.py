@@ -56,17 +56,19 @@ class DamageEffect(Effect):
         subject = self.get_target_combatant(source, opponent)
         subject.take_damage(level, self.damage_type_enum, status_registry)
 
-class RestoreEffect(Effect):
-    def __init__(self, target_type_enum, resource_enum):
+class ChangeResourceEffect(Effect):
+    def __init__(self, effect_name_enum, target_type_enum, resource_enum):
         self.resource_enum = resource_enum
         self.target_type_enum = target_type_enum
-        effect_id = self.format_id(EffectNames.RESTORE.name, resource_enum.name)
-        name = self.format_name(EffectNames.RESTORE.value, resource_enum.value.display) 
+        effect_id = self.format_id(effect_name_enum.name, resource_enum.name)
+        name = self.format_name(effect_name_enum.value, resource_enum.value.display) 
         super().__init__(effect_id, name, target_type_enum)
     
     def resolve(self, source, opponent, level, *args, **kwargs):
+        if EffectNames.DRAIN in self.effect_id:
+            level *= -1
         subject = self.get_target_combatant(source, opponent)
-        subject.gain_resource(self.resource_enum, level)
+        subject.change_resource(self.resource_enum, level)
 
 class PickpocketEffect(Effect):
     def __init__(self):
@@ -94,39 +96,34 @@ class HandEffect(Effect):
             pass
 
 class EffectRegistry:
-    def __init__(self, effects_path):
-        self.effects = self._register_effects(effects_path)
+    def __init__(self, effects_path, status_registry):
+        self.effects = self._register_effects(effects_path, status_registry)
 
-    def _create_effect(self, effect_id, data):
-        effect_type = data["TYPE"]
-        target_type = TargetTypes[data["TARGET_TYPE"].upper()]
-        
-        if effect_type == EffectNames.NO_EFFECT.name:
-            return NoEffect()
-        elif effect_type == EffectNames.APPLY_STATUS.name:
-            status_id = StatusNames[data["STATUS"].upper()]
-            return ChangeStatusEffect(EffectNames.APPLY_STATUS, target_type, status_id)
-        elif effect_type == EffectNames.REMOVE_STATUS.name:
-            status_id = StatusNames[data["STATUS"].upper()]
-            return ChangeStatusEffect(EffectNames.REMOVE_STATUS, target_type, status_id)
-        elif effect_type == EffectNames.DAMAGE.name:
-            damage_type = DamageTypes[data["DAMAGE_TYPE"].upper()]
-            return DamageEffect(target_type, damage_type)
-        elif effect_type == EffectNames.RESTORE.name:
-            resource = Resources[data["RESOURCE"].upper()]
-            return RestoreEffect(target_type, resource)
-        elif effect_type == EffectNames.PICKPOCKET.name:
-            return PickpocketEffect()
-        else:
-            raise ValueError(f"Unknown effect type '{effect_type}'.")
-
-    def _register_effects(self, path):
+    def _register_effects(self, path, status_registry):
         effects = {}
-        data = load_json(path)
-
-        for effect_id, effect_data in data.items():
-            effect = self._create_effect(effect_id, effect_data)
-            effects[effect_id] = effect
+        
+        effects[EffectNames.NO_EFFECT.name] = NoEffect()
+        effects[EffectNames.PICKPOCKET.name] = PickpocketEffect()
+        
+        for target_type in TargetTypes:
+            for status_id in status_registry.list_statuses():
+                apply_status_effect = ChangeStatusEffect(EffectNames.APPLY_STATUS, target_type, StatusNames[status_id])
+                remove_status_effect = ChangeStatusEffect(EffectNames.REMOVE_STATUS, target_type, StatusNames[status_id])
+                effects[apply_status_effect.effect_id] = apply_status_effect
+                effects[remove_status_effect.effect_id] = remove_status_effect
+            
+            for damage_type in DamageTypes:
+                damage_effect = DamageEffect(target_type, damage_type)
+                effects[damage_effect.effect_id] = damage_effect
+            
+            for resource in Resources:
+                if resource == Resources.GOLD:
+                    continue
+                restore_effect = ChangeResourceEffect(EffectNames.RESTORE, target_type, resource)
+                if resource != Resources.HEALTH:
+                    drain_effect = ChangeResourceEffect(EffectNames.DRAIN, target_type, resource)
+                    effects[drain_effect.effect_id] = drain_effect
+                effects[restore_effect.effect_id] = restore_effect
 
         return effects
 

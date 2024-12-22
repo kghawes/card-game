@@ -1,4 +1,5 @@
 import random
+import itertools
 
 class CardManager:
     def __init__(self, starting_deck, card_cache):
@@ -37,7 +38,9 @@ class CardManager:
         self.discard_pile.extend(self.hand)
         self.hand = []
         
-    def reset_effect_levels(self):
-        for card in self.deck:
+    def reset_cards(self):
+        cards = itertools.chain(self.deck, self.discard_pile, self.hand)
+        for card in cards:
+            card.reset_cost()
             for effect_level in card.effects.values():
                 effect_level.reset()

@@ -1,5 +1,4 @@
 import random
-from copy import deepcopy
 from utils.constants import CardTypes, CardSubtypes, StatusNames, EffectNames, DamageTypes, StatusParameters
 import gameplay.modifiers as modifiers
 
@@ -73,7 +72,7 @@ class ModifyEffectStatus(Status):
     def modify_effect_level(self, card, status_level):
         if card.matches(self.affected_cards_enum):
             for effect_id, effect_level in card.effects.items():
-                if effect_id in self.affected_effect:
+                if self.affected_effect in effect_id:
                     effect_level.set_level(self.modifier.modify_value(status_level, effect_level.get_level()))
     
     def trigger_on_turn(self, subject, level):
@@ -116,3 +115,6 @@ class StatusRegistry:
         if status_id not in self.statuses:
             raise KeyError(f"Status ID '{status_id}' not found.")
         return self.statuses[status_id]
+    
+    def list_statuses(self) -> list:
+        return list(self.statuses.keys())
