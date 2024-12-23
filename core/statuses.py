@@ -1,5 +1,5 @@
 import random
-from utils.constants import CardTypes, CardSubtypes, StatusNames, EffectNames, DamageTypes, StatusParameters
+from utils.constants import CardTypes, CardSubtypes, StatusNames, EffectNames, DamageTypes, StatusParameters, Attributes
 import gameplay.modifiers as modifiers
 
 class Status:
@@ -83,13 +83,29 @@ class ModifyEffectStatus(Status):
         self.modify_effect_level(card, level)
         return 1
 
+class ModifyMaxResourceStatus(Status):
+    def __init__(self, status_enum, resource_enum, is_buff):
+        super().__init__(status_enum)
+        self.resource_enum = resource_enum
+        self.is_buff = is_buff
+        
+    def modify_max_resource(self, subject, level):
+        
+        
+    def trigger_on_turn(self, subject, level):
+        
+
 class StatusRegistry:
     def __init__(self, statuses_path):
         self.statuses = self._initialize_statuses()
     
     def _initialize_statuses(self) -> dict:
+        statuses = {}
+        
         defense_status = DefenseStatus()
+        statuses[defense_status.status_id] = defense_status
         poison_status = PoisonStatus()
+        statuses[poison_status.status_id] = poison_status
         
         ftfy_agi_status = ModifyCostStatus(StatusNames.FORTIFY_AGILITY, CardTypes.SKILL, False)
         dmge_agi_status = ModifyCostStatus(StatusNames.DAMAGE_AGILITY, CardTypes.SKILL, True)
@@ -101,8 +117,8 @@ class StatusRegistry:
         ftfy_destruction_status = ModifyCostStatus(StatusNames.FORTIFY_DESTRUCTION, CardSubtypes.DESTRUCTION, False)
         
         return {
-            defense_status.status_id: defense_status,
-            poison_status.status_id: poison_status,
+            ,
+            s,
             ftfy_agi_status.status_id: ftfy_agi_status,
             dmge_agi_status.status_id: dmge_agi_status,
             ftfy_str_status.status_id: ftfy_str_status,

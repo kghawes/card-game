@@ -29,18 +29,12 @@ class CardSubtypes(Enum):
 class ConsumableCategories(Enum):
     SCROLL = "Scroll"
     POTION = "Potion"
-    
-class ResourceData:
-    def __init__(self, name):
-        self.attribute_name = name.lower()
-        self.display = name.capitalize()
-        self.max_attribute = f"max_{name.lower()}"
 
 class Resources(Enum):
-    HEALTH = ResourceData("health")
-    STAMINA = ResourceData("stamina")
-    MAGICKA = ResourceData("magicka")
-    GOLD = ResourceData("gold")
+    HEALTH = "health"
+    STAMINA = "stamina"
+    MAGICKA = "magicka"
+    GOLD = "gold"
 
 class DamageTypes(Enum):
     PHYSICAL = "Physical"

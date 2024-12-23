@@ -1,15 +1,13 @@
 from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
-from utils.constants import StatusNames
+from utils.constants import StatusNames, Resources
 
 class Combatant:
     def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache):
         self.name = name
-        self.max_health = max_health
-        self.max_stamina = max_stamina
-        self.max_magicka = max_magicka
+        self.stamina = Resource()
         self.card_manager = CardManager(starting_deck, card_cache)
-        self.status_manager = StatusManager()
+        self.status_manager = StatusManager(Resources.STAMINA)
         self.replenish_health()
         self.replenish_stamina()
         self.replenish_magicka()
@@ -55,3 +53,26 @@ class Combatant:
         
         setattr(self, resource, current_value - amount)
         return True
+    
+    def reset_max_resources(self):
+        self.modified_max_stamina = self.max_stamina
+        self.modified_max_magicka = self.max_magicka
+
+class Resource:
+    def __init__(self, resource_enum, max_value):
+        self.resource_enum = resource_enum
+        self.max_value = max_value
+        self.modified_max_value = max_value
+        self.current_value = max_value
+    
+    def try_spend(self, amount) -> bool:
+        if self.current_value < amount:
+            return False
+        self.current_value = self.current_value - amount
+        return True
+    
+    def reset_max_value(self):
+        self.modified_max_value = self.max_value
+    
+    def get_max_value(self) -> int:
+        return self.modified_max_value
