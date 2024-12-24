@@ -46,9 +46,7 @@ class ChangeStatusEffect(Effect):
         if subject.status_manager.has_status(status_id):
             status = status_registry.get_status(status_id)
             if status.applies_immediately:
-                status.trigger_on_apply(subject, subject.status_manager.get_status_level(status_id))
-            
-            
+                status.trigger_on_apply(subject, subject.status_manager.get_status_level(status_id))            
 
 class DamageEffect(Effect):
     def __init__(self, target_type_enum, damage_type_enum):

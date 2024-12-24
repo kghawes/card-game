@@ -37,6 +37,7 @@ class Resources(Enum):
     GOLD = "gold"
 
 MIN_RESOURCE = 1
+MIN_EFFECT = 1
 
 class DamageTypes(Enum):
     PHYSICAL = "Physical"
@@ -117,8 +118,7 @@ class StatusNames(Enum):
     FORTIFY_LONG_BLADE = "Fortify Long Blade skill"
     FORTIFY_DESTRUCTION = "Fortify Destruction skill"
 
-SCALING_BUFF_MULTIPLIER = 1.25
-SCALING_DEBUFF_MULTIPLIER = 0.8
+SCALE_FACTOR = 0.2
 
 class StatusParameters(Enum):
     BASE_EVASION_PROBABILITY = 0.1

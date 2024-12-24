@@ -1,6 +1,6 @@
 from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
-from utils.constants import StatusNames, Resources, DamageTypes, MIN_RESOURCE
+from utils.constants import StatusNames, Resources, MIN_RESOURCE, SCALE_FACTOR
 
 class Combatant:
     def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache):
@@ -33,7 +33,7 @@ class Combatant:
         
     def take_damage(self, amount, damage_type_enum, status_registry) -> bool:
         
-        amount = round(self.apply_resistances_and_weaknesses(amount, damage_type_enum.name, status_registry))
+        amount = self.apply_resistances_and_weaknesses(amount, damage_type_enum.name)
         
         if self.status_manager.has_status(StatusNames.DEFENSE.name):
             defense_status = status_registry.get_status(StatusNames.DEFENSE.name)
@@ -43,16 +43,19 @@ class Combatant:
         self.resources[Resources.HEALTH.name].current_value = max(self.get_health() - amount, 0)
         return self.is_alive()
     
-    def apply_resistances_and_weaknesses(self, damage_amount, incoming_damage_type, status_registry) -> float:
-        for status_type in [StatusNames.RESISTANCE.name, StatusNames.WEAKNESS.name]:
-            for affected_damage_type in DamageTypes:
-                if incoming_damage_type == affected_damage_type.name:
-                    status_id = status_type + "_" + incoming_damage_type
-                    if self.status_manager.has_status(status_id):
-                        modify_damage_status = status_registry.get_status(status_id)
-                        status_level = self.status_manager.get_status_level(status_id)
-                        damage_amount = modify_damage_status.trigger_instantly(self, damage_amount, status_level)
-        return damage_amount
+    def apply_resistances_and_weaknesses(self, damage_amount, incoming_damage_type) -> int:
+        multiplier = 1
+        
+        for active_status_id, status_level in self.status_manager.statuses.items():
+            sign_factor = 1
+            if StatusNames.RESISTANCE.name in active_status_id:
+                sign_factor = -1
+            elif StatusNames.WEAKNESS.name not in active_status_id:
+                continue
+            if incoming_damage_type in active_status_id:
+                multiplier += sign_factor * status_level * SCALE_FACTOR
+                        
+        return round(damage_amount * multiplier)
     
     def is_alive(self) -> bool:
         return self.get_health() > 0
@@ -64,8 +67,7 @@ class Combatant:
     def reset_for_turn(self):
         self.card_manager.reset_cards_to_draw()
         self.card_manager.reset_cards()
-        for resource in self.resources.values():
-            resource.replenish()
+        self.replenish_resources_for_turn()
 
 class Resource:
     def __init__(self, resource_enum, max_value):

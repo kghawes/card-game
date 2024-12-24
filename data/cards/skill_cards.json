@@ -4,7 +4,7 @@
     "card_type": "SKILL",
     "cost": 0,
     "value": 200,
-    "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 3 }
+    "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 1 }
   },
   "FORTENDTEST": {
     "name": "Fort. Str. Test",

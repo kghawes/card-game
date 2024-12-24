@@ -1,12 +1,22 @@
 import random
 import utils.constants as constants
-import gameplay.modifiers as modifiers
 
 class Status:
     def __init__(self, status_enum, applies_immediately):
         self.status_id = status_enum.name
         self.name = status_enum.value
         self.applies_immediately = applies_immediately
+        
+    def modify_value_flat(self, old_value, change_amount, is_reduction, minimum_result) -> int:
+        if is_reduction:
+            return max(old_value - change_amount, minimum_result)
+        else:
+            return old_value + change_amount
+    
+    def modify_value_scaling(self, old_value, status_level, is_reduction, minimum_result) -> int:
+        sign_factor = -1 if is_reduction else 1
+        new_value_exact = (1 + sign_factor * constants.SCALE_FACTOR * status_level) * old_value
+        return round(new_value_exact)
     
     def trigger_on_turn(self, subject, level):
         return
@@ -17,22 +27,12 @@ class Status:
 class DefenseStatus(Status):
     def __init__(self):
         super().__init__(constants.StatusNames.DEFENSE, False)
-        self.modifier = modifiers.FlatModifier(constants.StatusNames.DEFENSE)
     
     def trigger_instantly(self, subject, level, incoming_damage) -> int:
-        net_damage = self.modifier.modify_value(level, incoming_damage)
+        net_damage = self.modify_value_flat(incoming_damage, level, True, 0)
         defense_to_remove = net_damage - incoming_damage
         subject.status_manager.change_status(self.status_id, defense_to_remove)
         return net_damage
-
-class ModifyDamageStatus(Status):
-    def __init__(self, status_enum, is_weakness):
-        super().__init__(status_enum, False)
-        self.is_weakness = is_weakness
-        self.modifier = modifiers.ScalingModifier(status_enum.name, is_weakness)
-        
-    def trigger_instantly(self, level, incoming_damage) -> float:
-        return self.modifier.modify_value(level, incoming_damage)
 
 class PoisonStatus(Status):
     def __init__(self):
@@ -55,7 +55,6 @@ class ModifyCostStatus(Status):
         super().__init__(status_enum, True)
         self.affected_cards_enum = affected_cards_enum
         self.is_cost_increase = is_cost_increase
-        self.modifier = modifiers.FlatModifier(status_enum.name, is_cost_increase)
         
     def trigger_on_turn(self, subject, level):
         for card in subject.card_manager.hand:
@@ -63,7 +62,7 @@ class ModifyCostStatus(Status):
     
     def trigger_instantly(self, subject, level, card):
         if card.matches(self.affected_cards_enum):
-            card.set_cost(self.modifier.modify_value(level, card.get_cost()))
+            card.set_cost(self.modifier.modify_value(level, card.get_cost()))###########################################################
     
     def trigger_on_apply(self, subject, level):
         self.trigger_on_turn(subject, level)
@@ -73,7 +72,7 @@ class ModifyEffectStatus(Status):
         super().__init__(status_enum, True)
         self.affected_cards_enum = affected_cards_enum
         self.affected_effect = affected_effect
-        self.modifier = modifiers.ScalingModifier(status_enum.name, is_effectiveness_buff)
+        self.is_reduction = not is_effectiveness_buff
         
     def trigger_on_turn(self, subject, level):
         for card in subject.card_manager.hand:
@@ -83,7 +82,8 @@ class ModifyEffectStatus(Status):
         if card.matches(self.affected_cards_enum):
             for effect_id, effect_level in card.effects.items():
                 if self.affected_effect in effect_id:
-                    effect_level.set_level(self.modifier.modify_value(level, effect_level.get_level()))
+                    new_level = self.modify_value_scaling(effect_level.get_level(), level, self.is_reduction, constants.MIN_EFFECT)
+                    effect_level.set_level(new_level)
     
     def trigger_on_apply(self, subject, level):
         self.trigger_on_turn(subject, level)
@@ -92,42 +92,29 @@ class ModifyMaxResourceStatus(Status):
     def __init__(self, status_enum, resource_enum, is_buff):
         super().__init__(status_enum, True)
         self.resource_enum = resource_enum
-        self.modifier = modifiers.FlatModifier(status_enum.name, is_buff, constants.MIN_RESOURCE)
         
     def trigger_on_turn(self, subject, level):
         pass
     
-    def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
+    def trigger_instantly(self, subject, level) -> int:
         pass
 
 class SpeedStatus(Status):
     def __init__(self, status_enum, is_buff):
         super().__init__(status_enum, False)
-        self.modifier = modifiers.FlatModifier(status_enum.name, is_buff, constants.MIN_HAND_SIZE)
+    
+    def trigger_instantly(self, subject, level):
+        pass
         
-    def modify_draw(self, subject, level):
-        subject.card_manager.cards_to_draw = self.modifier.modify_value(level, subject.card_manager.cards_to_draw)
-    
-    def trigger_on_turn(self, subject, level):
-        self.modify_draw(subject, level)
-    
-    def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
-        self.modify_draw(subject, level)
-        return 0
-
 class StatusRegistry:
     def __init__(self, statuses_path):
         self.statuses = self._initialize_statuses()
     
     def _initialize_statuses(self) -> dict:
-        statuses = {}
-        
         defense_status = DefenseStatus()
-        statuses[defense_status.status_id] = defense_status
         poison_status = PoisonStatus()
-        statuses[poison_status.status_id] = poison_status
         
-        res_fire_status = ModifyDamageStatus(constants.StatusNames.RESISTANCE + "_" + constants.DamageTypes.FIRE.name, is_weakness)
+        res_fire_status = Status(constants.StatusNames.RESISTANCE_FIRE, False)
         
         ftfy_agi_status = ModifyCostStatus(constants.StatusNames.FORTIFY_AGILITY, constants.CardTypes.SKILL, False)
         dmge_agi_status = ModifyCostStatus(constants.StatusNames.DAMAGE_AGILITY, constants.CardTypes.SKILL, True)
@@ -139,6 +126,9 @@ class StatusRegistry:
         ftfy_destruction_status = ModifyCostStatus(constants.StatusNames.FORTIFY_DESTRUCTION, constants.CardSubtypes.DESTRUCTION, False)
         
         return {
+            defense_status.status_id: defense_status,
+            poison_status.status_id: poison_status,
+            res_fire_status.status_id: res_fire_status,
             ftfy_agi_status.status_id: ftfy_agi_status,
             dmge_agi_status.status_id: dmge_agi_status,
             ftfy_str_status.status_id: ftfy_str_status,
