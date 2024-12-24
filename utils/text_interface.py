@@ -13,15 +13,15 @@ class TextInterface:
     def display_turn_info(self, player, enemy, effect_registry):
         # Calculate dynamic widths based on the longest name and health value lengths
         name_padding = max(len(enemy.name), len(player.name)) + 2
-        max_hp_length = max(len(str(enemy.max_health)), len(str(player.max_health)))
+        max_hp_length = max(len(str(enemy.get_max_health())), len(str(player.get_max_health())))
         hp_padding = 4 + max_hp_length * 2  # Include space for "HP: X/Y" where X and Y can vary in length
     
         # Header with enemy and player stats
         print(constants.TEXT_DIVIDER)
-        print(f"\033[01m{enemy.name:<{name_padding}}\033[0m HP: {enemy.health:>{max_hp_length}}/{enemy.max_health:<{max_hp_length}}  Deck: {len(enemy.card_manager.deck):<5} Discard: {len(enemy.card_manager.discard_pile):<5}")
-        print(f"\033[01m{player.name:<{name_padding}}\033[0m HP: {player.health:>{max_hp_length}}/{player.max_health:<{max_hp_length}}  Deck: {len(player.card_manager.deck):<5} Discard: {len(player.card_manager.discard_pile):<5}")
+        print(f"\033[01m{enemy.name:<{name_padding}}\033[0m HP: {enemy.get_health():>{max_hp_length}}/{enemy.get_max_health():<{max_hp_length}}  Deck: {len(enemy.card_manager.deck):<5} Discard: {len(enemy.card_manager.discard_pile):<5}")
+        print(f"\033[01m{player.name:<{name_padding}}\033[0m HP: {player.get_health():>{max_hp_length}}/{player.get_max_health():<{max_hp_length}}  Deck: {len(player.card_manager.deck):<5} Discard: {len(player.card_manager.discard_pile):<5}")
         print(constants.TEXT_DIVIDER)
-        print(f"Stamina: {player.stamina}/{player.max_stamina:<{hp_padding}}  Magicka: {player.magicka}/{player.max_magicka}")
+        print(f"Stamina: {player.get_stamina()}/{player.get_max_stamina():<{hp_padding}}  Magicka: {player.get_magicka()}/{player.get_max_magicka()}")
         print()
         # Display player's hand with card effects
         print("\033[01mCards in Hand:\033[0m")

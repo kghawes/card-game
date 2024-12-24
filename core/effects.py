@@ -1,5 +1,4 @@
 from utils.constants import Resources, DamageTypes, EffectNames, StatusNames, TargetTypes
-from utils.utils import load_json
 
 class Effect:
     def __init__(self, effect_id, name, target_type_enum=None):
@@ -39,9 +38,12 @@ class ChangeStatusEffect(Effect):
     
     def resolve(self, source, opponent, level, *args, **kwargs):
         subject = self.get_target_combatant(source, opponent)
-        if EffectNames.REMOVE_STATUS.name in self.effect_id:
+        if EffectNames.REMOVE.name in self.effect_id:
             level *= -1
         subject.status_manager.change_status(self.status_enum.name, level)
+        
+        if subject.status_manager.has_status(self.status_enum.name):
+            subject.status_manager.trigger_status_instantly(subject, self.status_enum.name, kwargs[status_registry], )
 
 class DamageEffect(Effect):
     def __init__(self, target_type_enum, damage_type_enum):
@@ -61,7 +63,7 @@ class ChangeResourceEffect(Effect):
         self.resource_enum = resource_enum
         self.target_type_enum = target_type_enum
         effect_id = self.format_id(effect_name_enum.name, resource_enum.name)
-        name = self.format_name(effect_name_enum.value, resource_enum.value.display) 
+        name = self.format_name(effect_name_enum.value, resource_enum.value) 
         super().__init__(effect_id, name, target_type_enum)
     
     def resolve(self, source, opponent, level, *args, **kwargs):
@@ -107,8 +109,8 @@ class EffectRegistry:
         
         for target_type in TargetTypes:
             for status_id in status_registry.list_statuses():
-                apply_status_effect = ChangeStatusEffect(EffectNames.APPLY_STATUS, target_type, StatusNames[status_id])
-                remove_status_effect = ChangeStatusEffect(EffectNames.REMOVE_STATUS, target_type, StatusNames[status_id])
+                apply_status_effect = ChangeStatusEffect(EffectNames.APPLY, target_type, StatusNames[status_id])
+                remove_status_effect = ChangeStatusEffect(EffectNames.REMOVE, target_type, StatusNames[status_id])
                 effects[apply_status_effect.effect_id] = apply_status_effect
                 effects[remove_status_effect.effect_id] = remove_status_effect
             

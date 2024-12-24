@@ -25,7 +25,7 @@ class Game:
         self.player.name = "KK" #self.text_interface.name_prompt()
         
         for quest in self.quest_registry.quests:
-            self.player.replenish_health()
+            self.player.resources[constants.Resources.HEALTH.name].replenish()
             
             self.text_interface.send_message(quest.description)
     

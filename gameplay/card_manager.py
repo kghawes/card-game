@@ -21,8 +21,10 @@ class CardManager:
     def shuffle(self):
         random.shuffle(self.deck)
 
-    def draw(self, cards_to_draw=6):
+    def draw(self, cards_to_draw=1) -> bool:
         while cards_to_draw > 0:
+            if len(self.hand) == constants.MAX_HAND_SIZE:
+                return False
             if len(self.deck) == 0:
                 self.deck = self.discard_pile[:]
                 self.discard_pile = []
@@ -31,6 +33,10 @@ class CardManager:
                 break
             self.hand.append(self.deck.pop(0))
             cards_to_draw -= 1
+        return True
+            
+    def draw_hand(self) -> bool:
+        return self.draw(self.cards_to_draw)
 
     def discard(self, card):
         self.discard_pile.append(card)
@@ -49,6 +55,3 @@ class CardManager:
     
     def reset_cards_to_draw(self):
         self.cards_to_draw = constants.HAND_SIZE
-    
-    def change_cards_to_draw(self, amount):
-        self.cards_to_draw = max(min(self.cards_to_draw + amount, constants.MAX_HAND_SIZE), constants.MIN_HAND_SIZE)

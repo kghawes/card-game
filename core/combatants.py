@@ -5,27 +5,49 @@ from utils.constants import StatusNames, Resources, MIN_RESOURCE
 class Combatant:
     def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache):
         self.name = name
-        self.health = Resource(Resources.HEALTH, max_health)
-        self.stamina = Resource(Resources.STAMINA, max_stamina)
-        self.magicka = Resource(Resources.MAGICKA, max_magicka)
+        self.resources = {
+            Resources.HEALTH.name: Resource(Resources.HEALTH, max_health),
+            Resources.STAMINA.name: Resource(Resources.STAMINA, max_stamina),
+            Resources.MAGICKA.name: Resource(Resources.MAGICKA, max_magicka)
+        }
         self.card_manager = CardManager(starting_deck, card_cache)
         self.status_manager = StatusManager()
         
+    def get_health(self) -> int:
+        return self.resources[Resources.HEALTH.name].current_value
+    
+    def get_max_health(self) -> int:
+        return self.resources[Resources.HEALTH.name].get_max_value()
+    
+    def get_stamina(self) -> int:
+        return self.resources[Resources.STAMINA.name].current_value
+    
+    def get_max_stamina(self) -> int:
+        return self.resources[Resources.STAMINA.name].get_max_value()
+    
+    def get_magicka(self) -> int:
+        return self.resources[Resources.MAGICKA.name].current_value
+    
+    def get_max_magicka(self) -> int:
+        return self.resources[Resources.MAGICKA.name].get_max_value()
+        
     def take_damage(self, amount, damage_type_enum, status_registry) -> bool:
-        # check for weakness or resistance
-        amount = self.status_manager.trigger_status_instantly(self, StatusNames.DEFENSE.name, status_registry, default=amount, incoming_damage=amount)
-        self.health = max(self.health - amount, 0)
+        amount = self.status_manager.trigger_status_instantly(self, StatusNames.DEFENSE.name, status_registry, incoming_damage=amount)
+        self.resources[Resources.HEALTH.name].current_value = max(self.get_health() - amount, 0)
         return self.is_alive()
     
     def is_alive(self) -> bool:
-        return self.health.current_value > 0
+        return self.get_health() > 0
+    
+    def replenish_resources_for_turn(self):
+        self.resources[Resources.STAMINA.name].replenish()
+        self.resources[Resources.MAGICKA.name].replenish()
     
     def reset_for_turn(self):
         self.card_manager.reset_cards_to_draw()
         self.card_manager.reset_cards()
-        self.health.reset_max_value()
-        self.stamina.reset_max_value()
-        self.magicka.reset_max_value()
+        for resource in self.resources.values():
+            resource.replenish()
 
 class Resource:
     def __init__(self, resource_enum, max_value):

@@ -1,5 +1,5 @@
 import random
-from utils.constants import CardTypes, CardSubtypes, StatusNames, EffectNames, DamageTypes, StatusParameters, Attributes
+import utils.constants as constants
 import gameplay.modifiers as modifiers
 
 class Status:
@@ -11,13 +11,13 @@ class Status:
         # Perform the actions the status needs done
         return
     
-    def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
-        return kwargs.get("default", 0)
+    def trigger_on_apply(self, subject, level):
+        return
 
 class DefenseStatus(Status):
     def __init__(self):
-        super().__init__(StatusNames.DEFENSE)
-        self.modifier = modifiers.FlatModifier(StatusNames.DEFENSE)
+        super().__init__(constants.StatusNames.DEFENSE)
+        self.modifier = modifiers.FlatModifier(constants.StatusNames.DEFENSE)
     
     def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
         incoming_damage = kwargs.get("incoming_damage", 0)
@@ -28,18 +28,18 @@ class DefenseStatus(Status):
 
 class PoisonStatus(Status):
     def __init__(self):
-        super().__init__(StatusNames.POISON)
+        super().__init__(constants.StatusNames.POISON)
     
     def trigger_on_turn(self, subject, level):
-        subject.take_damage(level, DamageTypes.POISON)
+        subject.take_damage(level, constants.DamageTypes.POISON)
         
 class EvasionStatus(Status):
     def __init__(self):
-        super().__init__(StatusNames.EVASION)
+        super().__init__(constants.StatusNames.EVASION)
     
     def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
         incoming_damage = kwargs.get("damage", 0)
-        success_probability = min(StatusParameters.BASE_EVASION_PROBABILITY * level, 1.0)
+        success_probability = min(constants.StatusParameters.BASE_EVASION_PROBABILITY * level, 1.0)
         roll = random.random()
         return 0 if roll >= success_probability else incoming_damage
 
@@ -56,11 +56,14 @@ class ModifyCostStatus(Status):
         
     def trigger_on_turn(self, subject, level):
         for card in subject.card_manager.hand:
-            self.modify_card_cost(card, level)
+            self.trigger_instantly(subject, level, card)
     
-    def trigger_instantly(self, subject, level, card, *args, **kwargs) -> int:
+    def trigger_instantly(self, subject, level, card):
         self.modify_card_cost(card, level)
-        return 1
+        return
+    
+    def trigger_on_apply(self, subject, level):
+        self.trigger_on_turn(subject, level)
 
 class ModifyEffectStatus(Status):
     def __init__(self, status_enum, affected_cards_enum, affected_effect, is_effectiveness_buff):
@@ -81,13 +84,13 @@ class ModifyEffectStatus(Status):
     
     def trigger_instantly(self, subject, level, card, *args, **kwargs) -> int:
         self.modify_effect_level(card, level)
-        return 1
+        return 0
 
 class ModifyMaxResourceStatus(Status):
     def __init__(self, status_enum, resource_enum, is_buff):
         super().__init__(status_enum)
         self.resource_enum = resource_enum
-        self.is_buff = is_buff
+        self.modifier = modifiers.FlatModifier(status_enum.name, is_buff, constants.MIN_RESOURCE)
         
     def modify_max_resource(self, subject, level):
         pass
@@ -98,8 +101,20 @@ class ModifyMaxResourceStatus(Status):
     def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
         pass
 
-class ModifyDrawStatus(Status):
-    def modify_draw(self, )
+class SpeedStatus(Status):
+    def __init__(self, status_enum, is_buff):
+        super().__init__(status_enum)
+        self.modifier = modifiers.FlatModifier(status_enum.name, is_buff, constants.MIN_HAND_SIZE)
+        
+    def modify_draw(self, subject, level):
+        subject.card_manager.cards_to_draw = self.modifier.modify_value(level, subject.card_manager.cards_to_draw)
+    
+    def trigger_on_turn(self, subject, level):
+        self.modify_draw(subject, level)
+    
+    def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
+        self.modify_draw(subject, level)
+        return 0
 
 class StatusRegistry:
     def __init__(self, statuses_path):
@@ -113,18 +128,16 @@ class StatusRegistry:
         poison_status = PoisonStatus()
         statuses[poison_status.status_id] = poison_status
         
-        ftfy_agi_status = ModifyCostStatus(StatusNames.FORTIFY_AGILITY, CardTypes.SKILL, False)
-        dmge_agi_status = ModifyCostStatus(StatusNames.DAMAGE_AGILITY, CardTypes.SKILL, True)
+        ftfy_agi_status = ModifyCostStatus(constants.StatusNames.FORTIFY_AGILITY, constants.CardTypes.SKILL, False)
+        dmge_agi_status = ModifyCostStatus(constants.StatusNames.DAMAGE_AGILITY, constants.CardTypes.SKILL, True)
         
-        ftfy_str_status = ModifyEffectStatus(StatusNames.FORTIFY_STRENGTH, CardTypes.WEAPON, EffectNames.DAMAGE.name, True)
-        dmge_str_status = ModifyEffectStatus(StatusNames.DAMAGE_STRENGTH, CardTypes.WEAPON, EffectNames.DAMAGE.name, False)
+        ftfy_str_status = ModifyEffectStatus(constants.StatusNames.FORTIFY_STRENGTH, constants.CardTypes.WEAPON, constants.EffectNames.DAMAGE.name, True)
+        dmge_str_status = ModifyEffectStatus(constants.StatusNames.DAMAGE_STRENGTH, constants.CardTypes.WEAPON, constants.EffectNames.DAMAGE.name, False)
         
-        ftfy_longblade_status = ModifyCostStatus(StatusNames.FORTIFY_LONG_BLADE, CardSubtypes.LONG_BLADE, False)
-        ftfy_destruction_status = ModifyCostStatus(StatusNames.FORTIFY_DESTRUCTION, CardSubtypes.DESTRUCTION, False)
+        ftfy_longblade_status = ModifyCostStatus(constants.StatusNames.FORTIFY_LONG_BLADE, constants.CardSubtypes.LONG_BLADE, False)
+        ftfy_destruction_status = ModifyCostStatus(constants.StatusNames.FORTIFY_DESTRUCTION, constants.CardSubtypes.DESTRUCTION, False)
         
         return {
-            ,
-            s,
             ftfy_agi_status.status_id: ftfy_agi_status,
             dmge_agi_status.status_id: dmge_agi_status,
             ftfy_str_status.status_id: ftfy_str_status,
@@ -132,6 +145,8 @@ class StatusRegistry:
             ftfy_longblade_status.status_id: ftfy_longblade_status,
             ftfy_destruction_status.status_id: ftfy_destruction_status
         }
+    
+    
     
     def get_status(self, status_id) -> Status:
         if status_id not in self.statuses:
