@@ -1,6 +1,6 @@
 from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
-from utils.constants import StatusNames, Resources, MIN_RESOURCE
+from utils.constants import StatusNames, Resources, DamageTypes, MIN_RESOURCE
 
 class Combatant:
     def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache):
@@ -32,7 +32,8 @@ class Combatant:
         return self.resources[Resources.MAGICKA.name].get_max_value()
         
     def take_damage(self, amount, damage_type_enum, status_registry) -> bool:
-        if self.status_manager.has_status(StatusNames.RESISTANCE)
+        
+        amount = round(self.apply_resistances_and_weaknesses(amount, damage_type_enum.name, status_registry))
         
         if self.status_manager.has_status(StatusNames.DEFENSE.name):
             defense_status = status_registry.get_status(StatusNames.DEFENSE.name)
@@ -41,6 +42,17 @@ class Combatant:
             
         self.resources[Resources.HEALTH.name].current_value = max(self.get_health() - amount, 0)
         return self.is_alive()
+    
+    def apply_resistances_and_weaknesses(self, damage_amount, incoming_damage_type, status_registry) -> float:
+        for status_type in [StatusNames.RESISTANCE.name, StatusNames.WEAKNESS.name]:
+            for affected_damage_type in DamageTypes:
+                if incoming_damage_type == affected_damage_type.name:
+                    status_id = status_type + "_" + incoming_damage_type
+                    if self.status_manager.has_status(status_id):
+                        modify_damage_status = status_registry.get_status(status_id)
+                        status_level = self.status_manager.get_status_level(status_id)
+                        damage_amount = modify_damage_status.trigger_instantly(self, damage_amount, status_level)
+        return damage_amount
     
     def is_alive(self) -> bool:
         return self.get_health() > 0

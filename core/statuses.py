@@ -25,6 +25,15 @@ class DefenseStatus(Status):
         subject.status_manager.change_status(self.status_id, defense_to_remove)
         return net_damage
 
+class ModifyDamageStatus(Status):
+    def __init__(self, status_enum, is_weakness):
+        super().__init__(status_enum, False)
+        self.is_weakness = is_weakness
+        self.modifier = modifiers.ScalingModifier(status_enum.name, is_weakness)
+        
+    def trigger_instantly(self, level, incoming_damage) -> float:
+        return self.modifier.modify_value(level, incoming_damage)
+
 class PoisonStatus(Status):
     def __init__(self):
         super().__init__(constants.StatusNames.POISON, False)
@@ -117,6 +126,8 @@ class StatusRegistry:
         statuses[defense_status.status_id] = defense_status
         poison_status = PoisonStatus()
         statuses[poison_status.status_id] = poison_status
+        
+        res_fire_status = ModifyDamageStatus(constants.StatusNames.RESISTANCE + "_" + constants.DamageTypes.FIRE.name, is_weakness)
         
         ftfy_agi_status = ModifyCostStatus(constants.StatusNames.FORTIFY_AGILITY, constants.CardTypes.SKILL, False)
         dmge_agi_status = ModifyCostStatus(constants.StatusNames.DAMAGE_AGILITY, constants.CardTypes.SKILL, True)

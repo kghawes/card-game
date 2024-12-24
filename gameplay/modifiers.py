@@ -13,8 +13,8 @@ class ScalingModifier(Modifier):
         self.multiplier = constants.SCALING_BUFF_MULTIPLIER if is_buff else constants.SCALING_DEBUFF_MULTIPLIER
         self.minimum_result = minimum_result
     
-    def modify_value(self, level, value) -> int:
-        return round(self.multiplier ** level * value)
+    def modify_value(self, level, value) -> float:
+        return self.multiplier ** level * value
 
 class FlatModifier(Modifier):
     def __init__(self, modifier_id, is_adding=False, minimum_result=0):

@@ -83,13 +83,23 @@ class StatusNames(Enum):
     WATERWALKING = "Waterwalking"
     WATERBREATHING = "Waterbreathing"
     SWIFT_SWIM = "Swift Swim"
-    WEAKNESS = "Weakness to"
-    RESISTANCE = "Resist"
     DISEASE = "Common Disease"
     BLIGHT = "Blight Disease"
     REFLECT = "Reflect"
     SPELL_ABSORPTION = "Spell Absorption"
     ALCHEMIST = "Alchemist"
+    WEAKNESS = "Weakness to"
+    RESISTANCE = "Resist"
+    WEAKNESS_PHYSICAL = "Weakness to Physical Damage"
+    WEAKNESS_FIRE = "Weakness to Fire Damage"
+    WEAKNESS_FROST = "Weakness to Frost Damage"
+    WEAKNESS_SHOCK = "Weakness to Shock Damage"
+    WEAKNESS_POISON = "Weakness to Poison Damage"
+    RESISTANCE_PHYSICAL = "Resist Physical Damage"
+    RESISTANCE_FIRE = "Resist Fire Damage"
+    RESISTANCE_FROST = "Resist Frost Damage"
+    RESISTANCE_SHOCK = "Resist Shock Damage"
+    RESISTANCE_POISON = "Resist Poison Damage"
     FORTIFY_STRENGTH = "Fortify Strength"
     DAMAGE_STRENGTH = "Damage Strength"
     FORTIFY_AGILITY = "Fortify Agility"
@@ -107,7 +117,7 @@ class StatusNames(Enum):
     FORTIFY_LONG_BLADE = "Fortify Long Blade skill"
     FORTIFY_DESTRUCTION = "Fortify Destruction skill"
 
-SCALING_BUFF_MULTIPLIER = 1.2
+SCALING_BUFF_MULTIPLIER = 1.25
 SCALING_DEBUFF_MULTIPLIER = 0.8
 
 class StatusParameters(Enum):
