@@ -6,7 +6,7 @@ class Effect:
         self.name = name
         self.target_type_enum = target_type_enum
     
-    def resolve(self, source, opponent, level=1, *args, **kwargs):
+    def resolve(self, source, opponent, level=1, status_registry=None):
         return
     
     def get_target_combatant(self, source, opponent):
@@ -36,14 +36,19 @@ class ChangeStatusEffect(Effect):
         self.name = self.format_name(effect_name_enum.value + status_enum.value)
         super().__init__(self.effect_id, self.name, target_type_enum)
     
-    def resolve(self, source, opponent, level, *args, **kwargs):
+    def resolve(self, source, opponent, level, status_registry):
         subject = self.get_target_combatant(source, opponent)
+        status_id = self.status_enum.name
         if EffectNames.REMOVE.name in self.effect_id:
             level *= -1
-        subject.status_manager.change_status(self.status_enum.name, level)
+        subject.status_manager.change_status(status_id, level)
         
-        if subject.status_manager.has_status(self.status_enum.name):
-            subject.status_manager.trigger_status_instantly(subject, self.status_enum.name, kwargs[status_registry], )
+        if subject.status_manager.has_status(status_id):
+            status = status_registry.get_status(status_id)
+            if status.applies_immediately:
+                status.trigger_on_apply(subject, subject.status_manager.get_status_level(status_id))
+            
+            
 
 class DamageEffect(Effect):
     def __init__(self, target_type_enum, damage_type_enum):
@@ -53,8 +58,7 @@ class DamageEffect(Effect):
         name = self.format_name(damage_type_enum.value, EffectNames.DAMAGE.value)
         super().__init__(effect_id, name, target_type_enum)
         
-    def resolve(self, source, opponent, level, *args, **kwargs):
-        status_registry = kwargs["status_registry"]
+    def resolve(self, source, opponent, level, status_registry):
         subject = self.get_target_combatant(source, opponent)
         subject.take_damage(level, self.damage_type_enum, status_registry)
 
@@ -66,7 +70,7 @@ class ChangeResourceEffect(Effect):
         name = self.format_name(effect_name_enum.value, resource_enum.value) 
         super().__init__(effect_id, name, target_type_enum)
     
-    def resolve(self, source, opponent, level, *args, **kwargs):
+    def resolve(self, source, opponent, level, status_registry):
         if EffectNames.DRAIN in self.effect_id:
             level *= -1
         subject = self.get_target_combatant(source, opponent)
@@ -76,7 +80,7 @@ class PickpocketEffect(Effect):
     def __init__(self):
         super().__init__(EffectNames.PICKPOCKET.name, EffectNames.PICKPOCKET.value)
     
-    def resolve(self, source, opponent, level, *args, **kwargs):
+    def resolve(self, source, opponent, level, status_registry):
         # target.card_manager.show_top_cards_in_deck(level)
         # ....
         pass
@@ -88,7 +92,7 @@ class HandEffect(Effect):
         super().__init__(effect_id, name, target_type_enum)
         self.is_draw_effect = is_draw_effect
     
-    def resolve(self, source, opponent, level, *args, **kwargs):
+    def resolve(self, source, opponent, level, status_registry):
         subject = self.get_target_combatant(source, opponent)
         if level == 0: 
             return

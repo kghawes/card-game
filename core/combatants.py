@@ -32,7 +32,13 @@ class Combatant:
         return self.resources[Resources.MAGICKA.name].get_max_value()
         
     def take_damage(self, amount, damage_type_enum, status_registry) -> bool:
-        amount = self.status_manager.trigger_status_instantly(self, StatusNames.DEFENSE.name, status_registry, incoming_damage=amount)
+        if self.status_manager.has_status(StatusNames.RESISTANCE)
+        
+        if self.status_manager.has_status(StatusNames.DEFENSE.name):
+            defense_status = status_registry.get_status(StatusNames.DEFENSE.name)
+            defense_level = self.status_manager.get_status_level(StatusNames.DEFENSE.name)
+            amount = defense_status.trigger_instantly(self, defense_level, amount)
+            
         self.resources[Resources.HEALTH.name].current_value = max(self.get_health() - amount, 0)
         return self.is_alive()
     

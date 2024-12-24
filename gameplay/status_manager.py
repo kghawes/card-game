@@ -15,7 +15,6 @@ class StatusManager:
         return self.statuses.get(status_id, 0)
     
     def change_status(self, status_id, level, remove_all_levels=False):
-        print(str(self.statuses.get(status_id, 0)) + "+" + str(level))
         if remove_all_levels and status_id in self.statuses:
             del self.statuses[status_id]
         else:
@@ -36,10 +35,3 @@ class StatusManager:
             if not subject.is_alive():
                 return
         return
-    
-    def trigger_status_instantly(self, subject, status_id, status_registry, default, *args, **kwargs) -> int:
-        if status_id not in self.statuses: 
-            return default
-        status = status_registry.get_status(status_id)
-        level = self.get_status_level(status_id)
-        return status.trigger_instantly(subject, level, default=default, *args, **kwargs)
