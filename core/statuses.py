@@ -90,10 +90,16 @@ class ModifyMaxResourceStatus(Status):
         self.is_buff = is_buff
         
     def modify_max_resource(self, subject, level):
-        
+        pass
         
     def trigger_on_turn(self, subject, level):
-        
+        pass
+    
+    def trigger_instantly(self, subject, level, *args, **kwargs) -> int:
+        pass
+
+class ModifyDrawStatus(Status):
+    def modify_draw(self, )
 
 class StatusRegistry:
     def __init__(self, statuses_path):

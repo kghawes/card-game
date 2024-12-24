@@ -1,11 +1,13 @@
 import random
 import itertools
+import utils.constants as constants
 
 class CardManager:
     def __init__(self, starting_deck, card_cache):
         self.deck = self._create_deck(starting_deck, card_cache)
         self.hand = []
         self.discard_pile = []
+        self.cards_to_draw = constants.HAND_SIZE
     
     def _create_deck(self, deck_list, card_cache):
         deck = []
@@ -44,3 +46,9 @@ class CardManager:
             card.reset_cost()
             for effect_level in card.effects.values():
                 effect_level.reset()
+    
+    def reset_cards_to_draw(self):
+        self.cards_to_draw = constants.HAND_SIZE
+    
+    def change_cards_to_draw(self, amount):
+        self.cards_to_draw = max(min(self.cards_to_draw + amount, constants.MAX_HAND_SIZE), constants.MIN_HAND_SIZE)

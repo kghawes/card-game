@@ -36,6 +36,8 @@ class Resources(Enum):
     MAGICKA = "magicka"
     GOLD = "gold"
 
+MIN_RESOURCE = 1
+
 class DamageTypes(Enum):
     PHYSICAL = "Physical"
     FIRE = "Fire"
@@ -115,6 +117,9 @@ STARTING_HEALTH = 10
 STARTING_STAMINA = 3
 STARTING_MAGICKA = 3
 MAX_NAME_LENGTH = 20
+HAND_SIZE = 6
+MIN_HAND_SIZE = 2
+MAX_HAND_SIZE = 10
 
 CARD_PATHS = [ 
     "data/cards/weapon_cards.json",

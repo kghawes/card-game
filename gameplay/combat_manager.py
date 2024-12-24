@@ -27,7 +27,7 @@ class CombatManager:
         player.card_manager.discard_hand()
 
     def beginning_of_turn(self, combatant, opponent, registries):
-        combatant.card_manager.reset_cards()
+        combatant.reset_for_turn()
         combatant.card_manager.draw()
 
         combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
