@@ -3,29 +3,33 @@ class StatusManager:
     def __init__(self):
         self.statuses = {}
         
-    def _kill_zombie(self, status_id):
+    def _kill_zombie(self, status_id, status_registry):
         if self.statuses.get(status_id, 1) <= 0:
-            del self.statuses[status_id]
+            self._delete(status_id)
+        
+    def _delete(self, status_id, status_registry):
+        status_registry.get_status(status_id).expire()
+        del self.statuses[status_id]
 
-    def has_status(self, status_id) -> bool:
-        self._kill_zombie(status_id)
+    def has_status(self, status_id, status_registry) -> bool:
+        self._kill_zombie(status_id, status_registry)
         return status_id in self.statuses
     
     def get_status_level(self, status_id) -> int:
         return self.statuses.get(status_id, 0)
     
-    def change_status(self, status_id, level, remove_all_levels=False):
+    def change_status(self, status_id, level, status_registry, remove_all_levels=False):
         if remove_all_levels and status_id in self.statuses:
-            del self.statuses[status_id]
+            self._delete(status_id, status_registry)
         else:
             self.statuses[status_id] = self.statuses.get(status_id, 0) + level
-        self._kill_zombie(status_id)
+        self._kill_zombie(status_id, status_registry)
 
-    def decrement_statuses(self):
+    def decrement_statuses(self, status_registry):
         for status_id in list(self.statuses.keys()):
-            self.change_status(status_id, -1)
+            self.change_status(status_id, -1, status_registry)
     
-    def remove_all_statuses(self):
+    def reset_statuses(self):
         self.statuses.clear()
 
     def trigger_statuses_on_turn(self, subject, status_registry):

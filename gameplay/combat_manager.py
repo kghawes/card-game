@@ -6,7 +6,6 @@ class CombatManager:
         return not (player.is_alive() and enemy.is_alive())
 
     def do_combat(self, player, enemy, text_interface, registries):
-        player.card_manager.reset_cards()
         player.card_manager.shuffle()
         enemy.card_manager.shuffle()
         while True:
@@ -34,7 +33,7 @@ class CombatManager:
         if self.is_combat_over(combatant, opponent):
             return True
 
-        combatant.status_manager.decrement_statuses()
+        combatant.status_manager.decrement_statuses(registries.statuses)
         combatant.replenish_resources_for_turn()
         return False
 
@@ -60,7 +59,7 @@ class CombatManager:
         
         for effect_id, effect_level in card.effects.items():
             effect = registries.effects.get_effect(effect_id)
-            level = effect_level.modified_level
+            level = effect_level.get_level()
             effect.resolve(combatant, opponent, level, status_registry=registries.statuses)
 
         text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(combatant.name, card.name, opponent.name, opponent.get_health()))

@@ -41,12 +41,12 @@ class ChangeStatusEffect(Effect):
         status_id = self.status_enum.name
         if EffectNames.REMOVE.name in self.effect_id:
             level *= -1
-        subject.status_manager.change_status(status_id, level)
+        subject.status_manager.change_status(status_id, level, status_registry)
         
-        if subject.status_manager.has_status(status_id):
+        if subject.status_manager.has_status(status_id, status_registry):
             status = status_registry.get_status(status_id)
             if status.applies_immediately:
-                status.trigger_on_apply(subject, subject.status_manager.get_status_level(status_id))            
+                status.trigger_on_apply(subject, level)            
 
 class DamageEffect(Effect):
     def __init__(self, target_type_enum, damage_type_enum):

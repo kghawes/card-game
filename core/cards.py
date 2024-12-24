@@ -6,7 +6,7 @@ class Card:
         self.name = name
         self.card_type = card_type
         self.cost = cost
-        self.modified_cost = cost
+        self.cost_modifier = 1
         self.value = value
         self.subtype = subtype
         self.effects = {}
@@ -17,13 +17,18 @@ class Card:
             self.effects[effect] = EffectLevel(level)
         
     def get_cost(self) -> int:
-        return self.modified_cost
+        return self.cost * self.cost_modifier
     
-    def set_cost(self, new_cost):
-        self.modified_cost = new_cost
+    def change_cost_modifier(self, amount):
+        self.cost_modifier += amount
         
-    def reset_cost(self):
-        self.modified_cost = self.cost
+    def reset_cost_modifier(self):
+        self.cost_modifier = 1
+        
+    def reset_card(self):
+        for level in self.effects.values():
+            level.reset_modifier()
+        self.reset_cost_modifier()
         
     def matches(self, card_property) -> bool:
         if card_property in CardTypes:
@@ -36,16 +41,16 @@ class Card:
 class EffectLevel():
     def __init__(self, base_level):
         self.base_level = base_level
-        self.modified_level = base_level
+        self.modifier = 1
         
     def get_level(self):
-        return self.modified_level
+        return self.base_level * self.modifier
     
-    def set_level(self, level):
-        self.modified_level = level
+    def change_modifier(self, amount):
+        self.modifier += amount
     
-    def reset(self):
-        self.modified_level = self.base_level
+    def reset_modifier(self):
+        self.modifier = 1
 
 class CardPrototype(Card, Prototype):
     def __init__(self, name, card_type, cost, value, effects, enchantments = None, enchanted_name = None):

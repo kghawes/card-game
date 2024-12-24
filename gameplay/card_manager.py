@@ -1,5 +1,4 @@
 import random
-import itertools
 import utils.constants as constants
 
 class CardManager:
@@ -39,19 +38,13 @@ class CardManager:
         return self.draw(self.cards_to_draw)
 
     def discard(self, card):
+        card.reset_card()
         self.discard_pile.append(card)
         self.hand.remove(card)
 
     def discard_hand(self):
-        self.discard_pile.extend(self.hand)
-        self.hand = []
-        
-    def reset_cards(self):
-        cards = itertools.chain(self.deck, self.discard_pile, self.hand)
-        for card in cards:
-            card.reset_cost()
-            for effect_level in card.effects.values():
-                effect_level.reset()
+        for card in self.hand:
+            self.discard(card)
     
     def reset_cards_to_draw(self):
         self.cards_to_draw = constants.HAND_SIZE

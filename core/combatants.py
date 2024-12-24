@@ -35,7 +35,7 @@ class Combatant:
         
         amount = self.apply_resistances_and_weaknesses(amount, damage_type_enum.name)
         
-        if self.status_manager.has_status(StatusNames.DEFENSE.name):
+        if self.status_manager.has_status(StatusNames.DEFENSE.name, status_registry):
             defense_status = status_registry.get_status(StatusNames.DEFENSE.name)
             defense_level = self.status_manager.get_status_level(StatusNames.DEFENSE.name)
             amount = defense_status.trigger_instantly(self, defense_level, amount)
@@ -66,7 +66,6 @@ class Combatant:
     
     def reset_for_turn(self):
         self.card_manager.reset_cards_to_draw()
-        self.card_manager.reset_cards()
         self.replenish_resources_for_turn()
 
 class Resource:

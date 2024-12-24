@@ -7,31 +7,29 @@ class Status:
         self.name = status_enum.value
         self.applies_immediately = applies_immediately
         
-    def modify_value_flat(self, old_value, change_amount, is_reduction, minimum_result) -> int:
+    def modify_value(self, old_value, change_amount, is_reduction, minimum_result) -> int:
         if is_reduction:
             return max(old_value - change_amount, minimum_result)
         else:
             return old_value + change_amount
-    
-    def modify_value_scaling(self, old_value, status_level, is_reduction, minimum_result) -> int:
-        sign_factor = -1 if is_reduction else 1
-        new_value_exact = (1 + sign_factor * constants.SCALE_FACTOR * status_level) * old_value
-        return round(new_value_exact)
     
     def trigger_on_turn(self, subject, level):
         return
     
     def trigger_on_apply(self, subject, level):
         return
+    
+    def expire(self, subject):
+        return
 
 class DefenseStatus(Status):
     def __init__(self):
         super().__init__(constants.StatusNames.DEFENSE, False)
     
-    def trigger_instantly(self, subject, level, incoming_damage) -> int:
-        net_damage = self.modify_value_flat(incoming_damage, level, True, 0)
+    def calculate_net_damage(self, subject, level, incoming_damage, status_registry) -> int:
+        net_damage = self.modify_value(incoming_damage, level, True, 0)
         defense_to_remove = net_damage - incoming_damage
-        subject.status_manager.change_status(self.status_id, defense_to_remove)
+        subject.status_manager.change_status(self.status_id, defense_to_remove, status_registry)
         return net_damage
 
 class PoisonStatus(Status):
@@ -45,7 +43,7 @@ class EvasionStatus(Status):
     def __init__(self):
         super().__init__(constants.StatusNames.EVASION, False)
     
-    def trigger_instantly(self, subject, level, incoming_damage) -> int:
+    def calculate_evasion_damage(self, subject, level, incoming_damage) -> int:
         success_probability = min(constants.StatusParameters.BASE_EVASION_PROBABILITY * level, 1.0)
         roll = random.random()
         return 0 if roll >= success_probability else incoming_damage
@@ -72,21 +70,27 @@ class ModifyEffectStatus(Status):
         super().__init__(status_enum, True)
         self.affected_cards_enum = affected_cards_enum
         self.affected_effect = affected_effect
-        self.is_reduction = not is_effectiveness_buff
+        self.sign_factor = 1 if is_effectiveness_buff else -1
         
     def trigger_on_turn(self, subject, level):
         for card in subject.card_manager.hand:
-            self.trigger_instantly(subject, level, card)
+            self.trigger_instantly(subject, level, card, True)
     
-    def trigger_instantly(self, subject, level, card):
+    def trigger_instantly(self, subject, level, card, needs_reset=False):
         if card.matches(self.affected_cards_enum):
             for effect_id, effect_level in card.effects.items():
                 if self.affected_effect in effect_id:
-                    new_level = self.modify_value_scaling(effect_level.get_level(), level, self.is_reduction, constants.MIN_EFFECT)
-                    effect_level.set_level(new_level)
+                    if needs_reset:
+                        effect_level.reset_modifier()
+                    effect_level.change_modifier(self.sign_factor * constants.SCALE_FACTOR * level)
     
-    def trigger_on_apply(self, subject, level):
-        self.trigger_on_turn(subject, level)
+    def trigger_on_apply(self, subject, level_change):
+        for card in subject.card_manager.hand:
+            self.trigger_instantly(subject, level_change, card, False)
+    
+    def expire(self, subject):
+        for card in subject.card_manager.hand:
+            self.trigger_instantly(subject, 0, card, True)
 
 class ModifyMaxResourceStatus(Status):
     def __init__(self, status_enum, resource_enum, is_buff):
