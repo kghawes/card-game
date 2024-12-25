@@ -1,5 +1,5 @@
 from utils.utils import Prototype
-from utils.constants import CardTypes, CardSubtypes
+from utils.constants import CardTypes, CardSubtypes, MIN_EFFECT
 
 class Card:
     def __init__(self, name, card_type, cost, value, effects, subtype=None):
@@ -47,7 +47,7 @@ class EffectLevel():
         return self.base_level * self.modifier
     
     def change_modifier(self, amount):
-        self.modifier += amount
+        self.modifier = max(self.modifier + amount, MIN_EFFECT)
     
     def reset_modifier(self):
         self.modifier = 1

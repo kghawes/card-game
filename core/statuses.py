@@ -16,7 +16,7 @@ class Status:
     def trigger_on_turn(self, subject, level):
         return
     
-    def trigger_on_apply(self, subject, level):
+    def trigger_on_change(self, subject, level):
         return
     
     def expire(self, subject):
@@ -62,7 +62,7 @@ class ModifyCostStatus(Status):
         if card.matches(self.affected_cards_enum):
             card.set_cost(self.modifier.modify_value(level, card.get_cost()))###########################################################
     
-    def trigger_on_apply(self, subject, level):
+    def trigger_on_change(self, subject, level):
         self.trigger_on_turn(subject, level)
 
 class ModifyEffectStatus(Status):
@@ -71,10 +71,9 @@ class ModifyEffectStatus(Status):
         self.affected_cards_enum = affected_cards_enum
         self.affected_effect = affected_effect
         self.sign_factor = 1 if is_effectiveness_buff else -1
-        
+    
     def trigger_on_turn(self, subject, level):
-        for card in subject.card_manager.hand:
-            self.trigger_instantly(subject, level, card, True)
+        self.trigger_on_change(subject, level, True)
     
     def trigger_instantly(self, subject, level, card, needs_reset=False):
         if card.matches(self.affected_cards_enum):
@@ -84,9 +83,9 @@ class ModifyEffectStatus(Status):
                         effect_level.reset_modifier()
                     effect_level.change_modifier(self.sign_factor * constants.SCALE_FACTOR * level)
     
-    def trigger_on_apply(self, subject, level_change):
+    def trigger_on_change(self, subject, level_change, needs_reset=False):
         for card in subject.card_manager.hand:
-            self.trigger_instantly(subject, level_change, card, False)
+            self.trigger_instantly(subject, level_change, card, needs_reset)
     
     def expire(self, subject):
         for card in subject.card_manager.hand:

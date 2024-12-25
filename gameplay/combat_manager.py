@@ -27,13 +27,18 @@ class CombatManager:
 
     def beginning_of_turn(self, combatant, opponent, registries):
         combatant.reset_for_turn()
+        
+        #trigger spd
+        
         combatant.card_manager.draw_hand()
+        
+        #trigger psn etc
 
-        combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
         if self.is_combat_over(combatant, opponent):
             return True
 
-        combatant.status_manager.decrement_statuses(registries.statuses)
+        combatant.status_manager.decrement_statuses(combatant, registries.statuses)
+        combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
         combatant.replenish_resources_for_turn()
         return False
 
