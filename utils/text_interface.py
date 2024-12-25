@@ -1,3 +1,4 @@
+import sys
 import utils.constants as constants
 
 class TextInterface:
@@ -40,10 +41,27 @@ class TextInterface:
     
         print(constants.TEXT_DIVIDER)
 
-    def turn_options_prompt(self):
+    def turn_options_prompt(self, player, enemy, registries) -> int:
+        debug_commands = self.debug_setup(player, enemy, registries)
+        
         while True:
             response = input(constants.PROMPT_TURN_OPTIONS).strip()
             if response.isdigit():
                 return int(response)
-            elif response.upper() == constants.INPUT_PASS_TURN:
+            response = response.upper()
+            if response == constants.INPUT_PASS_TURN:
                 return -1
+            elif response in debug_commands:
+                debug_commands[response]()
+        
+        raise RuntimeError("Unexpected state: Exited loop without returning.")
+    
+    def debug_setup(self, player, enemy, registries) -> dict:
+        debug_commands = {
+            "QUIT": lambda: sys.exit(0)
+        }
+        
+        for effect_id, effect in registries.effects.effects.items():
+            debug_commands[effect_id] = lambda: effect.resolve(player, enemy, 1, registries.statuses)
+        
+        return debug_commands

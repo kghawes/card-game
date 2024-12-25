@@ -43,7 +43,7 @@ class CombatManager:
         return False
 
     def do_player_action(self, player, enemy, text_interface, registries):
-        selection = text_interface.turn_options_prompt()
+        selection = text_interface.turn_options_prompt(player, enemy, registries)
         if selection < 0:  # Pass turn
             return True
         if selection >= len(player.card_manager.hand):

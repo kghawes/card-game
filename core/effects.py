@@ -66,7 +66,7 @@ class ChangeResourceEffect(Effect):
         super().__init__(effect_id, name, target_type_enum)
     
     def resolve(self, source, opponent, level, status_registry):
-        if EffectNames.DRAIN in self.effect_id:
+        if EffectNames.DRAIN.name in self.effect_id:
             level *= -1
         subject = self.get_target_combatant(source, opponent)
         subject.change_resource(self.resource_enum, level)
