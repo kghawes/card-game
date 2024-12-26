@@ -36,7 +36,7 @@ class StatusManager:
         if self.has_status(status_id, subject, status_registry):
             status = status_registry.get_status(status_id)
             if status.applies_immediately:
-                status.trigger_on_change(subject, level, status_registry)
+                status.trigger_on_change(subject, level)
 
     def decrement_statuses(self, subject, status_registry):
         for status_id in list(self.statuses.keys()):
