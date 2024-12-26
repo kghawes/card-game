@@ -85,7 +85,7 @@ class ModifyEffectStatus(Status):
     
     def trigger_on_change(self, subject, level_change, needs_reset=False):
         for card in subject.card_manager.hand:
-            self.trigger_instantly(subject, level_change, card, False)
+            self.trigger_instantly(subject, level_change, card, needs_reset)
     
     def expire(self, subject):
         for card in subject.card_manager.hand:
