@@ -11,7 +11,7 @@ import utils.constants as constants
 class Game:
     def __init__(self):
         self.text_interface = TextInterface()
-        self.registries = Registries(constants.EFFECTS_PATH, constants.STATUSES_PATH, constants.ENCHANTMENTS_PATH)
+        self.registries = Registries(constants.STATUSES_PATH, constants.ENCHANTMENTS_PATH)
         self.combat_manager = CombatManager()
         self.card_cache = CardCache(constants.CARD_PATHS, self.registries)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH)

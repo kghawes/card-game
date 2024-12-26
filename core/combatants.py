@@ -31,7 +31,7 @@ class Combatant:
     def get_max_magicka(self) -> int:
         return self.resources[Resources.MAGICKA.name].get_max_value()
         
-    def take_damage(self, amount, damage_type_enum, status_registry) -> bool:
+    def take_damage(self, amount, damage_type_enum, status_registry):
         
         amount = self.apply_resistances_and_weaknesses(amount, damage_type_enum.name)
         
@@ -41,7 +41,6 @@ class Combatant:
             amount = defense_status.calculate_net_damage(self, defense_level, amount, status_registry)
             
         self.resources[Resources.HEALTH.name].change_value(-1 * amount)
-        return self.is_alive()
     
     def apply_resistances_and_weaknesses(self, damage_amount, incoming_damage_type) -> int:
         multiplier = 1

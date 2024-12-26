@@ -127,11 +127,14 @@ class EffectRegistry:
             for resource in Resources:
                 if resource == Resources.GOLD:
                     continue
-                restore_effect = ChangeResourceEffect(EffectNames.RESTORE, target_type, resource)
-                if resource != Resources.HEALTH:
-                    drain_effect = ChangeResourceEffect(EffectNames.DRAIN, target_type, resource)
+                if resource == Resources.HEALTH:
+                    restore_health_effect = ChangeResourceEffect(EffectNames.RESTORE, target_type, resource)
+                    effects[restore_health_effect.effect_id] = restore_health_effect
+                else:
+                    drain_effect = ChangeResourceEffect(EffectNames.DRAIN, TargetTypes.SELF, resource)
+                    restore_effect = ChangeResourceEffect(EffectNames.RESTORE, TargetTypes.SELF, resource)
                     effects[drain_effect.effect_id] = drain_effect
-                effects[restore_effect.effect_id] = restore_effect
+                    effects[restore_effect.effect_id] = restore_effect
 
         return effects
 
