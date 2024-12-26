@@ -24,9 +24,11 @@ class Effect:
     def matches(self, effect_id) -> bool:
         return effect_id in self.effect_id
 
+
 class NoEffect(Effect):
     def __init__(self):
         super().__init__(EffectNames.NO_EFFECT.name, EffectNames.NO_EFFECT.value, None)
+
 
 class ChangeStatusEffect(Effect):
     def __init__(self, effect_name_enum, target_type_enum, status_enum):
@@ -45,6 +47,7 @@ class ChangeStatusEffect(Effect):
         
         subject.status_manager.change_status(status_id, level, subject, status_registry)           
 
+
 class DamageEffect(Effect):
     def __init__(self, target_type_enum, damage_type_enum):
         self.target_type_enum = target_type_enum
@@ -56,6 +59,7 @@ class DamageEffect(Effect):
     def resolve(self, source, opponent, level, status_registry):
         subject = self.get_target_combatant(source, opponent)
         subject.take_damage(level, self.damage_type_enum, status_registry)
+
 
 class ChangeResourceEffect(Effect):
     def __init__(self, effect_name_enum, target_type_enum, resource_enum):
@@ -69,7 +73,8 @@ class ChangeResourceEffect(Effect):
         if EffectNames.DRAIN.name in self.effect_id:
             level *= -1
         subject = self.get_target_combatant(source, opponent)
-        subject.change_resource(self.resource_enum, level)
+        subject.change_resource(self.resource_enum.name, level)
+
 
 class PickpocketEffect(Effect):
     def __init__(self):
@@ -79,6 +84,7 @@ class PickpocketEffect(Effect):
         # target.card_manager.show_top_cards_in_deck(level)
         # ....
         pass
+    
     
 class HandEffect(Effect):
     def __init__(self, effect_name_enum, target_type_enum, is_draw_effect):
@@ -96,11 +102,12 @@ class HandEffect(Effect):
         else:
             pass
 
-class EffectRegistry:
-    def __init__(self, effects_path, status_registry):
-        self.effects = self._register_effects(effects_path, status_registry)
 
-    def _register_effects(self, path, status_registry):
+class EffectRegistry:
+    def __init__(self, status_registry):
+        self.effects = self._register_effects(status_registry)
+
+    def _register_effects(self, status_registry):
         effects = {}
         
         effects[EffectNames.NO_EFFECT.name] = NoEffect()

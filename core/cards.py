@@ -38,6 +38,7 @@ class Card:
         else:
             return False
 
+
 class EffectLevel():
     def __init__(self, base_level):
         self.base_level = base_level
@@ -52,6 +53,7 @@ class EffectLevel():
     def reset_modifier(self):
         self.modifier = 1
 
+
 class CardPrototype(Card, Prototype):
     def __init__(self, name, card_type, cost, value, effects, enchantments = None, enchanted_name = None):
         super().__init__(name, card_type, cost, value, effects)
@@ -62,6 +64,7 @@ class CardPrototype(Card, Prototype):
 
     def clone(self):
         return Card(self.name, self.card_type, self.cost, self.value, self.effects)
+
 
 class CardCache:
     def __init__(self, filenames, registries):

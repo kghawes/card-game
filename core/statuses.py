@@ -13,7 +13,7 @@ class Status:
         else:
             return old_value + change_amount
     
-    def trigger_on_turn(self, subject, level):
+    def trigger_on_turn(self, subject, level, status_registry=None):
         return
     
     def trigger_on_change(self, subject, level):
@@ -29,15 +29,15 @@ class DefenseStatus(Status):
     def calculate_net_damage(self, subject, level, incoming_damage, status_registry) -> int:
         net_damage = self.modify_value(incoming_damage, level, True, 0)
         defense_to_remove = net_damage - incoming_damage
-        subject.status_manager.change_status(self.status_id, defense_to_remove, status_registry)
+        subject.status_manager.change_status(self.status_id, defense_to_remove, subject, status_registry)
         return net_damage
 
 class PoisonStatus(Status):
     def __init__(self):
         super().__init__(constants.StatusNames.POISON, False)
     
-    def trigger_on_turn(self, subject, level):
-        subject.take_damage(level, constants.DamageTypes.POISON)
+    def trigger_on_turn(self, subject, level, status_registry):
+        subject.take_damage(level, constants.DamageTypes.POISON, status_registry)
         
 class EvasionStatus(Status):
     def __init__(self):
@@ -54,7 +54,7 @@ class ModifyCostStatus(Status):
         self.affected_cards_enum = affected_cards_enum
         self.is_cost_increase = is_cost_increase
         
-    def trigger_on_turn(self, subject, level):
+    def trigger_on_turn(self, subject, level, status_registry):
         for card in subject.card_manager.hand:
             self.trigger_instantly(subject, level, card)
     
@@ -62,8 +62,8 @@ class ModifyCostStatus(Status):
         if card.matches(self.affected_cards_enum):
             card.set_cost(self.modifier.modify_value(level, card.get_cost()))###########################################################
     
-    def trigger_on_change(self, subject, level):
-        self.trigger_on_turn(subject, level)
+    def trigger_on_change(self, subject, level, status_registry):
+        self.trigger_on_turn(subject, level, status_registry)
 
 class ModifyEffectStatus(Status):
     def __init__(self, status_enum, affected_cards_enum, affected_effect, is_effectiveness_buff):
@@ -72,7 +72,7 @@ class ModifyEffectStatus(Status):
         self.affected_effect = affected_effect
         self.sign_factor = 1 if is_effectiveness_buff else -1
     
-    def trigger_on_turn(self, subject, level):
+    def trigger_on_turn(self, subject, level, status_registry):
         self.trigger_on_change(subject, level, True)
     
     def trigger_instantly(self, subject, level, card, needs_reset=False):
@@ -96,7 +96,7 @@ class ModifyMaxResourceStatus(Status):
         super().__init__(status_enum, True)
         self.resource_enum = resource_enum
         
-    def trigger_on_turn(self, subject, level):
+    def trigger_on_turn(self, subject, level, status_registry):
         pass
     
     def trigger_instantly(self, subject, level) -> int:

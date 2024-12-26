@@ -37,8 +37,8 @@ class CombatManager:
         if self.is_combat_over(combatant, opponent):
             return True
 
-        combatant.status_manager.decrement_statuses(combatant, registries.statuses)
         combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
+        combatant.status_manager.decrement_statuses(combatant, registries.statuses)
         combatant.replenish_resources_for_turn()
         return False
 

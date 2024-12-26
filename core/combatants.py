@@ -38,9 +38,9 @@ class Combatant:
         if self.status_manager.has_status(StatusNames.DEFENSE.name, self, status_registry):
             defense_status = status_registry.get_status(StatusNames.DEFENSE.name)
             defense_level = self.status_manager.get_status_level(StatusNames.DEFENSE.name)
-            amount = defense_status.trigger_instantly(self, defense_level, amount)
+            amount = defense_status.calculate_net_damage(self, defense_level, amount, status_registry)
             
-        self.resources[Resources.HEALTH.name].current_value = max(self.get_health() - amount, 0)
+        self.resources[Resources.HEALTH.name].change_value(-1 * amount)
         return self.is_alive()
     
     def apply_resistances_and_weaknesses(self, damage_amount, incoming_damage_type) -> int:
@@ -67,6 +67,11 @@ class Combatant:
     def reset_for_turn(self):
         self.card_manager.reset_cards_to_draw()
         self.replenish_resources_for_turn()
+        
+    def change_resource(self, resource_id, amount):
+        assert resource_id != Resources.HEALTH or amount >= 0 #
+        self.resources[resource_id].change_value(amount)
+
 
 class Resource:
     def __init__(self, resource_enum, max_value):
@@ -74,6 +79,9 @@ class Resource:
         self.max_value = max_value
         self.modified_max_value = max_value
         self.current_value = max_value
+        
+    def change_value(self, amount):
+        self.current_value = min(max(self.current_value + amount, 0), self.modified_max_value)
     
     def try_spend(self, amount) -> bool:
         if self.current_value < amount:

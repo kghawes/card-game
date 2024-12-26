@@ -28,7 +28,7 @@ class StatusManager:
         if self.has_status(status_id, subject, status_registry):
             status = status_registry.get_status(status_id)
             if status.applies_immediately:
-                status.trigger_on_change(subject, level)
+                status.trigger_on_change(subject, level, status_registry)
 
     def decrement_statuses(self, subject, status_registry):
         for status_id in list(self.statuses.keys()):
@@ -40,7 +40,7 @@ class StatusManager:
     def trigger_statuses_on_turn(self, subject, status_registry):
         for status_id, level in self.statuses.items():
             status = status_registry.get_status(status_id)
-            status.trigger_on_turn(subject, level)
+            status.trigger_on_turn(subject, level, status_registry)
             if not subject.is_alive():
                 return
         return

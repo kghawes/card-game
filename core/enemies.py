@@ -7,6 +7,7 @@ class Enemy(Combatant):
         super().__init__(name, max_health, max_stamina, max_magicka, deck, card_cache)
         self.loot = Treasure(loot)
 
+
 class EnemyPrototype(Prototype):
     def __init__(self, name, max_health, max_stamina, max_magicka, deck, loot):
         self.name = name
@@ -26,6 +27,7 @@ class EnemyPrototype(Prototype):
             card_cache=card_cache,
             loot=self.loot
         )
+
 
 class EnemyCache:
     def __init__(self, filename):

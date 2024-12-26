@@ -1,4 +1,5 @@
 import sys
+from functools import partial
 import utils.constants as constants
 
 class TextInterface:
@@ -42,7 +43,7 @@ class TextInterface:
         print(constants.TEXT_DIVIDER)
 
     def turn_options_prompt(self, player, enemy, registries) -> int:
-        debug_commands = self.debug_setup(player, enemy, registries)
+        debug_commands = self.debug_setup(player, enemy, registries.effects)
         
         while True:
             response = input(constants.PROMPT_TURN_OPTIONS).strip()
@@ -53,15 +54,36 @@ class TextInterface:
                 return -1
             elif response in debug_commands:
                 debug_commands[response]()
+            else:
+                effect_id, level = self.parse_effect_input(response)
+                if effect_id in debug_commands:
+                    debug_commands[effect_id](player, enemy, level, registries.statuses)
+                    self.display_turn_info(player, enemy, registries.effects)
         
         raise RuntimeError("Unexpected state: Exited loop without returning.")
     
-    def debug_setup(self, player, enemy, registries) -> dict:
+    def parse_effect_input(self, input_str):
+        parts = input_str.strip().split()
+    
+        if len(parts) < 2 or not parts[-1].isdigit():
+            raise ValueError("Invalid input. Format must be: '<effect_name> <level>'")
+    
+        level = int(parts.pop())
+        effect_id = "_".join(parts)
+    
+        return effect_id, level
+
+    def debug_setup(self, player, enemy, effect_registry) -> dict:
         debug_commands = {
             "QUIT": lambda: sys.exit(0)
         }
         
-        for effect_id, effect in registries.effects.effects.items():
-            debug_commands[effect_id] = lambda: effect.resolve(player, enemy, 1, registries.statuses)
-        
+        for effect_id, effect in effect_registry.effects.items():
+            # Use partial to capture the specific effect at loop iteration time
+            debug_commands[effect_id] = partial(self.apply_effect_debug, effect)
+    
         return debug_commands
+    
+    def apply_effect_debug(self, effect, player, enemy, level, status_registry):
+        effect.resolve(player, enemy, level, status_registry=status_registry)
+        print(f"Resolved {effect.name}")
