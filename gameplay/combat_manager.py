@@ -28,19 +28,27 @@ class CombatManager:
     def beginning_of_turn(self, combatant, opponent, registries):
         combatant.reset_for_turn()
         
-        #trigger spd
+        self.trigger_speed() # TODO
         
         combatant.card_manager.draw_hand()
         
-        #trigger psn etc
+        self.trigger_poison(combatant, registries.statuses)
 
         if self.is_combat_over(combatant, opponent):
             return True
 
-        combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
         combatant.status_manager.decrement_statuses(combatant, registries.statuses)
+        combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
         combatant.replenish_resources_for_turn()
         return False
+    
+    def trigger_speed(self): pass #
+
+    def trigger_poison(self, subject, status_registry):
+        poison_id = constants.StatusNames.POISON.name
+        poison_status, poison_level = subject.status_manager.get_status(poison_id, subject, status_registry)
+        if poison_status and poison_level:
+            poison_status.trigger_instantly(subject, poison_level, status_registry)
 
     def do_player_action(self, player, enemy, text_interface, registries):
         selection = text_interface.turn_options_prompt(player, enemy, registries)

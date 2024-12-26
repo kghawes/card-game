@@ -15,6 +15,14 @@ class StatusManager:
         self._kill_zombie(status_id, subject, status_registry)
         return status_id in self.statuses
     
+    def get_status(self, status_id, subject, status_registry):
+        if self.has_status(status_id, subject, status_registry):
+            status = status_registry.get_status(status_id)
+            level = self.get_status_level(status_id)
+            return status, level
+        else:
+            return None, 0
+    
     def get_status_level(self, status_id) -> int:
         return self.statuses.get(status_id, 0)
     

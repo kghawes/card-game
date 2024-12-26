@@ -36,7 +36,7 @@ class PoisonStatus(Status):
     def __init__(self):
         super().__init__(constants.StatusNames.POISON, False)
     
-    def trigger_on_turn(self, subject, level, status_registry):
+    def trigger_instantly(self, subject, level, status_registry):
         subject.take_damage(level, constants.DamageTypes.POISON, status_registry)
         
 class EvasionStatus(Status):
