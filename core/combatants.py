@@ -44,10 +44,11 @@ class Combatant:
 
     def clear_modifier_contributions(self, status):
         """Clear contributions for specific modifiers."""
-        self.modifier_pool[status.status_id]["value"] = 0
-        card_type = status.affected_cards_enum
-        effect = status.affected_effect
-        self.recalculate_modifiers(card_type, effect)
+        if isinstance(status, ModifyEffectStatus):
+            self.modifier_pool[status.status_id]["value"] = 0
+            card_type = status.affected_cards_enum
+            effect = status.affected_effect
+            self.recalculate_modifiers(card_type, effect)
         
     def reset_modifiers(self, card_type, effect):
         """Set all modifiers affecting this card type and effect to 0."""
