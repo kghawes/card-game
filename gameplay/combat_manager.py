@@ -67,13 +67,13 @@ class CombatManager:
         if not combatant.resources[resource.name].try_spend(card.get_cost()):
             text_interface.send_message("Not enough " + resource.value)
             return
-
-        combatant.card_manager.discard(card)
         
         for effect_id, effect_level in card.effects.items():
             effect = registries.effects.get_effect(effect_id)
             level = effect_level.get_level()
             effect.resolve(combatant, opponent, level, status_registry=registries.statuses)
+            
+        combatant.card_manager.discard(card)
 
         text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(combatant.name, card.name, opponent.name, opponent.get_health()))
 
