@@ -40,9 +40,18 @@ class Combatant:
         """Clear contributions for specific modifiers."""
         self.modifier_pool[status.status_id]["value"] = 0
         self.flag_modifier_recalculation(status.affected_cards_enum, status.affected_effect)
+        
+    def reset_modifiers(self, card_type, effect):
+        for card in self.card_manager.hand:
+            if card.matches(card_type):
+                for effect_id, effect_level in card.effects.items():
+                    if effect in effect_id:
+                        effect_level.reset_modifier()
 
     def flag_modifier_recalculation(self, card_type, effect):
         """Recalculate modifiers for affected cards."""
+        self.reset_modifiers(card_type, effect)
+        
         for modifier in self.modifier_pool.values():
             if modifier["type"] == card_type and modifier["effect"] == effect:
                 for card in self.card_manager.hand:

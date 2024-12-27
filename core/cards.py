@@ -10,7 +10,6 @@ class Card:
         self.value = value
         self.subtype = subtype
         self.effects = {}
-        self.net_modifiers = {}  # Tracks accumulated modifiers for effects
 
         for effect, level in effects.items():
             if type(level) is EffectLevel:
@@ -30,7 +29,6 @@ class Card:
         for level in self.effects.values():
             level.reset_modifier()
         self.reset_cost_modifier()
-        self.net_modifiers.clear()  # Clear all cached modifiers
 
     def matches(self, card_property) -> bool:
         if card_property in CardTypes:
@@ -50,7 +48,7 @@ class EffectLevel():
         return max(self.base_level * (1 + self.modifier), MIN_EFFECT)
 
     def change_modifier(self, amount):
-        self.modifier = amount
+        self.modifier += amount
 
     def reset_modifier(self):
         self.modifier = 0
