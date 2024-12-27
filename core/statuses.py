@@ -130,8 +130,8 @@ class StatusRegistry:
         
         res_fire_status = Status(constants.StatusNames.RESISTANCE_FIRE, False)
         
-        ftfy_agi_status = ModifyCostStatus(constants.StatusNames.FORTIFY_AGILITY, constants.CardTypes.SKILL, False)
-        dmge_agi_status = ModifyCostStatus(constants.StatusNames.DAMAGE_AGILITY, constants.CardTypes.SKILL, True)
+        ftfy_agi_status = ModifyMaxResourceStatus(constants.StatusNames.FORTIFY_AGILITY, constants.Resources.STAMINA, False)
+        dmge_agi_status = ModifyMaxResourceStatus(constants.StatusNames.DAMAGE_AGILITY, constants.Resources.STAMINA, True)
         
         ftfy_str_status = ModifyEffectStatus(constants.StatusNames.FORTIFY_STRENGTH, constants.CardTypes.WEAPON, constants.EffectNames.DAMAGE.name, True)
         dmge_str_status = ModifyEffectStatus(constants.StatusNames.DAMAGE_STRENGTH, constants.CardTypes.WEAPON, constants.EffectNames.DAMAGE.name, False)

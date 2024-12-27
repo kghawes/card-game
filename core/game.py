@@ -1,5 +1,4 @@
 from gameplay.combat_manager import CombatManager
-from gameplay.quests import QuestRegistry
 from gameplay.town import Town
 from core.registries import Registries
 from core.cards import CardCache
