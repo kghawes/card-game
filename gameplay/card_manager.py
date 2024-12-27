@@ -7,7 +7,7 @@ class CardManager:
         self.hand = []
         self.discard_pile = []
         self.cards_to_draw = constants.HAND_SIZE
-    
+
     def _create_deck(self, deck_list, card_cache):
         deck = []
         for entry in deck_list:
@@ -30,14 +30,19 @@ class CardManager:
                 self.shuffle()
             if not self.deck:
                 break
-            self.hand.append(self.deck.pop(0))
+            card = self.deck.pop(0)
+            self.hand.append(card)
+
+            # Recalculate modifiers for newly drawn cards
+            card.reset_card()
             cards_to_draw -= 1
         return True
-            
+
     def draw_hand(self) -> bool:
         return self.draw(self.cards_to_draw)
 
     def discard(self, card):
+        # Reset modifiers when discarding
         card.reset_card()
         self.discard_pile.append(card)
         self.hand.remove(card)
@@ -45,6 +50,6 @@ class CardManager:
     def discard_hand(self):
         for card in self.hand:
             self.discard(card)
-    
+
     def reset_cards_to_draw(self):
         self.cards_to_draw = constants.HAND_SIZE

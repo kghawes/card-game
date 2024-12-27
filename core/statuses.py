@@ -6,64 +6,22 @@ class Status:
         self.status_id = status_enum.name
         self.name = status_enum.value
         self.applies_immediately = applies_immediately
-        
+
     def modify_value(self, old_value, change_amount, is_reduction, minimum_result) -> int:
         if is_reduction:
             return max(old_value - change_amount, minimum_result)
         else:
             return old_value + change_amount
-    
+
     def trigger_on_turn(self, subject, level, status_registry=None):
         return
-    
+
     def trigger_on_change(self, subject, level):
         return
-    
+
     def expire(self, subject):
         return
 
-class DefenseStatus(Status):
-    def __init__(self):
-        super().__init__(constants.StatusNames.DEFENSE, False)
-    
-    def calculate_net_damage(self, subject, level, incoming_damage, status_registry) -> int:
-        net_damage = self.modify_value(incoming_damage, level, True, 0)
-        defense_to_remove = net_damage - incoming_damage
-        subject.status_manager.change_status(self.status_id, defense_to_remove, subject, status_registry)
-        return net_damage
-
-class PoisonStatus(Status):
-    def __init__(self):
-        super().__init__(constants.StatusNames.POISON, False)
-    
-    def trigger_instantly(self, subject, level, status_registry):
-        subject.take_damage(level, constants.DamageTypes.POISON, status_registry)
-        
-class EvasionStatus(Status):
-    def __init__(self):
-        super().__init__(constants.StatusNames.EVASION, False)
-    
-    def calculate_evasion_damage(self, subject, level, incoming_damage) -> int:
-        success_probability = min(constants.StatusParameters.BASE_EVASION_PROBABILITY * level, 1.0)
-        roll = random.random()
-        return 0 if roll >= success_probability else incoming_damage
-
-class ModifyCostStatus(Status):
-    def __init__(self, status_enum, affected_cards_enum, is_cost_increase):
-        super().__init__(status_enum, True)
-        self.affected_cards_enum = affected_cards_enum
-        self.is_cost_increase = is_cost_increase
-        
-    def trigger_on_turn(self, subject, level, status_registry):
-        for card in subject.card_manager.hand:
-            self.trigger_instantly(subject, level, card)
-    
-    def trigger_instantly(self, subject, level, card):
-        if card.matches(self.affected_cards_enum):
-            card.set_cost(self.modifier.modify_value(level, card.get_cost()))###########################################################
-    
-    def trigger_on_change(self, subject, level, status_registry):
-        self.trigger_on_turn(subject, level, status_registry)
 
 class ModifyEffectStatus(Status):
     def __init__(self, status_enum, affected_cards_enum, affected_effect, is_effectiveness_buff):
@@ -71,25 +29,50 @@ class ModifyEffectStatus(Status):
         self.affected_cards_enum = affected_cards_enum
         self.affected_effect = affected_effect
         self.sign_factor = 1 if is_effectiveness_buff else -1
-    
+
+    def calculate_contribution(self, level):
+        """Calculate the contribution of this status to the modifier pool."""
+        return self.sign_factor * constants.SCALE_FACTOR * level
+
     def trigger_on_turn(self, subject, level, status_registry):
-        self.trigger_on_change(subject, level, True)
-    
-    def trigger_instantly(self, subject, level, card, needs_reset=False):
-        if card.matches(self.affected_cards_enum):
-            for effect_id, effect_level in card.effects.items():
-                if self.affected_effect in effect_id:
-                    if needs_reset:
-                        effect_level.reset_modifier()
-                    effect_level.change_modifier(self.sign_factor * constants.SCALE_FACTOR * level)
-    
+        """Mark cards in hand for recalculation at the start of each turn."""
+        subject.flag_modifier_recalculation(self.affected_cards_enum, self.affected_effect)
+
     def trigger_on_change(self, subject, level_change, needs_reset=False):
-        for card in subject.card_manager.hand:
-            self.trigger_instantly(subject, level_change, card, needs_reset)
-    
+        """Accumulate contributions to the modifier pool when level changes."""
+        contribution = self.calculate_contribution(level_change)
+        subject.accumulate_modifier_contribution(
+            self.affected_cards_enum, self.affected_effect, contribution
+        )
+        subject.flag_modifier_recalculation(self.affected_cards_enum, self.affected_effect)
+
     def expire(self, subject):
-        for card in subject.card_manager.hand:
-            self.trigger_instantly(subject, 0, card, True)
+        """Clear contributions when the status expires."""
+        subject.clear_modifier_contributions(self.affected_cards_enum, self.affected_effect)
+        subject.flag_modifier_recalculation(self.affected_cards_enum, self.affected_effect)
+
+
+class ModifyCostStatus(Status):
+    def __init__(self, status_enum, affected_cards_enum, is_cost_increase):
+        super().__init__(status_enum, True)
+        self.affected_cards_enum = affected_cards_enum
+        self.is_cost_increase = is_cost_increase
+
+    def trigger_on_turn(self, subject, level, status_registry):
+        """Mark cards for cost recalculations at the start of each turn."""
+        subject.flag_cost_recalculation(self.affected_cards_enum)
+
+    def trigger_on_change(self, subject, level, status_registry):
+        """Accumulate contributions and mark for recalculations."""
+        contribution = level if self.is_cost_increase else -level
+        subject.accumulate_cost_contribution(self.affected_cards_enum, contribution)
+        subject.flag_cost_recalculation(self.affected_cards_enum)
+
+    def expire(self, subject):
+        """Clear contributions when the status expires."""
+        subject.clear_cost_contributions(self.affected_cards_enum)
+        subject.flag_cost_recalculation(self.affected_cards_enum)
+
 
 class ModifyMaxResourceStatus(Status):
     def __init__(self, status_enum, resource_enum, is_buff):
@@ -101,6 +84,36 @@ class ModifyMaxResourceStatus(Status):
     
     def trigger_instantly(self, subject, level) -> int:
         pass
+    
+
+class DefenseStatus(Status):
+    def __init__(self):
+        super().__init__(constants.StatusNames.DEFENSE, False)
+    
+    def calculate_net_damage(self, subject, level, incoming_damage, status_registry) -> int:
+        net_damage = self.modify_value(incoming_damage, level, True, 0)
+        defense_to_remove = net_damage - incoming_damage
+        subject.status_manager.change_status(self.status_id, defense_to_remove, subject, status_registry)
+        return net_damage
+
+
+class PoisonStatus(Status):
+    def __init__(self):
+        super().__init__(constants.StatusNames.POISON, False)
+    
+    def trigger_instantly(self, subject, level, status_registry):
+        subject.take_damage(level, constants.DamageTypes.POISON, status_registry)
+        
+        
+class EvasionStatus(Status):
+    def __init__(self):
+        super().__init__(constants.StatusNames.EVASION, False)
+    
+    def calculate_evasion_damage(self, subject, level, incoming_damage) -> int:
+        success_probability = min(constants.StatusParameters.BASE_EVASION_PROBABILITY * level, 1.0)
+        roll = random.random()
+        return 0 if roll >= success_probability else incoming_damage
+
 
 class SpeedStatus(Status):
     def __init__(self, status_enum, is_buff):
@@ -109,6 +122,7 @@ class SpeedStatus(Status):
     def trigger_instantly(self, subject, level):
         pass
         
+    
 class StatusRegistry:
     def __init__(self, statuses_path):
         self.statuses = self._initialize_statuses()

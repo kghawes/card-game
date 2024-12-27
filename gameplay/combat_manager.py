@@ -27,11 +27,11 @@ class CombatManager:
 
     def beginning_of_turn(self, combatant, opponent, registries):
         combatant.reset_for_turn()
-        
+
         self.trigger_speed() # TODO
-        
+
         combatant.card_manager.draw_hand()
-        
+
         self.trigger_poison(combatant, registries.statuses)
 
         if self.is_combat_over(combatant, opponent):
@@ -39,9 +39,13 @@ class CombatManager:
 
         combatant.status_manager.decrement_statuses(combatant, registries.statuses)
         combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
+
+        # Ensure modifiers are recalculated after status updates
+        combatant.recalculate_all_modifiers()
+
         combatant.replenish_resources_for_turn()
         return False
-    
+
     def trigger_speed(self): pass #
 
     def trigger_poison(self, subject, status_registry):
@@ -67,12 +71,12 @@ class CombatManager:
         if not combatant.resources[resource.name].try_spend(card.get_cost()):
             text_interface.send_message("Not enough " + resource.value)
             return
-        
+
         for effect_id, effect_level in card.effects.items():
             effect = registries.effects.get_effect(effect_id)
             level = effect_level.get_level()
             effect.resolve(combatant, opponent, level, status_registry=registries.statuses)
-            
+
         combatant.card_manager.discard(card)
 
         text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(combatant.name, card.name, opponent.name, opponent.get_health()))

@@ -10,26 +10,28 @@ class Card:
         self.value = value
         self.subtype = subtype
         self.effects = {}
-        
+        self.net_modifiers = {}  # Tracks accumulated modifiers for effects
+
         for effect, level in effects.items():
             if type(level) is EffectLevel:
                 level = level.base_level
             self.effects[effect] = EffectLevel(level)
-        
+
     def get_cost(self) -> int:
         return self.cost * self.cost_modifier
-    
+
     def change_cost_modifier(self, amount):
         self.cost_modifier += amount
-        
+
     def reset_cost_modifier(self):
         self.cost_modifier = 1
-        
+
     def reset_card(self):
         for level in self.effects.values():
             level.reset_modifier()
         self.reset_cost_modifier()
-        
+        self.net_modifiers.clear()  # Clear all cached modifiers
+
     def matches(self, card_property) -> bool:
         if card_property in CardTypes:
             return self.card_type == card_property.name
@@ -38,18 +40,32 @@ class Card:
         else:
             return False
 
+    def apply_modifier(self, effect, contribution):
+        """Apply the accumulated contribution to the net modifier cache."""
+        self.net_modifiers[effect] = self.net_modifiers.get(effect, 0) + contribution
+        self.recalculate_effect(effect)
+
+    def recalculate_effect(self, effect):
+        """Recalculate the effect level based on accumulated modifiers."""
+        if effect in self.effects:
+            modifier = 1 + self.net_modifiers.get(effect, 0)
+            self.effects[effect].set_modifier(modifier)
+
 
 class EffectLevel():
     def __init__(self, base_level):
         self.base_level = base_level
         self.modifier = 1
-        
+
     def get_level(self):
-        return self.base_level * self.modifier
-    
+        return max(self.base_level * self.modifier, MIN_EFFECT)
+
+    def set_modifier(self, modifier):
+        self.modifier = modifier
+
     def change_modifier(self, amount):
-        self.modifier = max(self.modifier + amount, MIN_EFFECT)
-    
+        self.modifier = self.modifier + amount
+
     def reset_modifier(self):
         self.modifier = 1
 
@@ -59,7 +75,7 @@ class CardPrototype(Card, Prototype):
         super().__init__(name, card_type, cost, value, effects)
         self.enchantments = enchantments
         self.enchanted_name = enchanted_name
-        
+
     required_fields = ["name", "card_type", "cost", "value", "effects"]
 
     def clone(self):
@@ -82,7 +98,7 @@ class CardCache:
         for card_id, prototype in raw_prototypes.items():
             if card_id in self.card_prototypes:
                 raise ValueError(f"Duplicate card ID '{card_id}' found in file '{filename}'.")
-            
+
             # Add the base card prototype
             self.card_prototypes[card_id] = prototype
 
@@ -97,7 +113,7 @@ class CardCache:
 
             if enchanted_card.card_id in self.card_prototypes:
                 raise ValueError(f"Duplicate card ID '{enchanted_card.card_id}' generated for '{base_card_id}'.")
-            
+
             self.card_prototypes[enchanted_card.card_id] = enchanted_card
 
     def create_card(self, card_id: str) -> Card:
