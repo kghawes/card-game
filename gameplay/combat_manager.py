@@ -1,4 +1,4 @@
-import utils.constants as constants
+import utils.constants as c
 
 class CombatManager:
 
@@ -22,7 +22,9 @@ class CombatManager:
         turn_ended = False
         while not turn_ended and not self.is_combat_over(player, enemy):
             text_interface.display_turn_info(player, enemy, registries.effects)
-            turn_ended = self.do_player_action(player, enemy, text_interface, registries)
+            turn_ended = self.do_player_action(
+                player, enemy, text_interface, registries
+                )
         player.card_manager.discard_hand()
 
     def beginning_of_turn(self, combatant, opponent, registries):
@@ -37,8 +39,12 @@ class CombatManager:
         if self.is_combat_over(combatant, opponent):
             return True
 
-        combatant.status_manager.decrement_statuses(combatant, registries.statuses)
-        combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
+        combatant.status_manager.decrement_statuses(
+            combatant, registries.statuses
+            )
+        combatant.status_manager.trigger_statuses_on_turn(
+            combatant, registries.statuses
+            )
 
         # Ensure modifiers are recalculated after status updates
         combatant.recalculate_all_modifiers(registries.statuses)
@@ -49,13 +55,19 @@ class CombatManager:
     def trigger_speed(self): pass #
 
     def trigger_poison(self, subject, status_registry):
-        poison_id = constants.StatusNames.POISON.name
-        poison_status, poison_level = subject.status_manager.get_status(poison_id, subject, status_registry)
+        poison_id = c.StatusNames.POISON.name
+        poison_status, poison_level = subject.status_manager.get_status(
+            poison_id, subject, status_registry
+            )
         if poison_status and poison_level:
-            poison_status.trigger_instantly(subject, poison_level, status_registry)
+            poison_status.trigger_instantly(
+                subject, poison_level, status_registry
+                )
 
     def do_player_action(self, player, enemy, text_interface, registries):
-        selection = text_interface.turn_options_prompt(player, enemy, registries)
+        selection = text_interface.turn_options_prompt(
+            player, enemy, registries
+            )
         if selection < 0:  # Pass turn
             return True
         if selection >= len(player.card_manager.hand):
@@ -65,9 +77,9 @@ class CombatManager:
         return self.is_combat_over(player, enemy)
 
     def play_card(self, combatant, opponent, card, text_interface, registries):
-        resource = constants.Resources.STAMINA
-        if card.card_type == constants.CardTypes.SPELL.name:
-            resource = constants.Resources.MAGICKA
+        resource = c.Resources.STAMINA
+        if card.card_type == c.CardTypes.SPELL.name:
+            resource = c.Resources.MAGICKA
         if not combatant.resources[resource.name].try_spend(card.get_cost()):
             text_interface.send_message("Not enough " + resource.value)
             return
@@ -75,11 +87,15 @@ class CombatManager:
         for effect_id, effect_level in card.effects.items():
             effect = registries.effects.get_effect(effect_id)
             level = effect_level.get_level()
-            effect.resolve(combatant, opponent, level, status_registry=registries.statuses)
+            effect.resolve(
+                combatant, opponent, level, status_registry=registries.statuses
+                )
 
         combatant.card_manager.discard(card)
 
-        text_interface.send_message(constants.CARD_PLAYED_MESSAGE.format(combatant.name, card.name, opponent.name, opponent.get_health()))
+        text_interface.send_message(c.CARD_PLAYED_MESSAGE.format(
+            combatant.name, card.name, opponent.name, opponent.get_health())
+            )
 
     def do_enemy_turn(self, player, enemy, text_interface, registries):
         self.beginning_of_turn(enemy, player, registries)
@@ -89,9 +105,11 @@ class CombatManager:
             for card in enemy.card_manager.hand:
                 if card.cost <= enemy.get_stamina(): ###
                     playable_card_exists = True
-                    self.play_card(enemy, player, card, text_interface, registries)
+                    self.play_card(
+                        enemy, player, card, text_interface, registries
+                        )
                     if self.is_combat_over(player, enemy):
                         return
                     break
-        text_interface.send_message(constants.ENEMY_PASSES_MESSAGE.format(enemy.name))
+        text_interface.send_message(c.ENEMY_PASSES_MESSAGE.format(enemy.name))
         enemy.card_manager.discard_hand()

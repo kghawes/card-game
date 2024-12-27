@@ -11,10 +11,14 @@ class Game:
     def __init__(self):
         self.text_interface = TextInterface()
         self.combat_manager = CombatManager()
-        self.registries = Registries(constants.STATUSES_PATH, constants.ENCHANTMENTS_PATH)
+        self.registries = Registries(
+            constants.STATUSES_PATH, constants.ENCHANTMENTS_PATH
+            )
         self.card_cache = CardCache(constants.CARD_PATHS, self.registries)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH)
-        self.registries.register_quests(constants.QUESTS_PATH, self.enemy_cache, self.card_cache)
+        self.registries.register_quests(
+            constants.QUESTS_PATH, self.enemy_cache, self.card_cache
+            )
         self.player = Player(self.card_cache, self.registries.statuses)
         self.town = Town()
         
@@ -29,7 +33,9 @@ class Game:
             self.text_interface.send_message(quest.description)
     
             for encounter in quest.encounters:
-                self.text_interface.send_message(encounter.enemy.name + " appeared! Entering combat!")
+                self.text_interface.send_message(
+                    encounter.enemy.name + " appeared! Entering combat!"
+                    )
                 self.combat_manager.do_combat(
                     self.player, encounter.enemy,
                     self.text_interface,

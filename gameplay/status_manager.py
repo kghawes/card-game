@@ -26,7 +26,10 @@ class StatusManager:
     def get_status_level(self, status_id) -> int:
         return self.statuses.get(status_id, 0)
 
-    def change_status(self, status_id, amount, subject, status_registry, remove_all_levels=False):
+    def change_status(
+            self, status_id, amount, subject, status_registry, 
+            remove_all_levels=False
+            ):
         current_level = self.get_status_level(status_id)
         new_level = max(current_level + amount, 0)
         

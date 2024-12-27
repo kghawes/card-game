@@ -1,4 +1,4 @@
-from utils.constants import Resources, DamageTypes, EffectNames, StatusNames, TargetTypes
+import utils.constants as c
 
 class Effect:
     def __init__(self, effect_id, name, target_type_enum=None):
@@ -10,7 +10,10 @@ class Effect:
         return
     
     def get_target_combatant(self, source, opponent):
-        return opponent if self.target_type_enum == TargetTypes.TARGET else source
+        if self.target_type_enum == c.TargetTypes.TARGET:
+            return opponent 
+        else: 
+            return source
     
     def format_string(self, separator, *strings) -> str:
         return separator.join(strings)
@@ -27,33 +30,41 @@ class Effect:
 
 class NoEffect(Effect):
     def __init__(self):
-        super().__init__(EffectNames.NO_EFFECT.name, EffectNames.NO_EFFECT.value, None)
+        effect_id = c.EffectNames.NO_EFFECT.name
+        effect_name = c.EffectNames.NO_EFFECT.value
+        super().__init__(effect_id, effect_name, None)
 
 
 class ChangeStatusEffect(Effect):
     def __init__(self, effect_name_enum, target_type_enum, status_enum):
         self.target_type_enum = target_type_enum
         self.status_enum = status_enum
-        self.effect_id = self.format_id(effect_name_enum.name, status_enum.name)
-        self.name = self.format_name(effect_name_enum.value + status_enum.value)
+        base_id = effect_name_enum.name
+        base_name = effect_name_enum.value
+        self.effect_id = self.format_id(base_id, status_enum.name)
+        self.name = self.format_name(base_name + status_enum.value)
         super().__init__(self.effect_id, self.name, target_type_enum)
     
     def resolve(self, source, opponent, level, status_registry):
         subject = self.get_target_combatant(source, opponent)
         status_id = self.status_enum.name
         
-        if EffectNames.REMOVE.name in self.effect_id:
+        if c.EffectNames.REMOVE.name in self.effect_id:
             level *= -1
         
-        subject.status_manager.change_status(status_id, level, subject, status_registry)           
+        subject.status_manager.change_status(
+            status_id, level, subject, status_registry
+            )           
 
 
 class DamageEffect(Effect):
     def __init__(self, target_type_enum, damage_type_enum):
         self.target_type_enum = target_type_enum
         self.damage_type_enum = damage_type_enum
-        effect_id = self.format_id(damage_type_enum.name, EffectNames.DAMAGE.name)
-        name = self.format_name(damage_type_enum.value, EffectNames.DAMAGE.value)
+        base_id = damage_type_enum.name
+        base_name = damage_type_enum.value
+        effect_id = self.format_id(base_id, c.EffectNames.DAMAGE.name)
+        name = self.format_name(base_name, c.EffectNames.DAMAGE.value)
         super().__init__(effect_id, name, target_type_enum)
         
     def resolve(self, source, opponent, level, status_registry):
@@ -70,7 +81,7 @@ class ChangeResourceEffect(Effect):
         super().__init__(effect_id, name, target_type_enum)
     
     def resolve(self, source, opponent, level, status_registry):
-        if EffectNames.DRAIN.name in self.effect_id:
+        if c.EffectNames.DRAIN.name in self.effect_id:
             level *= -1
         subject = self.get_target_combatant(source, opponent)
         subject.change_resource(self.resource_enum.name, level)
@@ -78,7 +89,9 @@ class ChangeResourceEffect(Effect):
 
 class PickpocketEffect(Effect):
     def __init__(self):
-        super().__init__(EffectNames.PICKPOCKET.name, EffectNames.PICKPOCKET.value)
+        effect_id = c.EffectNames.PICKPOCKET.name
+        effect_name = c.EffectNames.PICKPOCKET.value
+        super().__init__(effect_id, effect_name)
     
     def resolve(self, source, opponent, level, status_registry):
         # target.card_manager.show_top_cards_in_deck(level)
@@ -110,29 +123,40 @@ class EffectRegistry:
     def _register_effects(self, status_registry):
         effects = {}
         
-        effects[EffectNames.NO_EFFECT.name] = NoEffect()
-        effects[EffectNames.PICKPOCKET.name] = PickpocketEffect()
+        effects[c.EffectNames.NO_EFFECT.name] = NoEffect()
+        effects[c.EffectNames.PICKPOCKET.name] = PickpocketEffect()
         
-        for target_type in TargetTypes:
+        for target_type in c.TargetTypes:
             for status_id in status_registry.list_statuses():
-                apply_status_effect = ChangeStatusEffect(EffectNames.APPLY, target_type, StatusNames[status_id])
-                remove_status_effect = ChangeStatusEffect(EffectNames.REMOVE, target_type, StatusNames[status_id])
+                apply_status_effect = ChangeStatusEffect(
+                    c.EffectNames.APPLY, target_type, c.StatusNames[status_id]
+                    )
+                remove_status_effect = ChangeStatusEffect(
+                    c.EffectNames.REMOVE, target_type, c.StatusNames[status_id]
+                    )
                 effects[apply_status_effect.effect_id] = apply_status_effect
                 effects[remove_status_effect.effect_id] = remove_status_effect
             
-            for damage_type in DamageTypes:
+            for damage_type in c.DamageTypes:
                 damage_effect = DamageEffect(target_type, damage_type)
                 effects[damage_effect.effect_id] = damage_effect
             
-            for resource in Resources:
-                if resource == Resources.GOLD:
+            for resource in c.Resources:
+                if resource == c.Resources.GOLD:
                     continue
-                if resource == Resources.HEALTH:
-                    restore_health_effect = ChangeResourceEffect(EffectNames.RESTORE, target_type, resource)
-                    effects[restore_health_effect.effect_id] = restore_health_effect
+                if resource == c.Resources.HEALTH:
+                    restore_health_effect = ChangeResourceEffect(
+                        c.EffectNames.RESTORE, target_type, resource
+                        )
+                    health_id = restore_health_effect.effect_id
+                    effects[health_id] = restore_health_effect
                 else:
-                    drain_effect = ChangeResourceEffect(EffectNames.DRAIN, TargetTypes.SELF, resource)
-                    restore_effect = ChangeResourceEffect(EffectNames.RESTORE, TargetTypes.SELF, resource)
+                    drain_effect = ChangeResourceEffect(
+                        c.EffectNames.DRAIN, c.TargetTypes.SELF, resource
+                        )
+                    restore_effect = ChangeResourceEffect(
+                        c.EffectNames.RESTORE, c.TargetTypes.SELF, resource
+                        )
                     effects[drain_effect.effect_id] = drain_effect
                     effects[restore_effect.effect_id] = restore_effect
 

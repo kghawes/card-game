@@ -3,8 +3,14 @@ from core.combatants import Combatant
 from gameplay.treasure import Treasure
 
 class Enemy(Combatant):
-    def __init__(self, name, max_health, max_stamina, max_magicka, deck, card_cache, status_registry, loot):
-        super().__init__(name, max_health, max_stamina, max_magicka, deck, card_cache, status_registry)
+    def __init__(
+            self, name, max_health, max_stamina, max_magicka, deck, card_cache, 
+            status_registry, loot
+            ):
+        super().__init__(
+            name, max_health, max_stamina, max_magicka, deck, card_cache, 
+            status_registry
+            )
         self.loot = Treasure(loot)
 
 
@@ -38,8 +44,17 @@ class EnemyCache:
         enemy_data = load_json(filename)
         prototypes = {}
         for enemy_id, data in enemy_data.items():
-            if not all(key in data for key in ["name", "max_health", "max_stamina", "max_magicka", "deck", "loot"]):
-                raise ValueError(f"Enemy '{enemy_id}' is missing required fields.")
+            if not all(key in data for key in [
+                    "name",
+                    "max_health",
+                    "max_stamina",
+                    "max_magicka",
+                    "deck",
+                    "loot"
+                    ]):
+                raise ValueError(
+                    f"Enemy '{enemy_id}' is missing required fields."
+                    )
             prototypes[enemy_id] = EnemyPrototype(
                 name=data["name"],
                 max_health=data["max_health"],
@@ -53,7 +68,9 @@ class EnemyCache:
     def create_enemy(self, enemy_id, card_cache, status_registry) -> Enemy:
         if enemy_id not in self.enemy_prototypes:
             raise KeyError(f"Enemy ID '{enemy_id}' not found.")
-        return self.enemy_prototypes[enemy_id].clone(card_cache, status_registry)
+        prototype = self.enemy_prototypes[enemy_id]
+        enemy = prototype.clone(card_cache, status_registry)
+        return enemy
 
     def list_enemy_prototypes(self) -> list:
         return list(self.enemy_prototypes.keys())
