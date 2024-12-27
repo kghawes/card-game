@@ -41,7 +41,7 @@ class CombatManager:
         combatant.status_manager.trigger_statuses_on_turn(combatant, registries.statuses)
 
         # Ensure modifiers are recalculated after status updates
-        combatant.recalculate_all_modifiers()
+        combatant.recalculate_all_modifiers(registries.statuses)
 
         combatant.replenish_resources_for_turn()
         return False

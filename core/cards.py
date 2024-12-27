@@ -40,34 +40,20 @@ class Card:
         else:
             return False
 
-    def apply_modifier(self, effect, contribution):
-        """Apply the accumulated contribution to the net modifier cache."""
-        self.net_modifiers[effect] = self.net_modifiers.get(effect, 0) + contribution
-        self.recalculate_effect(effect)
-
-    def recalculate_effect(self, effect):
-        """Recalculate the effect level based on accumulated modifiers."""
-        if effect in self.effects:
-            modifier = 1 + self.net_modifiers.get(effect, 0)
-            self.effects[effect].set_modifier(modifier)
-
 
 class EffectLevel():
     def __init__(self, base_level):
         self.base_level = base_level
-        self.modifier = 1
+        self.modifier = 0
 
     def get_level(self):
-        return max(self.base_level * self.modifier, MIN_EFFECT)
-
-    def set_modifier(self, modifier):
-        self.modifier = modifier
+        return max(self.base_level * (1 + self.modifier), MIN_EFFECT)
 
     def change_modifier(self, amount):
-        self.modifier = self.modifier + amount
+        self.modifier = amount
 
     def reset_modifier(self):
-        self.modifier = 1
+        self.modifier = 0
 
 
 class CardPrototype(Card, Prototype):

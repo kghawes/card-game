@@ -1,9 +1,10 @@
 from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
+from core.statuses import ModifyEffectStatus
 from utils.constants import StatusNames, Resources, MIN_RESOURCE, SCALE_FACTOR
 
 class Combatant:
-    def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache):
+    def __init__(self, name, max_health, max_stamina, max_magicka, starting_deck, card_cache, status_registry):
         self.name = name
         self.resources = {
             Resources.HEALTH.name: Resource(Resources.HEALTH, max_health),
@@ -12,27 +13,49 @@ class Combatant:
         }
         self.card_manager = CardManager(starting_deck, card_cache)
         self.status_manager = StatusManager()
-        self.modifier_pool = {}  # Tracks accumulated contributions by type and effect
+        self.modifier_pool = self._initialize_modifier_pool(status_registry)
 
-    def accumulate_modifier_contribution(self, card_type, effect, contribution):
+    def _initialize_modifier_pool(self, status_registry) -> dict:
+        modifier_pool = {} # Tracks accumulated contributions by status
+        for status_id, status in status_registry.statuses.items():
+            if isinstance(status, ModifyEffectStatus):
+                card_type = status.affected_cards_enum
+                effect = status.affected_effect
+                modifier_pool[status_id] = {
+                  "type": card_type,
+                  "effect": effect,
+                  "value": 0
+                }
+              
+        return modifier_pool
+
+    def accumulate_modifier_contribution(self, status, contribution):
         """Accumulate contributions to modifiers in the pool."""
-        key = (card_type, effect)
-        self.modifier_pool[key] = self.modifier_pool.get(key, 0) + contribution
+        self.modifier_pool[status.status_id]["type"] = status.affected_cards_enum
+        self.modifier_pool[status.status_id]["effect"] = status.affected_effect
+        old_value = self.modifier_pool[status.status_id]["value"]
+        self.modifier_pool[status.status_id]["value"] = old_value + contribution
 
-    def clear_modifier_contributions(self, card_type, effect):
+    def clear_modifier_contributions(self, status):
         """Clear contributions for specific modifiers."""
-        key = (card_type, effect)
-        if key in self.modifier_pool:
-            del self.modifier_pool[key]
+        self.modifier_pool[status.status_id]["value"] = 0
+        self.flag_modifier_recalculation(status.affected_cards_enum, status.affected_effect)
 
     def flag_modifier_recalculation(self, card_type, effect):
         """Recalculate modifiers for affected cards."""
-        for card in self.card_manager.hand:
-            if card.matches(card_type):
-                for effect_id, effect_level in card.effects.items():
-                    if effect in effect_id:
-                        net_contribution = self.modifier_pool.get((card_type, effect), 0)
-                        effect_level.change_modifier(net_contribution)
+        for modifier in self.modifier_pool.values():
+            if modifier["type"] == card_type and modifier["effect"] == effect:
+                for card in self.card_manager.hand:
+                    if card.matches(card_type):
+                        for effect_id, effect_level in card.effects.items():
+                            if effect in effect_id:
+                                effect_level.change_modifier(modifier["value"])
+    
+    def recalculate_all_modifiers(self, status_registry):
+        for status_id in status_registry.list_statuses():
+            status = status_registry.get_status(status_id)
+            if isinstance(status, ModifyEffectStatus):
+                self.flag_modifier_recalculation(status.affected_cards_enum, status.affected_effect)
 
     def get_health(self) -> int:
         return self.resources[Resources.HEALTH.name].current_value

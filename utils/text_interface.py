@@ -65,9 +65,6 @@ class TextInterface:
     def parse_effect_input(self, input_str):
         parts = input_str.strip().split()
     
-        if len(parts) < 2 or not parts[-1].isdigit():
-            raise ValueError("Invalid input. Format must be: '<effect_name> <level>'")
-    
         level = int(parts.pop())
         effect_id = "_".join(parts)
     
@@ -75,7 +72,8 @@ class TextInterface:
 
     def debug_setup(self, player, enemy, effect_registry) -> dict:
         debug_commands = {
-            "QUIT": lambda: sys.exit(0)
+            "QUIT": lambda: sys.exit(0),
+            "MODIFIERS": lambda: print(player.modifier_pool)
         }
         
         for effect_id, effect in effect_registry.effects.items():

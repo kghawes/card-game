@@ -26,17 +26,23 @@ class StatusManager:
     def get_status_level(self, status_id) -> int:
         return self.statuses.get(status_id, 0)
 
-    def change_status(self, status_id, level, subject, status_registry, remove_all_levels=False):
+    def change_status(self, status_id, amount, subject, status_registry, remove_all_levels=False):
+        current_level = self.get_status_level(status_id)
+        new_level = max(current_level + amount, 0)
+        
         if remove_all_levels and status_id in self.statuses:
             self._delete(status_id, subject, status_registry)
         else:
-            self.statuses[status_id] = self.statuses.get(status_id, 0) + level
+            self.statuses[status_id] = new_level
         self._kill_zombie(status_id, subject, status_registry)
 
-        if self.has_status(status_id, subject, status_registry):
-            status = status_registry.get_status(status_id)
-            if status.applies_immediately:
-                status.trigger_on_change(subject, level)
+        status = status_registry.get_status(status_id)
+        if status.applies_immediately:
+            status.trigger_on_change(subject, new_level - current_level)
+        
+        if status_id not in self.statuses:
+            subject.clear_modifier_contributions(status)
+        subject.recalculate_all_modifiers(status_registry)
 
     def decrement_statuses(self, subject, status_registry):
         for status_id in list(self.statuses.keys()):
@@ -52,5 +58,5 @@ class StatusManager:
             if not subject.is_alive():
                 return
         # Trigger recalculations after statuses resolve
-        subject.recalculate_all_modifiers()
+        subject.recalculate_all_modifiers(status_registry)
         return

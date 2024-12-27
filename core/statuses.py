@@ -38,18 +38,15 @@ class ModifyEffectStatus(Status):
         """Mark cards in hand for recalculation at the start of each turn."""
         subject.flag_modifier_recalculation(self.affected_cards_enum, self.affected_effect)
 
-    def trigger_on_change(self, subject, level_change, needs_reset=False):
+    def trigger_on_change(self, subject, level_change):
         """Accumulate contributions to the modifier pool when level changes."""
         contribution = self.calculate_contribution(level_change)
-        subject.accumulate_modifier_contribution(
-            self.affected_cards_enum, self.affected_effect, contribution
-        )
+        subject.accumulate_modifier_contribution(self, contribution)
         subject.flag_modifier_recalculation(self.affected_cards_enum, self.affected_effect)
 
     def expire(self, subject):
         """Clear contributions when the status expires."""
-        subject.clear_modifier_contributions(self.affected_cards_enum, self.affected_effect)
-        subject.flag_modifier_recalculation(self.affected_cards_enum, self.affected_effect)
+        subject.clear_modifier_contributions(self)
 
 
 class ModifyCostStatus(Status):

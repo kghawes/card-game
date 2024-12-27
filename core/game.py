@@ -11,12 +11,12 @@ import utils.constants as constants
 class Game:
     def __init__(self):
         self.text_interface = TextInterface()
-        self.registries = Registries(constants.STATUSES_PATH, constants.ENCHANTMENTS_PATH)
         self.combat_manager = CombatManager()
+        self.registries = Registries(constants.STATUSES_PATH, constants.ENCHANTMENTS_PATH)
         self.card_cache = CardCache(constants.CARD_PATHS, self.registries)
         self.enemy_cache = EnemyCache(constants.ENEMIES_PATH)
-        self.quest_registry = QuestRegistry(constants.QUESTS_PATH, self.enemy_cache, self.card_cache)
-        self.player = Player(self.card_cache)
+        self.registries.register_quests(constants.QUESTS_PATH, self.enemy_cache, self.card_cache)
+        self.player = Player(self.card_cache, self.registries.statuses)
         self.town = Town()
         
     def game_loop(self):
@@ -24,7 +24,7 @@ class Game:
         self.text_interface.send_message(constants.SPLASH_MESSAGE)
         self.player.name = "KK" #self.text_interface.name_prompt()
         
-        for quest in self.quest_registry.quests:
+        for quest in self.registries.quests.quests:
             self.player.resources[constants.Resources.HEALTH.name].replenish()
             
             self.text_interface.send_message(quest.description)
