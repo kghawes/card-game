@@ -28,7 +28,7 @@ class EnemyPrototype(Prototype):
         self.max_health = max_health
         self.max_stamina = max_stamina
         self.max_magicka = max_magicka
-        self.deck = deck  # Save raw deck data
+        self.deck = deck # Save raw deck data
         self.loot = loot
 
     def clone(self, card_cache, status_registry) -> Enemy:

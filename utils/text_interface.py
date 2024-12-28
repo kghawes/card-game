@@ -88,8 +88,7 @@ class TextInterface:
     def debug_setup(self, player, enemy, effect_registry) -> dict:
         """Define debug commands usable from the turn options prompt."""
         debug_commands = {
-            "QUIT": lambda: sys.exit(0),
-            "MODIFIERS": lambda: print(player.modifier_pool)
+            "QUIT": lambda: sys.exit(0)
         }
         
         for effect_id, effect in effect_registry.effects.items():

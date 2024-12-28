@@ -56,8 +56,8 @@ class StatusManager:
             status.trigger_on_change(subject, new_level - current_level)
 
         if status_id not in self.statuses:
-            subject.clear_modifier_contributions(status)
-        subject.recalculate_all_modifiers(status_registry)
+            subject.clear_effect_modifier_contributions(status)
+        subject.recalculate_all_effect_modifiers(status_registry)
 
     def decrement_statuses(self, subject, status_registry):
         """Reduce the level of every active status by 1."""
@@ -65,7 +65,7 @@ class StatusManager:
             self.change_status(status_id, -1, subject, status_registry)
 
     def reset_statuses(self):
-        """Remove all active statuses."""
+        """Remove all active statuses without cleaning up."""
         self.statuses.clear()
 
     def trigger_statuses_on_turn(self, subject, status_registry):
@@ -77,5 +77,5 @@ class StatusManager:
             if not subject.is_alive():
                 return
         # Trigger recalculations after statuses resolve
-        subject.recalculate_all_modifiers(status_registry)
+        subject.recalculate_all_effect_modifiers(status_registry)
         return

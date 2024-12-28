@@ -39,13 +39,13 @@ class ModifyEffectStatus(Status):
     """Statuses that change the levels of effects on cards."""
     def __init__(
             self, status_enum, affected_cards_enum, affected_effect,
-            is_effectiveness_buff
+            sign_factor
             ):
         """Initialize a new ModifyEffectStatus."""
         super().__init__(status_enum, True)
         self.affected_cards_enum = affected_cards_enum
         self.affected_effect = affected_effect
-        self.sign_factor = 1 if is_effectiveness_buff else -1
+        self.sign_factor = sign_factor
 
     def calculate_contribution(self, level):
         """Calculate the contribution of this status to the modifier pool."""
@@ -55,28 +55,28 @@ class ModifyEffectStatus(Status):
         """Mark cards in hand for recalculation at the start of each turn."""
         card_type = self.affected_cards_enum
         effect = self.affected_effect
-        subject.recalculate_modifiers(card_type, effect)
+        subject.recalculate_effect_modifiers(card_type, effect)
 
     def trigger_on_change(self, subject, level):
         """Accumulate contributions to the modifier pool when level changes."""
         contribution = self.calculate_contribution(level)
-        subject.accumulate_modifier_contribution(self, contribution)
+        subject.accumulate_effect_modifier_contribution(self, contribution)
         card_type = self.affected_cards_enum
         effect = self.affected_effect
-        subject.recalculate_modifiers(card_type, effect)
+        subject.recalculate_effect_modifiers(card_type, effect)
 
     def expire(self, subject):
         """Clear contributions when the status expires."""
-        subject.clear_modifier_contributions(self)
+        subject.clear_effect_modifier_contributions(self)
 
 
 class ModifyCostStatus(Status):
     """Statuses that change the stamina or magicka cost on cards."""
-    def __init__(self, status_enum, affected_cards_enum, is_cost_increase):
+    def __init__(self, status_enum, affected_cards_enum, sign_factor):
         """Initialize a new ModifyCostStatus."""
         super().__init__(status_enum, True)
         self.affected_cards_enum = affected_cards_enum
-        self.is_cost_increase = is_cost_increase
+        self.sign_factor = sign_factor
 
     def trigger_on_turn(self, subject, level, status_registry):
         """Mark cards for cost recalculations at the start of each turn."""
@@ -84,7 +84,7 @@ class ModifyCostStatus(Status):
 
     def trigger_on_change(self, subject, level, status_registry):
         """Accumulate contributions and mark for recalculations."""
-        contribution = level if self.is_cost_increase else -level
+        contribution = level * self.sign_factor
         card_type = self.affected_cards_enum
         subject.accumulate_cost_contribution(card_type, contribution)
         subject.flag_cost_recalculation(card_type)
@@ -103,15 +103,10 @@ class ModifyMaxResourceStatus(Status):
         self.resource_enum = resource_enum
         self.sign_factor = sign_factor
 
-    def trigger_on_turn(self, subject, level, status_registry):
-        amount = self.sign_factor * level
-        subject.resources[self.resource_enum].change_max_value(amount)
-
     def trigger_on_change(self, subject, level):
-        pass
-    
-    def expire(self, subject):
-        pass
+        resource = subject.resources[self.resource_enum.name]
+        amount = level * self.sign_factor
+        resource.modify_max_value(self.status_id, amount)
 
 
 class DefenseStatus(Status):
@@ -186,30 +181,28 @@ class StatusRegistry:
         res_fire_status = Status(c.StatusNames.RESISTANCE_FIRE, False)
 
         ftfy_agi_status = ModifyMaxResourceStatus(
-            c.StatusNames.FORTIFY_AGILITY, c.Resources.STAMINA,
-            False
+            c.StatusNames.FORTIFY_AGILITY, c.Resources.STAMINA, 1
             )
         dmge_agi_status = ModifyMaxResourceStatus(
-            c.StatusNames.DAMAGE_AGILITY, c.Resources.STAMINA,
-            True
+            c.StatusNames.DAMAGE_AGILITY, c.Resources.STAMINA, -1
             )
 
         ftfy_str_status = ModifyEffectStatus(
             c.StatusNames.FORTIFY_STRENGTH, c.CardTypes.WEAPON,
-            c.EffectNames.DAMAGE.name, True
+            c.EffectNames.DAMAGE.name, 1
             )
         dmge_str_status = ModifyEffectStatus(
             c.StatusNames.DAMAGE_STRENGTH, c.CardTypes.WEAPON,
-            c.EffectNames.DAMAGE.name, False
+            c.EffectNames.DAMAGE.name, -1
             )
 
         ftfy_longblade_status = ModifyCostStatus(
             c.StatusNames.FORTIFY_LONG_BLADE,
-            c.CardSubtypes.LONG_BLADE, False
+            c.CardSubtypes.LONG_BLADE, 1
             )
         ftfy_destruction_status = ModifyCostStatus(
             c.StatusNames.FORTIFY_DESTRUCTION,
-            c.CardSubtypes.DESTRUCTION, False
+            c.CardSubtypes.DESTRUCTION, 1
             )
 
         return {

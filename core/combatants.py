@@ -33,9 +33,11 @@ class Combatant:
 
         self.card_manager = CardManager(starting_deck, card_cache)
         self.status_manager = StatusManager()
-        self.modifier_pool = self._initialize_modifier_pool(status_registry)
+        self.modifier_pool = self._initialize_effect_modifier_pool(
+            status_registry
+            )
 
-    def _initialize_modifier_pool(self, status_registry) -> dict:
+    def _initialize_effect_modifier_pool(self, status_registry) -> dict:
         """Populate the effect modifier pool with statuses and all 0 values."""
         modifier_pool = {} # Tracks accumulated contributions by status
         for status_id, status in status_registry.statuses.items():
@@ -49,7 +51,7 @@ class Combatant:
                 }
         return modifier_pool
 
-    def accumulate_modifier_contribution(self, status, contribution):
+    def accumulate_effect_modifier_contribution(self, status, contribution):
         """Accumulate contributions to effect modifiers in the pool."""
         card_type = status.affected_cards_enum
         self.modifier_pool[status.status_id]["type"] = card_type
@@ -58,15 +60,15 @@ class Combatant:
         new_value = old_value + contribution
         self.modifier_pool[status.status_id]["value"] = new_value
 
-    def clear_modifier_contributions(self, status):
+    def clear_effect_modifier_contributions(self, status):
         """Clear contributions for specific effect modifiers."""
         if isinstance(status, ModifyEffectStatus):
             self.modifier_pool[status.status_id]["value"] = 0
             card_type = status.affected_cards_enum
             effect = status.affected_effect
-            self.recalculate_modifiers(card_type, effect)
+            self.recalculate_effect_modifiers(card_type, effect)
 
-    def reset_modifiers(self, card_type, effect):
+    def reset_effect_modifiers(self, card_type, effect):
         """Set effect modifiers affecting this card type and effect to 0."""
         for card in self.card_manager.hand:
             if card.matches(card_type):
@@ -74,9 +76,9 @@ class Combatant:
                     if effect in effect_id:
                         effect_level.reset_modifier()
 
-    def recalculate_modifiers(self, card_type, effect):
+    def recalculate_effect_modifiers(self, card_type, effect):
         """Recalculate effect modifiers for affected cards."""
-        self.reset_modifiers(card_type, effect)
+        self.reset_effect_modifiers(card_type, effect)
         for modifier in self.modifier_pool.values():
             if modifier["type"] == card_type and modifier["effect"] == effect:
                 for card in self.card_manager.hand:
@@ -85,14 +87,14 @@ class Combatant:
                             if effect in effect_id:
                                 effect_level.change_modifier(modifier["value"])
 
-    def recalculate_all_modifiers(self, status_registry):
+    def recalculate_all_effect_modifiers(self, status_registry):
         """Recalculate effect modifiers for all cards."""
         for status_id in status_registry.list_statuses():
             status = status_registry.get_status(status_id)
             if isinstance(status, ModifyEffectStatus):
                 card_type = status.affected_cards_enum
                 effect = status.affected_effect
-                self.recalculate_modifiers(card_type, effect)
+                self.recalculate_effect_modifiers(card_type, effect)
 
     def get_health(self) -> int:
         """Get current health."""
@@ -189,9 +191,15 @@ class Resource:
         self.current_value = self.current_value - amount
         return True
 
-    def reset_max_value(self):
+    def reset_max_value(self): # ?
         """Clear all modifiers and reset maximum value to its base value."""
         for status_id in self.modifier_contributions:
+            self.modifier_contributions[status_id] = 0
+
+    def clear_contribution(self, status_id):
+        """Remove max value modifier contribution from a specific
+        status."""
+        if status_id in self.modifier_contributions:
             self.modifier_contributions[status_id] = 0
 
     def get_max_value(self) -> int:
