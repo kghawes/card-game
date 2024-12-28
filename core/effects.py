@@ -170,8 +170,6 @@ class EffectRegistry:
                 effects[damage_effect.effect_id] = damage_effect
 
             for resource in c.Resources:
-                if resource == c.Resources.GOLD:
-                    continue
                 if resource == c.Resources.HEALTH:
                     restore_health_effect = ChangeResourceEffect(
                         c.EffectNames.RESTORE, target_type, resource

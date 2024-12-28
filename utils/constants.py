@@ -34,14 +34,13 @@ class CardSubtypes(Enum):
     POTION = "Potion"
 
 class Resources(Enum):
-    """Things that can be 'spent'."""
+    """Combatant stats."""
     HEALTH = "health"
     STAMINA = "stamina"
     MAGICKA = "magicka"
-    GOLD = "gold"
 
 # Minimum values
-MIN_RESOURCE = 1
+MIN_RESOURCE = 0
 MIN_EFFECT = 1
 
 class DamageTypes(Enum):
@@ -53,7 +52,12 @@ class DamageTypes(Enum):
     POISON = "Poison"
     MAGIC = "Magic"
 
-ELEMENTAL_DAMAGE = [DamageTypes.FIRE, DamageTypes.FROST, DamageTypes.SHOCK]
+# Damage groups
+ELEMENTAL_DAMAGE_TYPES = [
+    DamageTypes.FIRE,
+    DamageTypes.FROST,
+    DamageTypes.SHOCK
+    ]
 
 class EffectNames(Enum):
     """Effect ids and display names."""
@@ -126,6 +130,17 @@ class StatusNames(Enum):
     DAMAGE_LUCK = "Damage Luck"
     FORTIFY_LONG_BLADE = "Fortify Long Blade skill"
     FORTIFY_DESTRUCTION = "Fortify Destruction skill"
+
+# Status groups
+HEALTH_STATUSES = []
+STAMINA_STATUSES = [
+    StatusNames.DAMAGE_AGILITY.name,
+    StatusNames.FORTIFY_AGILITY.name
+    ]
+MAGICKA_STATUSES = [
+    StatusNames.DAMAGE_INTELLIGENCE.name,
+    StatusNames.FORTIFY_INTELLIGENCE.name
+    ]
 
 # Status parameters
 BASE_EVASION_PROBABILITY = 0.1

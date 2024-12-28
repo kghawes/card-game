@@ -97,15 +97,20 @@ class ModifyCostStatus(Status):
 
 class ModifyMaxResourceStatus(Status):
     """Statuses that change maximum stamina or magicka."""
-    def __init__(self, status_enum, resource_enum, is_buff):
+    def __init__(self, status_enum, resource_enum, sign_factor):
         """Initialize a new ModifyMaxResourceStatus."""
         super().__init__(status_enum, True)
         self.resource_enum = resource_enum
+        self.sign_factor = sign_factor
 
     def trigger_on_turn(self, subject, level, status_registry):
-        pass
+        amount = self.sign_factor * level
+        subject.resources[self.resource_enum].change_max_value(amount)
 
-    def trigger_instantly(self, subject, level) -> int:
+    def trigger_on_change(self, subject, level):
+        pass
+    
+    def expire(self, subject):
         pass
 
 

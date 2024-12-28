@@ -60,8 +60,8 @@ class CardManager:
 
     def discard_hand(self):
         """Discard the hand after each turn."""
-        for card in self.hand:
-            self.discard(card)
+        while len(self.hand) > 0:
+            self.discard(self.hand[0])
 
     def reset_cards_to_draw(self):
         """Reset the hand size to its base value."""

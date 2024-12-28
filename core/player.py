@@ -24,4 +24,4 @@ class Player(Combatant):
     def try_spend_gold(self, amount) -> bool:
         """Reduce gold by the given amount or return false if there
         isn't enough."""
-        return self.try_spend_resource(c.Resources.GOLD.value, amount)
+        pass
