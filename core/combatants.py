@@ -215,7 +215,7 @@ class Resource:
             old_value = self.modifier_contributions[status_id]
             new_value = old_value + amount
             self.modifier_contributions[status_id] = new_value
-        self.current_value = min(self.current_value, self.get_max_value())
+            self.change_value(amount)
 
     def replenish(self):
         """Reset the current value to the maximum value."""
