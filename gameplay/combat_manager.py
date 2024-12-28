@@ -1,11 +1,18 @@
+"""
+This Module defines the CombatManager class.
+"""
 import utils.constants as c
 
 class CombatManager:
+    """This class controls the flow of combat and coordinates between
+    combatants, statuses, and effects."""
 
     def is_combat_over(self, player, enemy) -> bool:
+        """Check if either combatant is dead."""
         return not (player.is_alive() and enemy.is_alive())
 
     def do_combat(self, player, enemy, text_interface, registries):
+        """Enter the combat loop."""
         player.card_manager.shuffle()
         enemy.card_manager.shuffle()
         while True:
@@ -17,6 +24,8 @@ class CombatManager:
                 return
 
     def do_player_turn(self, player, enemy, text_interface, registries):
+        """Prepare for the player to take their turn then handle any
+        actions they perform."""
         if self.beginning_of_turn(player, enemy, registries):
             return
         turn_ended = False
@@ -27,7 +36,9 @@ class CombatManager:
                 )
         player.card_manager.discard_hand()
 
-    def beginning_of_turn(self, combatant, opponent, registries):
+    def beginning_of_turn(self, combatant, opponent, registries) -> bool:
+        """Handle resetting resources, triggering statuses, and drawing
+        cards. Returns whether combat ended during the beginning phase."""
         combatant.reset_for_turn()
 
         self.trigger_speed() # TODO
@@ -55,9 +66,9 @@ class CombatManager:
     def trigger_speed(self): pass #
 
     def trigger_poison(self, subject, status_registry):
-        poison_id = c.StatusNames.POISON.name
+        """Activate the poison status, if present."""
         poison_status, poison_level = subject.status_manager.get_status(
-            poison_id, subject, status_registry
+            c.StatusNames.POISON.name, subject, status_registry
             )
         if poison_status and poison_level:
             poison_status.trigger_instantly(
@@ -65,6 +76,7 @@ class CombatManager:
                 )
 
     def do_player_action(self, player, enemy, text_interface, registries):
+        """Get the player input and perform the selected action."""
         selection = text_interface.turn_options_prompt(
             player, enemy, registries
             )
@@ -77,6 +89,7 @@ class CombatManager:
         return self.is_combat_over(player, enemy)
 
     def play_card(self, combatant, opponent, card, text_interface, registries):
+        """Activate a card's effects, spend its cost, and discard it."""
         resource = c.Resources.STAMINA
         if card.card_type == c.CardTypes.SPELL.name:
             resource = c.Resources.MAGICKA
@@ -98,6 +111,7 @@ class CombatManager:
             )
 
     def do_enemy_turn(self, player, enemy, text_interface, registries):
+        """Process enemy actions."""
         self.beginning_of_turn(enemy, player, registries)
         playable_card_exists = True
         while playable_card_exists and not self.is_combat_over(player, enemy):

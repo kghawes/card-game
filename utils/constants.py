@@ -1,6 +1,10 @@
+"""
+This module contains constants needed across the codebase.
+"""
 from enum import Enum
 
 class CardTypes(Enum):
+    """All cards are divided into these types."""
     WEAPON = "Weapon"
     ARMOR = "Armor"
     SKILL = "Skill"
@@ -9,6 +13,7 @@ class CardTypes(Enum):
     CONSUMABLE = "Consumable"
 
 class CardSubtypes(Enum):
+    """Certain card types have subtypes."""
     LONG_BLADE = "Long Blade"
     BLUNT_WEAPON = "Blunt Weapon"
     SHORT_BLADE = "Short Blade"
@@ -25,21 +30,22 @@ class CardSubtypes(Enum):
     ILLUSION = "Illusion"
     MYSTICISM = "Mysticism"
     RESTORATION = "Restoration"
-
-class ConsumableCategories(Enum):
     SCROLL = "Scroll"
     POTION = "Potion"
 
 class Resources(Enum):
+    """Things that can be 'spent'."""
     HEALTH = "health"
     STAMINA = "stamina"
     MAGICKA = "magicka"
     GOLD = "gold"
 
+# Minimum values
 MIN_RESOURCE = 1
 MIN_EFFECT = 1
 
 class DamageTypes(Enum):
+    """Damage must come in one of these types."""
     PHYSICAL = "Physical"
     FIRE = "Fire"
     FROST = "Frost"
@@ -50,6 +56,7 @@ class DamageTypes(Enum):
 ELEMENTAL_DAMAGE = [DamageTypes.FIRE, DamageTypes.FROST, DamageTypes.SHOCK]
 
 class EffectNames(Enum):
+    """Effect ids and display names."""
     NO_EFFECT = "No Effect"
     DAMAGE = "Damage"
     RESTORE = "Restore"
@@ -63,12 +70,14 @@ class EffectNames(Enum):
     PICKPOCKET = "Pickpocket"
     DISPEL = "Dispel"
     CONJURE_CARD = "Conjure"
-    
+
 class TargetTypes(Enum):
+    """The target of a card effect."""
     SELF = "on Self"
     TARGET = "on Target"
 
 class StatusNames(Enum):
+    """Status ids and display names."""
     DEFENSE = "Defense"
     REGENERATION = "Regenerate Health"
     POISON = "Poison"
@@ -118,11 +127,11 @@ class StatusNames(Enum):
     FORTIFY_LONG_BLADE = "Fortify Long Blade skill"
     FORTIFY_DESTRUCTION = "Fortify Destruction skill"
 
+# Status parameters
+BASE_EVASION_PROBABILITY = 0.1
 SCALE_FACTOR = 0.2
 
-class StatusParameters(Enum):
-    BASE_EVASION_PROBABILITY = 0.1
-
+# Game parameters
 STARTING_HEALTH = 10
 STARTING_STAMINA = 3
 STARTING_MAGICKA = 3
@@ -131,7 +140,8 @@ HAND_SIZE = 6
 MIN_HAND_SIZE = 2
 MAX_HAND_SIZE = 10
 
-CARD_PATHS = [ 
+# Paths to JSON files
+CARD_PATHS = [
     "data/cards/weapon_cards.json",
     "data/cards/armor_cards.json",
     "data/cards/spell_cards.json",
@@ -145,6 +155,7 @@ ENCHANTMENTS_PATH = "data/enchantments.json"
 EFFECTS_PATH = "data/effects.json"
 STATUSES_PATH = "data/statuses.json"
 
+# Text for UI
 SPLASH_MESSAGE = "Welcome to the game!"
 PROMPT_NAME = "What is your character’s name? "
 ENTER_TOWN_MESSAGE = "Entering Seyda Neen."
