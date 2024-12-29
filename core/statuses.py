@@ -55,19 +55,19 @@ class ModifyEffectStatus(Status):
         """Mark cards in hand for recalculation at the start of each turn."""
         card_type = self.affected_cards_enum
         effect = self.affected_effect
-        subject.recalculate_effect_modifiers(card_type, effect)
+        subject.modifier_manager.recalculate_effect_modifiers(card_type, effect)
 
     def trigger_on_change(self, subject, level):
         """Accumulate contributions to the modifier pool when level changes."""
         contribution = self.calculate_contribution(level)
-        subject.accumulate_effect_modifier_contribution(self, contribution)
+        subject.modifier_manager.accumulate_effect_modifier(self, contribution)
         card_type = self.affected_cards_enum
         effect = self.affected_effect
-        subject.recalculate_effect_modifiers(card_type, effect)
+        subject.modifier_manager.recalculate_effect_modifiers(card_type, effect)
 
     def expire(self, subject):
         """Clear contributions when the status expires."""
-        subject.clear_effect_modifier_contributions(self)
+        subject.modifier_manager.clear_effect_modifiers(self)
 
 
 class ModifyCostStatus(Status):
@@ -157,9 +157,10 @@ class EvasionStatus(Status):
 
 class DrawStatus(Status):
     """Statuses that affect the number of cards drawn per turn."""
-    def __init__(self, status_enum, is_buff):
+    def __init__(self, status_enum, sign_factor):
         """Initialize a new DrawStatus"""
         super().__init__(status_enum, False)
+        self.sign_factor = sign_factor
 
     def trigger_instantly(self, subject, level):
         """Activate the status effect when requested by the caller."""

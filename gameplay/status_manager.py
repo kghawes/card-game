@@ -56,8 +56,8 @@ class StatusManager:
             status.trigger_on_change(subject, new_level - current_level)
 
         if status_id not in self.statuses:
-            subject.clear_effect_modifier_contributions(status)
-        subject.recalculate_all_effect_modifiers(status_registry)
+            subject.clear_effect_modifiers(status)
+        subject.modifier_manager.recalculate_all_effects(status_registry)
 
     def decrement_statuses(self, subject, status_registry):
         """Reduce the level of every active status by 1."""
@@ -77,5 +77,5 @@ class StatusManager:
             if not subject.is_alive():
                 return
         # Trigger recalculations after statuses resolve
-        subject.recalculate_all_effect_modifiers(status_registry)
+        subject.modifier_manager.recalculate_all_effects(status_registry)
         return

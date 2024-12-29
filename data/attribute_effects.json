@@ -1,0 +1,38 @@
+{
+  "ENDURANCE": {
+    "NAME": "Endurance",
+    "STATUS_TYPE": "MODIFY_EFFECT",
+    "AFFECTED_CARDS": "ARMOR",
+    "AFFECTED_EFFECT": "APPLY_DEFENSE_SELF"
+  },
+  "STRENGTH": {
+    "NAME": "Strength",
+    "STATUS_TYPE": "MODIFY_EFFECT",
+    "AFFECTED_CARDS": "WEAPON",
+    "AFFECTED_EFFECT": "PHYSICAL_DAMAGE_TARGET"
+  },
+  "WILLPOWER": {
+    "NAME": "Willpower",
+    "STATUS_TYPE": "MODIFY_EFFECT",
+    "AFFECTED_CARDS": "SPELL",
+    "AFFECTED_EFFECT": "DAMAGE"
+  },
+  "INTELLIGENCE": {
+    "NAME": "Intelligence",
+    "STATUS_TYPE": "MODIFY_MAX_RESOURCE",
+    "RESOURCE": "MAGICKA"
+  },
+  "AGILITY": {
+    "NAME": "Agility",
+    "STATUS_TYPE": "MODIFY_MAX_RESOURCE",
+    "RESOURCE": "STAMINA"
+  },
+  "SPEED": {
+    "NAME": "Speed",
+    "STATUS_TYPE": "MODIFY_DRAW"
+  },
+  "LUCK": {
+    "NAME": "Luck",
+    "STATUS_TYPE": "MODIFY_REWARDS"
+  }
+}
