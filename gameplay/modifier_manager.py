@@ -1,8 +1,16 @@
+"""
+This module defined the ModifierManager class and modifier classes.
+"""
 from core.statuses import ModifyEffectStatus
 
 class ModifierManager:
+    """This class holds the details of currently active status
+    modifications and controls their update and application."""
     def __init__(self, status_registry):
-        self.effect_modifiers = self._initialize_effect_modifiers(status_registry)
+        """Initialize a new ModifierManager."""
+        self.effect_modifiers = self._initialize_effect_modifiers(
+            status_registry
+            )
 
     def _initialize_effect_modifiers(self, status_registry) -> dict:
         """Populate the effect modifier pool with statuses."""
@@ -35,7 +43,7 @@ class ModifierManager:
                 self.reset_card_effect(card, effect)
 
     def recalculate_effect_modifiers(self, card_type, effect, card_manager):
-        """Recalculate effect modifiers for affected cards."""
+        """Recalculate affected effect modifiers for affected cards."""
         self.reset_effect_modifiers(card_type, effect, card_manager)
         for modifier in self.effect_modifiers.values():
             if modifier.matches(card_type, effect):
@@ -44,32 +52,42 @@ class ModifierManager:
                         self.modify_card_effect(card, effect, modifier)
 
     def recalculate_all_effects(self, status_registry, card_manager):
-        """Recalculate effect modifiers for all cards."""
+        """Recalculate all effect modifiers for all cards."""
         for status_id in status_registry.list_statuses():
             status = status_registry.get_status(status_id)
             if isinstance(status, ModifyEffectStatus):
                 card_type = status.affected_cards_enum
                 effect = status.affected_effect
-                self.recalculate_effect_modifiers(card_type, effect, card_manager)
+                self.recalculate_effect_modifiers(
+                    card_type, effect, card_manager
+                    )
 
     def modify_card_effect(self, card, effect, modifier):
+        """Change the effect level of the given effect on this card."""
         for effect_id, effect_level in card.effects.items():
             if effect in effect_id:
                 amount = modifier.contribution
                 effect_level.change_modifier(amount)
 
     def reset_card_effect(self, card, effect):
+        """Reset the effect level of the given effect on this card."""
         for effect_id, effect_level in card.effects.items():
             if effect in effect_id:
                 effect_level.reset_modifier()
 
 class EffectModifier:
+    """This class represents a modifier that applies to all cards of a
+    specified type and modifies the level of the specified effect on
+    those cards."""
     def __init__(self, affected_card_type_enum, affected_effect_id):
+        """Initialize a new EffectModifier."""
         self.card_type_enum = affected_card_type_enum
         self.effect_id = affected_effect_id
         self.contribution = 0
 
     def matches(self, card_type_enum, effect_id) -> bool:
+        """Checks if the given card type and effect are subject to
+        this modifier."""
         matches_type = self.card_type_enum == card_type_enum
         matches_effect = self.effect_id == effect_id
         return matches_type and matches_effect

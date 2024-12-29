@@ -58,7 +58,9 @@ class CombatManager:
             )
 
         # Ensure modifiers are recalculated after status updates
-        combatant.modifier_manager.recalculate_all_effects(registries.statuses, combatant.card_manager)
+        combatant.modifier_manager.recalculate_all_effects(
+            registries.statuses, combatant.card_manager
+            )
 
         combatant.replenish_resources_for_turn()
         return False

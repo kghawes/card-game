@@ -19,11 +19,14 @@ class Enchantment:
         enchanted_card.effects = deepcopy(card_prototype.effects)
 
         for effect_id, level in self.effects_dict.items():
-            enchanted_card.effects[effect_id] = enchanted_card.effects.get(effect_id, 0) + level
+            enchanted_card.effects[effect_id] = enchanted_card.effects.get(
+                effect_id, 0
+                ) + level
 
         enchanted_card.name = enchanted_card.enchanted_name.format(self.name)
         enchanted_card.card_id = enchanted_card.name.replace(" ", "_").upper()
-        enchanted_card.value = int(card_prototype.value * self.value_multiplier)
+        gold_value = card_prototype.value * self.value_multiplier
+        enchanted_card.value = int(gold_value)
 
         return enchanted_card
 
@@ -32,7 +35,9 @@ class EnchantmentRegistry:
     """This class holds enchantment data loaded from JSON."""
     def __init__(self, enchantments_path, effect_registry):
         """Initialize a new EnchantmentRegistry."""
-        self.enchantments = self._register_enchantments(effect_registry, enchantments_path)
+        self.enchantments = self._register_enchantments(
+            effect_registry, enchantments_path
+            )
 
     def _create_enchantment(
             self, enchantment_id, data, effect_registry
@@ -43,7 +48,9 @@ class EnchantmentRegistry:
 
         for effect_id, level in data["EFFECTS"].items():
             if not effect_registry.get_effect(effect_id):
-                raise ValueError(f"Effect '{effect_id}' not found in registry.")
+                raise ValueError(
+                    f"Effect '{effect_id}' not found in registry."
+                    )
             effects[effect_id] = level
 
         value_multiplier = data.get("VALUE_MULTIPLIER", 1.0)
@@ -55,7 +62,9 @@ class EnchantmentRegistry:
         data = load_json(path)
 
         for enchantment_id, enchantment_data in data.items():
-            enchantment = self._create_enchantment(enchantment_id, enchantment_data, effect_registry)
+            enchantment = self._create_enchantment(
+                enchantment_id, enchantment_data, effect_registry
+                )
             enchantments[enchantment_id] = enchantment
 
         return enchantments
