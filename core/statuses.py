@@ -55,7 +55,7 @@ class ModifyEffectStatus(Status):
         """Mark cards in hand for recalculation at the start of each turn."""
         card_type = self.affected_cards_enum
         effect = self.affected_effect
-        subject.modifier_manager.recalculate_effect_modifiers(card_type, effect)
+        subject.modifier_manager.recalculate_effect_modifiers(card_type, effect, subject.card_manager)
 
     def trigger_on_change(self, subject, level):
         """Accumulate contributions to the modifier pool when level changes."""
@@ -63,11 +63,11 @@ class ModifyEffectStatus(Status):
         subject.modifier_manager.accumulate_effect_modifier(self, contribution)
         card_type = self.affected_cards_enum
         effect = self.affected_effect
-        subject.modifier_manager.recalculate_effect_modifiers(card_type, effect)
+        subject.modifier_manager.recalculate_effect_modifiers(card_type, effect, subject.card_manager)
 
     def expire(self, subject):
         """Clear contributions when the status expires."""
-        subject.modifier_manager.clear_effect_modifiers(self)
+        subject.modifier_manager.clear_effect_modifiers(self, subject.card_manager)
 
 
 class ModifyCostStatus(Status):
@@ -82,7 +82,7 @@ class ModifyCostStatus(Status):
         """Mark cards for cost recalculations at the start of each turn."""
         subject.flag_cost_recalculation(self.affected_cards_enum)
 
-    def trigger_on_change(self, subject, level, status_registry):
+    def trigger_on_change(self, subject, level):
         """Accumulate contributions and mark for recalculations."""
         contribution = level * self.sign_factor
         card_type = self.affected_cards_enum
@@ -146,7 +146,7 @@ class EvasionStatus(Status):
         """Initialize a new EvasionStatus."""
         super().__init__(c.StatusNames.EVASION, False)
 
-    def calculate_evasion_damage(self, subject, level, incoming_damage) -> int:
+    def calculate_evasion_damage(self, level, incoming_damage) -> int:
         """Return the damage to be taken after winning or losing the
         dice roll."""
         base_probability = c.BASE_EVASION_PROBABILITY
