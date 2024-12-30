@@ -184,47 +184,52 @@ class StatusRegistry:
 
     def _initialize_statuses(self) -> dict:
         """Create Status objects and file them in a dict."""
+        statuses = {}
+        
+        # Standalone statuses
         defense_status = DefenseStatus()
+        statuses[defense_status.status_id] = defense_status
         poison_status = PoisonStatus()
+        statuses[poison_status.status_id] = poison_status
 
+        # Resistances and weaknesses
         res_fire_status = Status(c.StatusNames.RESISTANCE_FIRE, False)
+        statuses[res_fire_status.status_id] = res_fire_status
 
+        # Fortify and damage attributes
         ftfy_agi_status = ModifyMaxResourceStatus(
             c.StatusNames.FORTIFY_AGILITY, c.Resources.STAMINA, 1
             )
+        statuses[ftfy_agi_status.status_id] = ftfy_agi_status
         dmge_agi_status = ModifyMaxResourceStatus(
             c.StatusNames.DAMAGE_AGILITY, c.Resources.STAMINA, -1
             )
+        statuses[dmge_agi_status.status_id] = dmge_agi_status
 
         ftfy_str_status = ModifyEffectStatus(
             c.StatusNames.FORTIFY_STRENGTH, c.CardTypes.WEAPON,
             c.EffectNames.DAMAGE.name, 1
             )
+        statuses[ftfy_str_status.status_id] = ftfy_str_status
         dmge_str_status = ModifyEffectStatus(
             c.StatusNames.DAMAGE_STRENGTH, c.CardTypes.WEAPON,
             c.EffectNames.DAMAGE.name, -1
             )
+        statuses[dmge_str_status.status_id] = dmge_str_status
 
+        # Fortify card subtypes
         ftfy_longblade_status = ModifyCostStatus(
             c.StatusNames.FORTIFY_LONG_BLADE,
             c.CardSubtypes.LONG_BLADE, 1
             )
+        statuses[ftfy_longblade_status.status_id] = ftfy_longblade_status
         ftfy_destruction_status = ModifyCostStatus(
             c.StatusNames.FORTIFY_DESTRUCTION,
             c.CardSubtypes.DESTRUCTION, 1
             )
+        statuses[ftfy_destruction_status.status_id] = ftfy_destruction_status
 
-        return {
-            defense_status.status_id: defense_status,
-            poison_status.status_id: poison_status,
-            res_fire_status.status_id: res_fire_status,
-            ftfy_agi_status.status_id: ftfy_agi_status,
-            dmge_agi_status.status_id: dmge_agi_status,
-            ftfy_str_status.status_id: ftfy_str_status,
-            dmge_str_status.status_id: dmge_str_status,
-            ftfy_longblade_status.status_id: ftfy_longblade_status,
-            ftfy_destruction_status.status_id: ftfy_destruction_status
-        }
+        return statuses
 
     def get_status(self, status_id) -> Status:
         """Get Status object by status id."""

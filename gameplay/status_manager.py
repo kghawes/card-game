@@ -51,6 +51,7 @@ class StatusManager:
             self.statuses[status_id] = new_level
         self._kill_zombie(status_id, subject, status_registry)
 
+        # Handle consequences of statuses being changed or removed
         status = status_registry.get_status(status_id)
         if status.applies_immediately:
             status.trigger_on_change(subject, new_level - current_level)
