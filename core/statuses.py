@@ -110,9 +110,11 @@ class ModifyMaxResourceStatus(Status):
         self.sign_factor = sign_factor
 
     def trigger_on_change(self, subject, level):
-        resource = subject.resources[self.resource_enum.name]
+        modifier_manager = subject.modifier_manager
         amount = level * self.sign_factor
-        resource.modify_max_value(self.status_id, amount)
+        modifier_manager.modify_max_resource(
+            subject.resources[self.resource_enum], self.status_id, amount
+            )
 
 
 class DefenseStatus(Status):

@@ -1,7 +1,8 @@
+import utils.constants as c
 """
 This module defined the ModifierManager class and modifier classes.
 """
-from core.statuses import ModifyEffectStatus
+from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus
 
 class ModifierManager:
     """This class holds the details of currently active status
@@ -11,6 +12,22 @@ class ModifierManager:
         self.effect_modifiers = self._initialize_effect_modifiers(
             status_registry
             )
+        self.resource_modifiers = self._initialize_resource_modifiers(
+            status_registry
+            )
+
+    def reset_modifier_pool(self, modifier_pool):
+        """Clear all active modifiers for all statuses of a certain
+        type."""
+        for modifier in modifier_pool.values():
+            modifier.reset()
+
+    def reset_all(self):
+        """Clear all active modifiers for all statuses."""
+        self.reset_modifier_pool(self.effect_modifiers)
+        self.reset_modifier_pool(self.resource_modifiers)
+
+    # Effect modifiers
 
     def _initialize_effect_modifiers(self, status_registry) -> dict:
         """Populate the effect modifier pool with statuses."""
@@ -29,7 +46,7 @@ class ModifierManager:
         self.effect_modifiers[status.status_id].contribution = new_value
 
     def clear_effect_modifiers(self, status, card_manager):
-        """Clear contributions for specific effect modifiers."""
+        """Clear contributions for a specific status."""
         if isinstance(status, ModifyEffectStatus):
             self.effect_modifiers[status.status_id].contribution = 0
             card_type = status.affected_cards_enum
@@ -75,15 +92,69 @@ class ModifierManager:
             if effect in effect_id:
                 effect_level.reset_modifier()
 
-class EffectModifier:
+    # Max resource modifiers
+
+    def _initialize_resource_modifiers(self, status_registry) -> dict:
+        """Populate the resource modifier pool with statuses."""
+        resource_modifiers = {} # Tracks accumulated contributions by status
+        for status_id, status in status_registry.statuses.items():
+            if isinstance(status, ModifyMaxResourceStatus):
+                resource_modifiers[status_id] = ResourceModifier(
+                    status.resource_enum
+                    )
+        return resource_modifiers
+    
+    def reset_max_resource(self, resource_enum):
+        """Clear all modifiers for the resource and reset maximum
+        value to its base value."""
+        for modifier in self.resource_modifiers.values():
+            if modifier.matches(resource_enum):
+                 modifier.contribution = 0
+
+    def clear_resource_modifiers(self, status_id):
+        """Remove max value modifier contribution from a specific
+        status."""
+        if status_id in self.resource_modifiers:
+            self.resource_modifiers[status_id] = 0
+
+    def get_max_resource(self, resource_enum, base_max_value) -> int:
+        """Get the (modified) maximum value of the resource."""
+        net_contribution = 0
+        for modifier in self.resource_modifiers.values():
+            if modifier.matches(resource_enum):
+                net_contribution += modifier.contribution
+        return max(base_max_value + net_contribution, c.MIN_RESOURCE)
+
+    def modify_max_resource(self, resource, status_id, amount):
+        """Change the maximum value by the given amount."""
+        if status_id in self.resource_modifiers:
+            old_value = self.resource_modifiers[status_id].contribution
+            new_value = old_value + amount
+            self.resource_modifiers[status_id].contribution = new_value
+            resource.change_value(amount, self)
+
+
+class Modifier:
+    """This is the base class representing a modifier that comes from
+    an active status."""
+    def __init__(self):
+        """Initialize a new Modifier."""
+        self.contribution = 0
+
+    def reset(self):
+        """Reset this modifier's contribution to 0."""
+        self.contribution = 0
+
+
+class EffectModifier(Modifier):
     """This class represents a modifier that applies to all cards of a
     specified type and modifies the level of the specified effect on
     those cards."""
     def __init__(self, affected_card_type_enum, affected_effect_id):
         """Initialize a new EffectModifier."""
+        super().__init__()
         self.card_type_enum = affected_card_type_enum
         self.effect_id = affected_effect_id
-        self.contribution = 0
 
     def matches(self, card_type_enum, effect_id) -> bool:
         """Checks if the given card type and effect are subject to
@@ -91,3 +162,16 @@ class EffectModifier:
         matches_type = self.card_type_enum == card_type_enum
         matches_effect = self.effect_id == effect_id
         return matches_type and matches_effect
+
+
+class ResourceModifier(Modifier):
+    """This class represents a modifier that changes the maximum value
+    of a resource."""
+    def __init__(self, resource_enum):
+        """Initialize a new ResourceModifier."""
+        super().__init__()
+        self.resource_enum = resource_enum
+
+    def matches(self, resource_enum) -> bool:
+        """Checks if the given resource is subject to this modifier."""
+        return self.resource_enum == resource_enum

@@ -18,10 +18,12 @@ class CombatManager:
         while True:
             self.do_player_turn(player, enemy, text_interface, registries)
             if self.is_combat_over(player, enemy):
-                return
+                break
             self.do_enemy_turn(player, enemy, text_interface, registries)
             if self.is_combat_over(player, enemy):
-                return
+                break
+        player.status_manager.reset_statuses()
+        player.modifier_manager.reset_all()
 
     def do_player_turn(self, player, enemy, text_interface, registries):
         """Prepare for the player to take their turn then handle any
@@ -92,10 +94,10 @@ class CombatManager:
 
     def play_card(self, combatant, opponent, card, text_interface, registries):
         """Activate a card's effects, spend its cost, and discard it."""
-        resource = c.Resources.STAMINA
+        resource_enum = c.Resources.STAMINA
         if card.card_type == c.CardTypes.SPELL.name:
             resource = c.Resources.MAGICKA
-        if not combatant.resources[resource.name].try_spend(card.get_cost()):
+        if not combatant.resources[resource_enum].try_spend(card.get_cost()):
             text_interface.send_message("Not enough " + resource.value)
             return
 

@@ -32,7 +32,8 @@ class Game:
         self.player.name = "KK" #self.text_interface.name_prompt()
 
         for quest in self.registries.quests.quests:
-            self.player.resources[constants.Resources.HEALTH.name].replenish()
+            health = self.player.resources[constants.Resources.HEALTH]
+            health.replenish(self.player.modifier_manager)
 
             self.text_interface.send_message(quest.description)
 

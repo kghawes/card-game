@@ -131,17 +131,6 @@ class StatusNames(Enum):
     FORTIFY_LONG_BLADE = "Fortify Long Blade skill"
     FORTIFY_DESTRUCTION = "Fortify Destruction skill"
 
-# Status groups
-HEALTH_STATUSES = []
-STAMINA_STATUSES = [
-    StatusNames.DAMAGE_AGILITY.name,
-    StatusNames.FORTIFY_AGILITY.name
-    ]
-MAGICKA_STATUSES = [
-    StatusNames.DAMAGE_INTELLIGENCE.name,
-    StatusNames.FORTIFY_INTELLIGENCE.name
-    ]
-
 # Status parameters
 BASE_EVASION_PROBABILITY = 0.1
 SCALE_FACTOR = 0.2
