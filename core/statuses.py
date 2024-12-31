@@ -117,6 +117,20 @@ class ModifyMaxResourceStatus(Status):
             )
 
 
+class ModifyDrawStatus(Status):
+    """Statuses that affect the number of cards drawn per turn."""
+    def __init__(self, status_enum, sign_factor):
+        """Initialize a new DrawStatus"""
+        super().__init__(status_enum, True)
+        self.sign_factor = sign_factor
+
+    def trigger_on_change(self, subject, level):
+        """Activate the status effect when requested by the caller."""
+        modifier_manager = subject.modifier_manager
+        amount = level * self.sign_factor
+        modifier_manager.modify_cards_to_draw(self.status_id, amount)
+
+
 class DefenseStatus(Status):
     """This status blocks incoming damage."""
     def __init__(self):
@@ -163,18 +177,6 @@ class EvasionStatus(Status):
         return 0 if roll >= success_probability else incoming_damage
 
 
-class DrawStatus(Status):
-    """Statuses that affect the number of cards drawn per turn."""
-    def __init__(self, status_enum, sign_factor):
-        """Initialize a new DrawStatus"""
-        super().__init__(status_enum, False)
-        self.sign_factor = sign_factor
-
-    def trigger_instantly(self, subject, level):
-        """Activate the status effect when requested by the caller."""
-        pass
-
-
 class StatusRegistry:
     """Holds Status objects in a dictionary to be looked up when 
     needed."""
@@ -216,6 +218,11 @@ class StatusRegistry:
             c.EffectNames.DAMAGE.name, -1
             )
         statuses[dmge_str_status.status_id] = dmge_str_status
+
+        ftfy_spd_status = ModifyDrawStatus(c.StatusNames.FORTIFY_SPEED, 1)
+        statuses[ftfy_spd_status.status_id] = ftfy_spd_status
+        dmge_spd_status = ModifyDrawStatus(c.StatusNames.DAMAGE_SPEED, -1)
+        statuses[dmge_spd_status.status_id] = dmge_spd_status
 
         # Fortify card subtypes
         ftfy_longblade_status = ModifyCostStatus(

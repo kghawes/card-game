@@ -94,7 +94,6 @@ class Combatant:
 
     def reset_for_turn(self):
         """Reset values for the new turn."""
-        self.card_manager.reset_cards_to_draw()
         self.replenish_resources_for_turn()
 
     def change_resource(self, resource_enum, amount):

@@ -2,7 +2,8 @@ import utils.constants as c
 """
 This module defined the ModifierManager class and modifier classes.
 """
-from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus
+from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus, \
+    ModifyDrawStatus
 
 class ModifierManager:
     """This class holds the details of currently active status
@@ -13,6 +14,9 @@ class ModifierManager:
             status_registry
             )
         self.resource_modifiers = self._initialize_resource_modifiers(
+            status_registry
+            )
+        self.draw_modifiers = self._initialize_draw_modifiers(
             status_registry
             )
 
@@ -26,6 +30,7 @@ class ModifierManager:
         """Clear all active modifiers for all statuses."""
         self.reset_modifier_pool(self.effect_modifiers)
         self.reset_modifier_pool(self.resource_modifiers)
+        self.reset_modifier_pool(self.draw_modifiers)
 
     # Effect modifiers
 
@@ -133,6 +138,32 @@ class ModifierManager:
             self.resource_modifiers[status_id].contribution = new_value
             resource.change_value(amount, self)
 
+    # Draw modifiers
+
+    def _initialize_draw_modifiers(self, status_registry):
+        """Populate the resource modifier pool with statuses."""
+        draw_modifiers = {} # Tracks accumulated contributions by status
+        for status_id, status in status_registry.statuses.items():
+            if isinstance(status, ModifyDrawStatus):
+                draw_modifiers[status_id] = DrawModifier()
+        return draw_modifiers
+
+    def modify_cards_to_draw(self, status_id, amount):
+        """Change the number of cards to draw by the given amount."""
+        if status_id in self.draw_modifiers:
+            old_value = self.draw_modifiers[status_id].contribution
+            new_value = old_value + amount
+            self.draw_modifiers[status_id].contribution = new_value
+
+    def calculate_cards_to_draw(self) -> int:
+        """Get the modified number of cards to draw for a turn."""
+        net_contribution = 0
+        for modifier in self.draw_modifiers.values():
+            net_contribution += modifier.contribution
+        return max(c.HAND_SIZE + net_contribution, c.MIN_HAND_SIZE)
+
+
+# Modifier classes
 
 class Modifier:
     """This is the base class representing a modifier that comes from
@@ -175,3 +206,11 @@ class ResourceModifier(Modifier):
     def matches(self, resource_enum) -> bool:
         """Checks if the given resource is subject to this modifier."""
         return self.resource_enum == resource_enum
+
+
+class DrawModifier(Modifier):
+    """This class represents a modifier that changes the number of
+    cards drawn at the beginning of each turn."""
+    def __init__(self):
+        """Initialize a new DrawModifier."""
+        super().__init__()

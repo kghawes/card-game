@@ -11,9 +11,8 @@ class CardManager:
         self.deck = self._create_deck(starting_deck, card_cache)
         self.hand = []
         self.discard_pile = []
-        self.cards_to_draw = c.HAND_SIZE
 
-    def _create_deck(self, deck_list, card_cache):
+    def _create_deck(self, deck_list, card_cache) -> list:
         """From a list of card ids, generate Card objects."""
         deck = []
         for entry in deck_list:
@@ -29,7 +28,8 @@ class CardManager:
 
     def draw(self, cards_to_draw=1) -> bool:
         """Draw the indicated number of cards, shuffling the discard
-        pile back into the deck if necessary."""
+        pile back into the deck if necessary. Return False if the max
+        hand size was met or True if all cards were able to be drawn."""
         while cards_to_draw > 0:
             if len(self.hand) == c.MAX_HAND_SIZE:
                 return False
@@ -47,9 +47,10 @@ class CardManager:
             cards_to_draw -= 1
         return True
 
-    def draw_hand(self) -> bool:
-        """Draw a hand of cards each turn."""
-        return self.draw(self.cards_to_draw)
+    def draw_hand(self, modifier_manager):
+        """Draw the appropriate number of cards at the beginning of a
+        turn."""
+        self.draw(modifier_manager.calculate_cards_to_draw())
 
     def discard(self, card):
         """Move the card from the hand to the discard pile."""
@@ -62,7 +63,3 @@ class CardManager:
         """Discard the hand after each turn."""
         while len(self.hand) > 0:
             self.discard(self.hand[0])
-
-    def reset_cards_to_draw(self):
-        """Reset the hand size to its base value."""
-        self.cards_to_draw = c.HAND_SIZE

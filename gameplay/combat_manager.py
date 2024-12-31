@@ -45,7 +45,7 @@ class CombatManager:
 
         self.trigger_speed() # TODO
 
-        combatant.card_manager.draw_hand()
+        combatant.card_manager.draw_hand(combatant.modifier_manager)
 
         self.trigger_poison(combatant, registries.statuses)
 
