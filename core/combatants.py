@@ -17,13 +17,13 @@ class Combatant:
         """Initialize a new Combatant."""
         self.name = name
 
-        health_enum = r.HEALTH
-        stamina_enum = r.STAMINA
-        magicka_enum = r.MAGICKA
+        health_id = r.HEALTH.name
+        stamina_id = r.STAMINA.name
+        magicka_id = r.MAGICKA.name
         self.resources = {
-            health_enum: Resource(health_enum, max_health),
-            stamina_enum: Resource(stamina_enum, max_stamina),
-            magicka_enum: Resource(magicka_enum, max_magicka)
+            health_id: Resource(health_id, max_health),
+            stamina_id: Resource(stamina_id, max_stamina),
+            magicka_id: Resource(magicka_id, max_magicka)
         }
 
         self.card_manager = CardManager(starting_deck, card_cache)
@@ -32,32 +32,32 @@ class Combatant:
 
     def get_health(self) -> int:
         """Get current health."""
-        return self.resources[r.HEALTH].current_value
+        return self.resources[r.HEALTH.name].current_value
 
     def get_max_health(self) -> int:
         """Get maximum health."""
-        return self.resources[r.HEALTH].get_max_value(self.modifier_manager)
+        return self.resources[r.HEALTH.name].get_max_value(self.modifier_manager)
 
     def get_stamina(self) -> int:
         """Get current stamina."""
-        return self.resources[r.STAMINA].current_value
+        return self.resources[r.STAMINA.name].current_value
 
     def get_max_stamina(self) -> int:
         """Get maximum stamina."""
-        return self.resources[r.STAMINA].get_max_value(self.modifier_manager)
+        return self.resources[r.STAMINA.name].get_max_value(self.modifier_manager)
 
     def get_magicka(self) -> int:
         """Get current magicka."""
-        return self.resources[r.MAGICKA].current_value
+        return self.resources[r.MAGICKA.name].current_value
 
     def get_max_magicka(self) -> int:
         """Get maximum magicka."""
-        return self.resources[r.MAGICKA].get_max_value(self.modifier_manager)
+        return self.resources[r.MAGICKA.name].get_max_value(self.modifier_manager)
 
-    def take_damage(self, amount, damage_type_enum, status_registry):
+    def take_damage(self, amount, damage_type, status_registry):
         """Accounting for statuses that modify incoming damage, change
         health to register damage taken."""
-        amount = self.modify_damage(amount, damage_type_enum.name)
+        amount = self.modify_damage(amount, damage_type)
         defense = s.DEFENSE.name
         if self.status_manager.has_status(defense, self, status_registry):
             defense_status = status_registry.get_status(defense)
@@ -65,7 +65,7 @@ class Combatant:
             amount = defense_status.calculate_net_damage(
                 self, defense_level, amount, status_registry
                 )
-        self.resources[r.HEALTH].change_value(-amount, self.modifier_manager)
+        self.resources[r.HEALTH.name].change_value(-amount, self.modifier_manager)
 
 #move to modifier manager
     def modify_damage(self, damage_amount, damage_type) -> int:
@@ -87,18 +87,18 @@ class Combatant:
 
     def replenish_resources_for_turn(self):
         """Reset current stamina and magicka to their maximum values."""
-        stamina = self.resources[r.STAMINA]
+        stamina = self.resources[r.STAMINA.name]
         stamina.replenish(self.modifier_manager)
-        magicka = self.resources[r.MAGICKA]
+        magicka = self.resources[r.MAGICKA.name]
         magicka.replenish(self.modifier_manager)
 
     def reset_for_turn(self):
         """Reset values for the new turn."""
         self.replenish_resources_for_turn()
 
-    def change_resource(self, resource_enum, amount):
+    def change_resource(self, resource_id, amount):
         """Change the value of a given resource by a given amount."""
-        assert resource_enum != r.HEALTH or amount >= 0
-        self.resources[resource_enum].change_value(
+        assert resource_id != r.HEALTH.name or amount >= 0
+        self.resources[resource_id].change_value(
             amount, self.modifier_manager
             )

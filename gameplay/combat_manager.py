@@ -43,12 +43,9 @@ class CombatManager:
         cards. Returns whether combat ended during the beginning phase."""
         combatant.reset_for_turn()
 
-        self.trigger_speed() # TODO
-
         combatant.card_manager.draw_hand(combatant.modifier_manager)
 
         self.trigger_poison(combatant, registries.statuses)
-
         if self.is_combat_over(combatant, opponent):
             return True
 
@@ -66,8 +63,6 @@ class CombatManager:
 
         combatant.replenish_resources_for_turn()
         return False
-
-    def trigger_speed(self): pass #
 
     def trigger_poison(self, subject, status_registry):
         """Activate the poison status, if present."""
@@ -94,10 +89,10 @@ class CombatManager:
 
     def play_card(self, combatant, opponent, card, text_interface, registries):
         """Activate a card's effects, spend its cost, and discard it."""
-        resource_enum = c.Resources.STAMINA
+        resource_id = c.Resources.STAMINA.name
         if card.card_type == c.CardTypes.SPELL.name:
             resource = c.Resources.MAGICKA
-        if not combatant.resources[resource_enum].try_spend(card.get_cost()):
+        if not combatant.resources[resource_id].try_spend(card.get_cost()):
             text_interface.send_message("Not enough " + resource.value)
             return
 

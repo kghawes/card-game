@@ -68,12 +68,36 @@
   "FORTIFY_STRENGTH": {
     "class": "ModifyEffectStatus",
     "affected_card_type": "WEAPON",
-    "affected_effect": "DAMAGE",
+    "affected_effect": "PHYSICAL_DAMAGE",
     "sign_factor": 1
   },
   "DAMAGE_STRENGTH": {
     "class": "ModifyEffectStatus",
     "affected_card_type": "WEAPON",
+    "affected_effect": "PHYSICAL_DAMAGE",
+    "sign_factor": -1
+  },
+  "FORTIFY_ENDURANCE": {
+    "class": "ModifyEffectStatus",
+    "affected_card_type": "ARMOR",
+    "affected_effect": "DEFENSE",
+    "sign_factor": 1
+  },
+  "DAMAGE_ENDURANCE": {
+    "class": "ModifyEffectStatus",
+    "affected_card_type": "ARMOR",
+    "affected_effect": "DEFENSE",
+    "sign_factor": -1
+  },
+  "FORTIFY_WILLPOWER": {
+    "class": "ModifyEffectStatus",
+    "affected_card_type": "SPELL",
+    "affected_effect": "DAMAGE",
+    "sign_factor": 1
+  },
+  "DAMAGE_WILLPOWER": {
+    "class": "ModifyEffectStatus",
+    "affected_card_type": "SPELL",
     "affected_effect": "DAMAGE",
     "sign_factor": -1
   },

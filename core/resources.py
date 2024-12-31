@@ -5,9 +5,9 @@ from utils.constants import MIN_RESOURCE
 
 class Resource:
     """Represents health, stamina, or magicka."""
-    def __init__(self, resource_enum, max_value):
+    def __init__(self, resource_id, max_value):
         """Initialize a new Resource."""
-        self.resource_enum = resource_enum
+        self.resource_id = resource_id
         self.max_value = max_value
         self.current_value = max_value
 
@@ -33,7 +33,7 @@ class Resource:
 
     def get_max_value(self, modifier_manager) -> int:
         """Get the current maximum value."""
-        return modifier_manager.get_max_resource(self.resource_enum, self.max_value)
+        return modifier_manager.get_max_resource(self.resource_id, self.max_value)
 
     def replenish(self, modifier_manager):
         """Reset the current value to the maximum value."""
