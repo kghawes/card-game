@@ -208,6 +208,15 @@ class StatusRegistry:
             )
         statuses[dmge_agi_status.status_id] = dmge_agi_status
 
+        ftfy_int_status = ModifyMaxResourceStatus(
+            c.StatusNames.FORTIFY_INTELLIGENCE, c.Resources.MAGICKA, 1
+            )
+        statuses[ftfy_int_status.status_id] = ftfy_int_status
+        dmge_int_status = ModifyMaxResourceStatus(
+            c.StatusNames.DAMAGE_INTELLIGENCE, c.Resources.MAGICKA, -1
+            )
+        statuses[dmge_int_status.status_id] = dmge_int_status
+
         ftfy_str_status = ModifyEffectStatus(
             c.StatusNames.FORTIFY_STRENGTH, c.CardTypes.WEAPON,
             c.EffectNames.DAMAGE.name, 1
