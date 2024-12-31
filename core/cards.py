@@ -3,7 +3,7 @@ This module defines the Card class, the helper class EffectLevel, as
 well as the CardPrototype and CardCache.
 """
 from utils.utils import Prototype
-from utils.constants import CardTypes, CardSubtypes, MIN_EFFECT
+from utils.constants import MIN_EFFECT
 
 class Card:
     """Represents a card in game."""
@@ -42,11 +42,7 @@ class Card:
 
     def matches(self, card_property) -> bool:
         """Check if a card has a certain type or subtype."""
-        if card_property in CardTypes:
-            return self.card_type == card_property.name
-        if card_property in CardSubtypes:
-            return self.subtype == card_property.name
-        return False
+        return self.card_type == card_property or self.subtype == card_property
 
 
 class EffectLevel():

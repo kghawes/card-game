@@ -39,7 +39,7 @@ class ModifierManager:
         effect_modifiers = {} # Tracks accumulated contributions by status
         for status_id, status in status_registry.statuses.items():
             if isinstance(status, ModifyEffectStatus):
-                card_type = status.affected_cards_enum
+                card_type = status.affected_card_type
                 effect = status.affected_effect
                 effect_modifiers[status_id] = EffectModifier(card_type, effect)
         return effect_modifiers
@@ -54,7 +54,7 @@ class ModifierManager:
         """Clear contributions for a specific status."""
         if isinstance(status, ModifyEffectStatus):
             self.effect_modifiers[status.status_id].contribution = 0
-            card_type = status.affected_cards_enum
+            card_type = status.affected_card_type
             effect = status.affected_effect
             self.recalculate_effect_modifiers(card_type, effect, card_manager)
 
@@ -78,7 +78,7 @@ class ModifierManager:
         for status_id in status_registry.list_statuses():
             status = status_registry.get_status(status_id)
             if isinstance(status, ModifyEffectStatus):
-                card_type = status.affected_cards_enum
+                card_type = status.affected_card_type
                 effect = status.affected_effect
                 self.recalculate_effect_modifiers(
                     card_type, effect, card_manager
@@ -105,15 +105,15 @@ class ModifierManager:
         for status_id, status in status_registry.statuses.items():
             if isinstance(status, ModifyMaxResourceStatus):
                 resource_modifiers[status_id] = ResourceModifier(
-                    status.resource_enum
+                    status.resource_id
                     )
         return resource_modifiers
     
-    def reset_max_resource(self, resource_enum):
+    def reset_max_resource(self, resource_id):
         """Clear all modifiers for the resource and reset maximum
         value to its base value."""
         for modifier in self.resource_modifiers.values():
-            if modifier.matches(resource_enum):
+            if modifier.matches(resource_id):
                  modifier.contribution = 0
 
     def clear_resource_modifiers(self, status_id):
@@ -122,11 +122,11 @@ class ModifierManager:
         if status_id in self.resource_modifiers:
             self.resource_modifiers[status_id] = 0
 
-    def get_max_resource(self, resource_enum, base_max_value) -> int:
+    def get_max_resource(self, resource_id, base_max_value) -> int:
         """Get the (modified) maximum value of the resource."""
         net_contribution = 0
         for modifier in self.resource_modifiers.values():
-            if modifier.matches(resource_enum):
+            if modifier.matches(resource_id):
                 net_contribution += modifier.contribution
         return max(base_max_value + net_contribution, c.MIN_RESOURCE)
 
@@ -181,16 +181,16 @@ class EffectModifier(Modifier):
     """This class represents a modifier that applies to all cards of a
     specified type and modifies the level of the specified effect on
     those cards."""
-    def __init__(self, affected_card_type_enum, affected_effect_id):
+    def __init__(self, affected_card_type, affected_effect_id):
         """Initialize a new EffectModifier."""
         super().__init__()
-        self.card_type_enum = affected_card_type_enum
+        self.card_type = affected_card_type
         self.effect_id = affected_effect_id
 
-    def matches(self, card_type_enum, effect_id) -> bool:
+    def matches(self, card_type, effect_id) -> bool:
         """Checks if the given card type and effect are subject to
         this modifier."""
-        matches_type = self.card_type_enum == card_type_enum
+        matches_type = self.card_type == card_type
         matches_effect = self.effect_id == effect_id
         return matches_type and matches_effect
 
@@ -198,14 +198,14 @@ class EffectModifier(Modifier):
 class ResourceModifier(Modifier):
     """This class represents a modifier that changes the maximum value
     of a resource."""
-    def __init__(self, resource_enum):
+    def __init__(self, resource_id):
         """Initialize a new ResourceModifier."""
         super().__init__()
-        self.resource_enum = resource_enum
+        self.resource_id = resource_id
 
-    def matches(self, resource_enum) -> bool:
+    def matches(self, resource_id) -> bool:
         """Checks if the given resource is subject to this modifier."""
-        return self.resource_enum == resource_enum
+        return self.resource_id == resource_id
 
 
 class DrawModifier(Modifier):

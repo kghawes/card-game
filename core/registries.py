@@ -10,9 +10,9 @@ from gameplay.quests import QuestRegistry
 class Registries:
     """Wraps StatusRegistry, EffectRegistry, EnchantmentRegistry, and
     QuestRegistry since these are frequently used together."""
-    def __init__(self, enchantments_path):
+    def __init__(self, statuses_path, enchantments_path):
         """Initialize a new Registries."""
-        self.statuses = StatusRegistry()
+        self.statuses = StatusRegistry(statuses_path)
         self.effects = EffectRegistry(self.statuses)
         self.enchantments = EnchantmentRegistry(
             enchantments_path, self.effects

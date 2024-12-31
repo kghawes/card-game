@@ -1,122 +1,98 @@
 {
-  "statuses": {
-    "DEFENSE": {
-      "class": "DefenseStatus",
-      "name": "Defense"
-    },
-    "POISON": {
-      "class": "PoisonStatus",
-      "name": "Poison"
-    },
-    "RESISTANCE_PHYSICAL": {
-      "class": "Status",
-      "name": "Resist Physical Damage",
-      "applies_immediately": false
-    },
-    "RESISTANCE_FIRE": {
-      "class": "Status",
-      "name": "Resist Fire",
-      "applies_immediately": false
-    },
-    "RESISTANCE_FROST": {
-      "class": "Status",
-      "name": "Resist Frost",
-      "applies_immediately": false
-    },
-    "RESISTANCE_SHOCK": {
-      "class": "Status",
-      "name": "Resist Shock",
-      "applies_immediately": false
-    },
-    "RESISTANCE_POISON": {
-      "class": "Status",
-      "name": "Resist Poison",
-      "applies_immediately": false
-    },
-    "WEAKNESS_PHYSICAL": {
-      "class": "Status",
-      "name": "Weakness to Physical Damage",
-      "applies_immediately": false
-    },
-    "WEAKNESS_FIRE": {
-      "class": "Status",
-      "name": "Weakness to Fire",
-      "applies_immediately": false
-    },
-    "WEAKNESS_FROST": {
-      "class": "Status",
-      "name": "Weakness to Frost",
-      "applies_immediately": false
-    },
-    "WEAKNESS_SHOCK": {
-      "class": "Status",
-      "name": "Weakness to Shock",
-      "applies_immediately": false
-    },
-    "WEAKNESS_POISON": {
-      "class": "Status",
-      "name": "Weakness to Poison",
-      "applies_immediately": false
-    },
-    "FORTIFY_AGILITY": {
-      "class": "ModifyMaxResourceStatus",
-      "name": "Fortify Agility",
-      "resource": "STAMINA",
-      "contribution": 1
-    },
-    "DAMAGE_AGILITY": {
-      "class": "ModifyMaxResourceStatus",
-      "name": "Damage Agility",
-      "resource": "STAMINA",
-      "contribution": -1
-    },
-    "FORTIFY_INTELLIGENCE": {
-      "class": "ModifyMaxResourceStatus",
-      "name": "Fortify Intelligence",
-      "resource": "MAGICKA",
-      "contribution": 1
-    },
-    "DAMAGE_INTELLIGENCE": {
-      "class": "ModifyMaxResourceStatus",
-      "name": "Damage Intelligence",
-      "resource": "MAGICKA",
-      "contribution": -1
-    },
-    "FORTIFY_STRENGTH": {
-      "class": "ModifyEffectStatus",
-      "name": "Fortify Strength",
-      "affected_cards_enum": "WEAPON",
-      "affected_effect": "DAMAGE",
-      "contribution": 1
-    },
-    "DAMAGE_STRENGTH": {
-      "class": "ModifyEffectStatus",
-      "name": "Damage Strength",
-      "affected_cards_enum": "WEAPON",
-      "affected_effect": "DAMAGE",
-      "contribution": -1
-    },
-    "FORTIFY_SPEED": {
-      "class": "ModifyDrawStatus",
-      "name": "Fortify Speed",
-      "contribution": 1
-    },
-    "DAMAGE_SPEED": {
-      "class": "ModifyDrawStatus",
-      "name": "Damage Speed",
-      "contribution": -1
-    },
-    "FORTIFY_LONG_BLADE": {
-      "class": "ModifyCostStatus",
-      "name": "Fortify Long Blade",
-      "affected_cards_enum": "LONG_BLADE",
-      "contribution": 1
-    },
-    "FORTIFY_DESTRUCTION": {
-      "class": "ModifyCostStatus",
-      "name": "Fortify Destruction",
-      "affected_cards_enum": "DESTRUCTION",
-      "contribution": 1
-    }
+  "DEFENSE": {
+    "class": "DefenseStatus"
+  },
+  "POISON": {
+    "class": "PoisonStatus"
+  },
+  "RESISTANCE_PHYSICAL": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "RESISTANCE_FIRE": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "RESISTANCE_FROST": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "RESISTANCE_SHOCK": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "RESISTANCE_POISON": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "WEAKNESS_PHYSICAL": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "WEAKNESS_FIRE": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "WEAKNESS_FROST": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "WEAKNESS_SHOCK": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "WEAKNESS_POISON": {
+    "class": "Status",
+    "applies_immediately": false
+  },
+  "FORTIFY_AGILITY": {
+    "class": "ModifyMaxResourceStatus",
+    "resource_id": "STAMINA",
+    "sign_factor": 1
+  },
+  "DAMAGE_AGILITY": {
+    "class": "ModifyMaxResourceStatus",
+    "resource_id": "STAMINA",
+    "sign_factor": -1
+  },
+  "FORTIFY_INTELLIGENCE": {
+    "class": "ModifyMaxResourceStatus",
+    "resource_id": "MAGICKA",
+    "sign_factor": 1
+  },
+  "DAMAGE_INTELLIGENCE": {
+    "class": "ModifyMaxResourceStatus",
+    "resource_id": "MAGICKA",
+    "sign_factor": -1
+  },
+  "FORTIFY_STRENGTH": {
+    "class": "ModifyEffectStatus",
+    "affected_card_type": "WEAPON",
+    "affected_effect": "DAMAGE",
+    "sign_factor": 1
+  },
+  "DAMAGE_STRENGTH": {
+    "class": "ModifyEffectStatus",
+    "affected_card_type": "WEAPON",
+    "affected_effect": "DAMAGE",
+    "sign_factor": -1
+  },
+  "FORTIFY_SPEED": {
+    "class": "ModifyDrawStatus",
+    "sign_factor": 1
+  },
+  "DAMAGE_SPEED": {
+    "class": "ModifyDrawStatus",
+    "sign_factor": -1
+  },
+  "FORTIFY_LONG_BLADE": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "LONG_BLADE",
+    "sign_factor": 1
+  },
+  "FORTIFY_DESTRUCTION": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "DESTRUCTION",
+    "sign_factor": 1
   }
 }
