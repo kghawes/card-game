@@ -6,44 +6,54 @@
     "class": "PoisonStatus"
   },
   "RESISTANCE_PHYSICAL": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "PHYSICAL",
+    "sign_factor": -1
   },
   "RESISTANCE_FIRE": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "FIRE",
+    "sign_factor": -1
   },
   "RESISTANCE_FROST": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "FROST",
+    "sign_factor": -1
   },
   "RESISTANCE_SHOCK": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "SHOCK",
+    "sign_factor": -1
   },
   "RESISTANCE_POISON": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "POISON",
+    "sign_factor": -1
   },
   "WEAKNESS_PHYSICAL": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "PHYSICAL",
+    "sign_factor": 1
   },
   "WEAKNESS_FIRE": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "FIRE",
+    "sign_factor": 1
   },
   "WEAKNESS_FROST": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "FROST",
+    "sign_factor": 1
   },
   "WEAKNESS_SHOCK": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "SHOCK",
+    "sign_factor": 1
   },
   "WEAKNESS_POISON": {
-    "class": "Status",
-    "applies_immediately": false
+    "class": "ModifyDamageStatus",
+    "damage_type": "POISON",
+    "sign_factor": 1
   },
   "FORTIFY_AGILITY": {
     "class": "ModifyMaxResourceStatus",

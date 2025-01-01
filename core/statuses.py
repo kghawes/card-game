@@ -126,10 +126,25 @@ class ModifyDrawStatus(Status):
         self.sign_factor = sign_factor
 
     def trigger_on_change(self, subject, level):
-        """Activate the status effect when requested by the caller."""
+        """Update the modifier pool with the new contribution."""
         modifier_manager = subject.modifier_manager
         amount = level * self.sign_factor
         modifier_manager.modify_cards_to_draw(self.status_id, amount)
+
+
+class ModifyDamageStatus(Status):
+    """Stasuses that affect the amount of damage taken."""
+    def __init__(self, status_id, damage_type, sign_factor):
+        """Initialize a new ModifyDamageStatus."""
+        super().__init__(status_id, True)
+        self.damage_type = damage_type
+        self.sign_factor = sign_factor
+
+    def trigger_on_change(self, subject, level):
+        """Update the modifier pool with the new contribution."""
+        modifier_manager = subject.modifier_manager
+        amount = level * self.sign_factor * c.SCALE_FACTOR
+        modifier_manager.accumulate_damage_modifier(self.status_id, amount)
 
 
 class DefenseStatus(Status):
@@ -194,6 +209,7 @@ class StatusRegistry:
             "ModifyCostStatus": ModifyCostStatus,
             "ModifyMaxResourceStatus": ModifyMaxResourceStatus,
             "ModifyDrawStatus": ModifyDrawStatus,
+            "ModifyDamageStatus": ModifyDamageStatus,
             "DefenseStatus": DefenseStatus,
             "PoisonStatus": PoisonStatus,
             "EvasionStatus": EvasionStatus

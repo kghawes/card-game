@@ -37,7 +37,7 @@ class Card:
     def reset_card(self):
         """Reset all modified values on the card."""
         for level in self.effects.values():
-            level.reset_modifier()
+            level.reset_level()
         self.reset_cost_modifier()
 
     def matches(self, card_property) -> bool:
@@ -56,11 +56,11 @@ class EffectLevel():
         """Get the current level of the effect."""
         return max(self.base_level * (1 + self.modifier), MIN_EFFECT)
 
-    def change_modifier(self, amount):
+    def change_level(self, amount):
         """Change the level of the effect."""
         self.modifier += amount
 
-    def reset_modifier(self):
+    def reset_level(self):
         """Reset the effect to its original level."""
         self.modifier = 0
 

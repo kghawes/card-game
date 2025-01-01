@@ -57,7 +57,7 @@ class Combatant:
     def take_damage(self, amount, damage_type, status_registry):
         """Accounting for statuses that modify incoming damage, change
         health to register damage taken."""
-        amount = self.modify_damage(amount, damage_type)
+        amount = self.modifier_manager.calculate_damage(damage_type, amount)
         defense = s.DEFENSE.name
         if self.status_manager.has_status(defense, self, status_registry):
             defense_status = status_registry.get_status(defense)
@@ -66,20 +66,6 @@ class Combatant:
                 self, defense_level, amount, status_registry
                 )
         self.resources[r.HEALTH.name].change_value(-amount, self.modifier_manager)
-
-#move to modifier manager
-    def modify_damage(self, damage_amount, damage_type) -> int:
-        """Apply resistances and weaknesses to incoming damage."""
-        multiplier = 1
-        for active_status_id, level in self.status_manager.statuses.items():
-            sign_factor = 1
-            if s.RESISTANCE.name in active_status_id:
-                sign_factor = -1
-            elif s.WEAKNESS.name not in active_status_id:
-                continue
-            if damage_type in active_status_id:
-                multiplier += sign_factor * level * SCALE_FACTOR
-        return round(damage_amount * multiplier)
 
     def is_alive(self) -> bool:
         """Check if the Combatant has more than zero health."""

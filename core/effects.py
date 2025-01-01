@@ -84,7 +84,7 @@ class DamageEffect(Effect):
     def resolve(self, source, opponent, level, status_registry):
         """The target of the effect takes damage."""
         subject = self.get_target_combatant(source, opponent)
-        subject.take_damage(level, self.damage_type_enum, status_registry)
+        subject.take_damage(level, self.damage_type_enum.name, status_registry)
 
 
 class ChangeResourceEffect(Effect):

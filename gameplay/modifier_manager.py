@@ -3,7 +3,7 @@ import utils.constants as c
 This module defined the ModifierManager class and modifier classes.
 """
 from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus, \
-    ModifyDrawStatus
+    ModifyDrawStatus, ModifyDamageStatus
 
 class ModifierManager:
     """This class holds the details of currently active status
@@ -17,6 +17,9 @@ class ModifierManager:
             status_registry
             )
         self.draw_modifiers = self._initialize_draw_modifiers(
+            status_registry
+            )
+        self.damage_modifiers = self._initialize_damage_modifiers(
             status_registry
             )
 
@@ -89,13 +92,13 @@ class ModifierManager:
         for effect_id, effect_level in card.effects.items():
             if effect in effect_id:
                 amount = modifier.contribution
-                effect_level.change_modifier(amount)
+                effect_level.change_level(amount)
 
     def reset_card_effect(self, card, effect):
         """Reset the effect level of the given effect on this card."""
         for effect_id, effect_level in card.effects.items():
             if effect in effect_id:
-                effect_level.reset_modifier()
+                effect_level.reset_level()
 
     # Max resource modifiers
 
@@ -140,7 +143,7 @@ class ModifierManager:
 
     # Draw modifiers
 
-    def _initialize_draw_modifiers(self, status_registry):
+    def _initialize_draw_modifiers(self, status_registry) -> dict:
         """Populate the resource modifier pool with statuses."""
         draw_modifiers = {} # Tracks accumulated contributions by status
         for status_id, status in status_registry.statuses.items():
@@ -161,6 +164,29 @@ class ModifierManager:
         for modifier in self.draw_modifiers.values():
             net_contribution += modifier.contribution
         return max(c.HAND_SIZE + net_contribution, c.MIN_HAND_SIZE)
+
+    # Damage modifiers
+
+    def _initialize_damage_modifiers(self, status_registry) -> dict:
+        damage_modifiers = {}
+        for status_id, status in status_registry.statuses.items():
+            if isinstance(status, ModifyDamageStatus):
+                modifier = DamageModifier(status.damage_type)
+                damage_modifiers[status_id] = modifier
+        return damage_modifiers
+
+    def accumulate_damage_modifier(self, status_id, contribution):
+        """Update the contribution amount in the modifier pool."""
+        old_value = self.damage_modifiers[status_id].contribution
+        new_value = old_value + contribution
+        self.damage_modifiers[status_id].contribution = new_value
+
+    def calculate_damage(self, damage_type, amount):
+        net_contribution = 0
+        for modifier in self.damage_modifiers.values():
+            if modifier.matches(damage_type):
+                net_contribution += modifier.contribution
+        return round((1 + net_contribution) * amount)
 
 
 # Modifier classes
@@ -214,3 +240,16 @@ class DrawModifier(Modifier):
     def __init__(self):
         """Initialize a new DrawModifier."""
         super().__init__()
+
+
+class DamageModifier(Modifier):
+    """This class represents a modifier that changes the amount of
+    incoming damage based on its damage type."""
+    def __init__(self, damage_type):
+        """Initialize a new DamageModifier."""
+        super().__init__()
+        self.damage_type = damage_type
+
+    def matches(self, damage_type):
+        """Checks if the given damage type is subject to this modifier."""
+        return damage_type == self.damage_type
