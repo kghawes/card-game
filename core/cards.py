@@ -69,11 +69,11 @@ class CardPrototype(Card, Prototype):
     """This class represents a specific card that may be 'printed' any
     number of times."""
     def __init__(
-            self, name, card_type, cost, value, effects, enchantments = None,
-            enchanted_name = None
+            self, name, card_type, cost, value, effects, subtype=None,
+            enchantments=None, enchanted_name=None
             ):
         """Initialize a new CardPrototype."""
-        super().__init__(name, card_type, cost, value, effects)
+        super().__init__(name, card_type, cost, value, effects, subtype)
         self.enchantments = enchantments
         self.enchanted_name = enchanted_name
 
@@ -107,6 +107,11 @@ class CardCache:
                 raise ValueError(
                     f"Duplicate card '{card_id}' found in file '{filename}'."
                     )
+            for effect, effect_level in prototype.effects.items():
+                if effect_level.base_level < 0:
+                    raise ValueError(
+                        f"Invalid effect level for '{effect}' on '{card_id}'."
+                        )
 
             # Add the base card prototype
             self.card_prototypes[card_id] = prototype

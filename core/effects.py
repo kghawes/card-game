@@ -102,7 +102,7 @@ class ChangeResourceEffect(Effect):
         if self.matches(c.EffectNames.DRAIN.name):
             level *= -1
         subject = self.get_target_combatant(source, opponent)
-        subject.change_resource(self.resource_enum, level)
+        subject.change_resource(self.resource_enum.name, level)
 
 
 class PickpocketEffect(Effect):

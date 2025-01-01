@@ -45,7 +45,9 @@ class CombatManager:
 
         combatant.card_manager.draw_hand(combatant.modifier_manager)
 
-        self.trigger_poison(combatant, registries.statuses)
+        combatant.status_manager.trigger_statuses_on_turn(
+            combatant, False, registries.statuses
+            )
         if self.is_combat_over(combatant, opponent):
             return True
 
@@ -53,8 +55,10 @@ class CombatManager:
             combatant, registries.statuses
             )
         combatant.status_manager.trigger_statuses_on_turn(
-            combatant, registries.statuses
+            combatant, True, registries.statuses
             )
+        if self.is_combat_over(combatant, opponent):
+            return True
 
         # Ensure modifiers are recalculated after status updates
         combatant.modifier_manager.recalculate_all_effects(

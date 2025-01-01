@@ -186,7 +186,8 @@ class ModifierManager:
         for modifier in self.damage_modifiers.values():
             if modifier.matches(damage_type):
                 net_contribution += modifier.contribution
-        return round((1 + net_contribution) * amount)
+        amount = max(round((1 + net_contribution) * amount), 0)
+        return amount
 
 
 # Modifier classes
@@ -253,3 +254,17 @@ class DamageModifier(Modifier):
     def matches(self, damage_type):
         """Checks if the given damage type is subject to this modifier."""
         return damage_type == self.damage_type
+
+
+class CostModifier(Modifier):
+    """This class represents a modifier that changes the resource cost
+    of a specific type of card."""
+    def __init__(self, affected_card_type):
+        """Initialize a new CostModifier."""
+        super().__init__()
+        self.affected_card_type = affected_card_type
+
+    def matches(self, card_type):
+        """Checks if the given card type (or subtype) is subject to
+        this modifier."""
+        return card_type == self.affected_card_type

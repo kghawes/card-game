@@ -5,7 +5,7 @@ from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
 from gameplay.modifier_manager import ModifierManager
 from core.resources import Resource
-from utils.constants import Resources as r, StatusNames as s, SCALE_FACTOR
+from utils.constants import Resources as r, StatusNames as s
 
 class Combatant:
     """Base class that represents an entity that can engage in combat,

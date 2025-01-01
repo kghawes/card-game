@@ -5,6 +5,12 @@
   "POISON": {
     "class": "PoisonStatus"
   },
+  "REGENERATION": {
+    "class": "RegenerationStatus"
+  },
+  "EVASION": {
+    "class": "EvasionStatus"
+  },
   "RESISTANCE_PHYSICAL": {
     "class": "ModifyDamageStatus",
     "damage_type": "PHYSICAL",
@@ -119,14 +125,84 @@
     "class": "ModifyDrawStatus",
     "sign_factor": -1
   },
+  "FEATHER": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "SKILL",
+    "sign_factor": -1
+  },
+  "BURDEN": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "SKILL",
+    "sign_factor": 1
+  },
   "FORTIFY_LONG_BLADE": {
     "class": "ModifyCostStatus",
     "affected_card_type": "LONG_BLADE",
-    "sign_factor": 1
+    "sign_factor": -1
+  },
+  "FORTIFY_BLUNT_WEAPON": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "FORTIFY_BLUNT_WEAPON",
+    "sign_factor": -1
+  },
+  "FORTIFY_SHORT_BLADE": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "SHORT_BLADE",
+    "sign_factor": -1
+  },
+  "FORTIFY_MARKSMAN": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "MARKSMAN",
+    "sign_factor": -1
+  },
+  "FORTIFY_STAFF": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "STAFF",
+    "sign_factor": -1
+  },
+  "FORTIFY_LIGHT_ARMOR": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "LIGHT_ARMOR",
+    "sign_factor": -1
+  },
+  "FORTIFY_MEDIUM_ARMOR": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "MEDIUM_ARMOR",
+    "sign_factor": -1
+  },
+  "FORTIFY_HEAVY_ARMOR": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "HEAVY_ARMOR",
+    "sign_factor": -1
+  },
+  "FORTIFY_ALTERATION": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "ALTERATION",
+    "sign_factor": -1
+  },
+  "FORTIFY_CONJURATION": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "CONJURATION",
+    "sign_factor": -1
   },
   "FORTIFY_DESTRUCTION": {
     "class": "ModifyCostStatus",
     "affected_card_type": "DESTRUCTION",
-    "sign_factor": 1
+    "sign_factor": -1
+  },
+  "FORTIFY_ILLUSION": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "ILLUSION",
+    "sign_factor": -1
+  },
+  "FORTIFY_MYSTICISM": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "MYSTICISM",
+    "sign_factor": -1
+  },
+  "FORTIFY_RESTORATION": {
+    "class": "ModifyCostStatus",
+    "affected_card_type": "RESTORATION",
+    "sign_factor": -1
   }
 }

@@ -73,12 +73,17 @@ class StatusManager:
         """Remove all active statuses without cleaning up."""
         self.statuses.clear()
 
-    def trigger_statuses_on_turn(self, subject, status_registry):
+    def trigger_statuses_on_turn(
+            self, subject, is_after_decrement, status_registry
+            ):
         """Loop over active statuses and invite them to trigger their
-        start-of-turn effects."""
+        after-draw effects."""
         for status_id, level in self.statuses.items():
             status = status_registry.get_status(status_id)
-            status.trigger_on_turn(subject, level, status_registry)
+            if is_after_decrement:
+                status.trigger_after_decrement(subject, level, status_registry)
+            else:
+                status.trigger_before_decrement(subject, level, status_registry)
             if not subject.is_alive():
                 return
         # Trigger recalculations after statuses resolve

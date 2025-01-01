@@ -20,10 +20,14 @@ class Status:
             return max(old_value - amount, min_result)
         return old_value + amount
 
-    def trigger_on_turn(self, subject, level, status_registry=None):
+    def trigger_after_decrement(self, subject, level, status_registry=None):
         """Base method for polymorphism. Activate the status effect at
-        the beginning of the turn."""
+        the beginning of the turn after decrementing all statuses."""
         return
+
+    def trigger_before_decrement(self, subject, level, status_registry=None):
+        """Base method for polymorphism. Activate the status effect at
+        the beginning of the turn before decrementing all statuses."""
 
     def trigger_on_change(self, subject, level):
         """Base method for polymorphism. Activate the status effect
@@ -52,7 +56,7 @@ class ModifyEffectStatus(Status):
         """Calculate the contribution of this status to the modifier pool."""
         return self.sign_factor * c.SCALE_FACTOR * level
 
-    def trigger_on_turn(self, subject, level, status_registry):
+    def trigger_after_decrement(self, subject, level, status_registry):
         """Mark cards in hand for recalculation at the start of each turn."""
         card_type = self.affected_card_type
         effect = self.affected_effect
@@ -85,7 +89,7 @@ class ModifyCostStatus(Status):
         self.affected_card_type = affected_card_type
         self.sign_factor = sign_factor
 
-    def trigger_on_turn(self, subject, level, status_registry):
+    def trigger_after_decrement(self, subject, level, status_registry):
         """Mark cards for cost recalculations at the start of each turn."""
         subject.flag_cost_recalculation(self.affected_card_type)
 
@@ -98,8 +102,7 @@ class ModifyCostStatus(Status):
 
     def expire(self, subject):
         """Clear contributions when the status expires."""
-        subject.clear_cost_contributions(self.affected_card_type)
-        subject.flag_cost_recalculation(self.affected_card_type)
+        pass
 
 
 class ModifyMaxResourceStatus(Status):
@@ -172,10 +175,20 @@ class PoisonStatus(Status):
         """Initialize a new PoisonStatus."""
         super().__init__(status_id, False)
 
-    def trigger_instantly(self, subject, level, status_registry):
+    def trigger_before_decrement(self, subject, level, status_registry):
         """Activate the status effect when requested by caller."""
         damage_type = c.DamageTypes.POISON.name
         subject.take_damage(level, damage_type, status_registry)
+
+
+class RegenerationStatus(Status):
+    """This status restores health at the start of each turn."""
+    def __init__(self, status_id):
+        """Initialize a new RegenerationStatus."""
+        super().__init__(status_id, False)
+
+    def trigger_before_decrement(self, subject, level, status_registry):
+        subject.change_resource(c.Resources.HEALTH.name, level)
 
 
 class EvasionStatus(Status):
@@ -212,6 +225,7 @@ class StatusRegistry:
             "ModifyDamageStatus": ModifyDamageStatus,
             "DefenseStatus": DefenseStatus,
             "PoisonStatus": PoisonStatus,
+            "RegenerationStatus": RegenerationStatus,
             "EvasionStatus": EvasionStatus
             }
         
