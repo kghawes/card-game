@@ -206,6 +206,19 @@ class EvasionStatus(Status):
         return 0 if roll >= success_probability else incoming_damage
 
 
+class RestrictCardTypeStatus(Status):
+    """This status prevents the subject from playing certain tyoes of
+    cards."""
+    def __init__(self, status_id, restricted_types):
+        """Initialize a new RestrictCardStatus."""
+        super().__init__(status_id, True)
+        self.restricted_types = restricted_types
+
+    def is_card_playable(self, card_type) -> bool:
+        """Check if the given card type is allowed to be played."""
+        return card_type not in self.restricted_types
+
+
 class StatusRegistry:
     """Holds Status objects in a dictionary to be looked up when 
     needed."""
@@ -226,7 +239,8 @@ class StatusRegistry:
             "DefenseStatus": DefenseStatus,
             "PoisonStatus": PoisonStatus,
             "RegenerationStatus": RegenerationStatus,
-            "EvasionStatus": EvasionStatus
+            "EvasionStatus": EvasionStatus,
+            "RestrictCardTypeStatus": RestrictCardTypeStatus
             }
         
         statuses = {}

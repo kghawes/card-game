@@ -9,64 +9,66 @@
   "SHARD": {
     "NAME": "Shard",
     "EFFECTS": { 
-      "FIRE_DAMAGE_TARGET": 1 
+      "FROST_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2
   },
   "SPARK": {
     "NAME": "Spark",
     "EFFECTS": { 
-      "FIRE_DAMAGE_TARGET": 1 
+      "SHOCK_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2
   },
   "VIPER": {
     "NAME": "Viper",
     "EFFECTS": { 
-      "FIRE_DAMAGE_TARGET": 1 
+      "POISON_DAMAGE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 2
   },
   "CHASTENING": {
     "NAME": "Chastening",
     "EFFECTS": {
-      "FIRE_DAMAGE_TARGET": 1 
+      "REMOVE_EVASION_TARGET": 3
       },
     "VALUE_MULTIPLIER": 1.5
   },
   "JUDGMENT": {
     "NAME": "Judgment",
     "EFFECTS": { 
-      "FIRE_DAMAGE_TARGET": 1 
+      "APPLY_DAMAGE_ENDURANCE_TARGET": 3
       },
     "VALUE_MULTIPLIER": 2
   },
   "RECKONING": {
     "NAME": "Reckoning",
     "EFFECTS": { 
-      "FIRE_DAMAGE_TARGET": 1 
+      "APPLY_DAMAGE_SPEED_TARGET": 2
       },
     "VALUE_MULTIPLIER": 3
   },
   "SHAMING": {
     "NAME": "Shaming",
     "EFFECTS": { 
-      "FIRE_DAMAGE_TARGET": 1 
+      "APPLY_DAMAGE_INTELLIGENCE_TARGET": 3
       },
     "VALUE_MULTIPLIER": 2.5
   },
   "WAR": {
     "NAME": "War",
     "EFFECTS": { 
-    "FIRE_DAMAGE_TARGET": 1 
+    "FIRE_DAMAGE_TARGET": 1,
+    "FROST_DAMAGE_TARGET": 1,
+    "SHOCK_DAMAGE_TARGET": 1
     },
-    "VALUE_MULTIPLIER": 4
+    "VALUE_MULTIPLIER": 3
   },
   "PEACE": {
     "NAME": "Peace",
     "EFFECTS": { 
-      "FIRE_DAMAGE_TARGET": 1 
+      "APPLY_PARALYSIS_TARGET": 1 
       },
-    "VALUE_MULTIPLIER": 5
+    "VALUE_MULTIPLIER": 4
   }
 }

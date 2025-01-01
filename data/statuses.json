@@ -11,6 +11,10 @@
   "EVASION": {
     "class": "EvasionStatus"
   },
+  "PARALYSIS": {
+    "class": "RestrictCardTypeStatus",
+    "restricted_types": [ "WEAPON", "ARMOR", "SKILL", "SPELL", "ITEM" ]
+  },
   "RESISTANCE_PHYSICAL": {
     "class": "ModifyDamageStatus",
     "damage_type": "PHYSICAL",
