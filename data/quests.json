@@ -1,6 +1,6 @@
 {
-  "TEST_QUEST": {
-    "ENCOUNTERS": ["CLIFF_RACER", "RAT"],
-    "DESCRIPTION": "You are embarking on a test quest."
+  "CAVE_RATS": {
+    "ENCOUNTERS": ["RAT", "CAVE_RAT", "CAVE_RAT", "EVENT_CORPSE", "RAT", "GIANT_CAVE_RAT"],
+    "DESCRIPTION": "Clear a nearby cave of Cave Rats."
   }
 }

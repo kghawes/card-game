@@ -4,8 +4,14 @@ Status effects that activate at the beginning of your turn do so in the order th
 
 Weapons, Armor, and Skills cost Stamina to play. Spells cost Magicka. Items cost nothing.
 
-Strength, Endurance, and Willpower scale Damage and Defense by 20% per level (multiple levels are combined additively).
+Consumable cards can normally only be played once per combat.
+
+Strength, Endurance, Willpower, Weaknesses, and Resistances scale Damage and Defense by 20% per level (multiple levels are combined additively).
 
 Agility and Intelligence increase your maximum resource by an amount equal to the status level.
 
 Statuses decay by one level each turn.
+
+Stamina and Magicka replenish between turns. Health replenishes between Quests.
+
+Statuses are reset after each Encounter.

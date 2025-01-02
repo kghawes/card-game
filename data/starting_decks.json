@@ -1,8 +1,11 @@
 {
   "STARTING_DECK": [
-    { "card": "STEEL_MACE", "quantity": 3 },
-    { "card": "IRON_LONGSWORD", "quantity": 3 },
-    { "card": "GLASS_SHARDSWORD", "quantity": 3 },
-    { "card": "EBONY_THROWING_STAR", "quantity": 3}
+    { "card": "MISS", "quantity": 7 },
+    { "card": "IRON_MACE", "quantity": 3 },
+    { "card": "IRON_LONGSWORD", "quantity": 9 },
+    { "card": "IRON_HELM", "quantity": 3 },
+    { "card": "IRON_BOOTS", "quantity": 3 },
+    { "card": "ATHLETICS", "quantity": 2 },
+    { "card": "BARGAIN_POTION_STAMINA", "quantity": 4 }
   ]
 }

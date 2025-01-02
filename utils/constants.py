@@ -163,6 +163,7 @@ CARD_PATHS = [
     "data/cards/alteration_spell_cards.json",
     "data/cards/destruction_spell_cards.json",
     "data/cards/skill_cards.json",
+    "data/cards/consumable_cards.json",
     "data/cards/enemy_cards.json" 
     ]
 ENEMIES_PATH = "data/enemies.json"

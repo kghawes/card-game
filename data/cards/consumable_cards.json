@@ -1,0 +1,10 @@
+{
+  "BARGAIN_POTION_STAMINA": {
+    "name": "Bargain Potion of Stamina",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "RESTORE_STAMINA_SELF": 1 }
+  }
+}

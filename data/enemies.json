@@ -1,4 +1,12 @@
 {
+  "EVENT_CORPSE": {
+    "name": "-----",
+    "max_health": 1,
+    "max_stamina": 0,
+    "max_magicka": 0,
+    "deck": [ {"card": "MISS", "quantity": 6} ],
+    "loot": {"gold": 0}
+  },
   "CLIFF_RACER": {
     "name": "Cliff Racer",
     "max_health": 5,
@@ -21,5 +29,27 @@
       {"card": "MISS", "quantity": 2}
     ],
     "loot": {"gold": 1}
+  },
+  "CAVE_RAT": {
+    "name": "Cave Rat",
+    "max_health": 4,
+    "max_stamina": 2,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 7},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "GIANT_CAVE_RAT": {
+    "name": "Giant Cave Rat",
+    "max_health": 7,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "RAZOR_TEETH", "quantity": 7},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
   }
 }

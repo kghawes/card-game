@@ -5,15 +5,15 @@
     "subtype": "HEAVY",
     "cost": 1,
     "value": 20,
-    "effects": { "APPLY_DEFENSE_SELF": 1 }
+    "effects": { "APPLY_DEFENSE_SELF": 2 }
   },
   "IRON_HELM": {
     "name": "Iron Helm",
     "card_type": "ARMOR",
     "subtype": "HEAVY",
-    "cost": 3,
+    "cost": 2,
     "value": 20,
-    "effects": { "APPLY_DEFENSE_SELF": 4 }
+    "effects": { "APPLY_DEFENSE_SELF": 3 }
   },
   "IRON_BOOTS": {
     "name": "Iron Boots",
@@ -21,7 +21,7 @@
     "subtype": "HEAVY",
     "cost": 3,
     "value": 20,
-    "effects": { "APPLY_DEFENSE_SELF": 4 }
+    "effects": { "APPLY_DEFENSE_SELF": 3 }
   },
   "IRON_CUIRASS": {
     "name": "Iron Cuirass",
@@ -37,6 +37,6 @@
     "subtype": "HEAVY",
     "cost": 3,
     "value": 20,
-    "effects": { "APPLY_DEFENSE_SELF": 4 }
+    "effects": { "APPLY_DEFENSE_SELF": 5 }
   }
 }

@@ -26,5 +26,12 @@
     "cost": 1,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
+  },
+  "RAZOR_TEETH": {
+    "name": "Razor Teeth",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 0,
+    "effects": { "PHYSICAL_DAMAGE_TARGET": 2 }
   }
 }
