@@ -53,55 +53,76 @@ class TextInterface:
         print(constants.TEXT_DIVIDER)
 
     def turn_options_prompt(self, player, enemy, registries) -> int:
-        """Prompt the user for an action during their turn."""
+        """
+        Prompt the user for an action during their turn.
+        """
         debug_commands = self.debug_setup(player, enemy, registries.effects)
-        
+
         while True:
             response = input(constants.PROMPT_TURN_OPTIONS).strip()
+
+            # Handle debug commands starting with '/'
+            if response.startswith('/'):
+                command, *args = response[1:].split(' ', 1)
+                arg = args[0] if args else ""
+                if command in debug_commands:
+                    debug_commands[command](arg, player, enemy, registries)
+                    self.display_turn_info(player, enemy, registries.effects)
+                else:
+                    print("Unknown command.")
+                continue
+
+            # Normal game commands
             if response.isdigit():
                 return int(response)
-            response = response.upper()
-            if response == constants.INPUT_PASS_TURN:
+            if response.upper() == constants.INPUT_PASS_TURN:
                 return -1
-            elif response in debug_commands:
-                debug_commands[response]()
-            else:
-                effect_id, level = self.parse_effect_input(response)
-                if effect_id in debug_commands:
-                    debug_commands[effect_id](
-                        player, enemy, level, registries.statuses
-                        )
-                    self.display_turn_info(player, enemy, registries.effects)
-        
+
+            print("Invalid input.")
+
         raise RuntimeError("Unexpected state: Exited loop without returning.")
-    
+
     def parse_effect_input(self, input_str):
-        """If the user input the name of an effect an a level, parse
-        the information so that the effect can be resolved."""
-        parts = input_str.strip().split()
-    
-        level = int(parts.pop())
-        effect_id = "_".join(parts)
-    
+        """
+        Parse the user input to extract effect ID and level.
+        """
+        parts = input_str.strip().rsplit(' ', 1)
+        effect_id = parts[0].replace(" ", "_").upper()
+        level = int(parts[1])
         return effect_id, level
 
     def debug_setup(self, player, enemy, effect_registry) -> dict:
-        """Define debug commands usable from the turn options prompt."""
+        """
+        Define debug commands usable from the turn options prompt.
+        """
         debug_commands = {
-            "QUIT": lambda: sys.exit(0)
+            "q": lambda _, __, ___, ____: sys.exit(0),  # Quit command
+            "e": lambda args, p, e, r: self.handle_effect_command(args, p, e, r)  # Effect command
         }
-        
+
+        # Add effect commands dynamically
         for effect_id, effect in effect_registry.effects.items():
-            # Use partial to capture the specific effect at loop iteration time
             debug_commands[effect_id] = partial(
                 self.apply_effect_debug, effect
-                )
-    
+            )
+
         return debug_commands
-    
-    def apply_effect_debug(
-            self, effect, player, enemy, level, status_registry
-            ):
-        """Resolve the debug effect."""
+
+    def handle_effect_command(self, args, player, enemy, registries):
+        """
+        Handle the '/e' debug command for resolving effects.
+        """
+        try:
+            effect_id, level = self.parse_effect_input(args)
+            effect = registries.effects.get_effect(effect_id)
+            effect.resolve(player, enemy, level, registries.statuses)
+            print(f"Resolved {effect.name} at level {level}")
+        except Exception as e:
+            print(f"Error: {e}")
+
+    def apply_effect_debug(self, effect, player, enemy, level, status_registry):
+        """
+        Resolve an effect for debugging purposes.
+        """
         effect.resolve(player, enemy, level, status_registry=status_registry)
-        print(f"Resolved {effect.name}")
+        print(f"Resolved {effect.name} at level {level}")

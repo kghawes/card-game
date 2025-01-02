@@ -960,6 +960,6 @@
       "PHYSICAL_DAMAGE_TARGET": 12
     },
     "enchantments": ["CHASTENING", "JUDGMENT", "RECKONING", "SHAMING", "WAR", "PEACE"],
-    "enchanted_name": "Wooden Staff of {}"
+    "enchanted_name": "Daedric Staff of {}"
   }
 }
