@@ -20,14 +20,10 @@ class Status:
             return max(old_value - amount, min_result)
         return old_value + amount
 
-    def trigger_after_decrement(self, subject, level, status_registry=None):
+    def trigger_on_turn(self, subject, level, status_registry=None):
         """Base method for polymorphism. Activate the status effect at
-        the beginning of the turn after decrementing all statuses."""
+        the beginning of the turn."""
         return
-
-    def trigger_before_decrement(self, subject, level, status_registry=None):
-        """Base method for polymorphism. Activate the status effect at
-        the beginning of the turn before decrementing all statuses."""
 
     def trigger_on_change(self, subject, level):
         """Base method for polymorphism. Activate the status effect
@@ -56,7 +52,7 @@ class ModifyEffectStatus(Status):
         """Calculate the contribution of this status to the modifier pool."""
         return self.sign_factor * c.SCALE_FACTOR * level
 
-    def trigger_after_decrement(self, subject, level, status_registry):
+    def trigger_on_turn(self, subject, level, status_registry):
         """Mark cards in hand for recalculation at the start of each turn."""
         card_type = self.affected_card_type
         effect = self.affected_effect
@@ -89,7 +85,7 @@ class ModifyCostStatus(Status):
         self.affected_card_type = affected_card_type
         self.sign_factor = sign_factor
 
-    def trigger_after_decrement(self, subject, level, status_registry):
+    def trigger_on_turn(self, subject, level, status_registry):
         """Mark cards for cost recalculations at the start of each turn."""
         subject.flag_cost_recalculation(self.affected_card_type)
 
@@ -175,7 +171,7 @@ class PoisonStatus(Status):
         """Initialize a new PoisonStatus."""
         super().__init__(status_id, False)
 
-    def trigger_before_decrement(self, subject, level, status_registry):
+    def trigger_on_turn(self, subject, level, status_registry):
         """Activate the status effect when requested by caller."""
         damage_type = c.DamageTypes.POISON.name
         subject.take_damage(level, damage_type, status_registry)
@@ -187,7 +183,7 @@ class RegenerationStatus(Status):
         """Initialize a new RegenerationStatus."""
         super().__init__(status_id, False)
 
-    def trigger_before_decrement(self, subject, level, status_registry):
+    def trigger_on_turn(self, subject, level, status_registry):
         subject.change_resource(c.Resources.HEALTH.name, level)
 
 
@@ -219,6 +215,21 @@ class RestrictCardTypeStatus(Status):
         return card_type not in self.restricted_types
 
 
+class FilterEffectStatus(Status):
+    """Status that allow only certain effects to resolve."""
+    def __init__(self, status_id, allowed_effect, blocked_effect):
+        """Initialize a new FilterEffectStatus."""
+        super().__init__(status_id, False)
+        self.allowed_effect = allowed_effect
+        self.blocked_effect = blocked_effect
+
+    def effect_can_resolve(self, effect_id) -> bool:
+        """Check if the given effect is allowed to resolve."""
+        if effect_id == self.blocked_effect:
+            return False
+        return self.allowed_effect and effect_id == self.allowed_effect
+
+
 class StatusRegistry:
     """Holds Status objects in a dictionary to be looked up when 
     needed."""
@@ -240,7 +251,8 @@ class StatusRegistry:
             "PoisonStatus": PoisonStatus,
             "RegenerationStatus": RegenerationStatus,
             "EvasionStatus": EvasionStatus,
-            "RestrictCardTypeStatus": RestrictCardTypeStatus
+            "RestrictCardTypeStatus": RestrictCardTypeStatus,
+            "FilterEffectStatus": FilterEffectStatus
             }
         
         statuses = {}

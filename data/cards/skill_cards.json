@@ -5,7 +5,10 @@
     "subtype": "COMBAT",
     "cost": 1,
     "value": 40,
-    "effects": { "APPLY_FORTIFY_SPEED_SELF": 1 }
+    "effects": {
+      "APPLY_FORTIFY_SPEED_SELF": 5,
+      "APPLY_DAMAGE_SPEED_SELF": 4
+      }
   },
   "FURY": {
     "name": "Fury",
@@ -18,12 +21,88 @@
       "APPLY_DAMAGE_ENDURANCE_SELF": 2
     }
   },
-  "PREPARED": {
-    "name": "Prepared",
+  "PREPAREDNESS": {
+    "name": "Preparedness",
     "card_type": "SKILL",
     "subtype": "COMBAT",
     "cost": 1,
     "value": 20,
-    "effects": { "DRAW": 1 }
+    "effects": {
+      "DRAW": 1
+    }
+  },
+  "DEFENSIVE_STANCE": {
+    "name": "Defensive Stance",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 2,
+    "value": 40,
+    "effects": {
+      "APPLY_BURDEN_SELF": 3,
+      "APPLY_FORTIFY_ENDURANCE_SELF": 4
+    }
+  },
+  "OFFENSIVE_STANCE": {
+    "name": "Offensive Stance",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 2,
+    "value": 40,
+    "effects": {
+      "APPLY_BURDEN_SELF": 3,
+      "APPLY_FORTIFY_STRENGTH_SELF": 4
+    }
+  },
+  "ADRENALINE_RUSH": {
+    "name": "Adrenaline Rush",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 4,
+    "value": 60,
+    "effects": {
+      "APPLY_FORTIFY_AGILITY_SELF": 4,
+      "APPLY_DAMAGE_ENDURANCE_SELF": 6
+    }
+  },
+  "GLOVES_OFF": {
+    "name": "Gloves Off",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 2,
+    "value": 80,
+    "effects": {
+      "REMOVE_DEFENSE_SELF": 5,
+      "RESTORE_STAMINA_SELF": 5
+    }
+  },
+  "SWORDSMANSHIP": {
+    "name": "Swordsmanship",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 2,
+    "value": 80,
+    "effects": {
+      "APPLY_FORTIFY_LONG_BLADE_SELF": 2
+    }
+  },
+    "OATHBOUND": {
+    "name": "Oathbound",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 2,
+    "value": 80,
+    "effects": {
+      "APPLY_FORTIFY_BLUNT_WEAPON_SELF": 2
+    }
+  },
+  "TAUNT": {
+    "name": "Defensive Stance",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 2,
+    "value": 40,
+    "effects": {
+      "APPLY_FRENZY_TARGET": 3
+    }
   }
 }

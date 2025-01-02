@@ -2,6 +2,7 @@
 This Module defines the CombatManager class.
 """
 import utils.constants as c
+from core.statuses import FilterEffectStatus
 
 class CombatManager:
     """This class controls the flow of combat and coordinates between
@@ -36,9 +37,9 @@ class CombatManager:
             turn_ended = self.do_player_action(
                 player, enemy, text_interface, registries
                 )
-        player.card_manager.discard_hand()
+        self.end_of_turn(player, registries)
 
-    def beginning_of_turn(self, combatant, opponent, registries) -> bool:
+    def beginning_of_turn(self, combatant, opponent, status_registry) -> bool:
         """Handle resetting resources, triggering statuses, and drawing
         cards. Returns whether combat ended during the beginning phase."""
         combatant.reset_for_turn()
@@ -46,37 +47,24 @@ class CombatManager:
         combatant.card_manager.draw_hand(combatant.modifier_manager)
 
         combatant.status_manager.trigger_statuses_on_turn(
-            combatant, False, registries.statuses
-            )
-        if self.is_combat_over(combatant, opponent):
-            return True
-
-        combatant.status_manager.decrement_statuses(
-            combatant, registries.statuses
-            )
-        combatant.status_manager.trigger_statuses_on_turn(
-            combatant, True, registries.statuses
+            combatant, status_registry
             )
         if self.is_combat_over(combatant, opponent):
             return True
 
         # Ensure modifiers are recalculated after status updates
         combatant.modifier_manager.recalculate_all_effects(
-            registries.statuses, combatant.card_manager
+            status_registry, combatant.card_manager
             )
 
         combatant.replenish_resources_for_turn()
         return False
 
-    def trigger_poison(self, subject, status_registry):
-        """Activate the poison status, if present."""
-        poison_status, poison_level = subject.status_manager.get_status(
-            c.StatusNames.POISON.name, subject, status_registry
+    def end_of_turn(self, combatant, status_registry):
+        combatant.card_manager.discard_hand()
+        combatant.status_manager.decrement_statuses(
+            combatant, status_registry
             )
-        if poison_status and poison_level:
-            poison_status.trigger_instantly(
-                subject, poison_level, status_registry
-                )
 
     def do_player_action(self, player, enemy, text_interface, registries):
         """Get the player input and perform the selected action."""
@@ -101,6 +89,8 @@ class CombatManager:
             return
 
         for effect_id, effect_level in card.effects.items():
+            if not self.effect_can_resolve(combatant, effect_id):
+                continue
             effect = registries.effects.get_effect(effect_id)
             level = effect_level.get_level()
             effect.resolve(
@@ -112,6 +102,15 @@ class CombatManager:
         text_interface.send_message(c.CARD_PLAYED_MESSAGE.format(
             combatant.name, card.name, opponent.name, opponent.get_health())
             )
+
+    def effect_can_resolve(self, combatant, effect_id) -> bool:
+        """Check if the given card effect can resolve based on current
+        status effects."""
+        for status in combatant.status_manager.statuses.values():
+            if isinstance(status, FilterEffectStatus):
+                if not status.effect_can_resolve(effect_id):
+                    return False
+        return True
 
     def do_enemy_turn(self, player, enemy, text_interface, registries):
         """Process enemy actions."""
@@ -129,4 +128,4 @@ class CombatManager:
                         return
                     break
         text_interface.send_message(c.ENEMY_PASSES_MESSAGE.format(enemy.name))
-        enemy.card_manager.discard_hand()
+        self.end_of_turn(enemy, registries.statuses)

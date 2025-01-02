@@ -77,13 +77,10 @@ class StatusManager:
             self, subject, is_after_decrement, status_registry
             ):
         """Loop over active statuses and invite them to trigger their
-        after-draw effects."""
+        on-turn effects."""
         for status_id, level in self.statuses.items():
             status = status_registry.get_status(status_id)
-            if is_after_decrement:
-                status.trigger_after_decrement(subject, level, status_registry)
-            else:
-                status.trigger_before_decrement(subject, level, status_registry)
+            status.trigger_on_turn(subject, level, status_registry)
             if not subject.is_alive():
                 return
         # Trigger recalculations after statuses resolve

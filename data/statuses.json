@@ -23,6 +23,16 @@
     "class": "RestrictCardTypeStatus",
     "restricted_types": [ "WEAPON" ]
   },
+  "FRENZY": {
+    "class": "FilterEffectStatus",
+    "allowed_effect": "DAMAGE",
+    "blocked_effect": ""
+  },
+  "CALM": {
+    "class": "FilterEffectStatus",
+    "allowed_effect": "",
+    "blocked_effect": "DAMAGE"
+  },
   "RESISTANCE_PHYSICAL": {
     "class": "ModifyDamageStatus",
     "damage_type": "PHYSICAL",
