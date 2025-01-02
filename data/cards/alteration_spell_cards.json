@@ -1,0 +1,10 @@
+{
+  "FIRST_BARRIER": {
+    "name": "First Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "APPLY_DEFENSE_SELF": 2 }
+  }
+}

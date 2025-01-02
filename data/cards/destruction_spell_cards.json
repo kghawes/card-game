@@ -1,0 +1,74 @@
+{
+  "FIREBOLT": {
+    "name": "Firebolt",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { "FIRE_DAMAGE_TARGET": 1 }
+  },
+  "FROSTBOLT": {
+    "name": "Frostbolt",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { "FROST_DAMAGE_TARGET": 1 }
+  },
+  "SHOCKBOLT": {
+    "name": "Shockbolt",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { "SHOCK_DAMAGE_TARGET": 1 }
+  },
+  "FIREBALL": {
+    "name": "Fireball",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 20,
+    "effects": { "FIRE_DAMAGE_TARGET": 3 }
+  },
+  "FROSTBALL": {
+    "name": "Frostball",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 20,
+    "effects": { "FROST_DAMAGE_TARGET": 3 }
+  },
+  "SHOCKBALL": {
+    "name": "Shockball",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 20,
+    "effects": { "SHOCK_DAMAGE_TARGET": 3 }
+  },
+  "GREATER_FIREBALL": {
+    "name": "Greater Fireball",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 3,
+    "value": 20,
+    "effects": { "FIRE_DAMAGE_TARGET": 5 }
+  },
+  "GREATER_FROSTBALL": {
+    "name": "Greater Frostball",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 3,
+    "value": 20,
+    "effects": { "FROST_DAMAGE_TARGET": 5 }
+  },
+  "GREATER_SHOCKBALL": {
+    "name": "Greater Shockball",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 3,
+    "value": 20,
+    "effects": { "SHOCK_DAMAGE_TARGET": 3 }
+  }
+}

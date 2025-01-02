@@ -15,6 +15,14 @@
     "class": "RestrictCardTypeStatus",
     "restricted_types": [ "WEAPON", "ARMOR", "SKILL", "SPELL", "ITEM" ]
   },
+  "SILENCE": {
+    "class": "RestrictCardTypeStatus",
+    "restricted_types": [ "SPELL" ]
+  },
+  "BLIND": {
+    "class": "RestrictCardTypeStatus",
+    "restricted_types": [ "WEAPON" ]
+  },
   "RESISTANCE_PHYSICAL": {
     "class": "ModifyDamageStatus",
     "damage_type": "PHYSICAL",

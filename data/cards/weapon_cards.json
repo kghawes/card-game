@@ -11,6 +11,7 @@
   "IRON_LONGSWORD": {
     "name": "Iron Longsword",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 2,
     "value": 20,
     "effects": {
@@ -27,6 +28,7 @@
   "STEEL_LONGSWORD": {
     "name": "Steel Longsword",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 2,
     "value": 45,
     "effects": {
@@ -43,6 +45,7 @@
   "ORCISH_LONGSWORD": {
     "name": "Orcish Longsword",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 3,
     "value": 270,
     "effects": {
@@ -59,6 +62,7 @@
   "ADAMANTIUM_LONGSWORD": {
     "name": "Adamantium Longsword",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 3,
     "value": 350,
     "effects": {
@@ -75,6 +79,7 @@
   "GLASS_LONGSWORD": {
     "name": "Glass Longsword",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 4,
     "value": 900,
     "effects": {
@@ -91,6 +96,7 @@
   "EBONY_LONGSWORD": {
     "name": "Ebony Longsword",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 5,
     "value": 3000,
     "effects": {
@@ -107,6 +113,7 @@
   "DAEDRIC_LONGSWORD": {
     "name": "Daedric Longsword",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 6,
     "value": 10000,
     "effects": {
@@ -123,6 +130,7 @@
   "IRON_CLAYMORE": {
     "name": "Iron Claymore",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 3,
     "value": 30,
     "effects": {
@@ -139,6 +147,7 @@
   "STEEL_CLAYMORE": {
     "name": "Steel Claymore",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 4,
     "value": 100,
     "effects": {
@@ -155,6 +164,7 @@
   "ORCISH_CLAYMORE": {
     "name": "Orcish Claymore",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 5,
     "value": 400,
     "effects": {
@@ -171,6 +181,7 @@
   "ADAMANTIUM_CLAYMORE": {
     "name": "Adamantium Claymore",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 5,
     "value": 600,
     "effects": {
@@ -187,6 +198,7 @@
   "GLASS_CLAYMORE": {
     "name": "Glass Claymore",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 6,
     "value": 1100,
     "effects": {
@@ -203,6 +215,7 @@
   "EBONY_CLAYMORE": {
     "name": "Ebony Claymore",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 8,
     "value": 3400,
     "effects": {
@@ -219,6 +232,7 @@
   "DAEDRIC_CLAYMORE": {
     "name": "Daedric Claymore",
     "card_type": "WEAPON",
+    "subtype": "LONG_BLADE",
     "cost": 10,
     "value": 11000,
     "effects": {
@@ -235,6 +249,7 @@
   "IRON_MACE": {
     "name": "Iron Mace",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 3,
     "value": 15,
     "effects": {
@@ -251,6 +266,7 @@
   "STEEL_MACE": {
     "name": "Steel Mace",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 3,
     "value": 90,
     "effects": {
@@ -267,6 +283,7 @@
   "ORCISH_MACE": {
     "name": "Orcish Mace",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 4,
     "value": 360,
     "effects": {
@@ -283,6 +300,7 @@
   "ADAMANTIUM_MACE": {
     "name": "Adamantium Mace",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 4,
     "value": 500,
     "effects": {
@@ -299,6 +317,7 @@
   "GLASS_MACE": {
     "name": "Glass Mace",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 6,
     "value": 3100,
     "effects": {
@@ -315,6 +334,7 @@
   "EBONY_MACE": {
     "name": "Ebony Mace",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 7,
     "value": 3100,
     "effects": {
@@ -331,6 +351,7 @@
   "DAEDRIC_MACE": {
     "name": "Daedric Mace",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 8,
     "value": 16,
     "effects": {
@@ -347,6 +368,7 @@
   "IRON_WARHAMMER": {
     "name": "Iron Warhammer",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 4,
     "value": 25,
     "effects": {
@@ -363,6 +385,7 @@
   "STEEL_WARHAMMER": {
     "name": "Steel Warhammer",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 6,
     "value": 100,
     "effects": {
@@ -379,6 +402,7 @@
   "ORCISH_WARHAMMER": {
     "name": "Orcish Warhammer",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 7,
     "value": 420,
     "effects": {
@@ -395,6 +419,7 @@
   "ADAMANTIUM_WARHAMMER": {
     "name": "Adamantium Warhammer",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 7,
     "value": 580,
     "effects": {
@@ -411,6 +436,7 @@
   "GLASS_WARHAMMER": {
     "name": "Glass Warhammer",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 8,
     "value": 1200,
     "effects": {
@@ -427,6 +453,7 @@
   "EBONY_WARHAMMER": {
     "name": "Ebony Warhammer",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 8,
     "value": 3500,
     "effects": {
@@ -443,6 +470,7 @@
   "DAEDRIC_WARHAMMER": {
     "name": "Daedric Warhammer",
     "card_type": "WEAPON",
+    "subtype": "BLUNT_WEAPON",
     "cost": 12,
     "value": 12000,
     "effects": {
@@ -459,6 +487,7 @@
   "IRON_DAGGER": {
     "name": "Iron Dagger",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 1,
     "value": 10,
     "effects": {
@@ -475,6 +504,7 @@
   "STEEL_DAGGER": {
     "name": "Steel Dagger",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 1,
     "value": 50,
     "effects": {
@@ -491,6 +521,7 @@
   "ORCISH_DAGGER": {
     "name": "Orcish Dagger",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 2,
     "value": 200,
     "effects": {
@@ -507,6 +538,7 @@
   "ADAMANTIUM_DAGGER": {
     "name": "Adamantium Dagger",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 2,
     "value": 350,
     "effects": {
@@ -523,6 +555,7 @@
   "GLASS_DAGGER": {
     "name": "Glass Dagger",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 2,
     "value": 700,
     "effects": {
@@ -539,6 +572,7 @@
   "EBONY_DAGGER": {
     "name": "Ebony Dagger",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 2,
     "value": 2800,
     "effects": {
@@ -555,6 +589,7 @@
   "DAEDRIC_DAGGER": {
     "name": "Daedric Dagger",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 3,
     "value": 9500,
     "effects": {
@@ -571,6 +606,7 @@
   "IRON_SHORTSWORD": {
     "name": "Iron Shortsword",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 1,
     "value": 20,
     "effects": {
@@ -587,6 +623,7 @@
   "STEEL_SHORTSWORD": {
     "name": "Steel Shortsword",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 2,
     "value": 50,
     "effects": {
@@ -603,6 +640,7 @@
   "ORCISH_SHORTSWORD": {
     "name": "Orcish Shortsword",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 2,
     "value": 270,
     "effects": {
@@ -619,6 +657,7 @@
   "ADAMANTIUM_SHORTSWORD": {
     "name": "Adamantium Shortsword",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 2,
     "value": 400,
     "effects": {
@@ -635,6 +674,7 @@
   "GLASS_SHORTSWORD": {
     "name": "Glass Shortsword",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 3,
     "value": 800,
     "effects": {
@@ -651,6 +691,7 @@
   "EBONY_SHORTSWORD": {
     "name": "Ebony Shortsword",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 3,
     "value": 2900,
     "effects": {
@@ -667,6 +708,7 @@
   "DAEDRIC_SHORTSWORD": {
     "name": "Daedric Shortsword",
     "card_type": "WEAPON",
+    "subtype": "SHORT_BLADE",
     "cost": 4,
     "value": 9750,
     "effects": {
@@ -683,6 +725,7 @@
   "IRON_THROWING_STAR": {
     "name": "Iron Throwing Star",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 1,
     "value": 8,
     "effects": {
@@ -694,6 +737,7 @@
   "STEEL_THROWING_STAR": {
     "name": "Steel Throwing Star",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 1,
     "value": 20,
     "effects": {
@@ -705,6 +749,7 @@
   "ORCISH_THROWING_STAR": {
     "name": "Orcish Throwing Star",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 1,
     "value": 90,
     "effects": {
@@ -716,6 +761,7 @@
   "ADAMANTIUM_THROWING_STAR": {
     "name": "Adamantium Throwing Star",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 1,
     "value": 600,
     "effects": {
@@ -727,6 +773,7 @@
   "GLASS_THROWING_STAR": {
     "name": "Glass Throwing Star",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 1,
     "value": 500,
     "effects": {
@@ -738,6 +785,7 @@
   "EBONY_THROWING_STAR": {
     "name": "Ebony Throwing Star",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 2,
     "value": 1000,
     "effects": {
@@ -749,6 +797,7 @@
   "DAEDRIC_THROWING_STAR": {
     "name": "Daedric Throwing Star",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 2,
     "value": 2200,
     "effects": {
@@ -760,6 +809,7 @@
   "SHORTBOW": {
     "name": "Shortbow",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 1,
     "value": 25,
     "effects": {
@@ -771,6 +821,7 @@
   "LONGBOW": {
     "name": "Longbow",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 2,
     "value": 100,
     "effects": {
@@ -782,6 +833,7 @@
   "ORCISH_BOW": {
     "name": "Orcish Bow ({}arrows)",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 2,
     "value": 300,
     "effects": {
@@ -793,6 +845,7 @@
   "ADAMANTIUM_BOW": {
     "name": "Adamantium Bow",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 2,
     "value": 535,
     "effects": {
@@ -804,6 +857,7 @@
   "GLASS_BOW": {
     "name": "Glass Bow",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 2,
     "value": 850,
     "effects": {
@@ -815,6 +869,7 @@
   "EBONY_BOW": {
     "name": "Ebony Bow",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 2,
     "value": 2800,
     "effects": {
@@ -826,6 +881,7 @@
   "DAEDRIC_BOW": {
     "name": "Daedric Bow",
     "card_type": "WEAPON",
+    "subtype": "MARKSMAN",
     "cost": 3,
     "value": 12000,
     "effects": {
@@ -837,6 +893,7 @@
   "WOODEN_STAFF": {
     "name": "Wooden Staff",
     "card_type": "WEAPON",
+    "subtype": "STAFF",
     "cost": 1,
     "value": 3,
     "effects": {
