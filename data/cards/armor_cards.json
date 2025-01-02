@@ -1,6 +1,38 @@
 {
+  "IRON_GAUNTLETS": {
+    "name": "Iron Gauntlets",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 1,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 1 }
+  },
+  "IRON_HELM": {
+    "name": "Iron Helm",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 3,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 4 }
+  },
+  "IRON_BOOTS": {
+    "name": "Iron Boots",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 3,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 4 }
+  },
   "IRON_CUIRASS": {
     "name": "Iron Cuirass",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 3,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 4 }
+  },
+  "IRON_SHIELD": {
+    "name": "Iron Shield",
     "card_type": "ARMOR",
     "subtype": "HEAVY",
     "cost": 3,

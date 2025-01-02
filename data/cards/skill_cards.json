@@ -17,5 +17,13 @@
       "APPLY_FORTIFY_STRENGTH_SELF": 2,
       "APPLY_DAMAGE_ENDURANCE_SELF": 2
     }
+  },
+  "PREPARED": {
+    "name": "Prepared",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 1,
+    "value": 20,
+    "effects": { "DRAW": 1 }
   }
 }

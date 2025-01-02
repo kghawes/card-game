@@ -160,7 +160,8 @@ MAX_HAND_SIZE = 10
 CARD_PATHS = [
     "data/cards/weapon_cards.json",
     "data/cards/armor_cards.json",
-    "data/cards/spell_cards.json",
+    "data/cards/alteration_spell_cards.json",
+    "data/cards/destruction_spell_cards.json",
     "data/cards/skill_cards.json",
     "data/cards/enemy_cards.json" 
     ]
