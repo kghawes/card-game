@@ -27,6 +27,34 @@
       },
     "VALUE_MULTIPLIER": 2
   },
+  "FIRE": {
+    "NAME": "Fire",
+    "EFFECTS": { 
+      "FIRE_DAMAGE_TARGET": 3 
+      },
+    "VALUE_MULTIPLIER": 2.8
+  },
+  "FROST": {
+    "NAME": "Frost",
+    "EFFECTS": { 
+      "FROST_DAMAGE_TARGET": 3
+      },
+    "VALUE_MULTIPLIER": 2.8
+  },
+  "STORM": {
+    "NAME": "Storm",
+    "EFFECTS": { 
+      "SHOCK_DAMAGE_TARGET": 3
+      },
+    "VALUE_MULTIPLIER": 2.8
+  },
+  "POISON": {
+    "NAME": "Poison",
+    "EFFECTS": { 
+      "POISON_DAMAGE_TARGET": 3 
+      },
+    "VALUE_MULTIPLIER": 2.8
+  },
   "CHASTENING": {
     "NAME": "Chastening",
     "EFFECTS": {

@@ -901,5 +901,65 @@
     },
     "enchantments": ["CHASTENING", "JUDGMENT", "RECKONING", "SHAMING", "WAR", "PEACE"],
     "enchanted_name": "Wooden Staff of {}"
+  },
+  "SILVER_STAFF": {
+    "name": "Silver Staff",
+    "card_type": "WEAPON",
+    "subtype": "STAFF",
+    "cost": 1,
+    "value": 40,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 3
+    },
+    "enchantments": ["CHASTENING", "JUDGMENT", "RECKONING", "SHAMING", "WAR", "PEACE"],
+    "enchanted_name": "Silver Staff of {}"
+  },
+  "ORCISH_STAFF": {
+    "name": "Orcish Staff",
+    "card_type": "WEAPON",
+    "subtype": "STAFF",
+    "cost": 2,
+    "value": 50,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 5
+    },
+    "enchantments": ["CHASTENING", "JUDGMENT", "RECKONING", "SHAMING", "WAR", "PEACE"],
+    "enchanted_name": "Orcish Staff of {}"
+  },
+  "GLASS_STAFF": {
+    "name": "Glass Staff",
+    "card_type": "WEAPON",
+    "subtype": "STAFF",
+    "cost": 2,
+    "value": 400,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 8
+    },
+    "enchantments": ["CHASTENING", "JUDGMENT", "RECKONING", "SHAMING", "WAR", "PEACE"],
+    "enchanted_name": "Glass Staff of {}"
+  },
+  "EBONY_STAFF": {
+    "name": "Ebony Staff",
+    "card_type": "WEAPON",
+    "subtype": "STAFF",
+    "cost": 3,
+    "value": 1000,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 10
+    },
+    "enchantments": ["CHASTENING", "JUDGMENT", "RECKONING", "SHAMING", "WAR", "PEACE"],
+    "enchanted_name": "Ebony Staff of {}"
+  },
+  "DAEDRIC_STAFF": {
+    "name": "Daedric Staff",
+    "card_type": "WEAPON",
+    "subtype": "STAFF",
+    "cost": 4,
+    "value": 2500,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 12
+    },
+    "enchantments": ["CHASTENING", "JUDGMENT", "RECKONING", "SHAMING", "WAR", "PEACE"],
+    "enchanted_name": "Wooden Staff of {}"
   }
 }
