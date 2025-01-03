@@ -73,9 +73,7 @@ class StatusManager:
         """Remove all active statuses without cleaning up."""
         self.statuses.clear()
 
-    def trigger_statuses_on_turn(
-            self, subject, is_after_decrement, status_registry
-            ):
+    def trigger_statuses_on_turn(self, subject, status_registry):
         """Loop over active statuses and invite them to trigger their
         on-turn effects."""
         for status_id, level in self.statuses.items():

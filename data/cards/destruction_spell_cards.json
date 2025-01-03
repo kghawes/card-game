@@ -69,6 +69,240 @@
     "subtype": "DESTRUCTION",
     "cost": 3,
     "value": 20,
-    "effects": { "SHOCK_DAMAGE_TARGET": 3 }
+    "effects": { "SHOCK_DAMAGE_TARGET": 5 }
+  },
+  "INCINERATE": {
+    "name": "Incinerate",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 5,
+    "value": 20,
+    "effects": { "FIRE_DAMAGE_TARGET": 8 }
+  },
+  "ICE_SPIKE": {
+    "name": "Ice Spike",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 5,
+    "value": 20,
+    "effects": { 
+    "FROST_DAMAGE_TARGET": 6,
+    "APPLY_DAMAGE_AGILITY_TARGET": 2
+    }
+  },
+  "LIGHTNING_BOLT": {
+    "name": "Lightning Bolt",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 5,
+    "value": 20,
+    "effects": { 
+    "SHOCK_DAMAGE_TARGET": 6,
+    "APPLY_DAMAGE_INTELLIGENCE_TARGET": 2
+    }
+  },
+  "FIRE_STORM": {
+    "name": "Fire Storm",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 8,
+    "value": 20,
+    "effects": { 
+    "FIRE_DAMAGE_TARGET": 20
+    }
+  },
+  "FROST_STORM": {
+    "name": "Frost Storm",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 8,
+    "value": 20,
+    "effects": { 
+    "FROST_DAMAGE_TARGET": 15,
+    "APPLY_DAMAGE_AGILITY_TARGET": 5
+    }
+  },
+  "LIGHTNING_STORM": {
+    "name": "Lightning Storm",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 5,
+    "value": 20,
+    "effects": { 
+    "SHOCK_DAMAGE_TARGET": 15,
+    "APPLY_DAMAGE_INTELLIGENCE_TARGET": 5
+    }
+  },
+  "POISONOUS_TOUCH": {
+    "name": "Poisonous Touch",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 20,
+    "effects": { 
+    "APPLY_POISON_TARGET": 2
+    }
+  },
+  "POISONBLOOM": {
+    "name": "Poisonbloom",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 4,
+    "value": 20,
+    "effects": { 
+    "APPLY_POISON_TARGET": 3
+    }
+  },
+  "VIPERBOLT": {
+    "name": "Viperbolt",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 6,
+    "value": 20,
+    "effects": { 
+    "APPLY_POISON_TARGET": 4
+    }
+  },
+  "TOXIC_CLOUD": {
+    "name": "Toxic Cloud",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 8,
+    "value": 20,
+    "effects": { 
+    "APPLY_POISON_TARGET": 5
+    }
+  },
+  "DEADLY_POISON": {
+    "name": "Deadly Poison",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 10,
+    "value": 20,
+    "effects": { 
+    "APPLY_POISON_TARGET": 6
+    }
+  },
+  "CLUMSY_TOUCH": {
+    "name": "Clumsy Touch",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "APPLY_DAMAGE_AGILITY_TARGET": 1
+    }
+  },
+  "FUDDLE": {
+    "name": "Fuddle",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "APPLY_DAMAGE_INTELLIGENCE_TARGET": 2
+    }
+  },
+  "ENERVATE": {
+    "name": "Enervate",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "APPLY_DAMAGE_ENDURANCE_TARGET": 3
+    }
+  },
+  "WOE": {
+    "name": "Temp",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "APPLY_DAMAGE_WILLPOWER_TARGET": 3
+    }
+  },
+  "TORPOR": {
+    "name": "Torpor",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "APPLY_DAMAGE_SPEED_TARGET": 2
+    }
+  },
+  "WEARINESS": {
+    "name": "Weariness",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "APPLY_DAMAGE_STRENGTH_TARGET": 3
+    }
+  },
+  "ORDEAL_ST_OLMS": {
+    "name": "Ordeal of St. Olms",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 3,
+    "value": 20,
+    "effects": { 
+    "APPLY_DAMAGE_AGILITY_TARGET": 6,
+    "APPLY_FORTIFY_AGILITY_TARGET": 5
+    }
+  },
+  "GASH_SPIRIT": {
+    "name": "Gash Spirit",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "APPLY_DAMAGE_INTELLIGENCE_TARGET": 6,
+    "APPLY_FORTIFY_INTELLIGENCE_TARGET": 5
+    }
+  },
+  "DIRE_WEAKNESS_FIRE": {
+    "name": "Dire Weakness to Fire",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 20,
+    "effects": { 
+    "APPLY_WEAKNESS_FIRE_TARGET": 3
+    }
+  },
+  "DIRE_WEAKNESS_FROST": {
+    "name": "Dire Weakness to Frost",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 20,
+    "effects": { 
+    "APPLY_WEAKNESS_FROST_TARGET": 3
+    }
+  },
+  "DIRE_WEAKNESS_SHOCK": {
+    "name": "Dire Weakness to Shock",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 20,
+    "effects": { 
+    "APPLY_WEAKNESS_SHOCK_TARGET": 3
+    }
+  },
+  "DIRE_WEAKNESS_POISON": {
+    "name": "Dire Weakness to Poison",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 20,
+    "effects": { 
+    "APPLY_WEAKNESS_POISON_TARGET": 3
+    }
   }
 }

@@ -29,7 +29,7 @@ class CombatManager:
     def do_player_turn(self, player, enemy, text_interface, registries):
         """Prepare for the player to take their turn then handle any
         actions they perform."""
-        if self.beginning_of_turn(player, enemy, registries):
+        if self.beginning_of_turn(player, enemy, registries.statuses):
             return
         turn_ended = False
         while not turn_ended and not self.is_combat_over(player, enemy):
@@ -37,7 +37,7 @@ class CombatManager:
             turn_ended = self.do_player_action(
                 player, enemy, text_interface, registries
                 )
-        self.end_of_turn(player, registries)
+        self.end_of_turn(player, registries.statuses)
 
     def beginning_of_turn(self, combatant, opponent, status_registry) -> bool:
         """Handle resetting resources, triggering statuses, and drawing
@@ -114,7 +114,7 @@ class CombatManager:
 
     def do_enemy_turn(self, player, enemy, text_interface, registries):
         """Process enemy actions."""
-        self.beginning_of_turn(enemy, player, registries)
+        self.beginning_of_turn(enemy, player, registries.statuses)
         playable_card_exists = True
         while playable_card_exists and not self.is_combat_over(player, enemy):
             playable_card_exists = False

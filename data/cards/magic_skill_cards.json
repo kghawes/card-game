@@ -1,0 +1,12 @@
+{
+  "NOVICE_ALCHEMIST": {
+    "name": "Novice Alchemist",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 40,
+    "effects": {
+      "APPLY_ALCHEMIST_SELF": 2
+      }
+  }
+}

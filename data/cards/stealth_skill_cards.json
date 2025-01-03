@@ -1,0 +1,23 @@
+{
+  "ACROBACY": {
+    "name": "Acrobacy",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 3,
+    "value": 50,
+    "effects": {
+      "APPLY_FORTIFY_AGILITY_SELF": 2,
+      "APPLY_FORTIFY_SPEED_SELF": 2
+      }
+  },
+  "DODGE": {
+    "name": "Dodge",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 1,
+    "value": 20,
+    "effects": {
+      "APPLY_EVASION_SELF": 3
+      }
+  }
+}

@@ -162,7 +162,9 @@ CARD_PATHS = [
     "data/cards/armor_cards.json",
     "data/cards/alteration_spell_cards.json",
     "data/cards/destruction_spell_cards.json",
-    "data/cards/skill_cards.json",
+    "data/cards/combat_skill_cards.json",
+    "data/cards/stealth_skill_cards.json",
+    "data/cards/magic_skill_cards.json",
     "data/cards/consumable_cards.json",
     "data/cards/enemy_cards.json" 
     ]
