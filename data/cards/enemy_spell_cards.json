@@ -1,0 +1,10 @@
+{
+  "PARALYZING_BITE": {
+    "name": "Paralyzing Bite",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_PARALYZE_TARGET": 1 }
+  }
+}

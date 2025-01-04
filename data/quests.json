@@ -1,6 +1,6 @@
 {
   "CAVE_RATS": {
-    "ENCOUNTERS": ["RAT", "CAVE_RAT", "CAVE_RAT", "EVENT_CORPSE", "RAT", "GIANT_CAVE_RAT"],
+    "ENCOUNTERS": ["RAT", "CAVE_RAT", "CAVE_RAT", "RAT", "GIANT_CAVE_RAT"],
     "DESCRIPTION": "Clear a nearby cave of Cave Rats."
   }
 }

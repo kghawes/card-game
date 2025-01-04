@@ -53,7 +53,7 @@ class ChangeStatusEffect(Effect):
         base_id = effect_name_enum.name
         base_name = effect_name_enum.value
         self.effect_id = self.format_id(base_id, status_enum.name)
-        self.name = self.format_name(base_name + status_enum.value)
+        self.name = self.format_name(base_name, status_enum.value)
         super().__init__(self.effect_id, self.name, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):

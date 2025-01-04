@@ -166,7 +166,10 @@ CARD_PATHS = [
     "data/cards/stealth_skill_cards.json",
     "data/cards/magic_skill_cards.json",
     "data/cards/consumable_cards.json",
-    "data/cards/enemy_cards.json" 
+    "data/cards/enemy_weapon_cards.json",
+    "data/cards/enemy_armor_cards.json",
+    "data/cards/enemy_spell_cards.json",
+    "data/cards/enemy_skill_cards.json"
     ]
 ENEMIES_PATH = "data/enemies.json"
 STARTING_DECKS_PATH = "data/starting_decks.json"

@@ -32,27 +32,27 @@ class Combatant:
 
     def get_health(self) -> int:
         """Get current health."""
-        return self.resources[r.HEALTH.name].current_value
+        return self.resources[r.HEALTH.name].current
 
     def get_max_health(self) -> int:
         """Get maximum health."""
-        return self.resources[r.HEALTH.name].get_max_value(self.modifier_manager)
+        return self.resources[r.HEALTH.name].get_max(self.modifier_manager)
 
     def get_stamina(self) -> int:
         """Get current stamina."""
-        return self.resources[r.STAMINA.name].current_value
+        return self.resources[r.STAMINA.name].current
 
     def get_max_stamina(self) -> int:
         """Get maximum stamina."""
-        return self.resources[r.STAMINA.name].get_max_value(self.modifier_manager)
+        return self.resources[r.STAMINA.name].get_max(self.modifier_manager)
 
     def get_magicka(self) -> int:
         """Get current magicka."""
-        return self.resources[r.MAGICKA.name].current_value
+        return self.resources[r.MAGICKA.name].current
 
     def get_max_magicka(self) -> int:
         """Get maximum magicka."""
-        return self.resources[r.MAGICKA.name].get_max_value(self.modifier_manager)
+        return self.resources[r.MAGICKA.name].get_max(self.modifier_manager)
 
     def take_damage(self, amount, damage_type, status_registry):
         """Accounting for statuses that modify incoming damage, change
@@ -65,7 +65,8 @@ class Combatant:
             amount = defense_status.calculate_net_damage(
                 self, defense_level, amount, status_registry
                 )
-        self.resources[r.HEALTH.name].change_value(-amount, self.modifier_manager)
+        health = self.resources[r.HEALTH.name]
+        health.change_value(-amount, self.modifier_manager)
 
     def is_alive(self) -> bool:
         """Check if the Combatant has more than zero health."""
@@ -85,6 +86,4 @@ class Combatant:
     def change_resource(self, resource_id, amount):
         """Change the value of a given resource by a given amount."""
         assert resource_id != r.HEALTH.name or amount >= 0
-        self.resources[resource_id].change_value(
-            amount, self.modifier_manager
-            )
+        self.resources[resource_id].change_value(amount, self.modifier_manager)

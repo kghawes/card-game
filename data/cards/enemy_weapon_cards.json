@@ -1,4 +1,11 @@
 {
+  "SHARP_BEAK": {
+    "name": "Sharp Beak",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
+  },
 "RAZOR_BEAK": {
     "name": "Razor Beak",
     "card_type": "WEAPON",
@@ -12,13 +19,6 @@
     "cost": 1,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
-  },
-  "FLAP": {
-    "name": "Flap",
-    "card_type": "WEAPON",
-    "cost": 2,
-    "value": 0,
-    "effects": { "NO_EFFECT": 0 }
   },
   "SHARP_TEETH": {
     "name": "Sharp Teeth",

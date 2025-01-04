@@ -1,12 +1,4 @@
 {
-  "EVENT_CORPSE": {
-    "name": "-----",
-    "max_health": 1,
-    "max_stamina": 0,
-    "max_magicka": 0,
-    "deck": [ {"card": "MISS", "quantity": 6} ],
-    "loot": {"gold": 0}
-  },
   "CLIFF_RACER": {
     "name": "Cliff Racer",
     "max_health": 5,
@@ -49,6 +41,19 @@
     "deck": [
       {"card": "RAZOR_TEETH", "quantity": 7},
       {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "SCRIB": {
+    "name": "Scrib",
+    "max_health": 3,
+    "max_stamina": 2,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_BEAK", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "HARD_CARAPACE", "quantity": 2},
+      {"card": "PARALYZING_BITE", "quantity": 2}
     ],
     "loot": {"gold": 4}
   }
