@@ -43,6 +43,7 @@ class Resources(Enum):
 # Minimum values
 MIN_RESOURCE = 0
 MIN_EFFECT = 1
+MIN_COST = 0
 
 class DamageTypes(Enum):
     """Damage must come in one of these types."""

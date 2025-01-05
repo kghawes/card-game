@@ -53,7 +53,7 @@ class ModifyEffectStatus(Status):
         return self.sign_factor * c.SCALE_FACTOR * level
 
     def trigger_on_turn(self, subject, level, status_registry):
-        """Mark cards in hand for recalculation at the start of each turn."""
+        """Recalculate effects at the start of each turn."""
         card_type = self.affected_card_type
         effect = self.affected_effect
         subject.modifier_manager.recalculate_effect_modifiers(
@@ -85,20 +85,31 @@ class ModifyCostStatus(Status):
         self.affected_card_type = affected_card_type
         self.sign_factor = sign_factor
 
+    def calculate_contribution(self, level):
+        """Calculate the contribution of this status to the modifier pool."""
+        return self.sign_factor * level
+
     def trigger_on_turn(self, subject, level, status_registry):
-        """Mark cards for cost recalculations at the start of each turn."""
-        subject.flag_cost_recalculation(self.affected_card_type)
+        """Recalculate costs at the start of each turn."""
+        card_type = self.affected_card_type
+        subject.modifier_manager.recalculate_cost_modifiers(
+            card_type, subject.card_manager
+            )
 
     def trigger_on_change(self, subject, level):
-        """Accumulate contributions and mark for recalculations."""
-        contribution = level * self.sign_factor
+        """Accumulate contributions to the modifier pool when level changes."""
+        contribution = self.calculate_contribution(level)
+        subject.modifier_manager.accumulate_cost_modifier(self, contribution)
         card_type = self.affected_card_type
-        subject.accumulate_cost_contribution(card_type, contribution)
-        subject.flag_cost_recalculation(card_type)
+        subject.modifier_manager.recalculate_cost_modifiers(
+            card_type, subject.card_manager
+            )
 
     def expire(self, subject):
         """Clear contributions when the status expires."""
-        pass
+        subject.modifier_manager.clear_cost_modifiers(
+            self, subject.card_manager
+            )
 
 
 class ModifyMaxResourceStatus(Status):

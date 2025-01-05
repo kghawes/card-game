@@ -38,7 +38,7 @@ class TextInterface:
         # Display player's hand with card effects
         print("\033[01mCards in Hand:\033[0m")
         for idx, card in enumerate(player.card_manager.hand):
-            print(f"{idx}. {card.name} (Cost: {card.cost})")
+            print(f"{idx}. {card.name} (Cost: {card.get_cost()})")
             for effect_id, effect_level in card.effects.items():
                 effect = effect_registry.get_effect(effect_id)
                 level = effect_level.get_level()

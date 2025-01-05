@@ -3,7 +3,7 @@ This module defines the Card class, the helper class EffectLevel, as
 well as the CardPrototype and CardCache.
 """
 from utils.utils import Prototype
-from utils.constants import MIN_EFFECT
+from utils.constants import MIN_EFFECT, MIN_COST
 
 class Card:
     """Represents a card in game."""
@@ -24,7 +24,7 @@ class Card:
 
     def get_cost(self) -> int:
         """Get the stamina or magicka cost of the card."""
-        return self.cost * self.cost_modifier
+        return max(self.cost + self.cost_modifier, MIN_COST)
 
     def change_cost_modifier(self, amount):
         """Change the cost of the card."""
@@ -32,7 +32,7 @@ class Card:
 
     def reset_cost_modifier(self):
         """Reset the cost of the card to its base value."""
-        self.cost_modifier = 1
+        self.cost_modifier = 0
 
     def reset_card(self):
         """Reset all modified values on the card."""
@@ -82,7 +82,8 @@ class CardPrototype(Card, Prototype):
     def clone(self):
         """Create an instance of this card."""
         return Card(
-            self.name, self.card_type, self.cost, self.value, self.effects
+            self.name, self.card_type, self.cost, self.value, self.effects,
+            self.subtype
             )
 
 

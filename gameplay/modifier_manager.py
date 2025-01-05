@@ -3,7 +3,7 @@ This module defined the ModifierManager class and modifier classes.
 """
 import utils.constants as c
 from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus, \
-    ModifyDrawStatus, ModifyDamageStatus
+    ModifyDrawStatus, ModifyDamageStatus, ModifyCostStatus
 
 class ModifierManager:
     """This class holds the details of currently active status
@@ -20,6 +20,9 @@ class ModifierManager:
             status_registry
             )
         self.damage_modifiers = self._initialize_damage_modifiers(
+            status_registry
+            )
+        self.cost_modifiers = self._initialize_cost_modifiers(
             status_registry
             )
 
@@ -189,6 +192,58 @@ class ModifierManager:
                 net_contribution += modifier.contribution
         amount = max(round((1 + net_contribution) * amount), 0)
         return amount
+
+
+    # Cost modifiers
+
+    def _initialize_cost_modifiers(self, status_registry) -> dict:
+        """Populate the resource modifier pool with statuses."""
+        cost_modifiers = {}
+        for status_id, status in status_registry.statuses.items():
+            if isinstance(status, ModifyCostStatus):
+                modifier = CostModifier(status.affected_card_type)
+                cost_modifiers[status_id] = modifier
+        return cost_modifiers
+
+    def accumulate_cost_modifier(self, status, contribution):
+        """Accumulate contributions to cost modifiers in the pool."""
+        old_value = self.cost_modifiers[status.status_id].contribution
+        new_value = old_value + contribution
+        self.cost_modifiers[status.status_id].contribution = new_value
+
+    def clear_cost_modifiers(self, status, card_manager):
+        """Clear contributions for a specific status."""
+        if isinstance(status, ModifyCostStatus):
+            self.cost_modifiers[status.status_id].contribution = 0
+            card_type = status.affected_card_type
+            self.recalculate_cost_modifiers(card_type, card_manager)
+
+    def reset_cost_modifiers(self, card_type, card_manager):
+        """Set cost modifiers affecting this card type to 0."""
+        for card in card_manager.hand:
+            if card.matches(card_type):
+                card.reset_cost_modifier()
+
+    def recalculate_cost_modifiers(self, card_type, card_manager):
+        """Recalculate affected cost modifiers for affected cards."""
+        self.reset_cost_modifiers(card_type, card_manager)
+        for modifier in self.cost_modifiers.values():
+            if modifier.matches(card_type):
+                for card in card_manager.hand:
+                    if card.matches(card_type):
+                        self.modify_card_cost(card, modifier)
+
+    def recalculate_all_costs(self, status_registry, card_manager):
+        """Recalculate all cost modifiers for all cards."""
+        for status_id in status_registry.list_statuses():
+            status = status_registry.get_status(status_id)
+            if isinstance(status, ModifyCostStatus):
+                card_type = status.affected_card_type
+                self.recalculate_cost_modifiers(card_type, card_manager)
+
+    def modify_card_cost(self, card, modifier):
+        """Change the cost of the given card."""
+        card.change_cost_modifier(modifier.contribution)
 
 
 # Modifier classes

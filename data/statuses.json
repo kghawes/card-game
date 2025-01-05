@@ -164,7 +164,7 @@
   },
   "FORTIFY_BLUNT_WEAPON": {
     "class": "ModifyCostStatus",
-    "affected_card_type": "FORTIFY_BLUNT_WEAPON",
+    "affected_card_type": "BLUNT_WEAPON",
     "sign_factor": -1
   },
   "FORTIFY_SHORT_BLADE": {
@@ -184,17 +184,17 @@
   },
   "FORTIFY_LIGHT_ARMOR": {
     "class": "ModifyCostStatus",
-    "affected_card_type": "LIGHT_ARMOR",
+    "affected_card_type": "LIGHT",
     "sign_factor": -1
   },
   "FORTIFY_MEDIUM_ARMOR": {
     "class": "ModifyCostStatus",
-    "affected_card_type": "MEDIUM_ARMOR",
+    "affected_card_type": "MEDIUM",
     "sign_factor": -1
   },
   "FORTIFY_HEAVY_ARMOR": {
     "class": "ModifyCostStatus",
-    "affected_card_type": "HEAVY_ARMOR",
+    "affected_card_type": "HEAVY",
     "sign_factor": -1
   },
   "FORTIFY_ALTERATION": {

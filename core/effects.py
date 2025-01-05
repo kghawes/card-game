@@ -105,22 +105,6 @@ class ChangeResourceEffect(Effect):
         subject.change_resource(self.resource_enum.name, level)
 
 
-class PickpocketEffect(Effect):
-    """This effect lets you look at the top cards of your opponent's
-    deck and play one of them."""
-    def __init__(self):
-        """Initialize a new PickpocketEffect."""
-        effect_id = c.EffectNames.PICKPOCKET.name
-        effect_name = c.EffectNames.PICKPOCKET.value
-        super().__init__(effect_id, effect_name)
-
-    def resolve(self, source, opponent, level, status_registry):
-        """Show opponent cards and play one."""
-        # target.card_manager.show_top_cards_in_deck(level)
-        # ....
-        pass
-
-
 class HandEffect(Effect):
     """This type of effect draws or discards cards."""
     def __init__(self, effect_name_enum, target_type_enum, is_draw_effect):
@@ -152,7 +136,6 @@ class EffectRegistry:
         effects = {}
 
         effects[c.EffectNames.NO_EFFECT.name] = NoEffect()
-        effects[c.EffectNames.PICKPOCKET.name] = PickpocketEffect()
 
         # Multi-target effects:
         for target_type in c.TargetTypes:
