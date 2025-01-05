@@ -171,7 +171,10 @@ CARD_PATHS = [
     "data/cards/enemy_spell_cards.json",
     "data/cards/enemy_skill_cards.json"
     ]
-ENEMIES_PATH = "data/enemies.json"
+ENEMIES_PATHS = [
+    "data/enemies_beasts.json",
+    "data/enemies_undead.json"
+    ]
 STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"
 ENCHANTMENTS_PATH = "data/enchantments.json"

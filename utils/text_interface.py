@@ -43,20 +43,20 @@ class TextInterface:
                 effect = effect_registry.get_effect(effect_id)
                 level = effect_level.get_level()
                 print(f"     Level {level} {effect.name}")
-    
+
         # Divider and status display
         print(constants.TEXT_DIVIDER)
         print("Active Statuses:")
         for status_id, level in player.status_manager.statuses.items():
             print(f"  {status_id}: Level {level}")
-    
+
         print(constants.TEXT_DIVIDER)
 
     def turn_options_prompt(self, player, enemy, registries) -> int:
         """
         Prompt the user for an action during their turn.
         """
-        debug_commands = self.debug_setup(player, enemy, registries.effects)
+        debug_commands = self.debug_setup(registries.effects)
 
         while True:
             response = input(constants.PROMPT_TURN_OPTIONS).strip()
@@ -91,7 +91,7 @@ class TextInterface:
         level = int(parts[1])
         return effect_id, level
 
-    def debug_setup(self, player, enemy, effect_registry) -> dict:
+    def debug_setup(self, effect_registry) -> dict:
         """
         Define debug commands usable from the turn options prompt.
         """

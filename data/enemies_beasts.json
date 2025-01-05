@@ -1,0 +1,138 @@
+{
+  "CLIFF_RACER": {
+    "name": "Cliff Racer",
+    "max_health": 5,
+    "max_stamina": 2,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "RAZOR_BEAK", "quantity": 6},
+      {"card": "SHARP_TAIL", "quantity": 2},
+      {"card": "FLAP", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "DISEASED_CLIFF_RACER": {
+    "name": "Diseased Cliff Racer",
+    "max_health": 4,
+    "max_stamina": 2,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "RAZOR_BEAK", "quantity": 6},
+      {"card": "SHARP_TAIL", "quantity": 2},
+      {"card": "FLAP", "quantity": 2},
+      {"card": "ATAXIA", "quantity": 4}
+    ],
+    "loot": {"gold": 2}
+  },
+  "BLIGHTED_CLIFF_RACER": {
+    "name": "Blighted Cliff Racer",
+    "max_health": 5,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "RAZOR_BEAK", "quantity": 6},
+      {"card": "SHARP_TAIL", "quantity": 2},
+      {"card": "FLAP", "quantity": 2},
+      {"card": "ASH_CHANCRE", "quantity": 4}
+    ],
+    "loot": {"gold": 2}
+  },
+  "RAT": {
+    "name": "Rat",
+    "max_health": 3,
+    "max_stamina": 2,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 6},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 1}
+  },
+  "DISEASED_RAT": {
+    "name": "Diseased Rat",
+    "max_health": 2,
+    "max_stamina": 2,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 6},
+      {"card": "MISS", "quantity": 2},
+      {"card": "WITBANE", "quantity": 3}
+    ],
+    "loot": {"gold": 1}
+  },
+  "BLIGHTED_RAT": {
+    "name": "Blighted Rat",
+    "max_health": 3,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 6},
+      {"card": "MISS", "quantity": 2},
+      {"card": "BLACK_HEART_BLIGHT", "quantity": 3}
+    ],
+    "loot": {"gold": 1}
+  },
+  "CAVE_RAT": {
+    "name": "Cave Rat",
+    "max_health": 4,
+    "max_stamina": 2,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 7},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "GIANT_CAVE_RAT": {
+    "name": "Giant Cave Rat",
+    "max_health": 7,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "RAZOR_TEETH", "quantity": 7},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "SCRIB": {
+    "name": "Scrib",
+    "max_health": 3,
+    "max_stamina": 2,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_BEAK", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "HARD_CARAPACE", "quantity": 2},
+      {"card": "PARALYZING_BITE", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "DISEASED_SCRIB": {
+    "name": "Diseased Scrib",
+    "max_health": 2,
+    "max_stamina": 2,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_BEAK", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "HARD_CARAPACE", "quantity": 2},
+      {"card": "PARALYZING_BITE", "quantity": 2},
+      {"card": "RATTLES", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BLIGHTED_SCRIB": {
+    "name": "Blighted Scrib",
+    "max_health": 3,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_BEAK", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "HARD_CARAPACE", "quantity": 2},
+      {"card": "PARALYZING_BITE", "quantity": 2},
+      {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  }
+}

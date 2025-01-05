@@ -124,9 +124,7 @@ class CardCache:
         """Create variants of a card for generic enchantments."""
         for enchant_id in prototype.enchantments:
             enchantment = registries.enchantments.get_enchantment(enchant_id)
-            enchanted_card = enchantment.create_enchanted_card(
-                prototype, registries.effects
-                )
+            enchanted_card = enchantment.create_enchanted_card(prototype)
 
             if enchanted_card.card_id in self.card_prototypes:
                 raise ValueError(f"Duplicate card '{enchanted_card.card_id}'.")

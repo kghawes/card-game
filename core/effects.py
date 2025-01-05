@@ -138,7 +138,7 @@ class HandEffect(Effect):
         if self.is_draw_effect:
             subject.card_manager.draw(level)
         else:
-            pass
+            subject.card_manager.discard_random(level)
 
 
 class EffectRegistry:
@@ -154,6 +154,7 @@ class EffectRegistry:
         effects[c.EffectNames.NO_EFFECT.name] = NoEffect()
         effects[c.EffectNames.PICKPOCKET.name] = PickpocketEffect()
 
+        # Multi-target effects:
         for target_type in c.TargetTypes:
             for status_id in status_registry.list_statuses():
                 apply_status_effect = ChangeStatusEffect(
@@ -170,21 +171,10 @@ class EffectRegistry:
                 effects[damage_effect.effect_id] = damage_effect
 
             for resource in c.Resources:
-                if resource == c.Resources.HEALTH:
-                    restore_health_effect = ChangeResourceEffect(
-                        c.EffectNames.RESTORE, target_type, resource
-                        )
-                    health_id = restore_health_effect.effect_id
-                    effects[health_id] = restore_health_effect
-                else:
-                    drain_effect = ChangeResourceEffect(
-                        c.EffectNames.DRAIN, c.TargetTypes.SELF, resource
-                        )
-                    restore_effect = ChangeResourceEffect(
-                        c.EffectNames.RESTORE, c.TargetTypes.SELF, resource
-                        )
-                    effects[drain_effect.effect_id] = drain_effect
-                    effects[restore_effect.effect_id] = restore_effect
+                restore_effect = ChangeResourceEffect(
+                    c.EffectNames.RESTORE, c.TargetTypes.SELF, resource
+                    )
+                effects[restore_effect.effect_id] = restore_effect
 
         return effects
 

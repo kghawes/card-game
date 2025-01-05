@@ -47,34 +47,35 @@ class EnemyPrototype(Prototype):
 
 class EnemyCache:
     """Holds all the enemy prototype data."""
-    def __init__(self, filename):
+    def __init__(self, filenames):
         """Initialize a new EnemyCache."""
-        self.enemy_prototypes = self._load_enemy_prototypes(filename)
+        self.enemy_prototypes = self._load_enemy_prototypes(filenames)
 
-    def _load_enemy_prototypes(self, filename) -> dict:
+    def _load_enemy_prototypes(self, filenames) -> dict:
         """Load enemy data from JSON and create the dictionary."""
-        enemy_data = load_json(filename)
         prototypes = {}
-        for enemy_id, data in enemy_data.items():
-            if not all(key in data for key in [
-                    "name",
-                    "max_health",
-                    "max_stamina",
-                    "max_magicka",
-                    "deck",
-                    "loot"
-                    ]):
-                raise ValueError(
-                    f"Enemy '{enemy_id}' is missing required fields."
-                    )
-            prototypes[enemy_id] = EnemyPrototype(
-                name=data["name"],
-                max_health=data["max_health"],
-                max_stamina=data["max_stamina"],
-                max_magicka=data["max_magicka"],
-                deck=data["deck"],  # Pass raw deck
-                loot=data["loot"]
-            )
+        for path in filenames:
+            enemy_data = load_json(path)
+            for enemy_id, data in enemy_data.items():
+                if not all(key in data for key in [
+                        "name",
+                        "max_health",
+                        "max_stamina",
+                        "max_magicka",
+                        "deck",
+                        "loot"
+                        ]):
+                    raise ValueError(
+                        f"Enemy '{enemy_id}' is missing required fields."
+                        )
+                prototypes[enemy_id] = EnemyPrototype(
+                    name=data["name"],
+                    max_health=data["max_health"],
+                    max_stamina=data["max_stamina"],
+                    max_magicka=data["max_magicka"],
+                    deck=data["deck"],
+                    loot=data["loot"]
+                )
         return prototypes
 
     def create_enemy(self, enemy_id, card_cache, status_registry) -> Enemy:

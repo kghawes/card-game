@@ -61,6 +61,7 @@ class CombatManager:
         return False
 
     def end_of_turn(self, combatant, status_registry):
+        """Discard hand and decrement active status levels."""
         combatant.card_manager.discard_hand()
         combatant.status_manager.decrement_statuses(
             combatant, status_registry

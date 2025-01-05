@@ -6,5 +6,68 @@
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_PARALYZE_TARGET": 1 }
+  },
+  "RATTLES": {
+    "name": "Rattles",
+    "card_type": "SPELL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_DISEASE_TARGET": 1 }
+  },
+  "ATAXIA": {
+    "name": "Ataxia",
+    "card_type": "SPELL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_DISEASE_TARGET": 2 }
+  },
+  "BROWN_ROT": {
+    "name": "Brown Rot",
+    "card_type": "SPELL",
+    "cost": 2,
+    "value": 0,
+    "effects": { "APPLY_DISEASE_TARGET": 2 }
+  },
+  "ROCKJOINT": {
+    "name": "Rockjoint",
+    "card_type": "SPELL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_DISEASE_TARGET": 3 }
+  },
+  "WITBANE": {
+    "name": "Witbane",
+    "card_type": "SPELL",
+    "cost": 2,
+    "value": 0,
+    "effects": { "APPLY_DISEASE_TARGET": 4 }
+  },
+  "ASH_CHANCRE": {
+    "name": "Ash-chancre",
+    "card_type": "SPELL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_BLIGHT_TARGET": 1 }
+  },
+  "BLACK_HEART_BLIGHT": {
+    "name": "Black-Heart Blight",
+    "card_type": "SPELL",
+    "cost": 2,
+    "value": 0,
+    "effects": { "APPLY_BLIGHT_TARGET": 2 }
+  },
+  "CHANTHRAX_BLIGHT": {
+    "name": "Chanthrax Blight",
+    "card_type": "SPELL",
+    "cost": 2,
+    "value": 0,
+    "effects": { "APPLY_BLIGHT_TARGET": 3 }
+  },
+  "ASH_WOE_BLIGHT": {
+    "name": "Ash Woe Blight",
+    "card_type": "SPELL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_BLIGHT_TARGET": 3 }
   }
 }

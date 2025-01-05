@@ -132,8 +132,6 @@ Draw X
   Max hand size is 12; further cards will not be drawn when the effect resolves.
 Discard X
   Select up to X cards to discard, or discard hand if you don't have enough.
-Shield X
-  Apply defense X.
 Imbue effect
   Add an imbued effect to another card(s).
 Jump X
@@ -152,7 +150,7 @@ Recall
   Immediately end combat and return to quest where enemy encounter can be retried.
 Absorb health X
   Reduce opponent health by up to X and restore your health by that much (opponent takes magic damage).
-Conjure card
+Conjure card X
   Add a conjured card to your hand.
   Leveled effect?
 
@@ -168,19 +166,17 @@ Feather X
   Your skills cost up to X less stamina (min 0 stamina).
 Levitate X
   For X turns, at the start of your turn the cost of each card in your hand is set to the average cost of all the cards in your hand (rounded up).
-  Applies before or after other statuses that change cost depending on the order they were originally applied.
+  Applies on top of other statuses that change cost.
 Locked X
-  For X turns, the opponent cannot interact with your deck.
+  For X turns, the opponent cannot interact with your deck or discard pile.
 Waterwalking X
-  For X turns, cards you play don’t get discarded.
-  Doesn't apply to conjured or pickpocketed cards, nor any other card that would not go to your discard pile.
+  The next X cards you play that would go to your discard pile don’t get discarded.
 Waterbreathing X
   At the start of your turn, when you would draw cards, select up to X cards from your discard pile and add them to your hand. Then draw the rest of your cards from your deck.
 Swift Swim X
-  For X turns, at the start of your turn, after drawing cards, you may discard any number of cards then draw that many cards.
+  At the start of your turn, after drawing cards, you may discard up to X cards then draw that many cards.
 Poison X
   Take X poison damage each turn.
-  Applies before or after other statuses that change health or max health depending on the order they were originally applied.
 Weakness to damage type (physical, fire, frost, shock, poison) X
   Take 1+0.2x times damage from that type.
 Damage strength X
@@ -239,7 +235,7 @@ Paralyze X
 Evasion X
   0.1X chance to take 0 damage when a card would deal damage to you.
 Hidden X
-  0.1X chance to skip the opponent’s next turn.
+  0.1X chance to deal double damage.
 Frenzy X
   Cards you play have none of their effects except dealing damage for X turns.
 Calm X
@@ -273,6 +269,8 @@ Comments and examples:
     [Consumable] Poison of Paralyze / no cost / Effect: Inflict Paralyze 1. (Tooltip: "Paralyze 1: You can only play Consumable cards. Status effects decrease by 1 each turn.")
     [Consumable] Potion of Metagaming / no cost / Effect: Gain Alchemist 2. (Tooltip: "Alchemist 2: Your potions are 50% more effective. Status effects decrease by 1 each turn.")
     [Item] Salamander Ring / no cost / Effect: Gain Resist Fire 2. (Tooltip: "Resist Fire 2: You take 44% less Fire Damage. Status effects decrease by 1 each turn.")
+  
+
 
 Player Character 
 Name

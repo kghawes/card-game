@@ -1,0 +1,14 @@
+{
+  "SKELETAL_MINION": {
+    "name": "Skeletal Minion",
+    "max_health": 7,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "MISS", "quantity": 6},
+      {"card": "IRON_SHIELD", "quantity": 5},
+      {"card": "IRON_MACE", "quantity": 7}
+    ],
+    "loot": {"gold": 2}
+  }
+}

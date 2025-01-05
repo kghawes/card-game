@@ -13,7 +13,7 @@ class Enchantment:
         self.effects_dict = deepcopy(effects_dict)
         self.value_multiplier = value_multiplier
 
-    def create_enchanted_card(self, card_prototype, effect_registry):
+    def create_enchanted_card(self, card_prototype):
         """Create an enchanted version of the given card."""
         enchanted_card = copy(card_prototype)
         enchanted_card.effects = deepcopy(card_prototype.effects)

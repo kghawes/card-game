@@ -1,7 +1,7 @@
-import utils.constants as c
 """
 This module defined the ModifierManager class and modifier classes.
 """
+import utils.constants as c
 from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus, \
     ModifyDrawStatus, ModifyDamageStatus
 
@@ -111,13 +111,13 @@ class ModifierManager:
                     status.resource_id
                     )
         return resource_modifiers
-    
+
     def reset_max_resource(self, resource_id):
         """Clear all modifiers for the resource and reset maximum
         value to its base value."""
         for modifier in self.resource_modifiers.values():
             if modifier.matches(resource_id):
-                 modifier.contribution = 0
+                modifier.contribution = 0
 
     def clear_resource_modifiers(self, status_id):
         """Remove max value modifier contribution from a specific
@@ -182,6 +182,7 @@ class ModifierManager:
         self.damage_modifiers[status_id].contribution = new_value
 
     def calculate_damage(self, damage_type, amount):
+        """Return net damage after applying modifiers."""
         net_contribution = 0
         for modifier in self.damage_modifiers.values():
             if modifier.matches(damage_type):

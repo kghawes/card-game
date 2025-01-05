@@ -254,7 +254,7 @@ class StatusRegistry:
             "RestrictCardTypeStatus": RestrictCardTypeStatus,
             "FilterEffectStatus": FilterEffectStatus
             }
-        
+
         statuses = {}
 
         for status_id, data in status_data.items():

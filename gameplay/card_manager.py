@@ -59,6 +59,13 @@ class CardManager:
         self.discard_pile.append(card)
         self.hand.remove(card)
 
+    def discard_random(self, quantity):
+        """Randomly discard up to the given quantity of cards."""
+        while len(self.hand) > 0 and quantity > 0:
+            card = random.choice(self.hand)
+            self.discard(card)
+            quantity -= 1
+
     def discard_hand(self):
         """Discard the hand after each turn."""
         while len(self.hand) > 0:

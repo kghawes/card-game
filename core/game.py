@@ -18,7 +18,7 @@ class Game:
         self.combat_manager = CombatManager()
         self.registries = Registries(c.STATUSES_PATH, c.ENCHANTMENTS_PATH)
         self.card_cache = CardCache(c.CARD_PATHS, self.registries)
-        self.enemy_cache = EnemyCache(c.ENEMIES_PATH)
+        self.enemy_cache = EnemyCache(c.ENEMIES_PATHS)
         self.registries.register_quests(
             c.QUESTS_PATH, self.enemy_cache, self.card_cache
             )
