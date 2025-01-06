@@ -29,6 +29,8 @@ class Combatant:
         self.card_manager = CardManager(starting_deck, card_cache)
         self.status_manager = StatusManager()
         self.modifier_manager = ModifierManager(status_registry)
+        
+        self.cards_played_this_turn = 0
 
     def get_health(self) -> int:
         """Get current health."""
@@ -82,6 +84,7 @@ class Combatant:
     def reset_for_turn(self):
         """Reset values for the new turn."""
         self.replenish_resources_for_turn()
+        self.cards_played_this_turn = 0
 
     def change_resource(self, resource_id, amount):
         """Change the value of a given resource by a given amount."""

@@ -2,7 +2,8 @@
 This Module defines the CombatManager class.
 """
 import utils.constants as c
-from core.statuses import FilterEffectStatus
+from core.statuses import FilterEffectStatus, RestrictCardTypeStatus, \
+    LimitCardPlayStatus
 
 class CombatManager:
     """This class controls the flow of combat and coordinates between
@@ -77,17 +78,24 @@ class CombatManager:
         if selection >= len(player.card_manager.hand):
             return False
         card = player.card_manager.hand[selection]
-        self.play_card(player, enemy, card, text_interface, registries)
+        if self.play_card(player, enemy, card, text_interface, registries):
+            player.cards_played_this_turn += 1
         return self.is_combat_over(player, enemy)
 
-    def play_card(self, combatant, opponent, card, text_interface, registries):
-        """Activate a card's effects, spend its cost, and discard it."""
+    def play_card(
+            self, combatant, opponent, card, text_interface, registries
+            ) -> bool:
+        """Activate a card's effects, spend its cost, and discard it.
+        Return whether the card was successfully played."""
+        if not self.card_can_be_played(combatant, card):
+            return False
+
         resource_id = c.Resources.STAMINA.name
         if card.card_type == c.CardTypes.SPELL.name:
             resource = c.Resources.MAGICKA
         if not combatant.resources[resource_id].try_spend(card.get_cost()):
             text_interface.send_message("Not enough " + resource.value)
-            return
+            return False
 
         for effect_id, effect_level in card.effects.items():
             if not self.effect_can_resolve(combatant, effect_id):
@@ -103,6 +111,19 @@ class CombatManager:
         text_interface.send_message(c.CARD_PLAYED_MESSAGE.format(
             combatant.name, card.name, opponent.name, opponent.get_health())
             )
+        return True
+
+    def card_can_be_played(self, combatant, card) -> bool:
+        """Check if the given card can be played based on current
+        status effects."""
+        for status in combatant.status_manager.statuses.values():
+            if isinstance(status, RestrictCardTypeStatus):
+                if not status.is_card_playable(card.card_type):
+                    return False
+            elif (isinstance(status, LimitCardPlayStatus) and
+                  combatant.cards_played_this_turn > status.card_limit):
+                    return False
+        return True
 
     def effect_can_resolve(self, combatant, effect_id) -> bool:
         """Check if the given card effect can resolve based on current
@@ -122,9 +143,10 @@ class CombatManager:
             for card in enemy.card_manager.hand:
                 if card.cost <= enemy.get_stamina(): ###
                     playable_card_exists = True
-                    self.play_card(
+                    if self.play_card(
                         enemy, player, card, text_interface, registries
-                        )
+                        ):
+                        enemy.cards_played_this_turn += 1
                     if self.is_combat_over(player, enemy):
                         return
                     break

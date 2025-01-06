@@ -227,7 +227,7 @@ class RestrictCardTypeStatus(Status):
 
 
 class FilterEffectStatus(Status):
-    """Status that allow only certain effects to resolve."""
+    """This status allows only certain effects to resolve."""
     def __init__(self, status_id, allowed_effect, blocked_effect):
         """Initialize a new FilterEffectStatus."""
         super().__init__(status_id, False)
@@ -236,9 +236,20 @@ class FilterEffectStatus(Status):
 
     def effect_can_resolve(self, effect_id) -> bool:
         """Check if the given effect is allowed to resolve."""
-        if effect_id == self.blocked_effect:
+        if self.blocked_effect and effect_id == self.blocked_effect:
             return False
-        return self.allowed_effect and effect_id == self.allowed_effect
+        elif self.allowed_effect and effect_id != self.allowed_effect:
+            return False
+        return True
+
+
+class LimitCardPlayStatus(Status):
+    """This status prevents a combatant from playing more than a
+    certain number of cards per turn."""
+    def __init__(self, status_id, max_cards_per_turn):
+        """Initialize a new LimitCardPlayStatus."""
+        super().__init__(status_id, False)
+        self.card_limit = max_cards_per_turn
 
 
 class StatusRegistry:

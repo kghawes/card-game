@@ -6,5 +6,94 @@
     "cost": 2,
     "value": 30,
     "effects": { "APPLY_DEFENSE_SELF": 2 }
+  },
+  "SECOND_BARRIER": {
+    "name": "Second Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 3,
+    "value": 30,
+    "effects": { "APPLY_DEFENSE_SELF": 4 }
+  },
+  "THIRD_BARRIER": {
+    "name": "Third Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 3,
+    "value": 30,
+    "effects": { "APPLY_DEFENSE_SELF": 5 }
+  },
+  "FOURTH_BARRIER": {
+    "name": "First Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 4,
+    "value": 30,
+    "effects": { "APPLY_DEFENSE_SELF": 7 }
+  },
+  "FIFTH_BARRIER": {
+    "name": "Fifth Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 5,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 8,
+      "APPLY_RESIST_FIRE_SELF": 2,
+      "APPLY_RESIST_FROST_SELF": 2,
+      "APPLY_RESIST_SHOCK_SELF": 2
+    }
+  },
+  "SIXTH_BARRIER": {
+    "name": "Sixth Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 6,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 10,
+      "APPLY_RESIST_FIRE_SELF": 3,
+      "APPLY_RESIST_FROST_SELF": 3,
+      "APPLY_RESIST_SHOCK_SELF": 3
+    }
+  },
+  "SEVENTH_BARRIER": {
+    "name": "Seventh Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 7,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 14,
+      "APPLY_RESIST_FIRE_SELF": 4,
+      "APPLY_RESIST_FROST_SELF": 4,
+      "APPLY_RESIST_SHOCK_SELF": 4
+    }
+  },
+  "EIGHTH_BARRIER": {
+    "name": "Eighth Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 8,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 20,
+      "APPLY_RESIST_FIRE_SELF": 5,
+      "APPLY_RESIST_FROST_SELF": 5,
+      "APPLY_RESIST_SHOCK_SELF": 5
+    }
+  },
+  "NINTH_BARRIER": {
+    "name": "Ninth Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 9,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 30,
+      "APPLY_RESIST_FIRE_SELF": 6,
+      "APPLY_RESIST_FROST_SELF": 6,
+      "APPLY_RESIST_SHOCK_SELF": 6
+    }
   }
 }

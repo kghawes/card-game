@@ -1,14 +1,10 @@
 When you are attacked, your Resistances and Weaknesses apply before your Defense does.
 
-Status effects that activate at the beginning of your turn do so in the order they were originally applied.
-
-Weapons, Armor, and Skills cost Stamina to play. Spells cost Magicka. Items cost nothing.
+Weapons, Armor, and Skills cost Stamina to play. Spells cost Magicka. Items and Consumables cost nothing.
 
 Consumable cards can normally only be played once per combat.
 
-Strength, Endurance, Willpower, Weaknesses, and Resistances scale Damage and Defense by 20% per level (multiple levels are combined additively).
-
-Agility and Intelligence increase your maximum resource by an amount equal to the status level.
+Percent buffs and debuffs stack additively.
 
 Statuses decay by one level each turn.
 
