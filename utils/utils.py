@@ -2,12 +2,17 @@
 This module contains prototyping and JSON loading logic.
 """
 import json
+import sys
 from abc import ABC, abstractmethod
 
 def load_json(filepath: str):
     """Load data from the JSON file."""
-    with open(filepath, "r") as file:
-        return json.load(file)
+    try:
+        with open(filepath, "r") as file:
+            return json.load(file)
+    except Exception as e:
+        print(f"Error loading JSON file {filepath}:")
+        sys.exit(e)
 
 class Prototype(ABC):
     """Prototype class for creating many instances from a template."""

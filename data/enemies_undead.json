@@ -10,5 +10,41 @@
       {"card": "IRON_MACE", "quantity": 7}
     ],
     "loot": {"gold": 2}
+  },
+  "SKELETON_WARRIOR": {
+    "name": "Skeleton Warrior",
+    "max_health": 9,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "MISS", "quantity": 3},
+      {"card": "IRON_SHIELD", "quantity": 5},
+      {"card": "IRON_LONGSWORD", "quantity": 7}
+    ],
+    "loot": {"gold": 2}
+  },
+  "SKELETON_ARCHER": {
+    "name": "Skeleton Archer",
+    "max_health": 9,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "MISS", "quantity": 3},
+      {"card": "LONGBOW", "quantity": 5},
+      {"card": "LONGBOW_(SHARDARROWS)", "quantity": 3}
+    ],
+    "loot": {"gold": 2}
+  }
+  "SKELETON_CHAMPION": {
+    "name": "Skeleton Archer",
+    "max_health": 10,
+    "max_stamina": 5,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "MISS", "quantity": 1},
+      {"card": "STEEL_CLAYMORE", "quantity": 5},
+      {"card": "STEEL_SHIELD", "quantity": 3}
+    ],
+    "loot": {"gold": 2}
   }
 }

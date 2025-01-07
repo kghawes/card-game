@@ -39,7 +39,7 @@
     "cost": 1,
     "value": 20,
     "effects": {
-      "DRAW_SELF": 1
+      "DRAW": 1
     }
   },
   "DEFENSIVE_STANCE": {
@@ -90,7 +90,7 @@
     "name": "Swordsmanship",
     "card_type": "SKILL",
     "subtype": "COMBAT",
-    "cost": 2,
+    "cost": 1,
     "value": 80,
     "effects": {
       "APPLY_FORTIFY_LONG_BLADE_SELF": 2
@@ -100,7 +100,7 @@
     "name": "Oathbound",
     "card_type": "SKILL",
     "subtype": "COMBAT",
-    "cost": 2,
+    "cost": 1,
     "value": 80,
     "effects": {
       "APPLY_FORTIFY_BLUNT_WEAPON_SELF": 2

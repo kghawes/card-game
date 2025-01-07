@@ -3,10 +3,130 @@
     "name": "Novice Alchemist",
     "card_type": "SKILL",
     "subtype": "MAGIC",
-    "cost": 2,
+    "cost": 1,
     "value": 40,
     "effects": {
+      "APPLY_ALCHEMIST_SELF": 1
+      }
+  },
+  "APPRENTICE_ALCHEMIST": {
+    "name": "Apprentice Alchemist",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 1,
+    "value": 80,
+    "effects": {
       "APPLY_ALCHEMIST_SELF": 2
+      }
+  },
+  "JOURNEYMAN_ALCHEMIST": {
+    "name": "Journeyman Alchemist",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 130,
+    "effects": {
+      "APPLY_ALCHEMIST_SELF": 3
+      }
+  },
+  "MASTER_ALCHEMIST": {
+    "name": "Master Alchemist",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 180,
+    "effects": {
+      "APPLY_ALCHEMIST_SELF": 4
+      }
+  },
+  "GRANDMASTER_ALCHEMIST": {
+    "name": "Grandmaster Alchemist",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 3,
+    "value": 400,
+    "effects": {
+      "APPLY_ALCHEMIST_SELF": 5
+      }
+  },
+  "NOVICE_ENCHANTER": {
+    "name": "Novice Enchanter",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 1,
+    "value": 40,
+    "effects": {
+      "APPLY_ENCHANTER_SELF": 1
+      }
+  },
+  "APPRENTICE_ENCHANTER": {
+    "name": "Apprentice Enchanter",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 1,
+    "value": 80,
+    "effects": {
+      "APPLY_ENCHANTER_SELF": 2
+      }
+  },
+  "JOURNEYMAN_ENCHANTER": {
+    "name": "Journeyman Enchanter",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 130,
+    "effects": {
+      "APPLY_ENCHANTER_SELF": 3
+      }
+  },
+  "MASTER_ENCHANTER": {
+    "name": "Master Enchanter",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 180,
+    "effects": {
+      "APPLY_ENCHANTER_SELF": 4
+      }
+  },
+  "GRANDMASTER_ENCHANTER": {
+    "name": "Grandmaster Enchanter",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 3,
+    "value": 400,
+    "effects": {
+      "APPLY_ENCHANTER_SELF": 5
+      }
+  },
+  "FOCUS": {
+    "name": "Focus",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 88,
+    "effects": {
+      "APPLY_FORTIFY_INTELLIGENCE_SELF": 1
+      }
+  },
+  "MEDITATE": {
+    "name": "Meditate",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 3,
+    "value": 150,
+    "effects": {
+      "APPLY_FORTIFY_INTELLIGENCE_SELF": 2
+      }
+  },
+  "BATTLE_TRANCE": {
+    "name": "Battle Trance",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 4,
+    "value": 201,
+    "effects": {
+      "APPLY_FORTIFY_INTELLIGENCE_SELF": 3
       }
   }
 }

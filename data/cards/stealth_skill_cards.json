@@ -19,5 +19,45 @@
     "effects": {
       "APPLY_EVASION_SELF": 3
       }
+  },
+  "BACKFLIP": {
+    "name": "Backflip",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 3,
+    "value": 60,
+    "effects": {
+      "APPLY_FORTIFY_AGILITY_SELF": 3
+      }
+  },
+  "KNOCK_OFF_BALANCE": {
+    "name": "Knock Off Balance",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 1,
+    "value": 38,
+    "effects": {
+      "APPLY_DAMAGE_AGILITY_TARGET": 2
+      }
+  },
+  "PRESSURE_POINT": {
+    "name": "Pressure Point",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 1,
+    "value": 20,
+    "effects": {
+      "APPLY_WEAKNESS_PHYSICAL_TARGET": 2
+      }
+  },
+  "DISGUISE": {
+    "name": "Disguise",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 2,
+    "value": 30,
+    "effects": {
+      "APPLY_HIDDEN_SELF": 2
+      }
   }
 }

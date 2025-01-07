@@ -205,5 +205,445 @@
       "APPLY_FORTIFY_STRENGTH_SELF": 2,
       "APPLY_DAMAGE_ENDURANCE_SELF": 2
       }
+  },
+  "BARGAIN_POTION_STRENGTH": {
+    "name": "Bargain Potion of Strength",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 1 }
+  },
+  "BARGAIN_POTION_AGILITY": {
+    "name": "Bargain Potion of Agility",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_FORTIFY_AGILITY_SELF": 1 }
+  },
+  "BARGAIN_POTION_INTELLIGENCE": {
+    "name": "Bargain Potion of Intelligence",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 1 }
+  },
+  "BARGAIN_POTION_ENDURANCE": {
+    "name": "Bargain Potion of Endurance",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_FORTIFY_ENDURANCE_SELF": 1 }
+  },
+  "BARGAIN_POTION_SPEED": {
+    "name": "Bargain Potion of Speed",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_FORTIFY_SPEED_SELF": 2 }
+  },
+  "BARGAIN_POTION_WILLPOWER": {
+    "name": "Bargain Potion of Willpower",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_FORTIFY_WILLPOWER_SELF": 1 }
+  },
+  "BARGAIN_POTION_RESIST_FIRE": {
+    "name": "Bargain Potion of Resist Fire",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_RESISTANCE_FIRE_SELF": 2 }
+  },
+  "BARGAIN_POTION_RESIST_FROST": {
+    "name": "Bargain Potion of Resist Frost",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_RESISTANCE_FROST_SELF": 2 }
+  },
+  "BARGAIN_POTION_RESIST_SHOCK": {
+    "name": "Bargain Potion of Resist Shock",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 2 }
+  },
+  "BARGAIN_POTION_FEATHER": {
+    "name": "Bargain Potion of Feather",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "APPLY_FEATHER_SELF": 1 }
+  },
+  "BARGAIN_POTION_CURE_POISON": {
+    "name": "Bargain Potion of Cure Poison",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "REMOVE_POISON_SELF": 1 }
+  },
+  "CHEAP_POTION_STRENGTH": {
+    "name": "Cheap Potion of Strength",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 2 }
+  },
+  "CHEAP_POTION_AGILITY": {
+    "name": "Cheap Potion of Agility",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_FORTIFY_AGILITY_SELF": 2 }
+  },
+  "CHEAP_POTION_INTELLIGENCE": {
+    "name": "Cheap Potion of Intelligence",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 2 }
+  },
+  "CHEAP_POTION_ENDURANCE": {
+    "name": "Cheap Potion of Endurance",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_FORTIFY_ENDURANCE_SELF": 2 }
+  },
+  "CHEAP_POTION_SPEED": {
+    "name": "Cheap Potion of Speed",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_FORTIFY_SPEED_SELF": 3 }
+  },
+  "CHEAP_POTION_WILLPOWER": {
+    "name": "Cheap Potion of Willpower",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_FORTIFY_WILLPOWER_SELF": 2 }
+  },
+  "CHEAP_POTION_RESIST_FIRE": {
+    "name": "Cheap Potion of Resist Fire",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_RESISTANCE_FIRE_SELF": 3 }
+  },
+  "CHEAP_POTION_RESIST_FROST": {
+    "name": "Cheap Potion of Resist Frost",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_RESISTANCE_FROST_SELF": 3 }
+  },
+  "CHEAP_POTION_RESIST_SHOCK": {
+    "name": "Cheap Potion of Resist Shock",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 3 }
+  },
+  "CHEAP_POTION_FEATHER": {
+    "name": "Cheap Potion of Feather",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "APPLY_FEATHER_SELF": 2 }
+  },
+  "CHEAP_POTION_CURE_POISON": {
+    "name": "Cheap Potion of Cure Poison",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "REMOVE_POISON_SELF": 2 }
+  },
+  "STANDARD_POTION_STRENGTH": {
+    "name": "Standard Potion of Strength",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 3 }
+  },
+  "STANDARD_POTION_AGILITY": {
+    "name": "Standard Potion of Agility",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_FORTIFY_AGILITY_SELF": 3 }
+  },
+  "STANDARD_POTION_INTELLIGENCE": {
+    "name": "Standard Potion of Intelligence",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 3 }
+  },
+  "STANDARD_POTION_ENDURANCE": {
+    "name": "Standard Potion of Endurance",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_FORTIFY_ENDURANCE_SELF": 3 }
+  },
+  "STANDARD_POTION_SPEED": {
+    "name": "Standard Potion of Speed",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_FORTIFY_SPEED_SELF": 4 }
+  },
+  "STANDARD_POTION_WILLPOWER": {
+    "name": "Standard Potion of Willpower",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_FORTIFY_WILLPOWER_SELF": 3 }
+  },
+  "STANDARD_POTION_RESIST_FIRE": {
+    "name": "Standard Potion of Resist Fire",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_RESISTANCE_FIRE_SELF": 4 }
+  },
+  "STANDARD_POTION_RESIST_FROST": {
+    "name": "Standard Potion of Resist Frost",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_RESISTANCE_FROST_SELF": 4 }
+  },
+  "STANDARD_POTION_RESIST_SHOCK": {
+    "name": "Standard Potion of Resist Shock",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 4 }
+  },
+  "STANDARD_POTION_FEATHER": {
+    "name": "Standard Potion of Feather",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "APPLY_FEATHER_SELF": 3 }
+  },
+  "STANDARD_POTION_CURE_POISON": {
+    "name": "Standard Potion of Cure Poison",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "REMOVE_POISON_SELF": 3 }
+  },
+  "QUALITY_POTION_STRENGTH": {
+    "name": "Quality Potion of Strength",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 4 }
+  },
+  "QUALITY_POTION_AGILITY": {
+    "name": "Quality Potion of Agility",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_FORTIFY_AGILITY_SELF": 4 }
+  },
+  "QUALITY_POTION_INTELLIGENCE": {
+    "name": "Quality Potion of Intelligence",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 4 }
+  },
+  "QUALITY_POTION_ENDURANCE": {
+    "name": "Quality Potion of Endurance",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_FORTIFY_ENDURANCE_SELF": 4 }
+  },
+  "QUALITY_POTION_SPEED": {
+    "name": "Quality Potion of Speed",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_FORTIFY_SPEED_SELF": 5 }
+  },
+  "QUALITY_POTION_WILLPOWER": {
+    "name": "Quality Potion of Willpower",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_FORTIFY_WILLPOWER_SELF": 4 }
+  },
+  "QUALITY_POTION_RESIST_FIRE": {
+    "name": "Quality Potion of Resist Fire",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_RESISTANCE_FIRE_SELF": 5 }
+  },
+  "QUALITY_POTION_RESIST_FROST": {
+    "name": "Quality Potion of Resist Frost",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_RESISTANCE_FROST_SELF": 5 }
+  },
+  "QUALITY_POTION_RESIST_SHOCK": {
+    "name": "Quality Potion of Resist Shock",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 5 }
+  },
+  "QUALITY_POTION_FEATHER": {
+    "name": "Quality Potion of Feather",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "APPLY_FEATHER_SELF": 4 }
+  },
+  "QUALITY_POTION_CURE_POISON": {
+    "name": "Quality Potion of Cure Poison",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 145,
+    "effects": { "REMOVE_POISON_SELF": 4 }
+  },
+  "EXCLUSIVE_POTION_STRENGTH": {
+    "name": "Exclusive Potion of Strength",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 5 }
+  },
+  "EXCLUSIVE_POTION_AGILITY": {
+    "name": "Exclusive Potion of Agility",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_FORTIFY_AGILITY_SELF": 5 }
+  },
+  "EXCLUSIVE_POTION_INTELLIGENCE": {
+    "name": "Exclusive Potion of Intelligence",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 5 }
+  },
+  "EXCLUSIVE_POTION_ENDURANCE": {
+    "name": "Exclusive Potion of Endurance",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_FORTIFY_ENDURANCE_SELF": 5 }
+  },
+  "EXCLUSIVE_POTION_SPEED": {
+    "name": "Exclusive Potion of Speed",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_FORTIFY_SPEED_SELF": 6 }
+  },
+  "EXCLUSIVE_POTION_WILLPOWER": {
+    "name": "Exclusive Potion of Willpower",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_FORTIFY_WILLPOWER_SELF": 5 }
+  },
+  "EXCLUSIVE_POTION_RESIST_FIRE": {
+    "name": "Exclusive Potion of Resist Fire",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_RESISTANCE_FIRE_SELF": 6 }
+  },
+  "EXCLUSIVE_POTION_RESIST_FROST": {
+    "name": "Exclusive Potion of Resist Frost",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_RESISTANCE_FROST_SELF": 6 }
+  },
+  "EXCLUSIVE_POTION_RESIST_SHOCK": {
+    "name": "Exclusive Potion of Resist Shock",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 6 }
+  },
+  "EXCLUSIVE_POTION_FEATHER": {
+    "name": "Exclusive Potion of Feather",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "APPLY_FEATHER_SELF": 5 }
+  },
+  "EXCLUSIVE_POTION_CURE_POISON": {
+    "name": "Exclusive Potion of Cure Poison",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 260,
+    "effects": { "REMOVE_POISON_SELF": 5 }
   }
 }
