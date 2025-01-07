@@ -64,14 +64,20 @@ class StatusManager:
             status_registry, subject.card_manager
             )
 
+    def change_all_statuses(self, amount, subject, status_registry):
+        """Change the level of every active status by the same amount."""
+        for status_id in list(self.statuses.keys()):
+            self.change_status(status_id, amount, subject, status_registry)
+
     def decrement_statuses(self, subject, status_registry):
         """Reduce the level of every active status by 1."""
-        for status_id in list(self.statuses.keys()):
-            self.change_status(status_id, -1, subject, status_registry)
+        self.change_all_statuses(-1, subject, status_registry)
 
-    def reset_statuses(self):
-        """Remove all active statuses without cleaning up."""
-        self.statuses.clear()
+    def reset_statuses(self, subject, status_registry):
+        """Remove all active statuses."""
+        while len(self.statuses) > 0:
+            status_id = next(iter(self.statuses))
+            self._delete(status_id, subject, status_registry)
 
     def trigger_statuses_on_turn(self, subject, status_registry):
         """Loop over active statuses and invite them to trigger their

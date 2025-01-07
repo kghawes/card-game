@@ -1,5 +1,5 @@
 """
-This module defines the Resource class and manages stats during game.
+This module defines the Resource class.
 """
 from utils.constants import MIN_RESOURCE
 

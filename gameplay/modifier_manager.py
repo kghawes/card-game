@@ -25,6 +25,12 @@ class ModifierManager:
         self.cost_modifiers = self._initialize_cost_modifiers(
             status_registry
             )
+        self.modifier_pools = [
+            self.effect_modifiers,
+            self.resource_modifiers,
+            self.draw_modifiers,
+            self.cost_modifiers
+            ]
 
     def reset_modifier_pool(self, modifier_pool):
         """Clear all active modifiers for all statuses of a certain
@@ -34,9 +40,8 @@ class ModifierManager:
 
     def reset_all(self):
         """Clear all active modifiers for all statuses."""
-        self.reset_modifier_pool(self.effect_modifiers)
-        self.reset_modifier_pool(self.resource_modifiers)
-        self.reset_modifier_pool(self.draw_modifiers)
+        for pool in self.modifier_pools:
+            self.reset_modifier_pool(pool)
 
     # Effect modifiers
 
@@ -151,7 +156,7 @@ class ModifierManager:
         draw_modifiers = {} # Tracks accumulated contributions by status
         for status_id, status in status_registry.statuses.items():
             if isinstance(status, ModifyDrawStatus):
-                draw_modifiers[status_id] = DrawModifier()
+                draw_modifiers[status_id] = Modifier()
         return draw_modifiers
 
     def modify_cards_to_draw(self, status_id, amount):
@@ -192,7 +197,6 @@ class ModifierManager:
                 net_contribution += modifier.contribution
         amount = max(round((1 + net_contribution) * amount), 0)
         return amount
-
 
     # Cost modifiers
 
@@ -289,14 +293,6 @@ class ResourceModifier(Modifier):
     def matches(self, resource_id) -> bool:
         """Checks if the given resource is subject to this modifier."""
         return self.resource_id == resource_id
-
-
-class DrawModifier(Modifier):
-    """This class represents a modifier that changes the number of
-    cards drawn at the beginning of each turn."""
-    def __init__(self):
-        """Initialize a new DrawModifier."""
-        super().__init__()
 
 
 class DamageModifier(Modifier):

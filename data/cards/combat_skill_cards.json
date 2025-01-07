@@ -21,6 +21,17 @@
       "APPLY_DAMAGE_ENDURANCE_SELF": 2
     }
   },
+  "RAGE": {
+    "name": "Rage",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 2,
+    "value": 30,
+    "effects": {
+      "APPLY_FORTIFY_STRENGTH_SELF": 3,
+      "APPLY_DAMAGE_ENDURANCE_SELF": 4
+    }
+  },
   "PREPAREDNESS": {
     "name": "Preparedness",
     "card_type": "SKILL",
@@ -28,7 +39,7 @@
     "cost": 1,
     "value": 20,
     "effects": {
-      "DRAW": 1
+      "DRAW_SELF": 1
     }
   },
   "DEFENSIVE_STANCE": {
@@ -96,13 +107,23 @@
     }
   },
   "TAUNT": {
-    "name": "Defensive Stance",
+    "name": "Taunt",
     "card_type": "SKILL",
     "subtype": "COMBAT",
     "cost": 2,
     "value": 40,
     "effects": {
       "APPLY_FRENZY_TARGET": 3
+    }
+  },
+  "MEDICAL": {
+    "name": "Medical",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 2,
+    "value": 40,
+    "effects": {
+      "RESTORE_HEALTH_SELF": 2
     }
   }
 }

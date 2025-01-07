@@ -238,7 +238,7 @@ class FilterEffectStatus(Status):
         """Check if the given effect is allowed to resolve."""
         if self.blocked_effect and effect_id == self.blocked_effect:
             return False
-        elif self.allowed_effect and effect_id != self.allowed_effect:
+        if self.allowed_effect and effect_id != self.allowed_effect:
             return False
         return True
 

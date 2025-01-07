@@ -69,6 +69,23 @@ class ChangeStatusEffect(Effect):
             )
 
 
+class DispelEffect(Effect):
+    """This type of effect decreases levels from all active statuses."""
+    def __init__(self, target_type_enum):
+        """Initialize a new DispelEffect."""
+        super().__init__(
+            c.EffectNames.DISPEL.name, c.EffectNames.DISPEL.value,
+            target_type_enum
+            )
+
+    def resolve(self, source, opponent, level, status_registry):
+        """Reduce active statuses on the subject."""
+        subject = self.get_target_combatant(source, opponent)
+        subject.status_manager.change_all_statuses(
+            -level, subject, status_registry
+            )
+
+
 class DamageEffect(Effect):
     """This type of effect deals damage."""
     def __init__(self, target_type_enum, damage_type_enum):
@@ -107,11 +124,11 @@ class ChangeResourceEffect(Effect):
 
 class HandEffect(Effect):
     """This type of effect draws or discards cards."""
-    def __init__(self, effect_name_enum, target_type_enum, is_draw_effect):
+    def __init__(self, effect_name_enum, is_draw_effect):
         """Initialize a new HandEffect."""
         effect_id = effect_name_enum.name
         name = effect_name_enum.value
-        super().__init__(effect_id, name, target_type_enum)
+        super().__init__(effect_id, name, c.TargetTypes.SELF)
         self.is_draw_effect = is_draw_effect
 
     def resolve(self, source, opponent, level, status_registry):
@@ -136,6 +153,10 @@ class EffectRegistry:
         effects = {}
 
         effects[c.EffectNames.NO_EFFECT.name] = NoEffect()
+        effects[c.EffectNames.DRAW.name] = HandEffect(c.EffectNames.DRAW, True)
+        effects[c.EffectNames.DISCARD.name] = HandEffect(
+            c.EffectNames.DISCARD, False
+            )
 
         # Multi-target effects:
         for target_type in c.TargetTypes:

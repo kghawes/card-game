@@ -24,7 +24,7 @@ class CombatManager:
             self.do_enemy_turn(player, enemy, text_interface, registries)
             if self.is_combat_over(player, enemy):
                 break
-        player.status_manager.reset_statuses()
+        player.status_manager.reset_statuses(player, registries.statuses)
         player.modifier_manager.reset_all()
 
     def do_player_turn(self, player, enemy, text_interface, registries):
@@ -53,7 +53,6 @@ class CombatManager:
         if self.is_combat_over(combatant, opponent):
             return True
 
-        # Ensure modifiers are recalculated after status updates
         combatant.modifier_manager.recalculate_all_effects(
             status_registry, combatant.card_manager
             )
@@ -124,10 +123,12 @@ class CombatManager:
                     return False
             elif (isinstance(status, LimitCardPlayStatus) and
                   combatant.cards_played_this_turn > status.card_limit):
-                    return False
+                return False
         return True
 
-    def effect_can_resolve(self, combatant, effect_id, status_registry) -> bool:
+    def effect_can_resolve(
+            self, combatant, effect_id, status_registry
+            ) -> bool:
         """Check if the given card effect can resolve based on current
         status effects."""
         for status_id in combatant.status_manager.statuses:

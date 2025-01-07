@@ -1,0 +1,209 @@
+{
+  "BARGAIN_POTION_HEALTH": {
+    "name": "Bargain Potion of Health",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "RESTORE_HEALTH_SELF": 1 }
+  },
+  "BARGAIN_POTION_STAMINA": {
+    "name": "Bargain Potion of Stamina",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "RESTORE_STAMINA_SELF": 1 }
+  },
+  "BARGAIN_POTION_MAGICKA": {
+    "name": "Bargain Potion of Magicka",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 25,
+    "effects": { "RESTORE_MAGICKA_SELF": 1 }
+  },
+  "CHEAP_POTION_HEALTH": {
+    "name": "Cheap Potion of Health",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "RESTORE_HEALTH_SELF": 2 }
+  },
+  "CHEAP_POTION_STAMINA": {
+    "name": "Cheap Potion of Stamina",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "RESTORE_STAMINA_SELF": 2 }
+  },
+  "CHEAP_POTION_MAGICKA": {
+    "name": "Cheap Potion of Magicka",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 55,
+    "effects": { "RESTORE_MAGICKA_SELF": 2 }
+  },
+  "STANDARD_POTION_HEALTH": {
+    "name": "Standard Potion of Health",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "RESTORE_HEALTH_SELF": 3 }
+  },
+  "STANDARD_POTION_STAMINA": {
+    "name": "Standard Potion of Stamina",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "RESTORE_STAMINA_SELF": 3 }
+  },
+  "STANDARD_POTION_MAGICKA": {
+    "name": "Standard Potion of Magicka",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 100,
+    "effects": { "RESTORE_MAGICKA_SELF": 3 }
+  },
+  "QUALITY_POTION_HEALTH": {
+    "name": "Quality Potion of Health",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 133,
+    "effects": { "RESTORE_HEALTH_SELF": 4 }
+  },
+  "QUALITY_POTION_STAMINA": {
+    "name": "Quality Potion of Stamina",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 133,
+    "effects": { "RESTORE_STAMINA_SELF": 4 }
+  },
+  "QUALITY_POTION_MAGICKA": {
+    "name": "Quality Potion of Magicka",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 133,
+    "effects": { "RESTORE_MAGICKA_SELF": 4 }
+  },
+  "EXCLUSIVE_POTION_HEALTH": {
+    "name": "Exclusive Potion of Health",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 200,
+    "effects": { "RESTORE_HEALTH_SELF": 5 }
+  },
+  "EXCLUSIVE_POTION_STAMINA": {
+    "name": "Exclusive Potion of Stamina",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 200,
+    "effects": { "RESTORE_STAMINA_SELF": 5 }
+  },
+  "EXCLUSIVE_POTION_MAGICKA": {
+    "name": "Bargain Potion of Magicka",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 200,
+    "effects": { "RESTORE_MAGICKA_SELF": 5 }
+  },
+  "SHEIN": {
+    "name": "Shein",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 8,
+    "effects": {
+      "APPLY_FORTIFY_ENDURANCE_SELF": 2,
+      "APPLY_DAMAGE_INTELLIGENCE_SELF": 2
+      }
+  },
+  "MAZTE": {
+    "name": "Mazte",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 9,
+    "effects": {
+      "APPLY_FORTIFY_STRENGTH_SELF": 2,
+      "APPLY_DAMAGE_INTELLIGENCE_SELF": 2
+      }
+  },
+  "GREEF": {
+    "name": "Greef",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 14,
+    "effects": {
+      "APPLY_FORTIFY_STRENGTH_SELF": 3,
+      "APPLY_DAMAGE_AGILITY_SELF": 2
+      }
+  },
+  "SUJAMMA": {
+    "name": "Sujamma",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 30,
+    "effects": {
+      "APPLY_FORTIFY_STRENGTH_SELF": 3,
+      "APPLY_DAMAGE_INTELLIGENCE_SELF": 3
+      }
+  },
+  "CYRODILIC_BRANDY": {
+    "name": "Greef",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 90,
+    "effects": {
+      "APPLY_FORTIFY_ENDURANCE_SELF": 4
+      }
+  },
+  "FLIN": {
+    "name": "Flin",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 110,
+    "effects": {
+      "APPLY_FORTIFY_STRENGTH_SELF": 4
+      }
+  },
+  "VINTAGE_BRANDY": {
+    "name": "Vintage Brandy",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 160,
+    "effects": {
+      "APPLY_FORTIFY_STRENGTH_SELF": 5,
+      "APPLY_DAMAGE_AGILITY_SELF": 2
+      }
+  },
+  "SKOOMA": {
+    "name": "Skooma",
+    "card_type": "CONSUMABLE",
+    "subtype": "POTION",
+    "cost": 0,
+    "value": 300,
+    "effects": {
+      "APPLY_FORTIFY_SPEED_SELF": 5,
+      "APPLY_FORTIFY_STRENGTH_SELF": 2,
+      "APPLY_DAMAGE_ENDURANCE_SELF": 2
+      }
+  }
+}

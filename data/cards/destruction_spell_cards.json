@@ -214,7 +214,7 @@
     }
   },
   "WOE": {
-    "name": "Temp",
+    "name": "Woe",
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
@@ -303,6 +303,66 @@
     "value": 20,
     "effects": { 
     "APPLY_WEAKNESS_POISON_TARGET": 3
+    }
+  },
+  "DRAIN_STRENGTH": {
+    "name": "Drain Strength",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "REMOVE_FORTIFY_STRENGTH_TARGET": 3
+    }
+  },
+  "DRAIN_AGILITY": {
+    "name": "Drain Agility",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "REMOVE_FORTIFY_AGILITY_TARGET": 3
+    }
+  },
+  "DRAIN_ENDURANCE": {
+    "name": "Drain Endurance",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "REMOVE_FORTIFY_ENDURANCE_TARGET": 3
+    }
+  },
+  "DRAIN_INTELLIGENCE": {
+    "name": "Drain Intelligence",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "REMOVE_FORTIFY_INTELLIGENCE_TARGET": 3
+    }
+  },
+  "DRAIN_WILLPOWER": {
+    "name": "Drain Willpower",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "REMOVE_FORTIFY_WILLPOWER_TARGET": 3
+    }
+  },
+  "DRAIN_SPEED": {
+    "name": "Drain Speed",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 20,
+    "effects": { 
+    "REMOVE_FORTIFY_SPEED_TARGET": 3
     }
   }
 }

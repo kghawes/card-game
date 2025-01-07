@@ -48,7 +48,7 @@ class Card:
 
     def matches(self, card_property) -> bool:
         """Check if a card has a certain type or subtype."""
-        return self.card_type == card_property or self.subtype == card_property
+        return card_property in (self.card_type, self.subtype)
 
 
 class EffectLevel():

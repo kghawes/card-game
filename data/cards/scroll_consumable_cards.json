@@ -1,0 +1,81 @@
+{
+  "SCROLL_ELEVRAMS_STY": {
+    "name": "Scroll of Elevram's Sty",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": { "APPLY_BLIND_TARGET": 3 }
+  },
+  "SCROLL_FADERS_LEADEN_FLESH": {
+    "name": "Scroll of Fader's Leaden Flesh",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": { "APPLY_BURDEN_TARGET": 3 }
+  },
+  "SCROLL_GOLNARAS_EYEMAZE": {
+    "name": "Scroll of Golnara's Eye-Maze",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": { "APPLY_EVASION_SELF": 6 }
+  },
+  "SCROLL_SALENS_VIVICATION": {
+    "name": "Scroll of Salen's Vivication",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": {
+      "REMOVE_PARALYZE_SELF": 5,
+      "REMOVE_POISON_SELF": 5,
+      "REMOVE_DISEASE_SELF": 5
+      }
+  },
+  "SCROLL_BLACK_DESPAIR": {
+    "name": "Scroll of Black Dispair",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": { "APPLY_DAMAGE_WILLPOWER_TARGET": 4 }
+  },
+  "SCROLL_BLACK_MIND": {
+    "name": "Scroll of Black Mind",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": { "APPLY_DAMAGE_INTELLIGENCE_TARGET": 4 }
+  },
+  "SCROLL_BLACK_SLOTH": {
+    "name": "Scroll of Black Sloth",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": { "APPLY_DAMAGE_AGILITY_TARGET": 4 }
+  },
+  "SCROLL_BLACK_WEAKNESS": {
+    "name": "Scroll of Black Weakness",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": { "APPLY_DAMAGE_STRENGTH_TARGET": 4 }
+  },
+  "SCROLL_BLACK_STORM": {
+    "name": "Scroll of Black Storm",
+    "card_type": "CONSUMABLE",
+    "subtype": "SCROLL",
+    "cost": 0,
+    "value": 90,
+    "effects": {
+      "APPLY_DAMAGE_INTELLIGENCE_TARGET": 3,
+      "SHOCK_DAMAGE_TARGET": 5
+      }
+  }
+}

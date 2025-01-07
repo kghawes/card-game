@@ -29,7 +29,7 @@ class Combatant:
         self.card_manager = CardManager(starting_deck, card_cache)
         self.status_manager = StatusManager()
         self.modifier_manager = ModifierManager(status_registry)
-        
+
         self.cards_played_this_turn = 0
 
     def get_health(self) -> int:
