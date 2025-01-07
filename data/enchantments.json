@@ -95,7 +95,7 @@
   "PEACE": {
     "NAME": "Peace",
     "EFFECTS": { 
-      "APPLY_PARALYSIS_TARGET": 1 
+      "APPLY_PARALYZE_TARGET": 1 
       },
     "VALUE_MULTIPLIER": 4
   }

@@ -3,7 +3,7 @@ This module defines the Card class, the helper class EffectLevel, as
 well as the CardPrototype and CardCache.
 """
 from utils.utils import Prototype
-from utils.constants import MIN_EFFECT, MIN_COST
+from utils.constants import MIN_EFFECT, MIN_COST, Resources, CardTypes
 
 class Card:
     """Represents a card in game."""
@@ -21,6 +21,12 @@ class Card:
             if isinstance(level, EffectLevel):
                 level = level.base_level
             self.effects[effect] = EffectLevel(level)
+
+    def get_resource(self) -> str:
+        """Get the id of the resource corresponding to this card's cost."""
+        if self.card_type == CardTypes.SPELL:
+            return Resources.MAGICKA.name
+        return Resources.STAMINA.name
 
     def get_cost(self) -> int:
         """Get the stamina or magicka cost of the card."""

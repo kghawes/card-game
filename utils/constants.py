@@ -87,7 +87,7 @@ class StatusNames(Enum):
     DEFENSE = "Defense"
     REGENERATION = "Regenerate Health"
     POISON = "Poison"
-    PARALYSIS = "Paralysis"
+    PARALYZE = "Paralyze"
     SILENCE = "Silence"
     BLIND = "Blind"
     FRENZY = "Frenzy"

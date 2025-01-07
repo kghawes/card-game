@@ -37,6 +37,67 @@
     ],
     "loot": {"gold": 2}
   },
+  "SMALL_SLAUGHTERFISH": {
+    "name": "Small Slaughterfish",
+    "max_health": 3,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 5},
+      {"card": "RAZOR_TEETH", "quantity": 3},
+      {"card": "MISS", "quantity": 1}
+    ],
+    "loot": {"gold": 1}
+  },
+  "LARGE_SLAUGHTERFISH": {
+    "name": "Large Slaughterfish",
+    "max_health": 5,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 3},
+      {"card": "RAZOR_TEETH", "quantity": 3}
+    ],
+    "loot": {"gold": 1}
+  },
+  "MUDCRAB": {
+    "name": "Mudcrab",
+    "max_health": 2,
+    "max_stamina": 2,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_CLAWS", "quantity": 5},
+      {"card": "HARD_CARAPACE", "quantity": 3},
+      {"card": "MISS", "quantity": 3}
+    ],
+    "loot": {"gold": 1}
+  },
+  "DISEASED_MUDCRAB": {
+    "name": "Diseased Mudcrab",
+    "max_health": 2,
+    "max_stamina": 1,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_CLAWS", "quantity": 5},
+      {"card": "HARD_CARAPACE", "quantity": 3},
+      {"card": "MISS", "quantity": 3},
+      {"card": "ATAXIA", "quantity": 2}
+    ],
+    "loot": {"gold": 1}
+  },
+  "BLIGHTED_MUDCRAB": {
+    "name": "Blighted Mudcrab",
+    "max_health": 2,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_CLAWS", "quantity": 5},
+      {"card": "HARD_CARAPACE", "quantity": 3},
+      {"card": "MISS", "quantity": 3},
+      {"card": "BLACK_HEART_BLIGHT", "quantity": 2}
+    ],
+    "loot": {"gold": 1}
+  },
   "RAT": {
     "name": "Rat",
     "max_health": 3,
@@ -93,6 +154,33 @@
       {"card": "MISS", "quantity": 2}
     ],
     "loot": {"gold": 4}
+  },
+  "SEWER_RAT": {
+    "name": "Sewer Rat",
+    "max_health": 5,
+    "max_stamina": 3,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "RAZOR_TEETH", "quantity": 10},
+      {"card": "MISS", "quantity": 2},
+      {"card": "BROWN_ROT", "quantity": 2},
+      {"card": "ATAXIA", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "PLAGUE_RAT": {
+    "name": "Plague Rat",
+    "max_health": 5,
+    "max_stamina": 2,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "RAZOR_TEETH", "quantity": 10},
+      {"card": "MISS", "quantity": 2},
+      {"card": "BROWN_ROT", "quantity": 3},
+      {"card": "ATAXIA", "quantity": 3},
+      {"card": "WITBANE", "quantity": 3}
+    ],
+    "loot": {"gold": 2}
   },
   "SCRIB": {
     "name": "Scrib",

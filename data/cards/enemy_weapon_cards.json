@@ -6,7 +6,7 @@
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
   },
-"RAZOR_BEAK": {
+  "RAZOR_BEAK": {
     "name": "Razor Beak",
     "card_type": "WEAPON",
     "cost": 2,
@@ -33,5 +33,33 @@
     "cost": 2,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 2 }
+  },
+  "VICIOUS_TEETH": {
+    "name": "Vicious Teeth",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 0,
+    "effects": { "PHYSICAL_DAMAGE_TARGET": 5 }
+  },
+  "SHARP_CLAWS": {
+    "name": "Sharp Claws",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
+  },
+  "RAZOR_CLAWS": {
+    "name": "Razor Claws",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": { "PHYSICAL_DAMAGE_TARGET": 2 }
+  },
+  "VICIOUS_CLAWS": {
+    "name": "Vicious Claws",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 0,
+    "effects": { "PHYSICAL_DAMAGE_TARGET": 5 }
   }
 }

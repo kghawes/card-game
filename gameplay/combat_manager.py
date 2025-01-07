@@ -87,18 +87,19 @@ class CombatManager:
             ) -> bool:
         """Activate a card's effects, spend its cost, and discard it.
         Return whether the card was successfully played."""
-        if not self.card_can_be_played(combatant, card):
+        if not self.card_can_be_played(combatant, card, registries.statuses):
+            text_interface.send_message("Impossible!")
             return False
 
-        resource_id = c.Resources.STAMINA.name
-        if card.card_type == c.CardTypes.SPELL.name:
-            resource = c.Resources.MAGICKA
+        resource_id = card.get_resource()
         if not combatant.resources[resource_id].try_spend(card.get_cost()):
-            text_interface.send_message("Not enough " + resource.value)
+            text_interface.send_message("Not enough " + resource_id)
             return False
 
         for effect_id, effect_level in card.effects.items():
-            if not self.effect_can_resolve(combatant, effect_id):
+            if not self.effect_can_resolve(
+                    combatant, effect_id, registries.statuses
+                    ):
                 continue
             effect = registries.effects.get_effect(effect_id)
             level = effect_level.get_level()
@@ -113,10 +114,11 @@ class CombatManager:
             )
         return True
 
-    def card_can_be_played(self, combatant, card) -> bool:
+    def card_can_be_played(self, combatant, card, status_registry) -> bool:
         """Check if the given card can be played based on current
         status effects."""
-        for status in combatant.status_manager.statuses.values():
+        for status_id in combatant.status_manager.statuses:
+            status = status_registry.get_status(status_id)
             if isinstance(status, RestrictCardTypeStatus):
                 if not status.is_card_playable(card.card_type):
                     return False
@@ -125,10 +127,11 @@ class CombatManager:
                     return False
         return True
 
-    def effect_can_resolve(self, combatant, effect_id) -> bool:
+    def effect_can_resolve(self, combatant, effect_id, status_registry) -> bool:
         """Check if the given card effect can resolve based on current
         status effects."""
-        for status in combatant.status_manager.statuses.values():
+        for status_id in combatant.status_manager.statuses:
+            status = status_registry.get_status(status_id)
             if isinstance(status, FilterEffectStatus):
                 if not status.effect_can_resolve(effect_id):
                     return False
@@ -141,7 +144,8 @@ class CombatManager:
         while playable_card_exists and not self.is_combat_over(player, enemy):
             playable_card_exists = False
             for card in enemy.card_manager.hand:
-                if card.cost <= enemy.get_stamina(): ###
+                resource_id = card.get_resource()
+                if card.cost <= enemy.resources[resource_id].current:
                     playable_card_exists = True
                     if self.play_card(
                         enemy, player, card, text_interface, registries

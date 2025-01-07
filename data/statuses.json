@@ -11,7 +11,7 @@
   "EVASION": {
     "class": "EvasionStatus"
   },
-  "PARALYSIS": {
+  "PARALYZE": {
     "class": "RestrictCardTypeStatus",
     "restricted_types": [ "WEAPON", "ARMOR", "SKILL", "SPELL", "ITEM" ]
   },
