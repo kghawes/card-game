@@ -1,0 +1,621 @@
+{
+  "TRAVEL_LANTERN": {
+    "name": "Travel Lantern",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 10,
+    "effects": {
+    "REMOVE_HIDDEN_TARGET": 3
+    }
+  },
+  "GUARSKIN_DRUM": {
+    "name": "Guarskin Drum",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 20,
+    "effects": {
+    "RESTORE_STAMINA_SELF": 1
+    }
+  },
+  "LUTE": {
+    "name": "Lute",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 25,
+    "effects": {
+    "APPLY_FORTIFY_AGILITY_SELF": 1
+    }
+  },
+  "AMULET_FROST": {
+    "name": "Amulet of Frost",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "FROST_DAMAGE_TARGET": 1
+    }
+  },
+  "AMULET_MIGHTY_BLOWS": {
+    "name": "Amulet of Mighty Blows",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_FORTIFY_STRENGTH_SELF": 2
+    }
+  },
+  "AMULET_REST": {
+    "name": "Amulet of Rest",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "RESTORE_STAMINA_SELF": 1
+    }
+  },
+  "AMULET_SHIELD": {
+    "name": "Amulet of Shield",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_DEFENSE_SELF": 2
+    }
+  },
+  "AMULET_SILENCE": {
+    "name": "Amulet of Silence",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_SILENCE_TARGET": 1
+    }
+  },
+  "AMULET_BALYNAS_SOOTHING_BALM": {
+    "name": "Amulet of Balyna's Soothing Balm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "RESTORE_HEALTH_SELF": 1
+    }
+  },
+  "WEARY_CHARM": {
+    "name": "Weary Charm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_DAMAGE_STRENGTH_TARGET": 2
+    }
+  },
+  "CLENCH_CHARM": {
+    "name": "Clench Charm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_DAMAGE_SPEED_TARGET": 1
+    }
+  },
+  "FUDDLE_CHARM": {
+    "name": "Fuddle Charm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_DAMAGE_INTELLIGENCE_TARGET": 1
+    }
+  },
+  "GRIPES_CHARM": {
+    "name": "Gripes Charm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_DAMAGE_ENDURANCE_TARGET": 2
+    }
+  },
+  "STUMBLE_CHARM": {
+    "name": "Stumble Charm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_DAMAGE_AGILITY_TARGET": 1
+    }
+  },
+  "WOE_CHARM": {
+    "name": "Woe Charm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "APPLY_DAMAGE_WILLPOWER_TARGET": 2
+    }
+  },
+  "THUNDERFALL": {
+    "name": "Thunderfall",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "SHOCK_DAMAGE_TARGET": 1
+    }
+  },
+  "BELT_FORTITUDE": {
+    "name": "Belt of Fortitude",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "APPLY_FORTIFY_ENDURANCE_SELF": 2
+    }
+  },
+  "BELT_IRON_WILL": {
+    "name": "Belt of Iron Will",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "APPLY_FORTIFY_WILLPOWER_SELF": 2
+    }
+  },
+  "BELT_NIMBLENESS": {
+    "name": "Belt of Nimbleness",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "APPLY_FORTIFY_AGILITY_SELF": 1
+    }
+  },
+  "BELT_ORCS_STRENGTH": {
+    "name": "Belt of Orc's Strength",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "APPLY_FORTIFY_STRENGTH_SELF": 2
+    }
+  },
+  "BELT_WISDOM": {
+    "name": "Belt of Wisdom",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "APPLY_FORTIFY_INTELLIGENCE_SELF": 1
+    }
+  },
+  "WATCHERS_BELT": {
+    "name": "Watcher's Belt",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "APPLY_EVASION_SELF": 2
+    }
+  },
+  "FEATHER_BELT": {
+    "name": "Feather Belt",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "APPLY_FEATHER_SELF": 1
+    }
+  },
+  "HEARTH_BELT": {
+    "name": "Hearth Belt",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "RESTORE_HEALTH_SELF": 1
+    }
+  },
+  "HUNTERS_BELT": {
+    "name": "Hunter's Belt",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "APPLY_DEFENSE_SELF": 2
+    }
+  },
+  "CALIGINY_RING": {
+    "name": "Caliginy Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_BLIND_TARGET": 2
+    }
+  },
+  "CALIGINY_RING": {
+    "name": "Caliginy Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_BLIND_TARGET": 2
+    }
+  },
+  "FIGHTER_RING": {
+    "name": "Fighter Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_FORTIFY_STRENGTH_SELF": 2,
+    "APPLY_FORTIFY_ENDURANCE_SELF": 2
+    }
+  },
+  "THIEF_RING": {
+    "name": "Thief Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_FORTIFY_AGILITY_SELF": 2,
+    "APPLY_FORTIFY_SPEED_SELF": 2
+    }
+  },
+  "MAGE_RING": {
+    "name": "Mage Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_FORTIFY_INTELLIGENCE_SELF": 2,
+    "APPLY_FORTIFY_WILLPOWER_SELF": 2
+    }
+  },
+  "DISTRACTION_RING": {
+    "name": "Distraction Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "REMOVE_FORTIFY_INTELLIGENCE_TARGET": 5
+    }
+  },
+  "EYEMAZE_RING": {
+    "name": "Eye-Maze Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_EVASION_SELF": 2
+    }
+  },
+  "HAWKSHAW_RING": {
+    "name": "Hawkshaw Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "DRAW": 1
+    }
+  },
+  "JUICEDAW_FEATHER_RING": {
+    "name": "Juicedaw Feather Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_FEATHER_SELF": 2
+    }
+  },
+  "RING_AVERSION": {
+    "name": "Ring of Aversion",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_HIDDEN_SELF": 2
+    }
+  },
+  "RING_MEDUSAS_GAZE": {
+    "name": "Ring of Medusa's Gaze",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_PARALYZE_TARGET": 1
+    }
+  },
+  "RING_NIGHTEYE": {
+    "name": "Ring of Night-Eye",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "REMOVE_HIDDEN_TARGET": 5
+    }
+  },
+  "RING_TRANSFIGURING_WISDOM": {
+    "name": "Ring of Transfiguring Wisdom",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_ENCHANTER_SELF": 2
+    }
+  },
+  "SHADOWWEAVE_RING": {
+    "name": "Shadowweave Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 95,
+    "effects": {
+    "APPLY_EVASION_SELF": 2,
+    "APPLY_HIDDEN_SELF": 2
+    }
+  },
+  "WARDENS_RING": {
+    "name": "Warden's Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "DISPEL_TARGET": 2
+    }
+  },
+  "EYEMAZE_RING": {
+    "name": "Eye-Maze Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "APPLY_EVASION_SELF": 2
+    }
+  },
+  "FLAMEBOLT_RING": {
+    "name": "Flamebolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "FIRE_DAMAGE_TARGET": 1
+    }
+  },
+  "CRUEL_FLAMEBOLT_RING": {
+    "name": "Cruel Flamebolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 150,
+    "effects": {
+    "FIRE_DAMAGE_TARGET": 2
+    }
+  },
+  "RING_FIREBALL": {
+    "name": "Ring of Fireball",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 200,
+    "effects": {
+    "FIRE_DAMAGE_TARGET": 3
+    }
+  },
+  "RING_FIREBALLS": {
+    "name": "Ring of Fireballs",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 200,
+    "effects": {
+    "FIRE_DAMAGE_TARGET": 3
+    }
+  },
+  "DIRE_FLAMEBOLT_RING": {
+    "name": "Dire Flamebolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 320,
+    "effects": {
+    "FIRE_DAMAGE_TARGET": 4
+    }
+  },
+  "RING_FIRE_STORM": {
+    "name": "Ring of Fire Storm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 405,
+    "effects": {
+    "FIRE_DAMAGE_TARGET": 5
+    }
+  },
+  "SHARDBOLT_RING": {
+    "name": "Shardbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "FROST_DAMAGE_TARGET": 1
+    }
+  },
+  "CRUEL_SHARDBOLT_RING": {
+    "name": "Cruel Shardbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 150,
+    "effects": {
+    "FROST_DAMAGE_TARGET": 2
+    }
+  },
+  "RING_FROSTBALLS": {
+    "name": "Ring of Frostballs",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 200,
+    "effects": {
+    "FROST_DAMAGE_TARGET": 3
+    }
+  },
+  "DIRE_SHARDBOLT_RING": {
+    "name": "Dire Shardbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 320,
+    "effects": {
+    "FROST_DAMAGE_TARGET": 4
+    }
+  },
+  "RING_ICE_STORM": {
+    "name": "Ring of Ice Storm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 405,
+    "effects": {
+    "FROST_DAMAGE_TARGET": 5
+    }
+  },
+  "SPARKBOLT_RING": {
+    "name": "Sparkbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "SHOCK_DAMAGE_TARGET": 1
+    }
+  },
+  "CRUEL_SPARKBOLT_RING": {
+    "name": "Cruel Sparkbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 150,
+    "effects": {
+    "SHOCK_DAMAGE_TARGET": 2
+    }
+  },
+  "RING_SHOCKBALLS": {
+    "name": "Ring of Shockballs",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 200,
+    "effects": {
+    "SHOCK_DAMAGE_TARGET": 3
+    }
+  },
+  "DIRE_SPARKBOLT_RING": {
+    "name": "Dire Sparkbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 320,
+    "effects": {
+    "SHOCK_DAMAGE_TARGET": 4
+    }
+  },
+  "RING_LIGHTNING_STORM": {
+    "name": "Ring of Lightning Storm",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 405,
+    "effects": {
+    "SHOCK_DAMAGE_TARGET": 5
+    }
+  },
+  "VIPERBOLT_RING": {
+    "name": "Viperbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 70,
+    "effects": {
+    "POISON_DAMAGE_TARGET": 1
+    }
+  },
+  "CRUEL_VIPERBOLT_RING": {
+    "name": "Cruel Viperbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 150,
+    "effects": {
+    "POISON_DAMAGE_TARGET": 2
+    }
+  },
+  "RING_POISONBLOOMS": {
+    "name": "Ring of Poisonblooms",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 200,
+    "effects": {
+    "POISON_DAMAGE_TARGET": 3
+    }
+  },
+  "DIRE_VIPERBOLT_RING": {
+    "name": "Dire Viperbolt Ring",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 320,
+    "effects": {
+    "POISON_DAMAGE_TARGET": 4
+    }
+  },
+  "RING_TOXIC_CLOUD": {
+    "name": "Ring of Toxic Cloud",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 412,
+    "effects": {
+    "APPLY_POISON_TARGET": 4
+    }
+  },
+  "RING_FIVE_FINGERS_PAI": {
+    "name": "Ring of the Five Fingers of Pai",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 400,
+    "effects": {
+    "FIRE_DAMAGE_TARGET": 1,
+    "FROST_DAMAGE_TARGET": 1,
+    "SHOCK_DAMAGE_TARGET": 1,
+    "POISON_DAMAGE_TARGET": 1
+    }
+  },
+  "FLAMEGUARD_ROBE": {
+    "name": "Flameguard Robe",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 50,
+    "effects": {
+    "APPLY_RESISTANCE_FIRE_SELF": 3
+    }
+  },
+  "FROSTGUARD_ROBE": {
+    "name": "Frostguard Robe",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 50,
+    "effects": {
+    "APPLY_RESISTANCE_FROST_SELF": 3
+    }
+  },
+  "SHOCKGUARD_ROBE": {
+    "name": "Shockguard Robe",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 50,
+    "effects": {
+    "APPLY_RESISTANCE_SHOCK_SELF": 3
+    }
+  },
+  "POISONGUARD_ROBE": {
+    "name": "Poisonguard Robe",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 50,
+    "effects": {
+    "APPLY_RESISTANCE_POISON_SELF": 3
+    }
+  },
+  "VELOTHS_ROBE": {
+    "name": "Flameguard Robe",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 150,
+    "effects": {
+    "RESTORE_HEALTH_SELF": 2
+    }
+  },
+}

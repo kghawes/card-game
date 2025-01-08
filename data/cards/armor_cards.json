@@ -39,6 +39,14 @@
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
   },
+  "IRON_TOWER_SHIELD": {
+    "name": "Iron Tower Shield",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 5,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 6 }
+  },
   "STEEL_GAUNTLETS": {
     "name": "Steel Gauntlets",
     "card_type": "ARMOR",
@@ -78,6 +86,14 @@
     "cost": 4,
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 6 }
+  },
+  "STEEL_TOWER_SHIELD": {
+    "name": "Steel Tower Shield",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 5,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 7 }
   },
   "EBONY_GAUNTLETS": {
     "name": "Ebony Gauntlets",
@@ -119,6 +135,14 @@
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 15 }
   },
+  "EBONY_TOWER_SHIELD": {
+    "name": "Ebony Tower Shield",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 6,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 18 }
+  },
   "DAEDRIC_GAUNTLETS": {
     "name": "Daedric Gauntlets",
     "card_type": "ARMOR",
@@ -127,13 +151,29 @@
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 8 }
   },
-  "DAEDRIC_HELM": {
-    "name": "Daedric Helm",
+  "DAEDRIC_FACE_INSPIRATION": {
+    "name": "Daedric Face of Inspiration",
     "card_type": "ARMOR",
     "subtype": "HEAVY",
     "cost": 3,
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 9 }
+  },
+  "DAEDRIC_FACE_TERROR": {
+    "name": "Daedric Face of Terror",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 3,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 10 }
+  },
+  "DAEDRIC_FACE_GOD": {
+    "name": "Daedric Face of God",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 3,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 11 }
   },
   "DAEDRIC_BOOTS": {
     "name": "Daedric Boots",
@@ -158,6 +198,14 @@
     "cost": 5,
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 20 }
+  },
+  "DAEDRIC_TOWER_SHIELD": {
+    "name": "Daedric Tower Shield",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 6,
+    "value": 20,
+    "effects": { "APPLY_DEFENSE_SELF": 23 }
   },
   "ORCISH_GAUNTLETS": {
     "name": "Orcish Gauntlets",
@@ -191,14 +239,6 @@
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 6 }
   },
-  "ORCISH_SHIELD": {
-    "name": "Orcish Shield",
-    "card_type": "ARMOR",
-    "subtype": "MEDIUM",
-    "cost": 3,
-    "value": 20,
-    "effects": { "APPLY_DEFENSE_SELF": 7 }
-  },
   "ADAMANTIUM_GAUNTLETS": {
     "name": "Adamantium Gauntlets",
     "card_type": "ARMOR",
@@ -230,14 +270,6 @@
     "cost": 3,
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 9 }
-  },
-  "ADAMANTIUM_SHIELD": {
-    "name": "Adamantium Shield",
-    "card_type": "ARMOR",
-    "subtype": "MEDIUM",
-    "cost": 3,
-    "value": 20,
-    "effects": { "APPLY_DEFENSE_SELF": 10 }
   },
   "CHITIN_GAUNTLETS": {
     "name": "Chitin Gauntlets",

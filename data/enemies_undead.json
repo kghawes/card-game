@@ -34,7 +34,7 @@
       {"card": "LONGBOW_(SHARDARROWS)", "quantity": 3}
     ],
     "loot": {"gold": 2}
-  }
+  },
   "SKELETON_CHAMPION": {
     "name": "Skeleton Archer",
     "max_health": 10,
