@@ -618,4 +618,121 @@
     "RESTORE_HEALTH_SELF": 2
     }
   },
+  "BREATHING_WATER": {
+    "name": "Breathing Water",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_ALTERATION_SELF": 1
+    }
+  },
+  "NIGHT_FALLS_ON_SENTINEL": {
+    "name": "Night Falls On Sentinel",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_BLUNT_WEAPON_SELF": 1
+    }
+  },
+  "ART_WAR_MAGIC": {
+    "name": "The Art of War Magic",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_DESTRUCTION_SELF": 1
+    }
+  },
+  "HALLGERDS_TALE": {
+    "name": "Hallgerd's Tale",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_HEAVY_SELF": 1
+    }
+  },
+  "INCIDENT_NECROM": {
+    "name": "Incident in Necrom",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_ILLUSION_SELF": 1
+    }
+  },
+  "ICE_CHITON": {
+    "name": "Ice and Chiton",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_LIGHT_SELF": 1
+    }
+  },
+  "WORDS_PHILOSOPHY": {
+    "name": "Words and Philosophy",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_LONG_BLADE_SELF": 1
+    }
+  },
+  "GOLD_RIBBON_MERIT": {
+    "name": "The Gold Ribbon of Merit",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_MARKSMAN_SELF": 1
+    }
+  },
+  "CHERIMS_HEART_ANEQUINA": {
+    "name": "Cherim's Heart of Anequina",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_MEDIUM_SELF": 1
+    }
+  },
+  "FIRSTHOLD_REVOLT": {
+    "name": "The Firsthold Revolt",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_MYSTICISM_SELF": 1
+    }
+  },
+  "WITHERSHINS": {
+    "name": "Withershins",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_RESTORATION_SELF": 1
+    }
+  },
+  "UNNAMED_BOOK": {
+    "name": "Unnamed Book",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_SHORT_BLADE_SELF": 1
+    }
+  },
+  "WARRIORS_CHARGE": {
+    "name": "The Warrior's Charge",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 100,
+    "effects": {
+    "APPLY_FORTIFY_STAFF_SELF": 1
+    }
+  }
 }
