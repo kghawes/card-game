@@ -60,6 +60,33 @@
     ],
     "loot": {"gold": 1}
   },
+  "DREUGH": {
+    "name": "Dreugh",
+    "max_health": 10,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "NATURAL_ARMOR", "quantity": 3},
+      {"card": "HARD_CARAPACE", "quantity": 1},
+      {"card": "SHARP_CLAWS", "quantity": 1},
+      {"card": "RAZOR_CLAWS", "quantity": 4},
+      {"card": "MISS", "quantity": 1}
+    ],
+    "loot": {"gold": 1}
+  },
+  "DREUGH_WARLORD": {
+    "name": "Dreugh",
+    "max_health": 12,
+    "max_stamina": 8,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "NATURAL_ARMOR", "quantity": 3},
+      {"card": "RAZOR_CLAWS", "quantity": 4},
+      {"card": "VICIOUS_CLAWS", "quantity": 1},
+      {"card": "HYDRODYNAMIC", "quantity": 2}
+    ],
+    "loot": {"gold": 1}
+  },
   "MUDCRAB": {
     "name": "Mudcrab",
     "max_health": 2,
@@ -220,6 +247,18 @@
       {"card": "HARD_CARAPACE", "quantity": 2},
       {"card": "PARALYZING_BITE", "quantity": 2},
       {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "KWAMA_FORAGER": {
+    "name": "Kwama Forager",
+    "max_health": 4,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "VENOM", "quantity": 2}
     ],
     "loot": {"gold": 4}
   }

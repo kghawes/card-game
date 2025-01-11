@@ -1,0 +1,56 @@
+{
+  "FLAP": {
+    "name": "Flap",
+    "card_type": "SKILL",
+    "cost": 2,
+    "value": 0,
+    "effects": { "NO_EFFECT": 0 }
+  },
+  "HYDRODYNAMIC": {
+    "name": "Hydrodynamic",
+    "card_type": "SKILL",
+    "cost": 2,
+    "value": 0,
+    "effects": { "APPLY_FORTIFY_SPEED_SELF": 3 }
+  },
+  "FIREPROOF": {
+    "name": "Fireproof",
+    "card_type": "SKILL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_RESISTANCE_FIRE_SELF": 9 }
+  },
+  "FROSTPROOF": {
+    "name": "Frostproof",
+    "card_type": "SKILL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_RESISTANCE_FROST_SELF": 9 }
+  },
+  "SHOCKPROOF": {
+    "name": "Shockproof",
+    "card_type": "SKILL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 9 }
+  },
+  "ABSORPTIVE_SKIN": {
+    "name": "Absorptive Skin",
+    "card_type": "SKILL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_SPELL_ABSORPTION_SELF": 5 }
+  },
+  "MAGIC_RESISTANCE": {
+    "name": "Magic Resistance",
+    "card_type": "SKILL",
+    "cost": 2,
+    "value": 0,
+    "effects": {
+      "APPLY_RESISTANCE_FIRE_SELF": 3,
+      "APPLY_RESISTANCE_FROST_SELF": 3,
+      "APPLY_RESISTANCE_SHOCK_SELF": 3,
+      "APPLY_RESISTANCE_POISON_SELF": 3
+    }
+  }
+}

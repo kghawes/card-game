@@ -1,0 +1,205 @@
+{
+  "CRYING_EYE": {
+    "name": "Crying Eye",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "APPLY_BLIND_TARGET": 1 }
+  },
+  "ERELVAMS_WILD_STY": {
+    "name": "Erelvam's Wild Sty",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 4,
+    "value": 30,
+    "effects": { "APPLY_BLIND_TARGET": 3 }
+  },
+  "ALADS_CALIGINY": {
+    "name": "Alad's Caliginy",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 6,
+    "value": 30,
+    "effects": { "APPLY_BLIND_TARGET": 5 }
+  },
+  "CALMING_TOUCH": {
+    "name": "Calming Touch",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "APPLY_CALM_TARGET": 1 }
+  },
+  "PACIFY": {
+    "name": "Pacify",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 4,
+    "value": 30,
+    "effects": { "APPLY_CALM_TARGET": 2 }
+  },
+  "HARMONY": {
+    "name": "Harmony",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 6,
+    "value": 30,
+    "effects": { "APPLY_CALM_TARGET": 3 }
+  },
+  "FRENZYING_TOUCH": {
+    "name": "Frenzying Touch",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "APPLY_FRENZY_TARGET": 1 }
+  },
+  "TOUCH_RAGE": {
+    "name": "Touch of Rage",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 4,
+    "value": 30,
+    "effects": { "APPLY_FRENZY_TARGET": 2 }
+  },
+  "MAYHEM": {
+    "name": "Mayhem",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 6,
+    "value": 30,
+    "effects": { "APPLY_FRENZY_TARGET": 3 }
+  },
+  "SANCTUARY": {
+    "name": "Sanctuary",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 1,
+    "value": 30,
+    "effects": { "APPLY_EVASION_SELF": 2 }
+  },
+  "GOLANARS_EYEMAZE": {
+    "name": "Golanar's Eye-Maze",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "APPLY_EVASION_SELF": 2 }
+  },
+  "CHAMELEON": {
+    "name": "Chameleon",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 3,
+    "value": 30,
+    "effects": { "APPLY_EVASION_SELF": 3 }
+  },
+  "SHADOW_FORM": {
+    "name": "Shadow Form",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 4,
+    "value": 30,
+    "effects": { "APPLY_EVASION_SELF": 4 }
+  },
+  "SHADOW_WEAVE": {
+    "name": "Shadow Weave",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 5,
+    "value": 30,
+    "effects": { "APPLY_EVASION_SELF": 5 }
+  },
+  "SHADOWMASK": {
+    "name": "Shadowmask",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 6,
+    "value": 30,
+    "effects": { "APPLY_EVASION_SELF": 6 }
+  },
+  "BREVUSAS_AVERTED_EYES": {
+    "name": "Brevusa's Averted Eyes",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 1,
+    "value": 30,
+    "effects": { "APPLY_HIDDEN_SELF": 1 }
+  },
+  "INVISIBILITY": {
+    "name": "Invisibility",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "APPLY_HIDDEN_SELF": 2 }
+  },
+  "CONCEALMENT": {
+    "name": "Concealment",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 3,
+    "value": 30,
+    "effects": { "APPLY_HIDDEN_SELF": 3 }
+  },
+  "SPECTRAL_FORM": {
+    "name": "Spectral Form",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 5,
+    "value": 30,
+    "effects": { "APPLY_HIDDEN_SELF": 5 }
+  },
+  "NIGHTEYE": {
+    "name": "Night-Eye",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 1,
+    "value": 30,
+    "effects": {
+      "REMOVE_HIDDEN_TARGET": 2,
+      "REMOVE_EVASION_TARGET": 1
+      }
+  },
+  "PARALYSIS": {
+    "name": "Paralysis",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "APPLY_PARALYZE_TARGET": 1 }
+  },
+  "MEDUSAS_GAZE": {
+    "name": "Medusa's Gaze",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 5,
+    "value": 30,
+    "effects": { "APPLY_PARALYZE_TARGET": 3 }
+  },
+  "SILENCE": {
+    "name": "Silence",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "APPLY_SILENCE_TARGET": 1 }
+  },
+  "CRUEL_SILENCE": {
+    "name": "Cruel Silence",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 3,
+    "value": 30,
+    "effects": { "APPLY_SILENCE_TARGET": 2 }
+  },
+  "DIRE_SILENCE": {
+    "name": "Dire Silence",
+    "card_type": "SPELL",
+    "subtype": "ILLUSION",
+    "cost": 4,
+    "value": 30,
+    "effects": { "APPLY_SILENCE_TARGET": 3 }
+  }
+}

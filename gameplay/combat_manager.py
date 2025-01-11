@@ -122,7 +122,7 @@ class CombatManager:
                 if not status.is_card_playable(card.card_type):
                     return False
             elif (isinstance(status, LimitCardPlayStatus) and
-                  combatant.cards_played_this_turn > status.card_limit):
+                  combatant.cards_played_this_turn >= status.card_limit):
                 return False
         return True
 

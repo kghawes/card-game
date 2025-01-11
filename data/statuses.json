@@ -226,5 +226,19 @@
     "class": "ModifyCostStatus",
     "affected_card_type": "RESTORATION",
     "sign_factor": -1
+  },
+  "REFLECT": {
+    "class": "BlockMagicStatus"
+  },
+  "SPELL_ABSORPTION": {
+    "class": "BlockMagicStatus"
+  },
+  "DISEASE": {
+    "class": "LimitCardPlayStatus",
+    "max_cards_per_turn": 4
+  },
+  "BLIGHT": {
+    "class": "LimitCardPlayStatus",
+    "max_cards_per_turn": 2
   }
 }

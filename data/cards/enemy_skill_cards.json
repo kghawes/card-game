@@ -1,9 +1,0 @@
-{
-  "FLAP": {
-    "name": "Flap",
-    "card_type": "SKILL",
-    "cost": 2,
-    "value": 0,
-    "effects": { "NO_EFFECT": 0 }
-  }
-}

@@ -10,6 +10,7 @@
   "RATTLES": {
     "name": "Rattles",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_DISEASE_TARGET": 1 }
@@ -17,6 +18,7 @@
   "ATAXIA": {
     "name": "Ataxia",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_DISEASE_TARGET": 2 }
@@ -24,6 +26,7 @@
   "BROWN_ROT": {
     "name": "Brown Rot",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 2,
     "value": 0,
     "effects": { "APPLY_DISEASE_TARGET": 2 }
@@ -31,6 +34,7 @@
   "ROCKJOINT": {
     "name": "Rockjoint",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_DISEASE_TARGET": 3 }
@@ -38,6 +42,7 @@
   "WITBANE": {
     "name": "Witbane",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 2,
     "value": 0,
     "effects": { "APPLY_DISEASE_TARGET": 4 }
@@ -45,6 +50,7 @@
   "ASH_CHANCRE": {
     "name": "Ash-chancre",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_BLIGHT_TARGET": 1 }
@@ -52,6 +58,7 @@
   "BLACK_HEART_BLIGHT": {
     "name": "Black-Heart Blight",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 2,
     "value": 0,
     "effects": { "APPLY_BLIGHT_TARGET": 2 }
@@ -59,6 +66,7 @@
   "CHANTHRAX_BLIGHT": {
     "name": "Chanthrax Blight",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 2,
     "value": 0,
     "effects": { "APPLY_BLIGHT_TARGET": 3 }
@@ -66,8 +74,47 @@
   "ASH_WOE_BLIGHT": {
     "name": "Ash Woe Blight",
     "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_BLIGHT_TARGET": 3 }
+  },
+  "ARMOR_EATER": {
+    "name": "Armor Eater",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_DAMAGE_ENDURANCE_TARGET": 3 }
+  },
+  "SPELL_REFLECTION": {
+    "name": "Spell Reflection",
+    "card_type": "SPELL",
+    "subtype": "MYSTICISM",
+    "cost": 2,
+    "value": 0,
+    "effects": { "APPLY_REFLECT_SELF": 5 }
+  },
+  "FIREBORN": {
+    "name": "Fireborn",
+    "card_type": "SPELL",
+    "subtype": "RESTORATION",
+    "cost": 2,
+    "value": 0,
+    "effects": {
+      "APPLY_RESISTANCE_FIRE_SELF": 5,
+      "APPLY_WEAKNESS_SHOCK_SELF": 5
+      }
+  },
+  "POISON_SPIT": {
+    "name": "Poison Spit",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 3,
+    "value": 0,
+    "effects": {
+      "POISON_DAMAGE_TARGET": 4,
+      "APPLY_POISON_TARGET": 4
+      }
   }
 }

@@ -21,7 +21,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Iron {}sword"
   },
@@ -38,7 +42,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Steel {}sword"
   },
@@ -55,7 +63,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Orcish {}sword"
   },
@@ -72,7 +84,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Adamantium {}sword"
   },
@@ -89,7 +105,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Glass {}sword"
   },
@@ -106,7 +126,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Ebony {}sword"
   },
@@ -123,7 +147,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Daedric {}sword"
   },
@@ -140,7 +168,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Iron {}slayer"
   },
@@ -157,7 +189,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Steel {}slayer"
   },
@@ -174,7 +210,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Orcish {}slayer"
   },
@@ -191,7 +231,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Adamantium {}slayer"
   },
@@ -208,7 +252,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Glass {}slayer"
   },
@@ -225,7 +273,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Ebony {}slayer"
   },
@@ -242,7 +294,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Daedric {}slayer"
   },
@@ -259,7 +315,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Iron {}mace"
   },
@@ -276,7 +336,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Steel {}mace"
   },
@@ -293,7 +357,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Orcish {}mace"
   },
@@ -310,7 +378,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Adamantium {}mace"
   },
@@ -327,7 +399,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Glass {}mace"
   },
@@ -344,7 +420,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Ebony {}mace"
   },
@@ -361,7 +441,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Daedric {}mace"
   },
@@ -378,7 +462,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Iron {}mauler"
   },
@@ -395,7 +483,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Steel {}mauler"
   },
@@ -412,7 +504,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Orcish {}mauler"
   },
@@ -429,7 +525,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Adamantium {}mauler"
   },
@@ -446,7 +546,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Glass {}mauler"
   },
@@ -463,7 +567,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Ebony {}mauler"
   },
@@ -480,7 +588,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Daedric {}mauler"
   },
@@ -497,7 +609,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Cruel Iron {}blade"
   },
@@ -514,7 +630,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Cruel Steel {}blade"
   },
@@ -531,7 +651,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Cruel Orcish {}blade"
   },
@@ -548,7 +672,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Cruel Adamantium {}blade"
   },
@@ -565,7 +693,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Cruel Glass {}blade"
   },
@@ -582,7 +714,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Cruel Ebony {}blade"
   },
@@ -599,7 +735,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Cruel Daedric {}blade"
   },
@@ -616,7 +756,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Dire Iron {}blade"
   },
@@ -633,7 +777,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Dire Steel {}blade"
   },
@@ -650,7 +798,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Dire Orcish {}blade"
   },
@@ -667,7 +819,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Dire Adamantium {}blade"
   },
@@ -684,7 +840,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Dire Glass {}blade"
   },
@@ -701,7 +861,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Dire Ebony {}blade"
   },
@@ -718,7 +882,11 @@
       "FLAME",
       "SHARD",
       "SPARK",
-      "VIPER"
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
     ],
     "enchanted_name": "Dire Daedric {}blade"
   },
@@ -731,7 +899,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 1
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Iron {}star"
   },
   "STEEL_THROWING_STAR": {
@@ -743,7 +920,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 2
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Steel {}star"
   },
   "ORCISH_THROWING_STAR": {
@@ -755,7 +941,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 3
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Orcish {}star"
   },
   "ADAMANTIUM_THROWING_STAR": {
@@ -767,7 +962,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 3
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Adamantium {}star"
   },
   "GLASS_THROWING_STAR": {
@@ -779,7 +983,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 4
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Glass {}star"
   },
   "EBONY_THROWING_STAR": {
@@ -791,7 +1004,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 5
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Ebony {}star"
   },
   "DAEDRIC_THROWING_STAR": {
@@ -803,7 +1025,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 6
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Daedric {}star"
   },
   "SHORTBOW": {
@@ -815,7 +1046,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 2
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Shortbow ({}arrows)"
   },
   "LONGBOW": {
@@ -827,7 +1067,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 3
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Longbow ({}arrows)"
   },
   "ORCISH_BOW": {
@@ -839,7 +1088,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 4
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Orcish Bow ({}arrows)"
   },
   "ADAMANTIUM_BOW": {
@@ -851,7 +1109,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 5
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Adamantium Bow ({}arrows)"
   },
   "GLASS_BOW": {
@@ -863,7 +1130,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 6
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Glass Bow ({}arrows)"
   },
   "EBONY_BOW": {
@@ -875,7 +1151,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 7
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Ebony Bow ({}arrows)"
   },
   "DAEDRIC_BOW": {
@@ -887,7 +1172,16 @@
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 11
     },
-    "enchantments": ["FLAME", "SHARD", "SPARK", "VIPER"],
+    "enchantments": [
+      "FLAME",
+      "SHARD",
+      "SPARK",
+      "VIPER",
+      "FIRE",
+      "FROST",
+      "STORM",
+      "POISON"
+    ],
     "enchanted_name": "Daedric Bow ({}arrows)"
   },
   "WOODEN_STAFF": {

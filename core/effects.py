@@ -101,7 +101,9 @@ class DamageEffect(Effect):
     def resolve(self, source, opponent, level, status_registry):
         """The target of the effect takes damage."""
         subject = self.get_target_combatant(source, opponent)
-        subject.take_damage(level, self.damage_type_enum.name, status_registry)
+        subject.take_damage(
+            source, level, self.damage_type_enum.name, status_registry
+            )
 
 
 class ChangeResourceEffect(Effect):
@@ -116,8 +118,6 @@ class ChangeResourceEffect(Effect):
 
     def resolve(self, source, opponent, level, status_registry):
         """Change the resource's current value by the amount indicated."""
-        if self.matches(c.EffectNames.DRAIN.name):
-            level *= -1
         subject = self.get_target_combatant(source, opponent)
         subject.change_resource(self.resource_enum.name, level)
 

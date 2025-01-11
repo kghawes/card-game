@@ -1,0 +1,242 @@
+{
+  "FLAME_ATRONACH": {
+    "name": "Flame Atronach",
+    "max_health": 6,
+    "max_stamina": 3,
+    "max_magicka": 5,
+    "deck": [
+      {"card": "FIREBOLT", "quantity": 4},
+      {"card": "FIREBALL", "quantity": 4},
+      {"card": "FIREPROOF", "quantity": 2},
+      {"card": "MISS", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "FROST_ATRONACH": {
+    "name": "Frost Atronach",
+    "max_health": 7,
+    "max_stamina": 3,
+    "max_magicka": 5,
+    "deck": [
+      {"card": "FROSTBOLT", "quantity": 3},
+      {"card": "FROSTBALL", "quantity": 4},
+      {"card": "GREATER_FROSTBALL", "quantity": 1},
+      {"card": "FROSTPROOF", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "STORM_ATRONACH": {
+    "name": "Storm Atronach",
+    "max_health": 9,
+    "max_stamina": 3,
+    "max_magicka": 6,
+    "deck": [
+      {"card": "SHOCKBOLT", "quantity": 2},
+      {"card": "SHOCKBALL", "quantity": 4},
+      {"card": "GREATER_SHOCKBALL", "quantity": 2},
+      {"card": "SHOCKPROOF", "quantity": 2},
+      {"card": "LIGHTNING_BOLT", "quantity": 2},
+      {"card": "NATURAL_ARMOR", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "STUNTED_SCAMP": {
+    "name": "Stunted Scamp",
+    "max_health": 3,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "MISS", "quantity": 2},
+      {"card": "SHARP_CLAWS", "quantity": 4}
+    ],
+    "loot": {"gold": 2}
+  },
+  "SCAMP": {
+    "name": "Scamp",
+    "max_health": 5,
+    "max_stamina": 3,
+    "max_magicka": 1,
+    "deck": [
+      {"card": "MISS", "quantity": 2},
+      {"card": "SHARP_CLAWS", "quantity": 2},
+      {"card": "RAZOR_CLAWS", "quantity": 2},
+      {"card": "FIREBOLT", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "CLANNFEAR_RUNT": {
+    "name": "Clannfear Runt",
+    "max_health": 8,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_CLAWS", "quantity": 1},
+      {"card": "RAZOR_CLAWS", "quantity": 2},
+      {"card": "SHARP_TEETH", "quantity": 3},
+      {"card": "MISS", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "CLANNFEAR": {
+    "name": "Clannfear",
+    "max_health": 9,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "VICIOUS_CLAWS", "quantity": 1},
+      {"card": "RAZOR_CLAWS", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 3}
+    ],
+    "loot": {"gold": 2}
+  },
+  "DAEDROTH": {
+    "name": "Daedroth",
+    "max_health": 10,
+    "max_stamina": 4,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "VICIOUS_CLAWS", "quantity": 3},
+      {"card": "RAZOR_CLAWS", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 1},
+      {"card": "POISONBLOOM", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "OGRIM": {
+    "name": "Ogrim",
+    "max_health": 10,
+    "max_stamina": 5,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "TOUGH_HIDE", "quantity": 3},
+      {"card": "BLUDGEONING_FISTS", "quantity": 4}
+    ],
+    "loot": {"gold": 2}
+  },
+  "OGRIM_TITAN": {
+    "name": "Ogrim Titan",
+    "max_health": 12,
+    "max_stamina": 6,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "TOUGH_HIDE", "quantity": 3},
+      {"card": "BLUDGEONING_FISTS", "quantity": 4}
+    ],
+    "loot": {"gold": 2}
+  },
+  "HUNGER": {
+    "name": "Hunger",
+    "max_health": 10,
+    "max_stamina": 4,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "VICIOUS_CLAWS", "quantity": 4},
+      {"card": "ARMOR_EATER", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "DREMORA_CHURL": {
+    "name": "Dremora",
+    "max_health": 9,
+    "max_stamina": 5,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "FIREBOLT", "quantity": 2},
+      {"card": "STEEL_MACE", "quantity": 2},
+      {"card": "IRON_CLAYMORE", "quantity": 2},
+      {"card": "DAEDRIC_ARMOR", "quantity": 1},
+      {"card": "SPELL_REFLECTION", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "DREMORA": {
+    "name": "Dremora",
+    "max_health": 10,
+    "max_stamina": 8,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "FIREBALL", "quantity": 2},
+      {"card": "EBONY_MACE", "quantity": 2},
+      {"card": "EBONY_SHORTSWORD", "quantity": 2},
+      {"card": "DAEDRIC_ARMOR", "quantity": 2},
+      {"card": "SPELL_REFLECTION", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "DREMORA_LORD": {
+    "name": "Dremora Lord",
+    "max_health": 12,
+    "max_stamina": 10,
+    "max_magicka": 6,
+    "deck": [
+      {"card": "GREATER_FIREBALL", "quantity": 3},
+      {"card": "DAEDRIC_CLAYMORE", "quantity": 3},
+      {"card": "DAEDRIC_ARMOR", "quantity": 3},
+      {"card": "SPELL_REFLECTION", "quantity": 3}
+    ],
+    "loot": {"gold": 2}
+  },
+  "WINGED_TWILIGHT": {
+    "name": "Winged Twilight",
+    "max_health": 11,
+    "max_stamina": 9,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "VICIOUS_CLAWS", "quantity": 10},
+      {"card": "FLAP", "quantity": 1},
+      {"card": "SPELL_REFLECTION", "quantity": 3}
+    ],
+    "loot": {"gold": 2}
+  },
+  "GOLDEN_SAINT": {
+    "name": "Golden Saint",
+    "max_health": 13,
+    "max_stamina": 10,
+    "max_magicka": 10,
+    "deck": [
+      {"card": "GLASS_FIRESWORD", "quantity": 1},
+      {"card": "ADAMANTIUM_POISONSLAYER", "quantity": 1},
+      {"card": "EBONY_STORMSWORD", "quantity": 1},
+      {"card": "CRUEL_DAEDRIC_STORMBLADE", "quantity": 1},
+      {"card": "EBONY_SHIELD", "quantity": 1},
+      {"card": "GLASS_SHIELD", "quantity": 1},
+      {"card": "DAEDRIC_TOWER_SHIELD", "quantity": 1},
+      {"card": "SPELL_REFLECTION", "quantity": 1},
+      {"card": "PURGE_MAGIC", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "XIVILAI": {
+    "name": "Xivilai",
+    "max_health": 15,
+    "max_stamina": 10,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "GLASS_CLAYMORE", "quantity": 1},
+      {"card": "EBONY_WARHAMMER", "quantity": 1},
+      {"card": "GLASS_WARHAMMER", "quantity": 1},
+      {"card": "FIREBORN", "quantity": 1},
+      {"card": "LIGHTNING_BOLT", "quantity": 1},
+      {"card": "INCINERATE", "quantity": 1},
+      {"card": "PURGE_MAGIC", "quantity": 1},
+      {"card": "CHAMELEON", "quantity": 1},
+      {"card": "ABSORPTIVE_SKIN", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "SPIDER_DAEDRA": {
+    "name": "Spider Daedra",
+    "max_health": 9,
+    "max_stamina": 9,
+    "max_magicka": 9,
+    "deck": [
+      {"card": "POISON_SPIT", "quantity": 2},
+      {"card": "MAGIC_RESISTANCE", "quantity": 2},
+      {"card": "VICIOUS_CLAWS", "quantity": 1},
+      {"card": "HEAL_WOUNDS", "quantity": 1},
+      {"card": "HARD_CARAPACE", "quantity": 1},
+      {"card": "LIGHTNING_BOLT", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  }
+}

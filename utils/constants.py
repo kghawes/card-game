@@ -19,9 +19,9 @@ class CardSubtypes(Enum):
     SHORT_BLADE = "Short Blade"
     MARKSMAN = "Marksman Weapon"
     STAFF = "Staff"
-    HEAVY_ARMOR = "Heavy Armor"
-    MEDIUM_ARMOR = "Medium Armor"
-    LIGHT_ARMOR = "Light Armor"
+    HEAVY = "Heavy Armor"
+    MEDIUM = "Medium Armor"
+    LIGHT = "Light Armor"
     COMBAT = "Combat"
     STEALTH = "Stealth"
     MAGIC = "Magic"
@@ -52,30 +52,20 @@ class DamageTypes(Enum):
     FROST = "Frost"
     SHOCK = "Shock"
     POISON = "Poison"
-    MAGIC = "Magic"
-
-# Damage groups
-ELEMENTAL_DAMAGE_TYPES = [
-    DamageTypes.FIRE,
-    DamageTypes.FROST,
-    DamageTypes.SHOCK
-    ]
 
 class EffectNames(Enum):
     """Effect ids and display names."""
     NO_EFFECT = "No Effect"
     DAMAGE = "Damage"
     RESTORE = "Restore"
-    DRAIN = "Drain"
     APPLY = "Apply"
     REMOVE = "Remove"
     DRAW = "Draw"
     DISCARD = "Discard"
     JUMP = "Jump"
-    SCRY = "Scry"
-    PICKPOCKET = "Pickpocket"
     DISPEL = "Dispel"
-    CONJURE_CARD = "Conjure"
+
+ALL_EFFECTS = "All Effects"
 
 class TargetTypes(Enum):
     """The target of a card effect."""
@@ -96,9 +86,6 @@ class StatusNames(Enum):
     HIDDEN = "Hidden"
     BURDEN = "Burden"
     FEATHER = "Feather"
-    WATERWALKING = "Waterwalking"
-    WATERBREATHING = "Waterbreathing"
-    SWIFT_SWIM = "Swift Swim"
     DISEASE = "Common Disease"
     BLIGHT = "Blight Disease"
     REFLECT = "Reflect"
@@ -159,24 +146,26 @@ MAX_HAND_SIZE = 10
 
 # Paths to JSON files
 CARD_PATHS = [
-    "data/cards/weapon_cards.json",
-    "data/cards/armor_cards.json",
-    "data/cards/alteration_spell_cards.json",
-    "data/cards/destruction_spell_cards.json",
-    "data/cards/combat_skill_cards.json",
-    "data/cards/stealth_skill_cards.json",
-    "data/cards/magic_skill_cards.json",
-    "data/cards/potion_consumable_cards.json",
-    "data/cards/scroll_consumable_cards.json",
-    "data/cards/item_cards.json",
-    "data/cards/enemy_weapon_cards.json",
-    "data/cards/enemy_armor_cards.json",
-    "data/cards/enemy_spell_cards.json",
-    "data/cards/enemy_skill_cards.json"
+    "data/cards/weapons.json",
+    "data/cards/armors.json",
+    "data/cards/alteration_spells.json",
+    "data/cards/destruction_spells.json",
+    "data/cards/combat_skills.json",
+    "data/cards/stealth_skills.json",
+    "data/cards/magic_skills.json",
+    "data/cards/potion_consumables.json",
+    "data/cards/scroll_consumables.json",
+    "data/cards/items.json",
+    "data/cards/enemy_weapons.json",
+    "data/cards/enemy_armors.json",
+    "data/cards/enemy_spells.json",
+    "data/cards/enemy_skills.json"
     ]
 ENEMIES_PATHS = [
-    "data/enemies_beasts.json",
-    "data/enemies_undead.json"
+    "data/enemies/beasts.json",
+    "data/enemies/daedra.json",
+    "data/enemies/npcs.json",
+    "data/enemies/undead.json"
     ]
 STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"

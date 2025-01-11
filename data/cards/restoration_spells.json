@@ -1,0 +1,58 @@
+{
+  "HEAL_MINOR_WOUNDS": {
+    "name": "Heal Minor Wounds",
+    "card_type": "SPELL",
+    "subtype": "RESTORATION",
+    "cost": 1,
+    "value": 30,
+    "effects": { "RESTORE_HEALTH_SELF": 1 }
+  },
+  "HEAL_LESSER_WOUNDS": {
+    "name": "Heal Lesser Wounds",
+    "card_type": "SPELL",
+    "subtype": "RESTORATION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "RESTORE_HEALTH_SELF": 2 }
+  },
+  "HEAL_WOUNDS": {
+    "name": "Heal Wounds",
+    "card_type": "SPELL",
+    "subtype": "RESTORATION",
+    "cost": 4,
+    "value": 30,
+    "effects": { "RESTORE_HEALTH_SELF": 3 }
+  },
+  "HEAL_GREATER_WOUNDS": {
+    "name": "Heal Greater Wounds",
+    "card_type": "SPELL",
+    "subtype": "RESTORATION",
+    "cost": 5,
+    "value": 30,
+    "effects": { "RESTORE_HEALTH_SELF": 4 }
+  },
+  "HEAL_MAJOR_WOUNDS": {
+    "name": "Heal Major Wounds",
+    "card_type": "SPELL",
+    "subtype": "RESTORATION",
+    "cost": 7,
+    "value": 30,
+    "effects": { "RESTORE_HEALTH_SELF": 6 }
+  },
+  "CURE_BLIGHT_DISEASE": {
+    "name": "Cure Blight Disease",
+    "card_type": "SPELL",
+    "subtype": "RESTORATION",
+    "cost": 2,
+    "value": 30,
+    "effects": { "REMOVE_BLIGHT_SELF": 10 }
+  },
+  "CURE_COMMON_DISEASE": {
+    "name": "Cure Common Disease",
+    "card_type": "SPELL",
+    "subtype": "RESTORATION",
+    "cost": 1,
+    "value": 30,
+    "effects": { "REMOVE_DISEASE_SELF": 10 }
+  }
+}

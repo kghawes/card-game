@@ -1,0 +1,38 @@
+{
+  "HARD_CARAPACE": {
+    "name": "Hard Carapace",
+    "card_type": "ARMOR",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_ARMOR_SELF": 2 }
+  },
+  "TOUGH_HIDE": {
+    "name": "Tough Hide",
+    "card_type": "ARMOR",
+    "cost": 2,
+    "value": 0,
+    "effects": { "APPLY_ARMOR_SELF": 3 }
+  },
+  "NATURAL_ARMOR": {
+    "name": "Natural Armor",
+    "card_type": "ARMOR",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_ARMOR_SELF": 3 }
+  },
+  "METAL_HIDE": {
+    "name": "Metal Hide",
+    "card_type": "ARMOR",
+    "cost": 3,
+    "value": 0,
+    "effects": { "APPLY_ARMOR_SELF": 6 }
+  },
+  "DAEDRIC_ARMOR": {
+    "name": "Daedric Armor",
+    "card_type": "ARMOR",
+    "subtype": "HEAVY",
+    "cost": 4,
+    "value": 0,
+    "effects": { "APPLY_ARMOR_SELF": 8 }
+  }
+}

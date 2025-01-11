@@ -61,5 +61,19 @@
     "cost": 2,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 5 }
+  },
+  "VENOM": {
+    "name": "Venom",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": { "POISON_DAMAGE_TARGET": 1 }
+  },
+  "BLUDGEONING_FISTS": {
+    "name": "Bludgeoning Fists",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 0,
+    "effects": { "POISON_DAMAGE_TARGET": 4 }
   }
 }

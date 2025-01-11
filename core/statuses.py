@@ -185,7 +185,7 @@ class PoisonStatus(Status):
     def trigger_on_turn(self, subject, level, status_registry):
         """Activate the status effect when requested by caller."""
         damage_type = c.DamageTypes.POISON.name
-        subject.take_damage(level, damage_type, status_registry)
+        subject.take_damage(None, level, damage_type, status_registry)
 
 
 class RegenerationStatus(Status):
@@ -252,6 +252,21 @@ class LimitCardPlayStatus(Status):
         self.card_limit = max_cards_per_turn
 
 
+class BlockMagicStatus(Status):
+    """This type of status blocks incoming non-physical damage and
+    redirects it."""
+    def __init__(self, status_id):
+        super().__init__(status_id, False)
+
+    def calculate_block(self, damage_amount, damage_type, status_level):
+        assert c.DamageTypes[damage_type]
+        if damage_type != c.DamageTypes.PHYSICAL.name:
+            new_amount = max(damage_amount - status_level, 0)
+            blocked_damage = damage_amount - new_amount
+            return new_amount, blocked_damage
+        return damage_amount, 0
+
+
 class StatusRegistry:
     """Holds Status objects in a dictionary to be looked up when 
     needed."""
@@ -274,7 +289,9 @@ class StatusRegistry:
             "RegenerationStatus": RegenerationStatus,
             "EvasionStatus": EvasionStatus,
             "RestrictCardTypeStatus": RestrictCardTypeStatus,
-            "FilterEffectStatus": FilterEffectStatus
+            "FilterEffectStatus": FilterEffectStatus,
+            "LimitCardPlayStatus": LimitCardPlayStatus,
+            "BlockMagicStatus": BlockMagicStatus
             }
 
         statuses = {}

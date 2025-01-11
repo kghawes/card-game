@@ -1,6 +1,6 @@
 {
   "DEFENSE": "Block up to {} Damage and if you do, lose that much Defense.",
-  "POISON": "At the start of each turn, take {} Poison Damage.",
+  "POISON": "At the start of your turn, take {} Poison Damage.",
   "FORTIFY_STRENGTH": "Your Weapons do {} more damage.",
   "DAMAGE_STRENGTH": "Your Weapons do {} less damage.",
   "FORTIFY_AGILITY": "Your maximum Stamina is increased by {}.",
@@ -11,8 +11,8 @@
   "DAMAGE_INTELLIGENCE": "Your maximum Magicka is decreased by {}.",
   "FORTIFY_WILLPOWER": "Your Spells do {} more damage.",
   "DAMAGE_WILLPOWER": "Your Spells do {} less damage (minimum 1 for Spells that deal damage).",
-  "FORTIFY_SPEED": "Draw {} additional cards each turn.",
-  "DAMAGE_SPEED": "Draw {} fewer cards each turn (draw 2 minimum).",
+  "FORTIFY_SPEED": "Draw {} additional cards on your turn.",
+  "DAMAGE_SPEED": "Draw {} fewer cards on your turn (draw 2 minimum).",
   "FORTIFY_LUCK": "Receive the maximum possible rewards if you defeat the Enemy while you have this status.",
   "DAMAGE_LUCK": "Receive the minimum possible rewards if you defeat the Enemy while you have this status.",
   "REGENERATION": "Restore {} Health at the beginning of your turn.",
@@ -22,14 +22,14 @@
   "FRENZY": "Cards you play have none of their effects except dealing damage.",
   "CALM": "Cards you play deal no damage to the Enemy.",
   "EVASION": "{} chance to avoid taking damage.",
-  "HIDDEN": "{} chance to skip the Enemy's turn.",
+  "HIDDEN": "{} chance to deal double damage.",
   "BURDEN": "Your Skills cost {} more Stamina.",
   "FEATHER": "Your Skills cost {} less Stamina.",
   "WATERWALKING": "Cards you play that would go to your Discard Pile go on top of your Deck instead.",
-  "WATERBREATHING": "When you would draw your Hand, instead select up to {} cards from your Discard pile to add to your hand. Then, draw the rest of your cards.",
+  "WATERBREATHING": "When you would draw your Hand, instead draw up to {} cards from your Discard Pile. Then, draw the rest of your cards.",
   "SWIFT_SWIM": "After you draw your Hand, you may discard up to {} cards and then draw that many cards.",
-  "LEVITATE": "After you draw your Hand, set the cost of each card in your Hand to their average cost.",
-  "LOCKED": "The Enemy cannot interact with your Hand or Deck.",
+  "LEVITATE": "Set the cost of each card in your Hand to the average of their costs.",
+  "LOCKED": "The Enemy cannot interact with your Deck.",
   "WEAKNESS_PHYSICAL_DAMAGE": "Take {} more damage from Physical Damage.",
   "RESISTANCE_PHYSICAL_DAMAGE": "Take {} less damage from Physical Damage.",
   "WEAKNESS_FIRE_DAMAGE": "Take {} more damage from Fire.",
@@ -79,4 +79,5 @@
   "REFLECT": "When the Enemy would deal non-Physical Damage to you, take {} less damage and the Enemy takes damage equal to the amount blocked.",
   "SPELL_ABSORPTION": "When the Enemy would deal non-Physical Damage to you, take {} less damage and restore points of your Magicka equal to the amount of damage blocked.",
   "ALCHEMIST": "Your Potions are {} more effective."
+  "ENCHANTER": "Your Scrolls are {} more effective."
 }

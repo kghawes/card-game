@@ -1,9 +1,0 @@
-{
-  "HARD_CARAPACE": {
-    "name": "Hard Carapace",
-    "card_type": "ARMOR",
-    "cost": 1,
-    "value": 0,
-    "effects": { "APPLY_ARMOR_SELF": 1 }
-  }
-}

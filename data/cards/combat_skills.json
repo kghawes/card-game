@@ -125,5 +125,15 @@
     "effects": {
       "RESTORE_HEALTH_SELF": 2
     }
+  },
+  "INTIMIDATE": {
+    "name": "Intimidate",
+    "card_type": "SKILL",
+    "subtype": "COMBAT",
+    "cost": 1,
+    "value": 60,
+    "effects": {
+      "APPLY_DAMAGE_WILLPOWER_TARGET": 3
+    }
   }
 }
