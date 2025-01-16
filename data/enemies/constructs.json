@@ -1,0 +1,37 @@
+{
+  "SPIDER_CENTURION": {
+    "name": "Spider Centurion",
+    "max_health": 3,
+    "max_stamina": 2,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_CLAWS", "quantity": 4},
+      {"card": "NATURAL_ARMOR", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "ADVANCED_SPIDER_CENTURION": {
+    "name": "Advanced Spider Centurion",
+    "max_health": 5,
+    "max_stamina": 4,
+    "max_magicka": 1,
+    "deck": [
+      {"card": "RAZOR_CLAWS", "quantity": 4},
+      {"card": "NATURAL_ARMOR", "quantity": 2},
+      {"card": "SHOCKBOLT", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "SPHERE_CENTURION": {
+    "name": "Sphere Centurion",
+    "max_health": 6,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "RAZOR_CLAWS", "quantity": 4},
+      {"card": "NATURAL_ARMOR", "quantity": 2},
+      {"card": "SHOCKBOLT", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  }
+}

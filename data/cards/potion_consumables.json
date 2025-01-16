@@ -644,6 +644,6 @@
     "subtype": "POTION",
     "cost": 0,
     "value": 260,
-    "effects": { "REMOVE_POISON_SELF": 5 }
+    "effects": { "REMOVE_POISON_SELF": 7 }
   }
 }

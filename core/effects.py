@@ -142,6 +142,27 @@ class HandEffect(Effect):
             subject.card_manager.discard_random(level)
 
 
+class JumpEffect(Effect):
+    """This effect reduces the cost of the most costly card in hand."""
+    def __init__(self):
+        """Initialize a new JumpEffect."""
+        effect_id = c.EffectNames.JUMP.name
+        name = c.EffectNames.JUMP.value
+        super().__init__(effect_id, name)
+
+    def resolve(self, source, opponent, level, status_registry):
+        """Reduce the cost of the most costly card in hand."""
+        subject = source
+        hand = subject.card_manager.hand
+        highest_cost_card = None
+        
+        for card in hand:
+            if not highest_cost_card or \
+            card.get_cost() > highest_cost_card.get_cost():
+                highest_cost_card = card
+
+        highest_cost_card.change_temp_cost_modifier(-level)
+
 class EffectRegistry:
     """This class holds effect data and provides access to the effects."""
     def __init__(self, status_registry):
@@ -157,6 +178,7 @@ class EffectRegistry:
         effects[c.EffectNames.DISCARD.name] = HandEffect(
             c.EffectNames.DISCARD, False
             )
+        effects[c.EffectNames.JUMP.name] = JumpEffect()
 
         # Multi-target effects:
         for target_type in c.TargetTypes:

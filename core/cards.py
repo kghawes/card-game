@@ -12,7 +12,9 @@ class Card:
         self.name = name
         self.card_type = card_type
         self.cost = cost
-        self.cost_modifier = 1
+        self.cost_modifier = 0
+        self.temp_cost_modifier = 0
+        self.override_cost = -1
         self.value = value
         self.subtype = subtype
         self.effects = {}
@@ -30,7 +32,10 @@ class Card:
 
     def get_cost(self) -> int:
         """Get the stamina or magicka cost of the card."""
-        return max(self.cost + self.cost_modifier, MIN_COST)
+        if self.override_cost >= MIN_COST:
+            return self.override_cost
+        net_cost = self.cost + self.cost_modifier + self.temp_cost_modifier
+        return max(net_cost, MIN_COST)
 
     def change_cost_modifier(self, amount):
         """Change the cost of the card."""
@@ -40,11 +45,25 @@ class Card:
         """Reset the cost of the card to its base value."""
         self.cost_modifier = 0
 
+    def change_temp_cost_modifier(self, amount):
+        """Add a temporary cost change."""
+        self.temp_cost_modifier += amount
+
+    def reset_temp_cost_modifier(self):
+        """Remove temporary cost changes."""
+        self.temp_cost_modifier = 0
+
+    def reset_override_cost(self):
+        """Stop using the override cost."""
+        self.override_cost = -1
+
     def reset_card(self):
         """Reset all modified values on the card."""
         for level in self.effects.values():
             level.reset_level()
         self.reset_cost_modifier()
+        self.reset_temp_cost_modifier()
+        self.reset_override_cost()
 
     def matches(self, card_property) -> bool:
         """Check if a card has a certain type or subtype."""

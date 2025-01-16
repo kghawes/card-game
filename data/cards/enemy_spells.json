@@ -1,4 +1,11 @@
 {
+  "CAST_FAILED": {
+    "name": "Cast Failed",
+    "card_type": "SPELL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "NO_EFFECT": 0 }
+  },
   "PARALYZING_BITE": {
     "name": "Paralyzing Bite",
     "card_type": "SPELL",
@@ -115,6 +122,38 @@
     "effects": {
       "POISON_DAMAGE_TARGET": 4,
       "APPLY_POISON_TARGET": 4
+      }
+  },
+  "GRIM_CURSE": {
+    "name": "Grim Curse",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "APPLY_DAMAGE_SPEED_TARGET": 1
+      }
+  },
+  "GRAVE_CURSE": {
+    "name": "Grave Curse",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 0,
+    "effects": {
+      "APPLY_DAMAGE_STRENGTH_TARGET": 2,
+      "APPLY_DAMAGE_ENDURANCE_TARGET": 2
+      }
+  },
+  "DREAD_CURSE": {
+    "name": "Dread Curse",
+    "card_type": "SPELL",
+    "subtype": "DESTRUCTION",
+    "cost": 2,
+    "value": 0,
+    "effects": {
+      "APPLY_DAMAGE_AGILITY_TARGET": 2,
+      "APPLY_DAMAGE_INTELLIGENCE_TARGET": 2
       }
   }
 }

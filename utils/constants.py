@@ -55,6 +55,7 @@ class DamageTypes(Enum):
 
 class EffectNames(Enum):
     """Effect ids and display names."""
+    ALL_EFFECTS = "All Effects"
     NO_EFFECT = "No Effect"
     DAMAGE = "Damage"
     RESTORE = "Restore"
@@ -64,8 +65,6 @@ class EffectNames(Enum):
     DISCARD = "Discard"
     JUMP = "Jump"
     DISPEL = "Dispel"
-
-ALL_EFFECTS = "All Effects"
 
 class TargetTypes(Enum):
     """The target of a card effect."""
@@ -92,6 +91,7 @@ class StatusNames(Enum):
     SPELL_ABSORPTION = "Spell Absorption"
     ALCHEMIST = "Alchemist"
     ENCHANTER = "Enchanter"
+    LEVITATE = "Levitate"
     WEAKNESS_PHYSICAL = "Weakness to Physical Damage"
     WEAKNESS_FIRE = "Weakness to Fire Damage"
     WEAKNESS_FROST = "Weakness to Frost Damage"

@@ -8,6 +8,7 @@
       {"card": "FIREBOLT", "quantity": 4},
       {"card": "FIREBALL", "quantity": 4},
       {"card": "FIREPROOF", "quantity": 2},
+      {"card": "INORGANIC", "quantity": 1},
       {"card": "MISS", "quantity": 1}
     ],
     "loot": {"gold": 2}
@@ -21,6 +22,7 @@
       {"card": "FROSTBOLT", "quantity": 3},
       {"card": "FROSTBALL", "quantity": 4},
       {"card": "GREATER_FROSTBALL", "quantity": 1},
+      {"card": "INORGANIC", "quantity": 1},
       {"card": "FROSTPROOF", "quantity": 2}
     ],
     "loot": {"gold": 2}
@@ -36,6 +38,7 @@
       {"card": "GREATER_SHOCKBALL", "quantity": 2},
       {"card": "SHOCKPROOF", "quantity": 2},
       {"card": "LIGHTNING_BOLT", "quantity": 2},
+      {"card": "INORGANIC", "quantity": 1},
       {"card": "NATURAL_ARMOR", "quantity": 1}
     ],
     "loot": {"gold": 2}

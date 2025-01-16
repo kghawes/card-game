@@ -75,5 +75,33 @@
     "cost": 3,
     "value": 0,
     "effects": { "POISON_DAMAGE_TARGET": 4 }
+  },
+  "TENTACLES": {
+    "name": "Tentacles",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 0,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 2,
+      "APPLY_DAMAGE_SPEED_TARGET": 1
+    }
+  },
+  "SPIKED_CLUB": {
+    "name": "Spiked Club",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 0,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 2
+    }
+  },
+  "SPECTRAL_STRIKE": {
+    "name": "Spectral Strike",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 0,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 2
+    }
   }
 }

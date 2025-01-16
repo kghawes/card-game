@@ -98,14 +98,14 @@ class ModifierManager:
     def modify_card_effect(self, card, effect, modifier):
         """Change the effect level of the given effect on this card."""
         for effect_id, effect_level in card.effects.items():
-            if effect in effect_id:
+            if effect in effect_id or effect == c.EffectNames.ALL_EFFECTS.name:
                 amount = modifier.contribution
                 effect_level.change_level(amount)
 
     def reset_card_effect(self, card, effect):
         """Reset the effect level of the given effect on this card."""
         for effect_id, effect_level in card.effects.items():
-            if effect in effect_id:
+            if effect in effect_id or effect == c.EffectNames.ALL_EFFECTS.name:
                 effect_level.reset_level()
 
     # Max resource modifiers

@@ -31,8 +31,8 @@ class CardManager:
         pile back into the deck if necessary. Return False if the max
         hand size was met or True if all cards were able to be drawn."""
         while cards_to_draw > 0:
-            if len(self.hand) == c.MAX_HAND_SIZE:
-                return False
+            if len(self.hand) >= c.MAX_HAND_SIZE:
+                break
             if len(self.deck) == 0:
                 self.deck = self.discard_pile[:]
                 self.discard_pile = []
@@ -41,11 +41,9 @@ class CardManager:
                 break
             card = self.deck.pop(0)
             self.hand.append(card)
-
-            # Recalculate modifiers for newly drawn cards
-            card.reset_card()
             cards_to_draw -= 1
-        return True
+
+        # TODO apply status effects to newly drawn cards
 
     def draw_hand(self, modifier_manager):
         """Draw the appropriate number of cards at the beginning of a

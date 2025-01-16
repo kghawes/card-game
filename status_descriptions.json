@@ -77,7 +77,7 @@
   "FORTIFY_MAGIC_SKILL": "Your Magic Skills cost {} less Stamina.",
   "DAMAGE_MAGIC_SKILL": "Your Magic Skills cost {} more Stamina.",
   "REFLECT": "When the Enemy would deal non-Physical Damage to you, take {} less damage and the Enemy takes damage equal to the amount blocked.",
-  "SPELL_ABSORPTION": "When the Enemy would deal non-Physical Damage to you, take {} less damage and restore points of your Magicka equal to the amount of damage blocked.",
+  "SPELL_ABSORPTION": "When the Enemy would deal non-Physical Damage to you, take {} less damage and gain Fortify Intelligence equal to the amount of damage blocked.",
   "ALCHEMIST": "Your Potions are {} more effective."
   "ENCHANTER": "Your Scrolls are {} more effective."
 }

@@ -83,7 +83,9 @@
       {"card": "NATURAL_ARMOR", "quantity": 3},
       {"card": "RAZOR_CLAWS", "quantity": 4},
       {"card": "VICIOUS_CLAWS", "quantity": 1},
-      {"card": "HYDRODYNAMIC", "quantity": 2}
+      {"card": "HYDRODYNAMIC", "quantity": 2},
+      {"card": "AQUATIC", "quantity": 1},
+      {"card": "TENTACLES", "quantity": 2}
     ],
     "loot": {"gold": 1}
   },
@@ -259,6 +261,349 @@
       {"card": "SHARP_TEETH", "quantity": 2},
       {"card": "MISS", "quantity": 2},
       {"card": "VENOM", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "DISEASED_KWAMA_FORAGER": {
+    "name": "Diseased Kwama Forager",
+    "max_health": 3,
+    "max_stamina": 4,
+    "max_magicka": 1,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "VENOM", "quantity": 2},
+      {"card": "RATTLES", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BLIGHTED_KWAMA_FORAGER": {
+    "name": "Blighted Kwama Forager",
+    "max_health": 3,
+    "max_stamina": 4,
+    "max_magicka": 1,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "VENOM", "quantity": 2},
+      {"card": "ASH_CHANCRE", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "KWAMA_WORKER": {
+    "name": "Kwama Worker",
+    "max_health": 7,
+    "max_stamina": 2,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_CLAWS", "quantity": 4},
+      {"card": "HARD_CARAPACE", "quantity": 2},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "KWAMA_WARRIOR": {
+    "name": "Kwama Warrior",
+    "max_health": 9,
+    "max_stamina": 4,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "RAZOR_CLAWS", "quantity": 2},
+      {"card": "SHOCKBALL", "quantity": 2},
+      {"card": "HARD_CARAPACE", "quantity": 2},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "KWAMA_QUEEN": {
+    "name": "Kwama Queen",
+    "max_health": 10,
+    "max_stamina": 4,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "SHOCKBALL", "quantity": 4},
+      {"card": "NATURAL_ARMOR", "quantity": 2},
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "VENOM", "quantity": 2},
+      {"card": "HEAL_MINOR_WOUNDS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BLIGHTED_KWAMA_QUEEN": {
+    "name": "Blighted Kwama Queen",
+    "max_health": 11,
+    "max_stamina": 5,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "SHOCKBALL", "quantity": 4},
+      {"card": "NATURAL_ARMOR", "quantity": 2},
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "VENOM", "quantity": 2},
+      {"card": "HEAL_MINOR_WOUNDS", "quantity": 2},
+      {"card": "ASH_CHANCRE", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "NIX_HOUND": {
+    "name": "Nix Hound",
+    "max_health": 5,
+    "max_stamina": 2,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "SHARP_CLAWS", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "DISEASED_NIX_HOUND": {
+    "name": "Diseased Nix Hound",
+    "max_health": 4,
+    "max_stamina": 2,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "SHARP_CLAWS", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "RATTLES", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BLIGHTED_NIX_HOUND": {
+    "name": "Blighted Nix Hound",
+    "max_health": 5,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "SHARP_CLAWS", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "ASH_CHANCRE", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "WILD_GUAR": {
+    "name": "Wild Guar",
+    "max_health": 7,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "DISEASED_GUAR": {
+    "name": "Diseased Guar",
+    "max_health": 6,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2},
+      {"card": "ATAXIA", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BLIGHTED_GUAR": {
+    "name": "Blighted Guar",
+    "max_health": 8,
+    "max_stamina": 4,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SHARP_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2},
+      {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "KAGOUTI": {
+    "name": "Kagouti",
+    "max_health": 7,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "DISEASED_KAGOUTI": {
+    "name": "Diseased Kagouti",
+    "max_health": 6,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2},
+      {"card": "ATAXIA", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BLIGHTED_KAGOUTI": {
+    "name": "Blighted Kagouti",
+    "max_health": 8,
+    "max_stamina": 4,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "MISS", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2},
+      {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "MATING_KAGOUTI": {
+    "name": "Mating Kagouti",
+    "max_health": 8,
+    "max_stamina": 6,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 3},
+      {"card": "RAZOR_TEETH", "quantity": 1},
+      {"card": "TOUGH_HIDE", "quantity": 2},
+      {"card": "RAGE", "quantity": 1}
+    ],
+    "loot": {"gold": 4}
+  },
+  "KAGOUTI_ALPHA": {
+    "name": "Kagouti Alpha",
+    "max_health": 10,
+    "max_stamina": 6,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 3},
+      {"card": "TOUGH_HIDE", "quantity": 2},
+      {"card": "RAGE", "quantity": 1}
+    ],
+    "loot": {"gold": 4}
+  },
+  "ALIT": {
+    "name": "Alit",
+    "max_health": 8,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "VENOM", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "DISEASED_ALIT": {
+    "name": "Diseased Alit",
+    "max_health": 7,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "VENOM", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2},
+      {"card": "ATAXIA", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BLIGHTED_ALIT": {
+    "name": "Blighted Alit",
+    "max_health": 8,
+    "max_stamina": 5,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "VICIOUS_TEETH", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "VENOM", "quantity": 2},
+      {"card": "TOUGH_HIDE", "quantity": 2},
+      {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BULL_NETCH": {
+    "name": "Bull Netch",
+    "max_health": 7,
+    "max_stamina": 2,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "TENTACLES", "quantity": 3},
+      {"card": "POISONBLOOM", "quantity": 3},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BETTY_NETCH": {
+    "name": "Betty Netch",
+    "max_health": 8,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "TENTACLES", "quantity": 6}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BREEDING_NETCH": {
+    "name": "Breeding Netch",
+    "max_health": 8,
+    "max_stamina": 4,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "TENTACLES", "quantity": 3},
+      {"card": "POISONBLOOM", "quantity": 3}
+    ],
+    "loot": {"gold": 4}
+  },
+  "SHALK": {
+    "name": "Shalk",
+    "max_health": 4,
+    "max_stamina": 3,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "FIREBALL", "quantity": 3},
+      {"card": "RAZOR_CLAWS", "quantity": 3},
+      {"card": "HARD_CARAPACE", "quantity": 3}
+    ],
+    "loot": {"gold": 4}
+  },
+  "DISEASED_SHALK": {
+    "name": "Diseased Shalk",
+    "max_health": 3,
+    "max_stamina": 3,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "FIREBALL", "quantity": 3},
+      {"card": "RAZOR_CLAWS", "quantity": 3},
+      {"card": "HARD_CARAPACE", "quantity": 3},
+      {"card": "ROCKJOINT", "quantity": 2},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 4}
+  },
+  "BLIGHTED_SHALK": {
+    "name": "Blighted Shalk",
+    "max_health": 4,
+    "max_stamina": 4,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "FIREBALL", "quantity": 3},
+      {"card": "RAZOR_CLAWS", "quantity": 3},
+      {"card": "HARD_CARAPACE", "quantity": 3},
+      {"card": "ASH_WOE_BLIGHT", "quantity": 2}
     ],
     "loot": {"gold": 4}
   }

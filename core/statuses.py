@@ -267,6 +267,28 @@ class BlockMagicStatus(Status):
         return damage_amount, 0
 
 
+class AverageCostStatus(Status):
+    """This status averages the costs of cards in hand."""
+    def __init__(self, status_id):
+        super().__init__(status_id, True)
+
+    def trigger_on_change(self, subject, level):
+        """Perform the cost averaging."""
+        if level <= 0:
+            return
+        sum_cost = 0
+        for card in subject.card_manager.hand:
+            sum_cost += card.get_cost()
+        average_cost = round(sum_cost / len(subject.card_manager.hand))
+        for card in subject.card_manager.hand:
+            card.override_cost = average_cost
+
+    def expire(self, subject):
+        """Reset costs."""
+        for card in subject.card_manager.hand:
+            card.reset_override_cost()
+
+
 class StatusRegistry:
     """Holds Status objects in a dictionary to be looked up when 
     needed."""
@@ -291,7 +313,8 @@ class StatusRegistry:
             "RestrictCardTypeStatus": RestrictCardTypeStatus,
             "FilterEffectStatus": FilterEffectStatus,
             "LimitCardPlayStatus": LimitCardPlayStatus,
-            "BlockMagicStatus": BlockMagicStatus
+            "BlockMagicStatus": BlockMagicStatus,
+            "AverageCostStatus": AverageCostStatus
             }
 
         statuses = {}

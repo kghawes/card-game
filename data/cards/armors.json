@@ -95,8 +95,8 @@
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 7 }
   },
-  "EBONY_GAUNTLETS": {
-    "name": "Ebony Gauntlets",
+  "EBONY_BRACERS": {
+    "name": "Ebony Bracers",
     "card_type": "ARMOR",
     "subtype": "HEAVY",
     "cost": 1,
@@ -207,8 +207,8 @@
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 23 }
   },
-  "ORCISH_GAUNTLETS": {
-    "name": "Orcish Gauntlets",
+  "ORCISH_BRACERS": {
+    "name": "Orcish Bracers",
     "card_type": "ARMOR",
     "subtype": "MEDIUM",
     "cost": 1,
@@ -239,8 +239,8 @@
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 6 }
   },
-  "ADAMANTIUM_GAUNTLETS": {
-    "name": "Adamantium Gauntlets",
+  "ADAMANTIUM_BRACERS": {
+    "name": "Adamantium Bracers",
     "card_type": "ARMOR",
     "subtype": "MEDIUM",
     "cost": 1,
@@ -311,8 +311,8 @@
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
   },
-  "GLASS_GAUNTLETS": {
-    "name": "Glass Gauntlets",
+  "GLASS_BRACERS": {
+    "name": "Glass Bracers",
     "card_type": "ARMOR",
     "subtype": "LIGHT",
     "cost": 1,

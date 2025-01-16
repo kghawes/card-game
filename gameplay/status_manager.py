@@ -1,6 +1,8 @@
 """
 This module defines the StatusManager class.
 """
+from core.statuses import ModifyCostStatus
+from utils.constants import StatusNames
 
 class StatusManager:
     """This class maintains a list of active statuses and handles their
@@ -63,6 +65,17 @@ class StatusManager:
         subject.modifier_manager.recalculate_all_effects(
             status_registry, subject.card_manager
             )
+
+        levitate_id = StatusNames.LEVITATE.name
+        if isinstance(status, ModifyCostStatus) \
+        and self.has_status(levitate_id, subject, status_registry):
+            levitate = status_registry.get_status(levitate_id)
+            levitate_level = self.get_status_level(levitate_id)
+            levitate.trigger_on_change(subject, levitate_level)
+        elif status_id == levitate_id:
+            subject.modifier_manager.recalculate_all_costs(
+                status_registry, subject.card_manager
+                )
 
     def change_all_statuses(self, amount, subject, status_registry):
         """Change the level of every active status by the same amount."""

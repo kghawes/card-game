@@ -46,5 +46,68 @@
       {"card": "STEEL_SHIELD", "quantity": 3}
     ],
     "loot": {"gold": 2}
+  },
+  "ANCESTOR_GHOST": {
+    "name": "Ancestor Ghost",
+    "max_health": 5,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "MISS", "quantity": 2},
+      {"card": "RESIST_MUNDANE_WEAPONS", "quantity": 2},
+      {"card": "SPECTRAL_STRIKE", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "GREATER_ANCESTOR_GHOST": {
+    "name": "Greater Ancestor Ghost",
+    "max_health": 9,
+    "max_stamina": 3,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "GRIM_CURSE", "quantity": 2},
+      {"card": "RESIST_MUNDANE_WEAPONS", "quantity": 2},
+      {"card": "SPECTRAL_STRIKE", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "BONEWALKER": {
+    "name": "Bonewalker",
+    "max_health": 7,
+    "max_stamina": 3,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "BLUDGEONING_FISTS", "quantity": 4},
+      {"card": "BROWN_ROT", "quantity": 1},
+      {"card": "GRAVE_CURSE", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "GREATER_BONEWALKER": {
+    "name": "Greater Bonewalker",
+    "max_health": 9,
+    "max_stamina": 3,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "BLUDGEONING_FISTS", "quantity": 4},
+      {"card": "BROWN_ROT", "quantity": 1},
+      {"card": "DREAD_CURSE", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "BONELORD": {
+    "name": "Bonelord",
+    "max_health": 9,
+    "max_stamina": 3,
+    "max_magicka": 6,
+    "deck": [
+      {"card": "SPECTRAL_STRIKE", "quantity": 1},
+      {"card": "GRAVE_CURSE", "quantity": 1},
+      {"card": "DREAD_CURSE", "quantity": 1},
+      {"card": "SECOND_BARRIER", "quantity": 1},
+      {"card": "FIREBALL", "quantity": 1},
+      {"card": "RESIST_MUNDANE_WEAPONS", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
   }
 }

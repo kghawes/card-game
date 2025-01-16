@@ -13,6 +13,16 @@
     "value": 0,
     "effects": { "APPLY_FORTIFY_SPEED_SELF": 3 }
   },
+  "AQUATIC": {
+    "name": "Aquatic",
+    "card_type": "SKILL",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "APPLY_RESISTANCE_FIRE_SELF": 7,
+      "APPLY_WEAKNESS_SHOCK_SELF": 5
+      }
+  },
   "FIREPROOF": {
     "name": "Fireproof",
     "card_type": "SKILL",
@@ -34,6 +44,13 @@
     "value": 0,
     "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 9 }
   },
+  "INORGANIC": {
+    "name": "Inorganic",
+    "card_type": "SKILL",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_RESISTANCE_POISON_SELF": 9 }
+  },
   "ABSORPTIVE_SKIN": {
     "name": "Absorptive Skin",
     "card_type": "SKILL",
@@ -51,6 +68,15 @@
       "APPLY_RESISTANCE_FROST_SELF": 3,
       "APPLY_RESISTANCE_SHOCK_SELF": 3,
       "APPLY_RESISTANCE_POISON_SELF": 3
+    }
+  },
+  "RESIST_MUNDANE_WEAPONS": {
+    "name": "Resist Mundane Weapons",
+    "card_type": "SKILL",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "APPLY_RESISTANCE_PHYSICAL_SELF": 5
     }
   }
 }

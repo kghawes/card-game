@@ -200,7 +200,7 @@
     "cost": 1,
     "value": 20,
     "effects": { 
-    "APPLY_DAMAGE_INTELLIGENCE_TARGET": 2
+    "APPLY_DAMAGE_INTELLIGENCE_TARGET": 1
     }
   },
   "ENERVATE": {
@@ -210,7 +210,7 @@
     "cost": 1,
     "value": 20,
     "effects": { 
-    "APPLY_DAMAGE_ENDURANCE_TARGET": 3
+    "APPLY_DAMAGE_ENDURANCE_TARGET": 2
     }
   },
   "WOE": {
@@ -220,7 +220,7 @@
     "cost": 1,
     "value": 20,
     "effects": { 
-    "APPLY_DAMAGE_WILLPOWER_TARGET": 3
+    "APPLY_DAMAGE_WILLPOWER_TARGET": 2
     }
   },
   "TORPOR": {
@@ -240,7 +240,7 @@
     "cost": 1,
     "value": 20,
     "effects": { 
-    "APPLY_DAMAGE_STRENGTH_TARGET": 3
+    "APPLY_DAMAGE_STRENGTH_TARGET": 2
     }
   },
   "ORDEAL_ST_OLMS": {

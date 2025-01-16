@@ -240,5 +240,20 @@
   "BLIGHT": {
     "class": "LimitCardPlayStatus",
     "max_cards_per_turn": 2
+  },
+  "ALCHEMIST": {
+    "class": "ModifyEffectStatus",
+    "affected_card_type": "POTION",
+    "affected_effect": "ALL_EFFECTS",
+    "sign_factor": 1
+  },
+  "ENCHANTER": {
+    "class": "ModifyEffectStatus",
+    "affected_card_type": "SCROLL",
+    "affected_effect": "ALL_EFFECTS",
+    "sign_factor": 1
+  },
+  "LEVITATE": {
+    "class": "AverageCostStatus"
   }
 }
