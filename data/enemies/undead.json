@@ -109,5 +109,19 @@
       {"card": "RESIST_MUNDANE_WEAPONS", "quantity": 1}
     ],
     "loot": {"gold": 2}
+  },
+  "DWARVEN_SPECTRE": {
+    "name": "Dwarven Spectre",
+    "max_health": 8,
+    "max_stamina": 4,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "GRIM_CURSE", "quantity": 2},
+      {"card": "GRAVE_CURSE", "quantity": 2},
+      {"card": "RESIST_MUNDANE_WEAPONS", "quantity": 2},
+      {"card": "SPECTRAL_STRIKE", "quantity": 2},
+      {"card": "FIREBALL", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
   }
 }

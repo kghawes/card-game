@@ -5,49 +5,71 @@ EffectRegistry.
 import utils.constants as c
 
 class Effect:
-    """Base class representing a card's immediate effect when played."""
+    """
+    Base class representing a card's immediate effect when played.
+    """
     def __init__(self, effect_id, name, target_type_enum=None):
-        """Initialize a new Effect."""
+        """
+        Initialize a new Effect.
+        """
         self.effect_id = effect_id
         self.name = name
         self.target_type_enum = target_type_enum
 
     def resolve(self, source, opponent, level=1, status_registry=None):
-        """Base method for polymorphism. Do the thing the effect does."""
+        """
+        Base method for polymorphism. Do the thing the effect does.
+        """
         return
 
     def get_target_combatant(self, source, opponent):
-        """Identify the correct Combatant to apply the effect to."""
+        """
+        Identify the correct Combatant to apply the effect to.
+        """
         if self.target_type_enum == c.TargetTypes.TARGET:
             return opponent
         return source
 
     def format_id(self, *strings) -> str:
-        """Create the effect id by combining its parts."""
+        """
+        Create the effect id by combining its parts.
+        """
         return "_".join([*strings, self.target_type_enum.name])
 
     def format_name(self, *strings) -> str:
-        """Create the effect display name by combining its parts."""
+        """
+        Create the effect display name by combining its parts.
+        """
         return " ".join([*strings, self.target_type_enum.value])
 
     def matches(self, effect_id) -> bool:
-        """Check if this effect matches the given type of effect."""
+        """
+        Check if this effect matches the given type of effect.
+        """
         return effect_id in self.effect_id
 
 
 class NoEffect(Effect):
-    """This effect does nothing. Needed for cards that do nothing."""
+    """
+    This effect does nothing. Needed for cards that do nothing.
+    """
     def __init__(self):
-        """Initialize a new NoEffect."""
+        """
+        Initialize a new NoEffect.
+        """
         effect_id = c.EffectNames.NO_EFFECT.name
         effect_name = c.EffectNames.NO_EFFECT.value
         super().__init__(effect_id, effect_name, None)
 
 
 class ChangeStatusEffect(Effect):
-    """This type of effect applies or removes a Status."""
+    """
+    This type of effect applies or removes a Status.
+    """
     def __init__(self, effect_name_enum, target_type_enum, status_enum):
-        """Initialize a new ChangeStatusEffect."""
+        """
+        Initialize a new ChangeStatusEffect.
+        """
         self.target_type_enum = target_type_enum
         self.status_enum = status_enum
         base_id = effect_name_enum.name
@@ -57,7 +79,9 @@ class ChangeStatusEffect(Effect):
         super().__init__(self.effect_id, self.name, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
-        """Change the status by the amount indicated."""
+        """
+        Change the status by the amount indicated.
+        """
         subject = self.get_target_combatant(source, opponent)
         status_id = self.status_enum.name
 
@@ -70,16 +94,22 @@ class ChangeStatusEffect(Effect):
 
 
 class DispelEffect(Effect):
-    """This type of effect decreases levels from all active statuses."""
+    """
+    This type of effect decreases levels from all active statuses.
+    """
     def __init__(self, target_type_enum):
-        """Initialize a new DispelEffect."""
+        """
+        Initialize a new DispelEffect.
+        """
         super().__init__(
             c.EffectNames.DISPEL.name, c.EffectNames.DISPEL.value,
             target_type_enum
             )
 
     def resolve(self, source, opponent, level, status_registry):
-        """Reduce active statuses on the subject."""
+        """
+        Reduce active statuses on the subject.
+        """
         subject = self.get_target_combatant(source, opponent)
         subject.status_manager.change_all_statuses(
             -level, subject, status_registry
@@ -87,9 +117,13 @@ class DispelEffect(Effect):
 
 
 class DamageEffect(Effect):
-    """This type of effect deals damage."""
+    """
+    This type of effect deals damage.
+    """
     def __init__(self, target_type_enum, damage_type_enum):
-        """Initialize a new DamageEffect."""
+        """
+        Initialize a new DamageEffect.
+        """
         self.target_type_enum = target_type_enum
         self.damage_type_enum = damage_type_enum
         base_id = damage_type_enum.name
@@ -99,7 +133,9 @@ class DamageEffect(Effect):
         super().__init__(effect_id, name, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
-        """The target of the effect takes damage."""
+        """
+        The target of the effect takes damage.
+        """
         subject = self.get_target_combatant(source, opponent)
         subject.take_damage(
             source, level, self.damage_type_enum.name, status_registry
@@ -107,9 +143,13 @@ class DamageEffect(Effect):
 
 
 class ChangeResourceEffect(Effect):
-    """This type of effect changes the current value of a Resource."""
+    """
+    This type of effect changes the current value of a Resource.
+    """
     def __init__(self, effect_name_enum, target_type_enum, resource_enum):
-        """Initialize a new ChangeResourceEffect."""
+        """
+        Initialize a new ChangeResourceEffect.
+        """
         self.resource_enum = resource_enum
         self.target_type_enum = target_type_enum
         effect_id = self.format_id(effect_name_enum.name, resource_enum.name)
@@ -117,60 +157,89 @@ class ChangeResourceEffect(Effect):
         super().__init__(effect_id, name, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
-        """Change the resource's current value by the amount indicated."""
+        """
+        Change the resource's current value by the amount indicated.
+        """
         subject = self.get_target_combatant(source, opponent)
         subject.change_resource(self.resource_enum.name, level)
 
 
 class HandEffect(Effect):
-    """This type of effect draws or discards cards."""
+    """
+    This type of effect draws or discards cards.
+    """
     def __init__(self, effect_name_enum, is_draw_effect):
-        """Initialize a new HandEffect."""
+        """
+        Initialize a new HandEffect.
+        """
         effect_id = effect_name_enum.name
         name = effect_name_enum.value
         super().__init__(effect_id, name, c.TargetTypes.SELF)
         self.is_draw_effect = is_draw_effect
 
     def resolve(self, source, opponent, level, status_registry):
-        """Draw or discard card(s)."""
+        """
+        Draw or discard card(s).
+        """
         subject = self.get_target_combatant(source, opponent)
         if level == 0:
             return
         if self.is_draw_effect:
-            subject.card_manager.draw(level)
+            subject.card_manager.draw(subject, status_registry, level)
         else:
-            subject.card_manager.discard_random(level)
+            subject.card_manager.discard_random(
+                level, subject, status_registry
+                )
 
 
 class JumpEffect(Effect):
-    """This effect reduces the cost of the most costly card in hand."""
+    """
+    This effect reduces the cost of the most costly card in hand.
+    """
     def __init__(self):
-        """Initialize a new JumpEffect."""
+        """
+        Initialize a new JumpEffect.
+        """
         effect_id = c.EffectNames.JUMP.name
         name = c.EffectNames.JUMP.value
         super().__init__(effect_id, name)
 
     def resolve(self, source, opponent, level, status_registry):
-        """Reduce the cost of the most costly card in hand."""
+        """
+        Reduce the cost of the most costly card in hand.
+        """
         subject = source
         hand = subject.card_manager.hand
         highest_cost_card = None
-        
+
         for card in hand:
             if not highest_cost_card or \
-            card.get_cost() > highest_cost_card.get_cost():
+            card.get_cost(False) > highest_cost_card.get_cost(False):
                 highest_cost_card = card
 
         highest_cost_card.change_temp_cost_modifier(-level)
 
+        status_manager = subject.status_manager
+        levitate = c.StatusNames.LEVITATE.name
+        if status_manager.has_status(levitate, subject, status_registry):
+            status_registry.get_status(levitate).trigger_on_change(
+                subject, status_manager.get_status_level(levitate)
+                )
+
 class EffectRegistry:
-    """This class holds effect data and provides access to the effects."""
+    """
+    This class holds effect data and provides access to the effects.
+    """
     def __init__(self, status_registry):
-        """Initialize a new EffectRegistry."""
+        """
+        Initialize a new EffectRegistry.
+        """
         self.effects = self._register_effects(status_registry)
 
     def _register_effects(self, status_registry) -> dict:
-        """Create the Effect objects and file them in the dict."""
+        """
+        Create the Effect objects and file them in the dict.
+        """
         effects = {}
 
         effects[c.EffectNames.NO_EFFECT.name] = NoEffect()
@@ -205,7 +274,9 @@ class EffectRegistry:
         return effects
 
     def get_effect(self, effect_id) -> Effect:
-        """Get the Effect object with the given id."""
+        """
+        Get the Effect object with the given id.
+        """
         if effect_id not in self.effects:
             raise KeyError(f"Effect ID '{effect_id}' not found.")
         return self.effects[effect_id]

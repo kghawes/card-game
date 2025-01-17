@@ -6,19 +6,27 @@ from core.statuses import FilterEffectStatus, RestrictCardTypeStatus, \
     LimitCardPlayStatus
 
 class CombatManager:
-    """This class controls the flow of combat and coordinates between
-    combatants, statuses, and effects."""
+    """
+    This class controls the flow of combat and coordinates between combatants,
+    statuses, and effects.
+    """
 
     def is_combat_over(self, player, enemy) -> bool:
-        """Check if either combatant is dead."""
+        """
+        Check if either combatant is dead.
+        """
         return not (player.is_alive() and enemy.is_alive())
 
-    def do_combat(self, player, enemy, text_interface, registries):
-        """Enter the combat loop."""
+    def do_combat(self, player, enemy, text_interface, registries, card_cache):
+        """
+        Enter the combat loop.
+        """
         player.card_manager.shuffle()
         enemy.card_manager.shuffle()
         while True:
-            self.do_player_turn(player, enemy, text_interface, registries)
+            self.do_player_turn(
+                player, enemy, text_interface, registries, card_cache
+                )
             if self.is_combat_over(player, enemy):
                 break
             self.do_enemy_turn(player, enemy, text_interface, registries)
@@ -27,25 +35,31 @@ class CombatManager:
         player.status_manager.reset_statuses(player, registries.statuses)
         player.modifier_manager.reset_all()
 
-    def do_player_turn(self, player, enemy, text_interface, registries):
-        """Prepare for the player to take their turn then handle any
-        actions they perform."""
+    def do_player_turn(
+            self, player, enemy, text_interface, registries, card_cache
+            ):
+        """
+        Prepare for the player to take their turn then handle any actions they
+        perform.
+        """
         if self.beginning_of_turn(player, enemy, registries.statuses):
             return
         turn_ended = False
         while not turn_ended and not self.is_combat_over(player, enemy):
             text_interface.display_turn_info(player, enemy, registries.effects)
             turn_ended = self.do_player_action(
-                player, enemy, text_interface, registries
+                player, enemy, text_interface, registries, card_cache
                 )
         self.end_of_turn(player, registries.statuses)
 
     def beginning_of_turn(self, combatant, opponent, status_registry) -> bool:
-        """Handle resetting resources, triggering statuses, and drawing
-        cards. Returns whether combat ended during the beginning phase."""
+        """
+        Handle resetting resources, triggering statuses, and drawing cards.
+        Returns whether combat ended during the beginning phase.
+        """
         combatant.reset_for_turn()
 
-        combatant.card_manager.draw_hand(combatant.modifier_manager)
+        combatant.card_manager.draw_hand(combatant, status_registry)
 
         combatant.status_manager.trigger_statuses_on_turn(
             combatant, status_registry
@@ -61,16 +75,22 @@ class CombatManager:
         return False
 
     def end_of_turn(self, combatant, status_registry):
-        """Discard hand and decrement active status levels."""
-        combatant.card_manager.discard_hand()
+        """
+        Discard hand and decrement active status levels.
+        """
+        combatant.card_manager.discard_hand(combatant, status_registry)
         combatant.status_manager.decrement_statuses(
             combatant, status_registry
             )
 
-    def do_player_action(self, player, enemy, text_interface, registries):
-        """Get the player input and perform the selected action."""
+    def do_player_action(
+            self, player, enemy, text_interface, registries, card_cache
+            ):
+        """
+        Get the player input and perform the selected action.
+        """
         selection = text_interface.turn_options_prompt(
-            player, enemy, registries
+            player, enemy, registries, card_cache
             )
         if selection < 0:  # Pass turn
             return True
@@ -84,8 +104,10 @@ class CombatManager:
     def play_card(
             self, combatant, opponent, card, text_interface, registries
             ) -> bool:
-        """Activate a card's effects, spend its cost, and discard it.
-        Return whether the card was successfully played."""
+        """
+        Activate a card's effects, spend its cost, and discard it. Return
+        whether the card was successfully played.
+        """
         if not self.card_can_be_played(combatant, card, registries.statuses):
             text_interface.send_message("Impossible!")
             return False
@@ -106,7 +128,7 @@ class CombatManager:
                 combatant, opponent, level, status_registry=registries.statuses
                 )
 
-        combatant.card_manager.discard(card)
+        combatant.card_manager.discard(card, combatant, registries.statuses)
 
         text_interface.send_message(c.CARD_PLAYED_MESSAGE.format(
             combatant.name, card.name, opponent.name, opponent.get_health())
@@ -114,8 +136,9 @@ class CombatManager:
         return True
 
     def card_can_be_played(self, combatant, card, status_registry) -> bool:
-        """Check if the given card can be played based on current
-        status effects."""
+        """
+        Check if the given card can be played based on current status effects.
+        """
         for status_id in combatant.status_manager.statuses:
             status = status_registry.get_status(status_id)
             if isinstance(status, RestrictCardTypeStatus):
@@ -129,8 +152,10 @@ class CombatManager:
     def effect_can_resolve(
             self, combatant, effect_id, status_registry
             ) -> bool:
-        """Check if the given card effect can resolve based on current
-        status effects."""
+        """
+        Check if the given card effect can resolve based on current status
+        effects.
+        """
         for status_id in combatant.status_manager.statuses:
             status = status_registry.get_status(status_id)
             if isinstance(status, FilterEffectStatus):
@@ -139,7 +164,9 @@ class CombatManager:
         return True
 
     def do_enemy_turn(self, player, enemy, text_interface, registries):
-        """Process enemy actions."""
+        """
+        Process enemy actions.
+        """
         self.beginning_of_turn(enemy, player, registries.statuses)
         playable_card_exists = True
         while playable_card_exists and not self.is_combat_over(player, enemy):

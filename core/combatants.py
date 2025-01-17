@@ -8,13 +8,17 @@ from core.resources import Resource
 from utils.constants import Resources as r, StatusNames as s, DamageTypes as d
 
 class Combatant:
-    """Base class that represents an entity that can engage in combat,
-    either the Player or an Enemy."""
+    """
+    Base class that represents an entity that can engage in combat, either the
+    Player or an Enemy.
+    """
     def __init__(
             self, name, max_health, max_stamina, max_magicka, starting_deck,
             card_cache, status_registry
             ):
-        """Initialize a new Combatant."""
+        """
+        Initialize a new Combatant.
+        """
         self.name = name
 
         health_id = r.HEALTH.name
@@ -33,32 +37,46 @@ class Combatant:
         self.cards_played_this_turn = 0
 
     def get_health(self) -> int:
-        """Get current health."""
+        """
+        Get current health.
+        """
         return self.resources[r.HEALTH.name].current
 
     def get_max_health(self) -> int:
-        """Get maximum health."""
+        """
+        Get maximum health.
+        """
         return self.resources[r.HEALTH.name].get_max(self.modifier_manager)
 
     def get_stamina(self) -> int:
-        """Get current stamina."""
+        """
+        Get current stamina.
+        """
         return self.resources[r.STAMINA.name].current
 
     def get_max_stamina(self) -> int:
-        """Get maximum stamina."""
+        """
+        Get maximum stamina.
+        """
         return self.resources[r.STAMINA.name].get_max(self.modifier_manager)
 
     def get_magicka(self) -> int:
-        """Get current magicka."""
+        """
+        Get current magicka.
+        """
         return self.resources[r.MAGICKA.name].current
 
     def get_max_magicka(self) -> int:
-        """Get maximum magicka."""
+        """
+        Get maximum magicka.
+        """
         return self.resources[r.MAGICKA.name].get_max(self.modifier_manager)
 
     def take_damage(self, attacker, amount, damage_type, status_registry):
-        """Accounting for statuses that modify incoming damage, change
-        health to register damage taken."""
+        """
+        Accounting for statuses that modify incoming damage, change health to
+        register damage taken.
+        """
         if amount <= 0:
             return
         
@@ -119,21 +137,29 @@ class Combatant:
         health.change_value(-amount, self.modifier_manager)
 
     def is_alive(self) -> bool:
-        """Check if the Combatant has more than zero health."""
+        """
+        Check if the Combatant has more than zero health.
+        """
         return self.get_health() > 0
 
     def replenish_resources_for_turn(self):
-        """Reset current stamina and magicka to their maximum values."""
+        """
+        Reset current stamina and magicka to their maximum values.
+        """
         stamina = self.resources[r.STAMINA.name]
         stamina.replenish(self.modifier_manager)
         magicka = self.resources[r.MAGICKA.name]
         magicka.replenish(self.modifier_manager)
 
     def reset_for_turn(self):
-        """Reset values for the new turn."""
+        """
+        Reset values for the new turn.
+        """
         self.replenish_resources_for_turn()
         self.cards_played_this_turn = 0
 
     def change_resource(self, resource_id, amount):
-        """Change the value of a given resource by a given amount."""
+        """
+        Change the value of a given resource by a given amount.
+        """
         self.resources[resource_id].change_value(amount, self.modifier_manager)

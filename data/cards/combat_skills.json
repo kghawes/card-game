@@ -83,7 +83,7 @@
     "value": 80,
     "effects": {
       "REMOVE_DEFENSE_SELF": 5,
-      "RESTORE_STAMINA_SELF": 5
+      "RESTORE_STAMINA_SELF": 7
     }
   },
   "SWORDSMANSHIP": {

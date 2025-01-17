@@ -20,7 +20,11 @@
     "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
-    "effects": { "APPLY_DISEASE_TARGET": 1 }
+    "effects": {
+      "APPLY_DISEASE_TARGET": 1,
+      "REMOVE_FORTIFY_STRENGTH_TARGET": 1,
+      "REMOVE_FORTIFY_WILLPOWER_TARGET": 1
+    }
   },
   "ATAXIA": {
     "name": "Ataxia",
@@ -28,7 +32,11 @@
     "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
-    "effects": { "APPLY_DISEASE_TARGET": 2 }
+    "effects": {
+      "APPLY_DISEASE_TARGET": 2,
+      "REMOVE_FORTIFY_STRENGTH_TARGET": 1,
+      "REMOVE_FORTIFY_ENDURANCE_TARGET": 1
+    }
   },
   "BROWN_ROT": {
     "name": "Brown Rot",
@@ -36,7 +44,11 @@
     "subtype": "DESTRUCTION",
     "cost": 2,
     "value": 0,
-    "effects": { "APPLY_DISEASE_TARGET": 2 }
+    "effects": {
+      "APPLY_DISEASE_TARGET": 2,
+      "APPLY_DAMAGE_STRENGTH_TARGET": 1,
+      "APPLY_DAMAGE_ENDURANCE_TARGET": 1
+    }
   },
   "ROCKJOINT": {
     "name": "Rockjoint",
@@ -44,7 +56,10 @@
     "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
-    "effects": { "APPLY_DISEASE_TARGET": 3 }
+    "effects": {
+      "APPLY_DISEASE_TARGET": 3,
+      "APPLY_DAMAGE_SPEED_TARGET": 1
+    }
   },
   "WITBANE": {
     "name": "Witbane",
@@ -52,7 +67,10 @@
     "subtype": "DESTRUCTION",
     "cost": 2,
     "value": 0,
-    "effects": { "APPLY_DISEASE_TARGET": 4 }
+    "effects": {
+      "APPLY_DISEASE_TARGET": 4,
+      "APPLY_DAMAGE_INTELLIGENCE_TARGET": 1
+    }
   },
   "ASH_CHANCRE": {
     "name": "Ash-chancre",
@@ -60,7 +78,10 @@
     "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
-    "effects": { "APPLY_BLIGHT_TARGET": 1 }
+    "effects": {
+      "APPLY_BLIGHT_TARGET": 1,
+      "REMOVE_EVASION_TARGET": 3
+    }
   },
   "BLACK_HEART_BLIGHT": {
     "name": "Black-Heart Blight",
@@ -68,7 +89,11 @@
     "subtype": "DESTRUCTION",
     "cost": 2,
     "value": 0,
-    "effects": { "APPLY_BLIGHT_TARGET": 2 }
+    "effects": {
+      "APPLY_BLIGHT_TARGET": 2,
+      "APPLY_DAMAGE_STRENGTH_TARGET": 1,
+      "APPLY_DAMAGE_ENDURANCE_TARGET": 1
+    }
   },
   "CHANTHRAX_BLIGHT": {
     "name": "Chanthrax Blight",
@@ -76,7 +101,11 @@
     "subtype": "DESTRUCTION",
     "cost": 2,
     "value": 0,
-    "effects": { "APPLY_BLIGHT_TARGET": 3 }
+    "effects": {
+      "APPLY_BLIGHT_TARGET": 3,
+      "APPLY_DAMAGE_AGILITY_TARGET": 1,
+      "APPLY_DAMAGE_SPEED_TARGET": 1
+    }
   },
   "ASH_WOE_BLIGHT": {
     "name": "Ash Woe Blight",
@@ -84,7 +113,11 @@
     "subtype": "DESTRUCTION",
     "cost": 1,
     "value": 0,
-    "effects": { "APPLY_BLIGHT_TARGET": 3 }
+    "effects": {
+      "APPLY_BLIGHT_TARGET": 3,
+      "APPLY_DAMAGE_INTELLIGENCE_TARGET": 1,
+      "APPLY_DAMAGE_WILLPOWER_TARGET": 1
+    }
   },
   "ARMOR_EATER": {
     "name": "Armor Eater",

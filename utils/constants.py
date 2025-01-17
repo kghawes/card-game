@@ -4,7 +4,9 @@ This module contains constants needed across the codebase.
 from enum import Enum
 
 class CardTypes(Enum):
-    """All cards are divided into these types."""
+    """
+    All cards are divided into these types.
+    """
     WEAPON = "Weapon"
     ARMOR = "Armor"
     SKILL = "Skill"
@@ -13,7 +15,9 @@ class CardTypes(Enum):
     CONSUMABLE = "Consumable"
 
 class CardSubtypes(Enum):
-    """Certain card types have subtypes."""
+    """
+    Certain card types have subtypes.
+    """
     LONG_BLADE = "Long Blade"
     BLUNT_WEAPON = "Blunt Weapon"
     SHORT_BLADE = "Short Blade"
@@ -35,7 +39,9 @@ class CardSubtypes(Enum):
     POTION = "Potion"
 
 class Resources(Enum):
-    """Combatant stats."""
+    """
+    Combatant stats.
+    """
     HEALTH = "health"
     STAMINA = "stamina"
     MAGICKA = "magicka"
@@ -46,7 +52,9 @@ MIN_EFFECT = 1
 MIN_COST = 0
 
 class DamageTypes(Enum):
-    """Damage must come in one of these types."""
+    """
+    Damage must come in one of these types.
+    """
     PHYSICAL = "Physical"
     FIRE = "Fire"
     FROST = "Frost"
@@ -54,7 +62,9 @@ class DamageTypes(Enum):
     POISON = "Poison"
 
 class EffectNames(Enum):
-    """Effect ids and display names."""
+    """
+    Effect ids and display names.
+    """
     ALL_EFFECTS = "All Effects"
     NO_EFFECT = "No Effect"
     DAMAGE = "Damage"
@@ -67,12 +77,16 @@ class EffectNames(Enum):
     DISPEL = "Dispel"
 
 class TargetTypes(Enum):
-    """The target of a card effect."""
+    """
+    The target of a card effect.
+    """
     SELF = "on Self"
     TARGET = "on Target"
 
 class StatusNames(Enum):
-    """Status ids and display names."""
+    """
+    Status ids and display names.
+    """
     DEFENSE = "Defense"
     REGENERATION = "Regenerate Health"
     POISON = "Poison"

@@ -6,7 +6,9 @@ import sys
 from abc import ABC, abstractmethod
 
 def load_json(filepath: str):
-    """Load data from the JSON file."""
+    """
+    Load data from the JSON file.
+    """
     try:
         with open(filepath, "r") as file:
             return json.load(file)
@@ -15,7 +17,9 @@ def load_json(filepath: str):
         sys.exit(e)
 
 class Prototype(ABC):
-    """Prototype class for creating many instances from a template."""
+    """
+    Prototype class for creating many instances from a template.
+    """
     @abstractmethod
     def clone(self):
         """Create an object based on the prototype."""

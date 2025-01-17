@@ -128,5 +128,55 @@
     "effects": {
       "APPLY_FORTIFY_INTELLIGENCE_SELF": 3
       }
+  },
+  "MASTER_ALTERATION": {
+    "name": "Master of Alteration",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 350,
+    "effects": {
+      "APPLY_FORTIFY_ALTERATION_SELF": 3
+      }
+  },
+  "MASTER_DESTRUCTION": {
+    "name": "Master of Destruction",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 350,
+    "effects": {
+      "APPLY_FORTIFY_DESTRUCTION_SELF": 3
+      }
+  },
+  "MASTER_ILLUSION": {
+    "name": "Master of Illusion",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 350,
+    "effects": {
+      "APPLY_FORTIFY_ILLUSION_SELF": 3
+      }
+  },
+  "MASTER_MYSTICISM": {
+    "name": "Master of Mysticism",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 350,
+    "effects": {
+      "APPLY_FORTIFY_MYSTICISM_SELF": 3
+      }
+  },
+  "MASTER_RESTORATION": {
+    "name": "Master of Restoration",
+    "card_type": "SKILL",
+    "subtype": "MAGIC",
+    "cost": 2,
+    "value": 350,
+    "effects": {
+      "APPLY_FORTIFY_RESTORATION_SELF": 3
+      }
   }
 }

@@ -5,30 +5,41 @@ from core.statuses import ModifyCostStatus
 from utils.constants import StatusNames
 
 class StatusManager:
-    """This class maintains a list of active statuses and handles their
-    application, removal, and activation."""
+    """
+    This class maintains a list of active statuses and handles their
+    application, removal, and activation.
+    """
     def __init__(self):
-        """Initialize a new StatusManager."""
+        """
+        Initialize a new StatusManager.
+        """
         self.statuses = {}
 
     def _kill_zombie(self, status_id, subject, status_registry):
-        """Remove a status with a nonpositive level."""
+        """
+        Remove a status with a nonpositive level.
+        """
         if self.statuses.get(status_id, 1) <= 0:
             self._delete(status_id, subject, status_registry)
 
     def _delete(self, status_id, subject, status_registry):
-        """Remove the status, making sure it cleans up after itself."""
+        """
+        Remove the status, making sure it cleans up after itself.
+        """
         status_registry.get_status(status_id).expire(subject)
         del self.statuses[status_id]
 
     def has_status(self, status_id, subject, status_registry) -> bool:
-        """Check if the given status is currently active."""
+        """
+        Check if the given status is currently active.
+        """
         self._kill_zombie(status_id, subject, status_registry)
         return status_id in self.statuses
 
     def get_status(self, status_id, subject, status_registry):
-        """Return the Status object with the given id and its current
-        level."""
+        """
+        Return the Status object with the given id and its current level.
+        """
         if self.has_status(status_id, subject, status_registry):
             status = status_registry.get_status(status_id)
             level = self.get_status_level(status_id)
@@ -36,14 +47,18 @@ class StatusManager:
         return None, 0
 
     def get_status_level(self, status_id) -> int:
-        """Get the current level of the status if active, or else 0."""
+        """
+        Get the current level of the status if active, or else 0.
+        """
         return self.statuses.get(status_id, 0)
 
     def change_status(
             self, status_id, amount, subject, status_registry,
             remove_all_levels=False
             ):
-        """Change the level of the status with the given id."""
+        """
+        Change the level of the status with the given id.
+        """
         current_level = self.get_status_level(status_id)
         new_level = max(current_level + amount, 0)
 
@@ -78,23 +93,31 @@ class StatusManager:
                 )
 
     def change_all_statuses(self, amount, subject, status_registry):
-        """Change the level of every active status by the same amount."""
+        """
+        Change the level of every active status by the same amount.
+        """
         for status_id in list(self.statuses.keys()):
             self.change_status(status_id, amount, subject, status_registry)
 
     def decrement_statuses(self, subject, status_registry):
-        """Reduce the level of every active status by 1."""
+        """
+        Reduce the level of every active status by 1.
+        """
         self.change_all_statuses(-1, subject, status_registry)
 
     def reset_statuses(self, subject, status_registry):
-        """Remove all active statuses."""
+        """
+        Remove all active statuses.
+        """
         while len(self.statuses) > 0:
             status_id = next(iter(self.statuses))
             self._delete(status_id, subject, status_registry)
 
     def trigger_statuses_on_turn(self, subject, status_registry):
-        """Loop over active statuses and invite them to trigger their
-        on-turn effects."""
+        """
+        Loop over active statuses and invite them to trigger their on-turn
+        effects.
+        """
         for status_id, level in self.statuses.items():
             status = status_registry.get_status(status_id)
             status.trigger_on_turn(subject, level, status_registry)

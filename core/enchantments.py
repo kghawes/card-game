@@ -5,7 +5,9 @@ from copy import copy, deepcopy
 from utils.utils import load_json
 
 class Enchantment:
-    """Represents a generic enchantment which adds effects to cards."""
+    """
+    Represents a generic enchantment which adds effects to cards.
+    """
     def __init__(self, enchantment_id, name, effects_dict, value_multiplier):
         """Initialize a new Enchantment."""
         self.enchantment_id = enchantment_id
@@ -14,7 +16,9 @@ class Enchantment:
         self.value_multiplier = value_multiplier
 
     def create_enchanted_card(self, card_prototype):
-        """Create an enchanted version of the given card."""
+        """
+        Create an enchanted version of the given card.
+        """
         enchanted_card = copy(card_prototype)
         enchanted_card.effects = deepcopy(card_prototype.effects)
 
@@ -32,9 +36,13 @@ class Enchantment:
 
 
 class EnchantmentRegistry:
-    """This class holds enchantment data loaded from JSON."""
+    """
+    This class holds enchantment data loaded from JSON.
+    """
     def __init__(self, enchantments_path, effect_registry):
-        """Initialize a new EnchantmentRegistry."""
+        """
+        Initialize a new EnchantmentRegistry.
+        """
         self.enchantments = self._register_enchantments(
             effect_registry, enchantments_path
             )
@@ -42,7 +50,9 @@ class EnchantmentRegistry:
     def _create_enchantment(
             self, enchantment_id, data, effect_registry
             ) -> Enchantment:
-        """Create an Enchantment object from the given data."""
+        """
+        Create an Enchantment object from the given data.
+        """
         name = data["NAME"]
         effects = {}
 
@@ -57,7 +67,9 @@ class EnchantmentRegistry:
         return Enchantment(enchantment_id, name, effects, value_multiplier)
 
     def _register_enchantments(self, effect_registry, path) -> dict:
-        """Load data from JSON and create the lookup dict."""
+        """
+        Load data from JSON and create the lookup dict.
+        """
         enchantments = {}
         data = load_json(path)
 
@@ -70,7 +82,9 @@ class EnchantmentRegistry:
         return enchantments
 
     def get_enchantment(self, enchantment_id) -> Enchantment:
-        """Get the Enchantment object matching the given id."""
+        """
+        Get the Enchantment object matching the given id.
+        """
         if enchantment_id not in self.enchantments:
             raise KeyError(f"Enchantment ID '{enchantment_id}' not found.")
         return self.enchantments[enchantment_id]

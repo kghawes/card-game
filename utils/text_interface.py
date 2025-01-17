@@ -1,23 +1,33 @@
-"""This module defines the TextInterface class, the text-based UI."""
+"""
+This module defines the TextInterface class, the text-based UI.
+"""
 import sys
 from functools import partial
 import utils.constants as constants
 
 class TextInterface:
-    """This class prints messages and receives input from the user."""
+    """
+    This class prints messages and receives input from the user.
+    """
     def send_message(self, message):
-        """Display a message to the user."""
+        """
+        Display a message to the user.
+        """
         print(message)
 
     def name_prompt(self) -> str:
-        """Prompt the user for the player name."""
+        """
+        Prompt the user for the player name.
+        """
         response = ""
         while not response or len(response) > constants.MAX_NAME_LENGTH:
             response = input(constants.PROMPT_NAME)
         return response
 
     def display_turn_info(self, player, enemy, effect_registry):
-        """Show the turn 'screen' with current stats and cards in hand."""
+        """
+        Show the turn 'screen' with current stats and cards in hand.
+        """
         # Calculate dynamic widths based on the longest name and health
         # value lengths
         name_padding = max(len(enemy.name), len(player.name)) + 2
@@ -52,7 +62,7 @@ class TextInterface:
 
         print(constants.TEXT_DIVIDER)
 
-    def turn_options_prompt(self, player, enemy, registries) -> int:
+    def turn_options_prompt(self, player, enemy, registries, card_cache) -> int:
         """
         Prompt the user for an action during their turn.
         """
@@ -66,7 +76,7 @@ class TextInterface:
                 command, *args = response[1:].split(' ', 1)
                 arg = args[0] if args else ""
                 if command in debug_commands:
-                    debug_commands[command](arg, player, enemy, registries)
+                    debug_commands[command](arg, player, enemy, registries, card_cache)
                     self.display_turn_info(player, enemy, registries.effects)
                 else:
                     print("Unknown command.")
@@ -96,8 +106,9 @@ class TextInterface:
         Define debug commands usable from the turn options prompt.
         """
         debug_commands = {
-            "q": lambda _, __, ___, ____: sys.exit(0),  # Quit command
-            "e": lambda args, p, e, r: self.handle_effect_command(args, p, e, r)  # Effect command
+            "q": lambda _, __, ___, ____, _____: sys.exit(0),  # Quit command
+            "e": lambda args, p, e, r, _: self.handle_effect_command(args, p, e, r),  # Effect command
+            "c": lambda args, p, _, __, c: self.handle_card_command(args, p, c) # Card command
         }
 
         # Add effect commands dynamically
@@ -112,13 +123,10 @@ class TextInterface:
         """
         Handle the '/e' debug command for resolving effects.
         """
-        try:
-            effect_id, level = self.parse_effect_input(args)
-            effect = registries.effects.get_effect(effect_id)
-            effect.resolve(player, enemy, level, registries.statuses)
-            print(f"Resolved {effect.name} at level {level}")
-        except Exception as e:
-            print(f"Error: {e}")
+        effect_id, level = self.parse_effect_input(args)
+        effect = registries.effects.get_effect(effect_id)
+        effect.resolve(player, enemy, level, registries.statuses)
+        print(f"Resolved {effect.name} at level {level}")
 
     def apply_effect_debug(self, effect, player, enemy, level, status_registry):
         """
@@ -126,3 +134,10 @@ class TextInterface:
         """
         effect.resolve(player, enemy, level, status_registry=status_registry)
         print(f"Resolved {effect.name} at level {level}")
+
+    def handle_card_command(self, card_id, player, card_cache):
+        """
+        Handle the '/c' debug command for adding cards.
+        """
+        card = card_cache.create_card(card_id)
+        player.card_manager.hand.append(card)

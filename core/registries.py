@@ -8,10 +8,14 @@ from core.enchantments import EnchantmentRegistry
 from gameplay.quests import QuestRegistry
 
 class Registries:
-    """Wraps StatusRegistry, EffectRegistry, EnchantmentRegistry, and
-    QuestRegistry since these are frequently used together."""
+    """
+    Wraps StatusRegistry, EffectRegistry, EnchantmentRegistry, and
+    QuestRegistry since these are frequently used together.
+    """
     def __init__(self, statuses_path, enchantments_path):
-        """Initialize a new Registries."""
+        """
+        Initialize a new Registries.
+        """
         self.statuses = StatusRegistry(statuses_path)
         self.effects = EffectRegistry(self.statuses)
         self.enchantments = EnchantmentRegistry(
@@ -20,7 +24,9 @@ class Registries:
         self.quests = None
 
     def register_quests(self, quests_path, enemy_cache, card_cache):
-        """Create the quest registry."""
+        """
+        Create the quest registry.
+        """
         self.quests = QuestRegistry(
             quests_path, enemy_cache, card_cache, self.statuses
             )

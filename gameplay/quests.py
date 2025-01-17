@@ -5,12 +5,16 @@ from utils.utils import load_json
 from gameplay.encounters import Encounter
 
 class Quest:
-    """This class represents a series of encounters."""
+    """
+    This class represents a series of encounters.
+    """
     def __init__(
             self, quest_id, description, encounters, enemy_cache, card_cache,
             status_registry
             ):
-        """Initialize a new Quest."""
+        """
+        Initialize a new Quest.
+        """
         self.quest_id = quest_id
         self.description = description
         self.encounters = []
@@ -21,9 +25,13 @@ class Quest:
             self.encounters.append(Encounter(enemy))
 
 class QuestRegistry:
-    """This class holds quest data loaded from JSON."""
+    """
+    This class holds quest data loaded from JSON.
+    """
     def __init__(self, quests_path, enemy_cache, card_cache, status_registry):
-        """Initialize a new QuestRegistry."""
+        """
+        Initialize a new QuestRegistry.
+        """
         self.quests = []
         quest_data = load_json(quests_path)
         for quest_id, quest_details in quest_data.items():

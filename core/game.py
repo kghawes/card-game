@@ -11,9 +11,13 @@ from utils.text_interface import TextInterface
 import utils.constants as c
 
 class Game:
-    """Holds the data needed for the game."""
+    """
+    Holds the data needed for the game.
+    """
     def __init__(self):
-        """Initialize a new Game."""
+        """
+        Initialize a new Game.
+        """
         self.text_interface = TextInterface()
         self.combat_manager = CombatManager()
         self.registries = Registries(c.STATUSES_PATH, c.ENCHANTMENTS_PATH)
@@ -26,7 +30,9 @@ class Game:
         self.town = Town()
 
     def game_loop(self):
-        """Run the game."""
+        """
+        Run the game.
+        """
         self.town.enter_town(self.text_interface)
         self.text_interface.send_message(c.SPLASH_MESSAGE)
         self.player.name = "KK" #self.text_interface.name_prompt()
@@ -44,7 +50,8 @@ class Game:
                 self.combat_manager.do_combat(
                     self.player, encounter.enemy,
                     self.text_interface,
-                    self.registries
+                    self.registries,
+                    self.card_cache
                 )
                 if self.player.is_alive():
                     self.text_interface.send_message(c.VICTORY_MESSAGE)

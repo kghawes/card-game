@@ -59,5 +59,25 @@
     "effects": {
       "APPLY_HIDDEN_SELF": 2
       }
+  },
+  "PERSUASION": {
+    "name": "Persuasion",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 2,
+    "value": 70,
+    "effects": {
+      "APPLY_CALM_TARGET": 1
+      }
+  },
+  "CONFUSION": {
+    "name": "Confusion",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 3,
+    "value": 110,
+    "effects": {
+      "APPLY_DAMAGE_WILLPOWER_TARGET": 3
+      }
   }
 }

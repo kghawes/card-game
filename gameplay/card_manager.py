@@ -5,15 +5,21 @@ import random
 import utils.constants as c
 
 class CardManager:
-    """This class handles the movement of cards between piles."""
+    """
+    This class handles the movement of cards between piles.
+    """
     def __init__(self, starting_deck, card_cache):
-        """Initialize a new CardManager."""
+        """
+        Initialize a new CardManager.
+        """
         self.deck = self._create_deck(starting_deck, card_cache)
         self.hand = []
         self.discard_pile = []
 
     def _create_deck(self, deck_list, card_cache) -> list:
-        """From a list of card ids, generate Card objects."""
+        """
+        From a list of card ids, generate Card objects.
+        """
         deck = []
         for entry in deck_list:
             card_id = entry.get("card")
@@ -23,13 +29,17 @@ class CardManager:
         return deck
 
     def shuffle(self):
-        """Randomize the order of cards in the deck."""
+        """
+        Randomize the order of cards in the deck.
+        """
         random.shuffle(self.deck)
 
-    def draw(self, cards_to_draw=1) -> bool:
-        """Draw the indicated number of cards, shuffling the discard
-        pile back into the deck if necessary. Return False if the max
-        hand size was met or True if all cards were able to be drawn."""
+    def draw(self, subject, status_registry, cards_to_draw=1) -> bool:
+        """
+        Draw the indicated number of cards, shuffling the discard pile back
+        into the deck if necessary. Return False if the max hand size was met
+        or True if all cards were able to be drawn.
+        """
         while cards_to_draw > 0:
             if len(self.hand) >= c.MAX_HAND_SIZE:
                 break
@@ -43,28 +53,52 @@ class CardManager:
             self.hand.append(card)
             cards_to_draw -= 1
 
-        # TODO apply status effects to newly drawn cards
+        modifier_manager = subject.modifier_manager
+        modifier_manager.recalculate_all_costs(status_registry, self)
+        modifier_manager.recalculate_all_effects(status_registry, self)
+        status_manager = subject.status_manager
+        levitate = c.StatusNames.LEVITATE.name
+        if status_manager.has_status(levitate, subject, status_registry):
+            status_registry.get_status(levitate).trigger_on_change(
+                subject, status_manager.get_status_level(levitate)
+                )
 
-    def draw_hand(self, modifier_manager):
-        """Draw the appropriate number of cards at the beginning of a
-        turn."""
-        self.draw(modifier_manager.calculate_cards_to_draw())
+    def draw_hand(self, subject, status_registry):
+        """
+        Draw the appropriate number of cards at the beginning of a turn.
+        """
+        self.draw(
+            subject, status_registry,
+            subject.modifier_manager.calculate_cards_to_draw()
+            )
 
-    def discard(self, card):
-        """Move the card from the hand to the discard pile."""
-        # Reset modifiers when discarding
+    def discard(self, card, subject, status_registry):
+        """
+        Move the card from the hand to the discard pile.
+        """
         card.reset_card()
         self.discard_pile.append(card)
         self.hand.remove(card)
+        
+        status_manager = subject.status_manager
+        levitate = c.StatusNames.LEVITATE.name
+        if status_manager.has_status(levitate, subject, status_registry):
+            status_registry.get_status(levitate).trigger_on_change(
+                subject, status_manager.get_status_level(levitate)
+                )
 
-    def discard_random(self, quantity):
-        """Randomly discard up to the given quantity of cards."""
+    def discard_random(self, quantity, subject, status_registry):
+        """
+        Randomly discard up to the given quantity of cards.
+        """
         while len(self.hand) > 0 and quantity > 0:
             card = random.choice(self.hand)
-            self.discard(card)
+            self.discard(card, subject, status_registry)
             quantity -= 1
 
-    def discard_hand(self):
-        """Discard the hand after each turn."""
+    def discard_hand(self, subject, status_registry):
+        """
+        Discard the hand after each turn.
+        """
         while len(self.hand) > 0:
-            self.discard(self.hand[0])
+            self.discard(self.hand[0], subject, status_registry)

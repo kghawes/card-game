@@ -1,7 +1,13 @@
-"""This module defines the Encounter class."""
+"""
+This module defines the Encounter class.
+"""
 
 class Encounter:
-    """This class represents an encounter in a quest."""
+    """
+    This class represents an encounter in a quest.
+    """
     def __init__(self, enemy):
-        """Initialize a new Encounter."""
+        """
+        Initialize a new Encounter.
+        """
         self.enemy = enemy
