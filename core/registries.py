@@ -1,6 +1,6 @@
 """
-This module defines the Registries class, containing lookup
-dictionaries for statuses, effects, enchantments, and quests.
+This module defines the Registries class, containing lookup dictionaries for
+statuses, effects, enchantments, and quests.
 """
 from core.effects import EffectRegistry
 from core.statuses import StatusRegistry

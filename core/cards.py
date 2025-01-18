@@ -32,7 +32,7 @@ class Card:
         """
         Get the id of the resource corresponding to this card's cost.
         """
-        if self.card_type == CardTypes.SPELL:
+        if self.card_type == CardTypes.SPELL.name:
             return Resources.MAGICKA.name
         return Resources.STAMINA.name
 

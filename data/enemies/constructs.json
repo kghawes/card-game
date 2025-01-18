@@ -6,7 +6,8 @@
     "max_magicka": 0,
     "deck": [
       {"card": "SHARP_CLAWS", "quantity": 4},
-      {"card": "NATURAL_ARMOR", "quantity": 2}
+      {"card": "HARD_CARAPACE", "quantity": 2},
+      {"card": "INORGANIC", "quantity": 1}
     ],
     "loot": {"gold": 2}
   },
@@ -14,23 +15,37 @@
     "name": "Advanced Spider Centurion",
     "max_health": 5,
     "max_stamina": 4,
-    "max_magicka": 1,
+    "max_magicka": 4,
     "deck": [
       {"card": "RAZOR_CLAWS", "quantity": 4},
       {"card": "NATURAL_ARMOR", "quantity": 2},
-      {"card": "SHOCKBOLT", "quantity": 2}
+      {"card": "POISONBLOOM", "quantity": 2},
+      {"card": "INORGANIC", "quantity": 1}
     ],
     "loot": {"gold": 2}
   },
   "SPHERE_CENTURION": {
     "name": "Sphere Centurion",
     "max_health": 6,
-    "max_stamina": 4,
+    "max_stamina": 5,
+    "max_magicka": 2,
+    "deck": [
+      {"card": "SPIKE", "quantity": 4},
+      {"card": "METAL_HIDE", "quantity": 2},
+      {"card": "INORGANIC", "quantity": 1},
+      {"card": "SHOCK_BARRIER", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "STEAM_CENTURION": {
+    "name": "Steam Centurion",
+    "max_health": 9,
+    "max_stamina": 7,
     "max_magicka": 0,
     "deck": [
-      {"card": "RAZOR_CLAWS", "quantity": 4},
-      {"card": "NATURAL_ARMOR", "quantity": 2},
-      {"card": "SHOCKBOLT", "quantity": 2}
+      {"card": "ARM_WEAPON", "quantity": 4},
+      {"card": "METAL_HIDE", "quantity": 2},
+      {"card": "MAGIC_RESISTANCE", "quantity": 1}
     ],
     "loot": {"gold": 2}
   }

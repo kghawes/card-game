@@ -1,4 +1,13 @@
 {
+  "_": {
+    "name": "_",
+    "card_type": "WEAPON",
+    "cost": 9999,
+    "value": 0,
+    "effects": {
+      "NO_EFFECT": 0
+    }
+  },
   "SHARP_BEAK": {
     "name": "Sharp Beak",
     "card_type": "WEAPON",
@@ -74,7 +83,7 @@
     "card_type": "WEAPON",
     "cost": 3,
     "value": 0,
-    "effects": { "POISON_DAMAGE_TARGET": 4 }
+    "effects": { "PHYSICAL_DAMAGE_TARGET": 4 }
   },
   "TENTACLES": {
     "name": "Tentacles",
@@ -102,6 +111,24 @@
     "value": 0,
     "effects": {
       "PHYSICAL_DAMAGE_TARGET": 2
+    }
+  },
+  "SPIKE": {
+    "name": "Spike",
+    "card_type": "WEAPON",
+    "cost": 2,
+    "value": 0,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 2
+    }
+  },
+  "ARM_WEAPON": {
+    "name": "Arm Weapon",
+    "card_type": "WEAPON",
+    "cost": 3,
+    "value": 0,
+    "effects": {
+      "PHYSICAL_DAMAGE_TARGET": 5
     }
   }
 }

@@ -164,6 +164,9 @@ CARD_PATHS = [
     "data/cards/armors.json",
     "data/cards/alteration_spells.json",
     "data/cards/destruction_spells.json",
+    "data/cards/illusion_spells.json",
+    "data/cards/mysticism_spells.json",
+    "data/cards/restoration_spells.json",
     "data/cards/combat_skills.json",
     "data/cards/stealth_skills.json",
     "data/cards/magic_skills.json",
@@ -179,7 +182,9 @@ ENEMIES_PATHS = [
     "data/enemies/beasts.json",
     "data/enemies/daedra.json",
     "data/enemies/npcs.json",
-    "data/enemies/undead.json"
+    "data/enemies/undead.json",
+    "data/enemies/dagoth.json",
+    "data/enemies/constructs.json"
     ]
 STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"

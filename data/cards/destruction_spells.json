@@ -126,7 +126,7 @@
     "name": "Lightning Storm",
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
-    "cost": 5,
+    "cost": 8,
     "value": 20,
     "effects": { 
     "SHOCK_DAMAGE_TARGET": 15,

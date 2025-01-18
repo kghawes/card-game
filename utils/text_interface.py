@@ -48,11 +48,12 @@ class TextInterface:
         # Display player's hand with card effects
         print("\033[01mCards in Hand:\033[0m")
         for idx, card in enumerate(player.card_manager.hand):
-            print(f"{idx}. {card.name} (Cost: {card.get_cost()})")
+            print(f"{idx}. {card.name} ({card.card_type})")
+            print(f"     Cost: {card.get_cost()}")
             for effect_id, effect_level in card.effects.items():
                 effect = effect_registry.get_effect(effect_id)
                 level = effect_level.get_level()
-                print(f"     Level {level} {effect.name}")
+                print(f"     * {effect.name} {level} *")
 
         # Divider and status display
         print(constants.TEXT_DIVIDER)
@@ -139,5 +140,5 @@ class TextInterface:
         """
         Handle the '/c' debug command for adding cards.
         """
-        card = card_cache.create_card(card_id)
+        card = card_cache.create_card(card_id.upper())
         player.card_manager.hand.append(card)

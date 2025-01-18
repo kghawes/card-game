@@ -50,5 +50,113 @@
     "effects": {
       "APPLY_DEFENSE_SELF": 10
     }
+  },
+  "FLAME_BARRIER": {
+    "name": "Flame Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 2,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 2,
+      "APPLY_RESISTANCE_FIRE_SELF": 2
+    }
+  },
+  "SHARD_BARRIER": {
+    "name": "Shard Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 2,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 2,
+      "APPLY_RESISTANCE_FROST_SELF": 2
+    }
+  },
+  "SHOCK_BARRIER": {
+    "name": "Shock Barrier",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 2,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 2,
+      "APPLY_RESISTANCE_SHOCK_SELF": 2
+    }
+  },
+  "FIRE_SHIELD": {
+    "name": "Fire Shield",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 4,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 3,
+      "APPLY_RESISTANCE_FIRE_SELF": 3,
+      "APPLY_WEAKNESS_FIRE_TARGET": 2
+    }
+  },
+  "FROST_SHIELD": {
+    "name": "Frost Shield",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 4,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 3,
+      "APPLY_RESISTANCE_FROST_SELF": 3,
+      "APPLY_WEAKNESS_FROST_TARGET": 2
+    }
+  },
+  "LIGHTNING SHIELD": {
+    "name": "Lightning Shield",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 4,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 3,
+      "APPLY_RESISTANCE_SHOCK_SELF": 3,
+      "APPLY_WEAKNESS_SHOCK_TARGET": 2
+    }
+  },
+  "GREATER_FIRE_SHIELD": {
+    "name": "Greater Fire Shield",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 8,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 5,
+      "APPLY_RESISTANCE_FIRE_SELF": 5,
+      "APPLY_WEAKNESS_FIRE_TARGET": 2,
+      "FIRE_DAMAGE_TARGET": 3
+    }
+  },
+  "GREATER_FROST_SHIELD": {
+    "name": "Greater Frost Shield",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 8,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 5,
+      "APPLY_RESISTANCE_FROST_SELF": 5,
+      "APPLY_WEAKNESS_FROST_TARGET": 2,
+      "FROST_DAMAGE_TARGET": 3
+    }
+  },
+  "GREATER_LIGHTNING SHIELD": {
+    "name": "Greater Lightning Shield",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 8,
+    "value": 30,
+    "effects": {
+      "APPLY_DEFENSE_SELF": 5,
+      "APPLY_RESISTANCE_SHOCK_SELF": 5,
+      "APPLY_WEAKNESS_SHOCK_TARGET": 2,
+      "SHOCK_DAMAGE_TARGET": 3
+    }
   }
 }

@@ -9,5 +9,89 @@
       {"card": "SPIKED_CLUB", "quantity": 3}
     ],
     "loot": {"gold": 2}
+  },
+  "ASH_ZOMBIE": {
+    "name": "Ash Zombie",
+    "max_health": 8,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "BLUDGEONING_FISTS", "quantity": 4},
+      {"card": "SPIKED_CLUB", "quantity": 4},
+      {"card": "MISS", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "ASH_SLAVE": {
+    "name": "Ash Slave",
+    "max_health": 7,
+    "max_stamina": 0,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "WOE", "quantity": 1},
+      {"card": "SHOCKBOLT", "quantity": 1},
+      {"card": "FIRST_BARRIER", "quantity": 1},
+      {"card": "ASH_WOE_BLIGHT", "quantity": 1},
+      {"card": "MISS", "quantity": 4}
+    ],
+    "loot": {"gold": 2}
+  },
+  "ASH_GHOUL": {
+    "name": "Ash Ghoul",
+    "max_health": 9,
+    "max_stamina": 0,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "WOE", "quantity": 1},
+      {"card": "SHOCKBOLT", "quantity": 1},
+      {"card": "FIRST_BARRIER", "quantity": 1},
+      {"card": "ASH_WOE_BLIGHT", "quantity": 1},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {"gold": 2}
+  },
+  "ASCENDED_SLEEPER": {
+    "name": "Ascended Sleeper",
+    "max_health": 9,
+    "max_stamina": 0,
+    "max_magicka": 6,
+    "deck": [
+      {"card": "DREAD_CURSE", "quantity": 1},
+      {"card": "ICE_SPIKE", "quantity": 1},
+      {"card": "INCINERATE", "quantity": 1},
+      {"card": "SHOCKBALL", "quantity": 1},
+      {"card": "PARALYSIS", "quantity": 1},
+      {"card": "ASH_CHANCRE", "quantity": 1},
+      {"card": "BLACK_HEART_BLIGHT", "quantity": 1},
+      {"card": "ASH_WOE_BLIGHT", "quantity": 1},
+      {"card": "CHANTHRAX_BLIGHT", "quantity": 1}
+    ],
+    "loot": {"gold": 2}
+  },
+  "CORPRUS_STALKER": {
+    "name": "Corprus Stalker",
+    "max_health": 5,
+    "max_stamina": 3,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "BLUDGEONING_FISTS", "quantity": 3},
+      {"card": "REGENERATE", "quantity": 1},
+      {"card": "MISS", "quantity": 1},
+      {"card": "_", "quantity": 5}
+    ],
+    "loot": {"gold": 2}
+  },
+  "CORPRUS_BEAST": {
+    "name": "Corprus Beast",
+    "max_health": 10,
+    "max_stamina": 6,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "BLUDGEONING_FISTS", "quantity": 3},
+      {"card": "BLACK_HEART_BLIGHT", "quantity": 1},
+      {"card": "MISS", "quantity": 1},
+      {"card": "_", "quantity": 5}
+    ],
+    "loot": {"gold": 2}
   }
 }

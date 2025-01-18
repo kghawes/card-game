@@ -1,6 +1,33 @@
 {
   "CAVE_RATS": {
     "ENCOUNTERS": ["RAT", "CAVE_RAT", "CAVE_RAT", "RAT", "GIANT_CAVE_RAT"],
-    "DESCRIPTION": "Clear a nearby cave of Cave Rats."
+    "DESCRIPTION": "Clear a nearby cave of rats."
+  },
+  "PEARL_DIVING": {
+    "ENCOUNTERS": [
+      "MUDCRAB",
+      "DISEASED_MUDCRAB",
+      "LARGE_SLAUGHTERFISH",
+      "SMALL_SLAUGHTERFISH",
+      "SMALL_SLAUGHTERFISH",
+      "DREUGH"
+    ],
+    "DESCRIPTION": "Dive for pearls in a nearby lake."
+  },
+  "HUNT_KAGOUTI": {
+    "ENCOUNTERS": [
+      "DISEASED_SCRIB",
+      "RAT",
+      "KAGOUTI",
+      "SCRIB",
+      "NIX_HOUND",
+      "WILD_GUAR",
+      "MATING_KAGOUTI",
+      "KAGOUTI",
+      "CLIFF_RACER",
+      "MATING_KAGOUTI",
+      "KAGOUTI_ALPHA"
+    ],
+    "DESCRIPTION": "Dive for pearls in a nearby lake."
   }
 }
