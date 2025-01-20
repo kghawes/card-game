@@ -196,7 +196,7 @@ class CombatManager:
         Give rewards to player.
         """
         player.gain_gold(enemy.loot.gold)
-        player.gain_exp(enemy.loot.exp)
+        player.gain_exp(enemy.loot.exp, text_interface)
         text_interface.rewards_message(enemy.loot.gold, enemy.loot.exp)
         card_rewards = c.NORMAL_CARD_REWARD
         if enemy.loot.is_boss:

@@ -269,7 +269,14 @@ Comments and examples:
     [Consumable] Poison of Paralyze / no cost / Effect: Inflict Paralyze 1. (Tooltip: "Paralyze 1: You can only play Consumable cards. Status effects decrease by 1 each turn.")
     [Consumable] Potion of Metagaming / no cost / Effect: Gain Alchemist 2. (Tooltip: "Alchemist 2: Your potions are 50% more effective. Status effects decrease by 1 each turn.")
     [Item] Salamander Ring / no cost / Effect: Gain Resist Fire 2. (Tooltip: "Resist Fire 2: You take 44% less Fire Damage. Status effects decrease by 1 each turn.")
-  
+Ideas for further statuses:
+  Rally
+  Demoralize
+  Slowfalling
+  Soultrap
+  Command
+  Resist magicka
+  Piercing damage
 
 
 Player Character 

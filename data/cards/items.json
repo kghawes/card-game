@@ -12,7 +12,7 @@
     "name": "Guarskin Drum",
     "card_type": "ITEM",
     "cost": 0,
-    "value": 20,
+    "value": 50,
     "effects": {
     "RESTORE_STAMINA_SELF": 1
     }
@@ -21,7 +21,7 @@
     "name": "Lute",
     "card_type": "ITEM",
     "cost": 0,
-    "value": 25,
+    "value": 55,
     "effects": {
     "APPLY_FORTIFY_AGILITY_SELF": 1
     }
@@ -30,7 +30,7 @@
     "name": "Amulet of Frost",
     "card_type": "ITEM",
     "cost": 0,
-    "value": 60,
+    "value": 70,
     "effects": {
     "FROST_DAMAGE_TARGET": 1
     }

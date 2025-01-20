@@ -396,7 +396,7 @@ class AverageCostStatus(Status):
         """
         Perform the cost averaging.
         """
-        if level <= 0:
+        if level <= 0 or not subject.card_manager.hand:
             return
         sum_cost = 0
         for card in subject.card_manager.hand:

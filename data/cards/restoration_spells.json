@@ -12,7 +12,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 50,
     "effects": { "RESTORE_HEALTH_SELF": 2 }
   },
   "HEAL_WOUNDS": {
@@ -20,7 +20,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 4,
-    "value": 30,
+    "value": 70,
     "effects": { "RESTORE_HEALTH_SELF": 3 }
   },
   "HEAL_GREATER_WOUNDS": {
@@ -28,7 +28,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 5,
-    "value": 30,
+    "value": 90,
     "effects": { "RESTORE_HEALTH_SELF": 4 }
   },
   "HEAL_MAJOR_WOUNDS": {
@@ -36,7 +36,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 7,
-    "value": 30,
+    "value": 110,
     "effects": { "RESTORE_HEALTH_SELF": 6 }
   },
   "CURE_BLIGHT_DISEASE": {
@@ -52,7 +52,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 1,
-    "value": 30,
+    "value": 25,
     "effects": { "REMOVE_DISEASE_SELF": 10 }
   },
   "CURE_POISON": {
@@ -68,7 +68,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 4,
-    "value": 30,
+    "value": 50,
     "effects": {
       "REMOVE_DISEASE_SELF": 10,
       "REMOVE_BLIGHT_SELF": 10,
@@ -80,7 +80,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 3,
-    "value": 30,
+    "value": 35,
     "effects": { "APPLY_FORTIFY_ENDURANCE_SELF": 4 }
   },
   "IRON_WILL": {
@@ -88,7 +88,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 3,
-    "value": 30,
+    "value": 35,
     "effects": { "APPLY_FORTIFY_WILLPOWER_SELF": 4 }
   },
   "NIMBLENESS": {
@@ -96,7 +96,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 3,
-    "value": 30,
+    "value": 50,
     "effects": { "APPLY_FORTIFY_AGILITY_SELF": 4 }
   },
   "QUICKSILVER": {
@@ -104,7 +104,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 3,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_SPEED_SELF": 4 }
   },
   "TROLL_STRENGTH": {
@@ -112,7 +112,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 3,
-    "value": 30,
+    "value": 35,
     "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 4 }
   },
   "WISDOM": {
@@ -120,7 +120,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 3,
-    "value": 30,
+    "value": 45,
     "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 4 }
   },
   "POWERWELL": {
@@ -128,7 +128,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 6,
-    "value": 30,
+    "value": 99,
     "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 6 }
   },
   "RESIST_FIRE": {
@@ -168,7 +168,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_RESISTANCE_FIRE_SELF": 3 }
   },
   "STRONG_RESIST_FROST": {
@@ -176,7 +176,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_RESISTANCE_FROST_SELF": 3 }
   },
   "STRONG_RESIST_SHOCK": {
@@ -184,7 +184,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 3 }
   },
   "STRONG_RESIST_POISON": {
@@ -192,7 +192,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_RESISTANCE_POISON_SELF": 3 }
   },
   "GREAT_RESIST_FIRE": {
@@ -200,7 +200,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 4,
-    "value": 30,
+    "value": 50,
     "effects": { "APPLY_RESISTANCE_FIRE_SELF": 5 }
   },
   "GREAT_RESIST_FROST": {
@@ -208,7 +208,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 4,
-    "value": 30,
+    "value": 50,
     "effects": { "APPLY_RESISTANCE_FROST_SELF": 5 }
   },
   "GREAT_RESIST_SHOCK": {
@@ -216,7 +216,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 4,
-    "value": 30,
+    "value": 50,
     "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 5 }
   },
   "GREAT_RESIST_POISON": {
@@ -224,7 +224,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 4,
-    "value": 30,
+    "value": 50,
     "effects": { "APPLY_RESISTANCE_POISON_SELF": 5 }
   },
   "RESTORE_AGILITY": {
@@ -280,7 +280,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "RESTORE_STAMINA_SELF": 2 }
   },
   "MASTERFUL_GOLDEN_WISDOM": {
@@ -288,7 +288,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_ALTERATION_SELF": 2 }
   },
   "MASTERFUL_GREEN_WISDOM": {
@@ -296,7 +296,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_RESTORATION_SELF": 2 }
   },
   "MASTERFUL_RED_WISDOM": {
@@ -304,7 +304,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_DESTRUCTION_SELF": 2 }
   },
   "MASTERFUL_SILVER_WISDOM": {
@@ -312,7 +312,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_ILLUSION_SELF": 2 }
   },
   "MASTERFUL_SMITING": {
@@ -320,7 +320,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_BLUNT_WEAPON_SELF": 2 }
   },
   "MASTERFUL_STOLID_ARMOR": {
@@ -328,7 +328,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_HEAVY_SELF": 2 }
   },
   "MASTERFUL_SWIFTBLADE": {
@@ -336,7 +336,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_SHORT_BLADE_SELF": 2 }
   },
   "MASTERFUL_UNSEEN_WISDOM": {
@@ -344,7 +344,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_MYSTICISM_SELF": 2 }
   },
   "MASTERFUL_HEWING": {
@@ -352,7 +352,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_LONG_BLADE_SELF": 2 }
   },
   "MASTERFUL_BALANCED_ARMOR": {
@@ -360,7 +360,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_MEDIUM_SELF": 2 }
   },
   "MASTERFUL_NIMBLE_ARMOR": {
@@ -368,7 +368,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_LIGHT_SELF": 2 }
   },
   "MASTERFUL_SUREFLIGHT": {
@@ -376,7 +376,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 2,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_FORTIFY_MARKSMAN_SELF": 2 }
   },
   "REGENERATE": {
@@ -384,7 +384,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 3,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_REGENERATION_SELF": 4 }
   },
   "RAPID_REGENERATE": {
@@ -392,7 +392,7 @@
     "card_type": "SPELL",
     "subtype": "RESTORATION",
     "cost": 6,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_REGENERATION_SELF": 6 }
   }
 }

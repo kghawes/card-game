@@ -12,7 +12,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 3,
-    "value": 30,
+    "value": 40,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
   },
   "THIRD_BARRIER": {
@@ -20,7 +20,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 3,
-    "value": 30,
+    "value": 50,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
   },
   "FOURTH_BARRIER": {
@@ -28,7 +28,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 4,
-    "value": 30,
+    "value": 75,
     "effects": { "APPLY_DEFENSE_SELF": 7 }
   },
   "FIFTH_BARRIER": {
@@ -36,7 +36,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 5,
-    "value": 30,
+    "value": 100,
     "effects": {
       "APPLY_DEFENSE_SELF": 8
     }
@@ -46,7 +46,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 6,
-    "value": 30,
+    "value": 125,
     "effects": {
       "APPLY_DEFENSE_SELF": 10
     }
@@ -56,7 +56,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 2,
-    "value": 30,
+    "value": 60,
     "effects": {
       "APPLY_DEFENSE_SELF": 2,
       "APPLY_RESISTANCE_FIRE_SELF": 2
@@ -67,7 +67,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 2,
-    "value": 30,
+    "value": 60,
     "effects": {
       "APPLY_DEFENSE_SELF": 2,
       "APPLY_RESISTANCE_FROST_SELF": 2
@@ -78,7 +78,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 2,
-    "value": 30,
+    "value": 60,
     "effects": {
       "APPLY_DEFENSE_SELF": 2,
       "APPLY_RESISTANCE_SHOCK_SELF": 2
@@ -89,7 +89,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 4,
-    "value": 30,
+    "value": 90,
     "effects": {
       "APPLY_DEFENSE_SELF": 3,
       "APPLY_RESISTANCE_FIRE_SELF": 3,
@@ -101,7 +101,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 4,
-    "value": 30,
+    "value": 90,
     "effects": {
       "APPLY_DEFENSE_SELF": 3,
       "APPLY_RESISTANCE_FROST_SELF": 3,
@@ -113,7 +113,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 4,
-    "value": 30,
+    "value": 90,
     "effects": {
       "APPLY_DEFENSE_SELF": 3,
       "APPLY_RESISTANCE_SHOCK_SELF": 3,
@@ -125,7 +125,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 8,
-    "value": 30,
+    "value": 150,
     "effects": {
       "APPLY_DEFENSE_SELF": 5,
       "APPLY_RESISTANCE_FIRE_SELF": 5,
@@ -138,7 +138,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 8,
-    "value": 30,
+    "value": 150,
     "effects": {
       "APPLY_DEFENSE_SELF": 5,
       "APPLY_RESISTANCE_FROST_SELF": 5,
@@ -151,7 +151,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 8,
-    "value": 30,
+    "value": 150,
     "effects": {
       "APPLY_DEFENSE_SELF": 5,
       "APPLY_RESISTANCE_SHOCK_SELF": 5,
@@ -164,7 +164,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 2,
-    "value": 30,
+    "value": 55,
     "effects": {
       "JUMP": 3
     }
@@ -174,7 +174,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 3,
-    "value": 30,
+    "value": 77,
     "effects": {
       "JUMP": 5
     }
@@ -184,7 +184,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 5,
-    "value": 30,
+    "value": 100,
     "effects": {
       "JUMP": 10
     }
@@ -204,7 +204,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 2,
-    "value": 30,
+    "value": 50,
     "effects": {
       "APPLY_LEVITATE_SELF": 2
     }
@@ -214,7 +214,7 @@
     "card_type": "SPELL",
     "subtype": "ALTERATION",
     "cost": 4,
-    "value": 30,
+    "value": 60,
     "effects": {
       "APPLY_LEVITATE_SELF": 5
     }

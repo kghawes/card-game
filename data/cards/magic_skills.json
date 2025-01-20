@@ -134,7 +134,7 @@
     "card_type": "SKILL",
     "subtype": "MAGIC",
     "cost": 2,
-    "value": 350,
+    "value": 100,
     "effects": {
       "APPLY_FORTIFY_ALTERATION_SELF": 3
       }
@@ -144,7 +144,7 @@
     "card_type": "SKILL",
     "subtype": "MAGIC",
     "cost": 2,
-    "value": 350,
+    "value": 100,
     "effects": {
       "APPLY_FORTIFY_DESTRUCTION_SELF": 3
       }
@@ -154,7 +154,7 @@
     "card_type": "SKILL",
     "subtype": "MAGIC",
     "cost": 2,
-    "value": 350,
+    "value": 100,
     "effects": {
       "APPLY_FORTIFY_ILLUSION_SELF": 3
       }
@@ -164,7 +164,7 @@
     "card_type": "SKILL",
     "subtype": "MAGIC",
     "cost": 2,
-    "value": 350,
+    "value": 100,
     "effects": {
       "APPLY_FORTIFY_MYSTICISM_SELF": 3
       }
@@ -174,7 +174,7 @@
     "card_type": "SKILL",
     "subtype": "MAGIC",
     "cost": 2,
-    "value": 350,
+    "value": 100,
     "effects": {
       "APPLY_FORTIFY_RESTORATION_SELF": 3
       }

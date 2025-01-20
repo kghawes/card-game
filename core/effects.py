@@ -101,10 +101,10 @@ class DispelEffect(Effect):
         """
         Initialize a new DispelEffect.
         """
-        super().__init__(
-            c.EffectNames.DISPEL.name, c.EffectNames.DISPEL.value,
-            target_type_enum
-            )
+        self.target_type_enum = target_type_enum
+        effect_id = self.format_id(c.EffectNames.DISPEL.name)
+        name = self.format_name(c.EffectNames.DISPEL.value)
+        super().__init__(effect_id, name, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
         """

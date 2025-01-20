@@ -28,7 +28,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 2,
-    "value": 20,
+    "value": 35,
     "effects": { "FIRE_DAMAGE_TARGET": 3 }
   },
   "FROSTBALL": {
@@ -36,7 +36,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 2,
-    "value": 20,
+    "value": 35,
     "effects": { "FROST_DAMAGE_TARGET": 3 }
   },
   "SHOCKBALL": {
@@ -44,7 +44,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 2,
-    "value": 20,
+    "value": 35,
     "effects": { "SHOCK_DAMAGE_TARGET": 3 }
   },
   "GREATER_FIREBALL": {
@@ -52,7 +52,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 3,
-    "value": 20,
+    "value": 50,
     "effects": { "FIRE_DAMAGE_TARGET": 5 }
   },
   "GREATER_FROSTBALL": {
@@ -60,7 +60,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 3,
-    "value": 20,
+    "value": 50,
     "effects": { "FROST_DAMAGE_TARGET": 5 }
   },
   "GREATER_SHOCKBALL": {
@@ -68,7 +68,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 3,
-    "value": 20,
+    "value": 50,
     "effects": { "SHOCK_DAMAGE_TARGET": 5 }
   },
   "INCINERATE": {
@@ -76,7 +76,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 5,
-    "value": 20,
+    "value": 70,
     "effects": { "FIRE_DAMAGE_TARGET": 8 }
   },
   "ICE_SPIKE": {
@@ -84,7 +84,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 5,
-    "value": 20,
+    "value": 70,
     "effects": { 
     "FROST_DAMAGE_TARGET": 6,
     "APPLY_DAMAGE_AGILITY_TARGET": 2
@@ -95,7 +95,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 5,
-    "value": 20,
+    "value": 70,
     "effects": { 
     "SHOCK_DAMAGE_TARGET": 6,
     "APPLY_DAMAGE_INTELLIGENCE_TARGET": 2
@@ -106,7 +106,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 8,
-    "value": 20,
+    "value": 100,
     "effects": { 
     "FIRE_DAMAGE_TARGET": 20
     }
@@ -116,7 +116,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 8,
-    "value": 20,
+    "value": 100,
     "effects": { 
     "FROST_DAMAGE_TARGET": 15,
     "APPLY_DAMAGE_AGILITY_TARGET": 5
@@ -127,7 +127,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 8,
-    "value": 20,
+    "value": 100,
     "effects": { 
     "SHOCK_DAMAGE_TARGET": 15,
     "APPLY_DAMAGE_INTELLIGENCE_TARGET": 5
@@ -148,7 +148,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 4,
-    "value": 20,
+    "value": 35,
     "effects": { 
     "APPLY_POISON_TARGET": 3
     }
@@ -158,7 +158,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 6,
-    "value": 20,
+    "value": 50,
     "effects": { 
     "APPLY_POISON_TARGET": 4
     }
@@ -168,7 +168,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 8,
-    "value": 20,
+    "value": 70,
     "effects": { 
     "APPLY_POISON_TARGET": 5
     }
@@ -178,7 +178,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 10,
-    "value": 20,
+    "value": 100,
     "effects": { 
     "APPLY_POISON_TARGET": 6
     }
@@ -188,7 +188,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 30,
     "effects": { 
     "APPLY_DAMAGE_AGILITY_TARGET": 1
     }
@@ -198,7 +198,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 32,
     "effects": { 
     "APPLY_DAMAGE_INTELLIGENCE_TARGET": 1
     }
@@ -228,7 +228,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 23,
     "effects": { 
     "APPLY_DAMAGE_SPEED_TARGET": 2
     }
@@ -248,7 +248,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 3,
-    "value": 20,
+    "value": 25,
     "effects": { 
     "APPLY_DAMAGE_AGILITY_TARGET": 6,
     "APPLY_FORTIFY_AGILITY_TARGET": 5
@@ -259,7 +259,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 25,
     "effects": { 
     "APPLY_DAMAGE_INTELLIGENCE_TARGET": 6,
     "APPLY_FORTIFY_INTELLIGENCE_TARGET": 5
@@ -310,7 +310,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 15,
     "effects": { 
     "REMOVE_FORTIFY_STRENGTH_TARGET": 3
     }
@@ -320,7 +320,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 15,
     "effects": { 
     "REMOVE_FORTIFY_AGILITY_TARGET": 3
     }
@@ -330,7 +330,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 15,
     "effects": { 
     "REMOVE_FORTIFY_ENDURANCE_TARGET": 3
     }
@@ -340,7 +340,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 15,
     "effects": { 
     "REMOVE_FORTIFY_INTELLIGENCE_TARGET": 3
     }
@@ -350,7 +350,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 15,
     "effects": { 
     "REMOVE_FORTIFY_WILLPOWER_TARGET": 3
     }
@@ -360,7 +360,7 @@
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
     "cost": 1,
-    "value": 20,
+    "value": 15,
     "effects": { 
     "REMOVE_FORTIFY_SPEED_TARGET": 3
     }
