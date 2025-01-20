@@ -169,7 +169,7 @@ class TextInterface:
             print(f"* {effect.name} {level} *")
         print()
         while True:
-            response = input("Keep this card? (Y/N)").upper().strip()
+            response = input("Keep this card? (Y/N) ").upper().strip()
             if response not in ("Y", "N"):
                 continue
             if response == "Y":

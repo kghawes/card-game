@@ -258,7 +258,7 @@
     "name": "Gash Spirit",
     "card_type": "SPELL",
     "subtype": "DESTRUCTION",
-    "cost": 1,
+    "cost": 3,
     "value": 25,
     "effects": { 
     "APPLY_DAMAGE_INTELLIGENCE_TARGET": 6,

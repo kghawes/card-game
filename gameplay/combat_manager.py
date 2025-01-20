@@ -32,11 +32,12 @@ class CombatManager:
             self.do_enemy_turn(player, enemy, text_interface, registries)
             if self.is_combat_over(player, enemy):
                 break
-        player.status_manager.reset_statuses(player, registries.statuses)
-        player.modifier_manager.reset_all()
-        self.finish_combat(
-            player, enemy, card_cache, text_interface, registries.effects
-            )
+        if player.get_health() > 0:
+            player.status_manager.reset_statuses(player, registries.statuses)
+            player.modifier_manager.reset_all()
+            self.present_rewards(
+                player, enemy, card_cache, text_interface, registries.effects
+                )
 
     def do_player_turn(
             self, player, enemy, text_interface, registries, card_cache
@@ -189,7 +190,7 @@ class CombatManager:
         text_interface.send_message(c.ENEMY_PASSES_MESSAGE.format(enemy.name))
         self.end_of_turn(enemy, registries.statuses)
 
-    def finish_combat(
+    def present_rewards(
             self, player, enemy, card_cache, text_interface, effect_registry
             ):
         """

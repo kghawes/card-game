@@ -34,5 +34,12 @@
     "cost": 4,
     "value": 0,
     "effects": { "APPLY_DEFENSE_SELF": 8 }
+  },
+  "WOODEN_SHIELD": {
+    "name": "Daedric Armor",
+    "card_type": "ARMOR",
+    "cost": 1,
+    "value": 0,
+    "effects": { "APPLY_DEFENSE_SELF": 2 }
   }
 }

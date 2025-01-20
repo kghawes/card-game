@@ -205,7 +205,8 @@ ENEMIES_PATHS = [
     "data/enemies/npcs.json",
     "data/enemies/undead.json",
     "data/enemies/dagoth.json",
-    "data/enemies/constructs.json"
+    "data/enemies/constructs.json",
+    "data/enemies/goblins.json"
     ]
 STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"

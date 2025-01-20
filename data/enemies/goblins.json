@@ -1,0 +1,199 @@
+{
+  "GOBLIN_WEAKLING": {
+    "name": "Goblin Weakling",
+    "max_health": 4,
+    "max_stamina": 3,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SPIKED_CLUB", "quantity": 2},
+      {"card": "RAZOR_TEETH", "quantity": 2},
+      {"card": "IRON_DAGGER", "quantity": 2},
+      {"card": "WOODEN_SHIELD", "quantity": 2},
+      {"card": "MISS", "quantity": 2}
+    ],
+    "loot": {
+      "gold": [5, 9],
+      "exp": 8,
+      "cards": "WEAK_BEAST"
+    }
+  },
+  "GOBLIN": {
+    "name": "Goblin",
+    "max_health": 8,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SPIKED_CLUB", "quantity": 2},
+      {"card": "VICIOUS_TEETH", "quantity": 2},
+      {"card": "IRON_SHORTSWORD", "quantity": 2},
+      {"card": "CHITIN_SHIELD", "quantity": 2},
+      {"card": "SHARP_CLAWS", "quantity": 2},
+      {"card": "BARGAIN_POTION_HEALTH", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [5, 9],
+      "exp": 8,
+      "cards": "STRONG_BEAST"
+    }
+  },
+  "GOBLIN_ARCHER": {
+    "name": "Goblin Archer",
+    "max_health": 8,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "SHORTBOW", "quantity": 3},
+      {"card": "LONGBOW", "quantity": 3},
+      {"card": "IRON_DAGGER", "quantity": 1},
+      {"card": "BARGAIN_POTION_HEALTH", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [4, 10],
+      "exp": 9,
+      "cards": "STRONG_BEAST"
+    }
+  },
+  "GOBLIN_SKIRMISHER": {
+    "name": "Goblin Skirmisher",
+    "max_health": 10,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "IRON_SPARKSWORD", "quantity": 3},
+      {"card": "IRON_SHIELD", "quantity": 3},
+      {"card": "IRON_FLAMEMACE", "quantity": 1},
+      {"card": "STANDARD_POTION_HEALTH", "quantity": 1},
+      {"card": "ORCISH_BRACERS", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [5, 13],
+      "exp": 11,
+      "cards": "STRONG_BEAST"
+    }
+  },
+  "GOBLIN_HUNTRESS": {
+    "name": "Goblin Huntress",
+    "max_health": 10,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "LONGBOW", "quantity": 3},
+      {"card": "LONGBOW_(VIPERARROWS)", "quantity": 3},
+      {"card": "ORCISH_BOW_(SPARKARROWS)", "quantity": 1},
+      {"card": "STANDARD_POTION_HEALTH", "quantity": 1},
+      {"card": "ORCISH_BRACERS", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [5, 13],
+      "exp": 11,
+      "cards": "STRONG_BEAST"
+    }
+  },
+  "GOBLIN_SHAMAN": {
+    "name": "Goblin Shaman",
+    "max_health": 10,
+    "max_stamina": 1,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "PURGE_MAGIC", "quantity": 1},
+      {"card": "SHOCK_BARRIER", "quantity": 1},
+      {"card": "REGENERATE", "quantity": 1},
+      {"card": "STANDARD_POTION_HEALTH", "quantity": 1},
+      {"card": "FIREBALL", "quantity": 1},
+      {"card": "SHOCKBOLT", "quantity": 1},
+      {"card": "GASH_SPIRIT", "quantity": 1},
+      {"card": "SILENCE", "quantity": 1},
+      {"card": "SANCTUARY", "quantity": 1},
+      {"card": "WOODEN_STAFF_JUDGMENT", "quantity": 1},
+      {"card": "WOODEN_STAFF_RECKONING", "quantity": 1},
+      {"card": "AMULET_FROST", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [5, 13],
+      "exp": 11,
+      "cards": "STRONG_BEAST"
+    }
+  },
+  "GOBLIN_BERSERKER": {
+    "name": "Goblin Berserker",
+    "max_health": 11,
+    "max_stamina": 5,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "STEEL_MACE", "quantity": 1},
+      {"card": "ORCISH_MACE", "quantity": 2},
+      {"card": "IRON_FIREMAULER", "quantity": 2},
+      {"card": "STANDARD_POTION_STAMINA", "quantity": 1},
+      {"card": "ORCISH_CLAYMORE", "quantity": 1},
+      {"card": "SUJAMMA", "quantity": 1},
+      {"card": "SPIKED_CLUB", "quantity": 2},
+      {"card": "VICIOUS_TEETH", "quantity": 1},
+      {"card": "VICIOUS_CLAWS", "quantity": 1},
+      {"card": "FURY", "quantity": 1},
+      {"card": "RAGE", "quantity": 1},
+      {"card": "ORCISH_BOOTS", "quantity": 1},
+      {"card": "ORCISH_GAUNTLETS", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [8, 15],
+      "exp": 15,
+      "cards": "STRONG_GOBLIN"
+    }
+  },
+  "GOBLIN_SHARPSHOOTER": {
+    "name": "Goblin Sharpshooter",
+    "max_health": 10,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "LONGBOW_(FLAMEARROWS)", "quantity": 1},
+      {"card": "LONGBOW_(VIPERARROWS)", "quantity": 2},
+      {"card": "ORCISH_BOW", "quantity": 2},
+      {"card": "STANDARD_POTION_HEALTH", "quantity": 1},
+      {"card": "AMULET_REST", "quantity": 1},
+      {"card": "FEATHER_BELT", "quantity": 1},
+      {"card": "DODGE", "quantity": 2},
+      {"card": "KNOCK_OFF_BALANCE", "quantity": 1},
+      {"card": "PRESSURE_POINT", "quantity": 1},
+      {"card": "SHORTBOW_(FROSTARROWS)", "quantity": 1},
+      {"card": "GREEF", "quantity": 1},
+      {"card": "ORCISH_BRACERS", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [5, 13],
+      "exp": 11,
+      "cards": "STRONG_GOBLIN"
+    }
+  },
+  "GOBLIN_WITCH": {
+    "name": "Goblin Witch",
+    "max_health": 10,
+    "max_stamina": 2,
+    "max_magicka": 4,
+    "deck": [
+      {"card": "SCROLL_FIRST_BARRIER", "quantity": 1},
+      {"card": "SCROLL_OATHFAST", "quantity": 2},
+      {"card": "WOODEN_STAFF_OF_WAR", "quantity": 2},
+      {"card": "WOODEN_STAFF_OF_PEACE", "quantity": 1},
+      {"card": "ORCISH_STAFF", "quantity": 1},
+      {"card": "CRYING_EYE", "quantity": 1},
+      {"card": "SANCTUARY", "quantity": 2},
+      {"card": "NIGHTEYE", "quantity": 1},
+      {"card": "SILENCE", "quantity": 1},
+      {"card": "GREATER_FIREBALL", "quantity": 1},
+      {"card": "SHOCKBALL", "quantity": 1},
+      {"card": "POISONBLOOM", "quantity": 1},
+      {"card": "WOE", "quantity": 1},
+      {"card": "TORPOR", "quantity": 1},
+      {"card": "DIRE_WEAKNESS_FIRE", "quantity": 1},
+      {"card": "FOCUS", "quantity": 1},
+      {"card": "SHOCKGUARD_ROBE", "quantity": 1},
+      {"card": "BELT_IRON_WILL", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [5, 13],
+      "exp": 11,
+      "cards": "STRONG_GOBLIN"
+    }
+  }
+}
