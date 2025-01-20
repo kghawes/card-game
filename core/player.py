@@ -2,6 +2,7 @@
 This module defines the Player class.
 """
 import utils.constants as c
+import utils.text_interface as text_interface
 from utils.utils import load_json
 from core.combatants import Combatant
 
@@ -20,6 +21,7 @@ class Player(Combatant):
             )
         self.gold = 0
         self.level = 1
+        self.exp = 0
 
     def gain_gold(self, amount):
         """
@@ -31,4 +33,28 @@ class Player(Combatant):
         """
         Reduce gold by the given amount or return false if there isn't enough.
         """
-        pass
+        if amount > self.gold:
+            return False
+        self.gold -= amount
+        return True
+
+    def gain_exp(self, amount):
+        """
+        Increase experience by given amount and level up if necessary.
+        """
+        self.exp += amount
+        if self.exp >= c.EXP_TO_LEVEL[self.level + 1]:
+            self.level_up()
+
+    def level_up(self):
+        """
+        Increase level and reset experience.
+        """
+        self.level += 1
+        self.exp -= c.EXP_TO_LEVEL[self.level]
+        resource_to_increase = text_interface.level_up_prompt(self)
+        self.resources[resource_to_increase].max_value += 1
+        new_max = self.resources[resource_to_increase].max_value
+        text_interface.send_message(
+            f"MAX {resource_to_increase} is now {new_max}!"
+            )

@@ -9,7 +9,11 @@
       {"card": "SHARP_TAIL", "quantity": 2},
       {"card": "FLAP", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [8, 10],
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "DISEASED_CLIFF_RACER": {
     "name": "Diseased Cliff Racer",
@@ -22,7 +26,11 @@
       {"card": "FLAP", "quantity": 2},
       {"card": "ATAXIA", "quantity": 4}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [7, 9]
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "BLIGHTED_CLIFF_RACER": {
     "name": "Blighted Cliff Racer",
@@ -35,7 +43,11 @@
       {"card": "FLAP", "quantity": 2},
       {"card": "ASH_CHANCRE", "quantity": 4}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [8, 10]
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "SMALL_SLAUGHTERFISH": {
     "name": "Small Slaughterfish",
@@ -47,7 +59,11 @@
       {"card": "RAZOR_TEETH", "quantity": 3},
       {"card": "MISS", "quantity": 1}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [4, 6],
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "LARGE_SLAUGHTERFISH": {
     "name": "Large Slaughterfish",
@@ -58,7 +74,11 @@
       {"card": "VICIOUS_TEETH", "quantity": 3},
       {"card": "RAZOR_TEETH", "quantity": 3}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [6, 10],
+      "exp": 11,
+      "cards": "STRONG_BEAST"
+    }
   },
   "DREUGH": {
     "name": "Dreugh",
@@ -72,10 +92,14 @@
       {"card": "RAZOR_CLAWS", "quantity": 4},
       {"card": "MISS", "quantity": 1}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [12, 20],
+      "exp": 20,
+      "cards": "STRONG_BEAST"
+    }
   },
   "DREUGH_WARLORD": {
-    "name": "Dreugh",
+    "name": "Dreugh Warlord",
     "max_health": 12,
     "max_stamina": 8,
     "max_magicka": 0,
@@ -87,7 +111,11 @@
       {"card": "AQUATIC", "quantity": 1},
       {"card": "TENTACLES", "quantity": 2}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [12, 20],
+      "exp": 20,
+      "cards": "BOSS_DREUGH_WARLORD"
+    }
   },
   "MUDCRAB": {
     "name": "Mudcrab",
@@ -99,7 +127,11 @@
       {"card": "HARD_CARAPACE", "quantity": 3},
       {"card": "MISS", "quantity": 3}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [1, 2],
+      "exp": 2,
+      "cards": "WEAK_BEAST"
+    }
   },
   "DISEASED_MUDCRAB": {
     "name": "Diseased Mudcrab",
@@ -112,7 +144,11 @@
       {"card": "MISS", "quantity": 3},
       {"card": "ATAXIA", "quantity": 2}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [1, 2],
+      "exp": 2,
+      "cards": "WEAK_BEAST"
+    }
   },
   "BLIGHTED_MUDCRAB": {
     "name": "Blighted Mudcrab",
@@ -125,7 +161,11 @@
       {"card": "MISS", "quantity": 3},
       {"card": "BLACK_HEART_BLIGHT", "quantity": 2}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [2, 2],
+      "exp": 2,
+      "cards": "WEAK_BEAST"
+    }
   },
   "RAT": {
     "name": "Rat",
@@ -136,7 +176,11 @@
       {"card": "SHARP_TEETH", "quantity": 6},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [4, 8]
+      "exp": 5,
+      "cards": "WEAK_BEAST"
+    }
   },
   "DISEASED_RAT": {
     "name": "Diseased Rat",
@@ -148,7 +192,11 @@
       {"card": "MISS", "quantity": 2},
       {"card": "WITBANE", "quantity": 3}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [4, 7]
+      "exp": 5,
+      "cards": "WEAK_BEAST"
+    }
   },
   "BLIGHTED_RAT": {
     "name": "Blighted Rat",
@@ -160,7 +208,11 @@
       {"card": "MISS", "quantity": 2},
       {"card": "BLACK_HEART_BLIGHT", "quantity": 3}
     ],
-    "loot": {"gold": 1}
+    "loot": {
+      "gold": [5, 8]
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "CAVE_RAT": {
     "name": "Cave Rat",
@@ -171,7 +223,11 @@
       {"card": "SHARP_TEETH", "quantity": 7},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [5, 9]
+      "exp": 6,
+      "cards": "STRONG_BEAST"
+    }
   },
   "GIANT_CAVE_RAT": {
     "name": "Giant Cave Rat",
@@ -182,7 +238,11 @@
       {"card": "RAZOR_TEETH", "quantity": 7},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [10, 15]
+      "exp": 12,
+      "cards": "BOSS_GIANT_CAVE_RAT"
+    }
   },
   "SEWER_RAT": {
     "name": "Sewer Rat",
@@ -195,7 +255,11 @@
       {"card": "BROWN_ROT", "quantity": 2},
       {"card": "ATAXIA", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [6, 8]
+      "exp": 5,
+      "cards": "WEAK_BEAST"
+    }
   },
   "PLAGUE_RAT": {
     "name": "Plague Rat",
@@ -209,7 +273,11 @@
       {"card": "ATAXIA", "quantity": 3},
       {"card": "WITBANE", "quantity": 3}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [5, 6]
+      "exp": 5,
+      "cards": "WEAK_BEAST"
+    }
   },
   "SCRIB": {
     "name": "Scrib",
@@ -222,7 +290,11 @@
       {"card": "HARD_CARAPACE", "quantity": 2},
       {"card": "PARALYZING_BITE", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [1, 2],
+      "exp": 3,
+      "cards": "WEAK_BEAST"
+    }
   },
   "DISEASED_SCRIB": {
     "name": "Diseased Scrib",
@@ -236,7 +308,11 @@
       {"card": "PARALYZING_BITE", "quantity": 2},
       {"card": "RATTLES", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [0, 2],
+      "exp": 2,
+      "cards": "WEAK_BEAST"
+    }
   },
   "BLIGHTED_SCRIB": {
     "name": "Blighted Scrib",
@@ -250,7 +326,11 @@
       {"card": "PARALYZING_BITE", "quantity": 2},
       {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [1, 1],
+      "exp": 3,
+      "cards": "WEAK_BEAST"
+    }
   },
   "KWAMA_FORAGER": {
     "name": "Kwama Forager",
@@ -262,7 +342,11 @@
       {"card": "MISS", "quantity": 2},
       {"card": "VENOM", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [2, 4],
+      "exp": 5,
+      "cards": "WEAK_BEAST"
+    }
   },
   "DISEASED_KWAMA_FORAGER": {
     "name": "Diseased Kwama Forager",
@@ -275,7 +359,11 @@
       {"card": "VENOM", "quantity": 2},
       {"card": "RATTLES", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [2, 3],
+      "exp": 4,
+      "cards": "WEAK_BEAST"
+    }
   },
   "BLIGHTED_KWAMA_FORAGER": {
     "name": "Blighted Kwama Forager",
@@ -288,7 +376,12 @@
       {"card": "VENOM", "quantity": 2},
       {"card": "ASH_CHANCRE", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [3, 3],
+      "exp": 5,
+      "cards": [
+      "cards": "WEAK_BEAST"
+    }
   },
   "KWAMA_WORKER": {
     "name": "Kwama Worker",
@@ -300,7 +393,11 @@
       {"card": "HARD_CARAPACE", "quantity": 2},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [4, 8],
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "KWAMA_WARRIOR": {
     "name": "Kwama Warrior",
@@ -313,7 +410,11 @@
       {"card": "HARD_CARAPACE", "quantity": 2},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [8, 11],
+      "exp": 10,
+      "cards": "STRONG_BEAST"
+    }
   },
   "KWAMA_QUEEN": {
     "name": "Kwama Queen",
@@ -328,7 +429,11 @@
       {"card": "VENOM", "quantity": 2},
       {"card": "HEAL_MINOR_WOUNDS", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [10, 19],
+      "exp": 15,
+      "cards": "STRONG_BEAST"
+    }
   },
   "BLIGHTED_KWAMA_QUEEN": {
     "name": "Blighted Kwama Queen",
@@ -344,7 +449,11 @@
       {"card": "HEAL_MINOR_WOUNDS", "quantity": 2},
       {"card": "ASH_CHANCRE", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [12, 20],
+      "exp": 18,
+      "cards": "BOSS_BLIGHTED_KWAMA_QUEEN"
+    }
   },
   "NIX_HOUND": {
     "name": "Nix Hound",
@@ -357,7 +466,11 @@
       {"card": "RAZOR_TEETH", "quantity": 2},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [2, 8],
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "DISEASED_NIX_HOUND": {
     "name": "Diseased Nix Hound",
@@ -371,7 +484,11 @@
       {"card": "MISS", "quantity": 2},
       {"card": "RATTLES", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [2, 6],
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "BLIGHTED_NIX_HOUND": {
     "name": "Blighted Nix Hound",
@@ -385,7 +502,11 @@
       {"card": "MISS", "quantity": 2},
       {"card": "ASH_CHANCRE", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [3, 7],
+      "exp": 6,
+      "cards": "WEAK_BEAST"
+    }
   },
   "WILD_GUAR": {
     "name": "Wild Guar",
@@ -398,7 +519,11 @@
       {"card": "MISS", "quantity": 2},
       {"card": "TOUGH_HIDE", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [4, 9],
+      "exp": 8,
+      "cards": "STRONG_BEAST"
+    }
   },
   "DISEASED_GUAR": {
     "name": "Diseased Guar",
@@ -412,7 +537,11 @@
       {"card": "TOUGH_HIDE", "quantity": 2},
       {"card": "ATAXIA", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [4, 5],
+      "exp": 7,
+      "cards": "STRONG_BEAST"
+    }
   },
   "BLIGHTED_GUAR": {
     "name": "Blighted Guar",
@@ -426,7 +555,11 @@
       {"card": "TOUGH_HIDE", "quantity": 2},
       {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [4, 9],
+      "exp": 9,
+      "cards": "STRONG_BEAST"
+    }
   },
   "KAGOUTI": {
     "name": "Kagouti",
@@ -439,7 +572,11 @@
       {"card": "MISS", "quantity": 2},
       {"card": "TOUGH_HIDE", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [7, 10],
+      "exp": 9,
+      "cards": "STRONG_BEAST"
+    }
   },
   "DISEASED_KAGOUTI": {
     "name": "Diseased Kagouti",
@@ -453,7 +590,11 @@
       {"card": "TOUGH_HIDE", "quantity": 2},
       {"card": "ATAXIA", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [8, 8],
+      "exp": 8,
+      "cards": "STRONG_BEAST"
+    }
   },
   "BLIGHTED_KAGOUTI": {
     "name": "Blighted Kagouti",
@@ -467,7 +608,11 @@
       {"card": "TOUGH_HIDE", "quantity": 2},
       {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [8, 10],
+      "exp": 10,
+      "cards": "STRONG_BEAST"
+    }
   },
   "MATING_KAGOUTI": {
     "name": "Mating Kagouti",
@@ -480,7 +625,11 @@
       {"card": "TOUGH_HIDE", "quantity": 2},
       {"card": "RAGE", "quantity": 1}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [9, 12],
+      "exp": 10,
+      "cards": "STRONG_BEAST"
+    }
   },
   "KAGOUTI_ALPHA": {
     "name": "Kagouti Alpha",
@@ -492,7 +641,11 @@
       {"card": "TOUGH_HIDE", "quantity": 2},
       {"card": "RAGE", "quantity": 1}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [12, 15],
+      "exp": 15,
+      "cards": "BOSS_KAGOUTI_ALPHA"
+    }
   },
   "ALIT": {
     "name": "Alit",
@@ -505,7 +658,11 @@
       {"card": "VENOM", "quantity": 2},
       {"card": "TOUGH_HIDE", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [6, 9],
+      "exp": 8,
+      "cards": "STRONG_BEAST"
+    }
   },
   "DISEASED_ALIT": {
     "name": "Diseased Alit",
@@ -519,7 +676,11 @@
       {"card": "TOUGH_HIDE", "quantity": 2},
       {"card": "ATAXIA", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [6, 7],
+      "exp": 7,
+      "cards": "STRONG_BEAST"
+    }
   },
   "BLIGHTED_ALIT": {
     "name": "Blighted Alit",
@@ -533,7 +694,11 @@
       {"card": "TOUGH_HIDE", "quantity": 2},
       {"card": "CHANTHRAX_BLIGHT", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [7, 7],
+      "exp": 8,
+      "cards": "STRONG_BEAST"
+    }
   },
   "BULL_NETCH": {
     "name": "Bull Netch",
@@ -545,7 +710,11 @@
       {"card": "POISONBLOOM", "quantity": 3},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [2, 7],
+      "exp": 6,
+      "cards": "STRONG_BEAST"
+    }
   },
   "BETTY_NETCH": {
     "name": "Betty Netch",
@@ -555,7 +724,11 @@
     "deck": [
       {"card": "TENTACLES", "quantity": 6}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [4, 10],
+      "exp": 8,
+      "cards": "STRONG_BEAST"
+    }
   },
   "BREEDING_NETCH": {
     "name": "Breeding Netch",
@@ -566,7 +739,26 @@
       {"card": "TENTACLES", "quantity": 3},
       {"card": "POISONBLOOM", "quantity": 3}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [4, 7],
+      "exp": 8,
+      "cards": "STRONG_BEAST"
+    }
+  },
+  "NETCH_ALPHA": {
+    "name": "Netch Alpha",
+    "max_health": 10,
+    "max_stamina": 5,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "TENTACLES", "quantity": 5},
+      {"card": "FURY", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [5, 15],
+      "exp": 12,
+      "cards": "BOSS_NETCH_ALPHA"
+    }
   },
   "SHALK": {
     "name": "Shalk",
@@ -578,7 +770,11 @@
       {"card": "RAZOR_CLAWS", "quantity": 3},
       {"card": "HARD_CARAPACE", "quantity": 3}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [5, 7],
+      "exp": 6,
+      "cards": "STRONG_BEAST"
+    }
   },
   "DISEASED_SHALK": {
     "name": "Diseased Shalk",
@@ -592,7 +788,11 @@
       {"card": "ROCKJOINT", "quantity": 2},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [5, 5],
+      "exp": 6,
+      "cards": "STRONG_BEAST"
+    }
   },
   "BLIGHTED_SHALK": {
     "name": "Blighted Shalk",
@@ -605,6 +805,10 @@
       {"card": "HARD_CARAPACE", "quantity": 3},
       {"card": "ASH_WOE_BLIGHT", "quantity": 2}
     ],
-    "loot": {"gold": 4}
+    "loot": {
+      "gold": [5, 8],
+      "exp": 6,
+      "cards": "STRONG_BEAST"
+    }
   }
 }

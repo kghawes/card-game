@@ -106,7 +106,7 @@
     "cost": 2,
     "value": 88,
     "effects": {
-      "APPLY_FORTIFY_INTELLIGENCE_SELF": 1
+      "APPLY_FORTIFY_INTELLIGENCE_SELF": 2
       }
   },
   "MEDITATE": {
@@ -116,7 +116,7 @@
     "cost": 3,
     "value": 150,
     "effects": {
-      "APPLY_FORTIFY_INTELLIGENCE_SELF": 2
+      "APPLY_FORTIFY_INTELLIGENCE_SELF": 3
       }
   },
   "BATTLE_TRANCE": {
@@ -126,7 +126,7 @@
     "cost": 4,
     "value": 201,
     "effects": {
-      "APPLY_FORTIFY_INTELLIGENCE_SELF": 3
+      "APPLY_FORTIFY_INTELLIGENCE_SELF": 4
       }
   },
   "MASTER_ALTERATION": {

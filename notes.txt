@@ -440,3 +440,18 @@ Merchants
 Merchants will buy cards at 80% value and sell cards at 120% value (or something). Stock is possibly random.
 Maybe have different merchants that sell different types of cards?
 SOMEDAY: disposition discount system?
+
+Cities
+Ebonheart
+Stonefalls
+Davon's Watch
+Kragenmoor
+Narsis
+Ald-Ruhn
+Other Cities:
+  Necrom
+  Veranis
+  Firewatch
+  Blacklight
+  Tear
+  Port Telvannis

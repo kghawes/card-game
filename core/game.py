@@ -8,6 +8,7 @@ from core.cards import CardCache
 from core.enemies import EnemyCache
 from core.player import Player
 from utils.text_interface import TextInterface
+from gameplay.treasure import CardRewards
 import utils.constants as c
 
 class Game:
@@ -23,8 +24,10 @@ class Game:
         self.registries = Registries(c.STATUSES_PATH, c.ENCHANTMENTS_PATH)
         self.card_cache = CardCache(c.CARD_PATHS, self.registries)
         self.enemy_cache = EnemyCache(c.ENEMIES_PATHS)
+        self.card_rewards = CardRewards(c.CARD_REWARDS_PATH)
         self.registries.register_quests(
-            c.QUESTS_PATH, self.enemy_cache, self.card_cache
+            c.QUESTS_PATH, self.enemy_cache, self.card_cache,
+            self.card_rewards.card_groups
             )
         self.player = Player(self.card_cache, self.registries.statuses)
         self.town = Town()

@@ -233,15 +233,6 @@
     "APPLY_BLIND_TARGET": 2
     }
   },
-  "CALIGINY_RING": {
-    "name": "Caliginy Ring",
-    "card_type": "ITEM",
-    "cost": 0,
-    "value": 70,
-    "effects": {
-    "APPLY_BLIND_TARGET": 2
-    }
-  },
   "FIGHTER_RING": {
     "name": "Fighter Ring",
     "card_type": "ITEM",
@@ -733,6 +724,60 @@
     "value": 100,
     "effects": {
     "APPLY_FORTIFY_STAFF_SELF": 1
+    }
+  },
+  "AMETHYST": {
+    "name": "Amethyst",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 40,
+    "effects": {
+    "NO_EFFECT": 0
+    }
+  },
+  "RUBY": {
+    "name": "Ruby",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 60,
+    "effects": {
+    "NO_EFFECT": 0
+    }
+  },
+  "EMERALD": {
+    "name": "Emerald",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 90,
+    "effects": {
+    "NO_EFFECT": 0
+    }
+  },
+  "SAPPHIRE": {
+    "name": "Sapphire",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 150,
+    "effects": {
+    "NO_EFFECT": 0
+    }
+  },
+  "DIAMOND": {
+    "name": "Diamond",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 200,
+    "effects": {
+    "NO_EFFECT": 0
+    }
+  },
+  "PEARL": {
+    "name": "Pearl",
+    "card_type": "ITEM",
+    "cost": 0,
+    "value": 55,
+    "effects": {
+    "NO_EFFECT": 0
     }
   }
 }

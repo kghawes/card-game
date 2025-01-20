@@ -157,6 +157,9 @@ MAX_NAME_LENGTH = 20
 HAND_SIZE = 6
 MIN_HAND_SIZE = 2
 MAX_HAND_SIZE = 10
+NORMAL_CARD_REWARD = 1
+BOSS_CARD_REWARD = 2
+BOSS_ID = "BOSS"
 
 # Paths to JSON files
 CARD_PATHS = [
@@ -189,22 +192,55 @@ ENEMIES_PATHS = [
 STARTING_DECKS_PATH = "data/starting_decks.json"
 QUESTS_PATH = "data/quests.json"
 ENCHANTMENTS_PATH = "data/enchantments.json"
-EFFECTS_PATH = "data/effects.json"
 STATUSES_PATH = "data/statuses.json"
+CARD_REWARDS_PATH = "data/card_rewards.json"
 
 # Text for UI
 SPLASH_MESSAGE = "Welcome to the game!"
 PROMPT_NAME = "What is your character’s name? "
-ENTER_TOWN_MESSAGE = "Entering Seyda Neen."
+ENTER_TOWN_MESSAGE = "Entering Ebonheart."
 VICTORY_MESSAGE = "You won!"
 DEFEAT_MESSAGE = "Game over!"
 BEAT_GAME_MESSAGE = "You beat the game!"
 TEXT_DIVIDER = "------------------------------------------------------------"
-DISPLAY_TURN_INFO = "{}\nEnemy {} | Health:{}/{}\n{} Cards in Deck | {} Cards in Discard\n{}\n{} | Health:{}/{} | Stamina:{}/{}\n{} Cards in Deck | {} Cards in Discard\nCards in Hand:"
-DISPLAY_CARD = "{}. {} (Cost: {})"
-DISPLAY_CARD_EFFECT = "     {} {}"
 PROMPT_TURN_OPTIONS = "Enter the number of the Card you want to Play or type PASS to end your Turn: "
 NOT_ENOUGH_STAMINA_MESSAGE = "You’re too fatigued to do that!"
 CARD_PLAYED_MESSAGE = "{} played {}! {} has {} health left!"
 ENEMY_PASSES_MESSAGE = "{} passes their turn."
 INPUT_PASS_TURN = "PASS"
+
+# Experience
+EXP_TO_LEVEL = [
+    0,
+    0,
+    30,
+    46,
+    70,
+    99,
+    135,
+    177,
+    225,
+    280,
+    340,
+    407,
+    479,
+    557,
+    642,
+    733,
+    830,
+    933,
+    1042,
+    1156,
+    1277,
+    1404,
+    1537,
+    1676,
+    1821,
+    1971,
+    2128,
+    2291,
+    2460,
+    2635,
+    2816,
+    3003
+]

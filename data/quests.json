@@ -1,16 +1,21 @@
 {
   "CAVE_RATS": {
-    "ENCOUNTERS": ["RAT", "CAVE_RAT", "CAVE_RAT", "RAT", "GIANT_CAVE_RAT"],
+    "ENCOUNTERS": [
+      "RAT",
+      "CAVE_RAT",
+      "CAVE_RAT",
+      "RAT",
+      "GIANT_CAVE_RAT"
+    ],
     "DESCRIPTION": "Clear a nearby cave of rats."
   },
   "PEARL_DIVING": {
     "ENCOUNTERS": [
       "MUDCRAB",
       "DISEASED_MUDCRAB",
-      "LARGE_SLAUGHTERFISH",
       "SMALL_SLAUGHTERFISH",
       "SMALL_SLAUGHTERFISH",
-      "DREUGH"
+      "LARGE_SLAUGHTERFISH"
     ],
     "DESCRIPTION": "Dive for pearls in a nearby lake."
   },
@@ -28,6 +33,6 @@
       "MATING_KAGOUTI",
       "KAGOUTI_ALPHA"
     ],
-    "DESCRIPTION": "Dive for pearls in a nearby lake."
+    "DESCRIPTION": "Hunt down some aggressive Kagouti."
   }
 }

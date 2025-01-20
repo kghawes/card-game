@@ -24,6 +24,17 @@ class TextInterface:
             response = input(constants.PROMPT_NAME)
         return response
 
+    def level_up_prompt(self, player) -> str:
+        """
+        Prompt the user to choose a resource to increase.
+        """
+        print(f"LEVEL UP! You are now level {player.level}!")
+        response = ""
+        while True:
+            response = input("Increase HEALTH, STAMINA, or MAGICKA? ").upper()
+            if response in player.resources:
+                return response
+
     def display_turn_info(self, player, enemy, effect_registry):
         """
         Show the turn 'screen' with current stats and cards in hand.

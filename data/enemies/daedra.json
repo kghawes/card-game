@@ -11,7 +11,11 @@
       {"card": "INORGANIC", "quantity": 1},
       {"card": "MISS", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [10, 12],
+      "exp": 10,
+      "cards": "LESSER_DAEDRA"
+    }
   },
   "FROST_ATRONACH": {
     "name": "Frost Atronach",
@@ -25,7 +29,11 @@
       {"card": "INORGANIC", "quantity": 1},
       {"card": "FROSTPROOF", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [11, 15],
+      "exp": 12,
+      "cards": "LESSER_DAEDRA"
+    }
   },
   "STORM_ATRONACH": {
     "name": "Storm Atronach",
@@ -41,7 +49,11 @@
       {"card": "INORGANIC", "quantity": 1},
       {"card": "NATURAL_ARMOR", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [12, 20],
+      "exp": 15,
+      "cards": "LESSER_DAEDRA"
+    }
   },
   "STUNTED_SCAMP": {
     "name": "Stunted Scamp",
@@ -52,7 +64,11 @@
       {"card": "MISS", "quantity": 2},
       {"card": "SHARP_CLAWS", "quantity": 4}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [4, 7],
+      "exp": 7,
+      "cards": "LEAST_DAEDRA"
+    }
   },
   "SCAMP": {
     "name": "Scamp",
@@ -65,7 +81,11 @@
       {"card": "RAZOR_CLAWS", "quantity": 2},
       {"card": "FIREBOLT", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [5, 8],
+      "exp": 8,
+      "cards": "LEAST_DAEDRA"
+    }
   },
   "CLANNFEAR_RUNT": {
     "name": "Clannfear Runt",
@@ -78,7 +98,11 @@
       {"card": "SHARP_TEETH", "quantity": 3},
       {"card": "MISS", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [5, 10],
+      "exp": 10,
+      "cards": "LEAST_DAEDRA"
+    }
   },
   "CLANNFEAR": {
     "name": "Clannfear",
@@ -90,7 +114,11 @@
       {"card": "RAZOR_CLAWS", "quantity": 2},
       {"card": "RAZOR_TEETH", "quantity": 3}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [8, 16],
+      "exp": 14,
+      "cards": "LESSER_DAEDRA"
+    }
   },
   "DAEDROTH": {
     "name": "Daedroth",
@@ -103,7 +131,11 @@
       {"card": "RAZOR_TEETH", "quantity": 1},
       {"card": "POISONBLOOM", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [12, 22],
+      "exp": 18,
+      "cards": "LESSER_DAEDRA"
+    }
   },
   "OGRIM": {
     "name": "Ogrim",
@@ -114,7 +146,11 @@
       {"card": "TOUGH_HIDE", "quantity": 3},
       {"card": "BLUDGEONING_FISTS", "quantity": 4}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [13, 21],
+      "exp": 19,
+      "cards": "LESSER_DAEDRA"
+    }
   },
   "OGRIM_TITAN": {
     "name": "Ogrim Titan",
@@ -125,7 +161,11 @@
       {"card": "TOUGH_HIDE", "quantity": 3},
       {"card": "BLUDGEONING_FISTS", "quantity": 4}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [15, 24],
+      "exp": 20,
+      "cards": "LESSER_DAEDRA"
+    }
   },
   "HUNGER": {
     "name": "Hunger",
@@ -136,7 +176,11 @@
       {"card": "VICIOUS_CLAWS", "quantity": 4},
       {"card": "ARMOR_EATER", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [19, 24],
+      "exp": 20,
+      "cards": "LESSER_DAEDRA"
+    }
   },
   "DREMORA_CHURL": {
     "name": "Dremora",
@@ -150,7 +194,11 @@
       {"card": "DAEDRIC_ARMOR", "quantity": 1},
       {"card": "SPELL_REFLECTION", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [20, 27],
+      "exp": 21,
+      "cards": "GREATER_DAEDRA"
+    }
   },
   "DREMORA": {
     "name": "Dremora",
@@ -164,7 +212,11 @@
       {"card": "DAEDRIC_ARMOR", "quantity": 2},
       {"card": "SPELL_REFLECTION", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [21, 28],
+      "exp": 23,
+      "cards": "GREATER_DAEDRA"
+    }
   },
   "DREMORA_LORD": {
     "name": "Dremora Lord",
@@ -177,7 +229,11 @@
       {"card": "DAEDRIC_ARMOR", "quantity": 3},
       {"card": "SPELL_REFLECTION", "quantity": 3}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [25, 30],
+      "exp": 25,
+      "cards": "GREATER_DAEDRA"
+    }
   },
   "WINGED_TWILIGHT": {
     "name": "Winged Twilight",
@@ -189,7 +245,11 @@
       {"card": "FLAP", "quantity": 1},
       {"card": "SPELL_REFLECTION", "quantity": 3}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [24, 31],
+      "exp": 25,
+      "cards": "GREATER_DAEDRA"
+    }
   },
   "GOLDEN_SAINT": {
     "name": "Golden Saint",
@@ -207,7 +267,11 @@
       {"card": "SPELL_REFLECTION", "quantity": 1},
       {"card": "PURGE_MAGIC", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [28, 40],
+      "exp": 29,
+      "cards": "GREATEST_DAEDRA"
+    }
   },
   "XIVILAI": {
     "name": "Xivilai",
@@ -225,7 +289,11 @@
       {"card": "CHAMELEON", "quantity": 1},
       {"card": "ABSORPTIVE_SKIN", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [30, 50],
+      "exp": 40,
+      "cards": "GREATEST_DAEDRA"
+    }
   },
   "SPIDER_DAEDRA": {
     "name": "Spider Daedra",
@@ -240,6 +308,10 @@
       {"card": "HARD_CARAPACE", "quantity": 1},
       {"card": "LIGHTNING_BOLT", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [14, 25],
+      "exp": 15,
+      "cards": "GREATER_DAEDRA"
+    }
   }
 }

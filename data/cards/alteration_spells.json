@@ -108,7 +108,7 @@
       "APPLY_WEAKNESS_FROST_TARGET": 2
     }
   },
-  "LIGHTNING SHIELD": {
+  "LIGHTNING_SHIELD": {
     "name": "Lightning Shield",
     "card_type": "SPELL",
     "subtype": "ALTERATION",
@@ -146,7 +146,7 @@
       "FROST_DAMAGE_TARGET": 3
     }
   },
-  "GREATER_LIGHTNING SHIELD": {
+  "GREATER_LIGHTNING_SHIELD": {
     "name": "Greater Lightning Shield",
     "card_type": "SPELL",
     "subtype": "ALTERATION",
@@ -157,6 +157,66 @@
       "APPLY_RESISTANCE_SHOCK_SELF": 5,
       "APPLY_WEAKNESS_SHOCK_TARGET": 2,
       "SHOCK_DAMAGE_TARGET": 3
+    }
+  },
+  "TINURS_HOPTOAD": {
+    "name": "Tinur's Hoptoad",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 2,
+    "value": 30,
+    "effects": {
+      "JUMP": 3
+    }
+  },
+  "JUMP": {
+    "name": "Jump",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 3,
+    "value": 30,
+    "effects": {
+      "JUMP": 5
+    }
+  },
+  "FLYING_LEAP": {
+    "name": "Flying Leap",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 5,
+    "value": 30,
+    "effects": {
+      "JUMP": 10
+    }
+  },
+  "WEAK_LEVITATE": {
+    "name": "Weak Levitate",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 1,
+    "value": 30,
+    "effects": {
+      "APPLY_LEVITATE_SELF": 1
+    }
+  },
+  "LEVITATE": {
+    "name": "Levitate",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 2,
+    "value": 30,
+    "effects": {
+      "APPLY_LEVITATE_SELF": 2
+    }
+  },
+  "STRONG_LEVITATE": {
+    "name": "Strong Levitate",
+    "card_type": "SPELL",
+    "subtype": "ALTERATION",
+    "cost": 4,
+    "value": 30,
+    "effects": {
+      "APPLY_LEVITATE_SELF": 5
     }
   }
 }
