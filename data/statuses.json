@@ -11,6 +11,9 @@
   "EVASION": {
     "class": "EvasionStatus"
   },
+  "HIDDEN": {
+    "class": "CriticalHitStatus"
+  },
   "PARALYZE": {
     "class": "RestrictCardTypeStatus",
     "restricted_types": [ "WEAPON", "ARMOR", "SKILL", "SPELL", "ITEM" ]

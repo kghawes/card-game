@@ -80,6 +80,15 @@ class Combatant:
         if amount <= 0:
             return
         
+        hidden = s.HIDDEN.name
+        if attacker.status_manager.has_status(
+                hidden, attacker, status_registry
+                ):
+            hidden_level = attacker.status_manager.get_status_level(hidden)
+            hidden_status = status_registry.get_status(hidden)
+            mult = hidden_status.calculate_damage_multiplier(hidden_level)
+            amount *= mult
+        
         amount = self.modifier_manager.calculate_damage(damage_type, amount)
         
         if amount <= 0:

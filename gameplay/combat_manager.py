@@ -176,7 +176,8 @@ class CombatManager:
             playable_card_exists = False
             for card in enemy.card_manager.hand:
                 resource_id = card.get_resource()
-                if card.cost <= enemy.resources[resource_id].current:
+                if card.cost <= enemy.resources[resource_id].current and \
+                    self.card_can_be_played(enemy, card, registries.statuses):
                     playable_card_exists = True
                     if self.play_card(
                         enemy, player, card, text_interface, registries

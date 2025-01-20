@@ -286,6 +286,26 @@ class EvasionStatus(Status):
         return 0 if roll >= success_probability else incoming_damage
 
 
+class CriticalHitStatus(Status):
+    """
+    This status randomly causes the subject to deal double damage.
+    """
+    def __init__(self, status_id):
+        """
+        Initialize a new CriticalHitStatus.
+        """
+        super().__init__(status_id, False)
+
+    def calculate_damage_multiplier(self, level) -> int:
+        """
+        Randomly calculate the damage multiplier.
+        """
+        base_probability = c.BASE_CRIT_PROBABILITY
+        success_probability = min(base_probability * level, 1.0)
+        roll = random.random()
+        return c.CRIT_MULTIPLIER if roll >= success_probability else 1
+
+
 class RestrictCardTypeStatus(Status):
     """
     This status prevents the subject from playing certain tyoes of cards.
@@ -419,6 +439,7 @@ class StatusRegistry:
             "PoisonStatus": PoisonStatus,
             "RegenerationStatus": RegenerationStatus,
             "EvasionStatus": EvasionStatus,
+            "CriticalHitStatus": CriticalHitStatus,
             "RestrictCardTypeStatus": RestrictCardTypeStatus,
             "FilterEffectStatus": FilterEffectStatus,
             "LimitCardPlayStatus": LimitCardPlayStatus,

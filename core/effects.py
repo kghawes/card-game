@@ -271,6 +271,9 @@ class EffectRegistry:
                     )
                 effects[restore_effect.effect_id] = restore_effect
 
+            dispel_effect = DispelEffect(target_type)
+            effects[dispel_effect.effect_id] = dispel_effect
+
         return effects
 
     def get_effect(self, effect_id) -> Effect:
