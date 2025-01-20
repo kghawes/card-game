@@ -8,7 +8,11 @@
       {"card": "MISS", "quantity": 3},
       {"card": "SPIKED_CLUB", "quantity": 3}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [0, 3],
+      "exp": 5,
+      "cards": "LESSER_DAGOTH"
+    }
   },
   "ASH_ZOMBIE": {
     "name": "Ash Zombie",
@@ -20,7 +24,11 @@
       {"card": "SPIKED_CLUB", "quantity": 4},
       {"card": "MISS", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [1, 6],
+      "exp": 7,
+      "cards": "LESSER_DAGOTH"
+    }
   },
   "ASH_SLAVE": {
     "name": "Ash Slave",
@@ -34,7 +42,11 @@
       {"card": "ASH_WOE_BLIGHT", "quantity": 1},
       {"card": "MISS", "quantity": 4}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [3, 7],
+      "exp": 8,
+      "cards": "LESSER_DAGOTH"
+    }
   },
   "ASH_GHOUL": {
     "name": "Ash Ghoul",
@@ -48,7 +60,11 @@
       {"card": "ASH_WOE_BLIGHT", "quantity": 1},
       {"card": "MISS", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [10, 15],
+      "exp": 14,
+      "cards": "GREATER_DAGOTH"
+    }
   },
   "ASCENDED_SLEEPER": {
     "name": "Ascended Sleeper",
@@ -66,7 +82,11 @@
       {"card": "ASH_WOE_BLIGHT", "quantity": 1},
       {"card": "CHANTHRAX_BLIGHT", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [15, 25],
+      "exp": 20,
+      "cards": "GREATER_DAGOTH"
+    }
   },
   "CORPRUS_STALKER": {
     "name": "Corprus Stalker",
@@ -79,7 +99,11 @@
       {"card": "MISS", "quantity": 1},
       {"card": "_", "quantity": 5}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [0, 2],
+      "exp": 5,
+      "cards": "LESSER_DAGOTH"
+    }
   },
   "CORPRUS_BEAST": {
     "name": "Corprus Beast",
@@ -92,6 +116,10 @@
       {"card": "MISS", "quantity": 1},
       {"card": "_", "quantity": 5}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [1, 5],
+      "exp": 13,
+      "cards": "LESSER_DAGOTH"
+    }
   }
 }

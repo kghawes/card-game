@@ -9,6 +9,10 @@
       {"card": "CHITIN_SHIELD", "quantity": 2},
       {"card": "IRON_SHORTSWORD", "quantity": 5}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [2, 25],
+      "exp": 9,
+      "cards": "OUTLAW"
+    }
   }
 }

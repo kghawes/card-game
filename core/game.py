@@ -29,7 +29,10 @@ class Game:
             c.QUESTS_PATH, self.enemy_cache, self.card_cache,
             self.card_rewards.card_groups
             )
-        self.player = Player(self.card_cache, self.registries.statuses)
+        self.player = Player(
+            self.card_cache, self.registries.statuses,
+            c.ClassSpecializations.FIGHTER.name
+            )
         self.town = Town()
 
     def game_loop(self):

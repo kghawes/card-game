@@ -3,6 +3,15 @@ This module contains constants needed across the codebase.
 """
 from enum import Enum
 
+class ClassSpecializations(Enum):
+    """
+    Player character classes' specializations.
+    """
+    FIGHTER = "COMBAT"
+    THIEF = "STEALTH"
+    MAGE = "MAGIC"
+
+
 class CardTypes(Enum):
     """
     All cards are divided into these types.
@@ -13,6 +22,7 @@ class CardTypes(Enum):
     SPELL = "Spell"
     ITEM = "Item"
     CONSUMABLE = "Consumable"
+
 
 class CardSubtypes(Enum):
     """
@@ -38,6 +48,7 @@ class CardSubtypes(Enum):
     SCROLL = "Scroll"
     POTION = "Potion"
 
+
 class Resources(Enum):
     """
     Combatant stats.
@@ -46,10 +57,6 @@ class Resources(Enum):
     STAMINA = "stamina"
     MAGICKA = "magicka"
 
-# Minimum values
-MIN_RESOURCE = 0
-MIN_EFFECT = 1
-MIN_COST = 0
 
 class DamageTypes(Enum):
     """
@@ -60,6 +67,7 @@ class DamageTypes(Enum):
     FROST = "Frost"
     SHOCK = "Shock"
     POISON = "Poison"
+
 
 class EffectNames(Enum):
     """
@@ -76,12 +84,14 @@ class EffectNames(Enum):
     JUMP = "Jump"
     DISPEL = "Dispel"
 
+
 class TargetTypes(Enum):
     """
     The target of a card effect.
     """
     SELF = "on Self"
     TARGET = "on Target"
+
 
 class StatusNames(Enum):
     """
@@ -144,6 +154,12 @@ class StatusNames(Enum):
     FORTIFY_ILLUSION = "Fortify Illusion"
     FORTIFY_MYSTICISM = "Fortify Mysticism"
     FORTIFY_RESTORATION = "Fortify Restoration"
+
+
+# Minimum values
+MIN_RESOURCE = 0
+MIN_EFFECT = 1
+MIN_COST = 0
 
 # Status parameters
 BASE_EVASION_PROBABILITY = 0.1

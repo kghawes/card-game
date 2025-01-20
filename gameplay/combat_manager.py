@@ -34,6 +34,9 @@ class CombatManager:
                 break
         player.status_manager.reset_statuses(player, registries.statuses)
         player.modifier_manager.reset_all()
+        self.finish_combat(
+            player, enemy, card_cache, text_interface, registries.effects
+            )
 
     def do_player_turn(
             self, player, enemy, text_interface, registries, card_cache
@@ -184,3 +187,21 @@ class CombatManager:
                     break
         text_interface.send_message(c.ENEMY_PASSES_MESSAGE.format(enemy.name))
         self.end_of_turn(enemy, registries.statuses)
+
+    def finish_combat(
+            self, player, enemy, card_cache, text_interface, effect_registry
+            ):
+        """
+        Give rewards to player.
+        """
+        player.gain_gold(enemy.loot.gold)
+        player.gain_exp(enemy.loot.exp)
+        text_interface.rewards_message(enemy.loot.gold, enemy.loot.exp)
+        card_rewards = c.NORMAL_CARD_REWARD
+        if enemy.loot.is_boss:
+            card_rewards = c.BOSS_CARD_REWARD
+        cards = enemy.loot.select_cards(
+            card_rewards, player.character_class, card_cache)
+        for card in cards:
+            if text_interface.card_reward_prompt(card, effect_registry):
+                player.card_manager.deck.append(card)

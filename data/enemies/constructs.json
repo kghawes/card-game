@@ -9,7 +9,11 @@
       {"card": "HARD_CARAPACE", "quantity": 2},
       {"card": "INORGANIC", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [1, 2],
+      "exp": 3,
+      "cards": "LESSER_CONSTRUCT"
+    }
   },
   "ADVANCED_SPIDER_CENTURION": {
     "name": "Advanced Spider Centurion",
@@ -22,7 +26,11 @@
       {"card": "POISONBLOOM", "quantity": 2},
       {"card": "INORGANIC", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [1, 4],
+      "exp": 5,
+      "cards": "LESSER_CONSTRUCT"
+    }
   },
   "SPHERE_CENTURION": {
     "name": "Sphere Centurion",
@@ -35,7 +43,11 @@
       {"card": "INORGANIC", "quantity": 1},
       {"card": "SHOCK_BARRIER", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [5, 7],
+      "exp": 6,
+      "cards": "LESSER_CONSTRUCT"
+    }
   },
   "STEAM_CENTURION": {
     "name": "Steam Centurion",
@@ -47,6 +59,10 @@
       {"card": "METAL_HIDE", "quantity": 2},
       {"card": "MAGIC_RESISTANCE", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [10, 12],
+      "exp": 15,
+      "cards": "GREATER_CONSTRUCT"
+    }
   }
 }

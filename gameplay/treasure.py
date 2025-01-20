@@ -2,7 +2,7 @@
 This module defines the Treasure class which represents rewards in game.
 """
 import random
-import utils.utils.load_json as load_json
+from utils.utils import load_json
 import utils.constants as c
 
 class Treasure:
@@ -17,25 +17,28 @@ class Treasure:
         self.gold = random.randint(*gold_range)
         self.exp = treasure_data.get("exp")
         card_group_id = treasure_data.get("cards")
-        card_group = card_rewards[card_group_id]
-        is_boss = False
+        self.cards = card_rewards[card_group_id]
+        self.is_boss = False
         if c.BOSS_ID in card_group_id:
-            is_boss = True
-        self.cards = self.select_card(card_group, is_boss)
+            self.is_boss = True
 
-    def select_card(card_group, is_boss) -> list:
+    def select_cards(self, number_of_cards, player_class, card_cache) -> list:
         """
-        Return a list of random cards from the card group based on their
-        probabilities.
+        Return a list of random cards from the card group.
         """
-        number_of_cards = c.NORMAL_CARD_REWARD
-        choices = list(card_group.items())
-        if is_boss:
-            number_of_cards = c.BOSS_CARD_REWARD
+        selection = []
+        choices = list(self.cards.items())
         items, weights = zip(*choices)
-        return random.choices(items, weights=weights, k=number_of_cards)
+        while len(selection) < number_of_cards:
+            card_id = random.choices(items, weights=weights, k=1)[0]
+            card = card_cache.create_card(card_id)
+            if card.matches(c.CardTypes.SKILL.name) \
+                and not card.matches(c.ClassSpecializations[player_class]):
+                continue
+            selection.append(card)
+        return selection
 
 
 class CardRewards:
-    def __init__(self):
-        self.card_groups = load_json(c.CARD_REWARDS_PATH)
+    def __init__(self, path):
+        self.card_groups = load_json(path)

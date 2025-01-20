@@ -27,7 +27,7 @@
       {"card": "ATAXIA", "quantity": 4}
     ],
     "loot": {
-      "gold": [7, 9]
+      "gold": [7, 9],
       "exp": 6,
       "cards": "WEAK_BEAST"
     }
@@ -44,7 +44,7 @@
       {"card": "ASH_CHANCRE", "quantity": 4}
     ],
     "loot": {
-      "gold": [8, 10]
+      "gold": [8, 10],
       "exp": 6,
       "cards": "WEAK_BEAST"
     }
@@ -177,7 +177,7 @@
       {"card": "MISS", "quantity": 2}
     ],
     "loot": {
-      "gold": [4, 8]
+      "gold": [4, 8],
       "exp": 5,
       "cards": "WEAK_BEAST"
     }
@@ -193,7 +193,7 @@
       {"card": "WITBANE", "quantity": 3}
     ],
     "loot": {
-      "gold": [4, 7]
+      "gold": [4, 7],
       "exp": 5,
       "cards": "WEAK_BEAST"
     }
@@ -209,7 +209,7 @@
       {"card": "BLACK_HEART_BLIGHT", "quantity": 3}
     ],
     "loot": {
-      "gold": [5, 8]
+      "gold": [5, 8],
       "exp": 6,
       "cards": "WEAK_BEAST"
     }
@@ -224,7 +224,7 @@
       {"card": "MISS", "quantity": 2}
     ],
     "loot": {
-      "gold": [5, 9]
+      "gold": [5, 9],
       "exp": 6,
       "cards": "STRONG_BEAST"
     }
@@ -239,7 +239,7 @@
       {"card": "MISS", "quantity": 2}
     ],
     "loot": {
-      "gold": [10, 15]
+      "gold": [10, 15],
       "exp": 12,
       "cards": "BOSS_GIANT_CAVE_RAT"
     }
@@ -256,7 +256,7 @@
       {"card": "ATAXIA", "quantity": 2}
     ],
     "loot": {
-      "gold": [6, 8]
+      "gold": [6, 8],
       "exp": 5,
       "cards": "WEAK_BEAST"
     }
@@ -274,7 +274,7 @@
       {"card": "WITBANE", "quantity": 3}
     ],
     "loot": {
-      "gold": [5, 6]
+      "gold": [5, 6],
       "exp": 5,
       "cards": "WEAK_BEAST"
     }
@@ -379,7 +379,6 @@
     "loot": {
       "gold": [3, 3],
       "exp": 5,
-      "cards": [
       "cards": "WEAK_BEAST"
     }
   },

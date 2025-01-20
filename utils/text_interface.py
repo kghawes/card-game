@@ -153,3 +153,37 @@ class TextInterface:
         """
         card = card_cache.create_card(card_id.upper())
         player.card_manager.hand.append(card)
+
+    def card_reward_prompt(self, card, effect_registry) -> bool:
+        """
+        Prompt the user to take or leave the card.
+        """
+        print(f"You got {card.name}!")
+        card_type_string = card.card_type
+        if card.subtype:
+            card_type_string += f" [{card.subtype}]"
+        print(f"({card_type_string} - Cost: {card.get_cost()} - Value: {card.value}g)")
+        for effect_id, effect_level in card.effects.items():
+            effect = effect_registry.get_effect(effect_id)
+            level = effect_level.get_level()
+            print(f"* {effect.name} {level} *")
+        print()
+        while True:
+            response = input("Keep this card? (Y/N)").upper().strip()
+            if response not in ("Y", "N"):
+                continue
+            if response == "Y":
+                return True
+            if response == "N":
+                confirmation = input("Are you sure you want to leave this card? (Y/N)").upper().strip()
+                if confirmation not in ("Y", "N") or confirmation == "N":
+                    continue
+                if confirmation == "Y":
+                    return False
+
+    def rewards_message(self, gold, exp):
+        """
+        Inform the player how much gold and experience they received.
+        """
+        print(f"You found {gold} gold!")
+        print(f"You got {exp} experience points!")

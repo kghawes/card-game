@@ -10,7 +10,7 @@ class Player(Combatant):
     """
     This class represents the player character.
     """
-    def __init__(self, card_cache, status_registry):
+    def __init__(self, card_cache, status_registry, character_class):
         """
         Initialize a new Player.
         """
@@ -19,6 +19,7 @@ class Player(Combatant):
             "", c.STARTING_HEALTH, c.STARTING_STAMINA, c.STARTING_MAGICKA, 
             deck_list, card_cache, status_registry
             )
+        self.character_class = character_class
         self.gold = 0
         self.level = 1
         self.exp = 0

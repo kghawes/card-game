@@ -9,7 +9,11 @@
       {"card": "IRON_SHIELD", "quantity": 5},
       {"card": "IRON_MACE", "quantity": 7}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [5, 7],
+      "exp": 7,
+      "cards": "LESSER_UNDEAD"
+    }
   },
   "SKELETON_WARRIOR": {
     "name": "Skeleton Warrior",
@@ -21,7 +25,11 @@
       {"card": "IRON_SHIELD", "quantity": 5},
       {"card": "IRON_LONGSWORD", "quantity": 7}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [7, 9],
+      "exp": 10,
+      "cards": "LESSER_UNDEAD"
+    }
   },
   "SKELETON_ARCHER": {
     "name": "Skeleton Archer",
@@ -33,7 +41,11 @@
       {"card": "LONGBOW", "quantity": 5},
       {"card": "LONGBOW_(SHARDARROWS)", "quantity": 3}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [7, 9],
+      "exp": 10,
+      "cards": "LESSER_UNDEAD"
+    }
   },
   "SKELETON_CHAMPION": {
     "name": "Skeleton Archer",
@@ -45,7 +57,11 @@
       {"card": "STEEL_CLAYMORE", "quantity": 5},
       {"card": "STEEL_SHIELD", "quantity": 3}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [10, 13],
+      "exp": 14,
+      "cards": "LESSER_UNDEAD"
+    }
   },
   "ANCESTOR_GHOST": {
     "name": "Ancestor Ghost",
@@ -57,7 +73,11 @@
       {"card": "RESIST_MUNDANE_WEAPONS", "quantity": 2},
       {"card": "SPECTRAL_STRIKE", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [6, 9],
+      "exp": 7,
+      "cards": "LESSER_UNDEAD"
+    }
   },
   "GREATER_ANCESTOR_GHOST": {
     "name": "Greater Ancestor Ghost",
@@ -69,7 +89,11 @@
       {"card": "RESIST_MUNDANE_WEAPONS", "quantity": 2},
       {"card": "SPECTRAL_STRIKE", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [10, 17],
+      "exp": 15,
+      "cards": "GREATER_UNDEAD"
+    }
   },
   "BONEWALKER": {
     "name": "Bonewalker",
@@ -81,7 +105,11 @@
       {"card": "BROWN_ROT", "quantity": 1},
       {"card": "GRAVE_CURSE", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [6, 10],
+      "exp": 9,
+      "cards": "LESSER_UNDEAD"
+    }
   },
   "GREATER_BONEWALKER": {
     "name": "Greater Bonewalker",
@@ -93,7 +121,11 @@
       {"card": "BROWN_ROT", "quantity": 1},
       {"card": "DREAD_CURSE", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [11, 16],
+      "exp": 15,
+      "cards": "GREATER_UNDEAD"
+    }
   },
   "BONELORD": {
     "name": "Bonelord",
@@ -108,7 +140,11 @@
       {"card": "FIREBALL", "quantity": 1},
       {"card": "RESIST_MUNDANE_WEAPONS", "quantity": 1}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [12, 14],
+      "exp": 13,
+      "cards": "GREATER_UNDEAD"
+    }
   },
   "DWARVEN_SPECTRE": {
     "name": "Dwarven Spectre",
@@ -122,6 +158,10 @@
       {"card": "SPECTRAL_STRIKE", "quantity": 2},
       {"card": "FIREBALL", "quantity": 2}
     ],
-    "loot": {"gold": 2}
+    "loot": {
+      "gold": [12, 13],
+      "exp": 15,
+      "cards": "GREATER_UNDEAD"
+    }
   }
 }
