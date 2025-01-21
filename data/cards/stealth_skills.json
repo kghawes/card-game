@@ -75,9 +75,113 @@
     "card_type": "SKILL",
     "subtype": "STEALTH",
     "cost": 3,
-    "value": 110,
+    "value": 55,
     "effects": {
       "APPLY_DAMAGE_WILLPOWER_TARGET": 3
+      }
+  },
+  "KNIFE_SKILLS": {
+    "name": "Knife Skills",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 2,
+    "value": 80,
+    "effects": {
+      "APPLY_FORTIFY_SHORT_BLADE_SELF": 3
+      }
+  },
+  "EAGLE_EYE": {
+    "name": "Eagle Eye",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 2,
+    "value": 80,
+    "effects": {
+      "APPLY_FORTIFY_MARKSMAN_SELF": 3
+      }
+  },
+  "RANGERS_EXPERTISE": {
+    "name": "Ranger's Expertise",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 2,
+    "value": 80,
+    "effects": {
+      "APPLY_FORTIFY_LIGHT_ARMOR_SELF": 3
+      }
+  },
+  "ROGUES_EXPERTISE": {
+    "name": "Rogue's Expertise",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 2,
+    "value": 80,
+    "effects": {
+      "APPLY_FORTIFY_MEDIUM_ARMOR_SELF": 3
+      }
+  },
+  "ON_A_MISSION": {
+    "name": "On a Mission",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 3,
+    "value": 90,
+    "effects": {
+      "APPLY_FORTIFY_WILLPOWER_SELF": 3
+      }
+  },
+  "TRICKSTERS_WIT": {
+    "name": "Trickster's Wit",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 2,
+    "value": 80,
+    "effects": {
+      "APPLY_FORTIFY_ILLUSION_SELF": 3
+      }
+  },
+  "STRATEGIC_MASTER": {
+    "name": "Strategic Master",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 5,
+    "value": 100,
+    "effects": {
+      "DRAW": 2,
+      "APPLY_FEATHER_SELF": 3,
+      "APPLY_FORTIFY_AGILITY_SELF": 3
+      }
+  },
+  "WALL_JUMP": {
+    "name": "Wall Jump",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 3,
+    "value": 90,
+    "effects": {
+      "JUMP": 4
+      }
+  },
+  "BACKSTAB": {
+    "name": "Backstab",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 3,
+    "value": 90,
+    "effects": {
+      "APPLY_WEAKNESS_PHYSICAL_TARGET": 3
+      }
+  },
+  "RETREAT": {
+    "name": "Retreat",
+    "card_type": "SKILL",
+    "subtype": "STEALTH",
+    "cost": 5,
+    "value": 90,
+    "effects": {
+      "APPLY_EVASION_SELF": 5,
+      "APPLY_CALM_SELF": 5,
+      "APPLY_FORTIFY_SPEED_SELF": 2
       }
   }
 }

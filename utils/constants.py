@@ -161,11 +161,11 @@ class Merchant_probabilities(Enum):
     The probability for a card of the given type to appear in the shop.
     """
     WEAPON = 0.23
-    ARMOR = 0.17
-    SKILL = 0.23
+    ARMOR = 0.19
+    SKILL = 0.18
     SPELL = 0.23
     ITEM = 0.13
-    CONSUMABLE = 0.01
+    CONSUMABLE = 0.04
 
 
 # Minimum values
