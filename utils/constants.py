@@ -156,6 +156,18 @@ class StatusNames(Enum):
     FORTIFY_RESTORATION = "Fortify Restoration"
 
 
+class Merchant_probabilities(Enum):
+    """
+    The probability for a card of the given type to appear in the shop.
+    """
+    WEAPON = 0.23
+    ARMOR = 0.17
+    SKILL = 0.23
+    SPELL = 0.23
+    ITEM = 0.13
+    CONSUMABLE = 0.01
+
+
 # Minimum values
 MIN_RESOURCE = 0
 MIN_EFFECT = 1
@@ -178,6 +190,38 @@ MAX_HAND_SIZE = 10
 NORMAL_CARD_REWARD = 1
 BOSS_CARD_REWARD = 2
 BOSS_ID = "BOSS"
+DEFAULT_SUBTYPE = "MISC"
+ALLOWED_TYPES = {
+    "ALL": [
+        "ALTERATION",
+        "CONJURATION",
+        "DESTRUCTION",
+        "ILLUSION",
+        "MYSTICISM",
+        "RESTORATION",
+        "SCROLL",
+        "POTION",
+        DEFAULT_SUBTYPE
+        ],
+    "FIGHTER": [ 
+        "LONG_BLADE",
+        "BLUNT_WEAPON",
+        "HEAVY",
+        "MEDIUM",
+        "COMBAT"
+        ],
+    "THIEF": [
+        "SHORT_BLADE",
+        "MARKSMAN",
+        "LIGHT",
+        "MEDIUM",
+        "STEALTH"
+        ],
+    "MAGE": [
+        "STAFF",
+        "MAGIC"
+        ]
+    }
 
 # Paths to JSON files
 CARD_PATHS = [

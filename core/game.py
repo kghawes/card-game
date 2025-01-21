@@ -59,10 +59,7 @@ class Game:
                     self.registries,
                     self.card_cache
                 )
-                if self.player.is_alive():
-                    self.text_interface.send_message(c.VICTORY_MESSAGE)
-                    self.player.gain_gold(encounter.enemy.loot.gold)
-                else:
+                if not self.player.is_alive():
                     self.text_interface.send_message(c.DEFEAT_MESSAGE)
                     return
 

@@ -2,6 +2,7 @@
   "CAST_FAILED": {
     "name": "Cast Failed",
     "card_type": "SPELL",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": { "NO_EFFECT": 0 }
@@ -9,7 +10,7 @@
   "PARALYZING_BITE": {
     "name": "Paralyzing Bite",
     "card_type": "SPELL",
-    "subtype": "ILLUSION",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_PARALYZE_TARGET": 1 }
@@ -17,7 +18,7 @@
   "RATTLES": {
     "name": "Rattles",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": {
@@ -29,7 +30,7 @@
   "ATAXIA": {
     "name": "Ataxia",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": {
@@ -41,7 +42,7 @@
   "BROWN_ROT": {
     "name": "Brown Rot",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": {
@@ -53,7 +54,7 @@
   "ROCKJOINT": {
     "name": "Rockjoint",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": {
@@ -64,7 +65,7 @@
   "WITBANE": {
     "name": "Witbane",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": {
@@ -75,7 +76,7 @@
   "ASH_CHANCRE": {
     "name": "Ash-chancre",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": {
@@ -86,7 +87,7 @@
   "BLACK_HEART_BLIGHT": {
     "name": "Black-Heart Blight",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": {
@@ -98,7 +99,7 @@
   "CHANTHRAX_BLIGHT": {
     "name": "Chanthrax Blight",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": {
@@ -110,7 +111,7 @@
   "ASH_WOE_BLIGHT": {
     "name": "Ash Woe Blight",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": {
@@ -122,7 +123,7 @@
   "ARMOR_EATER": {
     "name": "Armor Eater",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_DAMAGE_ENDURANCE_TARGET": 3 }
@@ -130,7 +131,7 @@
   "SPELL_REFLECTION": {
     "name": "Spell Reflection",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": { "APPLY_REFLECT_SELF": 5 }
@@ -138,7 +139,7 @@
   "FIREBORN": {
     "name": "Fireborn",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": {
@@ -149,7 +150,7 @@
   "POISON_SPIT": {
     "name": "Poison Spit",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 3,
     "value": 0,
     "effects": {
@@ -160,7 +161,7 @@
   "GRIM_CURSE": {
     "name": "Grim Curse",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": {
@@ -170,7 +171,7 @@
   "GRAVE_CURSE": {
     "name": "Grave Curse",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": {
@@ -181,7 +182,7 @@
   "DREAD_CURSE": {
     "name": "Dread Curse",
     "card_type": "SPELL",
-    "subtype": "DESTRUCTION",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": {

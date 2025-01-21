@@ -2,6 +2,7 @@
   "HARD_CARAPACE": {
     "name": "Hard Carapace",
     "card_type": "ARMOR",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_DEFENSE_SELF": 2 }
@@ -9,6 +10,7 @@
   "TOUGH_HIDE": {
     "name": "Tough Hide",
     "card_type": "ARMOR",
+    "subtype": "ENEMY",
     "cost": 2,
     "value": 0,
     "effects": { "APPLY_DEFENSE_SELF": 3 }
@@ -16,6 +18,7 @@
   "NATURAL_ARMOR": {
     "name": "Natural Armor",
     "card_type": "ARMOR",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_DEFENSE_SELF": 3 }
@@ -23,6 +26,7 @@
   "METAL_HIDE": {
     "name": "Metal Hide",
     "card_type": "ARMOR",
+    "subtype": "ENEMY",
     "cost": 3,
     "value": 0,
     "effects": { "APPLY_DEFENSE_SELF": 6 }
@@ -30,7 +34,7 @@
   "DAEDRIC_ARMOR": {
     "name": "Daedric Armor",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtype": "ENEMY",
     "cost": 4,
     "value": 0,
     "effects": { "APPLY_DEFENSE_SELF": 8 }
@@ -38,6 +42,7 @@
   "WOODEN_SHIELD": {
     "name": "Daedric Armor",
     "card_type": "ARMOR",
+    "subtype": "ENEMY",
     "cost": 1,
     "value": 0,
     "effects": { "APPLY_DEFENSE_SELF": 2 }

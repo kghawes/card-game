@@ -3,7 +3,7 @@ This module defines the Card class, the helper class EffectLevel, as well as
 the CardPrototype and CardCache.
 """
 from utils.utils import Prototype
-from utils.constants import MIN_EFFECT, MIN_COST, Resources, CardTypes
+import utils.constants as c
 
 class Card:
     """
@@ -32,18 +32,18 @@ class Card:
         """
         Get the id of the resource corresponding to this card's cost.
         """
-        if self.card_type == CardTypes.SPELL.name:
-            return Resources.MAGICKA.name
-        return Resources.STAMINA.name
+        if self.card_type == c.CardTypes.SPELL.name:
+            return c.Resources.MAGICKA.name
+        return c.Resources.STAMINA.name
 
     def get_cost(self, enable_override=True) -> int:
         """
         Get the stamina or magicka cost of the card.
         """
-        if enable_override and self.override_cost >= MIN_COST:
+        if enable_override and self.override_cost >= c.MIN_COST:
             return self.override_cost
         net_cost = self.cost + self.cost_modifier + self.temp_cost_modifier
-        return max(net_cost, MIN_COST)
+        return max(net_cost, c.MIN_COST)
 
     def change_cost_modifier(self, amount):
         """
@@ -107,7 +107,7 @@ class EffectLevel():
         """
         Get the current level of the effect.
         """
-        return max(round(self.base_level * (1 + self.modifier)), MIN_EFFECT)
+        return max(round(self.base_level * (1 + self.modifier)), c.MIN_EFFECT)
 
     def change_level(self, amount):
         """
@@ -128,8 +128,8 @@ class CardPrototype(Card, Prototype):
     times.
     """
     def __init__(
-            self, name, card_type, cost, value, effects, subtype=None,
-            enchantments=None, enchanted_name=None
+            self, name, card_type, cost, value, effects,
+            subtype=c.DEFAULT_SUBTYPE, enchantments=None, enchanted_name=None
             ):
         """
         Initialize a new CardPrototype.

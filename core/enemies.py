@@ -17,7 +17,7 @@ class Enemy(Combatant):
             ):
         super().__init__(
             name, max_health, max_stamina, max_magicka, deck, card_cache,
-            status_registry
+            status_registry, True
             )
         self.loot = Treasure(loot, card_rewards)
 

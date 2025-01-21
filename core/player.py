@@ -13,10 +13,10 @@ class Player(Combatant):
         """
         Initialize a new Player.
         """
-        deck_list = load_json(c.STARTING_DECKS_PATH).get("STARTING_DECK")
+        deck_list = load_json(c.STARTING_DECKS_PATH).get(character_class)
         super().__init__(
             "", c.STARTING_HEALTH, c.STARTING_STAMINA, c.STARTING_MAGICKA, 
-            deck_list, card_cache, status_registry
+            deck_list, card_cache, status_registry, False
             )
         self.character_class = character_class
         self.gold = 0

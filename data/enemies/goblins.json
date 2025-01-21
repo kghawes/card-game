@@ -160,8 +160,8 @@
       {"card": "ORCISH_BRACERS", "quantity": 1}
     ],
     "loot": {
-      "gold": [5, 13],
-      "exp": 11,
+      "gold": [8, 15],
+      "exp": 15,
       "cards": "STRONG_GOBLIN"
     }
   },
@@ -191,8 +191,49 @@
       {"card": "BELT_IRON_WILL", "quantity": 1}
     ],
     "loot": {
-      "gold": [5, 13],
-      "exp": 11,
+      "gold": [9, 15],
+      "exp": 16,
+      "cards": "STRONG_GOBLIN"
+    }
+  },
+  "GOBLIN_WARLORD": {
+    "name": "Goblin Warlord",
+    "max_health": 12,
+    "max_stamina": 5,
+    "max_magicka": 5,
+    "deck": [
+      {"card": "SCROLL_FIRST_BARRIER", "quantity": 1},
+      {"card": "SCROLL_OATHFAST", "quantity": 1},
+      {"card": "ORCISH_STAFF", "quantity": 1},
+      {"card": "CRYING_EYE", "quantity": 1},
+      {"card": "SANCTUARY", "quantity": 1},
+      {"card": "SILENCE", "quantity": 1},
+      {"card": "GREATER_FIREBALL", "quantity": 1},
+      {"card": "SHOCKBALL", "quantity": 1},
+      {"card": "POISONBLOOM", "quantity": 1},
+      {"card": "WOE", "quantity": 1},
+      {"card": "TORPOR", "quantity": 1},
+      {"card": "DIRE_WEAKNESS_FIRE", "quantity": 1},
+      {"card": "BELT_IRON_WILL", "quantity": 1},
+      {"card": "STEEL_MACE", "quantity": 1},
+      {"card": "ORCISH_MACE", "quantity": 1},
+      {"card": "IRON_FIREMAULER", "quantity": 1},
+      {"card": "STANDARD_POTION_STAMINA", "quantity": 1},
+      {"card": "ORCISH_CLAYMORE", "quantity": 1},
+      {"card": "SUJAMMA", "quantity": 1},
+      {"card": "SPIKED_CLUB", "quantity": 1},
+      {"card": "VICIOUS_TEETH", "quantity": 1},
+      {"card": "VICIOUS_CLAWS", "quantity": 1},
+      {"card": "FURY", "quantity": 1},
+      {"card": "RAGE", "quantity": 1},
+      {"card": "ORCISH_BOOTS", "quantity": 1},
+      {"card": "ORCISH_GAUNTLETS", "quantity": 1},
+      {"card": "ORCISH_CUIRASS", "quantity": 2},
+      {"card": "ADAMANTIUM_LONGSWORD", "quantity": 2}
+    ],
+    "loot": {
+      "gold": [9, 15],
+      "exp": 16,
       "cards": "STRONG_GOBLIN"
     }
   }

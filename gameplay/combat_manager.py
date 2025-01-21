@@ -33,6 +33,7 @@ class CombatManager:
             if self.is_combat_over(player, enemy):
                 break
         if player.get_health() > 0:
+            text_interface.send_message(c.VICTORY_MESSAGE)
             player.status_manager.reset_statuses(player, registries.statuses)
             player.modifier_manager.reset_all()
             self.present_rewards(
@@ -141,7 +142,8 @@ class CombatManager:
 
     def card_can_be_played(self, combatant, card, status_registry) -> bool:
         """
-        Check if the given card can be played based on current status effects.
+        Check if the given card can be played based on current status effects
+        and player class.
         """
         for status_id in combatant.status_manager.statuses:
             status = status_registry.get_status(status_id)
@@ -151,7 +153,14 @@ class CombatManager:
             elif (isinstance(status, LimitCardPlayStatus) and
                   combatant.cards_played_this_turn >= status.card_limit):
                 return False
-        return True
+
+        if combatant.is_enemy:
+            return True
+
+        if card.subtype in c.ALLOWED_TYPES["ALL"] or \
+            card.subtype in c.ALLOWED_TYPES[combatant.character_class]:
+                return True
+        return False
 
     def effect_can_resolve(
             self, combatant, effect_id, status_registry
