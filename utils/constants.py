@@ -257,6 +257,7 @@ QUESTS_PATH = "data/quests.json"
 ENCHANTMENTS_PATH = "data/enchantments.json"
 STATUSES_PATH = "data/statuses.json"
 CARD_REWARDS_PATH = "data/card_rewards.json"
+ENEMY_GROUPS_PATH = "data/enemy_groups.json"
 
 # Text for UI
 SPLASH_MESSAGE = "Welcome to the game!"

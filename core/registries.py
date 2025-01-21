@@ -24,11 +24,13 @@ class Registries:
         self.quests = None
 
     def register_quests(
-            self, quests_path, enemy_cache, card_cache, card_rewards
+            self, quests_path, enemy_groups_path, enemy_cache, card_cache,
+            card_rewards
             ):
         """
         Create the quest registry.
         """
         self.quests = QuestRegistry(
-            quests_path, enemy_cache, card_cache, self.statuses, card_rewards
+            quests_path, enemy_groups_path, enemy_cache, card_cache,
+            self.statuses, card_rewards
             )

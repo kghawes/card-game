@@ -15,6 +15,7 @@ class CardManager:
         self.deck = self._create_deck(starting_deck, card_cache)
         self.hand = []
         self.discard_pile = []
+        self.consumed_pile = []
 
     def _create_deck(self, deck_list, card_cache) -> list:
         """
@@ -77,7 +78,10 @@ class CardManager:
         Move the card from the hand to the discard pile.
         """
         card.reset_card()
-        self.discard_pile.append(card)
+        if card.matches(c.CardTypes.CONSUMABLE.name):
+            self.consumed_pile.append(card)
+        else:
+            self.discard_pile.append(card)
         self.hand.remove(card)
         
         status_manager = subject.status_manager
@@ -102,3 +106,10 @@ class CardManager:
         """
         while len(self.hand) > 0:
             self.discard(self.hand[0], subject, status_registry)
+
+    def reset_consumed_cards(self):
+        """
+        Return cards from the consumed pile to the deck at the end of combat.
+        """
+        self.deck += self.consumed_pile
+        self.consumed_pile = []

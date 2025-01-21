@@ -26,8 +26,8 @@ class Game:
         self.enemy_cache = EnemyCache(c.ENEMIES_PATHS)
         self.card_rewards = CardRewards(c.CARD_REWARDS_PATH)
         self.registries.register_quests(
-            c.QUESTS_PATH, self.enemy_cache, self.card_cache,
-            self.card_rewards.card_groups
+            c.QUESTS_PATH, c.ENEMY_GROUPS_PATH, self.enemy_cache,
+            self.card_cache, self.card_rewards.card_groups
             )
         self.player = Player(
             self.card_cache, self.registries.statuses,

@@ -175,7 +175,7 @@ class TextInterface:
             if response == "Y":
                 return True
             if response == "N":
-                confirmation = input("Are you sure you want to leave this card? (Y/N)").upper().strip()
+                confirmation = input("Are you sure you want to leave this card? (Y/N) ").upper().strip()
                 if confirmation not in ("Y", "N") or confirmation == "N":
                     continue
                 if confirmation == "Y":

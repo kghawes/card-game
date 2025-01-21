@@ -36,6 +36,7 @@ class CombatManager:
             text_interface.send_message(c.VICTORY_MESSAGE)
             player.status_manager.reset_statuses(player, registries.statuses)
             player.modifier_manager.reset_all()
+            player.card_manager.reset_consumed_cards()
             self.present_rewards(
                 player, enemy, card_cache, text_interface, registries.effects
                 )
