@@ -47,7 +47,7 @@
       {"card": "GLASS_VIPERSTAR", "quantity": 5},
       {"card": "GLASS_SHARDSTAR", "quantity": 4},
       {"card": "ORCISH_FROSTSTAR", "quantity": 3},
-      {"card": "STEEL_THROWING_STAR", "quantity": 2}
+      {"card": "STEEL_THROWING_STAR", "quantity": 2},
       {"card": "ADAMANTIUM_DAGGER", "quantity": 2},
       {"card": "GLASS_DAGGER", "quantity": 2},
       {"card": "BACKSTAB", "quantity": 3},
@@ -86,9 +86,8 @@
       {"card": "ORCISH_BOW", "quantity": 5},
       {"card": "ORCISH_BOW_(SPARKARROWS)", "quantity": 4},
       {"card": "ADAMANTIUM_LONGSWORD", "quantity": 3},
-      {"card": "ORCISH_TOWER_SHIELD", "quantity": 2}
-      {"card": "STEEL_SHIELD", "quantity": 2},
-      
+      {"card": "ORCISH_TOWER_SHIELD", "quantity": 2},
+      {"card": "STEEL_SHIELD", "quantity": 2}
     ],
     "loot": {
       "gold": [25, 50],
