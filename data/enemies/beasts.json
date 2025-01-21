@@ -98,6 +98,24 @@
       "cards": "STRONG_BEAST"
     }
   },
+  "DREUGH_BOSS": {
+    "name": "Dreugh",
+    "max_health": 10,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "NATURAL_ARMOR", "quantity": 3},
+      {"card": "HARD_CARAPACE", "quantity": 1},
+      {"card": "SHARP_CLAWS", "quantity": 1},
+      {"card": "RAZOR_CLAWS", "quantity": 4},
+      {"card": "MISS", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [12, 20],
+      "exp": 20,
+      "cards": "BOSS_DREUGH"
+    }
+  },
   "DREUGH_WARLORD": {
     "name": "Dreugh Warlord",
     "max_health": 12,

@@ -24,12 +24,35 @@
       "WILDERNESS",
       "WILDERNESS",
       "KAGOUTI_TERRITORY",
-      "WILDERNESS",
       "KAGOUTI_TERRITORY",
       "KAGOUTI_TERRITORY",
       "KAGOUTI_TERRITORY",
       "KAGOUTI_ALPHA"
     ],
     "DESCRIPTION": "Hunt down some aggressive Kagouti."
+  },
+  "INFESTED_MINE": {
+    "ENCOUNTERS": [
+      "WILDERNESS",
+      "KWAMA_MINE",
+      "KWAMA_MINE",
+      "KWAMA_MINE",
+      "KWAMA_MINE",
+      "KWAMA_MINE",
+      "BLIGHTED_KWAMA_QUEEN"
+    ],
+    "DESCRIPTION": "Clear a Kwama infestation in a glass mine."
+  },
+  "HUNT_NETCH": {
+    "ENCOUNTERS": [
+      "NETCH_TERRITORY",
+      "NETCH_TERRITORY",
+      "NETCH_TERRITORY",
+      "NETCH_TERRITORY",
+      "NETCH_TERRITORY",
+      "NETCH_TERRITORY",
+      "NETCH_ALPHA"
+    ],
+    "DESCRIPTION": "Hunt down some aggressive Netch."
   }
 }

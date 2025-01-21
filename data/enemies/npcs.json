@@ -14,5 +14,86 @@
       "exp": 9,
       "cards": "OUTLAW"
     }
+  },
+  "SMUGGLER": {
+    "name": "Smuggler",
+    "max_health": 9,
+    "max_stamina": 4,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "STEEL_LONGSWORD", "quantity": 1},
+      {"card": "STEEL_DAGGER", "quantity": 2},
+      {"card": "STEEL_THROWING_STAR", "quantity": 5},
+      {"card": "SHORTBOW", "quantity": 2},
+      {"card": "IRON_HELM", "quantity": 1},
+      {"card": "STEEL_BOOTS", "quantity": 1},
+      {"card": "IRON_GAUNTLETS", "quantity": 1},
+      {"card": "CHITIN_BOOTS", "quantity": 1},
+      {"card": "CHITIN_CUIRASS", "quantity": 1},
+      {"card": "CHITIN_GAUNTLETS", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [10, 20],
+      "exp": 10,
+      "cards": "OUTLAW"
+    }
+  },
+  "ASSASSIN": {
+    "name": "Assassin",
+    "max_health": 7,
+    "max_stamina": 6,
+    "max_magicka": 3,
+    "deck": [
+      {"card": "GLASS_VIPERSTAR", "quantity": 5},
+      {"card": "GLASS_SHARDSTAR", "quantity": 4},
+      {"card": "ORCISH_FROSTSTAR", "quantity": 3},
+      {"card": "STEEL_THROWING_STAR", "quantity": 2}
+      {"card": "ADAMANTIUM_DAGGER", "quantity": 2},
+      {"card": "GLASS_DAGGER", "quantity": 2},
+      {"card": "BACKSTAB", "quantity": 3},
+      {"card": "EAGLE_EYE", "quantity": 1},
+      {"card": "DISGUISE", "quantity": 1},
+      {"card": "DODGE", "quantity": 1},
+      {"card": "ACROBACY", "quantity": 1},
+      {"card": "BACKFLIP", "quantity": 1},
+      {"card": "GLASS_BOOTS", "quantity": 1},
+      {"card": "GLASS_HELM", "quantity": 1},
+      {"card": "AMULET_SILENCE", "quantity": 1},
+      {"card": "CALIGINY_RING", "quantity": 1},
+      {"card": "THIEF_RING", "quantity": 1},
+      {"card": "CHEAP_POTION_FEATHER", "quantity": 1},
+      {"card": "BARGAIN_POTION_SPEED", "quantity": 1},
+      {"card": "SCROLL_ELEMENTAL_BURST_FIRE", "quantity": 1},
+      {"card": "TINURS_HOPTOAD", "quantity": 1},
+      {"card": "HEAL_MINOR_WOUNDS", "quantity": 1},
+      {"card": "PURGE_MAGIC", "quantity": 1},
+      {"card": "CHAMELEON", "quantity": 1},
+      {"card": "INVISIBILITY", "quantity": 1},
+      {"card": "PARALYSIS", "quantity": 1}
+    ],
+    "loot": {
+      "gold": [25, 50],
+      "exp": 20,
+      "cards": "BOSS_OUTLAW"
+    }
+  },
+  "RINGLEADER": {
+    "name": "Ringleader",
+    "max_health": 12,
+    "max_stamina": 5,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "ORCISH_BOW", "quantity": 5},
+      {"card": "ORCISH_BOW_(SPARKARROWS)", "quantity": 4},
+      {"card": "ADAMANTIUM_LONGSWORD", "quantity": 3},
+      {"card": "ORCISH_TOWER_SHIELD", "quantity": 2}
+      {"card": "STEEL_SHIELD", "quantity": 2},
+      
+    ],
+    "loot": {
+      "gold": [25, 50],
+      "exp": 15,
+      "cards": "BOSS_OUTLAW"
+    }
   }
 }
