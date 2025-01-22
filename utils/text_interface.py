@@ -154,6 +154,62 @@ class TextInterface:
         card = card_cache.create_card(card_id.upper())
         player.card_manager.hand.append(card)
 
+    def discard_prompt(self, hand_size, count, is_optional) -> list:
+        """
+        Prompt the user for a list of cards to discard.
+        """
+        if count <= 0:
+            return
+        prompt = "List{} {} cards to discard."
+        if is_optional:
+            prompt = prompt.format(" up to", count)
+        else:
+            prompt = prompt.format("", count)
+        indices = []
+        while True:
+            response = input(prompt)
+            selected_card_indices = response.split(",")
+            if (is_optional and len(selected_card_indices) > count) or \
+                (not is_optional and len(selected_card_indices) != count) or \
+                    len(selected_card_indices) <= 0:
+                    continue
+            for selection in selected_card_indices:
+                index = -1
+                if selection.isdigit():
+                    index = int(selection)
+                else:
+                    continue ###
+                if index >= hand_size or index < 0:
+                    continue ###
+                indices.append(index)
+            break
+        return indices
+
+    def return_from_discard_prompt(
+            self, discard_pile, count, hand_size
+            ) -> list:
+        """
+        Prompt the user for cards to take from discard pile.
+        """
+        selection = []
+        if count <= 0 or len(discard_pile) <= 0:
+            return selection
+        if count >= len(discard_pile) and count <= hand_size:
+            return discard_pile
+        print("Discard Pile:")
+        for idx, card in enumerate(discard_pile):
+            print(f"{idx}. {card.name}")
+        while len(selection) < hand_size:
+            response = input(f"Select up to {count} cards to return to your hand: ")
+            selected_card_indices = response.split(",")
+            if len(selected_card_indices) > max(count, hand_size):
+                continue
+            for index in selected_card_indices:
+                if index.isdigit():
+                    selection.append(int(index))
+                else:
+                    continue ###
+
     def card_reward_prompt(self, card, effect_registry) -> bool:
         """
         Prompt the user to take or leave the card.

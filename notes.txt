@@ -175,6 +175,8 @@ Waterbreathing X
   At the start of your turn, when you would draw cards, select up to X cards from your discard pile and add them to your hand. Then draw the rest of your cards from your deck.
 Swift Swim X
   At the start of your turn, after drawing cards, you may discard up to X cards then draw that many cards.
+Slowfalling X
+  Keep your hand at the end of your turn for X turns.
 Poison X
   Take X poison damage each turn.
 Weakness to damage type (physical, fire, frost, shock, poison) X
@@ -272,7 +274,6 @@ Comments and examples:
 Ideas for further statuses:
   Rally
   Demoralize
-  Slowfalling
   Soultrap
   Command
   Resist magicka

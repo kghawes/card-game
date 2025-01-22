@@ -42,6 +42,65 @@ class Game:
         self.town.enter_town(self.text_interface)
         self.text_interface.send_message(c.SPLASH_MESSAGE)
         self.player.name = "KK" #self.text_interface.name_prompt()
+        
+        #*********************************************************************#
+        weapons = []
+        armors = []
+        combat_skills = []
+        stealth_skills = []
+        magic_skills = []
+        skills = []
+        alterations = []
+        destructions = []
+        illusions = []
+        mysticisms = []
+        restorations = []
+        spells = []
+        items = []
+        consumables = []
+        for card in self.card_cache.card_prototypes.values():
+            if card.value == 0:
+                    continue
+            if card.card_type == c.CardTypes.WEAPON.name:
+                weapons.append(card)
+                continue
+            if card.card_type == c.CardTypes.ARMOR.name:
+                armors.append(card)
+                continue
+            if card.card_type == c.CardTypes.ITEM.name:
+                items.append(card)
+                continue
+            if card.card_type == c.CardTypes.CONSUMABLE.name:
+                consumables.append(card)
+                continue
+            if card.card_type == c.CardTypes.SKILL.name:
+                skills.append(card)
+                if card.subtype == c.CardSubtypes.COMBAT.name:
+                    combat_skills.append(card)
+                    continue
+                if card.subtype == c.CardSubtypes.STEALTH.name:
+                    stealth_skills.append(card)
+                    continue
+                if card.subtype == c.CardSubtypes.MAGIC.name:
+                    magic_skills.append(card)
+                    continue
+            if card.card_type == c.CardTypes.SPELL.name:
+                spells.append(card)
+                if card.subtype == c.CardSubtypes.ALTERATION.name:
+                    alterations.append(card)
+                    continue
+                if card.subtype == c.CardSubtypes.DESTRUCTION.name:
+                    destructions.append(card)
+                    continue
+                if card.subtype == c.CardSubtypes.ILLUSION.name:
+                    illusions.append(card)
+                    continue
+                if card.subtype == c.CardSubtypes.MYSTICISM.name:
+                    mysticisms.append(card)
+                    continue
+                if card.subtype == c.CardSubtypes.RESTORATION.name:
+                    restorations.append(card)
+        #*********************************************************************#
 
         for quest in self.registries.quests.quests:
             health = self.player.resources[c.Resources.HEALTH.name]

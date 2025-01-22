@@ -1,262 +1,333 @@
 {
   "DEFENSE": {
-    "class": "DefenseStatus"
+    "class": "DefenseStatus",
+    "description": "Block up to {} Physical Damage and if you do, remove that much Defense."
   },
   "POISON": {
-    "class": "PoisonStatus"
+    "class": "PoisonStatus",
+    "description": "Take {} Poison Damage at the start of your turn."
   },
   "REGENERATION": {
-    "class": "RegenerationStatus"
+    "class": "RegenerationStatus",
+    "description": "Restore {} Health at the start of your turn."
   },
   "EVASION": {
-    "class": "EvasionStatus"
+    "class": "EvasionStatus",
+    "description": "{} chance to take no damage from an incoming attack."
   },
   "HIDDEN": {
-    "class": "CriticalHitStatus"
+    "class": "CriticalHitStatus",
+    "description": "{} chance to deal double damage when you attack."
   },
   "PARALYZE": {
     "class": "RestrictCardTypeStatus",
+    "description": "You cannot play any cards except Consumables.",
     "restricted_types": [ "WEAPON", "ARMOR", "SKILL", "SPELL", "ITEM" ]
   },
   "SILENCE": {
     "class": "RestrictCardTypeStatus",
+    "description": "You cannot play Spells.",
     "restricted_types": [ "SPELL" ]
   },
   "BLIND": {
     "class": "RestrictCardTypeStatus",
+    "description": "You cannot play Weapons.",
     "restricted_types": [ "WEAPON" ]
   },
   "FRENZY": {
     "class": "FilterEffectStatus",
+    "description": "Cards you play have none of their effects except dealing damage.",
     "allowed_effect": "DAMAGE",
     "blocked_effect": ""
   },
   "CALM": {
     "class": "FilterEffectStatus",
+    "description": "Cards you play deal no damage.",
     "allowed_effect": "",
     "blocked_effect": "DAMAGE"
   },
   "RESISTANCE_PHYSICAL": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} less damage from Physical attacks.",
     "damage_type": "PHYSICAL",
     "sign_factor": -1
   },
   "RESISTANCE_FIRE": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} less damage from Fire attacks.",
     "damage_type": "FIRE",
     "sign_factor": -1
   },
   "RESISTANCE_FROST": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} less damage from Frost attacks.",
     "damage_type": "FROST",
     "sign_factor": -1
   },
   "RESISTANCE_SHOCK": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} less damage from Shock attacks.",
     "damage_type": "SHOCK",
     "sign_factor": -1
   },
   "RESISTANCE_POISON": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} less damage from Poison attacks.",
     "damage_type": "POISON",
     "sign_factor": -1
   },
   "WEAKNESS_PHYSICAL": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} more damage from Physical attacks.",
     "damage_type": "PHYSICAL",
     "sign_factor": 1
   },
   "WEAKNESS_FIRE": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} more damage from Fire attacks.",
     "damage_type": "FIRE",
     "sign_factor": 1
   },
   "WEAKNESS_FROST": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} more damage from Frost attacks.",
     "damage_type": "FROST",
     "sign_factor": 1
   },
   "WEAKNESS_SHOCK": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} more damage from Shock attacks.",
     "damage_type": "SHOCK",
     "sign_factor": 1
   },
   "WEAKNESS_POISON": {
     "class": "ModifyDamageStatus",
+    "description": "Take {} more damage from Poison attacks.",
     "damage_type": "POISON",
     "sign_factor": 1
   },
   "FORTIFY_AGILITY": {
     "class": "ModifyMaxResourceStatus",
+    "description": "Increase your maximum Stamina by {}.",
     "resource_id": "STAMINA",
     "sign_factor": 1
   },
   "DAMAGE_AGILITY": {
     "class": "ModifyMaxResourceStatus",
+    "description": "Decrease your maximum Stamina by {}.",
     "resource_id": "STAMINA",
     "sign_factor": -1
   },
   "FORTIFY_INTELLIGENCE": {
     "class": "ModifyMaxResourceStatus",
+    "description": "Increase your maximum Magicka by {}.",
     "resource_id": "MAGICKA",
     "sign_factor": 1
   },
   "DAMAGE_INTELLIGENCE": {
     "class": "ModifyMaxResourceStatus",
+    "description": "Decrease your maximum Magicka by {}.",
     "resource_id": "MAGICKA",
     "sign_factor": -1
   },
   "FORTIFY_STRENGTH": {
     "class": "ModifyEffectStatus",
+    "description": "Weapons you play deal {} more damage.",
     "affected_card_type": "WEAPON",
     "affected_effect": "PHYSICAL_DAMAGE",
     "sign_factor": 1
   },
   "DAMAGE_STRENGTH": {
     "class": "ModifyEffectStatus",
+    "description": "Weapons you play deal {} less damage.",
     "affected_card_type": "WEAPON",
     "affected_effect": "PHYSICAL_DAMAGE",
     "sign_factor": -1
   },
   "FORTIFY_ENDURANCE": {
     "class": "ModifyEffectStatus",
+    "description": "Armor you play provides {} more Defense.",
     "affected_card_type": "ARMOR",
     "affected_effect": "DEFENSE",
     "sign_factor": 1
   },
   "DAMAGE_ENDURANCE": {
     "class": "ModifyEffectStatus",
+    "description": "Armor you play provides {} less Defense.",
     "affected_card_type": "ARMOR",
     "affected_effect": "DEFENSE",
     "sign_factor": -1
   },
   "FORTIFY_WILLPOWER": {
     "class": "ModifyEffectStatus",
+    "description": "Spells you play deal {} more damage.",
     "affected_card_type": "SPELL",
     "affected_effect": "DAMAGE",
     "sign_factor": 1
   },
   "DAMAGE_WILLPOWER": {
     "class": "ModifyEffectStatus",
+    "description": "Spells you play deal {} less damage.",
     "affected_card_type": "SPELL",
     "affected_effect": "DAMAGE",
     "sign_factor": -1
   },
   "FORTIFY_SPEED": {
     "class": "ModifyDrawStatus",
+    "description": "Draw {} more cards at the start of your turn.",
     "sign_factor": 1
   },
   "DAMAGE_SPEED": {
     "class": "ModifyDrawStatus",
+    "description": "Draw {} fewer cards at the start of your turn.",
     "sign_factor": -1
   },
   "FEATHER": {
     "class": "ModifyCostStatus",
+    "description": "Your Skills cost {} less Stamina.",
     "affected_card_type": "SKILL",
     "sign_factor": -1
   },
   "BURDEN": {
     "class": "ModifyCostStatus",
+    "description": "Your Skills cost {} more Stamina.",
     "affected_card_type": "SKILL",
     "sign_factor": 1
   },
   "FORTIFY_LONG_BLADE": {
     "class": "ModifyCostStatus",
+    "description": "Your Long Blades cost {} less Stamina.",
     "affected_card_type": "LONG_BLADE",
     "sign_factor": -1
   },
   "FORTIFY_BLUNT_WEAPON": {
     "class": "ModifyCostStatus",
+    "description": "Your Blunt Weapons cost {} less Stamina.",
     "affected_card_type": "BLUNT_WEAPON",
     "sign_factor": -1
   },
   "FORTIFY_SHORT_BLADE": {
     "class": "ModifyCostStatus",
+    "description": "Your Short Blades cost {} less Stamina.",
     "affected_card_type": "SHORT_BLADE",
     "sign_factor": -1
   },
   "FORTIFY_MARKSMAN": {
     "class": "ModifyCostStatus",
+    "description": "Your Marksman Weapons cost {} less Stamina.",
     "affected_card_type": "MARKSMAN",
     "sign_factor": -1
   },
   "FORTIFY_STAFF": {
     "class": "ModifyCostStatus",
+    "description": "Your Staves cost {} less Stamina.",
     "affected_card_type": "STAFF",
     "sign_factor": -1
   },
   "FORTIFY_LIGHT_ARMOR": {
     "class": "ModifyCostStatus",
+    "description": "Your Light Armor costs {} less Stamina.",
     "affected_card_type": "LIGHT",
     "sign_factor": -1
   },
   "FORTIFY_MEDIUM_ARMOR": {
     "class": "ModifyCostStatus",
+    "description": "Your Medium Armor costs {} less Stamina.",
     "affected_card_type": "MEDIUM",
     "sign_factor": -1
   },
   "FORTIFY_HEAVY_ARMOR": {
     "class": "ModifyCostStatus",
+    "description": "Your Heavy Armor costs {} less Stamina.",
     "affected_card_type": "HEAVY",
     "sign_factor": -1
   },
   "FORTIFY_ALTERATION": {
     "class": "ModifyCostStatus",
+    "description": "Your Alteration Spells costs {} less Stamina.",
     "affected_card_type": "ALTERATION",
     "sign_factor": -1
   },
   "FORTIFY_CONJURATION": {
     "class": "ModifyCostStatus",
+    "description": "Your Conjuration Spells costs {} less Stamina.",
     "affected_card_type": "CONJURATION",
     "sign_factor": -1
   },
   "FORTIFY_DESTRUCTION": {
     "class": "ModifyCostStatus",
+    "description": "Your Destruction Spells costs {} less Stamina.",
     "affected_card_type": "DESTRUCTION",
     "sign_factor": -1
   },
   "FORTIFY_ILLUSION": {
     "class": "ModifyCostStatus",
+    "description": "Your Illusion Spells costs {} less Stamina.",
     "affected_card_type": "ILLUSION",
     "sign_factor": -1
   },
   "FORTIFY_MYSTICISM": {
     "class": "ModifyCostStatus",
+    "description": "Your Mysticism Spells costs {} less Stamina.",
     "affected_card_type": "MYSTICISM",
     "sign_factor": -1
   },
   "FORTIFY_RESTORATION": {
     "class": "ModifyCostStatus",
+    "description": "Your Restoration Spells costs {} less Stamina.",
     "affected_card_type": "RESTORATION",
     "sign_factor": -1
   },
   "REFLECT": {
-    "class": "BlockMagicStatus"
+    "class": "BlockMagicStatus",
+    "description": "Block up to {} non-Physical damage, and if you do, deal that much damage to the attacker."
   },
   "SPELL_ABSORPTION": {
-    "class": "BlockMagicStatus"
+    "class": "BlockMagicStatus",
+    "description": "Block up to {} non-Physical damage, and if you do, gain that many points of Fortify Intelligence."
   },
   "DISEASE": {
     "class": "LimitCardPlayStatus",
+    "description": "You cannot play more than 4 cards per turn.",
     "max_cards_per_turn": 4
   },
   "BLIGHT": {
     "class": "LimitCardPlayStatus",
+    "description": "You cannot play more than 2 cards per turn.",
     "max_cards_per_turn": 2
   },
   "ALCHEMIST": {
     "class": "ModifyEffectStatus",
+    "description": "Your Potions are {} more effective.",
     "affected_card_type": "POTION",
     "affected_effect": "ALL_EFFECTS",
     "sign_factor": 1
   },
   "ENCHANTER": {
     "class": "ModifyEffectStatus",
+    "description": "Your Scrolls are {} more effective.",
     "affected_card_type": "SCROLL",
     "affected_effect": "ALL_EFFECTS",
     "sign_factor": 1
   },
   "LEVITATE": {
-    "class": "AverageCostStatus"
+    "class": "AverageCostStatus",
+    "description": "Average the costs of the cards in your hand."
+  },
+  "SLOWFALLING": {
+    "class": "FlagStatus",
+    "description": "You no longer discard your remaining cards at the end of your turn."
+  },
+  "WATER_WALKING": {
+    "class": "FlagStatus",
+    "description": "Cards you play that would go to the Discard Pile go on top of your Deck instead."
+  },
+  "SWIFT_SWIM": {
+    "class": "MulliganStatus",
+    "description": "When you draw your hand, you may discard up to {} cards then draw that many cards."
+  },
+  "WATER_BREATHING": {
+    "class": "ReturnFromDiscardStatus",
+    "description": "When you would draw your hand, instead select up to {} cards from your Discard Pile to add to your hand. Then draw the rest of your cards."
   }
 }

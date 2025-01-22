@@ -10,12 +10,13 @@ class Status:
     """
     The base class for an ongoing status effect.
     """
-    def __init__(self, status_id, applies_immediately):
+    def __init__(self, status_id, description, applies_immediately):
         """
         Initialize a new Status.
         """
         self.status_id = status_id
         self.name = c.StatusNames[status_id].value
+        self.description = description
         self.applies_immediately = applies_immediately
 
     def modify_value(self, old_value, amount, is_reduction, min_result) -> int:
@@ -53,13 +54,13 @@ class ModifyEffectStatus(Status):
     Statuses that change the levels of effects on cards.
     """
     def __init__(
-            self, status_id, affected_card_type, affected_effect,
+            self, status_id, description, affected_card_type, affected_effect,
             sign_factor
             ):
         """
         Initialize a new ModifyEffectStatus.
         """
-        super().__init__(status_id, True)
+        super().__init__(status_id, description, True)
         self.affected_card_type = affected_card_type
         self.affected_effect = affected_effect
         self.sign_factor = sign_factor
@@ -105,11 +106,13 @@ class ModifyCostStatus(Status):
     """
     Statuses that change the stamina or magicka cost on cards.
     """
-    def __init__(self, status_id, affected_card_type, sign_factor):
+    def __init__(
+            self, status_id, description, affected_card_type, sign_factor
+            ):
         """
         Initialize a new ModifyCostStatus.
         """
-        super().__init__(status_id, True)
+        super().__init__(status_id, description, True)
         self.affected_card_type = affected_card_type
         self.sign_factor = sign_factor
 
@@ -152,11 +155,11 @@ class ModifyMaxResourceStatus(Status):
     """
     Statuses that change maximum stamina or magicka.
     """
-    def __init__(self, status_id, resource_id, sign_factor):
+    def __init__(self, status_id, description, resource_id, sign_factor):
         """
         Initialize a new ModifyMaxResourceStatus.
         """
-        super().__init__(status_id, True)
+        super().__init__(status_id, description, True)
         self.resource_id = resource_id
         self.sign_factor = sign_factor
 
@@ -172,11 +175,11 @@ class ModifyDrawStatus(Status):
     """
     Statuses that affect the number of cards drawn per turn.
     """
-    def __init__(self, status_id, sign_factor):
+    def __init__(self, status_id, description, sign_factor):
         """
         Initialize a new DrawStatus
         """
-        super().__init__(status_id, True)
+        super().__init__(status_id, description, True)
         self.sign_factor = sign_factor
 
     def trigger_on_change(self, subject, level):
@@ -192,11 +195,11 @@ class ModifyDamageStatus(Status):
     """
     Stasuses that affect the amount of damage taken.
     """
-    def __init__(self, status_id, damage_type, sign_factor):
+    def __init__(self, status_id, description, damage_type, sign_factor):
         """
         Initialize a new ModifyDamageStatus.
         """
-        super().__init__(status_id, True)
+        super().__init__(status_id, description, True)
         self.damage_type = damage_type
         self.sign_factor = sign_factor
 
@@ -213,11 +216,11 @@ class DefenseStatus(Status):
     """
     This status blocks incoming damage.
     """
-    def __init__(self, status_id):
+    def __init__(self, status_id, description):
         """
         Initialize a new DefenseStatus.
         """
-        super().__init__(status_id, False)
+        super().__init__(status_id, description, False)
 
     def calculate_net_damage(
             self, subject, level, incoming_damage, status_registry
@@ -238,11 +241,11 @@ class PoisonStatus(Status):
     """
     This status deals Poison Damage at the start of each turn.
     """
-    def __init__(self, status_id):
+    def __init__(self, status_id, description):
         """
         Initialize a new PoisonStatus.
         """
-        super().__init__(status_id, False)
+        super().__init__(status_id, description, False)
 
     def trigger_on_turn(self, subject, level, status_registry):
         """
@@ -256,11 +259,11 @@ class RegenerationStatus(Status):
     """
     This status restores health at the start of each turn.
     """
-    def __init__(self, status_id):
+    def __init__(self, status_id, description):
         """
         Initialize a new RegenerationStatus.
         """
-        super().__init__(status_id, False)
+        super().__init__(status_id, description, False)
 
     def trigger_on_turn(self, subject, level, status_registry):
         subject.change_resource(c.Resources.HEALTH.name, level)
@@ -270,11 +273,11 @@ class EvasionStatus(Status):
     """
     This status randomly prevents all or zero incoming damage.
     """
-    def __init__(self, status_id):
+    def __init__(self, status_id, description):
         """
         Initialize a new EvasionStatus.
         """
-        super().__init__(status_id, False)
+        super().__init__(status_id, description, False)
 
     def calculate_evasion_damage(self, level, incoming_damage) -> int:
         """
@@ -290,11 +293,11 @@ class CriticalHitStatus(Status):
     """
     This status randomly causes the subject to deal double damage.
     """
-    def __init__(self, status_id):
+    def __init__(self, status_id, description):
         """
         Initialize a new CriticalHitStatus.
         """
-        super().__init__(status_id, False)
+        super().__init__(status_id, description, False)
 
     def calculate_damage_multiplier(self, level) -> int:
         """
@@ -310,11 +313,11 @@ class RestrictCardTypeStatus(Status):
     """
     This status prevents the subject from playing certain tyoes of cards.
     """
-    def __init__(self, status_id, restricted_types):
+    def __init__(self, status_id, description, restricted_types):
         """
         Initialize a new RestrictCardStatus.
         """
-        super().__init__(status_id, True)
+        super().__init__(status_id, description, True)
         self.restricted_types = restricted_types
 
     def is_card_playable(self, card_type) -> bool:
@@ -328,11 +331,11 @@ class FilterEffectStatus(Status):
     """
     This status allows only certain effects to resolve.
     """
-    def __init__(self, status_id, allowed_effect, blocked_effect):
+    def __init__(self, status_id, description, allowed_effect, blocked_effect):
         """
         Initialize a new FilterEffectStatus.
         """
-        super().__init__(status_id, False)
+        super().__init__(status_id, description, False)
         self.allowed_effect = allowed_effect
         self.blocked_effect = blocked_effect
 
@@ -352,11 +355,11 @@ class LimitCardPlayStatus(Status):
     This status prevents a combatant from playing more than a certain number of
     cards per turn.
     """
-    def __init__(self, status_id, max_cards_per_turn):
+    def __init__(self, status_id, description, max_cards_per_turn):
         """
         Initialize a new LimitCardPlayStatus.
         """
-        super().__init__(status_id, False)
+        super().__init__(status_id, description, False)
         self.card_limit = max_cards_per_turn
 
 
@@ -364,11 +367,11 @@ class BlockMagicStatus(Status):
     """
     This type of status blocks incoming non-physical damage and redirects it.
     """
-    def __init__(self, status_id):
+    def __init__(self, status_id, description):
         """
         Initialize a new BlockMagicStatus.
         """
-        super().__init__(status_id, False)
+        super().__init__(status_id, description, False)
 
     def calculate_block(self, damage_amount, damage_type, status_level):
         """
@@ -386,11 +389,11 @@ class AverageCostStatus(Status):
     """
     This status averages the costs of cards in hand.
     """
-    def __init__(self, status_id):
+    def __init__(self, status_id, description):
         """
         Initialize a new AverageCostStatus.
         """
-        super().__init__(status_id, True)
+        super().__init__(status_id, description, True)
 
     def trigger_on_change(self, subject, level):
         """
@@ -411,6 +414,65 @@ class AverageCostStatus(Status):
         """
         for card in subject.card_manager.hand:
             card.reset_override_cost()
+
+
+class FlagStatus(Status):
+    """
+    This type of status does something just by being present and has no other
+    behavior.
+    """
+    def __init__(self, status_id, description):
+        """
+        Initialize a new FlagStatus.
+        """
+        super().__init__(status_id, description, False)
+
+
+class MulliganStatus(Status):
+    """
+    This status allows the player to discard and redraw at the start of their
+    turn.
+    """
+    def __init__(self, status_id, description):
+        """
+        Initialize a new MulliganStatus.
+        """
+        super().__init__(status_id, description, False)
+
+    def do_redraw(self, subject, level, text_interface):
+        """
+        Prompt the user to discard cards, then draw that many cards.
+        """
+        if subject.is_enemy:
+            return
+        
+        discard_selection = text_interface.discard_prompt(
+            len(subject.card_manager.hand), level, True
+            )
+        discard_selection.sort(reverse=True)
+        cards_discarded = 0
+        for card_index in discard_selection:
+            card = subject.card_manager.hand[card_index]
+            subject.card_manager.discard(card)
+            cards_discarded += 1
+        subject.card_manager.draw(cards_discarded)
+
+
+class ReturnFromDiscardStatus(Status):
+    """
+    This status allows the subject to draw from their discard pile.
+    """
+    def __init__(self, status_id, description):
+        """
+        Initialize a new ReturnFromDiscardStatus.
+        """
+        super().__init__(status_id, description, False)
+
+    def draw_from_discard(self, subject, level, text_interface):
+        hand_size = subject.modifier_manager.calculate_cards_to_draw()
+        max_cards = min(hand_size, level)
+        while len(subject.card_manager.hand) < max_cards:
+            selection = text_interface.return_from_discard_prompt()
 
 
 class StatusRegistry:
@@ -444,7 +506,10 @@ class StatusRegistry:
             "FilterEffectStatus": FilterEffectStatus,
             "LimitCardPlayStatus": LimitCardPlayStatus,
             "BlockMagicStatus": BlockMagicStatus,
-            "AverageCostStatus": AverageCostStatus
+            "AverageCostStatus": AverageCostStatus,
+            "FlagStatus": FlagStatus,
+            "MulliganStatus": MulliganStatus,
+            "ReturnFromDiscardStatus": ReturnFromDiscardStatus
             }
 
         statuses = {}

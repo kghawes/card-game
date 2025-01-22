@@ -84,7 +84,10 @@ class CombatManager:
         """
         Discard hand and decrement active status levels.
         """
-        combatant.card_manager.discard_hand(combatant, status_registry)
+        if not combatant.status_manager.has_status(
+                c.StatusNames.SLOWFALLING, combatant, status_registry
+                ):
+            combatant.card_manager.discard_hand(combatant, status_registry)
         combatant.status_manager.decrement_statuses(
             combatant, status_registry
             )

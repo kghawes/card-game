@@ -77,6 +77,9 @@ class CardManager:
         """
         Move the card from the hand to the discard pile.
         """
+        if card not in self.hand:
+            return
+        
         card.reset_card()
         if card.matches(c.CardTypes.CONSUMABLE.name):
             self.consumed_pile.append(card)
