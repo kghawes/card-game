@@ -48,7 +48,9 @@ class CombatManager:
         Prepare for the player to take their turn then handle any actions they
         perform.
         """
-        if self.beginning_of_turn(player, enemy, registries.statuses):
+        if self.beginning_of_turn(
+                player, enemy, registries, text_interface
+                ):
             return
         turn_ended = False
         while not turn_ended and not self.is_combat_over(player, enemy):
@@ -58,23 +60,27 @@ class CombatManager:
                 )
         self.end_of_turn(player, registries.statuses)
 
-    def beginning_of_turn(self, combatant, opponent, status_registry) -> bool:
+    def beginning_of_turn(
+            self, combatant, opponent, registries, text_interface
+            ) -> bool:
         """
         Handle resetting resources, triggering statuses, and drawing cards.
         Returns whether combat ended during the beginning phase.
         """
         combatant.reset_for_turn()
 
-        combatant.card_manager.draw_hand(combatant, status_registry)
+        combatant.card_manager.draw_hand(
+            combatant, registries, text_interface
+            )
 
         combatant.status_manager.trigger_statuses_on_turn(
-            combatant, status_registry
+            combatant, registries.statuses
             )
         if self.is_combat_over(combatant, opponent):
             return True
 
         combatant.modifier_manager.recalculate_all_effects(
-            status_registry, combatant.card_manager
+            registries.statuses, combatant.card_manager
             )
 
         combatant.replenish_resources_for_turn()
@@ -85,7 +91,7 @@ class CombatManager:
         Discard hand and decrement active status levels.
         """
         if not combatant.status_manager.has_status(
-                c.StatusNames.SLOWFALLING, combatant, status_registry
+                c.StatusNames.SLOWFALLING.name, combatant, status_registry
                 ):
             combatant.card_manager.discard_hand(combatant, status_registry)
         combatant.status_manager.decrement_statuses(
@@ -137,7 +143,9 @@ class CombatManager:
                 combatant, opponent, level, status_registry=registries.statuses
                 )
 
-        combatant.card_manager.discard(card, combatant, registries.statuses)
+        combatant.card_manager.discard(
+            card, combatant, registries.statuses, True
+            )
 
         text_interface.send_message(c.CARD_PLAYED_MESSAGE.format(
             combatant.name, card.name, opponent.name, opponent.get_health())
@@ -184,7 +192,9 @@ class CombatManager:
         """
         Process enemy actions.
         """
-        self.beginning_of_turn(enemy, player, registries.statuses)
+        self.beginning_of_turn(
+            enemy, player, registries, text_interface
+            )
         playable_card_exists = True
         while playable_card_exists and not self.is_combat_over(player, enemy):
             playable_card_exists = False

@@ -439,7 +439,7 @@ class MulliganStatus(Status):
         """
         super().__init__(status_id, description, False)
 
-    def do_redraw(self, subject, level, text_interface):
+    def do_redraw(self, subject, level, text_interface, registries):
         """
         Prompt the user to discard cards, then draw that many cards.
         """
@@ -447,15 +447,17 @@ class MulliganStatus(Status):
             return
         
         discard_selection = text_interface.discard_prompt(
-            len(subject.card_manager.hand), level, True
+            subject, level, True, registries.effects
             )
         discard_selection.sort(reverse=True)
         cards_discarded = 0
         for card_index in discard_selection:
             card = subject.card_manager.hand[card_index]
-            subject.card_manager.discard(card)
+            subject.card_manager.discard(card, subject, registries.statuses)
             cards_discarded += 1
-        subject.card_manager.draw(cards_discarded)
+        subject.card_manager.draw(
+            subject, registries.statuses, cards_discarded
+            )
 
 
 class ReturnFromDiscardStatus(Status):
@@ -468,11 +470,23 @@ class ReturnFromDiscardStatus(Status):
         """
         super().__init__(status_id, description, False)
 
-    def draw_from_discard(self, subject, level, text_interface):
-        hand_size = subject.modifier_manager.calculate_cards_to_draw()
-        max_cards = min(hand_size, level)
-        while len(subject.card_manager.hand) < max_cards:
-            selection = text_interface.return_from_discard_prompt()
+    def draw_from_discard(
+            self, subject, level, text_interface, status_registry
+            ) -> int:
+        """
+        Move player selected cards from discard to hand and return the number
+        of cards moved.
+        """
+        count = 0
+        selection = text_interface.return_from_discard_prompt(
+            subject.card_manager.discard_pile, level
+            )
+        selection.sort(reverse=True)
+        for card_index in selection:
+            subject.card_manager.undiscard(
+                card_index, subject, status_registry
+                )
+            count += 1
 
 
 class StatusRegistry:

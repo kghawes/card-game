@@ -35,12 +35,13 @@ class CardManager:
         """
         random.shuffle(self.deck)
 
-    def draw(self, subject, status_registry, cards_to_draw=1) -> bool:
+    def draw(self, subject, status_registry, cards_to_draw=1):
         """
         Draw the indicated number of cards, shuffling the discard pile back
-        into the deck if necessary. Return False if the max hand size was met
-        or True if all cards were able to be drawn.
+        into the deck if necessary.
         """
+        if cards_to_draw == 0:
+            return
         while cards_to_draw > 0:
             if len(self.hand) >= c.MAX_HAND_SIZE:
                 break
@@ -53,7 +54,12 @@ class CardManager:
             card = self.deck.pop(0)
             self.hand.append(card)
             cards_to_draw -= 1
+        self.recalculate_for_new_card(subject, status_registry)
 
+    def recalculate_for_new_card(self, subject, status_registry):
+        """
+        Recalculate modifiers and costs when a card is added to the hand.
+        """
         modifier_manager = subject.modifier_manager
         modifier_manager.recalculate_all_costs(status_registry, self)
         modifier_manager.recalculate_all_effects(status_registry, self)
@@ -64,27 +70,47 @@ class CardManager:
                 subject, status_manager.get_status_level(levitate)
                 )
 
-    def draw_hand(self, subject, status_registry):
+    def draw_hand(self, subject, registries, text_interface):
         """
         Draw the appropriate number of cards at the beginning of a turn.
         """
-        self.draw(
-            subject, status_registry,
-            subject.modifier_manager.calculate_cards_to_draw()
-            )
+        cards_to_draw = subject.modifier_manager.calculate_cards_to_draw()
+        
+        wb = c.StatusNames.WATER_BREATHING.name
+        if subject.status_manager.has_status(wb, subject, registries.statuses):
+            wb_status = registries.statuses.get_status(wb)
+            wb_level = subject.status_manager.get_status_level(wb)
+            cards_to_draw -= wb_status.draw_from_discard(
+                subject, wb_level, text_interface, registries.statuses
+                )
 
-    def discard(self, card, subject, status_registry):
+        self.draw(subject, registries.statuses, cards_to_draw)
+        
+        ss = c.StatusNames.SWIFT_SWIM.name
+        if subject.status_manager.has_status(ss, subject, registries.statuses):
+            ss_status = registries.statuses.get_status(ss)
+            ss_level = subject.status_manager.get_status_level(ss)
+            ss_status.do_redraw(
+                subject, ss_level, text_interface, registries
+                )
+
+    def discard(self, card, subject, status_registry, is_being_played=False):
         """
-        Move the card from the hand to the discard pile.
+        Move the card from the hand to the discard pile, consumed pile, or
+        deck.
         """
         if card not in self.hand:
             return
         
         card.reset_card()
-        if card.matches(c.CardTypes.CONSUMABLE.name):
-            self.consumed_pile.append(card)
+        if card.matches(c.CardTypes.CONSUMABLE.name) and is_being_played:
+            self.consumed_pile.insert(0, card)
+        elif subject.status_manager.has_status(
+                c.StatusNames.WATER_WALKING.name, subject, status_registry
+                ) and is_being_played:
+            self.deck.insert(0, card)
         else:
-            self.discard_pile.append(card)
+            self.discard_pile.insert(0, card)
         self.hand.remove(card)
         
         status_manager = subject.status_manager
@@ -109,6 +135,16 @@ class CardManager:
         """
         while len(self.hand) > 0:
             self.discard(self.hand[0], subject, status_registry)
+
+    def undiscard(self, card_index, subject, status_registry):
+        """
+        Move a card from the discard pile to the hand.
+        """
+        hand_size = subject.modifier_manager.calculate_cards_to_draw()
+        assert self.discard_pile and len(self.hand) < hand_size
+        card = self.discard_pile.pop(card_index)
+        self.hand.append(card)
+        self.recalculate_for_new_card(subject, status_registry)
 
     def reset_consumed_cards(self):
         """
