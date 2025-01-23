@@ -42,8 +42,8 @@ class Game:
         self.town.enter_town(self.text_interface)
         self.text_interface.send_message(c.SPLASH_MESSAGE)
         self.player.name = "KK" #self.text_interface.name_prompt()
-        
-        #*********************************************************************#
+
+        #***************************CARD**ANALYSIS****************************#
         weapons = []
         armors = []
         combat_skills = []

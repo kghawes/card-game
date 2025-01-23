@@ -113,7 +113,6 @@ Items
 Scrolls
 Skills
 Spells
-  Maybe make some generic spells?
 Conjured cards
 
 Effects
@@ -243,7 +242,7 @@ Frenzy X
 Calm X
   Cards you play deal 0 damage for X turns.
 Commanded X
-  Your turn is controlled by your opponent. Lasts X turns.
+  Your turn is controlled by your opponent. Lasts X turns. - ?
 Reflect X
   When your opponent deals elemental damage (fire, frost, shock, poison) to you, you take (0.9)^X times damage and your opponent takes damage of the same type equal to the damage blocked.
 Spell absorption
