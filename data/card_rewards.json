@@ -1,12 +1,12 @@
 {
   "WEAK_BEAST": {
-    "FURY": 10,
+    "FURY": 15,
     "PREPAREDNESS": 10,
     "ATHLETICS": 10,
     "ACROBACY": 10,
     "DISGUISE": 10,
-    "DODGE": 10,
-    "FOCUS": 10,
+    "DODGE": 15,
+    "FOCUS": 15,
     "NOVICE_ALCHEMIST": 10,
     "NOVICE_ENCHANTER": 10,
     "DISTRACTION_RING": 1,

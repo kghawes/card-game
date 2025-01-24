@@ -96,7 +96,7 @@
     }
   },
   "CULTIST": {
-    "name": "Cultist",
+    "name": "Daedra Worshipper",
     "max_health": 10,
     "max_stamina": 3,
     "max_magicka": 3,
