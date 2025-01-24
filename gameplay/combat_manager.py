@@ -171,7 +171,7 @@ class CombatManager:
 
         if card.subtype in c.ALLOWED_TYPES["ALL"] or \
             card.subtype in c.ALLOWED_TYPES[combatant.character_class]:
-                return True
+            return True
         return False
 
     def effect_can_resolve(

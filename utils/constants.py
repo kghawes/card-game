@@ -160,7 +160,7 @@ class StatusNames(Enum):
     FORTIFY_RESTORATION = "Fortify Restoration"
 
 
-class Merchant_probabilities(Enum):
+class MerchantProbabilities(Enum):
     """
     The probability for a card of the given type to appear in the shop.
     """

@@ -3,12 +3,12 @@ This module contains the game data and game loop.
 """
 from gameplay.combat_manager import CombatManager
 from gameplay.town import Town
+from gameplay.treasure import CardRewards
 from core.registries import Registries
 from core.cards import CardCache
 from core.enemies import EnemyCache
 from core.player import Player
 from utils.text_interface import TextInterface
-from gameplay.treasure import CardRewards
 import utils.constants as c
 
 class Game:
@@ -60,7 +60,7 @@ class Game:
         consumables = []
         for card in self.card_cache.card_prototypes.values():
             if card.value == 0:
-                    continue
+                continue
             if card.card_type == c.CardTypes.WEAPON.name:
                 weapons.append(card)
                 continue

@@ -173,7 +173,7 @@ class TextInterface:
         Prompt the user for a list of cards to discard and redraw.
         """
         if count <= 0:
-            return
+            return []
 
         self.display_hand(player, effect_registry)
         print()
@@ -192,7 +192,7 @@ class TextInterface:
             if (is_optional and len(selected_indices) > count) or \
                 (not is_optional and len(selected_indices) != count) or \
                     len(selected_indices) <= 0:
-                    continue
+                continue
             try:
                 hand = player.card_manager.hand
                 indices = self.get_card_indices(selected_indices, len(hand)-1)
@@ -227,7 +227,7 @@ class TextInterface:
         selection = []
         if count <= 0 or len(discard_pile) <= 0:
             return selection
-        if count >= len(discard_pile) and count <= c.MAX_HAND_SIZE:
+        if len(discard_pile) <= count <= c.MAX_HAND_SIZE:
             return discard_pile
         print("Discard Pile:")
         for idx, card in enumerate(discard_pile):

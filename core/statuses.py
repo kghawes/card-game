@@ -445,7 +445,7 @@ class MulliganStatus(Status):
         """
         if subject.is_enemy:
             return
-        
+
         discard_selection = text_interface.discard_prompt(
             subject, level, True, registries.effects
             )

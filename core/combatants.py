@@ -77,7 +77,7 @@ class Combatant:
         """
         if amount <= 0:
             return
-        
+
         hidden = s.HIDDEN.name
         if attacker.status_manager.has_status(
                 hidden, attacker, status_registry
@@ -86,12 +86,12 @@ class Combatant:
             hidden_status = status_registry.get_status(hidden)
             mult = hidden_status.calculate_damage_multiplier(hidden_level)
             amount *= mult
-        
+
         amount = self.modifier_manager.calculate_damage(damage_type, amount)
-        
+
         if amount <= 0:
             return
-        
+
         if damage_type == d.PHYSICAL.name:
             defense = s.DEFENSE.name
             if self.status_manager.has_status(defense, self, status_registry):
@@ -139,7 +139,7 @@ class Combatant:
                 self.status_manager.change_status(
                     fortify_int, absorbed_amount, self, status_registry
                     )
-        
+
         health = self.resources[r.HEALTH.name]
         health.change_value(-amount, self.modifier_manager)
 

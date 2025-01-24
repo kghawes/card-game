@@ -75,7 +75,7 @@ class CardManager:
         Draw the appropriate number of cards at the beginning of a turn.
         """
         cards_to_draw = subject.modifier_manager.calculate_cards_to_draw()
-        
+
         wb = c.StatusNames.WATER_BREATHING.name
         if subject.status_manager.has_status(wb, subject, registries.statuses):
             wb_status = registries.statuses.get_status(wb)
@@ -85,7 +85,7 @@ class CardManager:
                 )
 
         self.draw(subject, registries.statuses, cards_to_draw)
-        
+
         ss = c.StatusNames.SWIFT_SWIM.name
         if subject.status_manager.has_status(ss, subject, registries.statuses):
             ss_status = registries.statuses.get_status(ss)
@@ -101,7 +101,7 @@ class CardManager:
         """
         if card not in self.hand:
             return
-        
+
         card.reset_card()
         if card.matches(c.CardTypes.CONSUMABLE.name) and is_being_played:
             self.consumed_pile.insert(0, card)
@@ -112,7 +112,7 @@ class CardManager:
         else:
             self.discard_pile.insert(0, card)
         self.hand.remove(card)
-        
+
         status_manager = subject.status_manager
         levitate = c.StatusNames.LEVITATE.name
         if status_manager.has_status(levitate, subject, status_registry):

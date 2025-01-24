@@ -9,7 +9,9 @@ class Enchantment:
     Represents a generic enchantment which adds effects to cards.
     """
     def __init__(self, enchantment_id, name, effects_dict, value_multiplier):
-        """Initialize a new Enchantment."""
+        """
+        Initialize a new Enchantment.
+        """
         self.enchantment_id = enchantment_id
         self.name = name
         self.effects_dict = deepcopy(effects_dict)

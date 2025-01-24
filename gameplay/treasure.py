@@ -40,5 +40,11 @@ class Treasure:
 
 
 class CardRewards:
+    """
+    This class holds the data for loot tables.
+    """
     def __init__(self, path):
+        """
+        Initialize a new CardRewards.
+        """
         self.card_groups = load_json(path)

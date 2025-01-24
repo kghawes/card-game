@@ -22,11 +22,16 @@ class Prototype(ABC):
     """
     @abstractmethod
     def clone(self):
-        """Create an object based on the prototype."""
+        """
+        Create an object based on the prototype.
+        """
         pass
 
+    @staticmethod
     def load_prototypes(filename, required_fields, prototype_class) -> dict:
-        """Turn the data in a JSON file into a collection of prototypes."""
+        """
+        Turn the data in a JSON file into a collection of prototypes.
+        """
         data = load_json(filename)
 
         prototypes = {}
