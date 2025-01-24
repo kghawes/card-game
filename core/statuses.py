@@ -449,6 +449,8 @@ class MulliganStatus(Status):
         discard_selection = text_interface.discard_prompt(
             subject, level, True, registries.effects
             )
+        if not discard_selection:
+            return
         discard_selection.sort(reverse=True)
         cards_discarded = 0
         for card_index in discard_selection:
@@ -481,6 +483,8 @@ class ReturnFromDiscardStatus(Status):
         selection = text_interface.return_from_discard_prompt(
             subject.card_manager.discard_pile, level
             )
+        if not selection:
+            return
         selection.sort(reverse=True)
         for card_index in selection:
             subject.card_manager.undiscard(

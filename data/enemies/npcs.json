@@ -38,6 +38,24 @@
       "cards": "OUTLAW"
     }
   },
+  "RINGLEADER": {
+    "name": "Ringleader",
+    "max_health": 12,
+    "max_stamina": 5,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "ORCISH_BOW", "quantity": 5},
+      {"card": "ORCISH_BOW_(SPARKARROWS)", "quantity": 4},
+      {"card": "ADAMANTIUM_LONGSWORD", "quantity": 3},
+      {"card": "ORCISH_TOWER_SHIELD", "quantity": 2},
+      {"card": "STEEL_SHIELD", "quantity": 2}
+    ],
+    "loot": {
+      "gold": [25, 50],
+      "exp": 15,
+      "cards": "BOSS_OUTLAW"
+    }
+  },
   "ASSASSIN": {
     "name": "Assassin",
     "max_health": 7,
@@ -77,22 +95,30 @@
       "cards": "BOSS_OUTLAW"
     }
   },
-  "RINGLEADER": {
-    "name": "Ringleader",
-    "max_health": 12,
-    "max_stamina": 5,
-    "max_magicka": 0,
+  "CULTIST": {
+    "name": "Cultist",
+    "max_health": 10,
+    "max_stamina": 3,
+    "max_magicka": 3,
     "deck": [
-      {"card": "ORCISH_BOW", "quantity": 5},
-      {"card": "ORCISH_BOW_(SPARKARROWS)", "quantity": 4},
-      {"card": "ADAMANTIUM_LONGSWORD", "quantity": 3},
-      {"card": "ORCISH_TOWER_SHIELD", "quantity": 2},
-      {"card": "STEEL_SHIELD", "quantity": 2}
+      {"card": "STEEL_LONGSWORD", "quantity": 2},
+      {"card": "ORCISH_LONGSWORD", "quantity": 2},
+      {"card": "ORCISH_BOOTS", "quantity": 2},
+      {"card": "ORCISH_HELM", "quantity": 2},
+      {"card": "CHEAP_POTION_STAMINA", "quantity": 1},
+      {"card": "CHEAP_POTION_MAGICKA", "quantity": 1},
+      {"card": "CHEAP_POTION_HEALTH", "quantity": 1},
+      {"card": "TAUNT", "quantity": 1},
+      {"card": "FIREBALL", "quantity": 1},
+      {"card": "SANCTUARY", "quantity": 1},
+      {"card": "RING_MEDUSAS_GAZE", "quantity": 1},
+      {"card": "BELT_IRON_WILL", "quantity": 1},
+      {"card": "SCROLL_BLACK_WEAKNESS", "quantity": 1},
     ],
     "loot": {
-      "gold": [25, 50],
+      "gold": [10, 30],
       "exp": 15,
-      "cards": "BOSS_OUTLAW"
+      "cards": "CULTIST"
     }
   }
 }

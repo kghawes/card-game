@@ -177,15 +177,17 @@ class TextInterface:
 
         self.display_hand(player, effect_registry)
         print()
-        prompt = "List{} {} cards to discard."
+        prompt = "List{} {} cards to discard.{}"
         if is_optional:
-            prompt = prompt.format(" up to", count)
+            prompt = prompt.format(" up to", count, " (SKIP to skip this)")
         else:
-            prompt = prompt.format("", count)
+            prompt = prompt.format("", count, "")
         indices = []
         while True:
             print(prompt)
             response = input(">  ")
+            if response.strip().upper() == "SKIP" and is_optional:
+                return []
             selected_indices = [idx.strip() for idx in response.split(",")]
             if (is_optional and len(selected_indices) > count) or \
                 (not is_optional and len(selected_indices) != count) or \
@@ -196,7 +198,6 @@ class TextInterface:
                 indices = self.get_card_indices(selected_indices, len(hand)-1)
                 break
             except IndexError:
-                print("TEST: discard_prompt raised IndexError.")
                 continue
         return indices
 
@@ -232,10 +233,13 @@ class TextInterface:
         for idx, card in enumerate(discard_pile):
             print(f"{idx}. {card.name}")
         while True:
-            print(f"Select up to {count} cards to return to your hand:")
+            print(f"Select up to {count} cards to return to your hand (SKIP to skip this):")
             response = input(">  ")
+            if response.strip().upper() == "SKIP":
+                return []
             selected_indices = response.split(",")
-            if len(selected_indices) > min(count, c.MAX_HAND_SIZE):
+            if len(selected_indices) > min(count, c.MAX_HAND_SIZE) or \
+                len(selected_indices) <= 0:
                 continue
             max_index = len(discard_pile) - 1
             try:
