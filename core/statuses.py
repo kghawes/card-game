@@ -484,13 +484,14 @@ class ReturnFromDiscardStatus(Status):
             subject.card_manager.discard_pile, level
             )
         if not selection:
-            return
+            return 0
         selection.sort(reverse=True)
         for card_index in selection:
             subject.card_manager.undiscard(
                 card_index, subject, status_registry
                 )
             count += 1
+        return count
 
 
 class StatusRegistry:

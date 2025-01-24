@@ -113,7 +113,7 @@
       {"card": "SANCTUARY", "quantity": 1},
       {"card": "RING_MEDUSAS_GAZE", "quantity": 1},
       {"card": "BELT_IRON_WILL", "quantity": 1},
-      {"card": "SCROLL_BLACK_WEAKNESS", "quantity": 1},
+      {"card": "SCROLL_BLACK_WEAKNESS", "quantity": 1}
     ],
     "loot": {
       "gold": [10, 30],
