@@ -23,7 +23,7 @@ class TextInterface:
         response = ""
         while not response or len(response) > c.MAX_NAME_LENGTH:
             print(c.PROMPT_NAME)
-            response = input(">  ")
+            response = self.get_input(False)
         return response
 
     def level_up_prompt(self, player) -> str:
@@ -34,7 +34,7 @@ class TextInterface:
         response = ""
         while True:
             print("Increase HEALTH, STAMINA, or MAGICKA?")
-            response = input(">  ").upper()
+            response = self.get_input()
             if response in player.resources:
                 return response
 
@@ -78,7 +78,7 @@ class TextInterface:
 
         while True:
             print(c.PROMPT_TURN_OPTIONS)
-            response = input(">  ").strip()
+            response = self.get_input(False)
 
             if response.startswith('/'):
                 command, *args = response[1:].split(' ', 1)
@@ -185,8 +185,8 @@ class TextInterface:
         indices = []
         while True:
             print(prompt)
-            response = input(">  ")
-            if response.strip().upper() == "SKIP" and is_optional:
+            response = self.get_input()
+            if response == "SKIP" and is_optional:
                 return []
             selected_indices = [idx.strip() for idx in response.split(",")]
             if (is_optional and len(selected_indices) > count) or \
@@ -234,8 +234,8 @@ class TextInterface:
             print(f"{idx}. {card.name}")
         while True:
             print(f"Select up to {count} cards to return to your hand (SKIP to skip this):")
-            response = input(">  ")
-            if response.strip().upper() == "SKIP":
+            response = self.get_input()
+            if response == "SKIP":
                 return []
             selected_indices = response.split(",")
             if len(selected_indices) > min(count, c.MAX_HAND_SIZE) or \
@@ -265,14 +265,14 @@ class TextInterface:
         print()
         while True:
             print("Keep this card? (Y/N)")
-            response = input(">  ").upper().strip()
+            response = self.get_input()
             if response not in ("Y", "N"):
                 continue
             if response == "Y":
                 return True
             if response == "N":
                 print("Are you sure you want to leave this card? (Y/N)")
-                confirmation = input(">  ").upper().strip()
+                confirmation = self.get_input()
                 if confirmation not in ("Y", "N") or confirmation == "N":
                     continue
                 if confirmation == "Y":
@@ -284,3 +284,73 @@ class TextInterface:
         """
         print(f"You found {gold} gold!")
         print(f"You got {exp} experience points!")
+
+    def get_input(self, upper=True) -> str:
+        """
+        Prompt the user for input and prepare it for parsing.
+        """
+        response = input(">  ").strip()
+        if upper:
+            response = response.upper()
+        return response
+
+    def parse_numeric_input(self, response, min_value, max_value) -> (bool, int):
+        """
+        Parse player input as an int and return a success flag.
+        """
+        num = -1
+        success = False
+        if response.isdigit():
+            num = int(response)
+            if min_value <= num <= max_value:
+                success = True
+        return success, num
+
+    def town_options_prompt(self) -> int:
+        """
+        Display the options in town and get player input.
+        """
+        for idx, option_text in enumerate(c.TOWN_OPTIONS):
+            print(f"{idx}. {option_text}")
+        print("Enter a number to select from the menu above.")
+        while True:
+            response = self.get_input()
+            is_valid_selection, selection = self.parse_numeric_input(
+                response, 0, len(c.TOWN_OPTIONS)
+                )
+            if is_valid_selection:
+                return selection
+
+    def library_options_prompt(self) -> str:
+        """
+        Display the library main menu and get player input.
+        """
+        print("Welcome to your personal card library.")
+        print("Type LIBRARY to view your library and withdraw cards.")
+        print("Type DECK to view your deck and deposit cards.")
+        while True:
+            response = self.get_input()
+            if response in "LIBRARY":
+                return "LIBRARY"
+            if response in "DECK":
+                return "DECK"
+
+    def storage_options_prompt(self, library) -> int:
+        """
+        Display the library stored cards and options and get player input.
+        """
+        for idx, card in enumerate(library.stored_cards):
+            print(f"{idx}. {card.name}")
+        print("Enter a number to select a card to inspect or withdraw.")
+        while True:
+            response = self.get_input()
+            is_valid_selection, selection = self.parse_numeric_input(
+                response, 0, len(library.stored_cards)
+                )
+            if is_valid_selection:
+                return selection
+
+    def display_stored_card(self, card, library) -> bool:
+        """
+        Print the details of the card and return whether to withdraw the card.
+        """

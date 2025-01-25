@@ -172,6 +172,13 @@ class MerchantProbabilities(Enum):
     CONSUMABLE = 0.04
 
 
+# Town options menu
+TOWN_OPTIONS = [
+    "Go to personal library (card storage)",
+    "Go to card merchant",
+    "Proceed to next quest"
+    ]
+
 # Minimum values
 MIN_RESOURCE = 0
 MIN_EFFECT = 1
@@ -191,6 +198,8 @@ MAX_NAME_LENGTH = 20
 HAND_SIZE = 6
 MIN_HAND_SIZE = 2
 MAX_HAND_SIZE = 12
+MIN_DECK_SIZE = 10
+MAX_DECK_SIZE = 50
 NORMAL_CARD_REWARD = 30#
 BOSS_CARD_REWARD = 2
 BOSS_ID = "BOSS"
@@ -207,7 +216,7 @@ ALLOWED_TYPES = {
         "POTION",
         DEFAULT_SUBTYPE
         ],
-    "FIGHTER": [ 
+    "FIGHTER": [
         "LONG_BLADE",
         "BLUNT_WEAPON",
         "HEAVY",
