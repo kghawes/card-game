@@ -254,14 +254,7 @@ class TextInterface:
         Prompt the user to take or leave the card.
         """
         print(f"You got {card.name}!")
-        card_type_string = card.card_type
-        if card.subtype:
-            card_type_string += f" [{card.subtype}]"
-        print(f"({card_type_string} - Cost: {card.get_cost()} - Value: {card.value}g)")
-        for effect_id, effect_level in card.effects.items():
-            effect = effect_registry.get_effect(effect_id)
-            level = effect_level.get_level()
-            print(f"* {effect.name} {level} *")
+        self.display_card_details(card, effect_registry)
         print()
         while True:
             print("Keep this card? (Y/N)")
@@ -277,6 +270,19 @@ class TextInterface:
                     continue
                 if confirmation == "Y":
                     return False
+
+    def display_card_details(self, card, effect_registry):
+        """
+        Display the information for a card.
+        """
+        card_type_string = card.card_type
+        if card.subtype:
+            card_type_string += f" [{card.subtype}]"
+        print(f"{card.name} ({card_type_string} - Cost: {card.get_cost()} - Value: {card.value}g)")
+        for effect_id, effect_level in card.effects.items():
+            effect = effect_registry.get_effect(effect_id)
+            level = effect_level.get_level()
+            print(f"* {effect.name} {level} *")
 
     def rewards_message(self, gold, exp):
         """
@@ -321,7 +327,7 @@ class TextInterface:
             if is_valid_selection:
                 return selection
 
-    def library_options_prompt(self) -> str:
+    def library_options_prompt(self, options) -> str:
         """
         Display the library main menu and get player input.
         """
@@ -330,27 +336,50 @@ class TextInterface:
         print("Type DECK to view your deck and deposit cards.")
         while True:
             response = self.get_input()
-            if response in "LIBRARY":
-                return "LIBRARY"
-            if response in "DECK":
-                return "DECK"
+            for option in options:
+                if response in option:
+                    return option
 
-    def storage_options_prompt(self, library) -> int:
+    def storage_options_prompt(self, stored_cards) -> int:
         """
         Display the library stored cards and options and get player input.
         """
-        for idx, card in enumerate(library.stored_cards):
+        for idx, card in enumerate(stored_cards):
             print(f"{idx}. {card.name}")
         print("Enter a number to select a card to inspect or withdraw.")
         while True:
             response = self.get_input()
             is_valid_selection, selection = self.parse_numeric_input(
-                response, 0, len(library.stored_cards)
+                response, 0, len(stored_cards)
                 )
             if is_valid_selection:
                 return selection
 
-    def display_stored_card(self, card, library) -> bool:
+    def display_library_card(
+            self, card, can_move, is_in_storage, effect_registry
+            ) -> bool:
         """
         Print the details of the card and return whether to withdraw the card.
         """
+        move_prompt = ""
+        if is_in_storage:
+            move_prompt = "Withdraw this card and add it to your deck? (Y/N)"
+        else:
+            move_prompt = "Deposit this card and remove it from your deck? (Y/N)"
+        self.display_card_details(card, effect_registry)
+        while True:
+            if can_move:
+                print(move_prompt)
+                while True:
+                    response = self.get_input()
+                    if response == "Y":
+                        return True
+                    if response == "N":
+                        break
+            print("Return to library? (Y/N)")
+            while True:
+                response = self.get_input()
+                if response == "Y":
+                    return False
+                if response == "N":
+                    break

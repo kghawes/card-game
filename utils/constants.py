@@ -172,11 +172,16 @@ class MerchantProbabilities(Enum):
     CONSUMABLE = 0.04
 
 
-# Town options menu
+# Options menus
 TOWN_OPTIONS = [
     "Go to personal library (card storage)",
     "Go to card merchant",
     "Proceed to next quest"
+    ]
+LIBRARY_OPTIONS = [
+    "DECK",
+    "LIBRARY",
+    "EXIT"
     ]
 
 # Minimum values

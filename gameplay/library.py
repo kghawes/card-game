@@ -13,11 +13,34 @@ class Library:
         """
         self.stored_cards = []
 
-    def open_library(self, text_interface):
+    def open_library(self, deck, text_interface, effect_registry):
         """
         Show the library options screen.
         """
-        text_interface.library_options_prompt()
+        while True:
+            menu_choice = text_interface.library_options_prompt(
+                c.LIBRARY_OPTIONS
+                )
+            if menu_choice == 0:  # show deck
+                selected_card = text_interface.library_deck_prompt(deck)
+                can_deposit = len(deck) > c.MIN_DECK_SIZE
+                if text_interface.display_library_card(
+                    selected_card, can_deposit, False, effect_registry
+                    ):
+                    self.deposit_card(selected_card, deck)
+            elif menu_choice == 1:  # show stored cards
+                selected_card = text_interface.storage_options_prompt(
+                    self.stored_cards
+                    )
+                can_withdraw = len(deck) < c.MAX_DECK_SIZE
+                if text_interface.display_library_card(
+                    selected_card, can_withdraw, True, effect_registry
+                    ):
+                    self.withdraw_card(selected_card, deck)
+            elif menu_choice == 2:  # exit library
+                return
+            else:
+                assert False
 
     def deposit_card(self, card, deck):
         """
