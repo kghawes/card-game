@@ -21,23 +21,31 @@ class Library:
             menu_choice = text_interface.library_options_prompt(
                 c.LIBRARY_OPTIONS
                 )
-            if menu_choice == 0:  # show deck
-                selected_card = text_interface.library_deck_prompt(deck)
+            if menu_choice == c.LIBRARY_OPTIONS[0]:  # show deck
+                selected_index = text_interface.storage_options_prompt(
+                    deck, False
+                    )
+                if selected_index == -1:  # exit to library
+                    continue
+                card = deck[selected_index]
                 can_deposit = len(deck) > c.MIN_DECK_SIZE
                 if text_interface.display_library_card(
-                    selected_card, can_deposit, False, effect_registry
+                    card, can_deposit, False, effect_registry
                     ):
-                    self.deposit_card(selected_card, deck)
-            elif menu_choice == 1:  # show stored cards
-                selected_card = text_interface.storage_options_prompt(
-                    self.stored_cards
+                    self.deposit_card(card, deck)
+            elif menu_choice == c.LIBRARY_OPTIONS[1]:  # show stored cards
+                selected_index = text_interface.storage_options_prompt(
+                    self.stored_cards, True
                     )
+                if selected_index == -1:  # exit to library
+                    continue
+                card = self.stored_cards[selected_index]
                 can_withdraw = len(deck) < c.MAX_DECK_SIZE
                 if text_interface.display_library_card(
-                    selected_card, can_withdraw, True, effect_registry
+                    card, can_withdraw, True, effect_registry
                     ):
-                    self.withdraw_card(selected_card, deck)
-            elif menu_choice == 2:  # exit library
+                    self.withdraw_card(card, deck)
+            elif menu_choice == c.LIBRARY_OPTIONS[2]:  # exit library
                 return
             else:
                 assert False

@@ -332,25 +332,32 @@ class TextInterface:
         Display the library main menu and get player input.
         """
         print("Welcome to your personal card library.")
-        print("Type LIBRARY to view your library and withdraw cards.")
-        print("Type DECK to view your deck and deposit cards.")
+        for idx, option_text in enumerate(c.LIBRARY_OPTIONS):
+            print(f"{idx}. {option_text}")
+        print("Enter a number to select from the menu above.")
         while True:
             response = self.get_input()
             for option in options:
                 if response in option:
                     return option
 
-    def storage_options_prompt(self, stored_cards) -> int:
+    def storage_options_prompt(self, card_list, is_in_storage) -> int:
         """
-        Display the library stored cards and options and get player input.
+        Display the library stored cards or player deck and options and get
+        player input.
         """
-        for idx, card in enumerate(stored_cards):
+        operation = "deposit"
+        if is_in_storage:
+            operation = "withdraw"
+        for idx, card in enumerate(card_list):
             print(f"{idx}. {card.name}")
-        print("Enter a number to select a card to inspect or withdraw.")
+        print(f"Enter a number to select a card to inspect or {operation} (QUIT to leave).")
         while True:
             response = self.get_input()
+            if response == "QUIT":
+                return -1
             is_valid_selection, selection = self.parse_numeric_input(
-                response, 0, len(stored_cards)
+                response, 0, len(card_list)
                 )
             if is_valid_selection:
                 return selection

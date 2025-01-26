@@ -179,9 +179,9 @@ TOWN_OPTIONS = [
     "Proceed to next quest"
     ]
 LIBRARY_OPTIONS = [
-    "DECK",
-    "LIBRARY",
-    "EXIT"
+    "View deck and deposit cards",
+    "View library and withdraw cards",
+    "Exit to town"
     ]
 
 # Minimum values
@@ -205,7 +205,7 @@ MIN_HAND_SIZE = 2
 MAX_HAND_SIZE = 12
 MIN_DECK_SIZE = 10
 MAX_DECK_SIZE = 50
-NORMAL_CARD_REWARD = 30#
+NORMAL_CARD_REWARD = 1
 BOSS_CARD_REWARD = 2
 BOSS_ID = "BOSS"
 DEFAULT_SUBTYPE = "MISC"

@@ -39,7 +39,6 @@ class Game:
         """
         Run the game.
         """
-        self.town.enter_town(self.text_interface)
         self.text_interface.send_message(c.SPLASH_MESSAGE)
         self.player.name = "KK" #self.text_interface.name_prompt()
 
@@ -103,6 +102,10 @@ class Game:
         #*********************************************************************#
 
         for quest in self.registries.quests.quests:
+            self.town.enter_town(##############################################
+                self.player, self.text_interface, self.registries.effects######
+                )##############################################################
+
             health = self.player.resources[c.Resources.HEALTH.name]
             health.replenish(self.player.modifier_manager)
 
@@ -121,5 +124,9 @@ class Game:
                 if not self.player.is_alive():
                     self.text_interface.send_message(c.DEFEAT_MESSAGE)
                     return
+
+            self.town.enter_town(
+                self.player, self.text_interface, self.registries.effects
+                )
 
         self.text_interface.send_message(c.BEAT_GAME_MESSAGE)
