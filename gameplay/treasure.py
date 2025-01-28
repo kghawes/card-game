@@ -33,7 +33,9 @@ class Treasure:
             card_id = random.choices(items, weights=weights, k=1)[0]
             card = card_cache.create_card(card_id)
             if card.matches(c.CardTypes.SKILL.name) \
-                and not card.matches(c.ClassSpecializations[player_class]):
+                and not card.matches(
+                    c.ClassSpecializations[player_class].value
+                    ):
                 continue
             selection.append(card)
         return selection
