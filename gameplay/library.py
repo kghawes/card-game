@@ -21,7 +21,7 @@ class Library:
             menu_choice = text_interface.library_options_prompt(
                 c.LIBRARY_OPTIONS
                 )
-            if menu_choice == c.LIBRARY_OPTIONS[0]:  # show deck
+            if menu_choice == 0:  # show deck
                 selected_index = text_interface.storage_options_prompt(
                     deck, False
                     )
@@ -33,7 +33,7 @@ class Library:
                     card, can_deposit, False, effect_registry
                     ):
                     self.deposit_card(card, deck)
-            elif menu_choice == c.LIBRARY_OPTIONS[1]:  # show stored cards
+            elif menu_choice == 1:  # show stored cards
                 selected_index = text_interface.storage_options_prompt(
                     self.stored_cards, True
                     )
@@ -45,7 +45,7 @@ class Library:
                     card, can_withdraw, True, effect_registry
                     ):
                     self.withdraw_card(card, deck)
-            elif menu_choice == c.LIBRARY_OPTIONS[2]:  # exit library
+            elif menu_choice == 2:  # exit library
                 return
             else:
                 assert False

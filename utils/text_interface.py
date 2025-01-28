@@ -316,30 +316,30 @@ class TextInterface:
         """
         Display the options in town and get player input.
         """
-        for idx, option_text in enumerate(c.TOWN_OPTIONS):
+        return self.list_menu_prompt(c.TOWN_OPTIONS)
+
+    def list_menu_prompt(self, options, premessage="") -> int:
+        """
+        Display a list of options and get player input.
+        """
+        if premessage:
+            print(premessage)
+        for idx, option_text in enumerate(options):
             print(f"{idx}. {option_text}")
         print("Enter a number to select from the menu above.")
         while True:
             response = self.get_input()
             is_valid_selection, selection = self.parse_numeric_input(
-                response, 0, len(c.TOWN_OPTIONS)
+                response, 0, len(options)
                 )
             if is_valid_selection:
                 return selection
 
-    def library_options_prompt(self, options) -> str:
+    def library_options_prompt(self, options) -> int:
         """
         Display the library main menu and get player input.
         """
-        print("Welcome to your personal card library.")
-        for idx, option_text in enumerate(c.LIBRARY_OPTIONS):
-            print(f"{idx}. {option_text}")
-        print("Enter a number to select from the menu above.")
-        while True:
-            response = self.get_input()
-            for option in options:
-                if response in option:
-                    return option
+        return self.list_menu_prompt(c.LIBRARY_OPTIONS, "Welcome to your personal card library.")
 
     def storage_options_prompt(self, card_list, is_in_storage) -> int:
         """
