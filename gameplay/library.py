@@ -20,7 +20,7 @@ class Library:
         while True:
             deck.sort(key=lambda card: card.name)
             self.stored_cards.sort(key=lambda card: card.name)
-            menu_choice = text_interface.library_options_prompt(c.LIBRARY_OPTIONS)
+            menu_choice = text_interface.library_options_prompt()
             if menu_choice == 0:  # show deck
                 cards = self.handle_storage_menu(
                     deck, deck, text_interface, effect_registry, False
@@ -47,7 +47,9 @@ class Library:
         storage.
         Returns a list of cards to deposit or withdraw.
         """
-        selected_indices = text_interface.storage_options_prompt(storage, is_storage)
+        selected_indices = text_interface.storage_options_prompt(
+            storage, is_storage
+            )
         if not selected_indices or selected_indices[0] == -1:
             return []  # Exit to library
 
@@ -73,7 +75,7 @@ class Library:
                 raise ValueError("Card is not in deck.")
             if len(deck) <= c.MIN_DECK_SIZE:
                 raise ValueError(
-                    f"Cannot have fewer than {c.MIN_DECK_SIZE} cards in your deck."
+                    f"Deck cannot have fewer than {c.MIN_DECK_SIZE} cards."
                     )
             deck.remove(card)
             self.stored_cards.append(card)
@@ -87,7 +89,7 @@ class Library:
                 raise ValueError("Card is not in library.")
             if len(deck) >= c.MAX_DECK_SIZE:
                 raise ValueError(
-                    f"Cannot have more than {c.MAX_DECK_SIZE} cards in your deck."
+                    f"Deck cannot have more than {c.MAX_DECK_SIZE} cards."
                     )
             self.stored_cards.remove(card)
             deck.append(card)
