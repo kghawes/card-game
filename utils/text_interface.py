@@ -335,45 +335,74 @@ class TextInterface:
             if is_valid_selection:
                 return selection
 
-    def library_options_prompt(self, options) -> int:
+    def library_options_prompt(self) -> int:
         """
         Display the library main menu and get player input.
         """
         return self.list_menu_prompt(c.LIBRARY_OPTIONS, "Welcome to your personal card library.")
 
-    def storage_options_prompt(self, card_list, is_in_storage) -> int:
+    def storage_options_prompt(self, card_list, is_in_storage) -> list:
         """
-        Display the library stored cards or player deck and options and get
-        player input.
+        Display the card inventory screen and get player input. Returns a list
+        of card indices to inspect, or -1 to quit.
         """
-        operation = "deposit"
-        if is_in_storage:
-            operation = "withdraw"
+        operation = "deposit" if not is_in_storage else "withdraw"
         for idx, card in enumerate(card_list):
             print(f"{idx}. {card.name}")
-        print(f"Enter a number to select a card to inspect or {operation} (QUIT to leave).")
+        print(f"Enter a number, a range (e.g., 5-7), or a comma-separated list to select cards to inspect or {operation} (QUIT to leave).")
+
         while True:
             response = self.get_input()
             if response == "QUIT":
-                return -1
-            is_valid_selection, selection = self.parse_numeric_input(
-                response, 0, len(card_list)
-                )
-            if is_valid_selection:
-                return selection
+                return []
 
-    def display_library_card(
-            self, card, can_move, is_in_storage, effect_registry
+            selections = set()
+            parts = response.split(",")
+            valid = True
+
+            for part in parts:
+                part = part.strip()
+                if "-" in part:
+                    bounds = part.split("-")
+                    if len(bounds) != 2:
+                        valid = False
+                        break
+                    is_valid_start, start = self.parse_numeric_input(
+                        bounds[0], 0, len(card_list)
+                        )
+                    is_valid_end, end = self.parse_numeric_input(
+                        bounds[1], 0, len(card_list)
+                        )
+                    if not (is_valid_start and is_valid_end) or start > end:
+                        valid = False
+                        break
+                    selections.update(range(start, end + 1))
+                else:
+                    is_valid, number = self.parse_numeric_input(
+                        part, 0, len(card_list)
+                        )
+                    if not is_valid:
+                        valid = False
+                        break
+                    selections.add(number)
+
+            if valid:
+                return sorted(selections)
+
+    def display_library_cards(
+            self, cards, can_move, is_in_storage, effect_registry
             ) -> bool:
         """
-        Print the details of the card and return whether to withdraw the card.
+        Print the details of the cards and return whether to move them.
         """
         move_prompt = ""
         if is_in_storage:
-            move_prompt = "Withdraw this card and add it to your deck? (Y/N)"
+            move_prompt = "Withdraw these card and add them to your deck? (Y/N)"
         else:
-            move_prompt = "Deposit this card and remove it from your deck? (Y/N)"
-        self.display_card_details(card, effect_registry)
+            move_prompt = "Deposit these cards and remove them from your deck? (Y/N)"
+        for card in cards:
+            self.display_card_details(card, effect_registry)
+            print()
         while True:
             if can_move:
                 print(move_prompt)
