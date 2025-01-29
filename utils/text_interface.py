@@ -23,7 +23,7 @@ class TextInterface:
         response = ""
         while not response or len(response) > c.MAX_NAME_LENGTH:
             print(c.PROMPT_NAME)
-            response = input(">  ")
+            response = self.get_input(False)
         return response
 
     def level_up_prompt(self, player) -> str:
@@ -34,7 +34,7 @@ class TextInterface:
         response = ""
         while True:
             print("Increase HEALTH, STAMINA, or MAGICKA?")
-            response = input(">  ").upper()
+            response = self.get_input()
             if response in player.resources:
                 return response
 
@@ -78,7 +78,7 @@ class TextInterface:
 
         while True:
             print(c.PROMPT_TURN_OPTIONS)
-            response = input(">  ").strip()
+            response = self.get_input(False)
 
             if response.startswith('/'):
                 command, *args = response[1:].split(' ', 1)
@@ -185,8 +185,8 @@ class TextInterface:
         indices = []
         while True:
             print(prompt)
-            response = input(">  ")
-            if response.strip().upper() == "SKIP" and is_optional:
+            response = self.get_input()
+            if response == "SKIP" and is_optional:
                 return []
             selected_indices = [idx.strip() for idx in response.split(",")]
             if (is_optional and len(selected_indices) > count) or \
@@ -234,8 +234,8 @@ class TextInterface:
             print(f"{idx}. {card.name}")
         while True:
             print(f"Select up to {count} cards to return to your hand (SKIP to skip this):")
-            response = input(">  ")
-            if response.strip().upper() == "SKIP":
+            response = self.get_input()
+            if response == "SKIP":
                 return []
             selected_indices = response.split(",")
             if len(selected_indices) > min(count, c.MAX_HAND_SIZE) or \
@@ -254,29 +254,35 @@ class TextInterface:
         Prompt the user to take or leave the card.
         """
         print(f"You got {card.name}!")
-        card_type_string = card.card_type
-        if card.subtype:
-            card_type_string += f" [{card.subtype}]"
-        print(f"({card_type_string} - Cost: {card.get_cost()} - Value: {card.value}g)")
-        for effect_id, effect_level in card.effects.items():
-            effect = effect_registry.get_effect(effect_id)
-            level = effect_level.get_level()
-            print(f"* {effect.name} {level} *")
+        self.display_card_details(card, effect_registry)
         print()
         while True:
             print("Keep this card? (Y/N)")
-            response = input(">  ").upper().strip()
+            response = self.get_input()
             if response not in ("Y", "N"):
                 continue
             if response == "Y":
                 return True
             if response == "N":
                 print("Are you sure you want to leave this card? (Y/N)")
-                confirmation = input(">  ").upper().strip()
+                confirmation = self.get_input()
                 if confirmation not in ("Y", "N") or confirmation == "N":
                     continue
                 if confirmation == "Y":
                     return False
+
+    def display_card_details(self, card, effect_registry):
+        """
+        Display the information for a card.
+        """
+        card_type_string = card.card_type
+        if card.subtype:
+            card_type_string += f" [{card.subtype}]"
+        print(f"{card.name} ({card_type_string} - Cost: {card.get_cost()} - Value: {card.value}g)")
+        for effect_id, effect_level in card.effects.items():
+            effect = effect_registry.get_effect(effect_id)
+            level = effect_level.get_level()
+            print(f"* {effect.name} {level} *")
 
     def rewards_message(self, gold, exp):
         """
@@ -284,3 +290,132 @@ class TextInterface:
         """
         print(f"You found {gold} gold!")
         print(f"You got {exp} experience points!")
+
+    def get_input(self, upper=True) -> str:
+        """
+        Prompt the user for input and prepare it for parsing.
+        """
+        response = input(">  ").strip()
+        if upper:
+            response = response.upper()
+        return response
+
+    def parse_numeric_input(self, response, min_value, max_value) -> (bool, int):
+        """
+        Parse player input as an int and return a success flag.
+        """
+        num = -1
+        success = False
+        if response.isdigit():
+            num = int(response)
+            if min_value <= num <= max_value:
+                success = True
+        return success, num
+
+    def town_options_prompt(self) -> int:
+        """
+        Display the options in town and get player input.
+        """
+        return self.list_menu_prompt(c.TOWN_OPTIONS)
+
+    def list_menu_prompt(self, options, premessage="") -> int:
+        """
+        Display a list of options and get player input.
+        """
+        if premessage:
+            print(premessage)
+        for idx, option_text in enumerate(options):
+            print(f"{idx}. {option_text}")
+        print("Enter a number to select from the menu above.")
+        while True:
+            response = self.get_input()
+            is_valid_selection, selection = self.parse_numeric_input(
+                response, 0, len(options)
+                )
+            if is_valid_selection:
+                return selection
+
+    def library_options_prompt(self) -> int:
+        """
+        Display the library main menu and get player input.
+        """
+        return self.list_menu_prompt(c.LIBRARY_OPTIONS, "Welcome to your personal card library.")
+
+    def storage_options_prompt(self, card_list, is_in_storage) -> list:
+        """
+        Display the card inventory screen and get player input. Returns a list
+        of card indices to inspect, or -1 to quit.
+        """
+        operation = "deposit" if not is_in_storage else "withdraw"
+        for idx, card in enumerate(card_list):
+            print(f"{idx}. {card.name}")
+        print(f"Enter a number, a range (e.g., 5-7), or a comma-separated list to select cards to inspect or {operation} (QUIT to leave).")
+
+        while True:
+            response = self.get_input()
+            if response == "QUIT":
+                return []
+
+            selections = set()
+            parts = response.split(",")
+            valid = True
+
+            for part in parts:
+                part = part.strip()
+                if "-" in part:
+                    bounds = part.split("-")
+                    if len(bounds) != 2:
+                        valid = False
+                        break
+                    is_valid_start, start = self.parse_numeric_input(
+                        bounds[0], 0, len(card_list)
+                        )
+                    is_valid_end, end = self.parse_numeric_input(
+                        bounds[1], 0, len(card_list)
+                        )
+                    if not (is_valid_start and is_valid_end) or start > end:
+                        valid = False
+                        break
+                    selections.update(range(start, end + 1))
+                else:
+                    is_valid, number = self.parse_numeric_input(
+                        part, 0, len(card_list)
+                        )
+                    if not is_valid:
+                        valid = False
+                        break
+                    selections.add(number)
+
+            if valid:
+                return sorted(selections)
+
+    def display_library_cards(
+            self, cards, can_move, is_in_storage, effect_registry
+            ) -> bool:
+        """
+        Print the details of the cards and return whether to move them.
+        """
+        move_prompt = ""
+        if is_in_storage:
+            move_prompt = "Withdraw these card and add them to your deck? (Y/N)"
+        else:
+            move_prompt = "Deposit these cards and remove them from your deck? (Y/N)"
+        for card in cards:
+            self.display_card_details(card, effect_registry)
+            print()
+        while True:
+            if can_move:
+                print(move_prompt)
+                while True:
+                    response = self.get_input()
+                    if response == "Y":
+                        return True
+                    if response == "N":
+                        break
+            print("Return to library? (Y/N)")
+            while True:
+                response = self.get_input()
+                if response == "Y":
+                    return False
+                if response == "N":
+                    break

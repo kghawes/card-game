@@ -3,6 +3,7 @@ This module defines the CardManager class.
 """
 import random
 import utils.constants as c
+from gameplay.library import Library
 
 class CardManager:
     """
@@ -16,6 +17,7 @@ class CardManager:
         self.hand = []
         self.discard_pile = []
         self.consumed_pile = []
+        self.library = Library()
 
     def _create_deck(self, deck_list, card_cache) -> list:
         """

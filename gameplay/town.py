@@ -1,16 +1,26 @@
 """
 This module defines the Town class.
 """
-
 import utils.constants as constants
 
 class Town:
     """
-    This class represents the 'overworld' town.
+    This class represents the 'overworld' visited between quests.
     """
-    def enter_town(self, text_interface):
+    def enter_town(self, player, text_interface, effect_registry):
         """
-        Go to town screen
+        Go to town screen.
         """
-        text_interface.send_message(constants.ENTER_TOWN_MESSAGE)
-        
+        while True:
+            text_interface.send_message(constants.ENTER_TOWN_MESSAGE)
+            selection = text_interface.town_options_prompt()
+            if selection == 0:  # Library
+                player.card_manager.library.open_library(
+                    player.card_manager.deck, text_interface, effect_registry
+                    )
+            elif selection == 1:  # Merchant
+                pass
+            elif selection == 2:  # Quest
+                return
+            else:
+                assert False
