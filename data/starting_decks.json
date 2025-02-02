@@ -1,12 +1,16 @@
 {
   "FIGHTER": [
-    { "card": "MISS", "quantity": 7 },
+    { "card": "MISS", "quantity": 5 },
+    { "card": "IRON_LONGSWORD", "quantity": 50 }
+  ],
+  "_FIGHTER": [
+    { "card": "MISS", "quantity": 5 },
     { "card": "IRON_MACE", "quantity": 3 },
-    { "card": "IRON_LONGSWORD", "quantity": 9 },
-    { "card": "IRON_HELM", "quantity": 3 },
+    { "card": "IRON_LONGSWORD", "quantity": 5 },
+    { "card": "IRON_HELM", "quantity": 4 },
     { "card": "IRON_BOOTS", "quantity": 3 },
-    { "card": "ATHLETICS", "quantity": 2 },
-    { "card": "BARGAIN_POTION_STAMINA", "quantity": 4 },
+    { "card": "ATHLETICS", "quantity": 1 },
+    { "card": "BARGAIN_POTION_STAMINA", "quantity": 2 },
     { "card": "BARGAIN_POTION_HEALTH", "quantity": 1 }
   ]
 }

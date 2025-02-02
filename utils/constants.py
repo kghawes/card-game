@@ -205,6 +205,7 @@ MIN_HAND_SIZE = 2
 MAX_HAND_SIZE = 12
 MIN_DECK_SIZE = 10
 MAX_DECK_SIZE = 50
+MAX_CARD_FREQUENCY = 5
 NORMAL_CARD_REWARD = 1
 BOSS_CARD_REWARD = 2
 BOSS_ID = "BOSS"
@@ -290,6 +291,8 @@ NOT_ENOUGH_STAMINA_MESSAGE = "You’re too fatigued to do that!"
 CARD_PLAYED_MESSAGE = "{} played {}! {} has {} health left!"
 ENEMY_PASSES_MESSAGE = "{} passes their turn."
 INPUT_PASS_TURN = "PASS"
+TOO_MANY_COPIES = "You can't have more than {} copies of {} in your deck!"
+TOO_MANY_CARDS = "Your deck can't have more than {} cards in it!"
 
 # Experience
 EXP_TO_LEVEL = [

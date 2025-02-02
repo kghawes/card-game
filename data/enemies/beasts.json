@@ -1,4 +1,18 @@
 {
+  "TEST": {
+    "name": "Test enemy",
+    "max_health": 1,
+    "max_stamina": 0,
+    "max_magicka": 0,
+    "deck": [
+      {"card": "FLAP", "quantity": 6}
+    ],
+    "loot": {
+      "gold": [0, 0],
+      "exp": 0,
+      "cards": "BOSS_TEST"
+    }
+  },
   "CLIFF_RACER": {
     "name": "Cliff Racer",
     "max_health": 5,

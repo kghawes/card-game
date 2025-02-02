@@ -1,4 +1,7 @@
 {
+  "TEST": {
+    "TEST": 1
+  },
   "RAT_CAVE": {
     "RAT": 2,
     "DISEASED_RAT": 1,

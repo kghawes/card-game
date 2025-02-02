@@ -1,4 +1,7 @@
 {
+  "BOSS_TEST": {
+    "MISS": 1
+  },
   "WEAK_BEAST": {
     "FURY": 15,
     "PREPAREDNESS": 10,

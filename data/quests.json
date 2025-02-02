@@ -1,4 +1,10 @@
 {
+  "TEST": {
+    "ENCOUNTERS": [
+      "TEST"
+    ],
+    "DESCRIPTION": "Test quest"
+  },
   "CAVE_RATS": {
     "ENCOUNTERS": [
       "RAT_CAVE",

@@ -229,4 +229,16 @@ class CombatManager:
             card_rewards, player.character_class, card_cache)
         for card in cards:
             if text_interface.card_reward_prompt(card, effect_registry):
-                player.card_manager.deck.append(card)
+                success, too_many_copies, too_many_cards = \
+                    player.card_manager.try_add_to_deck(card)
+                if not success:
+                    if too_many_copies:
+                        text_interface.send_message(
+                            c.TOO_MANY_COPIES.format(
+                                c.MAX_CARD_FREQUENCY, card.name
+                                )
+                            )
+                    if too_many_cards:
+                        text_interface.send_message(
+                            c.TOO_MANY_CARDS.format(c.MAX_DECK_SIZE)
+                            )

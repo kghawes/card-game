@@ -390,7 +390,8 @@ class TextInterface:
                 return sorted(selections)
 
     def display_library_cards(
-            self, cards, can_move, is_in_storage, effect_registry
+            self, cards, deck_size, too_few_cards, too_many_cards,
+            is_in_storage, effect_registry
             ) -> bool:
         """
         Print the details of the cards and return whether to move them.
@@ -404,7 +405,15 @@ class TextInterface:
             self.display_card_details(card, effect_registry)
             print()
         while True:
-            if can_move:
+            if too_few_cards and not is_in_storage:
+                print("These cards can't be stored because your deck does not have enough cards in it.")
+                print(f"Minimum deck size: {c.MIN_DECK_SIZE} cards")
+                print(f"Your deck: {deck_size} cards")
+            elif too_many_cards and is_in_storage:
+                print("These cards can't be withdrawn because your deck does not have enough room.")
+                print(f"Maximum deck size: {c.MAX_DECK_SIZE} cards")
+                print(f"Your deck: {deck_size} cards")
+            else:
                 print(move_prompt)
                 while True:
                     response = self.get_input()

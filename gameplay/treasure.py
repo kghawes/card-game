@@ -18,9 +18,7 @@ class Treasure:
         self.exp = treasure_data.get("exp")
         card_group_id = treasure_data.get("cards")
         self.cards = card_rewards[card_group_id]
-        self.is_boss = False
-        if c.BOSS_ID in card_group_id:
-            self.is_boss = True
+        self.is_boss = True if c.BOSS_ID in card_group_id else False
 
     def select_cards(self, number_of_cards, player_class, card_cache) -> list:
         """

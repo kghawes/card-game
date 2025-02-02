@@ -449,7 +449,7 @@ Maybe have different merchants that sell different types of cards?
 SOMEDAY: disposition discount system?
 
 Cities
-Ebonheart
+(Old) Ebonheart
 Stonefalls
 Davon's Watch
 Kragenmoor
@@ -462,6 +462,50 @@ Other Cities:
   Blacklight
   Tear
   Port Telvannis
+  
+Placenames
+Caves
+  Adad-nirari
+  Shalmaneser
+  Uballit
+  Suppiluliuma
+  Zalpuwa
+  Yaz
+Ancestral tombs
+  Drothan
+  Gilnith
+  Ralas
+  Thenim
+  Hledri
+  Ludreth
+Strongholds
+  Nelenimaryon
+  Oralasreth
+  Ruvynanoth
+Daedric ruins
+  Mazuwadimmu
+  Yarssunalit
+  Ulenbalsheth
+  Kulishinash
+  Baalpitashpal
+  Sinsirrismus
+Dwemer ruins
+  Nyzfth-Bthinumz
+  Nchandftz
+  Gthark
+  Ndrkthand
+Velothi towers
+  Bashtapa
+  Anat
+  Sattuara
+Mines
+  Darrallit
+  Shafti-Zedan
+  Yrranu-Palu
+  Gawia
+  Rishtanaptibi
+  Coldspring Cave
+  
   
 ________________________________________
 |                                      |

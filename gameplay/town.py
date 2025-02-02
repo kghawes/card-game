@@ -16,7 +16,7 @@ class Town:
             selection = text_interface.town_options_prompt()
             if selection == 0:  # Library
                 player.card_manager.library.open_library(
-                    player.card_manager.deck, text_interface, effect_registry
+                    player.card_manager, text_interface, effect_registry
                     )
             elif selection == 1:  # Merchant
                 pass

@@ -31,6 +31,28 @@ class CardManager:
                 deck.append(card_cache.create_card(card_id))
         return deck
 
+    def try_add_to_deck(self, card) -> (bool, bool, bool):
+        """
+        Attempt to add the card to the deck and return success flag and error
+        message.
+        """
+        allowed = True
+        too_many_copies = False
+        too_many_cards = False
+        card_frequency = 0
+        for card_in_deck in self.deck:
+            if card_in_deck.name == card.name:
+                card_frequency += 1
+        if card_frequency >= c.MAX_CARD_FREQUENCY:
+            allowed = False
+            too_many_copies = True
+        if len(self.deck) >= c.MAX_DECK_SIZE:
+            allowed = False
+            too_many_cards = True
+        if allowed:
+            self.deck.append(card)
+        return allowed, too_many_copies, too_many_cards
+
     def shuffle(self):
         """
         Randomize the order of cards in the deck.
