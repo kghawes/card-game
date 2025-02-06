@@ -1,128 +1,153 @@
 import pygame
-import sys
+import pygame_gui
 
-# Initialize pygame
+# Initialize Pygame
 pygame.init()
 
 # Constants
-WIDTH, HEIGHT = 600, 600
-LINE_WIDTH = 10
-BOARD_ROWS, BOARD_COLS = 3, 3
-SQUARE_SIZE = WIDTH // BOARD_COLS
-CIRCLE_RADIUS = SQUARE_SIZE // 3
-CIRCLE_WIDTH = 10
-CROSS_WIDTH = 10
-SPACE = SQUARE_SIZE // 4
+WIDTH, HEIGHT = 1000, 600
+FPS = 60
+CARD_WIDTH, CARD_HEIGHT = 80, 120
+HAND_Y = HEIGHT - 150
+CARD_SPACING = 100
+PLAY_AREA_CENTER = (WIDTH // 2, HEIGHT // 3)
 
 # Colors
-BG_COLOR = (28, 170, 156)
-LINE_COLOR = (23, 145, 135)
-CIRCLE_COLOR = (239, 231, 200)
-CROSS_COLOR = (66, 66, 66)
+WHITE = (255, 255, 255)
+GREEN = (50, 205, 50)
+BLUE = (70, 130, 180)
+GRAY = (200, 200, 200)
+DARK_GRAY = (50, 50, 50)
 
-# Fonts
-pygame.font.init()
-font = pygame.font.Font(r"C:\Users\kenne\Experiments\!STS-TES\card-game\assets\Planewalker.otf", 50)
-
-# Create screen
+# Pygame Setup
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Tic-Tac-Toe")
-screen.fill(BG_COLOR)
+pygame.display.set_caption("Digital Card Game Mock-up")
+clock = pygame.time.Clock()
 
-# Board
-board = [[None] * BOARD_COLS for _ in range(BOARD_ROWS)]
-player = "X"
-game_over = False
+# Pygame GUI Setup
+manager = pygame_gui.UIManager((WIDTH, HEIGHT))
 
+# Player Info UI
+health_bar = pygame_gui.elements.UIStatusBar(
+    relative_rect=pygame.Rect((20, 20), (200, 25)),
+    manager=manager,
+    sprite=None
+)
+energy_bar = pygame_gui.elements.UIStatusBar(
+    relative_rect=pygame.Rect((20, 50), (200, 25)),
+    manager=manager,
+    sprite=None
+)
+player_name = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect((20, 80), (200, 30)),
+    text="Player: Hero",
+    manager=manager
+)
 
-def draw_lines():
-    """ Draws the grid lines. """
-    for i in range(1, BOARD_ROWS):
-        pygame.draw.line(screen, LINE_COLOR, (0, i * SQUARE_SIZE), (WIDTH, i * SQUARE_SIZE), LINE_WIDTH)
-        pygame.draw.line(screen, LINE_COLOR, (i * SQUARE_SIZE, 0), (i * SQUARE_SIZE, HEIGHT), LINE_WIDTH)
+# Deck, Hand, and Discard Pile
+deck_rect = pygame.Rect(20, HAND_Y, CARD_WIDTH, CARD_HEIGHT)
+discard_pile_rect = pygame.Rect(300, HAND_Y, CARD_WIDTH, CARD_HEIGHT)
+play_area_rect = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 3 - 60, 200, 140)
 
+# Generate a mock hand of 6 cards
+hand = []
+for i in range(6):
+    hand.append({
+        "rect": pygame.Rect(150 + i * CARD_SPACING, HAND_Y, CARD_WIDTH, CARD_HEIGHT),
+        "color": GREEN,
+        "text": f"Card {i+1}",
+        "hover": False,
+        "dragging": False,
+        "original_pos": (150 + i * CARD_SPACING, HAND_Y),
+        "tooltip": None
+    })
 
-def draw_marks():
-    """ Draws Xs and Os based on board state. """
-    for row in range(BOARD_ROWS):
-        for col in range(BOARD_COLS):
-            if board[row][col] == "O":
-                pygame.draw.circle(
-                    screen, CIRCLE_COLOR,
-                    (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2),
-                    CIRCLE_RADIUS, CIRCLE_WIDTH
-                )
-            elif board[row][col] == "X":
-                start_x = col * SQUARE_SIZE + SPACE
-                start_y = row * SQUARE_SIZE + SPACE
-                end_x = (col + 1) * SQUARE_SIZE - SPACE
-                end_y = (row + 1) * SQUARE_SIZE - SPACE
-                pygame.draw.line(screen, CROSS_COLOR, (start_x, start_y), (end_x, end_y), CROSS_WIDTH)
-                pygame.draw.line(screen, CROSS_COLOR, (start_x, end_y), (end_x, start_y), CROSS_WIDTH)
-
-
-def check_winner():
-    """ Checks for a winner and returns X, O, or None. """
-    for row in board:
-        if row[0] == row[1] == row[2] and row[0] is not None:
-            return row[0]
-
-    for col in range(BOARD_COLS):
-        if board[0][col] == board[1][col] == board[2][col] and board[0][col] is not None:
-            return board[0][col]
-
-    if board[0][0] == board[1][1] == board[2][2] and board[0][0] is not None:
-        return board[0][0]
-
-    if board[0][2] == board[1][1] == board[2][0] and board[0][2] is not None:
-        return board[0][2]
-
-    return None
-
-
-def draw_winner(winner):
-    """ Displays the winner and restarts the game. """
-    text = font.render(f"{winner} Wins! Click to Restart", True, (255, 255, 255))
-    screen.blit(text, (WIDTH // 4, HEIGHT // 2))
-    pygame.display.update()
-
-
-def restart():
-    """ Resets the game state. """
-    global board, player, game_over
-    board = [[None] * BOARD_COLS for _ in range(BOARD_ROWS)]
-    player = "X"
-    game_over = False
-    screen.fill(BG_COLOR)
-    draw_lines()
-
+# Card being played (None if no card in play area)
+card_in_play = None
+animation_active = False
+animation_progress = 0.0
 
 # Game loop
-draw_lines()
 running = True
-
 while running:
+    time_delta = clock.tick(FPS) / 1000.0
+
+    # FILL BACKGROUND TO PREVENT BLACK SCREEN
+    screen.fill(DARK_GRAY)
+
+    # EVENT HANDLING
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
-            pygame.quit()
-            sys.exit()
+            running = False  # Fix window not closing issue
 
-        if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
-            x, y = event.pos
-            row, col = y // SQUARE_SIZE, x // SQUARE_SIZE
+        # Handle Pygame GUI events
+        manager.process_events(event)
 
-            if board[row][col] is None:
-                board[row][col] = player
-                player = "O" if player == "X" else "X"
+        # Mouse Hover Tooltips
+        for card in hand:
+            if card["rect"].collidepoint(pygame.mouse.get_pos()):
+                card["hover"] = True
+                if not card["tooltip"]:
+                    card["tooltip"] = pygame_gui.elements.UITooltip(card["text"], (10, 10), manager)
+            else:
+                card["hover"] = False
+                if card["tooltip"]:
+                    card["tooltip"].kill()
+                    card["tooltip"] = None
 
-                winner = check_winner()
-                if winner:
-                    draw_winner(winner)
-                    game_over = True
+        # Drag and Drop Events
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            for card in hand:
+                if card["rect"].collidepoint(event.pos):
+                    card["dragging"] = True
 
-        elif event.type == pygame.MOUSEBUTTONDOWN and game_over:
-            restart()
+        elif event.type == pygame.MOUSEBUTTONUP:
+            for card in hand:
+                if card["dragging"]:
+                    card["dragging"] = False
+                    if play_area_rect.collidepoint(card["rect"].center):
+                        # Snap to play area
+                        card_in_play = card
+                        card["rect"].center = PLAY_AREA_CENTER
+                        animation_active = True
+                        animation_progress = 0.0
+                    else:
+                        # Snap back to original position
+                        card["rect"].topleft = card["original_pos"]
 
-    draw_marks()
-    pygame.display.update()
+        elif event.type == pygame.MOUSEMOTION:
+            for card in hand:
+                if card["dragging"]:
+                    card["rect"].move_ip(event.rel)
+
+    # Update animation
+    if animation_active and card_in_play:
+        animation_progress += 0.02
+        if animation_progress >= 1.0:
+            animation_active = False
+            # Move to discard pile
+            card_in_play["rect"].topleft = discard_pile_rect.topleft
+            card_in_play["original_pos"] = discard_pile_rect.topleft
+            card_in_play = None
+
+    # DRAW UI ELEMENTS
+    pygame.draw.rect(screen, WHITE, deck_rect)  # Deck
+    pygame.draw.rect(screen, WHITE, discard_pile_rect)  # Discard Pile
+    pygame.draw.rect(screen, GRAY, play_area_rect)  # Play Area
+
+    # Draw Cards in Hand
+    for card in hand:
+        pygame.draw.rect(screen, card["color"], card["rect"])
+        font = pygame.font.Font(None, 24)
+        text_surf = font.render(card["text"], True, WHITE)
+        text_rect = text_surf.get_rect(center=card["rect"].center)
+        screen.blit(text_surf, text_rect)
+
+    # UPDATE PYGAME GUI
+    manager.update(time_delta)
+    manager.draw_ui(screen)
+
+    # REFRESH SCREEN TO AVOID BLACK BACKGROUND
+    pygame.display.flip()
+
+pygame.quit()
