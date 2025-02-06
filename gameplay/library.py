@@ -97,7 +97,7 @@ class Library:
                     f"Deck cannot have more than {c.MAX_DECK_SIZE} cards."
                     )
             success, too_many_copies, too_many_cards = \
-                card_manager.try_add_card_to_deck(card)
+                card_manager.try_add_to_deck(card)
             if success:
                 self.stored_cards.remove(card)
             elif too_many_copies:
