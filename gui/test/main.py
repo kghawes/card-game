@@ -5,6 +5,7 @@ from kivy.properties import (
 )
 from kivy.clock import Clock
 from kivy.core.window import Window
+from kivy.graphics import Line
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
@@ -64,7 +65,8 @@ class Card(Widget):
 
 
 class CardGame(Widget):
-    card = ObjectProperty(None)
+    card1 = ObjectProperty(None)
+    card2 = ObjectProperty(None)
     play_area = ObjectProperty(None)
     
 

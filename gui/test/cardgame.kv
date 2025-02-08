@@ -3,21 +3,31 @@
 <Card>:
     size: 200, 300
     canvas:
-        Rectangle:
-            source: 'card.png'
+        Color:
+            rgba: (0.73, 0.32, 0.07, 1)
+        RoundedRectangle:
             pos: self.center_x - self.width / 2, self.center_y - self.height / 2
             size: self.size
+            radius: [20, 20, 20, 20]
+        Color:
+            rgba: (0, 0, 0, 1)
+        RoundedRectangle:
+            pos: self.center_x - self.width / 2 + 3, self.center_y - self.height / 2 + 3
+            size: self.width - 6, self.height - 6
+            radius: [16, 16, 16, 16]
 
 <PlayArea>:
-    size: 800, 600
+    size: 600, 600
     canvas:
+        Color:
+            rgba: (0.5, 0.5, 0.5, 1)
         Rectangle:
-            source: 'play_area.png'
             pos: self.center_x - self.width / 2, self.center_y - self.height / 2
             size: self.size
 
 <CardGame>:
-    card: card
+    card1: card1
+    card2: card2
     play_area: play_area
 
     PlayArea:
@@ -25,6 +35,10 @@
         center: self.parent.center
 
     Card:
-        id: card
-        center: self.parent.center
+        id: card1
+        center: 200, 200
+
+    Card:
+        id: card2
+        center: 600, 200
 
