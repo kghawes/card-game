@@ -3,75 +3,54 @@ from kivy.uix.widget import Widget
 from kivy.properties import (
     NumericProperty, ReferenceListProperty, ObjectProperty
 )
-from kivy.vector import Vector
 from kivy.clock import Clock
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
 
-class PongPaddle(Widget):
-    score = NumericProperty(0)
+class Card(Widget):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.click_location = (0, 0)
+        self.starting_position = (self.center_x, self.center_y)
 
-    def bounce_ball(self, ball):
-        if self.collide_widget(ball):
-            vx, vy = ball.velocity
-            offset = (ball.center_y - self.center_y) / (self.height / 2)
-            bounced = Vector(-1 * vx, vy)
-            vel = bounced * 1.1
-            ball.velocity = vel.x, vel.y + offset
-
-
-class PongBall(Widget):
-    velocity_x = NumericProperty(0)
-    velocity_y = NumericProperty(0)
-    velocity = ReferenceListProperty(velocity_x, velocity_y)
-
-    def move(self):
-        self.pos = Vector(*self.velocity) + self.pos
-
-
-class PongGame(Widget):
-    ball = ObjectProperty(None)
-    player1 = ObjectProperty(None)
-    player2 = ObjectProperty(None)
-
-    def serve_ball(self, vel=(4, 0)):
-        self.ball.center = self.center
-        self.ball.velocity = vel
-
-    def update(self, dt):
-        self.ball.move()
-
-        # bounce off paddles
-        self.player1.bounce_ball(self.ball)
-        self.player2.bounce_ball(self.ball)
-
-        # bounce ball off bottom or top
-        if (self.ball.y < self.y) or (self.ball.top > self.top):
-            self.ball.velocity_y *= -1
-
-        # went off to a side to score point?
-        if self.ball.x < self.x:
-            self.player2.score += 1
-            self.serve_ball(vel=(4, 0))
-        if self.ball.right > self.width:
-            self.player1.score += 1
-            self.serve_ball(vel=(-4, 0))
+    def on_touch_down(self, touch):
+        if super().on_touch_down(touch):
+            return True
+        if not self.collide_point(touch.x, touch.y):
+            return False
+        self.click_location = (touch.x, touch.y)
+        self.starting_position = (self.center_x, self.center_y)
+        touch.grab(self)
+        return True
 
     def on_touch_move(self, touch):
-        if touch.x < self.width / 3:
-            self.player1.center_y = touch.y
-        if touch.x > self.width - self.width / 3:
-            self.player2.center_y = touch.y
+        offset_x = touch.x - self.click_location[0]
+        offset_y = touch.y - self.click_location[1]
+        if touch.grab_current is self:
+            self.center_x = self.starting_position[0] + offset_x
+            self.center_y = self.starting_position[1] + offset_y
+            return True
+        return False
+    
+    def on_touch_up(self, touch):
+        if self.collide_point(*touch.pos):
+            touch.ungrab(self)
+            return True
+        return False
 
 
-class PongApp(App):
+class CardGame(Widget):
+    card = ObjectProperty(None)
+    
+
+
+class CardGameApp(App):
     def build(self):
-        game = PongGame()
-        game.serve_ball()
-        Clock.schedule_interval(game.update, 1.0 / 60.0)
+        game = CardGame()
+        #Clock.schedule_interval(game.update, 1.0 / 60.0)
         return game
 
 
 if __name__ == '__main__':
-    PongApp().run()
+    CardGameApp().run()
