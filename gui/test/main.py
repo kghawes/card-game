@@ -4,6 +4,7 @@ from kivy.properties import (
     NumericProperty, ReferenceListProperty, ObjectProperty, BooleanProperty
 )
 from kivy.clock import Clock
+from kivy.core.window import Window
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
@@ -25,7 +26,7 @@ class PlayArea(Widget):
 
 
 class Card(Widget):
-    is_grabbed = BooleanProperty(False)  # Add this line
+    is_grabbed = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -40,22 +41,24 @@ class Card(Widget):
         self.click_location = (touch.x, touch.y)
         self.starting_position = (self.center_x, self.center_y)
         touch.grab(self)
-        self.is_grabbed = True  # Update grabbed state
+        self.is_grabbed = True
         return True
 
     def on_touch_move(self, touch):
-        offset_x = touch.x - self.click_location[0]
-        offset_y = touch.y - self.click_location[1]
         if touch.grab_current is self:
-            self.center_x = self.starting_position[0] + offset_x
-            self.center_y = self.starting_position[1] + offset_y
+            offset_x = touch.x - self.click_location[0]
+            offset_y = touch.y - self.click_location[1]
+            new_x = self.starting_position[0] + offset_x
+            new_y = self.starting_position[1] + offset_y
+            self.center_x = max(0 + self.width / 2, min(new_x, Window.width - self.width / 2))
+            self.center_y = max(0 + self.height / 2, min(new_y, Window.height - self.height / 2))
             return True
         return False
     
     def on_touch_up(self, touch):
         if touch.grab_current is self:
             touch.ungrab(self)
-            self.is_grabbed = False  # Update grabbed state
+            self.is_grabbed = False
             return True
         return False
 
