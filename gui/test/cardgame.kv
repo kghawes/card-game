@@ -8,8 +8,21 @@
             pos: self.center_x - self.width / 2, self.center_y - self.height / 2
             size: self.size
 
+<PlayArea>:
+    size: 800, 600
+    canvas:
+        Rectangle:
+            source: 'play_area.png'
+            pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+            size: self.size
+
 <CardGame>:
     card: card
+    play_area: play_area
+
+    PlayArea:
+        id: play_area
+        center: self.parent.center
 
     Card:
         id: card
