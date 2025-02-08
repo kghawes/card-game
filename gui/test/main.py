@@ -14,16 +14,14 @@ class PlayArea(Widget):
     def on_touch_up(self, touch):
         if super().on_touch_up(touch):
             return True
-        if not self.collide_point(touch.x, touch.y):
-            return False
         
         for child in self.walk():
-            if isinstance(child, Card) and child.is_grabbed:
+            if isinstance(child, Card) and child.is_grabbed and self.collide_point(child.center_x, child.center_y):
                 # Do something when a card is grabbed and touch is within PlayArea
                 print("Card is grabbed and touch is within PlayArea")
                 return True
         
-        return True
+        return False
 
 
 class Card(Widget):
