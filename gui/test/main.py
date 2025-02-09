@@ -64,17 +64,11 @@ class Hand(BoxLayout):
     def on_touch_up(self, touch):
         if self.is_card_hovered:
             for card in self.children:
-                if card.collide_point(touch.x, touch.y):
-                    print("Card hovered and released")
-                    if card.on_touch_up(touch):
-                        print("Card released in hand")
-                        if card.is_hovered:
-                            print("Card released in hand and hovered")
-                            if not card.collide_point(touch.x, touch.y):
-                                print("Card released outside hand")
-                                card.is_hovered = False
-                                self.is_card_hovered = False
-                                return True
+                if card.collide_point(touch.x, touch.y) and card.on_touch_up(touch):
+                    if card.is_hovered and not card.collide_point(touch.x, touch.y):
+                            card.is_hovered = False
+                            self.is_card_hovered = False
+                            return True
         return False
 
     def on_motion(self, window, pos):
