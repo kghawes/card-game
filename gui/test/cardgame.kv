@@ -3,6 +3,13 @@
 <Card>:
     size_hint: None, None
     size: 200, 300
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1 if self.is_hovered else 0  # Change color based on is_hovered
+        RoundedRectangle:
+            pos: self.center_x - self.width / 2 - 2, self.center_y - self.height / 2 - 2
+            size: self.width + 4, self.height + 4
+            radius: [20, 20, 20, 20]
     canvas:
         Color:
             rgba: (0.73, 0.32, 0.07, 1)
@@ -29,8 +36,8 @@
 <CardGame>:
     card1: card1
     card2: card2
-    play_area: play_area
     hand: hand
+    play_area: play_area
 
     PlayArea:
         id: play_area
@@ -51,10 +58,8 @@
             Rectangle:
                 pos: self.x, self.y + self.height - 10
                 size: self.width, 10
-
         Card:
             id: card1
-
         Card:
             id: card2
 

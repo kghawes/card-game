@@ -6,7 +6,6 @@ from kivy.properties import (
 )
 from kivy.clock import Clock
 from kivy.core.window import Window
-from kivy.graphics import Line
 from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
@@ -16,6 +15,7 @@ class PlayArea(Widget):
 
 class Card(Widget):
     is_grabbed = BooleanProperty(False)
+    is_hovered = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -59,7 +59,19 @@ class Card(Widget):
         return False
 
 class Hand(BoxLayout):
-    pass
+    def on_motion(self, window, pos):
+        if not self.collide_point(pos[0], pos[1]):
+            for card in self.children:
+                if card.is_hovered:
+                    card.is_hovered = False
+                    return False
+        for card in self.children:
+            if card.collide_point(pos[0], pos[1]) and not card.is_hovered:
+                card.is_hovered = True
+                return True
+            if not card.collide_point(pos[0], pos[1]) and card.is_hovered:
+                card.is_hovered = False
+        return False
 
 class CardGame(Widget):
     play_area = ObjectProperty(None)
@@ -70,7 +82,7 @@ class CardGame(Widget):
 class CardGameApp(App):
     def build(self):
         game = CardGame()
-        # Clock.schedule_interval(game.update, 1.0 / 60.0)
+        Window.bind(mouse_pos=game.hand.on_motion)  # Bind mouse motion to on_motion
         return game
 
 if __name__ == '__main__':
