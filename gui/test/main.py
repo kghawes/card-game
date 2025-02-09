@@ -12,17 +12,7 @@ from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
 class PlayArea(Widget):
-    def on_touch_up(self, touch):
-        if super().on_touch_up(touch):
-            return True
-        
-        for child in self.walk():
-            if isinstance(child, Card) and child.is_grabbed and self.collide_point(child.center_x, child.center_y):
-                child.center_x = self.center_x
-                child.center_y = self.center_y
-                return True
-        
-        return False
+    pass
 
 class Card(Widget):
     is_grabbed = BooleanProperty(False)
@@ -58,6 +48,13 @@ class Card(Widget):
         if touch.grab_current is self:
             touch.ungrab(self)
             self.is_grabbed = False
+            play_area = self.parent.parent.play_area
+            if play_area.collide_point(self.center_x, self.center_y):
+                self.center_x = play_area.center_x
+                self.center_y = play_area.center_y
+            else:
+                self.center_x = self.starting_position[0]
+                self.center_y = self.starting_position[1]
             return True
         return False
 
