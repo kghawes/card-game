@@ -9,6 +9,8 @@ from kivy.core.window import Window
 from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+Config.set('graphics', 'resizable', '0')
+Window.size = (1200, 720)
 
 class PlayArea(Widget):
     pass
@@ -48,7 +50,7 @@ class Card(Widget):
         if touch.grab_current is self or self.is_hovered:
             touch.ungrab(self)
             self.is_grabbed = False
-            play_area = self.parent.parent.play_area
+            play_area = self.get_root_window().children[0].play_area
             if play_area.collide_point(self.center_x, self.center_y):
                 self.center_x = play_area.center_x
                 self.center_y = play_area.center_y
@@ -93,7 +95,7 @@ class CardGameApp(App):
         game.hand.add_widget(Card())
         game.hand.add_widget(Card())
         game.hand.add_widget(Card())
-
+        
         return game
 
 if __name__ == '__main__':

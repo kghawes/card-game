@@ -25,7 +25,7 @@
             radius: [18, 18, 18, 18]
 
 <PlayArea>:
-    size: 300, 200
+    size: 800, 360
     canvas:
         Color:
             rgba: (0.5, 0.5, 0.5, 1)
@@ -37,17 +37,89 @@
     hand: hand
     play_area: play_area
 
-    PlayArea:
-        id: play_area
-        center: self.parent.center
+    GridLayout:
+        cols: 3
+        rows: 3
+        width: self.parent.width
+        height: self.parent.height
 
-    Hand:
-        id: hand
-        size_hint: None, None
-        width: self.minimum_width
-        height: 300
-        pos_hint: {'center_x': 0.5, 'y': 0}
-        center_x: self.parent.center_x
-        orientation: 'horizontal'
-        spacing: 8
+        Widget:
+            size_hint: None, None
+            size: 200, 60
+            canvas:
+                Color:
+                    rgba: (1, 0, 0, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        
+        Label:
+            text: 'Card Game'
+            font_size: 32
+            color: (1, 1, 1, 1)
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.5, 'y': 0.9}
+            canvas.before:
+                Color:
+                    rgba: (0, 1, 0, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        
+        Button:
+            text: 'Start Game'
+            size_hint: None, None
+            size: 200, 60
+        
+        Widget:
+            size_hint: None, None
+            size: 200, 360
+            canvas:
+                Color:
+                    rgba: (0, 0, 1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        
+        PlayArea:
+            id: play_area
+
+        Widget:
+            size_hint: None, None
+            size: 200, 360
+            canvas:
+                Color:
+                    rgba: (1, 0, 1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        
+        Widget:
+            size_hint: None, None
+            size: 200, 300
+            canvas:
+                Color:
+                    rgba: (1, 1, 0, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        
+        Hand:
+            id: hand
+            size_hint: None, None
+            width: self.minimum_width
+            height: 300
+            orientation: 'horizontal'
+            spacing: 8
+
+        Widget:
+            size_hint: None, None
+            size: 200, 300
+            canvas:
+                Color:
+                    rgba: (0, 1, 1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 
