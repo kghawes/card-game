@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
+from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import (
     NumericProperty, ReferenceListProperty, ObjectProperty, BooleanProperty
 )
@@ -7,8 +8,8 @@ from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.graphics import Line
 from kivy.config import Config
-Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
 class PlayArea(Widget):
     def on_touch_up(self, touch):
@@ -17,12 +18,11 @@ class PlayArea(Widget):
         
         for child in self.walk():
             if isinstance(child, Card) and child.is_grabbed and self.collide_point(child.center_x, child.center_y):
-                # Do something when a card is grabbed and touch is within PlayArea
-                print("Card is grabbed and touch is within PlayArea")
+                child.center_x = self.center_x
+                child.center_y = self.center_y
                 return True
         
         return False
-
 
 class Card(Widget):
     is_grabbed = BooleanProperty(False)
@@ -49,11 +49,11 @@ class Card(Widget):
             offset_y = touch.y - self.click_location[1]
             new_x = self.starting_position[0] + offset_x
             new_y = self.starting_position[1] + offset_y
-            self.center_x = max(0 + self.width / 2, min(new_x, Window.width - self.width / 2))
-            self.center_y = max(0 + self.height / 2, min(new_y, Window.height - self.height / 2))
+            self.center_x = max(self.width / 2, min(new_x, Window.width - self.width / 2))
+            self.center_y = max(self.height / 2, min(new_y, Window.height - self.height / 2))
             return True
         return False
-    
+
     def on_touch_up(self, touch):
         if touch.grab_current is self:
             touch.ungrab(self)
@@ -61,20 +61,17 @@ class Card(Widget):
             return True
         return False
 
-
 class CardGame(Widget):
+    play_area = ObjectProperty(None)
     card1 = ObjectProperty(None)
     card2 = ObjectProperty(None)
-    play_area = ObjectProperty(None)
-    
 
 
 class CardGameApp(App):
     def build(self):
         game = CardGame()
-        #Clock.schedule_interval(game.update, 1.0 / 60.0)
+        # Clock.schedule_interval(game.update, 1.0 / 60.0)
         return game
-
 
 if __name__ == '__main__':
     CardGameApp().run()
