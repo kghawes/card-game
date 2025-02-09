@@ -1,6 +1,7 @@
 #:kivy 2.3.1
 
 <Card>:
+    size_hint: None, None
     size: 200, 300
     canvas:
         Color:
@@ -17,7 +18,7 @@
             radius: [18, 18, 18, 18]
 
 <PlayArea>:
-    size: 600, 600
+    size: 300, 200
     canvas:
         Color:
             rgba: (0.5, 0.5, 0.5, 1)
@@ -29,16 +30,30 @@
     card1: card1
     card2: card2
     play_area: play_area
+    hand: hand
 
     PlayArea:
         id: play_area
         center: self.parent.center
 
-    Card:
-        id: card1
-        center: 200, 200
+    Hand:
+        id: hand
+        size_hint: None, None
+        width: self.minimum_width
+        height: 300
+        pos_hint: {'center_x': 0.5, 'y': 0}
+        center_x: self.parent.center_x
+        orientation: 'horizontal'
+        canvas:
+            Color:
+                rgba: (0.5, 0.5, 0.5, 1)
+            Rectangle:
+                pos: self.x, self.y + self.height - 10
+                size: self.width, 10
 
-    Card:
-        id: card2
-        center: 600, 200
+        Card:
+            id: card1
+
+        Card:
+            id: card2
 

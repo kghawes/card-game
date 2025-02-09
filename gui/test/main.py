@@ -2,7 +2,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import (
-    NumericProperty, ReferenceListProperty, ObjectProperty, BooleanProperty
+    ObjectProperty, BooleanProperty
 )
 from kivy.clock import Clock
 from kivy.core.window import Window
@@ -61,11 +61,14 @@ class Card(Widget):
             return True
         return False
 
+class Hand(BoxLayout):
+    pass
+
 class CardGame(Widget):
     play_area = ObjectProperty(None)
     card1 = ObjectProperty(None)
     card2 = ObjectProperty(None)
-
+    hand = ObjectProperty(None)
 
 class CardGameApp(App):
     def build(self):
