@@ -45,7 +45,7 @@ class Card(Widget):
         return False
 
     def on_touch_up(self, touch):
-        if touch.grab_current is self:
+        if touch.grab_current is self or self.is_hovered:
             touch.ungrab(self)
             self.is_grabbed = False
             play_area = self.parent.parent.play_area
@@ -59,13 +59,33 @@ class Card(Widget):
         return False
 
 class Hand(BoxLayout):
+    is_card_hovered = BooleanProperty(False)
+
+    def on_touch_up(self, touch):
+        if self.is_card_hovered:
+            for card in self.children:
+                if card.collide_point(touch.x, touch.y):
+                    print("Card hovered and released")
+                    if card.on_touch_up(touch):
+                        print("Card released in hand")
+                        if card.is_hovered:
+                            print("Card released in hand and hovered")
+                            if not card.collide_point(touch.x, touch.y):
+                                print("Card released outside hand")
+                                card.is_hovered = False
+                                self.is_card_hovered = False
+                                return True
+        return False
+
     def on_motion(self, window, pos):
         for card in self.children:
-            if card.collide_point(pos[0], pos[1]) and not card.is_hovered:
+            if card.collide_point(pos[0], pos[1]) and not card.is_hovered and not self.is_card_hovered:
                 card.is_hovered = True
+                self.is_card_hovered = True
                 return True
             if not card.collide_point(pos[0], pos[1]) and card.is_hovered:
                 card.is_hovered = False
+                self.is_card_hovered = False
         return False
 
 class CardGame(Widget):
@@ -78,6 +98,7 @@ class CardGameApp(App):
     def build(self):
         game = CardGame()
         Window.bind(mouse_pos=game.hand.on_motion)
+        game.hand.add_widget(Card())
         return game
 
 if __name__ == '__main__':
