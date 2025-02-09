@@ -60,11 +60,6 @@ class Card(Widget):
 
 class Hand(BoxLayout):
     def on_motion(self, window, pos):
-        if not self.collide_point(pos[0], pos[1]):
-            for card in self.children:
-                if card.is_hovered:
-                    card.is_hovered = False
-                    return False
         for card in self.children:
             if card.collide_point(pos[0], pos[1]) and not card.is_hovered:
                 card.is_hovered = True
@@ -82,7 +77,7 @@ class CardGame(Widget):
 class CardGameApp(App):
     def build(self):
         game = CardGame()
-        Window.bind(mouse_pos=game.hand.on_motion)  # Bind mouse motion to on_motion
+        Window.bind(mouse_pos=game.hand.on_motion)
         return game
 
 if __name__ == '__main__':
