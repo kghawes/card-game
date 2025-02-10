@@ -3,14 +3,13 @@
 <Card>:
     size_hint: None, None
     size: 200, 300
-    canvas.before:
+    canvas:
         Color:
-            rgba: 1, 1, 1, 1 if self.is_hovered else 0  # Change color based on is_hovered
+            rgba: 1, 1, 1, 1 if self.is_hovered else 0
         RoundedRectangle:
             pos: self.center_x - self.width / 2 - 2, self.center_y - self.height / 2 - 2
             size: self.width + 4, self.height + 4
             radius: [20, 20, 20, 20]
-    canvas:
         Color:
             rgba: (0.73, 0.32, 0.07, 1)
         RoundedRectangle:
@@ -37,86 +36,69 @@
     hand: hand
     play_area: play_area
 
-    GridLayout:
-        cols: 3
-        rows: 3
-        width: self.parent.width
-        height: self.parent.height
-        spacing: 8
+    FloatLayout:
+        size: self.parent.size
+        pos: self.parent.pos
+
+        PlayArea:
+            id: play_area
+            pos: 208, 308
+            size: 1084, 544
+            size_hint: None, None
 
         Widget:
+            id: title
+            pos: 208, 860
+            size: 1084, 40
             size_hint: None, None
-            size: 200, 40
             canvas:
-                Color:
-                    rgba: (1, 0, 0, 1)
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-        
-        Label:
-            text: 'Card Game'
-            font_size: 32
-            color: (1, 1, 1, 1)
-            size_hint: None, None
-            size: 1086, 40
-            pos_hint: {'center_x': 0.5, 'y': 0.9}
-            canvas.before:
                 Color:
                     rgba: (0, 1, 0, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
-        
-        Button:
-            text: 'Menu'
-            size_hint: None, None
-            size: 200, 40
-        
+
         Widget:
+            id: menu_button
+            pos: 1300, 860
+            size: 200, 40
             size_hint: None, None
-            size: 200, 544
             canvas:
                 Color:
                     rgba: (0, 0, 1, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
-        
-        PlayArea:
-            id: play_area
 
         Widget:
+            id: options
+            pos: 0, 860
+            size: 200, 40
             size_hint: None, None
-            size: 200, 544
-            canvas:
-                Color:
-                    rgba: (1, 0, 1, 1)
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-        
-        Widget:
-            size_hint: None, None
-            size: 200, 300
             canvas:
                 Color:
                     rgba: (1, 1, 0, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
-        
-        Hand:
-            id: hand
-            size_hint: None, None
-            width: self.minimum_width
-            height: 300
-            orientation: 'horizontal'
-            spacing: 8
 
         Widget:
+            id: player_info
+            pos: 0, 308
+            size: 200, 544
             size_hint: None, None
-            size: 200, 300
+            canvas:
+                Color:
+                    rgba: (1, 0, 0, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        Widget:
+            id: enemy_info
+            pos: 1300, 308
+            size: 200, 544
+            size_hint: None, None
             canvas:
                 Color:
                     rgba: (0, 1, 1, 1)
@@ -124,3 +106,38 @@
                     pos: self.pos
                     size: self.size
 
+        Widget:
+            id: discard_pile
+            pos: 1300, 0
+            size: 200, 300
+            size_hint: None, None
+            canvas:
+                Color:
+                    rgba: (1, 0, 1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        Widget:
+            id: deck
+            pos: 0, 0
+            size: 200, 300
+            size_hint: None, None
+            canvas:
+                Color:
+                    rgba: (1, 0.5, 0, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        Hand:
+            id: hand
+            pos: 208, 0
+            size: 1084, 300
+            size_hint: None, None
+            orientation: 'horizontal'
+            spacing: 8
+            
+
+
+        
