@@ -10,7 +10,6 @@ from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'resizable', '0')
-Window.size = (1200, 720)
 
 class PlayArea(Widget):
     pass

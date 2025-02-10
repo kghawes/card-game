@@ -42,10 +42,11 @@
         rows: 3
         width: self.parent.width
         height: self.parent.height
+        spacing: 8
 
         Widget:
             size_hint: None, None
-            size: 200, 60
+            size: 200, 40
             canvas:
                 Color:
                     rgba: (1, 0, 0, 1)
@@ -58,7 +59,7 @@
             font_size: 32
             color: (1, 1, 1, 1)
             size_hint: None, None
-            size: self.texture_size
+            size: 1086, 40
             pos_hint: {'center_x': 0.5, 'y': 0.9}
             canvas.before:
                 Color:
@@ -68,13 +69,13 @@
                     size: self.size
         
         Button:
-            text: 'Start Game'
+            text: 'Menu'
             size_hint: None, None
-            size: 200, 60
+            size: 200, 40
         
         Widget:
             size_hint: None, None
-            size: 200, 360
+            size: 200, 544
             canvas:
                 Color:
                     rgba: (0, 0, 1, 1)
@@ -87,7 +88,7 @@
 
         Widget:
             size_hint: None, None
-            size: 200, 360
+            size: 200, 544
             canvas:
                 Color:
                     rgba: (1, 0, 1, 1)
