@@ -35,6 +35,13 @@
 <CardGame>:
     hand: hand
     play_area: play_area
+    title: title
+    menu_button: menu_button
+    options: options
+    player_info: player_info
+    enemy_info: enemy_info
+    discard_pile: discard_pile
+    deck: deck
 
     FloatLayout:
         size: self.parent.size
@@ -46,29 +53,27 @@
             size: 1084, 544
             size_hint: None, None
 
-        Widget:
+        Label:
             id: title
+            text: 'Card Game'
+            font_size: 32
+            color: (1, 1, 1, 1)
             pos: 208, 860
             size: 1084, 40
             size_hint: None, None
-            canvas:
+            canvas.before:
                 Color:
                     rgba: (0, 1, 0, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
 
-        Widget:
+        Button:
             id: menu_button
+            text: 'Menu'
             pos: 1300, 860
             size: 200, 40
             size_hint: None, None
-            canvas:
-                Color:
-                    rgba: (0, 0, 1, 1)
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
 
         Widget:
             id: options
