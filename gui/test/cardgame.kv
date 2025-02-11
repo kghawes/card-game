@@ -24,10 +24,9 @@
             radius: [18, 18, 18, 18]
 
 <PlayArea>:
-    size: 800, 360
     canvas:
         Color:
-            rgba: (0.5, 0.5, 0.5, 1)
+            rgba: (0.1, 0.1, 0.1, 1)
         Rectangle:
             pos: self.center_x - self.width / 2, self.center_y - self.height / 2
             size: self.size
@@ -96,10 +95,18 @@
             size: 200, 300
             size_hint: None, None
             canvas:
-                Rectangle:
-                    source: 'card.png'
-                    pos: self.pos
+                Color:
+                    rgba: (0.3, 0.3, 0.3, 1)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2 - 2, self.center_y - self.height / 2 - 2
+                    size: self.width + 4, self.height + 4
+                    radius: [20, 20, 20, 20]
+                Color:
+                    rgba: (0, 0, 0, 1)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
                     size: self.size
+                    radius: [20, 20, 20, 20]
 
         Widget:
             id: deck
@@ -107,10 +114,43 @@
             size: 200, 300
             size_hint: None, None
             canvas:
+                Color:
+                    rgba: (0.3, 0.3, 0.3, 1)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2 - 2, self.center_y - self.height / 2 - 2
+                    size: self.width + 4, self.height + 4
+                    radius: [20, 20, 20, 20]
+                Color:
+                    rgba: (0, 0, 0, 1)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
+                    radius: [20, 20, 20, 20]
+
+        BoxLayout:
+            id: combat_log
+            orientation: 'vertical'
+            pos: 316, 324
+            size: 868, self.minimum_height
+            size_hint: None, None
+            canvas:
+                Color:
+                    rgba: (0.8, 0.1, 0.1, 0.5)
                 Rectangle:
-                    source: 'card.png'
                     pos: self.pos
                     size: self.size
+            Label:
+                text: 'test1'
+                font_size: 16
+                color: (1, 1, 1, 1)
+                size: self.parent.width - 8, self.texture_size[1]
+                size_hint: None, None
+            Label:
+                text: 'test2'
+                font_size: 16
+                color: (1, 1, 1, 1)
+                size: self.parent.width - 8, self.texture_size[1]
+                size_hint: None, None
 
         Hand:
             id: hand
