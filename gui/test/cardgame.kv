@@ -36,8 +36,6 @@
     hand: hand
     play_area: play_area
     title: title
-    menu_button: menu_button
-    options: options
     player_info: player_info
     enemy_info: enemy_info
     discard_pile: discard_pile
@@ -49,8 +47,8 @@
 
         PlayArea:
             id: play_area
-            pos: 208, 308
-            size: 1084, 544
+            pos: 316, 324
+            size: 868, 528
             size_hint: None, None
 
         Label:
@@ -58,8 +56,8 @@
             text: 'Card Game'
             font_size: 32
             color: (1, 1, 1, 1)
-            pos: 208, 860
-            size: 1084, 40
+            pos: 0, 860
+            size: 1500, 40
             size_hint: None, None
             canvas.before:
                 Color:
@@ -68,77 +66,56 @@
                     pos: self.pos
                     size: self.size
 
-        Button:
-            id: menu_button
-            text: 'Menu'
-            pos: 1300, 860
-            size: 200, 40
-            size_hint: None, None
-
-        Widget:
-            id: options
-            pos: 0, 860
-            size: 200, 40
-            size_hint: None, None
-            canvas:
-                Color:
-                    rgba: (1, 1, 0, 1)
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-
         Widget:
             id: player_info
-            pos: 0, 308
-            size: 200, 544
+            pos: 8, 324
+            size: 300, 528
             size_hint: None, None
             canvas:
                 Color:
-                    rgba: (1, 0, 0, 1)
+                    rgba: (1, 1, 1, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
 
         Widget:
             id: enemy_info
-            pos: 1300, 308
-            size: 200, 544
+            pos: 1192, 324
+            size: 300, 528
             size_hint: None, None
             canvas:
                 Color:
-                    rgba: (0, 1, 1, 1)
+                    rgba: (1, 1, 1, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
 
         Widget:
             id: discard_pile
-            pos: 1300, 0
+            pos: 1292, 8
             size: 200, 300
             size_hint: None, None
             canvas:
-                Color:
-                    rgba: (1, 0, 1, 1)
                 Rectangle:
+                    source: 'card.png'
                     pos: self.pos
                     size: self.size
 
         Widget:
             id: deck
-            pos: 0, 0
+            pos: 8, 8
             size: 200, 300
             size_hint: None, None
             canvas:
-                Color:
-                    rgba: (1, 0.5, 0, 1)
                 Rectangle:
+                    source: 'card.png'
                     pos: self.pos
                     size: self.size
 
         Hand:
             id: hand
-            pos: 208, 0
-            size: 1084, 300
+            pos: 316, 8
+            size: 868, 300
             size_hint: None, None
             orientation: 'horizontal'
             spacing: 8
