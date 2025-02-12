@@ -3,6 +3,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
+from kivy.vector import Vector
 from kivy.properties import ObjectProperty, BooleanProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
@@ -18,6 +19,9 @@ class CardPile(Widget):
     pass
 
 class HeldCardLayer(FloatLayout):
+    pass
+
+class Hand(BoxLayout):
     pass
 
 class Card(Widget):
@@ -45,12 +49,10 @@ class Card(Widget):
 
     def on_touch_move(self, touch):
         if touch.grab_current is self:
-            offset_x = touch.x - self.click_location[0]
-            offset_y = touch.y - self.click_location[1]
-            new_x = self.starting_position[0] + offset_x
-            new_y = self.starting_position[1] + offset_y
-            self.center_x = max(self.width / 2, min(new_x, Window.width - self.width / 2))
-            self.center_y = max(self.height / 2, min(new_y, Window.height - self.height / 2))
+            offset = tuple(Vector(*touch.pos) - Vector(*self.click_location))
+            new_position = tuple(Vector(*self.starting_position) + Vector(*offset))
+            self.center_x = max(self.width / 2, min(new_position[0], Window.width - self.width / 2))
+            self.center_y = max(self.height / 2, min(new_position[1], Window.height - self.height / 2))
             return True
         return False
 
@@ -80,9 +82,6 @@ class Card(Widget):
         self.is_draggable = False
         self.is_grabbed = False
 
-class Hand(BoxLayout):
-    pass
-
 class CardGame(Widget):
     play_area = ObjectProperty(None)
     hand = ObjectProperty(None)
@@ -96,12 +95,10 @@ class CardGameApp(App):
         card1_label = Label(text="Card 1", size_hint=(None, None))
         card1.bind(pos=lambda instance, value: card1_label.setter('pos')(card1, (card1.center_x - card1_label.width / 2, card1.center_y - card1_label.height / 2)))
         card1.add_widget(card1_label)
-        
         card2 = Card()
         card2_label = Label(text="Card 2", size_hint=(None, None))
         card2.bind(pos=lambda instance, value: card2_label.setter('pos')(card2, (card2.center_x - card2_label.width / 2, card2.center_y - card2_label.height / 2)))
         card2.add_widget(card2_label)
-        
         card3 = Card()
         card3_label = Label(text="Card 3", size_hint=(None, None))
         card3.bind(pos=lambda instance, value: card3_label.setter('pos')(card3, (card3.center_x - card3_label.width / 2, card3.center_y - card3_label.height / 2)))
