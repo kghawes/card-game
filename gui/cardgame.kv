@@ -31,6 +31,17 @@
             pos: self.center_x - self.width / 2, self.center_y - self.height / 2
             size: self.size
 
+<CardPile>:
+    size: 200, 300
+    size_hint: None, None
+    canvas:
+        Color:
+            rgba: (0.1, 0.1, 0.1, 1)
+        RoundedRectangle:
+            pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+            size: self.size
+            radius: [20, 20, 20, 20]
+
 <CardGame>:
     hand: hand
     play_area: play_area
@@ -89,43 +100,13 @@
                     pos: self.pos
                     size: self.size
 
-        Widget:
+        CardPile:
             id: discard_pile
             pos: 1292, 8
-            size: 200, 300
-            size_hint: None, None
-            canvas:
-                Color:
-                    rgba: (0.3, 0.3, 0.3, 1)
-                RoundedRectangle:
-                    pos: self.center_x - self.width / 2 - 2, self.center_y - self.height / 2 - 2
-                    size: self.width + 4, self.height + 4
-                    radius: [20, 20, 20, 20]
-                Color:
-                    rgba: (0, 0, 0, 1)
-                RoundedRectangle:
-                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
-                    size: self.size
-                    radius: [20, 20, 20, 20]
 
-        Widget:
+        CardPile:
             id: deck
             pos: 8, 8
-            size: 200, 300
-            size_hint: None, None
-            canvas:
-                Color:
-                    rgba: (0.3, 0.3, 0.3, 1)
-                RoundedRectangle:
-                    pos: self.center_x - self.width / 2 - 2, self.center_y - self.height / 2 - 2
-                    size: self.width + 4, self.height + 4
-                    radius: [20, 20, 20, 20]
-                Color:
-                    rgba: (0, 0, 0, 1)
-                RoundedRectangle:
-                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
-                    size: self.size
-                    radius: [20, 20, 20, 20]
 
         BoxLayout:
             id: combat_log
@@ -133,12 +114,6 @@
             pos: 316, 324
             size: 868, self.minimum_height
             size_hint: None, None
-            canvas:
-                Color:
-                    rgba: (0.8, 0.1, 0.1, 0.5)
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
             Label:
                 text: 'test1'
                 font_size: 16

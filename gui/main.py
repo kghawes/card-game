@@ -1,9 +1,7 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import (
-    ObjectProperty, BooleanProperty
-)
+from kivy.properties import ObjectProperty, BooleanProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.config import Config
@@ -12,6 +10,9 @@ Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'resizable', '0')
 
 class PlayArea(Widget):
+    pass
+
+class CardPile(Widget):
     pass
 
 class Card(Widget):
@@ -66,6 +67,8 @@ class Card(Widget):
         self.center_x = discard_pile.center_x
         self.center_y = discard_pile.center_y
         self.parent.remove_widget(self)
+        if discard_pile.children:
+            discard_pile.remove_widget(discard_pile.children[0])
         discard_pile.add_widget(self)
         self.is_draggable = False
         self.is_hovered = False
