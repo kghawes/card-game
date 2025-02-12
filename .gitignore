@@ -1,2 +1,4 @@
 **/__pycache__/
 /.spyproject
+/.vscode
+/kivy_env
