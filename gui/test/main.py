@@ -15,6 +15,7 @@ class PlayArea(Widget):
     pass
 
 class Card(Widget):
+    is_draggable = BooleanProperty(True)
     is_grabbed = BooleanProperty(False)
     is_hovered = BooleanProperty(False)
 
@@ -26,7 +27,7 @@ class Card(Widget):
     def on_touch_down(self, touch):
         if super().on_touch_down(touch):
             return True
-        if not self.collide_point(touch.x, touch.y):
+        if not self.is_draggable or not self.collide_point(touch.x, touch.y):
             return False
         self.click_location = (touch.x, touch.y)
         self.starting_position = (self.center_x, self.center_y)
@@ -53,11 +54,22 @@ class Card(Widget):
             if play_area.collide_point(self.center_x, self.center_y):
                 self.center_x = play_area.center_x
                 self.center_y = play_area.center_y
+                Clock.schedule_once(self.move_to_discard, 1)
             else:
                 self.center_x = self.starting_position[0]
                 self.center_y = self.starting_position[1]
             return True
         return False
+
+    def move_to_discard(self, dt):
+        discard_pile = self.get_root_window().children[0].discard_pile
+        self.center_x = discard_pile.center_x
+        self.center_y = discard_pile.center_y
+        self.parent.remove_widget(self)
+        discard_pile.add_widget(self)
+        self.is_draggable = False
+        self.is_hovered = False
+        self.is_grabbed = False
 
 class Hand(BoxLayout):
     is_card_hovered = BooleanProperty(False)
@@ -86,6 +98,7 @@ class Hand(BoxLayout):
 class CardGame(Widget):
     play_area = ObjectProperty(None)
     hand = ObjectProperty(None)
+    discard_pile = ObjectProperty(None)
 
 class CardGameApp(App):
     def build(self):
