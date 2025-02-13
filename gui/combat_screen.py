@@ -109,5 +109,4 @@ class CardGameApp(App):
         
         return game
 
-if __name__ == '__main__':
-    CardGameApp().run()
+zCardGameApp().run()
