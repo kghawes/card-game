@@ -43,7 +43,10 @@ class Card(Widget):
         touch.grab(self)
         self.hand_index = self.parent.children.index(self)
         animation_layer = self.parent.get_root_window().children[0].animation_layer
-        self.parent.remove_widget(self)
+        hand = self.parent
+        for card in hand.children:
+            card.is_draggable = False
+        hand.remove_widget(self)
         animation_layer.add_widget(self)
         return True
 
@@ -68,6 +71,8 @@ class Card(Widget):
                 hand = self.get_root_window().children[0].hand
                 self.parent.remove_widget(self)
                 hand.add_widget(self, index=self.hand_index)
+                for card in hand.children:
+                    card.is_draggable = True
             return True
         return False
 
@@ -80,7 +85,9 @@ class Card(Widget):
             discard_pile.remove_widget(discard_pile.children[0])
         discard_pile.add_widget(self)
         self.is_draggable = False
-        self.is_grabbed = False
+        hand = self.get_root_window().children[0].hand
+        for card in hand.children:
+            card.is_draggable = True
 
 class CardGame(Widget):
     play_area = ObjectProperty(None)
@@ -109,4 +116,4 @@ class CardGameApp(App):
         
         return game
 
-zCardGameApp().run()
+CardGameApp().run()
