@@ -45,7 +45,7 @@
     discard_pile: discard_pile
     deck: deck
     combat_log: combat_log
-    held_card_layer: held_card_layer
+    animation_layer: animation_layer
 
     FloatLayout:
         size: self.parent.size
@@ -67,7 +67,7 @@
             size_hint: None, None
             canvas.before:
                 Color:
-                    rgba: (0, 1, 0, 1)
+                    rgba: (0.1, 0.1, 0.1, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -79,7 +79,7 @@
             size_hint: None, None
             canvas:
                 Color:
-                    rgba: (1, 1, 1, 1)
+                    rgba: (0.1, 0.1, 0.1, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -91,7 +91,7 @@
             size_hint: None, None
             canvas:
                 Color:
-                    rgba: (1, 1, 1, 1)
+                    rgba: (0.1, 0.1, 0.1, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -131,11 +131,10 @@
             orientation: 'horizontal'
             spacing: 8
         
-        HeldCardLayer:
-            id: held_card_layer
+        AnimationLayer:
+            id: animation_layer
             size: self.parent.size
             size_hint: None, None
-            
 
 
-        
+

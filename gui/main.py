@@ -18,7 +18,7 @@ class PlayArea(Widget):
 class CardPile(Widget):
     pass
 
-class HeldCardLayer(FloatLayout):
+class AnimationLayer(FloatLayout):
     pass
 
 class Hand(BoxLayout):
@@ -42,9 +42,9 @@ class Card(Widget):
         self.starting_position = (self.center_x, self.center_y)
         touch.grab(self)
         self.hand_index = self.parent.children.index(self)
-        held_card_layer = self.parent.get_root_window().children[0].held_card_layer
+        animation_layer = self.parent.get_root_window().children[0].animation_layer
         self.parent.remove_widget(self)
-        held_card_layer.add_widget(self)
+        animation_layer.add_widget(self)
         return True
 
     def on_touch_move(self, touch):
@@ -86,7 +86,7 @@ class CardGame(Widget):
     play_area = ObjectProperty(None)
     hand = ObjectProperty(None)
     discard_pile = ObjectProperty(None)
-    held_card_layer = ObjectProperty(None)
+    animation_layer = ObjectProperty(None)
 
 class CardGameApp(App):
     def build(self):
