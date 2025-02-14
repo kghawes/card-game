@@ -3,11 +3,13 @@ from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
+from kivy.graphics import Color, RoundedRectangle
 from kivy.vector import Vector
-from kivy.properties import ObjectProperty, BooleanProperty
+from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.config import Config
+import gui_constants as constants
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'resizable', '0')
@@ -46,12 +48,14 @@ class Hand(FloatLayout):
 
 class Card(Widget):
     is_draggable = BooleanProperty(True)
+    border_color = ColorProperty([0, 0, 0, 0])
 
-    def __init__(self, **kwargs):
+    def __init__(self, card_data, **kwargs):
         super().__init__(**kwargs)
         self.click_location = (0, 0)
         self.starting_position = (self.center_x, self.center_y)
         self.hand_index = 0
+        self.border_color = constants.CARD_TYPE_COLORS[card_data['type']]
 
     def on_touch_down(self, touch):
         if super().on_touch_down(touch):
@@ -118,26 +122,26 @@ class CardGame(Widget):
 class CardGameApp(App):
     def build(self):
         game = CardGame()
-        card1 = Card()
+        card1 = Card({'type': 'WEAPON'})
         card1_label = Label(text="Card 1", size_hint=(None, None))
         card1.bind(pos=lambda instance, value: card1_label.setter('pos')(card1, (card1.center_x - card1_label.width / 2, card1.center_y - card1_label.height / 2)))
         card1.add_widget(card1_label)
-        card2 = Card()
+        card2 = Card({'type': 'ARMOR'})
         card2_label = Label(text="Card 2", size_hint=(None, None))
         card2.bind(pos=lambda instance, value: card2_label.setter('pos')(card2, (card2.center_x - card2_label.width / 2, card2.center_y - card2_label.height / 2)))
         card2.add_widget(card2_label)
-        card3 = Card()
+        card3 = Card({'type': 'SPELL'})
         card3_label = Label(text="Card 3", size_hint=(None, None))
         card3.bind(pos=lambda instance, value: card3_label.setter('pos')(card3, (card3.center_x - card3_label.width / 2, card3.center_y - card3_label.height / 2)))
         card3.add_widget(card3_label)
         game.hand.add_widget(card1)
         game.hand.add_widget(card2)
         game.hand.add_widget(card3)
-        game.hand.add_widget(Card())
-        game.hand.add_widget(Card())
-        game.hand.add_widget(Card())
-        game.hand.add_widget(Card())
-        game.hand.position_cards()  
+        game.hand.add_widget(Card({'type': 'SKILL'}))
+        game.hand.add_widget(Card({'type': 'ITEM'}))
+        game.hand.add_widget(Card({'type': 'CONSUMABLE'}))
+        game.hand.add_widget(Card({'type': 'WEAPON'}))
+        game.hand.position_cards()
         return game
 
 CardGameApp().run()
