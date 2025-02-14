@@ -1,9 +1,7 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
-from kivy.graphics import Color, RoundedRectangle
 from kivy.vector import Vector
 from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty
 from kivy.clock import Clock
@@ -18,7 +16,12 @@ class PlayArea(Widget):
     pass
 
 class CardPile(Widget):
-    pass
+    def show_cardback(self):
+        cardback = Card({'type': 'CARD_BACK'})
+        cardback.is_draggable = False
+        cardback.center_x = self.center_x
+        cardback.center_y = self.center_y
+        self.add_widget(cardback)
 
 class AnimationLayer(FloatLayout):
     pass
@@ -116,8 +119,12 @@ class Card(Widget):
 class CardGame(Widget):
     play_area = ObjectProperty(None)
     hand = ObjectProperty(None)
+    deck = ObjectProperty(None)
     discard_pile = ObjectProperty(None)
     animation_layer = ObjectProperty(None)
+
+    def end_turn(self):
+        pass
 
 class CardGameApp(App):
     def build(self):
@@ -142,6 +149,7 @@ class CardGameApp(App):
         game.hand.add_widget(Card({'type': 'CONSUMABLE'}))
         game.hand.add_widget(Card({'type': 'WEAPON'}))
         game.hand.position_cards()
+        game.deck.show_cardback()
         return game
 
 CardGameApp().run()

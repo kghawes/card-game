@@ -9,13 +9,14 @@
         RoundedRectangle:
             pos: self.center_x - self.width / 2, self.center_y - self.height / 2
             size: self.size
-            radius: [20, 20, 20, 20]
+            radius: [15, 15, 15, 15]
         Color:
-            rgba: (0.1, 0.1, 0.1, 1)
+            rgba: (1, 1, 1, 1)
         RoundedRectangle:
+            source: 'assets/cardbg.png'
             pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4
             size: self.width - 8, self.height - 8
-            radius: [18, 18, 18, 18]
+            radius: [13, 13, 13, 13]
 
 <PlayArea>:
     canvas:
@@ -103,6 +104,19 @@
         CardPile:
             id: deck
             pos: 8, 8
+
+        Button:
+            text: 'End Turn'
+            size_hint: None, None
+            size: 200, 40
+            pos: 1292, 324
+            on_release: root.end_turn()
+            background_normal: 'assets/btn_up.9.png'
+            background_color: (1, 1, 1, 1)
+            color: (1, 1, 1, 1)
+            font_size: 18
+            bold: True
+            background_down: 'assets/btn_down.9.png'
 
         BoxLayout:
             id: combat_log
