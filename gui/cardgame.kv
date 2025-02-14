@@ -125,11 +125,15 @@
 
         Hand:
             id: hand
-            pos: 226, 8
-            size: 1048, 300
+            pos: 234, 8
+            size: 1032, 300
             size_hint: None, None
-            orientation: 'horizontal'
-            spacing: 8
+            canvas:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
         
         AnimationLayer:
             id: animation_layer

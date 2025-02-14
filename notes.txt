@@ -31,6 +31,24 @@ Style (Long Blade, Blunt Weapon, Short Blade, Marksman Weapon, Staff, Natural We
   Thief: can use short blade, marksman weapon
   Mage: can use staff
   Only enemies can use natural weapons
+Substyle (non-mechanical, card design only)
+  Long Blades
+    Broadsword - Weakest and heaviest (iron, imperial, ebony, daedric)
+    Saber - Lighter but weak (iron, steel)
+    Longsword - Balanced (iron, steel, silver, glass, ebony, daedric)
+    Katana - Superior (steel, daedric)
+    Claymore - Heavier and more powerful (iron, steel, silver, glass, dwarven, daedric)
+    Dai-katana - Supreme (steel, daedric)
+  Blunt Weapons ["Heavy Weapons" and add axes?]
+    Mace - Strong and heavy (iron, steel, dwarven, ebony, daedric)
+    Warhammer - Stronger and heavier (iron, steel, dwarven, orc, daedric)
+  Short Blades
+    Daggers - Weak but fast (chitin, iron, steel, silver, glass, daedric)
+    Shortswords - Balanced (chitin, iron, steel, imperial, silver, dwarven, ebony, daedric)
+  Marksman Weapons
+    Throwing weapons - Weak but efficient (chitin, iron, steel x2, silver, glass x2, ebony, daedric)
+    Bows - Stronger but less efficient (chitin, short, long, steel, daedric)
+    Crossbows - Balanced (steel, dwarven)
 
 Armor
 Weight (Light, Medium, Heavy, or Natural)
@@ -38,6 +56,19 @@ Weight (Light, Medium, Heavy, or Natural)
   Thief: can use light or medium
   Mage: can use none
   Only enemies can use natural armor
+Materials (non-mechanical, card design only)
+  Light
+    Chitin 1
+    Glass 7
+  Medium
+    Bonemold 4
+    Orcish 6
+  Heavy
+    Iron 2
+    Steel 3
+    Dwemer 5
+    Ebony 8
+    Daedric 9
 
 Spells
 School

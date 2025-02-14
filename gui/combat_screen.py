@@ -21,8 +21,28 @@ class CardPile(Widget):
 class AnimationLayer(FloatLayout):
     pass
 
-class Hand(BoxLayout):
-    pass
+class Hand(FloatLayout):
+    def position_cards(self):
+        cards = self.children
+        x = self.center_x
+        y = self.center_y
+        if len(cards) <= 5:
+            for i, card in enumerate(cards):
+                center_index = len(cards) // 2
+                card.center_x = x + (i - center_index) * 208 + 104 * (1 - len(cards) % 2)
+                card.center_y = y
+        else:
+            for i, card in enumerate(cards):
+                card.center_x = i * (832 / (len(cards) - 1)) + 334
+                card.center_y = y
+    
+    def add_to_hand(self, card, index=0):
+        self.add_widget(card, index=index)
+        self.position_cards()
+    
+    def remove_from_hand(self, card):
+        self.remove_widget(card)
+        self.position_cards()
 
 class Card(Widget):
     is_draggable = BooleanProperty(True)
@@ -46,7 +66,7 @@ class Card(Widget):
         hand = self.parent
         for card in hand.children:
             card.is_draggable = False
-        hand.remove_widget(self)
+        hand.remove_from_hand(self)
         animation_layer.add_widget(self)
         return True
 
@@ -70,7 +90,7 @@ class Card(Widget):
             else:
                 hand = self.get_root_window().children[0].hand
                 self.parent.remove_widget(self)
-                hand.add_widget(self, index=self.hand_index)
+                hand.add_to_hand(self, index=self.hand_index)
                 for card in hand.children:
                     card.is_draggable = True
             return True
@@ -113,7 +133,11 @@ class CardGameApp(App):
         game.hand.add_widget(card1)
         game.hand.add_widget(card2)
         game.hand.add_widget(card3)
-        
+        game.hand.add_widget(Card())
+        game.hand.add_widget(Card())
+        game.hand.add_widget(Card())
+        game.hand.add_widget(Card())
+        game.hand.position_cards()  
         return game
 
 CardGameApp().run()
