@@ -1,3 +1,4 @@
+"""Combat Screen Module for Card Game"""
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
@@ -17,10 +18,14 @@ Config.set('graphics', 'resizable', '0')
 Builder.load_file('card.kv')
 
 class PlayArea(Widget):
+    """Widget representing the play area where cards can be played."""
     pass
 
 class CardPile(Widget):
+    """Widget representing a pile of cards."""
+
     def show_cardback(self):
+        """Displays the back of a card."""
         cardback = Card({'type': 'CARD_BACK'})
         cardback.is_draggable = False
         cardback.center_x = self.center_x
@@ -31,10 +36,14 @@ class CardPile(Widget):
             Rectangle(pos=cardback.pos, size=cardback.size, source='assets/cardback.png')
 
 class AnimationLayer(FloatLayout):
+    """Layer for handling animations or widgets that need to be temporarily on top of the z-stack."""
     pass
 
 class Hand(FloatLayout):
+    """Widget representing the player's hand of cards."""
+
     def position_cards(self):
+        """Positions the cards in the hand."""
         cards = self.children
         x = self.center_x
         y = self.center_y
@@ -49,20 +58,24 @@ class Hand(FloatLayout):
                 card.center_y = y
     
     def add_to_hand(self, card, index=0):
+        """Adds a card to the hand and repositions the cards."""
         self.add_widget(card, index=index)
         self.position_cards()
     
     def remove_from_hand(self, card):
+        """Removes a card from the hand and repositions the cards."""
         self.remove_widget(card)
         self.position_cards()
 
 class Card(Widget):
+    """Widget representing a card."""
     is_draggable = BooleanProperty(True)
     border_color = ColorProperty([0, 0, 0, 0])
     resource_cost_color = ColorProperty([0, 0, 0, 0])
     card_type = StringProperty('CARD_BACK')
 
     def __init__(self, card_data, **kwargs):
+        """Initializes a card with the given data."""
         super().__init__(**kwargs)
         self.click_location = (0, 0)
         self.starting_position = (self.center_x, self.center_y)
@@ -71,6 +84,7 @@ class Card(Widget):
         self.border_color = constants.CARD_TYPE_COLORS[self.card_type]['border']
 
     def on_touch_down(self, touch):
+        """When clicked, pick up the card."""
         if super().on_touch_down(touch):
             return True
         if not self.is_draggable or not self.collide_point(touch.x, touch.y):
@@ -88,6 +102,7 @@ class Card(Widget):
         return True
 
     def on_touch_move(self, touch):
+        """Drag the card with the mouse."""
         if touch.grab_current is self:
             offset = tuple(Vector(*touch.pos) - Vector(*self.click_location))
             new_position = tuple(Vector(*self.starting_position) + Vector(*offset))
@@ -97,6 +112,7 @@ class Card(Widget):
         return False
 
     def on_touch_up(self, touch):
+        """Release a held card."""
         if touch.grab_current is self:
             touch.ungrab(self)
             play_area = self.get_root_window().children[0].play_area
@@ -114,6 +130,7 @@ class Card(Widget):
         return False
 
     def move_to_discard(self, dt):
+        """Moves the card to the discard pile."""
         discard_pile = self.get_root_window().children[0].discard_pile
         self.center_x = discard_pile.center_x
         self.center_y = discard_pile.center_y
@@ -127,6 +144,7 @@ class Card(Widget):
             card.is_draggable = True
 
 class CardGame(Widget):
+    """Main widget for the card game."""
     play_area = ObjectProperty(None)
     hand = ObjectProperty(None)
     deck = ObjectProperty(None)
@@ -134,10 +152,14 @@ class CardGame(Widget):
     animation_layer = ObjectProperty(None)
 
     def end_turn(self):
+        """Ends the current turn."""
         pass
 
 class CardGameApp(App):
+    """Main application class for the card game."""
+    
     def build(self):
+        """Builds the card game application."""
         game = CardGame()
         card1 = Card({'type': 'WEAPON'})
         card1_label = Label(text="Card 1", size_hint=(None, None))
