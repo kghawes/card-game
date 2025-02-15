@@ -1,0 +1,31 @@
+#:kivy 2.3.1
+
+<Card>:
+    size_hint: None, None
+    size: 200, 300
+    canvas:
+        Color:
+            rgba: self.border_color
+        RoundedRectangle:
+            pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+            size: self.size
+            radius: [15, 15, 15, 15]
+        Color:
+            rgba: (1, 1, 1, 1)
+        RoundedRectangle:
+            source: 'assets/cardbg.png'
+            pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4
+            size: self.width - 8, self.height - 8
+            radius: [13, 13, 13, 13]
+        Color:
+            rgba: self.border_color
+        RoundedRectangle:
+            pos: self.x + self.width - 40, self.y + self.height - 40
+            size: 40, 40
+            radius: [0, 15, 0, 15]
+        Color:
+            rgba: (0, 0, 0, 1)
+        RoundedRectangle:
+            pos: self.x + self.width - 38, self.y + self.height - 38
+            size: 36, 36
+            radius: [0, 13, 0, 13]

@@ -2,16 +2,19 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
-from kivy.graphics import Rectangle
+from kivy.graphics import Rectangle, Color
 from kivy.vector import Vector
 from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
+from kivy.lang import Builder
 from kivy.config import Config
 import gui_constants as constants
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'resizable', '0')
+
+Builder.load_file('card.kv')
 
 class PlayArea(Widget):
     pass
@@ -24,7 +27,8 @@ class CardPile(Widget):
         cardback.center_y = self.center_y
         self.add_widget(cardback)
         with cardback.canvas:
-            cardback.canvas.add(Rectangle(pos=cardback.pos, size=cardback.size, source='assets/cardback.png'))
+            Color(rgba=[1, 1, 1, 1])
+            Rectangle(pos=cardback.pos, size=cardback.size, source='assets/cardback.png')
 
 class AnimationLayer(FloatLayout):
     pass
@@ -65,7 +69,6 @@ class Card(Widget):
         self.hand_index = 0
         self.card_type = card_data['type']
         self.border_color = constants.CARD_TYPE_COLORS[self.card_type]['border']
-        self.resource_cost_color = constants.CARD_TYPE_COLORS[self.card_type]['cost']
 
     def on_touch_down(self, touch):
         if super().on_touch_down(touch):

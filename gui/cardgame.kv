@@ -1,33 +1,4 @@
-#:kivy 2.3.1
-
-<Card>:
-    size_hint: None, None
-    size: 200, 300
-    canvas:
-        Color:
-            rgba: self.border_color
-        RoundedRectangle:
-            pos: self.center_x - self.width / 2, self.center_y - self.height / 2
-            size: self.size
-            radius: [15, 15, 15, 15]
-        Color:
-            rgba: (1, 1, 1, 1)
-        RoundedRectangle:
-            source: 'assets/cardbg.png'
-            pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4
-            size: self.width - 8, self.height - 8
-            radius: [13, 13, 13, 13]
-        Color:
-            rgba: (0, 0, 0, 0) if self.card_type in ('ITEM', 'CONSUMABLE', 'CARD_BACK') else (1, 1, 1, 0.33)
-        Ellipse:
-            pos: self.x, self.y + self.height - 32
-            size: 32, 32
-        Color:
-            rgba: self.resource_cost_color
-        Ellipse:
-            pos: self.x + 2, self.y + self.height - 30
-            size: 28, 28
-            source: 'assets/resource.png'
+#:kivy 2.3.1        
 
 <PlayArea>:
     canvas:
