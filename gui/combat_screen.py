@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
+from kivy.graphics import Rectangle
 from kivy.vector import Vector
 from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty
 from kivy.clock import Clock
@@ -22,6 +23,8 @@ class CardPile(Widget):
         cardback.center_x = self.center_x
         cardback.center_y = self.center_y
         self.add_widget(cardback)
+        with cardback.canvas:
+            cardback.canvas.add(Rectangle(pos=cardback.pos, size=cardback.size, source='assets/cardback.png'))
 
 class AnimationLayer(FloatLayout):
     pass

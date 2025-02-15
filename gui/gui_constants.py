@@ -5,5 +5,5 @@ CARD_TYPE_COLORS = {
     "SPELL": [0.447, 0.376, 0.702, 1.0], # purple-blue
     "SKILL": [0.471, 0.702, 0.376, 1.0], # green
     "ARMOR": [0.961, 0.616, 0.204, 1.0], # orange-yellow
-    "CARD_BACK": [0.5, 0.5, 0.5, 1.0]
+    "CARD_BACK": [0.656, 0.547, 0.469, 1.0] # brown
 }
