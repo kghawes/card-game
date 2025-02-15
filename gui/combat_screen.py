@@ -4,7 +4,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.graphics import Rectangle
 from kivy.vector import Vector
-from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty
+from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.config import Config
@@ -55,13 +55,17 @@ class Hand(FloatLayout):
 class Card(Widget):
     is_draggable = BooleanProperty(True)
     border_color = ColorProperty([0, 0, 0, 0])
+    resource_cost_color = ColorProperty([0, 0, 0, 0])
+    card_type = StringProperty('CARD_BACK')
 
     def __init__(self, card_data, **kwargs):
         super().__init__(**kwargs)
         self.click_location = (0, 0)
         self.starting_position = (self.center_x, self.center_y)
         self.hand_index = 0
-        self.border_color = constants.CARD_TYPE_COLORS[card_data['type']]
+        self.card_type = card_data['type']
+        self.border_color = constants.CARD_TYPE_COLORS[self.card_type]['border']
+        self.resource_cost_color = constants.CARD_TYPE_COLORS[self.card_type]['cost']
 
     def on_touch_down(self, touch):
         if super().on_touch_down(touch):
@@ -150,7 +154,7 @@ class CardGameApp(App):
         game.hand.add_widget(Card({'type': 'SKILL'}))
         game.hand.add_widget(Card({'type': 'ITEM'}))
         game.hand.add_widget(Card({'type': 'CONSUMABLE'}))
-        game.hand.add_widget(Card({'type': 'WEAPON'}))
+        game.hand.add_widget(Card({'type': 'SPELL'}))
         game.hand.position_cards()
         game.deck.show_cardback()
         return game

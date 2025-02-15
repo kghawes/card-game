@@ -17,6 +17,11 @@
             pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4
             size: self.width - 8, self.height - 8
             radius: [13, 13, 13, 13]
+        Color:
+            rgba: self.resource_cost_color
+        Ellipse:
+            pos: self.x + 10, self.y + self.height - 20
+            size: 20, 20
 
 <PlayArea>:
     canvas:
