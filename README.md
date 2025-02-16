@@ -72,7 +72,6 @@ GUI structure:
 ## Getting Started
 ### Prerequisites
 - Python 3.x
-- Kivy 2.3.1
 
 ### Installation
 1. Clone the repository:
