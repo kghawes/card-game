@@ -7,4 +7,4 @@ assignees: kghawes
 
 ---
 
-** What would you like the developer to know? **
+**What would you like the developer to know?**
