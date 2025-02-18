@@ -3,9 +3,9 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
-from kivy.graphics import Rectangle, Color
+from kivy.graphics import Rectangle, Color, RoundedRectangle
 from kivy.vector import Vector
-from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty
+from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty, NumericProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
@@ -72,6 +72,8 @@ class Card(Widget):
     is_draggable = BooleanProperty(True)
     border_color = ColorProperty([0, 0, 0, 0])
     resource_cost_color = ColorProperty([0, 0, 0, 0])
+    cost_indicator = ObjectProperty([0, 0, 0, 0, 0, 0])
+    resource_cost_alpha = NumericProperty(1)
     card_type = StringProperty('CARD_BACK')
 
     def __init__(self, card_data, **kwargs):
@@ -82,6 +84,9 @@ class Card(Widget):
         self.hand_index = 0
         self.card_type = card_data['type']
         self.border_color = constants.CARD_TYPE_COLORS[self.card_type]['border']
+        self.resource_cost_color = constants.RESOURCE_COLORS[constants.CARD_TYPE_COLORS[self.card_type]['resource']]
+        self.cost_indicator = constants.RESOURCE_INDICATOR_OFFSETS[constants.CARD_TYPE_COLORS[self.card_type]['indicator']]
+        self.resource_cost_alpha = constants.CARD_TYPE_COLORS[self.card_type]['indicator_transparency']
 
     def on_touch_down(self, touch):
         """When clicked, pick up the card."""

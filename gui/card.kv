@@ -18,14 +18,25 @@
             size: self.width - 8, self.height - 8
             radius: [13, 13, 13, 13]
         Color:
-            rgba: self.border_color
+            rgba: self.border_color if self.resource_cost_alpha == 1 else (0, 0, 0, 0)
         RoundedRectangle:
             pos: self.x + self.width - 40, self.y + self.height - 40
             size: 40, 40
             radius: [0, 15, 0, 15]
         Color:
-            rgba: (0, 0, 0, 1)
+            rgba: (0, 0, 0, self.resource_cost_alpha)
         RoundedRectangle:
             pos: self.x + self.width - 38, self.y + self.height - 38
             size: 36, 36
             radius: [0, 13, 0, 13]
+        Color:
+            rgba: self.resource_cost_color
+        Triangle:
+            points: [self.x + self.width - self.cost_indicator[0], self.y + self.height - self.cost_indicator[1], self.x + self.width - self.cost_indicator[2], self.y + self.height - self.cost_indicator[3], self.x + self.width - self.cost_indicator[4], self.y + self.height - self.cost_indicator[5]]
+
+    Label:
+        text: '6'
+        font_size: 24
+        font_name: 'assets/planewalker.otf'
+        color: self.parent.resource_cost_color if self.parent.resource_cost_alpha == 1 else (0, 0, 0, 0)
+        pos: self.parent.x + self.parent.width - 69, self.parent.y + self.parent.height - 69
