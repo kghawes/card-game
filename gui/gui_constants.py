@@ -2,7 +2,7 @@ RESOURCE_COLORS = {
     "HEALTH": [0.68, 0.281, 0.168, 1.0], # red
     "STAMINA": [0.0, 0.574, 0.32, 1.0], # green
     "MAGICKA": [0.262, 0.305, 0.566, 1.0], # blue
-    "NONE": [0.6, 0.6, 0.6, 1.0] # grey
+    "NONE": [0.44, 0.44, 0.44, 1.0] # grey
 }
 
 RESOURCE_INDICATOR_OFFSETS = {
