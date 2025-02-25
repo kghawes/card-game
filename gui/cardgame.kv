@@ -1,24 +1,5 @@
 #:kivy 2.3.1        
 
-<PlayArea>:
-    canvas:
-        Color:
-            rgba: (0.1, 0.1, 0.1, 1)
-        Rectangle:
-            pos: self.center_x - self.width / 2, self.center_y - self.height / 2
-            size: self.size
-
-<CardPile>:
-    size: 200, 300
-    size_hint: None, None
-    canvas:
-        Color:
-            rgba: (0.1, 0.1, 0.1, 1)
-        RoundedRectangle:
-            pos: self.center_x - self.width / 2, self.center_y - self.height / 2
-            size: self.size
-            radius: [20, 20, 20, 20]
-
 <CardGame>:
     hand: hand
     play_area: play_area
@@ -34,11 +15,17 @@
         size: self.parent.size
         pos: self.parent.pos
 
-        PlayArea:
+        Widget:
             id: play_area
             pos: 316, 324
             size: 868, 528
             size_hint: None, None
+            canvas:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                Rectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
 
         Label:
             id: title
@@ -79,13 +66,49 @@
                     pos: self.pos
                     size: self.size
 
-        CardPile:
+        Widget:
             id: discard_pile
             pos: 1292, 8
+            size: 200, 300
+            size_hint: None, None
+            canvas.before:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
+                    radius: [20, 20, 20, 20]
 
-        CardPile:
+        Widget:
             id: deck
             pos: 8, 8
+            size: 200, 300
+            size_hint: None, None
+            canvas.before:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
+                    radius: [20, 20, 20, 20]
+            canvas:
+                Color:
+                    rgba: (0.62, 0.569, 0.443, 1.0) #(0.656, 0.547, 0.469, 1.0)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
+                    radius: [15, 15, 15, 15]
+                Color:
+                    rgba: (1, 1, 1, 1)
+                RoundedRectangle:
+                    source: 'assets/cardbg.png'
+                    pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4
+                    size: self.width - 8, self.height - 8
+                    radius: [13, 13, 13, 13]
+                Rectangle:
+                    source: 'assets/cardback1.png'
+                    pos: self.pos
+                    size: self.size
 
         Button:
             text: 'End Turn'

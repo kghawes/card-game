@@ -18,13 +18,13 @@
             size: self.width - 8, self.height - 8
             radius: [13, 13, 13, 13]
         Color:
-            rgba: self.border_color if self.resource_cost_alpha == 1 else (0, 0, 0, 0)
+            rgba: self.border_color
         RoundedRectangle:
             pos: self.x + self.width - 40, self.y + self.height - 40
             size: 40, 40
             radius: [0, 15, 0, 15]
         Color:
-            rgba: (0, 0, 0, self.resource_cost_alpha)
+            rgba: (0, 0, 0, 1)
         RoundedRectangle:
             pos: self.x + self.width - 38, self.y + self.height - 38
             size: 36, 36
@@ -33,10 +33,36 @@
             rgba: self.resource_cost_color
         Triangle:
             points: [self.x + self.width - self.cost_indicator[0], self.y + self.height - self.cost_indicator[1], self.x + self.width - self.cost_indicator[2], self.y + self.height - self.cost_indicator[3], self.x + self.width - self.cost_indicator[4], self.y + self.height - self.cost_indicator[5]]
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            texture: self.texture
+            pos: self.x + 40, self.y + 160
+            size: 120, 120
 
     Label:
-        text: '0'
+        text: self.parent.cost
         font_size: 18
-        font_name: 'assets/Comfortaa-Bold.ttf'
-        color: self.parent.resource_cost_color if self.parent.resource_cost_alpha == 1 else (0, 0, 0, 0)
+        font_name: 'assets/rubik.ttf'
+        color: self.parent.resource_cost_color
         pos: self.parent.x + self.parent.width - 69, self.parent.y + self.parent.height - 69
+    
+    Label:
+        text: self.parent.name
+        font_size: 19
+        font_name: 'assets/planewalker.otf'
+        color: (1, 1, 1, 1)
+        pos: self.parent.x + 35, self.parent.y + self.parent.height - 110
+        text_size: 150, 100
+        halign: 'center'
+        valign: 'top'
+    
+    Label:
+        text: self.parent.effects
+        font_size: 15
+        font_name: 'assets/rubik.ttf'
+        color: (1, 1, 1, 1)
+        pos: self.parent.x + 52, self.parent.y + 36
+        text_size: 190, 150
+        halign: 'center'
+        valign: 'top'

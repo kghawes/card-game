@@ -15,44 +15,32 @@ CARD_TYPE_COLORS = {
     "WEAPON": {
         "border": [0.882, 0.227, 0.306, 1.0], # red
         "resource": "STAMINA",
-        "indicator": "LOWER_RIGHT",
-        "indicator_transparency": 1
+        "indicator": "LOWER_RIGHT"
     },
     "ITEM": {
         "border": [0.376, 0.631, 0.702, 1.0], # blue
         "resource": "NONE",
-        "indicator": "NONE",
-        "indicator_transparency": 1
+        "indicator": "NONE"
     },
     "CONSUMABLE": {
         "border": [0.75, 0.38, 0.63, 1.0], # pink
         "resource": "NONE",
-        "indicator": "NONE",
-        "indicator_transparency": 1
+        "indicator": "NONE"
     },
     "SPELL": {
         "border": [0.547, 0.375, 0.699, 1.0], # purple
         "resource": "MAGICKA",
-        "indicator": "UPPER_LEFT",
-        "indicator_transparency": 1
+        "indicator": "UPPER_LEFT"
     },
     "SKILL": {
         "border": [0.641, 0.699, 0.375, 1.0], # green
         "resource": "STAMINA",
-        "indicator": "LOWER_RIGHT",
-        "indicator_transparency": 1
+        "indicator": "LOWER_RIGHT"
     },
     "ARMOR": {
         "border": [0.961, 0.616, 0.204, 1.0], # orange
         "resource": "STAMINA",
-        "indicator": "LOWER_RIGHT",
-        "indicator_transparency": 1
-    },
-    "CARD_BACK": {
-        "border": [0.656, 0.547, 0.469, 1.0], # tan
-        "resource": "NONE",
-        "indicator": "NONE",
-        "indicator_transparency": 0
+        "indicator": "LOWER_RIGHT"
     }
 }
 

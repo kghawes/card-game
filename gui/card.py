@@ -1,4 +1,3 @@
-import gui_constants as constants
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
@@ -7,6 +6,8 @@ from kivy.vector import Vector
 from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty, NumericProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
+import gui_constants as constants
+from asset_cache import AssetCache
 
 class Card(Widget):
     """Widget representing a card."""
@@ -14,8 +15,11 @@ class Card(Widget):
     border_color = ColorProperty([0, 0, 0, 0])
     resource_cost_color = ColorProperty([0, 0, 0, 0])
     cost_indicator = ObjectProperty([0, 0, 0, 0, 0, 0])
-    resource_cost_alpha = NumericProperty(1)
-    card_type = StringProperty('CARD_BACK')
+    card_type = StringProperty('NONE')
+    name = StringProperty('Card Name')
+    cost = StringProperty('0')
+    effects = StringProperty('No Effect')
+    texture = ObjectProperty(None)
 
     def __init__(self, card_data, **kwargs):
         """Initializes a card with the given data."""
@@ -23,11 +27,26 @@ class Card(Widget):
         self.click_location = (0, 0)
         self.starting_position = (self.center_x, self.center_y)
         self.hand_index = 0
+        self.render_card(card_data)
+
+    def render_card(self, card_data):
+        """Renders the card with the given data."""
         self.card_type = card_data['type']
         self.border_color = constants.CARD_TYPE_COLORS[self.card_type]['border']
         self.resource_cost_color = constants.RESOURCE_COLORS[constants.CARD_TYPE_COLORS[self.card_type]['resource']]
         self.cost_indicator = constants.RESOURCE_INDICATOR_OFFSETS[constants.CARD_TYPE_COLORS[self.card_type]['indicator']]
-        self.resource_cost_alpha = constants.CARD_TYPE_COLORS[self.card_type]['indicator_transparency']
+        self.name = card_data['name']
+        self.card_id = card_data['id']
+        self.texture = AssetCache.get_texture(f'assets/cards/{self.card_id}.png')
+        self.cost = card_data['cost']
+        self.effects = self.format_effects(card_data['effects'])
+    
+    def format_effects(self, effects):
+        """Formats the effects of the card for display."""
+        formatted_effects = []
+        for effect, level in effects.items():
+            formatted_effects.append(f"{effect} {level}")
+        return '\n'.join(formatted_effects)
 
     def on_touch_down(self, touch):
         """When clicked, pick up the card."""
