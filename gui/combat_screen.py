@@ -2,12 +2,7 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.label import Label
-from kivy.graphics import Rectangle, Color, RoundedRectangle
-from kivy.vector import Vector
-from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty, NumericProperty
-from kivy.clock import Clock
-from kivy.core.window import Window
+from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.config import Config
 import gui_constants as constants
@@ -15,13 +10,7 @@ from card import Card
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'resizable', '0')
-
 Builder.load_file('card.kv')
-
-class AnimationLayer(FloatLayout):
-    """Layer for handling animations or widgets that need to be temporarily on top of the z-stack."""
-    pass
-
 
 class Hand(FloatLayout):
     """Widget representing the player's hand of cards."""
