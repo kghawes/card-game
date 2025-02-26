@@ -58,11 +58,28 @@
         valign: 'top'
     
     Label:
+        text: self.parent.formatted_type
+        font_size: 15
+        font_name: 'assets/rubik.ttf'
+        color: (0.5, 0.5, 0.5, 1)
+        pos: self.parent.x + 50, self.parent.y + 96
+        text_size: 192, 20
+        halign: 'center'
+        valign: 'center'
+        canvas.before:
+            Color:
+                rgba: (0, 0, 0, 1)
+            RoundedRectangle:
+                pos: self.x - 46, self.y + 40
+                size: 192, 20
+                radius: [5, 5, 5, 5]
+    
+    Label:
         text: self.parent.effects
         font_size: 15
         font_name: 'assets/rubik.ttf'
         color: (1, 1, 1, 1)
         pos: self.parent.x + 52, self.parent.y + 36
-        text_size: 190, 150
+        text_size: 190, 100
         halign: 'center'
         valign: 'center'

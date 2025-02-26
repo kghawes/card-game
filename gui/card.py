@@ -20,6 +20,7 @@ class Card(Widget):
     cost = StringProperty('0')
     effects = StringProperty('No Effect')
     texture = ObjectProperty(None)
+    formatted_type = StringProperty('None')
 
     def __init__(self, card_data, **kwargs):
         """Initializes a card with the given data."""
@@ -40,6 +41,7 @@ class Card(Widget):
         self.texture = AssetCache.get_texture(f'assets/cards/{self.card_id}.png')
         self.cost = card_data['cost']
         self.effects = self.format_effects(card_data['effects'])
+        self.formatted_type = f"{self.card_type} ({card_data['subtype']})" if 'subtype' in card_data else self.card_type
     
     def format_effects(self, effects):
         """Formats the effects of the card for display."""

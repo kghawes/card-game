@@ -61,6 +61,7 @@ class CardGameApp(App):
         game = CardGame()
         test_card = Card({
             'type': 'WEAPON',
+            'subtype': 'Long Blade',
             'name': 'Iron Longsword',
             'id': 1,
             'cost': '3',
