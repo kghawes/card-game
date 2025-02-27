@@ -13,7 +13,7 @@ RESOURCE_INDICATOR_OFFSETS = {
 
 CARD_TYPE_COLORS = {
     "WEAPON": {
-        "border": [0.882, 0.227, 0.306, 1.0], # red
+        "border": [0.47, 0.17, 0.21],#[0.882, 0.227, 0.306, 1.0], # red
         "resource": "STAMINA",
         "indicator": "LOWER_RIGHT"
     },

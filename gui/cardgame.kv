@@ -93,13 +93,13 @@
                     radius: [20, 20, 20, 20]
             canvas:
                 Color:
-                    rgba: (0.62, 0.569, 0.443, 1.0) #(0.656, 0.547, 0.469, 1.0)
+                    rgba: (0.62, 0.569, 0.443, 1.0) if self.parent.parent.show_deck else (0, 0, 0, 0)
                 RoundedRectangle:
                     pos: self.center_x - self.width / 2, self.center_y - self.height / 2
                     size: self.size
                     radius: [15, 15, 15, 15]
                 Color:
-                    rgba: (1, 1, 1, 1)
+                    rgba: (1, 1, 1, 1) if self.parent.parent.show_deck else (0, 0, 0, 0)
                 RoundedRectangle:
                     source: 'assets/cardbg.png'
                     pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4

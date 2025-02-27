@@ -2,7 +2,7 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, BooleanProperty
 from kivy.lang import Builder
 from kivy.config import Config
 import gui_constants as constants
@@ -48,6 +48,7 @@ class CardGame(Widget):
     deck = ObjectProperty(None)
     discard_pile = ObjectProperty(None)
     animation_layer = ObjectProperty(None)
+    show_deck = BooleanProperty(True)
 
     def end_turn(self):
         """Ends the current turn."""
