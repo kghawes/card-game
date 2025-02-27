@@ -3,14 +3,8 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty, BooleanProperty
-from kivy.lang import Builder
-from kivy.config import Config
 import gui_constants as constants
 from card import Card
-
-Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
-Config.set('graphics', 'resizable', '0')
-Builder.load_file('card.kv')
 
 class Hand(FloatLayout):
     """Widget representing the player's hand of cards."""
@@ -41,25 +35,16 @@ class Hand(FloatLayout):
         self.position_cards()
 
 
-class CardGame(Widget):
-    """Main widget for the card game."""
+class CombatScreen(Widget):
+    """Widget representing the combat screen of the card game."""
     play_area = ObjectProperty(None)
-    hand = ObjectProperty(None)
+    hand = ObjectProperty(Hand)
     deck = ObjectProperty(None)
     discard_pile = ObjectProperty(None)
     animation_layer = ObjectProperty(None)
     show_deck = BooleanProperty(True)
 
-    def end_turn(self):
-        """Ends the current turn."""
-        pass
-
-class CardGameApp(App):
-    """Main application class for the card game."""
-    
-    def build(self):
-        """Builds the card game application."""
-        game = CardGame()
+    def load(self):
         test_card = Card({
             'type': 'WEAPON',
             'subtype': 'Long Blade',
@@ -69,9 +54,10 @@ class CardGameApp(App):
             'effects': {
                 'Physical Damage Target': 2
                 }
-            })
-        game.hand.add_widget(test_card)
-        game.hand.position_cards()
-        return game
+            }, self.animation_layer, self.hand, self.play_area, self.discard_pile)
+        self.hand.add_widget(test_card)
+        self.hand.position_cards()
 
-CardGameApp().run()
+    def end_turn(self):
+        """Ends the current turn."""
+        self.load() #pass

@@ -19,12 +19,17 @@ class Card(Widget):
     name = StringProperty('Card Name')
     cost = StringProperty('0')
     effects = StringProperty('No Effect')
-    texture = ObjectProperty(None)
+    art_texture = ObjectProperty(None)
+    art_bg_texture = ObjectProperty(None)
     formatted_type = StringProperty('None')
 
-    def __init__(self, card_data, **kwargs):
+    def __init__(self, card_data, animation_layer, hand, play_area, discard_pile, **kwargs):
         """Initializes a card with the given data."""
         super().__init__(**kwargs)
+        self.animation_layer = animation_layer
+        self.hand = hand
+        self.play_area = play_area
+        self.discard_pile = discard_pile
         self.click_location = (0, 0)
         self.starting_position = (self.center_x, self.center_y)
         self.hand_index = 0
@@ -38,7 +43,8 @@ class Card(Widget):
         self.cost_indicator = constants.RESOURCE_INDICATOR_OFFSETS[constants.CARD_TYPE_COLORS[self.card_type]['indicator']]
         self.name = card_data['name']
         self.card_id = card_data['id']
-        self.texture = AssetCache.get_texture(f'assets/cards/{self.card_id}.png')
+        self.art_texture = AssetCache.get_texture(f'assets/cards/{self.card_id}.png')
+        self.art_bg_texture = AssetCache.get_texture(f'assets/cards/{self.card_type}_bg.png')
         self.cost = card_data['cost']
         self.effects = self.format_effects(card_data['effects'])
         self.formatted_type = f"{self.card_type} ({card_data['subtype']})" if 'subtype' in card_data else self.card_type
@@ -60,12 +66,11 @@ class Card(Widget):
         self.starting_position = (self.center_x, self.center_y)
         touch.grab(self)
         self.hand_index = self.parent.children.index(self)
-        animation_layer = self.parent.get_root_window().children[0].animation_layer
         hand = self.parent
         for card in hand.children:
             card.is_draggable = False
         hand.remove_from_hand(self)
-        animation_layer.add_widget(self)
+        self.animation_layer.add_widget(self)
         return True
 
     def on_touch_move(self, touch):
@@ -82,30 +87,26 @@ class Card(Widget):
         """Release a held card."""
         if touch.grab_current is self:
             touch.ungrab(self)
-            play_area = self.get_root_window().children[0].play_area
-            if play_area.collide_point(self.center_x, self.center_y):
-                self.center_x = play_area.center_x
-                self.center_y = play_area.center_y
+            if self.play_area.collide_point(self.center_x, self.center_y):
+                self.center_x = self.play_area.center_x
+                self.center_y = self.play_area.center_y
                 Clock.schedule_once(self.move_to_discard, 1)
             else:
-                hand = self.get_root_window().children[0].hand
                 self.parent.remove_widget(self)
-                hand.add_to_hand(self, index=self.hand_index)
-                for card in hand.children:
+                self.hand.add_to_hand(self, index=self.hand_index)
+                for card in self.hand.children:
                     card.is_draggable = True
             return True
         return False
 
     def move_to_discard(self, dt):
         """Moves the card to the discard pile."""
-        discard_pile = self.get_root_window().children[0].discard_pile
-        self.center_x = discard_pile.center_x
-        self.center_y = discard_pile.center_y
+        self.center_x = self.discard_pile.center_x
+        self.center_y = self.discard_pile.center_y
         self.parent.remove_widget(self)
-        if discard_pile.children:
-            discard_pile.remove_widget(discard_pile.children[0])
-        discard_pile.add_widget(self)
+        if self.discard_pile.children:
+            self.discard_pile.remove_widget(self.discard_pile.children[0])
+        self.discard_pile.add_widget(self)
         self.is_draggable = False
-        hand = self.get_root_window().children[0].hand
-        for card in hand.children:
+        for card in self.hand.children:
             card.is_draggable = True
