@@ -6,8 +6,8 @@ from kivy.vector import Vector
 from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty, NumericProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
-import gui_constants as constants
-from asset_cache import AssetCache
+import gui.gui_constants as constants
+from gui.asset_cache import AssetCache
 
 class Card(Widget):
     """Widget representing a card."""
@@ -43,8 +43,8 @@ class Card(Widget):
         self.cost_indicator = constants.RESOURCE_INDICATOR_OFFSETS[constants.CARD_TYPE_COLORS[self.card_type]['indicator']]
         self.name = card_data['name']
         self.card_id = card_data['id']
-        self.art_texture = AssetCache.get_texture(f'assets/cards/{self.card_id}.png')
-        self.art_bg_texture = AssetCache.get_texture(f'assets/cards/{self.card_type}_bg.png')
+        self.art_texture = AssetCache.get_texture(f'gui/assets/cards/{self.card_id}.png')
+        self.art_bg_texture = AssetCache.get_texture(f'gui/assets/cards/{self.card_type}_bg.png')
         self.cost = card_data['cost']
         self.effects = self.format_effects(card_data['effects'])
         self.formatted_type = f"{self.card_type} ({card_data['subtype']})" if 'subtype' in card_data else self.card_type

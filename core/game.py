@@ -15,10 +15,11 @@ class Game:
     """
     Holds the data needed for the game.
     """
-    def __init__(self):
+    def __init__(self, event_manager):
         """
         Initialize a new Game.
         """
+        self.event_manager = event_manager
         self.text_interface = TextInterface()
         self.combat_manager = CombatManager()
         self.registries = Registries(c.STATUSES_PATH, c.ENCHANTMENTS_PATH)

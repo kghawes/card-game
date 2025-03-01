@@ -1,6 +1,7 @@
 #:kivy 2.3.1
 
 <CombatScreen>:
+    id: combat_screen
     hand: hand
     play_area: play_area
     title: title
@@ -10,6 +11,7 @@
     deck: deck
     combat_log: combat_log
     animation_layer: animation_layer
+    end_turn_button: end_turn_button
 
     FloatLayout:
         size: self.parent.size
@@ -42,29 +44,77 @@
                     pos: self.pos
                     size: self.size
 
-        Widget:
+        BoxLayout:
             id: player_info
+            player_name_label: player_name_label
+            player_health_label: player_health_label
+            player_stamina_label: player_stamina_label
+            player_magicka_label: player_magicka_label
             pos: 8, 324
             size: 300, 528
             size_hint: None, None
+            orientation: 'vertical'
             canvas:
                 Color:
                     rgba: (0.1, 0.1, 0.1, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
+            
+            Label:
+                id: player_name_label
+                text: ''
+            
+            Label:
+                id: player_health_label
+                text: ''
+            
+            Label:
+                id: player_stamina_label
+                text: ''
+            
+            Label:
+                id: player_magicka_label
+                text: ''
 
-        Widget:
+        BoxLayout:
             id: enemy_info
-            pos: 1192, 324
-            size: 300, 528
+            enemy_name_label: enemy_name_label
+            enemy_health_label: enemy_health_label
+            enemy_stamina_label: enemy_stamina_label
+            enemy_magicka_label: enemy_magicka_label
+            pos: 1192, 372
+            size: 300, 480
             size_hint: None, None
+            orientation: 'vertical'
             canvas:
                 Color:
                     rgba: (0.1, 0.1, 0.1, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
+                Color:
+                    rgba: (1, 1, 1, 1)
+                Rectangle:
+                    texture: root.wait_texture
+                    pos: self.pos
+                    size: 23, 23
+
+            Label:
+                id: enemy_name_label
+                text: ''
+            
+            Label:
+                id: enemy_health_label
+                text: ''
+            
+            Label:
+                id: enemy_stamina_label
+                text: ''
+            
+            Label:
+                id: enemy_magicka_label
+                text: ''
 
         Widget:
             id: discard_pile
@@ -101,28 +151,44 @@
                 Color:
                     rgba: (1, 1, 1, 1) if self.parent.parent.show_deck else (0, 0, 0, 0)
                 RoundedRectangle:
-                    source: 'assets/cardbg.png'
+                    source: 'gui/assets/cardbg.png'
                     pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4
                     size: self.width - 8, self.height - 8
                     radius: [13, 13, 13, 13]
                 Rectangle:
-                    source: 'assets/cardback1.png'
+                    source: 'gui/assets/cardback1.png'
                     pos: self.pos
                     size: self.size
 
         Button:
+            id: end_turn_button
             text: 'End Turn'
             size_hint: None, None
-            size: 160, 35
-            pos: 1312, 324
+            size: 148, 35
+            pos: 1344, 324
             on_release: root.end_turn()
-            background_normal: 'assets/btn_up.9.png'
+            background_normal: 'gui/assets/btn_up.9.png'
             background_color: (1, 1, 1, 1)
             color: (0.715, 0.676, 0.535, 1.0)
             font_size: 21
-            font_name: 'assets/romanantique.ttf'
+            font_name: 'gui/assets/romanantique.ttf'
             bold: False
-            background_down: 'assets/btn_down.9.png'
+            background_down: 'gui/assets/btn_down.9.png'
+            border: (27, 50, 4, 4)
+        
+        Button:
+            text: 'View Log'
+            size_hint: None, None
+            size: 148, 35
+            pos: 1192, 324
+            on_release: root.end_turn()
+            background_normal: 'gui/assets/btn_up.9.png'
+            background_color: (1, 1, 1, 1)
+            color: (0.715, 0.676, 0.535, 1.0)
+            font_size: 21
+            font_name: 'gui/assets/romanantique.ttf'
+            bold: False
+            background_down: 'gui/assets/btn_down.9.png'
             border: (27, 50, 4, 4)
 
         BoxLayout:
