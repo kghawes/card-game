@@ -14,7 +14,7 @@ class Combatant:
     """
     def __init__(
             self, name, max_health, max_stamina, max_magicka, starting_deck,
-            card_cache, status_registry, is_enemy
+            card_cache, status_registry, is_enemy, event_manager
             ):
         """
         Initialize a new Combatant.
@@ -29,10 +29,11 @@ class Combatant:
             stamina_id: Resource(stamina_id, max_stamina),
             magicka_id: Resource(magicka_id, max_magicka)
         }
-        self.card_manager = CardManager(starting_deck, card_cache)
+        self.card_manager = CardManager(starting_deck, card_cache, event_manager)
         self.status_manager = StatusManager()
         self.modifier_manager = ModifierManager(status_registry)
         self.cards_played_this_turn = 0
+        self.event_manager = event_manager
 
     def get_health(self) -> int:
         """

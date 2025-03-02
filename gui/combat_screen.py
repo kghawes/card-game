@@ -11,6 +11,7 @@ from gui.card import Card
 
 class Hand(FloatLayout):
     """Widget representing the player's hand of cards."""
+    screen = ObjectProperty(None)
 
     def position_cards(self):
         """Positions the cards in the hand."""
@@ -36,6 +37,18 @@ class Hand(FloatLayout):
         """Removes a card from the hand and repositions the cards."""
         self.remove_widget(card)
         self.position_cards()
+    
+    def draw(self, card_data):
+        """Draws a card from the deck and adds it to the hand."""
+        card = Card(card_data, self.screen)
+        self.add_to_hand(card)
+    
+    def discard(self, index):
+        """Discards a card from the hand."""
+        if 0 <= index < len(self.children):
+            card = self.children[index]
+            card.move_to_discard_pile()
+            self.position_cards()
 
 
 class CombatScreen(Widget):
@@ -53,6 +66,7 @@ class CombatScreen(Widget):
     def __init__(self, player, enemy, **kwargs):
         """Initializes the combat screen with the given properties."""
         super().__init__(**kwargs)
+        self.hand.screen = self
         self.player = player
         self.player_info.player_name_label.text = self.player['name']
         self.update_player_stats()
@@ -91,7 +105,7 @@ class CombatScreen(Widget):
         """Ends the current turn."""
         self.load()
         self.end_turn_button.disabled = True
-        Clock.schedule_interval(self.loop_textures, 0.25)
+        #Clock.schedule_interval(self.loop_textures, 0.25)
 
     def loop_textures(self, dt):
         """Loops through the textures for the wait animation."""
@@ -102,3 +116,8 @@ class CombatScreen(Widget):
             AssetCache.get_texture('gui/assets/hourglass135.png')
         ]
         self.wait_texture = textures[(indexOf(textures, self.wait_texture) + 1) % len(textures)]
+    
+    def empty_discard_pile(self):
+        """Empties the discard pile."""
+        for card in self.discard_pile.children:
+            self.discard_pile.remove_widget(card)

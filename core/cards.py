@@ -14,6 +14,7 @@ class Card:
         Initialize a new Card.
         """
         self.name = name
+        self.card_id = hash(name)
         self.card_type = card_type
         self.cost = cost
         self.cost_modifier = 0
@@ -27,6 +28,20 @@ class Card:
             if isinstance(level, EffectLevel):
                 level = level.base_level
             self.effects[effect] = EffectLevel(level)
+
+    def get_card_data(self) -> dict:
+        """
+        Get a dictionary of the card's data.
+        """
+        return {
+            "name": self.name,
+            "id": self.card_id,
+            "type": self.card_type,
+            "cost": self.get_cost(),
+            "value": self.value,
+            "subtype": self.subtype,
+            "effects": {effect: level.get_level() for effect, level in self.effects.items()}
+        }
 
     def get_resource(self) -> str:
         """

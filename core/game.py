@@ -8,7 +8,6 @@ from core.registries import Registries
 from core.cards import CardCache
 from core.enemies import EnemyCache
 from core.player import Player
-from utils.text_interface import TextInterface
 import utils.constants as c
 
 class Game:
@@ -20,8 +19,7 @@ class Game:
         Initialize a new Game.
         """
         self.event_manager = event_manager
-        self.text_interface = TextInterface()
-        self.combat_manager = CombatManager()
+        self.combat_manager = CombatManager(self.event_manager)
         self.registries = Registries(c.STATUSES_PATH, c.ENCHANTMENTS_PATH)
         self.card_cache = CardCache(c.CARD_PATHS, self.registries)
         self.enemy_cache = EnemyCache(c.ENEMIES_PATHS)
@@ -32,7 +30,7 @@ class Game:
             )
         self.player = Player(
             self.card_cache, self.registries.statuses,
-            c.ClassSpecializations.FIGHTER.name
+            c.ClassSpecializations.FIGHTER.name, self.event_manager
             )
         self.town = Town()
 
@@ -40,94 +38,20 @@ class Game:
         """
         Run the game.
         """
-        self.text_interface.send_message(c.SPLASH_MESSAGE)
-        self.player.name = "KK" #self.text_interface.name_prompt()
-
-        #***************************CARD**ANALYSIS****************************#
-        weapons = []
-        armors = []
-        combat_skills = []
-        stealth_skills = []
-        magic_skills = []
-        skills = []
-        alterations = []
-        destructions = []
-        illusions = []
-        mysticisms = []
-        restorations = []
-        spells = []
-        items = []
-        consumables = []
-        for card in self.card_cache.card_prototypes.values():
-            if card.value == 0:
-                continue
-            if card.card_type == c.CardTypes.WEAPON.name:
-                weapons.append(card)
-                continue
-            if card.card_type == c.CardTypes.ARMOR.name:
-                armors.append(card)
-                continue
-            if card.card_type == c.CardTypes.ITEM.name:
-                items.append(card)
-                continue
-            if card.card_type == c.CardTypes.CONSUMABLE.name:
-                consumables.append(card)
-                continue
-            if card.card_type == c.CardTypes.SKILL.name:
-                skills.append(card)
-                if card.subtype == c.CardSubtypes.COMBAT.name:
-                    combat_skills.append(card)
-                    continue
-                if card.subtype == c.CardSubtypes.STEALTH.name:
-                    stealth_skills.append(card)
-                    continue
-                if card.subtype == c.CardSubtypes.MAGIC.name:
-                    magic_skills.append(card)
-                    continue
-            if card.card_type == c.CardTypes.SPELL.name:
-                spells.append(card)
-                if card.subtype == c.CardSubtypes.ALTERATION.name:
-                    alterations.append(card)
-                    continue
-                if card.subtype == c.CardSubtypes.DESTRUCTION.name:
-                    destructions.append(card)
-                    continue
-                if card.subtype == c.CardSubtypes.ILLUSION.name:
-                    illusions.append(card)
-                    continue
-                if card.subtype == c.CardSubtypes.MYSTICISM.name:
-                    mysticisms.append(card)
-                    continue
-                if card.subtype == c.CardSubtypes.RESTORATION.name:
-                    restorations.append(card)
-        #*********************************************************************#
+        self.town.enter_town(self.player, self.registries.effects)
 
         for quest in self.registries.quests.quests:
-            self.town.enter_town(##############################################
-                self.player, self.text_interface, self.registries.effects######
-                )##############################################################
-
             health = self.player.resources[c.Resources.HEALTH.name]
             health.replenish(self.player.modifier_manager)
 
-            self.text_interface.send_message(quest.description)
-
             for encounter in quest.encounters:
-                self.text_interface.send_message(
-                    encounter.enemy.name + " appeared! Entering combat!"
-                    )
                 self.combat_manager.do_combat(
-                    self.player, encounter.enemy,
-                    self.text_interface,
+                    self.player,
+                    encounter.enemy,
                     self.registries,
                     self.card_cache
                 )
                 if not self.player.is_alive():
-                    self.text_interface.send_message(c.DEFEAT_MESSAGE)
                     return
 
-            self.town.enter_town(
-                self.player, self.text_interface, self.registries.effects
-                )
-
-        self.text_interface.send_message(c.BEAT_GAME_MESSAGE)
+            self.town.enter_town(self.player, self.registries.effects)

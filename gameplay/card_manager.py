@@ -9,7 +9,7 @@ class CardManager:
     """
     This class handles the movement of cards between piles.
     """
-    def __init__(self, starting_deck, card_cache):
+    def __init__(self, starting_deck, card_cache, event_manager):
         """
         Initialize a new CardManager.
         """
@@ -18,6 +18,7 @@ class CardManager:
         self.discard_pile = []
         self.consumed_pile = []
         self.library = Library()
+        self.event_manager = event_manager
 
     def _create_deck(self, deck_list, card_cache) -> list:
         """
@@ -73,12 +74,15 @@ class CardManager:
                 self.deck = self.discard_pile[:]
                 self.discard_pile = []
                 self.shuffle()
+                self.event_manager.dispatch('empty_discard_pile')
             if not self.deck:
                 break
             card = self.deck.pop(0)
             self.hand.append(card)
             cards_to_draw -= 1
         self.recalculate_for_new_card(subject, status_registry)
+        if not subject.is_enemy:
+            self.event_manager.dispatch('draw_cards', self.hand, self.deck, self.discard_pile)
 
     def recalculate_for_new_card(self, subject, status_registry):
         """

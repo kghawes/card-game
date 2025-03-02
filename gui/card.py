@@ -23,13 +23,14 @@ class Card(Widget):
     art_bg_texture = ObjectProperty(None)
     formatted_type = StringProperty('None')
 
-    def __init__(self, card_data, animation_layer, hand, play_area, discard_pile, **kwargs):
+    def __init__(self, card_data, screen, **kwargs):
         """Initializes a card with the given data."""
         super().__init__(**kwargs)
-        self.animation_layer = animation_layer
-        self.hand = hand
-        self.play_area = play_area
-        self.discard_pile = discard_pile
+        self.screen = screen
+        self.animation_layer = screen.animation_layer
+        self.hand = screen.hand
+        self.play_area = screen.play_area
+        self.discard_pile = screen.discard_pile
         self.click_location = (0, 0)
         self.starting_position = (self.center_x, self.center_y)
         self.hand_index = 0
@@ -99,13 +100,12 @@ class Card(Widget):
             return True
         return False
 
-    def move_to_discard(self, dt):
+    def move_to_discard(self, dt=0):
         """Moves the card to the discard pile."""
         self.center_x = self.discard_pile.center_x
         self.center_y = self.discard_pile.center_y
         self.parent.remove_widget(self)
-        if self.discard_pile.children:
-            self.discard_pile.remove_widget(self.discard_pile.children[0])
+        self.screen.empty_discard_pile()
         self.discard_pile.add_widget(self)
         self.is_draggable = False
         for card in self.hand.children:

@@ -18,35 +18,45 @@ class Controller:
         """Subscribe to game events."""
         self.event_manager.subscribe('start_combat', self.handle_start_combat)
         self.event_manager.subscribe('end_combat', self.handle_end_combat)
-        self.event_manager.subscribe('draw_cards', self.handle_draw_cards)
+        self.event_manager.subscribe('draw_card', self.handle_draw_card)
         self.event_manager.subscribe('discard_cards', self.handle_discard_cards)
-    
-    def subscribe_to_gui_events(self):
-        """Subscribe to GUI events."""
-        self.app.event_manager.subscribe('play_card', self.handle_play_card)
-        self.app.event_manager.subscribe('end_turn', self.handle_end_turn)
+        self.event_manager.subscribe('empty_discard_pile', self.handle_empty_discard_pile)
     
     def handle_start_combat(self, player, enemy):
         """Handle starting combat."""
-        pass
+        self.app.game.start_combat(player, enemy)
 
-    def handle_end_combat(self, player, enemy):
+    def handle_end_combat(self):
         """Handle ending combat."""
         pass
     
-    def handle_draw_cards(self, player_id, num_cards):
-        """Handle drawing cards."""
-        pass
+    def handle_draw_card(self, card):
+        """Handle drawing a card."""
+        self.current_screen.hand.draw(card.get_card_data())
 
-    def handle_discard_cards(self, player_id, num_cards):
+    def handle_empty_discard_pile(self):
+        """Handle emptying the discard pile."""
+        self.current_screen.empty_discard_pile()
+
+    def handle_discard_card(self, index_in_hand):
         """Handle discarding cards."""
-        pass
+        self.current_screen.hand.discard(index_in_hand)
+    
+    def subscribe_to_gui_events(self):
+        """Subscribe to GUI events."""
+        self.app.event_manager.subscribe('set_screen', self.handle_set_screen)
+        self.app.event_manager.subscribe('play_card', self.handle_play_card)
+        self.app.event_manager.subscribe('end_turn', self.handle_end_turn)
 
-    def handle_play_card(self, player_id, card_id):
+    def handle_set_screen(self, screen):
+        """Handle setting the screen."""
+        self.current_screen = screen
+
+    def handle_play_card(self, index_in_hand):
         """Handle playing a card."""
         pass
 
-    def handle_end_turn(self, player_id):
+    def handle_end_turn(self):
         """Handle ending the turn."""
         pass
 
