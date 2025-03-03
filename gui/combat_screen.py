@@ -96,7 +96,7 @@ class CombatScreen(Widget):
             'effects': {
                 'Physical Damage Target': 2
                 }
-            }, self.animation_layer, self.hand, self.play_area, self.discard_pile)
+            }, self)
         self.hand.add_widget(test_card)
         self.hand.position_cards()
         self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
@@ -121,3 +121,16 @@ class CombatScreen(Widget):
         """Empties the discard pile."""
         for card in self.discard_pile.children:
             self.discard_pile.remove_widget(card)
+    
+    def update_stats(self, subject, stats_data):
+        """Updates the stats of the player or enemy."""
+        if subject == 'player':
+            for key in stats_data.keys():
+                if key in self.player:
+                    self.player[key] = stats_data[key]
+            self.update_player_stats()
+        else:
+            for key in stats_data.keys():
+                if key in self.enemy:
+                    self.enemy[key] = stats_data[key]
+            self.update_enemy_stats()

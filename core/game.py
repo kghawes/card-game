@@ -22,7 +22,7 @@ class Game:
         self.combat_manager = CombatManager(self.event_manager)
         self.registries = Registries(c.STATUSES_PATH, c.ENCHANTMENTS_PATH)
         self.card_cache = CardCache(c.CARD_PATHS, self.registries)
-        self.enemy_cache = EnemyCache(c.ENEMIES_PATHS)
+        self.enemy_cache = EnemyCache(c.ENEMIES_PATHS, self.event_manager)
         self.card_rewards = CardRewards(c.CARD_REWARDS_PATH)
         self.registries.register_quests(
             c.QUESTS_PATH, c.ENEMY_GROUPS_PATH, self.enemy_cache,

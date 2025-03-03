@@ -14,22 +14,52 @@ class Controller:
         """Start the game."""
         self.app.run()
     
+    # Game events
+
     def subscribe_to_game_events(self):
         """Subscribe to game events."""
         self.event_manager.subscribe('start_combat', self.handle_start_combat)
-        self.event_manager.subscribe('end_combat', self.handle_end_combat)
+        self.event_manager.subscribe('player_defeat', self.handle_player_defeat)
+        self.event_manager.subscribe('start_player_turn', self.handle_start_player_turn)
+        self.event_manager.subscribe('card_not_playable', self.handle_card_not_playable)
+        self.event_manager.subscribe('player_victory', self.handle_player_victory)
+        self.event_manager.subscribe('update_statuses', self.handle_update_statuses)
         self.event_manager.subscribe('draw_card', self.handle_draw_card)
-        self.event_manager.subscribe('discard_cards', self.handle_discard_cards)
+        self.event_manager.subscribe('discard_card', self.handle_discard_card)
         self.event_manager.subscribe('empty_discard_pile', self.handle_empty_discard_pile)
+        self.event_manager.subscribe('stats_changed', self.handle_stats_changed)
     
-    def handle_start_combat(self, player, enemy):
+    def handle_start_combat(self, enemy):
         """Handle starting combat."""
-        self.app.game.start_combat(player, enemy)
+        self.app.game.start_combat(self.game.player.get_player_data(), enemy)
 
-    def handle_end_combat(self):
-        """Handle ending combat."""
-        pass
+    def handle_player_defeat(self):
+        """Handle player defeat."""
+        self.app.game.player_defeat()
     
+    def handle_start_player_turn(self):
+        """Handle starting player turn."""
+        statuses = self.game.player.status_manager.get_statuses()
+        hand = [card.get_card_data() for card in self.game.player.card_manager.hand]
+        self.current_screen.start_player_turn(statuses, hand)
+
+    def handle_card_not_playable(self):
+        """Handle a card that cannot be played."""
+        self.current_screen.card_not_playable()
+
+    def handle_player_victory(self, rewards, player_leveled_up):
+        """Handle player victory."""
+        self.app.game.player_victory(rewards, player_leveled_up)
+    
+    def handle_update_statuses(self, combatant):
+        """Handle updating statuses."""
+        if not combatant.is_enemy:
+            statuses = self.game.player.status_manager.get_statuses()
+            self.current_screen.update_statuses('player', statuses)
+        else:
+            statuses = self.game.enemy.status_manager.get_statuses()
+            self.current_screen.update_statuses('enemy', statuses)
+
     def handle_draw_card(self, card):
         """Handle drawing a card."""
         self.current_screen.hand.draw(card.get_card_data())
@@ -42,11 +72,31 @@ class Controller:
         """Handle discarding cards."""
         self.current_screen.hand.discard(index_in_hand)
     
+    def handle_stats_changed(self, combatant):
+        """Handle stats changes."""
+        stats_data = {
+            'health': combatant.get_health(),
+            'max_health': combatant.get_max_health(),
+            'stamina': combatant.get_stamina(),
+            'max_stamina': combatant.get_max_stamina(),
+            'magicka': combatant.get_magicka(),
+            'max_magicka': combatant.get_max_magicka()
+        }
+        subject = 'player' if not combatant.is_enemy else 'enemy'
+        self.current_screen.update_stats(subject, stats_data)
+
+    # GUI events
+
     def subscribe_to_gui_events(self):
         """Subscribe to GUI events."""
+        self.app.event_manager.subscribe('initiate_encounter', self.handle_initiate_encounter)
         self.app.event_manager.subscribe('set_screen', self.handle_set_screen)
         self.app.event_manager.subscribe('play_card', self.handle_play_card)
         self.app.event_manager.subscribe('end_turn', self.handle_end_turn)
+    
+    def handle_initiate_encounter(self, encounter):
+        """Handle initiating an encounter."""
+        self.game.start_encounter(encounter)
 
     def handle_set_screen(self, screen):
         """Handle setting the screen."""

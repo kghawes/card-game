@@ -13,11 +13,11 @@ class Enemy(Combatant):
     """
     def __init__(
             self, name, max_health, max_stamina, max_magicka, deck, card_cache,
-            status_registry, loot, card_rewards
+            status_registry, loot, card_rewards, event_manager
             ):
         super().__init__(
             name, max_health, max_stamina, max_magicka, deck, card_cache,
-            status_registry, True
+            status_registry, True, event_manager
             )
         self.loot = Treasure(loot, card_rewards)
 
@@ -26,7 +26,7 @@ class EnemyPrototype(Prototype):
     """
     Represents instructions to produce a new Enemy.
     """
-    def __init__(self, name, max_health, max_stamina, max_magicka, deck, loot):
+    def __init__(self, name, max_health, max_stamina, max_magicka, deck, loot, event_manager):
         """
         Initialize a new EnemyPrototype.
         """
@@ -34,8 +34,9 @@ class EnemyPrototype(Prototype):
         self.max_health = max_health
         self.max_stamina = max_stamina
         self.max_magicka = max_magicka
-        self.deck = deck # Save raw deck data
+        self.deck = deck
         self.loot = loot
+        self.event_manager = event_manager
 
     def clone(self, card_cache, status_registry, card_rewards) -> Enemy:
         """
@@ -50,7 +51,8 @@ class EnemyPrototype(Prototype):
             card_cache=card_cache,
             status_registry = status_registry,
             loot=self.loot,
-            card_rewards=card_rewards
+            card_rewards=card_rewards,
+            event_manager=self.event_manager
         )
 
 
@@ -58,13 +60,13 @@ class EnemyCache:
     """
     Holds all the enemy prototype data.
     """
-    def __init__(self, filenames):
+    def __init__(self, filenames, event_manager):
         """
         Initialize a new EnemyCache.
         """
-        self.enemy_prototypes = self._load_enemy_prototypes(filenames)
+        self.enemy_prototypes = self._load_enemy_prototypes(filenames, event_manager)
 
-    def _load_enemy_prototypes(self, filenames) -> dict:
+    def _load_enemy_prototypes(self, filenames, event_manager) -> dict:
         """
         Load enemy data from JSON and create the dictionary.
         """
@@ -89,7 +91,8 @@ class EnemyCache:
                     max_stamina=data["max_stamina"],
                     max_magicka=data["max_magicka"],
                     deck=data["deck"],
-                    loot=data["loot"]
+                    loot=data["loot"],
+                    event_manager=event_manager
                 )
         return prototypes
 

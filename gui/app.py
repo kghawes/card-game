@@ -19,6 +19,10 @@ class CardGame(Widget):
         super().__init__(**kwargs)
         self.event_manager = event_manager
 
+    def start_quest(self):
+        """Starts a quest in the game."""
+        self.start_combat() # For testing purposes, directly start combat
+
     def start_combat(self):
         """Starts a combat encounter in the game."""
         player = {
@@ -51,7 +55,7 @@ class CardGameApp(App):
     """Main application class for the card game."""
     def __init__(self, event_manager, **kwargs):
         """Initializes the kivy app."""
-        super().__init__(self, event_manager, **kwargs)
+        super().__init__(**kwargs)
         self.event_manager = event_manager
 
     def build(self):
