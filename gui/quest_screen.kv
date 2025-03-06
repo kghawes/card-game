@@ -1,0 +1,23 @@
+#:kivy 2.3.1
+
+<QuestScreen>:
+    id: quest_screen
+    encounter_button: encounter_button
+    pos: 0, 0
+    size: 1500, 900
+    canvas.before:
+        Color:
+            rgba: (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Button:
+        id: encounter_button
+        quest_screen: quest_screen
+        text: 'Enter combat'
+        size_hint: None, None
+        size: self.texture_size
+        pos: self.parent.center_x - self.width / 2, self.parent.center_y - self.height / 2
+        font_size: 24
+        on_release: self.quest_screen.start_encounter()

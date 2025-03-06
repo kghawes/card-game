@@ -35,6 +35,20 @@ class Combatant:
         self.cards_played_this_turn = 0
         self.event_manager = event_manager
 
+    def get_combatant_data(self):
+        """
+        Get the data to display in the UI.
+        """
+        return {
+            'name': self.name,
+            'health': self.get_health(),
+            'max_health': self.get_max_health(),
+            'stamina': self.get_stamina(),
+            'max_stamina': self.get_max_stamina(),
+            'magicka': self.get_magicka(),
+            'max_magicka': self.get_max_magicka()
+        }
+
     def get_health(self) -> int:
         """
         Get current health.

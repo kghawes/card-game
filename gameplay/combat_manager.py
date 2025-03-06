@@ -21,29 +21,29 @@ class CombatManager:
         """
         return not (player.is_alive() and enemy.is_alive())
 
-    def do_combat(self, player, enemy, registries, card_cache):
+    def start_combat(self, player, enemy): #, registries, card_cache):
         """
-        Enter the combat loop.
+        Set up for combat.
         """
-        self.event_manager.dispatch('start_combat', player, enemy)
         player.card_manager.shuffle()
         enemy.card_manager.shuffle()
-        while True:
-            self.do_player_turn(
-                player, enemy, registries, card_cache
-                )
-            if self.is_combat_over(player, enemy):
-                break
-            self.do_enemy_turn(player, enemy, registries)
-            if self.is_combat_over(player, enemy):
-                break
-        if player.get_health() > 0:
-            player.status_manager.reset_statuses(player, registries.statuses)
-            player.modifier_manager.reset_all()
-            player.card_manager.reset_consumed_cards()
-            self.present_rewards(
-                player, enemy, card_cache, registries.effects
-                )
+        self.event_manager.dispatch('start_combat', enemy)
+        # while True:
+        #     self.do_player_turn(
+        #         player, enemy, registries, card_cache
+        #         )
+        #     if self.is_combat_over(player, enemy):
+        #         break
+        #     self.do_enemy_turn(player, enemy, registries)
+        #     if self.is_combat_over(player, enemy):
+        #         break
+        # if player.get_health() > 0:
+        #     player.status_manager.reset_statuses(player, registries.statuses)
+        #     player.modifier_manager.reset_all()
+        #     player.card_manager.reset_consumed_cards()
+        #     self.present_rewards(
+        #         player, enemy, card_cache, registries.effects
+        #         )
 
     def do_player_turn(
             self, player, enemy, registries, card_cache

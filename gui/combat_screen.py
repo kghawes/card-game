@@ -63,9 +63,10 @@ class CombatScreen(Widget):
     enemy = ObjectProperty(None)
     wait_texture = ObjectProperty(None)
 
-    def __init__(self, player, enemy, **kwargs):
+    def __init__(self, player, enemy, event_manager, **kwargs):
         """Initializes the combat screen with the given properties."""
         super().__init__(**kwargs)
+        self.event_manager = event_manager
         self.hand.screen = self
         self.player = player
         self.player_info.player_name_label.text = self.player['name']

@@ -34,24 +34,28 @@ class Game:
             )
         self.town = Town()
 
-    def game_loop(self):
+    def start_game(self):
         """
-        Run the game.
+        Start the game.
         """
         self.town.enter_town(self.player, self.registries.effects)
+        self.event_manager.dispatch('start_game')
 
-        for quest in self.registries.quests.quests:
-            health = self.player.resources[c.Resources.HEALTH.name]
-            health.replenish(self.player.modifier_manager)
+    def start_quest(self):
+        """
+        Start the next quest.
+        """
+        self.quest = self.registries.quests.quests.pop(0)
+        health = self.player.resources[c.Resources.HEALTH.name]
+        health.replenish(self.player.modifier_manager)
+        self.event_manager.dispatch('start_quest', self.quest)
 
-            for encounter in quest.encounters:
-                self.combat_manager.do_combat(
-                    self.player,
-                    encounter.enemy,
-                    self.registries,
-                    self.card_cache
-                )
-                if not self.player.is_alive():
-                    return
-
-            self.town.enter_town(self.player, self.registries.effects)
+    def start_encounter(self):
+        """Start the next encounter."""
+        encounter = self.quest.encounters.pop(0)
+        self.combat_manager.start_combat(self.player, encounter.enemy)
+        #     self.player,
+        #     encounter.enemy,
+        #     self.registries,
+        #     self.card_cache
+        # )
