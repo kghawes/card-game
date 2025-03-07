@@ -100,29 +100,31 @@ class CardManager:
                 subject, status_manager.get_status_level(levitate)
                 )
 
-    def draw_hand(self, subject, registries, text_interface):
+    def draw_hand(self, subject, registries):
         """
         Draw the appropriate number of cards at the beginning of a turn.
         """
         cards_to_draw = subject.modifier_manager.calculate_cards_to_draw()
 
-        wb = c.StatusNames.WATER_BREATHING.name
-        if subject.status_manager.has_status(wb, subject, registries.statuses):
-            wb_status = registries.statuses.get_status(wb)
-            wb_level = subject.status_manager.get_status_level(wb)
-            cards_to_draw -= wb_status.draw_from_discard(
-                subject, wb_level, text_interface, registries.statuses
-                )
+        # wb = c.StatusNames.WATER_BREATHING.name
+        # if subject.status_manager.has_status(wb, subject, registries.statuses):
+        #     wb_status = registries.statuses.get_status(wb)
+        #     wb_level = subject.status_manager.get_status_level(wb)
+        #     cards_to_draw -= wb_status.draw_from_discard(
+        #         subject, wb_level, registries.statuses
+        #         )
 
         self.draw(subject, registries.statuses, cards_to_draw)
 
-        ss = c.StatusNames.SWIFT_SWIM.name
-        if subject.status_manager.has_status(ss, subject, registries.statuses):
-            ss_status = registries.statuses.get_status(ss)
-            ss_level = subject.status_manager.get_status_level(ss)
-            ss_status.do_redraw(
-                subject, ss_level, text_interface, registries
-                )
+        # ss = c.StatusNames.SWIFT_SWIM.name
+        # if subject.status_manager.has_status(ss, subject, registries.statuses):
+        #     ss_status = registries.statuses.get_status(ss)
+        #     ss_level = subject.status_manager.get_status_level(ss)
+        #     ss_status.do_redraw(
+        #         subject, ss_level, registries
+        #         )
+
+        self.event_manager.dispatch('draw_hand')
 
     def discard(self, card, subject, status_registry, is_being_played=False):
         """

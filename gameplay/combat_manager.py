@@ -45,22 +45,22 @@ class CombatManager:
         #         player, enemy, card_cache, registries.effects
         #         )
 
-    def do_player_turn(
-            self, player, enemy, registries, card_cache
-            ):
-        """
-        Prepare for the player to take their turn then handle any actions they
-        perform.
-        """
-        if self.beginning_of_turn(player, enemy, registries):
-            return
-        turn_ended = False
-        while not turn_ended and not self.is_combat_over(player, enemy):
-            text_interface.display_turn_info(player, enemy, registries.effects)
-            turn_ended = self.do_player_action(
-                player, enemy, text_interface, registries, card_cache
-                )
-        self.end_of_turn(player, registries.statuses)
+    # def do_player_turn(
+    #         self, player, enemy, registries, card_cache
+    #         ):
+    #     """
+    #     Prepare for the player to take their turn then handle any actions they
+    #     perform.
+    #     """
+    #     if self.beginning_of_turn(player, enemy, registries):
+    #         return
+    #     turn_ended = False
+    #     while not turn_ended and not self.is_combat_over(player, enemy):
+    #         text_interface.display_turn_info(player, enemy, registries.effects)
+    #         turn_ended = self.do_player_action(
+    #             player, enemy, text_interface, registries, card_cache
+    #             )
+    #     self.end_of_turn(player, registries.statuses)
 
     def beginning_of_turn(self, combatant, opponent, registries) -> bool:
         """
@@ -68,21 +68,16 @@ class CombatManager:
         Returns whether combat ended during the beginning phase.
         """
         combatant.reset_for_turn()
-
         combatant.card_manager.draw_hand(combatant, registries)
-
         combatant.status_manager.trigger_statuses_on_turn(
             combatant, registries.statuses
             )
         if self.is_combat_over(combatant, opponent):
-            return True
-
+            self.event_manager.dispatch('end_combat')
         combatant.modifier_manager.recalculate_all_effects(
             registries.statuses, combatant.card_manager
             )
-
         combatant.replenish_resources_for_turn()
-        return False
 
     def end_of_turn(self, combatant, status_registry):
         """

@@ -53,9 +53,5 @@ class Game:
     def start_encounter(self):
         """Start the next encounter."""
         encounter = self.quest.encounters.pop(0)
-        self.combat_manager.start_combat(self.player, encounter.enemy)
-        #     self.player,
-        #     encounter.enemy,
-        #     self.registries,
-        #     self.card_cache
-        # )
+        self.enemy = encounter.enemy
+        self.combat_manager.start_combat(self.player, self.enemy)

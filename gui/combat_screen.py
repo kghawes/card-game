@@ -74,6 +74,15 @@ class CombatScreen(Widget):
         self.enemy = enemy
         self.enemy_info.enemy_name_label.text = self.enemy['name']
         self.update_enemy_stats()
+    
+    def start_player_turn(self, statuses, hand):
+        """Starts the player's turn."""
+        self.end_turn_button.disabled = False
+        self.update_player_statuses(statuses) # have statuses been decremented yet?
+
+    def update_player_statuses(self, statuses):
+        """Updates the player's statuses on the screen."""
+        pass 
 
     def update_player_stats(self):
         """Updates the player's stats on the screen."""

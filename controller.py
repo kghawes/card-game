@@ -21,6 +21,7 @@ class Controller:
         self.event_manager.subscribe('start_game', self.handle_start_game)
         self.event_manager.subscribe('start_quest', self.handle_start_quest)
         self.event_manager.subscribe('start_combat', self.handle_start_combat)
+        self.event_manager.subscribe('draw_hand', self.handle_draw_hand)
         self.event_manager.subscribe('player_defeat', self.handle_player_defeat)
         self.event_manager.subscribe('card_not_playable', self.handle_card_not_playable)
         self.event_manager.subscribe('player_victory', self.handle_player_victory)
@@ -29,6 +30,7 @@ class Controller:
         self.event_manager.subscribe('discard_card', self.handle_discard_card)
         self.event_manager.subscribe('empty_discard_pile', self.handle_empty_discard_pile)
         self.event_manager.subscribe('stats_changed', self.handle_stats_changed)
+        self.event_manager.subscribe('end_combat', self.handle_end_combat)
 
     def handle_start_game(self):
         """Handle starting the game."""
@@ -41,6 +43,10 @@ class Controller:
     def handle_start_combat(self, enemy):
         """Handle starting combat."""
         self.app.game.start_combat(self.game.player.get_combatant_data(), enemy.get_combatant_data())
+
+    def handle_draw_hand(self):
+        """Handle drawing a hand of cards."""
+        pass
 
     def handle_player_defeat(self):
         """Handle player defeat."""
@@ -87,6 +93,10 @@ class Controller:
         }
         subject = 'player' if not combatant.is_enemy else 'enemy'
         self.app.game.screen.update_stats(subject, stats_data)
+    
+    def handle_end_combat(self):
+        """Handle ending combat."""
+        pass
 
     # GUI events
 
@@ -108,6 +118,7 @@ class Controller:
     
     def handle_start_player_turn(self):
         """Handle starting player turn."""
+        self.game.combat_manager.beginning_of_turn(self.game.player, self.game.enemy, self.game.registries)
         statuses = dict(self.game.player.status_manager.statuses)
         hand = [card.get_card_data() for card in self.game.player.card_manager.hand]
         self.app.game.screen.start_player_turn(statuses, hand)
