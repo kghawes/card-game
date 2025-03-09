@@ -51,6 +51,20 @@ class Hand(FloatLayout):
             self.position_cards()
 
 
+class StatusIcon(Widget):
+    """Widget representing a status icon."""
+    status_texture = ObjectProperty(None)
+    status_name = ObjectProperty(None)
+    status_level = ObjectProperty(None)
+
+    def __init__(self, status_data, **kwargs):
+        """Initializes the status icon with the given data."""
+        super().__init__(**kwargs)
+        self.status_texture = AssetCache.get_texture(status_data['texture'])
+        self.status_name.text = status_data['name']
+        self.status_level.text = str(status_data['level'])
+
+
 class CombatScreen(Widget):
     """Widget representing the combat screen of the card game."""
     play_area = ObjectProperty(None)
@@ -113,12 +127,12 @@ class CombatScreen(Widget):
 
     def end_turn(self):
         """Ends the current turn."""
-        self.load()
         self.end_turn_button.disabled = True
-        #Clock.schedule_interval(self.loop_textures, 0.25)
+        self.event_manager.dispatch('end_turn')
 
     def loop_textures(self, dt):
         """Loops through the textures for the wait animation."""
+        # use Clock.schedule_interval(self.loop_textures, 0.25)
         textures = [
             AssetCache.get_texture('gui/assets/hourglass0.png'),
             AssetCache.get_texture('gui/assets/hourglass45.png'),

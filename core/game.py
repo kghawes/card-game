@@ -32,6 +32,7 @@ class Game:
             self.card_cache, self.registries.statuses,
             c.ClassSpecializations.FIGHTER.name, self.event_manager
             )
+        self.player.name = "Player"
         self.town = Town()
 
     def start_game(self):

@@ -50,6 +50,7 @@
             player_health_label: player_health_label
             player_stamina_label: player_stamina_label
             player_magicka_label: player_magicka_label
+            player_status_effects: player_status_effects
             pos: 8, 324
             size: 300, 528
             size_hint: None, None
@@ -76,6 +77,12 @@
             Label:
                 id: player_magicka_label
                 text: ''
+            
+            GridLayout:
+                id: player_status_effects
+                cols: 7
+                size_hint: None, None
+                size: self.minimum_width, self.minimum_height
 
         BoxLayout:
             id: enemy_info
