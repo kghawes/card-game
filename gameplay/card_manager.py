@@ -124,8 +124,6 @@ class CardManager:
         #         subject, ss_level, registries
         #         )
 
-        self.event_manager.dispatch('draw_hand')
-
     def discard(self, card, subject, status_registry, is_being_played=False):
         """
         Move the card from the hand to the discard pile, consumed pile, or

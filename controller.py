@@ -21,8 +21,8 @@ class Controller:
         self.event_manager.subscribe('start_game', self.handle_start_game)
         self.event_manager.subscribe('start_quest', self.handle_start_quest)
         self.event_manager.subscribe('start_combat', self.handle_start_combat)
-        self.event_manager.subscribe('draw_hand', self.handle_draw_hand)
         self.event_manager.subscribe('player_defeat', self.handle_player_defeat)
+        self.event_manager.subscribe('start_action_phase', self.handle_start_action_phase)
         self.event_manager.subscribe('card_not_playable', self.handle_card_not_playable)
         self.event_manager.subscribe('player_victory', self.handle_player_victory)
         self.event_manager.subscribe('update_statuses', self.handle_update_statuses)
@@ -44,13 +44,14 @@ class Controller:
         """Handle starting combat."""
         self.app.game.start_combat(self.game.player.get_combatant_data(), enemy.get_combatant_data())
 
-    def handle_draw_hand(self):
-        """Handle drawing a hand of cards."""
-        pass
-
     def handle_player_defeat(self):
         """Handle player defeat."""
         self.app.game.player_defeat()
+    
+    def handle_start_action_phase(self, hand):
+        """Handle starting the action phase."""
+        for card in hand:
+            self.app.game.screen.hand.draw(card.get_card_data())
 
     def handle_card_not_playable(self):
         """Handle a card that cannot be played."""
@@ -125,7 +126,8 @@ class Controller:
 
     def handle_play_card(self, index_in_hand):
         """Handle playing a card."""
-        pass
+        card = self.game.player.card_manager.hand[index_in_hand]
+        self.game.combat_manager.play_card(self.game.player, self.game.enemy, card, self.game.registries)
 
     def handle_end_turn(self):
         """Handle ending the turn."""

@@ -62,10 +62,9 @@ class CombatManager:
     #             )
     #     self.end_of_turn(player, registries.statuses)
 
-    def beginning_of_turn(self, combatant, opponent, registries) -> bool:
+    def beginning_of_turn(self, combatant, opponent, registries):
         """
         Handle resetting resources, triggering statuses, and drawing cards.
-        Returns whether combat ended during the beginning phase.
         """
         combatant.reset_for_turn()
         combatant.card_manager.draw_hand(combatant, registries)
@@ -78,6 +77,7 @@ class CombatManager:
             registries.statuses, combatant.card_manager
             )
         combatant.replenish_resources_for_turn()
+        self.event_manager.dispatch('start_action_phase', combatant.card_manager.hand)
 
     def end_of_turn(self, combatant, status_registry):
         """
@@ -91,21 +91,21 @@ class CombatManager:
             combatant, status_registry
             )
 
-    def do_player_action(self, player, enemy, registries, card_cache):
-        """
-        Get the player input and perform the selected action.
-        """
-        selection = text_interface.turn_options_prompt(
-            player, enemy, registries, card_cache
-            )
-        if selection < 0:  # Pass turn
-            return True
-        if selection >= len(player.card_manager.hand):
-            return False
-        card = player.card_manager.hand[selection]
-        if self.play_card(player, enemy, card, registries):
-            player.cards_played_this_turn += 1
-        return self.is_combat_over(player, enemy)
+    # def do_player_action(self, player, enemy, registries, card_cache):
+    #     """
+    #     Get the player input and perform the selected action.
+    #     """
+    #     selection = text_interface.turn_options_prompt(
+    #         player, enemy, registries, card_cache
+    #         )
+    #     if selection < 0:  # Pass turn
+    #         return True
+    #     if selection >= len(player.card_manager.hand):
+    #         return False
+    #     card = player.card_manager.hand[selection]
+    #     if self.play_card(player, enemy, card, registries):
+    #         player.cards_played_this_turn += 1
+    #     return self.is_combat_over(player, enemy)
 
     def play_card(self, combatant, opponent, card, registries) -> bool:
         """
@@ -113,13 +113,12 @@ class CombatManager:
         whether the card was successfully played.
         """
         if not self.card_can_be_played(combatant, card, registries.statuses):
-            text_interface.send_message("Impossible!")
-            return False
+            # TODO make card_can_be_played return a reason
+            self.event_manager.dispatch('invalid_card_play', combatant, card)
 
         resource_id = card.get_resource()
         if not combatant.resources[resource_id].try_spend(card.get_cost()):
-            text_interface.send_message("Not enough " + resource_id)
-            return False
+            self.event_manager.dispatch('not_enough_resource', combatant, card)
 
         for effect_id, effect_level in card.effects.items():
             if not self.effect_can_resolve(
@@ -136,9 +135,6 @@ class CombatManager:
             card, combatant, registries.statuses, True
             )
 
-        text_interface.send_message(c.CARD_PLAYED_MESSAGE.format(
-            combatant.name, card.name, opponent.name, opponent.get_health())
-            )
         return True
 
     def card_can_be_played(self, combatant, card, status_registry) -> bool:

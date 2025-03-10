@@ -46,7 +46,7 @@ class Card(Widget):
         self.card_id = card_data['id']
         self.art_texture = AssetCache.get_texture(f'gui/assets/cards/{self.card_id}.png')
         self.art_bg_texture = AssetCache.get_texture(f'gui/assets/cards/{self.card_type}_bg.png')
-        self.cost = card_data['cost']
+        self.cost = str(card_data['cost'])
         self.effects = self.format_effects(card_data['effects'])
         self.formatted_type = f"{self.card_type} ({card_data['subtype']})" if 'subtype' in card_data else self.card_type
     
@@ -91,6 +91,8 @@ class Card(Widget):
             if self.play_area.collide_point(self.center_x, self.center_y):
                 self.center_x = self.play_area.center_x
                 self.center_y = self.play_area.center_y
+                self.screen.event_manager.dispatch('play_card', self.hand_index)
+                # this needs to be triggered by the combat manager:
                 Clock.schedule_once(self.move_to_discard, 1)
             else:
                 self.parent.remove_widget(self)

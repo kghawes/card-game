@@ -172,18 +172,6 @@ class MerchantProbabilities(Enum):
     CONSUMABLE = 0.04
 
 
-# Options menus
-TOWN_OPTIONS = [
-    "Go to personal library (card storage)",
-    "Go to card merchant",
-    "Proceed to next quest"
-    ]
-LIBRARY_OPTIONS = [
-    "View deck and deposit cards",
-    "View library and withdraw cards",
-    "Exit to town"
-    ]
-
 # Minimum values
 MIN_RESOURCE = 0
 MIN_EFFECT = 1
@@ -278,21 +266,6 @@ STATUSES_PATH = "data/statuses.json"
 CARD_REWARDS_PATH = "data/card_rewards.json"
 ENEMY_GROUPS_PATH = "data/enemy_groups.json"
 
-# Text for UI
-SPLASH_MESSAGE = "Welcome to the game!"
-PROMPT_NAME = "What is your character’s name? "
-ENTER_TOWN_MESSAGE = "Entering Ebonheart."
-VICTORY_MESSAGE = "You won!"
-DEFEAT_MESSAGE = "Game over!"
-BEAT_GAME_MESSAGE = "You beat the game!"
-TEXT_DIVIDER = "------------------------------------------------------------"
-PROMPT_TURN_OPTIONS = "Enter the number of the Card you want to Play or type PASS to end your Turn: "
-NOT_ENOUGH_STAMINA_MESSAGE = "You’re too fatigued to do that!"
-CARD_PLAYED_MESSAGE = "{} played {}! {} has {} health left!"
-ENEMY_PASSES_MESSAGE = "{} passes their turn."
-INPUT_PASS_TURN = "PASS"
-TOO_MANY_COPIES = "You can't have more than {} copies of {} in your deck!"
-TOO_MANY_CARDS = "Your deck can't have more than {} cards in it!"
 
 # Experience
 EXP_TO_LEVEL = [

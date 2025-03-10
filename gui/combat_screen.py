@@ -3,6 +3,7 @@ from operator import indexOf
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.label import Label
 from kivy.properties import ObjectProperty, BooleanProperty
 from kivy.clock import Clock
 import gui.gui_constants as constants
@@ -51,18 +52,21 @@ class Hand(FloatLayout):
             self.position_cards()
 
 
-class StatusIcon(Widget):
-    """Widget representing a status icon."""
-    status_texture = ObjectProperty(None)
-    status_name = ObjectProperty(None)
-    status_level = ObjectProperty(None)
+# class StatusIcon(Widget):
+#     """Widget representing a status icon."""
+#     status_texture = ObjectProperty(None)
+#     status_name = ObjectProperty(None)
+#     status_level = ObjectProperty(None)
 
-    def __init__(self, status_data, **kwargs):
-        """Initializes the status icon with the given data."""
-        super().__init__(**kwargs)
-        self.status_texture = AssetCache.get_texture(status_data['texture'])
-        self.status_name.text = status_data['name']
-        self.status_level.text = str(status_data['level'])
+#     def __init__(self, status_data, **kwargs):
+#         """Initializes the status icon with the given data."""
+#         super().__init__(**kwargs)
+#         self.status_texture = AssetCache.get_texture(status_data['texture'])
+#         self.status_name.text = status_data['name']
+#         self.status_level.text = str(status_data['level'])
+        # implement a method to load all the statuses on startup
+        # implement status name and status data on game side
+        # consider simpler implementation first
 
 
 class CombatScreen(Widget):
@@ -96,7 +100,17 @@ class CombatScreen(Widget):
 
     def update_player_statuses(self, statuses):
         """Updates the player's statuses on the screen."""
-        pass 
+        self.player_info.player_statuses.clear_widgets()
+        y_offset = 0
+        for status_id, level in statuses.items():
+            status_label = Label(text=f"{status_id} ({level})")
+            self.player_info.player_statuses.add_widget(status_label)
+            status_label.size = (300, 33)
+            status_label.size_hint = (None, None)
+            x = 8
+            y_offset += 33
+            y = self.player_info.player_magicka_label.y - y_offset
+            status_label.pos = (x, y)
 
     def update_player_stats(self):
         """Updates the player's stats on the screen."""
@@ -109,21 +123,34 @@ class CombatScreen(Widget):
         self.enemy_info.enemy_health_label.text = f"Health: {self.enemy['health']}/{self.enemy['max_health']}"
         self.enemy_info.enemy_stamina_label.text = f"Stamina: {self.enemy['stamina']}/{self.enemy['max_stamina']}"
         self.enemy_info.enemy_magicka_label.text = f"Magicka: {self.enemy['magicka']}/{self.enemy['max_magicka']}"
+    
+    def update_stats(self, subject, stats_data):
+        """Updates the stats of the player or enemy."""
+        if subject == 'player':
+            for key in stats_data.keys():
+                if key in self.player:
+                    self.player[key] = stats_data[key]
+            self.update_player_stats()
+        else:
+            for key in stats_data.keys():
+                if key in self.enemy:
+                    self.enemy[key] = stats_data[key]
+            self.update_enemy_stats()
 
-    def load(self):
-        test_card = Card({
-            'type': 'WEAPON',
-            'subtype': 'Long Blade',
-            'name': 'Iron Longsword',
-            'id': 1,
-            'cost': '3',
-            'effects': {
-                'Physical Damage Target': 2
-                }
-            }, self)
-        self.hand.add_widget(test_card)
-        self.hand.position_cards()
-        self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
+    # def load(self):
+    #     test_card = Card({
+    #         'type': 'WEAPON',
+    #         'subtype': 'Long Blade',
+    #         'name': 'Iron Longsword',
+    #         'id': 1,
+    #         'cost': '3',
+    #         'effects': {
+    #             'Physical Damage Target': 2
+    #             }
+    #         }, self)
+    #     self.hand.add_widget(test_card)
+    #     self.hand.position_cards()
+    #     self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
 
     def end_turn(self):
         """Ends the current turn."""
@@ -145,16 +172,3 @@ class CombatScreen(Widget):
         """Empties the discard pile."""
         for card in self.discard_pile.children:
             self.discard_pile.remove_widget(card)
-    
-    def update_stats(self, subject, stats_data):
-        """Updates the stats of the player or enemy."""
-        if subject == 'player':
-            for key in stats_data.keys():
-                if key in self.player:
-                    self.player[key] = stats_data[key]
-            self.update_player_stats()
-        else:
-            for key in stats_data.keys():
-                if key in self.enemy:
-                    self.enemy[key] = stats_data[key]
-            self.update_enemy_stats()

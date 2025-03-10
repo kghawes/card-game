@@ -44,13 +44,13 @@
                     pos: self.pos
                     size: self.size
 
-        BoxLayout:
+        FloatLayout:
             id: player_info
             player_name_label: player_name_label
             player_health_label: player_health_label
             player_stamina_label: player_stamina_label
             player_magicka_label: player_magicka_label
-            player_status_effects: player_status_effects
+            player_statuses: player_statuses
             pos: 8, 324
             size: 300, 528
             size_hint: None, None
@@ -65,26 +65,39 @@
             Label:
                 id: player_name_label
                 text: ''
+                pos: 8, 812
+                size: 300, 40
+                size_hint: None, None
             
             Label:
                 id: player_health_label
                 text: ''
+                pos: 8, 782
+                size: 300, 30
+                size_hint: None, None
             
             Label:
                 id: player_stamina_label
                 text: ''
+                pos: 8, 752
+                size: 300, 30
+                size_hint: None, None
             
             Label:
                 id: player_magicka_label
                 text: ''
-            
-            GridLayout:
-                id: player_status_effects
-                cols: 7
+                pos: 8, 722
+                size: 300, 30
                 size_hint: None, None
-                size: self.minimum_width, self.minimum_height
+            
+            FloatLayout:
+                id: player_statuses
+                pos: 8, 372
+                size: 300, 350
+            
+            
 
-        BoxLayout:
+        FloatLayout:
             id: enemy_info
             enemy_name_label: enemy_name_label
             enemy_health_label: enemy_health_label
@@ -93,7 +106,6 @@
             pos: 1192, 372
             size: 300, 480
             size_hint: None, None
-            orientation: 'vertical'
             canvas:
                 Color:
                     rgba: (0.1, 0.1, 0.1, 1)
@@ -110,18 +122,30 @@
             Label:
                 id: enemy_name_label
                 text: ''
+                pos: 1192, 812
+                size: 300, 40
+                size_hint: None, None
             
             Label:
                 id: enemy_health_label
                 text: ''
+                pos: 1192, 782
+                size: 300, 30
+                size_hint: None, None
             
             Label:
                 id: enemy_stamina_label
                 text: ''
+                pos: 1192, 752
+                size: 300, 30
+                size_hint: None, None
             
             Label:
                 id: enemy_magicka_label
                 text: ''
+                pos: 1192, 722
+                size: 300, 30
+                size_hint: None, None
 
         Widget:
             id: discard_pile
