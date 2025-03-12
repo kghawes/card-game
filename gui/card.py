@@ -92,8 +92,6 @@ class Card(Widget):
                 self.center_x = self.play_area.center_x
                 self.center_y = self.play_area.center_y
                 self.screen.event_manager.dispatch('play_card', self.hand_index)
-                # this needs to be triggered by the combat manager:
-                Clock.schedule_once(self.move_to_discard, 1)
             else:
                 self.parent.remove_widget(self)
                 self.hand.add_to_hand(self, index=self.hand_index)
@@ -101,6 +99,10 @@ class Card(Widget):
                     card.is_draggable = True
             return True
         return False
+    
+    def show_card_play_effects(self):
+        """Show the card play effects."""
+        Clock.schedule_once(self.move_to_discard, 1)
 
     def move_to_discard(self, dt=0):
         """Moves the card to the discard pile."""

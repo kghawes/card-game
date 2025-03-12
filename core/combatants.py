@@ -156,8 +156,7 @@ class Combatant:
                     )
 
         health = self.resources[r.HEALTH.name]
-        health.change_value(-amount, self.modifier_manager)
-        self.event_manager.dispatch('stats_changed', self)
+        health.change_value(-amount, self.modifier_manager, self.event_manager)
 
     def is_alive(self) -> bool:
         """
@@ -173,7 +172,6 @@ class Combatant:
         stamina.replenish(self.modifier_manager)
         magicka = self.resources[r.MAGICKA.name]
         magicka.replenish(self.modifier_manager)
-        self.event_manager.dispatch('stats_changed', self)
 
     def reset_for_turn(self):
         """
@@ -186,5 +184,6 @@ class Combatant:
         """
         Change the value of a given resource by a given amount.
         """
-        self.resources[resource_id].change_value(amount, self.modifier_manager)
-        self.event_manager.dispatch('stats_changed', self)
+        self.resources[resource_id].change_value(
+            amount, self.modifier_manager
+            )

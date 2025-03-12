@@ -83,8 +83,6 @@ class CardManager:
             self.hand.append(card)
             cards_to_draw -= 1
         self.recalculate_for_new_card(subject, status_registry)
-        if not subject.is_enemy:
-            self.event_manager.dispatch('draw_cards', self.hand, self.deck, self.discard_pile)
 
     def recalculate_for_new_card(self, subject, status_registry):
         """

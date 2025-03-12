@@ -24,80 +24,49 @@ class Controller:
         self.event_manager.subscribe('player_defeat', self.handle_player_defeat)
         self.event_manager.subscribe('start_action_phase', self.handle_start_action_phase)
         self.event_manager.subscribe('card_not_playable', self.handle_card_not_playable)
+        self.event_manager.subscribe('card_resolved', self.handle_card_resolved)
         self.event_manager.subscribe('player_victory', self.handle_player_victory)
-        self.event_manager.subscribe('update_statuses', self.handle_update_statuses)
-        self.event_manager.subscribe('draw_card', self.handle_draw_card)
-        self.event_manager.subscribe('discard_card', self.handle_discard_card)
-        self.event_manager.subscribe('empty_discard_pile', self.handle_empty_discard_pile)
-        self.event_manager.subscribe('stats_changed', self.handle_stats_changed)
-        self.event_manager.subscribe('end_combat', self.handle_end_combat)
 
     def handle_start_game(self):
         """Handle starting the game."""
+        print("Game event fired: start_game")
         self.app.run()
 
     def handle_start_quest(self, quest):
         """Handle starting a quest."""
+        print("Game event fired: start_quest")
         self.app.game.start_quest(quest)
 
     def handle_start_combat(self, enemy):
         """Handle starting combat."""
+        print("Game event fired: start_combat")
         self.app.game.start_combat(self.game.player.get_combatant_data(), enemy.get_combatant_data())
 
     def handle_player_defeat(self):
         """Handle player defeat."""
+        print("Game event fired: player_defeat")
         self.app.game.player_defeat()
     
     def handle_start_action_phase(self, hand):
         """Handle starting the action phase."""
+        print("Game event fired: start_action_phase")
         for card in hand:
             self.app.game.screen.hand.draw(card.get_card_data())
 
     def handle_card_not_playable(self):
         """Handle a card that cannot be played."""
+        print("Game event fired: card_not_playable")
         self.app.game.screen.card_not_playable()
+
+    def handle_card_resolved(self):
+        """Handle a card that has been resolved."""
+        print("Game event fired: card_resolved")
+        pass
 
     def handle_player_victory(self, rewards, player_leveled_up):
         """Handle player victory."""
+        print("Game event fired: player_victory")
         self.app.game.player_victory(rewards, player_leveled_up)
-    
-    def handle_update_statuses(self, combatant):
-        """Handle updating statuses."""
-        if not combatant.is_enemy:
-            statuses = self.game.player.status_manager.get_statuses()
-            self.app.game.screen.update_statuses('player', statuses)
-        else:
-            statuses = self.game.enemy.status_manager.get_statuses()
-            self.app.game.screen.update_statuses('enemy', statuses)
-
-    def handle_draw_card(self, card):
-        """Handle drawing a card."""
-        self.app.game.screen.hand.draw(card.get_card_data())
-
-    def handle_empty_discard_pile(self):
-        """Handle emptying the discard pile."""
-        self.app.game.screen.empty_discard_pile()
-
-    def handle_discard_card(self, index_in_hand):
-        """Handle discarding cards."""
-        self.app.game.screen.hand.discard(index_in_hand)
-    
-    def handle_stats_changed(self, combatant):
-        """Handle stats changes."""
-        stats_data = {
-            'health': combatant.get_health(),
-            'max_health': combatant.get_max_health(),
-            'stamina': combatant.get_stamina(),
-            'max_stamina': combatant.get_max_stamina(),
-            'magicka': combatant.get_magicka(),
-            'max_magicka': combatant.get_max_magicka()
-        }
-        subject = 'player' if not combatant.is_enemy else 'enemy'
-        self.app.game.screen.update_stats(subject, stats_data)
-    
-    def handle_end_combat(self):
-        """Handle ending combat."""
-        pass
 
     # GUI events
 
@@ -111,14 +80,17 @@ class Controller:
 
     def handle_initiate_quest(self):
         """Handle initiating a quest."""
+        print("GUI event fired: initiate_quest")
         self.game.start_quest()
 
     def handle_initiate_encounter(self):
         """Handle initiating an encounter."""
+        print("GUI event fired: initiate_encounter")
         self.game.start_encounter()
     
     def handle_start_player_turn(self):
         """Handle starting player turn."""
+        print("GUI event fired: start_player_turn")
         self.game.combat_manager.beginning_of_turn(self.game.player, self.game.enemy, self.game.registries)
         statuses = dict(self.game.player.status_manager.statuses)
         hand = [card.get_card_data() for card in self.game.player.card_manager.hand]
@@ -126,10 +98,12 @@ class Controller:
 
     def handle_play_card(self, index_in_hand):
         """Handle playing a card."""
+        print("GUI event fired: play_card")
         card = self.game.player.card_manager.hand[index_in_hand]
         self.game.combat_manager.play_card(self.game.player, self.game.enemy, card, self.game.registries)
 
     def handle_end_turn(self):
         """Handle ending the turn."""
+        print("GUI event fired: end_turn")
         pass
 

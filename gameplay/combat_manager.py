@@ -117,8 +117,7 @@ class CombatManager:
             self.event_manager.dispatch('invalid_card_play', combatant, card)
 
         resource_id = card.get_resource()
-        if not combatant.resources[resource_id].try_spend(card.get_cost()):
-            self.event_manager.dispatch('not_enough_resource', combatant, card)
+        combatant.resources[resource_id].try_spend(card.get_cost())
 
         for effect_id, effect_level in card.effects.items():
             if not self.effect_can_resolve(
@@ -135,7 +134,7 @@ class CombatManager:
             card, combatant, registries.statuses, True
             )
 
-        return True
+        self.event_manager.dispatch('card_resolved')
 
     def card_can_be_played(self, combatant, card, status_registry) -> bool:
         """
