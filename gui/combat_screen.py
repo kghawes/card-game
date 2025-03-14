@@ -29,7 +29,7 @@ class Hand(FloatLayout):
                 card.center_x = i * (832 / (len(cards) - 1)) + 334
                 card.center_y = y
     
-    def add_to_hand(self, card, index=None):
+    def add_to_hand(self, card, index=0):
         """Adds a card to the hand and repositions the cards."""
         self.add_widget(card, index=index)
         self.position_cards()
@@ -131,6 +131,11 @@ class CombatScreen(Widget):
             if key in target:
                 target[key] = value
         self.update_player_stats() if subject == 'player' else self.update_enemy_stats()
+
+    def invalid_play(self):
+        """Handles an invalid play."""
+        card = self.animation_layer.children[0]
+        card.return_to_hand()
 
     def end_turn(self):
         """Ends the current turn."""

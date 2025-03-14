@@ -56,7 +56,7 @@ class Controller:
     def handle_card_not_playable(self):
         """Handle a card that cannot be played."""
         print("Game event fired: card_not_playable")
-        self.app.game.screen.card_not_playable()
+        self.app.game.screen.invalid_play()
 
     def handle_card_resolved(self):
         """Handle a card that has been resolved."""

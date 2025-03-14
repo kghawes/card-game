@@ -30,14 +30,15 @@ class Resource:
         new_value = self.clamp_value(new_value, modifier_manager)
         self.current = new_value
 
-    def try_spend(self, amount, modifier_manager, event_manager):
+    def try_spend(self, amount, modifier_manager) -> bool:
         """
-        Reduce the current value by the given amount or notify if there
+        Reduce the current value by the given amount or return false if there
         isn't enough.
         """
         if self.current < amount:
-            event_manager.dispatch('not_enough_resource', self.resource_id)
+            return False
         self.change_value(-amount, modifier_manager)
+        return True
 
     def get_max(self, modifier_manager) -> int:
         """

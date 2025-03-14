@@ -50,14 +50,14 @@ class Card(Widget):
         self.effects = self.format_effects(card_data['effects'])
         self.formatted_type = f"{self.card_type} ({card_data['subtype']})" if 'subtype' in card_data else self.card_type
     
-    def format_effects(self, effects):
+    def format_effects(self, effects) -> str:
         """Formats the effects of the card for display."""
         formatted_effects = []
         for effect, level in effects.items():
             formatted_effects.append(f"{effect} {level}")
         return '\n'.join(formatted_effects)
 
-    def on_touch_down(self, touch):
+    def on_touch_down(self, touch) -> bool:
         """When clicked, pick up the card."""
         if super().on_touch_down(touch):
             return True
@@ -74,7 +74,7 @@ class Card(Widget):
         self.animation_layer.add_widget(self)
         return True
 
-    def on_touch_move(self, touch):
+    def on_touch_move(self, touch) -> bool:
         """Drag the card with the mouse."""
         if touch.grab_current is self:
             offset = tuple(Vector(*touch.pos) - Vector(*self.click_location))
@@ -84,7 +84,7 @@ class Card(Widget):
             return True
         return False
 
-    def on_touch_up(self, touch):
+    def on_touch_up(self, touch) -> bool:
         """Release a held card."""
         if touch.grab_current is self:
             touch.ungrab(self)
@@ -93,12 +93,15 @@ class Card(Widget):
                 self.center_y = self.play_area.center_y
                 self.screen.event_manager.dispatch('play_card', self.hand_index)
             else:
-                self.parent.remove_widget(self)
-                self.hand.add_to_hand(self, index=self.hand_index)
-                for card in self.hand.children:
-                    card.is_draggable = True
+                self.return_to_hand()
             return True
         return False
+
+    def return_to_hand(self):
+        self.parent.remove_widget(self)
+        self.hand.add_to_hand(self, index=self.hand_index)
+        for card in self.hand.children:
+            card.is_draggable = True
     
     def show_card_effect(self):
         """Show the card play effects."""

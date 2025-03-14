@@ -112,14 +112,13 @@ class CombatManager:
         Activate a card's effects, spend its cost, and discard it. Return
         whether the card was successfully played.
         """
-        if not self.card_can_be_played(combatant, card, registries.statuses):
+        if not self.card_can_be_played(combatant, card, registries.statuses) \
+        or not combatant.resources[card.get_resource()].try_spend(
+            card.get_cost(), combatant.modifier_manager
+        ):
             # TODO make card_can_be_played return a reason
-            self.event_manager.dispatch('invalid_card_play', combatant, card)
-
-        resource_id = card.get_resource()
-        combatant.resources[resource_id].try_spend(
-            card.get_cost(), combatant.modifier_manager, self.event_manager
-        )
+            self.event_manager.dispatch('card_not_playable')
+            return False            
 
         for effect_id, effect_level in card.effects.items():
             if not self.effect_can_resolve(
@@ -137,6 +136,7 @@ class CombatManager:
             )
 
         self.event_manager.dispatch('card_resolved')
+        return True
 
     def card_can_be_played(self, combatant, card, status_registry) -> bool:
         """
