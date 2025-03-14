@@ -1,4 +1,58 @@
 {
+  "TEST_0": {
+    "name": "Test 0",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "NO_EFFECT": 0
+    }
+  },
+  "TEST_1": {
+    "name": "Test 1",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "NO_EFFECT": 0
+    }
+  },
+  "TEST_2": {
+    "name": "Test 2",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "NO_EFFECT": 0
+    }
+  },
+  "TEST_3": {
+    "name": "Test 3",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "NO_EFFECT": 0
+    }
+  },
+  "TEST_4": {
+    "name": "Test 4",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "NO_EFFECT": 0
+    }
+  },
+  "TEST_5": {
+    "name": "Test 5",
+    "card_type": "WEAPON",
+    "cost": 1,
+    "value": 0,
+    "effects": {
+      "NO_EFFECT": 0
+    }
+  },
   "MISS": {
     "name": "Miss",
     "card_type": "WEAPON",

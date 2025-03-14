@@ -156,7 +156,7 @@ class Combatant:
                     )
 
         health = self.resources[r.HEALTH.name]
-        health.change_value(-amount, self.modifier_manager, self.event_manager)
+        health.change_value(-amount, self.modifier_manager)
 
     def is_alive(self) -> bool:
         """

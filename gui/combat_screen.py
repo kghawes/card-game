@@ -29,7 +29,7 @@ class Hand(FloatLayout):
                 card.center_x = i * (832 / (len(cards) - 1)) + 334
                 card.center_y = y
     
-    def add_to_hand(self, card, index=0):
+    def add_to_hand(self, card, index=None):
         """Adds a card to the hand and repositions the cards."""
         self.add_widget(card, index=index)
         self.position_cards()
@@ -96,7 +96,7 @@ class CombatScreen(Widget):
     def start_player_turn(self, statuses, hand):
         """Starts the player's turn."""
         self.end_turn_button.disabled = False
-        self.update_player_statuses(statuses) # have statuses been decremented yet?
+        self.update_player_statuses(statuses)
 
     def update_player_statuses(self, statuses):
         """Updates the player's statuses on the screen."""
@@ -126,31 +126,11 @@ class CombatScreen(Widget):
     
     def update_stats(self, subject, stats_data):
         """Updates the stats of the player or enemy."""
-        if subject == 'player':
-            for key in stats_data.keys():
-                if key in self.player:
-                    self.player[key] = stats_data[key]
-            self.update_player_stats()
-        else:
-            for key in stats_data.keys():
-                if key in self.enemy:
-                    self.enemy[key] = stats_data[key]
-            self.update_enemy_stats()
-
-    # def load(self):
-    #     test_card = Card({
-    #         'type': 'WEAPON',
-    #         'subtype': 'Long Blade',
-    #         'name': 'Iron Longsword',
-    #         'id': 1,
-    #         'cost': '3',
-    #         'effects': {
-    #             'Physical Damage Target': 2
-    #             }
-    #         }, self)
-    #     self.hand.add_widget(test_card)
-    #     self.hand.position_cards()
-    #     self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
+        target = self.player if subject == 'player' else self.enemy
+        for key, value in stats_data.items():
+            if key in target:
+                target[key] = value
+        self.update_player_stats() if subject == 'player' else self.update_enemy_stats()
 
     def end_turn(self):
         """Ends the current turn."""

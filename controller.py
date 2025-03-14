@@ -50,7 +50,7 @@ class Controller:
     def handle_start_action_phase(self, hand):
         """Handle starting the action phase."""
         print("Game event fired: start_action_phase")
-        for card in hand:
+        for card in reversed(hand[:]):
             self.app.game.screen.hand.draw(card.get_card_data())
 
     def handle_card_not_playable(self):
@@ -61,7 +61,9 @@ class Controller:
     def handle_card_resolved(self):
         """Handle a card that has been resolved."""
         print("Game event fired: card_resolved")
-        pass
+        self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
+        self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
+        self.app.game.screen.animation_layer.children[0].show_card_effect()
 
     def handle_player_victory(self, rewards, player_leveled_up):
         """Handle player victory."""

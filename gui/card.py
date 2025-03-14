@@ -100,7 +100,7 @@ class Card(Widget):
             return True
         return False
     
-    def show_card_play_effects(self):
+    def show_card_effect(self):
         """Show the card play effects."""
         Clock.schedule_once(self.move_to_discard, 1)
 

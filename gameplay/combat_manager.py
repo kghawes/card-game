@@ -117,7 +117,9 @@ class CombatManager:
             self.event_manager.dispatch('invalid_card_play', combatant, card)
 
         resource_id = card.get_resource()
-        combatant.resources[resource_id].try_spend(card.get_cost())
+        combatant.resources[resource_id].try_spend(
+            card.get_cost(), combatant.modifier_manager, self.event_manager
+        )
 
         for effect_id, effect_level in card.effects.items():
             if not self.effect_can_resolve(
