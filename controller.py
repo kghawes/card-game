@@ -69,7 +69,9 @@ class Controller:
     def handle_end_enemy_turn(self):
         """Handle end of enemy turn."""
         print("Game event fired: end_enemy_turn")
-        pass  # TODO - implement this
+        self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
+        self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
+        self.event_manager.dispatch('start_player_turn')
 
     def handle_player_victory(self, rewards, player_leveled_up):
         """Handle player victory."""

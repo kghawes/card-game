@@ -150,7 +150,7 @@ class CombatScreen(Widget):
                 Clock.unschedule(discard_card)
                 self.event_manager.dispatch('end_turn')
 
-        Clock.schedule_interval(discard_card, 1)
+        Clock.schedule_interval(discard_card, 0.1)
     
     def enemy_played_card(self, enemy_name, card_data):
         """Handles the enemy playing a card."""
