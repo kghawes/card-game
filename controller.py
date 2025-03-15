@@ -25,6 +25,7 @@ class Controller:
         self.event_manager.subscribe('start_action_phase', self.handle_start_action_phase)
         self.event_manager.subscribe('card_not_playable', self.handle_card_not_playable)
         self.event_manager.subscribe('card_resolved', self.handle_card_resolved)
+        self.event_manager.subscribe('end_enemy_turn', self.handle_end_enemy_turn)
         self.event_manager.subscribe('player_victory', self.handle_player_victory)
 
     def handle_start_game(self):
@@ -64,6 +65,11 @@ class Controller:
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
         self.app.game.screen.animation_layer.children[0].show_card_effect()
+
+    def handle_end_enemy_turn(self):
+        """Handle end of enemy turn."""
+        print("Game event fired: end_enemy_turn")
+        pass  # TODO - implement this
 
     def handle_player_victory(self, rewards, player_leveled_up):
         """Handle player victory."""
@@ -107,5 +113,5 @@ class Controller:
     def handle_end_turn(self):
         """Handle ending the turn."""
         print("GUI event fired: end_turn")
-        pass
-
+        self.game.combat_manager.end_of_turn(self.game.player, self.game.registries.statuses)
+        self.game.combat_manager.do_enemy_turn(self.game.player, self.game.enemy, self.game.registries)

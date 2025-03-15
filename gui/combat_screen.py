@@ -44,11 +44,14 @@ class Hand(FloatLayout):
         card = Card(card_data, self.screen)
         self.add_to_hand(card)
     
-    def discard(self, index):
+    def discard(self, index=None, card=None):
         """Discards a card from the hand."""
-        if 0 <= index < len(self.children):
+        if not card and index is not None and 0 <= index < len(self.children):
             card = self.children[index]
-            card.move_to_discard_pile()
+        elif not card:
+            card = self.children[0]
+        if card:
+            card.move_to_discard()
             self.position_cards()
 
 
@@ -140,7 +143,18 @@ class CombatScreen(Widget):
     def end_turn(self):
         """Ends the current turn."""
         self.end_turn_button.disabled = True
-        self.event_manager.dispatch('end_turn')
+        def discard_card(dt):
+            if self.hand.children:
+                self.hand.discard()
+            else:
+                Clock.unschedule(discard_card)
+                self.event_manager.dispatch('end_turn')
+
+        Clock.schedule_interval(discard_card, 1)
+    
+    def enemy_played_card(self, enemy_name, card_data):
+        """Handles the enemy playing a card."""
+        pass
 
     def loop_textures(self, dt):
         """Loops through the textures for the wait animation."""
