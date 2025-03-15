@@ -171,3 +171,16 @@ class CombatScreen(Widget):
         """Empties the discard pile."""
         for card in self.discard_pile.children:
             self.discard_pile.remove_widget(card)
+    
+    def show_combat_results(self, player_wins, rewards):
+        """Shows the combat results."""
+        # TODO implement combat results display
+        if player_wins:
+            pass
+            # self.combat_results_label.text = "You Win!"
+            # self.rewards_label.text = f"Rewards: {', '.join(rewards)}"
+        else:
+            pass
+            # self.combat_results_label.text = "You Lose!"
+        # self.combat_results_label.opacity = 1
+        # self.rewards_label.opacity = 1

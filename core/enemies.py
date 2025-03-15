@@ -20,6 +20,18 @@ class Enemy(Combatant):
             status_registry, True, event_manager
             )
         self.loot = Treasure(loot, card_rewards)
+    
+    def get_rewards(self, player_class, card_cache) -> dict:
+        """
+        Get the loot rewards for defeating this enemy.
+        """
+        return {
+            'gold': self.loot.gold,
+            'exp': self.loot.exp,
+            'cards': self.loot.select_cards(
+                1, player_class, card_cache
+                )
+        }
 
 
 class EnemyPrototype(Prototype):

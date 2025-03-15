@@ -21,12 +21,11 @@ class Controller:
         self.event_manager.subscribe('start_game', self.handle_start_game)
         self.event_manager.subscribe('start_quest', self.handle_start_quest)
         self.event_manager.subscribe('start_combat', self.handle_start_combat)
-        self.event_manager.subscribe('player_defeat', self.handle_player_defeat)
         self.event_manager.subscribe('start_action_phase', self.handle_start_action_phase)
         self.event_manager.subscribe('card_not_playable', self.handle_card_not_playable)
         self.event_manager.subscribe('card_resolved', self.handle_card_resolved)
         self.event_manager.subscribe('end_enemy_turn', self.handle_end_enemy_turn)
-        self.event_manager.subscribe('player_victory', self.handle_player_victory)
+        self.event_manager.subscribe('end_combat', self.handle_end_combat)
 
     def handle_start_game(self):
         """Handle starting the game."""
@@ -42,11 +41,6 @@ class Controller:
         """Handle starting combat."""
         print("Game event fired: start_combat")
         self.app.game.start_combat(self.game.player.get_combatant_data(), enemy.get_combatant_data())
-
-    def handle_player_defeat(self):
-        """Handle player defeat."""
-        print("Game event fired: player_defeat")
-        self.app.game.player_defeat()
     
     def handle_start_action_phase(self, hand):
         """Handle starting the action phase."""
@@ -72,11 +66,20 @@ class Controller:
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
         self.event_manager.dispatch('start_player_turn')
-
-    def handle_player_victory(self, rewards, player_leveled_up):
-        """Handle player victory."""
-        print("Game event fired: player_victory")
-        self.app.game.player_victory(rewards, player_leveled_up)
+    
+    def handle_end_combat(self):
+        """Handle end of combat."""
+        print("Game event fired: end_combat")
+        if self.game.player.is_alive():
+            rewards = self.game.enemy.get_rewards(
+                self.game.player.character_class,
+                self.game.card_cache
+                )
+            # TODO give rewards to player
+            self.app.game.screen.show_combat_results(True, rewards)
+            # TODO make rewards optional
+        else:
+            self.app.game.screen.show_combat_results(False, None)
 
     # GUI events
 

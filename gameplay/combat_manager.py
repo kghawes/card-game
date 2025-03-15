@@ -84,14 +84,13 @@ class CombatManager:
                 combatant, opponent, level, status_registry=registries.statuses
                 )
             if self.is_combat_over(combatant, opponent):
-                # TODO handle victory or defeat
-                pass
+                self.event_manager.dispatch('end_combat')
 
         combatant.card_manager.discard(
             card, combatant, registries.statuses, True
             )
 
-        # does cards_played need to be incremented here?
+        combatant.cards_played_this_turn += 1
         if not combatant.is_enemy:
             self.event_manager.dispatch('card_resolved')
         return True
@@ -143,38 +142,38 @@ class CombatManager:
                 if card.cost <= enemy.resources[resource_id].current and \
                     self.card_can_be_played(enemy, card, registries.statuses):
                     playable_card_exists = True
-                    if self.play_card(enemy, player, card, registries):
-                        enemy.cards_played_this_turn += 1
+                    self.play_card(enemy, player, card, registries)
                     if self.is_combat_over(player, enemy):
-                        return
+                        self.event_manager.dispatch('end_combat')
+                        assert False
                     break
         self.end_of_turn(enemy, registries.statuses)
         self.event_manager.dispatch('end_enemy_turn')
 
-    def present_rewards(self, player, enemy, card_cache, effect_registry):
-        """
-        Give rewards to player.
-        """
-        player.gain_gold(enemy.loot.gold)
-        player.gain_exp(enemy.loot.exp)
-        text_interface.rewards_message(enemy.loot.gold, enemy.loot.exp)
-        card_rewards = c.NORMAL_CARD_REWARD
-        if enemy.loot.is_boss:
-            card_rewards = c.BOSS_CARD_REWARD
-        cards = enemy.loot.select_cards(
-            card_rewards, player.character_class, card_cache)
-        for card in cards:
-            if text_interface.card_reward_prompt(card, effect_registry):
-                success, too_many_copies, too_many_cards = \
-                    player.card_manager.try_add_to_deck(card)
-                if not success:
-                    if too_many_copies:
-                        text_interface.send_message(
-                            c.TOO_MANY_COPIES.format(
-                                c.MAX_CARD_FREQUENCY, card.name
-                                )
-                            )
-                    if too_many_cards:
-                        text_interface.send_message(
-                            c.TOO_MANY_CARDS.format(c.MAX_DECK_SIZE)
-                            )
+    # def present_rewards(self, player, enemy, card_cache, effect_registry):
+    #     """
+    #     Give rewards to player.
+    #     """
+    #     player.gain_gold(enemy.loot.gold)
+    #     player.gain_exp(enemy.loot.exp)
+    #     text_interface.rewards_message(enemy.loot.gold, enemy.loot.exp)
+    #     card_rewards = c.NORMAL_CARD_REWARD
+    #     if enemy.loot.is_boss:
+    #         card_rewards = c.BOSS_CARD_REWARD
+    #     cards = enemy.loot.select_cards(
+    #         card_rewards, player.character_class, card_cache)
+    #     for card in cards:
+    #         if text_interface.card_reward_prompt(card, effect_registry):
+    #             success, too_many_copies, too_many_cards = \
+    #                 player.card_manager.try_add_to_deck(card)
+    #             if not success:
+    #                 if too_many_copies:
+    #                     text_interface.send_message(
+    #                         c.TOO_MANY_COPIES.format(
+    #                             c.MAX_CARD_FREQUENCY, card.name
+    #                             )
+    #                         )
+    #                 if too_many_cards:
+    #                     text_interface.send_message(
+    #                         c.TOO_MANY_CARDS.format(c.MAX_DECK_SIZE)
+    #                         )
