@@ -37,7 +37,7 @@ A card has a **type**, a **cost** to play, and one or more **effects**.
 **Statuses** impact combat dynamically. Some key examples:
 - **Defense**: Reduces incoming damage.
 - **Poison**: Deals damage over time.
-- **Fortify [Stat]**: Boosts a resource or effect.
+- **Fortify [Attribute]**: Boosts a resource or effect.
 - **Weakness [Damage Type]**: Increases damage taken.
 - **Reflect**: Bounces elemental damage back at the attacker.
 - **Disease**: Limits the number of cards you can play in a turn.
@@ -69,6 +69,8 @@ GUI structure:
         - Widgets (and their widget children) -> defined partly in .py and partly in .kv
           - Canvas (this is where shapes, colors, and images are drawn) -> defined primarily in .kv
 
+Communication between the GUI and the game logic is mediated by event managers and a Controller class.
+
 ## Getting Started
 ### Prerequisites
 - Python 3.x
@@ -99,7 +101,7 @@ Tips: It is recommended to create a virtual environment for the project.
 - **Sophisticated AI**: Smarter enemy behavior and deck strategies.
 
 ## License
-This is a personal project and is not intended for commercial release. The setting and lore are based on *The Elder Scrolls III: Morrowind*, owned by Bethesda Softworks. Some content or assets may be based on copyrighted material owned by Bethesda Softworks. This game should be considered a work of parody. Original code may be freely reused with credit to this project.
+This is a personal project and is not intended for commercial release. The setting and lore are based on *The Elder Scrolls III: Morrowind*, owned by Bethesda Softworks. Some content or assets may be based on copyrighted material owned by Bethesda Softworks. This game should be considered a work of parody. Original code may be freely reused with credit to this project. See the License for more detailed information.
 
 ## Contact
 For feedback or contributions, open an issue on GitHub.
