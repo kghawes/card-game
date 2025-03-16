@@ -83,6 +83,7 @@ class CombatScreen(Widget):
     player = ObjectProperty(None)
     enemy = ObjectProperty(None)
     wait_texture = ObjectProperty(None)
+    log_texture = ObjectProperty(None)
 
     def __init__(self, player, enemy, event_manager, **kwargs):
         """Initializes the combat screen with the given properties."""
@@ -95,10 +96,15 @@ class CombatScreen(Widget):
         self.enemy = enemy
         self.enemy_info.enemy_name_label.text = self.enemy['name']
         self.update_enemy_stats()
+        self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
+        self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
+        self.log_shown = False
     
     def start_player_turn(self, statuses, hand):
         """Starts the player's turn."""
         self.end_turn_button.disabled = False
+        Clock.unschedule(self.loop_textures)
+        self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
         self.update_player_statuses(statuses)
 
     def update_player_statuses(self, statuses):
@@ -139,10 +145,13 @@ class CombatScreen(Widget):
         """Handles an invalid play."""
         card = self.animation_layer.children[0]
         card.return_to_hand()
+        # TODO notify the player about the invalid play
 
     def end_turn(self):
         """Ends the current turn."""
         self.end_turn_button.disabled = True
+        self.loop_textures(None)
+        Clock.schedule_interval(self.loop_textures, 0.1)
         def discard_card(dt):
             if self.hand.children:
                 self.hand.discard()
@@ -158,7 +167,7 @@ class CombatScreen(Widget):
 
     def loop_textures(self, dt):
         """Loops through the textures for the wait animation."""
-        # use Clock.schedule_interval(self.loop_textures, 0.25)
+        # use 
         textures = [
             AssetCache.get_texture('gui/assets/hourglass0.png'),
             AssetCache.get_texture('gui/assets/hourglass45.png'),
@@ -172,6 +181,15 @@ class CombatScreen(Widget):
         for card in self.discard_pile.children:
             self.discard_pile.remove_widget(card)
     
+    def toggle_log(self):
+        """Toggles the log display."""
+        if self.log_shown:
+            self.log_shown = False
+            self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
+        else:
+            self.log_shown = True
+            self.log_texture = AssetCache.get_texture('gui/assets/logbookopen.png')
+
     def show_combat_results(self, player_wins, rewards):
         """Shows the combat results."""
         # TODO implement combat results display

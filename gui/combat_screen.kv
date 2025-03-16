@@ -112,12 +112,6 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
-                Color:
-                    rgba: (1, 1, 1, 1)
-                Rectangle:
-                    texture: root.wait_texture
-                    pos: self.pos
-                    size: 23, 23
 
             Label:
                 id: enemy_name_label
@@ -205,14 +199,23 @@
             font_name: 'gui/assets/fonts/romanantique.ttf'
             bold: False
             background_down: 'gui/assets/btn_down.9.png'
+            disabled_color: (0.715, 0.676, 0.535, 0.75)
+            background_disabled_normal: 'gui/assets/btn_down.9.png'
             border: (27, 50, 4, 4)
+            canvas.after:
+                Color:
+                    rgba: (0.715, 0.676, 0.535, 1.0)
+                Rectangle:
+                    texture: root.wait_texture
+                    pos: self.x + 6, self.y + 6
+                    size: 23, 23
         
         Button:
             text: 'View Log'
             size_hint: None, None
             size: 148, 35
             pos: 1192, 324
-            on_release: root.end_turn()
+            on_release: root.toggle_log()
             background_normal: 'gui/assets/btn_up.9.png'
             background_color: (1, 1, 1, 1)
             color: (0.715, 0.676, 0.535, 1.0)
@@ -221,6 +224,13 @@
             bold: False
             background_down: 'gui/assets/btn_down.9.png'
             border: (27, 50, 4, 4)
+            canvas.after:
+                Color:
+                    rgba: (0.715, 0.676, 0.535, 1.0)
+                Rectangle:
+                    texture: root.log_texture
+                    pos: self.x + 6, self.y + 6
+                    size: 23, 23
 
         BoxLayout:
             id: combat_log
