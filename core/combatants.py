@@ -46,7 +46,8 @@ class Combatant:
             'stamina': self.get_stamina(),
             'max_stamina': self.get_max_stamina(),
             'magicka': self.get_magicka(),
-            'max_magicka': self.get_max_magicka()
+            'max_magicka': self.get_max_magicka(),
+            'statuses': dict(self.status_manager.statuses)
         }
 
     def get_health(self) -> int:
