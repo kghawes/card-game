@@ -45,6 +45,7 @@ class Controller:
     def handle_start_action_phase(self, hand):
         """Handle starting the action phase."""
         print("Game event fired: start_action_phase")
+        self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         for card in reversed(hand[:]):
             self.app.game.screen.hand.draw(card.get_card_data())
 

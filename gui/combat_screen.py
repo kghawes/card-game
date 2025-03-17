@@ -120,6 +120,20 @@ class CombatScreen(Widget):
             y_offset += 33
             y = self.player_info.player_magicka_label.y - y_offset
             status_label.pos = (x, y)
+    
+    def update_enemy_statuses(self, statuses):
+        """Updates the enemy's statuses on the screen."""
+        self.enemy_info.enemy_statuses.clear_widgets()
+        y_offset = 0
+        for status_id, level in statuses.items():
+            status_label = Label(text=f"{status_id} ({level})")
+            self.enemy_info.enemy_statuses.add_widget(status_label)
+            status_label.size = (300, 33)
+            status_label.size_hint = (None, None)
+            x = 1192
+            y_offset += 33
+            y = self.enemy_info.enemy_magicka_label.y - y_offset
+            status_label.pos = (x, y)
 
     def update_player_stats(self):
         """Updates the player's stats on the screen."""
@@ -139,7 +153,12 @@ class CombatScreen(Widget):
         for key, value in stats_data.items():
             if key in target:
                 target[key] = value
-        self.update_player_stats() if subject == 'player' else self.update_enemy_stats()
+        if subject == 'player':
+            self.update_player_stats() 
+            self.update_player_statuses(stats_data['statuses'])
+        else:
+            self.update_enemy_stats()
+            self.update_enemy_statuses(stats_data['statuses'])
 
     def invalid_play(self):
         """Handles an invalid play."""

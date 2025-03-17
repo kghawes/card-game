@@ -103,6 +103,7 @@
             enemy_health_label: enemy_health_label
             enemy_stamina_label: enemy_stamina_label
             enemy_magicka_label: enemy_magicka_label
+            enemy_statuses: enemy_statuses
             pos: 1192, 372
             size: 300, 480
             size_hint: None, None
@@ -140,6 +141,11 @@
                 pos: 1192, 722
                 size: 300, 30
                 size_hint: None, None
+            
+            FloatLayout:
+                id: enemy_statuses
+                pos: 1192, 372
+                size: 300, 350
 
         Widget:
             id: discard_pile
