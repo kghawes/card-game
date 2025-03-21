@@ -55,6 +55,22 @@ class Hand(FloatLayout):
             self.position_cards()
 
 
+class ScreenDarken(Widget):    
+    def on_touch_down(self, touch):
+        return True
+    
+    def on_touch_move(self, touch):
+        return True
+    
+    def on_touch_up(self, touch):
+        return True
+
+
+class CombatResults(Widget):
+    """Widget representing the combat results screen."""
+    pass
+
+
 # class StatusIcon(Widget):
 #     """Widget representing a status icon."""
 #     status_texture = ObjectProperty(None)
@@ -211,13 +227,10 @@ class CombatScreen(Widget):
 
     def show_combat_results(self, player_wins, rewards):
         """Shows the combat results."""
-        # TODO implement combat results display
+        self.animation_layer.add_widget(ScreenDarken())
+        combat_results = CombatResults()
+        self.add_widget(combat_results)
         if player_wins:
-            pass
-            # self.combat_results_label.text = "You Win!"
-            # self.rewards_label.text = f"Rewards: {', '.join(rewards)}"
+            combat_results.combat_results_label.text = "You win!"
         else:
-            pass
-            # self.combat_results_label.text = "You Lose!"
-        # self.combat_results_label.opacity = 1
-        # self.rewards_label.opacity = 1
+            combat_results.combat_results_label.text = "You lose!"

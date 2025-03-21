@@ -59,7 +59,7 @@ class Controller:
         print("Game event fired: card_resolved")
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
-        self.app.game.screen.animation_layer.children[0].show_card_effect()
+        self.app.game.screen.animation_layer.children[-1].show_card_effect() # Ensure we are using the card and not something else in the animation layer
 
     def handle_end_enemy_turn(self):
         """Handle end of enemy turn."""

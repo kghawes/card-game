@@ -1,5 +1,61 @@
 #:kivy 2.3.1
 
+<ScreenDarken>:
+    pos: 0, 0
+    size: 1500, 900
+    canvas:
+        Color:
+            rgba: (0, 0, 0, 0.5)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<CombatResults>:
+    id: combat_results
+    combat_results_label: combat_results_label
+
+    FloatLayout:
+        size: 200, 300
+        pos: 650, 300
+        canvas:
+            Color:
+                rgba: (0.1, 0.1, 0.1, 1)
+            Rectangle:
+                pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                size: self.size
+
+        Label:
+            id: combat_results_label
+            text: 'Combat Results'
+            font_size: 32
+            color: (1, 1, 1, 1)
+            pos: 550, 350
+            size: 200, 40
+            size_hint: None, None
+            canvas.before:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        Button:
+            text: 'Back to Map'
+            size_hint: None, None
+            size: 148, 35
+            pos: 8, 324
+            on_release: root.back_to_map()
+            background_normal: 'gui/assets/btn_up.9.png'
+            background_color: (1, 1, 1, 1)
+            color: (0.715, 0.676, 0.535, 1.0)
+            font_size: 21
+            font_name: 'gui/assets/fonts/romanantique.ttf'
+            bold: False
+            background_down: 'gui/assets/btn_down.9.png'
+            disabled_color: (0.715, 0.676, 0.535, 0.75)
+            background_disabled_normal: 'gui/assets/btn_down.9.png'
+            border: (27, 50, 4, 4)
+
 <CombatScreen>:
     id: combat_screen
     hand: hand
@@ -95,8 +151,6 @@
                 pos: 8, 372
                 size: 300, 350
             
-            
-
         FloatLayout:
             id: enemy_info
             enemy_name_label: enemy_name_label

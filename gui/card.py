@@ -59,8 +59,6 @@ class Card(Widget):
 
     def on_touch_down(self, touch) -> bool:
         """When clicked, pick up the card."""
-        if super().on_touch_down(touch):
-            return True
         if not self.is_draggable or not self.collide_point(touch.x, touch.y):
             return False
         self.click_location = (touch.x, touch.y)
