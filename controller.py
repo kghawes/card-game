@@ -91,6 +91,7 @@ class Controller:
         self.app.event_manager.subscribe('start_player_turn', self.handle_start_player_turn)
         self.app.event_manager.subscribe('play_card', self.handle_play_card)
         self.app.event_manager.subscribe('end_turn', self.handle_end_turn)
+        self.app.event_manager.subscribe('back_to_quest', self.handle_back_to_quest)
 
     def handle_initiate_quest(self):
         """Handle initiating a quest."""
@@ -121,3 +122,8 @@ class Controller:
         print("GUI event fired: end_turn")
         self.game.combat_manager.end_of_turn(self.game.player, self.game.registries.statuses)
         self.game.combat_manager.do_enemy_turn(self.game.player, self.game.enemy, self.game.registries)
+
+    def handle_back_to_quest(self):
+        """Handle going back to the quest screen."""
+        print("GUI event fired: back_to_quest")
+        self.app.game.start_quest(self.game.quest)

@@ -68,7 +68,14 @@ class ScreenDarken(Widget):
 
 class CombatResults(Widget):
     """Widget representing the combat results screen."""
-    pass
+    def __init__(self, event_manager, **kwargs):
+        """Initializes the combat results widget."""
+        super().__init__(**kwargs)
+        self.event_manager = event_manager
+
+    def back_to_quest(self):
+        """Returns to the quest screen."""
+        self.event_manager.dispatch('back_to_quest')
 
 
 # class StatusIcon(Widget):
@@ -202,7 +209,6 @@ class CombatScreen(Widget):
 
     def loop_textures(self, dt):
         """Loops through the textures for the wait animation."""
-        # use 
         textures = [
             AssetCache.get_texture('gui/assets/hourglass0.png'),
             AssetCache.get_texture('gui/assets/hourglass45.png'),
@@ -228,7 +234,7 @@ class CombatScreen(Widget):
     def show_combat_results(self, player_wins, rewards):
         """Shows the combat results."""
         self.animation_layer.add_widget(ScreenDarken())
-        combat_results = CombatResults()
+        combat_results = CombatResults(self.event_manager)
         self.add_widget(combat_results)
         if player_wins:
             combat_results.combat_results_label.text = "You win!"
