@@ -15,11 +15,11 @@
     combat_results_label: combat_results_label
 
     FloatLayout:
-        size: 200, 300
-        pos: 650, 300
+        size: 300, 200
+        pos: 600, 450
         canvas:
             Color:
-                rgba: (0.1, 0.1, 0.1, 1)
+                rgba: (0, 0, 0, 1)
             Rectangle:
                 pos: self.center_x - self.width / 2, self.center_y - self.height / 2
                 size: self.size
@@ -29,21 +29,15 @@
             text: 'Combat Results'
             font_size: 32
             color: (1, 1, 1, 1)
-            pos: 550, 350
+            pos: 650, 580
             size: 200, 40
             size_hint: None, None
-            canvas.before:
-                Color:
-                    rgba: (0.1, 0.1, 0.1, 1)
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
 
         Button:
             text: 'Back to Map'
             size_hint: None, None
-            size: 148, 35
-            pos: 8, 324
+            size: 200, 40
+            pos: 650, 490
             on_release: root.back_to_map()
             background_normal: 'gui/assets/btn_up.9.png'
             background_color: (1, 1, 1, 1)
