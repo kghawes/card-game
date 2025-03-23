@@ -174,9 +174,14 @@ class CardManager:
         self.hand.append(card)
         self.recalculate_for_new_card(subject, status_registry)
 
-    def reset_consumed_cards(self):
+    def reset_cards(self):
         """
-        Return cards from the consumed pile to the deck at the end of combat.
+        Return cards to the deck at the end of combat.
         """
-        self.deck += self.consumed_pile
+        self.deck.extend(self.consumed_pile)
         self.consumed_pile = []
+        self.deck.extend(self.discard_pile)
+        self.discard_pile = []
+        self.deck.extend(self.hand)
+        self.hand = []
+        self.shuffle()

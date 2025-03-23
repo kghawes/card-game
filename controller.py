@@ -72,6 +72,7 @@ class Controller:
         """Handle end of combat."""
         print("Game event fired: end_combat")
         if self.game.player.is_alive():
+            self.game.player.combat_cleanup(self.game.registries.statuses)
             rewards = self.game.enemy.get_rewards(
                 self.game.player.character_class,
                 self.game.card_cache
