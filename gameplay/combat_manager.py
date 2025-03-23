@@ -85,7 +85,7 @@ class CombatManager:
                 )
             if self.is_combat_over(combatant, opponent):
                 self.event_manager.dispatch('end_combat')
-                break
+                return True
 
         combatant.card_manager.discard(
             card, combatant, registries.statuses, True
@@ -145,8 +145,7 @@ class CombatManager:
                     playable_card_exists = True
                     self.play_card(enemy, player, card, registries)
                     if self.is_combat_over(player, enemy):
-                        self.event_manager.dispatch('end_combat')
-                        assert False
+                        return
                     break
         self.end_of_turn(enemy, registries.statuses)
         self.event_manager.dispatch('end_enemy_turn')

@@ -39,7 +39,7 @@ class Game:
         """
         Start the game.
         """
-        self.town.enter_town(self.player, self.registries.effects)
+        self.town.enter_town()
         self.event_manager.dispatch('start_game')
 
     def start_quest(self):

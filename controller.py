@@ -93,6 +93,7 @@ class Controller:
         self.app.event_manager.subscribe('play_card', self.handle_play_card)
         self.app.event_manager.subscribe('end_turn', self.handle_end_turn)
         self.app.event_manager.subscribe('back_to_quest', self.handle_back_to_quest)
+        self.app.event_manager.subscribe('game_over', self.handle_game_over) 
 
     def handle_initiate_quest(self):
         """Handle initiating a quest."""
@@ -128,3 +129,8 @@ class Controller:
         """Handle going back to the quest screen."""
         print("GUI event fired: back_to_quest")
         self.app.game.start_quest(self.game.quest)
+    
+    def handle_game_over(self):
+        """Handle game over."""
+        print("GUI event fired: game_over")
+        self.app.stop()

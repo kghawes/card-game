@@ -238,5 +238,9 @@ class CombatScreen(Widget):
         self.add_widget(combat_results)
         if player_wins:
             combat_results.combat_results_label.text = "You win!"
+            # TODO display rewards
         else:
             combat_results.combat_results_label.text = "You lose!"
+            combat_results.continue_button.text = "Too bad"
+            combat_results.continue_button.bind(on_release=lambda x: self.event_manager.dispatch('game_over'))
+            # TODO implement game over logic and return to main menu instead of quitting
