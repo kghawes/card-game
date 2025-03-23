@@ -1,7 +1,7 @@
 """Centralized event system to broadcast events between game and GUI."""
 
 class EventManager:
-    """Centralized event system to broadcast events between game and GUI."""
+    """Class to manage subscribing to and dispatching events."""
     def __init__(self):
         self.listeners = {}
 

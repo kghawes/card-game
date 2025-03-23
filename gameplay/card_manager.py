@@ -2,6 +2,7 @@
 This module defines the CardManager class.
 """
 import random
+from typing import Tuple
 import utils.constants as c
 from gameplay.library import Library
 
@@ -31,8 +32,6 @@ class CardManager:
             for _ in range(quantity):
                 deck.append(card_cache.create_card(card_id))
         return deck
-
-    from typing import Tuple
 
     def try_add_to_deck(self, card) -> Tuple[bool, bool, bool]:
         """

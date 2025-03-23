@@ -21,7 +21,7 @@ class CombatManager:
         """
         return not (player.is_alive() and enemy.is_alive())
 
-    def start_combat(self, player, enemy): #, registries, card_cache):
+    def start_combat(self, player, enemy):
         """
         Set up for combat.
         """
