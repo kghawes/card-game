@@ -9,11 +9,12 @@ class CombatManager:
     This class controls the flow of combat and coordinates between combatants,
     statuses, and effects.
     """
-    def __init__(self, event_manager):
+    def __init__(self, event_manager, logger):
         """
         Initialize a new CombatManager.
         """
         self.event_manager = event_manager
+        self.logger = logger
 
     def is_combat_over(self, player, enemy) -> bool:
         """

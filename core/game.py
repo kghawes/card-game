@@ -9,6 +9,7 @@ from core.cards import CardCache
 from core.enemies import EnemyCache
 from core.player import Player
 import utils.constants as c
+from utils.logger import Logger
 
 class Game:
     """
@@ -18,8 +19,10 @@ class Game:
         """
         Initialize a new Game.
         """
+        self.logger = Logger()
+        self.logger.log("Initializing game.", True)
         self.event_manager = event_manager
-        self.combat_manager = CombatManager(self.event_manager)
+        self.combat_manager = CombatManager(self.event_manager, self.logger)
         self.registries = Registries(c.STATUSES_PATH, c.ENCHANTMENTS_PATH)
         self.card_cache = CardCache(c.CARD_PATHS, self.registries)
         self.enemy_cache = EnemyCache(c.ENEMIES_PATHS, self.event_manager)
