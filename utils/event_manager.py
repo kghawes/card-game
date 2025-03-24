@@ -1,9 +1,11 @@
 """Centralized event system to broadcast events between game and GUI."""
+from utils.logger import Logger
 
 class EventManager:
     """Class to manage subscribing to and dispatching events."""
     def __init__(self):
         self.listeners = {}
+        self.logger = Logger()
 
     def subscribe(self, event_type, callback):
         """Register a callback function for an event."""

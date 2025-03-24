@@ -14,6 +14,10 @@ class Controller:
         """Start the game."""
         self.game.start_game()
     
+    def send_logs(self):
+        """Send logs to the GUI."""
+        self.app.game.screen.combat_log.flush_log_messages(self.event_manager)
+    
     # Game events
 
     def subscribe_to_game_events(self):
@@ -29,48 +33,51 @@ class Controller:
 
     def handle_start_game(self):
         """Handle starting the game."""
-        print("Game event fired: start_game")
+        self.event_manager.logger.log("Game event fired: start_game", True)
         self.app.run()
 
     def handle_start_quest(self, quest):
         """Handle starting a quest."""
-        print("Game event fired: start_quest")
+        self.event_manager.logger.log("Game event fired: start_quest", True)
         self.app.game.start_quest(quest)
 
     def handle_start_combat(self, enemy):
         """Handle starting combat."""
-        print("Game event fired: start_combat")
+        self.event_manager.logger.log("Game event fired: start_combat", True)
         self.app.game.start_combat(self.game.player.get_combatant_data(), enemy.get_combatant_data())
     
     def handle_start_action_phase(self, hand):
         """Handle starting the action phase."""
-        print("Game event fired: start_action_phase")
+        self.event_manager.logger.log("Game event fired: start_action_phase", True)
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         for card in reversed(hand[:]):
             self.app.game.screen.hand.draw(card.get_card_data())
 
     def handle_card_not_playable(self):
         """Handle a card that cannot be played."""
-        print("Game event fired: card_not_playable")
+        self.event_manager.logger.log("Game event fired: card_not_playable", True)
+        self.send_logs()
         self.app.game.screen.invalid_play()
 
     def handle_card_resolved(self):
         """Handle a card that has been resolved."""
-        print("Game event fired: card_resolved")
+        self.event_manager.logger.log("Game event fired: card_resolved", True)
+        self.send_logs()
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
         self.app.game.screen.animation_layer.children[-1].show_card_effect() # Ensure we are using the card and not something else in the animation layer
 
     def handle_end_enemy_turn(self):
         """Handle end of enemy turn."""
-        print("Game event fired: end_enemy_turn")
+        self.event_manager.logger.log("Game event fired: end_enemy_turn", True)
+        self.send_logs()
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
         self.event_manager.dispatch('start_player_turn')
     
     def handle_end_combat(self):
         """Handle end of combat."""
-        print("Game event fired: end_combat")
+        self.event_manager.logger.log("Game event fired: end_combat", True)
         if self.game.player.is_alive():
             self.game.player.combat_cleanup(self.game.registries.statuses)
             rewards = self.game.enemy.get_rewards(
@@ -97,17 +104,17 @@ class Controller:
 
     def handle_initiate_quest(self):
         """Handle initiating a quest."""
-        print("GUI event fired: initiate_quest")
+        self.event_manager.logger.log("GUI event fired: initiate_quest", True)
         self.game.start_quest()
 
     def handle_initiate_encounter(self):
         """Handle initiating an encounter."""
-        print("GUI event fired: initiate_encounter")
+        self.event_manager.logger.log("GUI event fired: initiate_encounter", True)
         self.game.start_encounter()
     
     def handle_start_player_turn(self):
         """Handle starting player turn."""
-        print("GUI event fired: start_player_turn")
+        self.event_manager.logger.log("GUI event fired: start_player_turn", True)
         self.game.combat_manager.beginning_of_turn(self.game.player, self.game.enemy, self.game.registries)
         statuses = self.game.player.get_combatant_data()['statuses']
         hand = [card.get_card_data() for card in self.game.player.card_manager.hand]
@@ -115,22 +122,22 @@ class Controller:
 
     def handle_play_card(self, index_in_hand):
         """Handle playing a card."""
-        print("GUI event fired: play_card")
+        self.event_manager.logger.log("GUI event fired: play_card", True)
         card = self.game.player.card_manager.hand[index_in_hand]
         self.game.combat_manager.play_card(self.game.player, self.game.enemy, card, self.game.registries)
 
     def handle_end_turn(self):
         """Handle ending the turn."""
-        print("GUI event fired: end_turn")
+        self.event_manager.logger.log("GUI event fired: end_turn", True)
         self.game.combat_manager.end_of_turn(self.game.player, self.game.registries.statuses)
         self.game.combat_manager.do_enemy_turn(self.game.player, self.game.enemy, self.game.registries)
 
     def handle_back_to_quest(self):
         """Handle going back to the quest screen."""
-        print("GUI event fired: back_to_quest")
+        self.event_manager.logger.log("GUI event fired: back_to_quest", True)
         self.app.game.start_quest(self.game.quest)
     
     def handle_game_over(self):
         """Handle game over."""
-        print("GUI event fired: game_over")
+        self.event_manager.logger.log("GUI event fired: game_over", True)
         self.app.stop()

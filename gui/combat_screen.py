@@ -55,6 +55,43 @@ class Hand(FloatLayout):
             self.position_cards()
 
 
+class CombatLog(Widget):
+    """Widget representing the combat log."""
+    combat_log_label = ObjectProperty(None)
+
+    def __init__(self, **kwargs):
+        """Initialize a new CombatLog."""
+        super().__init__(**kwargs)
+        self.history = []
+        self.pending = []
+
+    def flush_log_messages(self, event_manager):
+        """Writes all pending log messages to the log display."""
+        self.pending = event_manager.logger.get_combat_logs()
+        if self.pending:
+            Clock.schedule_interval(self.log_message, 0.1)
+    
+    def log_message(self, dt):
+        message = self.pending.pop(0)
+        self.history.append(message)
+        self.combat_log_label.text = message
+        if not self.pending:
+            Clock.unschedule(self.log_message)
+            Clock.schedule_once(self.hide_message, 2)  
+    
+    def hide_message(self, dt):
+        """Hides the current message after a delay."""
+        self.combat_log_label.text = ""
+
+    def show_history(self):
+        """Displays the combat log history."""
+        self.combat_log_label.text = "\n".join(self.history)
+    
+    def hide_history(self):
+        """Hides the combat log history."""
+        self.combat_log_label.text = ""
+
+
 class ScreenDarken(Widget):    
     def on_touch_down(self, touch):
         return True
@@ -225,12 +262,14 @@ class CombatScreen(Widget):
     def toggle_log(self):
         """Toggles the log display."""
         if self.log_shown:
+            self.combat_log.hide_history()
             self.log_shown = False
             self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
         else:
+            self.combat_log.show_history()
             self.log_shown = True
             self.log_texture = AssetCache.get_texture('gui/assets/logbookopen.png')
-
+    
     def show_combat_results(self, player_wins, rewards):
         """Shows the combat results."""
         Clock.unschedule(self.loop_textures)

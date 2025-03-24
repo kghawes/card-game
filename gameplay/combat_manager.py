@@ -9,12 +9,11 @@ class CombatManager:
     This class controls the flow of combat and coordinates between combatants,
     statuses, and effects.
     """
-    def __init__(self, event_manager, logger):
+    def __init__(self, event_manager):
         """
         Initialize a new CombatManager.
         """
         self.event_manager = event_manager
-        self.logger = logger
 
     def is_combat_over(self, player, enemy) -> bool:
         """
@@ -70,6 +69,7 @@ class CombatManager:
             card.get_cost(), combatant.modifier_manager
         ):
             # TODO make card_can_be_played return a reason
+            self.event_manager.logger.log(f"This {card.name} can't be played.")
             self.event_manager.dispatch('card_not_playable')
             return False            
 

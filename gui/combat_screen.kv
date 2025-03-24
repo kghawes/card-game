@@ -288,18 +288,27 @@
                     pos: self.x + 6, self.y + 6
                     size: 23, 23
 
-        BoxLayout:
+        CombatLog:
             id: combat_log
-            orientation: 'vertical'
+            combat_log_label: combat_log_label
             pos: 316, 324
-            size: 868, self.minimum_height
+            size: 868, combat_log_label.texture_size[1] + 4
             size_hint: None, None
+            canvas.before:
+                Color:
+                    rgba: (0, 0, 0, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
             Label:
-                text: 'test1'
+                id: combat_log_label
+                text: ''
                 font_size: 16
                 color: (1, 1, 1, 1)
                 size: self.parent.width, self.texture_size[1]
                 size_hint: None, None
+                pos: self.parent.pos
 
         Hand:
             id: hand
