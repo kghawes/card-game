@@ -64,20 +64,24 @@ class CombatLog(Widget):
         super().__init__(**kwargs)
         self.history = []
         self.pending = []
+        self.log_shown = False
 
     def flush_log_messages(self, event_manager):
         """Writes all pending log messages to the log display."""
         self.pending = event_manager.logger.get_combat_logs()
         if self.pending:
-            Clock.schedule_interval(self.log_message, 0.1)
+            Clock.schedule_interval(self.log_message, 0.33)
     
     def log_message(self, dt):
         message = self.pending.pop(0)
         self.history.append(message)
-        self.combat_log_label.text = message
+        if self.combat_log_label.text:
+            self.combat_log_label.text += "\n"
+        self.combat_log_label.text += message
         if not self.pending:
             Clock.unschedule(self.log_message)
-            Clock.schedule_once(self.hide_message, 2)  
+            if not self.log_shown:
+                Clock.schedule_once(self.hide_message, 2)  
     
     def hide_message(self, dt):
         """Hides the current message after a delay."""
@@ -86,10 +90,12 @@ class CombatLog(Widget):
     def show_history(self):
         """Displays the combat log history."""
         self.combat_log_label.text = "\n".join(self.history)
+        self.log_shown = True
     
     def hide_history(self):
         """Hides the combat log history."""
         self.combat_log_label.text = ""
+        self.log_shown = False
 
 
 class ScreenDarken(Widget):    
@@ -144,6 +150,7 @@ class CombatScreen(Widget):
     enemy = ObjectProperty(None)
     wait_texture = ObjectProperty(None)
     log_texture = ObjectProperty(None)
+    combat_log = ObjectProperty(CombatLog)
 
     def __init__(self, player, enemy, event_manager, **kwargs):
         """Initializes the combat screen with the given properties."""
@@ -158,7 +165,6 @@ class CombatScreen(Widget):
         self.update_enemy_stats()
         self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
         self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
-        self.log_shown = False
     
     def start_player_turn(self, statuses, hand):
         """Starts the player's turn."""
@@ -224,7 +230,6 @@ class CombatScreen(Widget):
         """Handles an invalid play."""
         card = self.animation_layer.children[0]
         card.return_to_hand()
-        # TODO notify the player about the invalid play
 
     def end_turn(self):
         """Ends the current turn."""
@@ -261,13 +266,13 @@ class CombatScreen(Widget):
     
     def toggle_log(self):
         """Toggles the log display."""
-        if self.log_shown:
+        if self.combat_log.log_shown:
             self.combat_log.hide_history()
-            self.log_shown = False
+            self.combat_log.log_shown = False
             self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
         else:
             self.combat_log.show_history()
-            self.log_shown = True
+            self.combat_log.log_shown = True
             self.log_texture = AssetCache.get_texture('gui/assets/logbookopen.png')
     
     def show_combat_results(self, player_wins, rewards):
