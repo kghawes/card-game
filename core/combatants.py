@@ -102,8 +102,23 @@ class Combatant:
             hidden_status = status_registry.get_status(hidden)
             mult = hidden_status.calculate_damage_multiplier(hidden_level)
             amount *= mult
+            if mult > 1:
+                self.event_manager.logger.log(
+                    f"{attacker.name} took {self.name} by surprise! Critical strike! ({mult}x damage)"
+                    )
 
-        amount = self.modifier_manager.calculate_damage(damage_type, amount)
+        old_amount = amount
+        amount = self.modifier_manager.calculate_damage(damage_type, amount, self.event_manager.logger)
+        if amount > old_amount:
+            increase = (amount - old_amount) / old_amount
+            self.event_manager.logger.log(
+                f"The attack is super effective against {self.name}! (+{increase:.0%} damage)"
+                )
+        elif amount < old_amount:
+            decrease = (old_amount - amount) / old_amount
+            self.event_manager.logger.log(
+                f"{self.name} resists the attack! (-{decrease:.0%} damage)"
+                )
 
         if amount <= 0:
             return
@@ -113,9 +128,15 @@ class Combatant:
             if self.status_manager.has_status(defense, self, status_registry):
                 defense_status = status_registry.get_status(defense)
                 defense_level = self.status_manager.get_status_level(defense)
+                old_amount = amount
                 amount = defense_status.calculate_net_damage(
                     self, defense_level, amount, status_registry
                     )
+                if amount < old_amount:
+                    difference = old_amount - amount
+                    self.event_manager.logger.log(
+                        f"{self.name}'s defense blocked {difference} damage!"
+                        )
                 if amount <= 0:
                     return
         elif attacker != self:
@@ -126,13 +147,17 @@ class Combatant:
                 amount, reflected_amount = reflect_status.calculate_block(
                     amount, damage_type, reflect_level
                     )
+                if reflected_amount > 0:
+                    self.event_manager.logger.log(
+                        f"{self.name} reflected {reflected_amount} damage back to {attacker.name}!"
+                        )
                 if amount == 0 and attacker.status_manager.has_status(
                         reflect, attacker, status_registry
                         ):
-                    reflect_level = attacker.status_manager.get_status_level(
+                    attacker_reflect_level = attacker.status_manager.get_status_level(
                         reflect
                         )
-                    if reflected_amount <= reflect_level:
+                    if reflected_amount <= attacker_reflect_level:
                         return # Prevent infinite reflecting back and forth
                 attacker.take_damage(
                     self, reflected_amount, damage_type, status_registry
@@ -151,6 +176,10 @@ class Combatant:
                 amount, absorbed_amount = absorb_status.calculate_block(
                     amount, damage_type, absorb_level
                     )
+                if absorbed_amount > 0:
+                    self.event_manager.logger.log(
+                        f"{self.name} absorbed {absorbed_amount} damage from {attacker.name}!"
+                        )
                 fortify_int = s.FORTIFY_INTELLIGENCE.name
                 self.status_manager.change_status(
                     fortify_int, absorbed_amount, self, status_registry
@@ -158,6 +187,9 @@ class Combatant:
 
         health = self.resources[r.HEALTH.name]
         health.change_value(-amount, self.modifier_manager)
+        self.event_manager.logger.log(
+            f"{self.name} took {amount} damage!"
+            )
 
     def is_alive(self) -> bool:
         """

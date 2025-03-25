@@ -81,6 +81,10 @@ class CardManager:
             card = self.deck.pop(0)
             self.hand.append(card)
             cards_to_draw -= 1
+            if not subject.is_enemy:
+                self.event_manager.logger.log(
+                    f"{subject.name} drew {card.name}.", True
+                    )
         self.recalculate_for_new_card(subject, status_registry)
 
     def recalculate_for_new_card(self, subject, status_registry):
@@ -132,12 +136,17 @@ class CardManager:
         card.reset_card()
         if card.matches(c.CardTypes.CONSUMABLE.name) and is_being_played:
             self.consumed_pile.insert(0, card)
+            # TODO: log
         elif subject.status_manager.has_status(
                 c.StatusNames.WATER_WALKING.name, subject, status_registry
                 ) and is_being_played:
             self.deck.insert(0, card)
+            # TODO: log
         else:
             self.discard_pile.insert(0, card)
+            self.event_manager.logger.log(
+                f"{subject.name} discarded {card.name}.", True
+                )
         self.hand.remove(card)
 
         status_manager = subject.status_manager
