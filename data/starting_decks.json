@@ -1,10 +1,6 @@
 {
   "FIGHTER": [
     { "card": "MISS", "quantity": 5 },
-    { "card": "IRON_LONGSWORD", "quantity": 50 }
-  ],
-  "_FIGHTER": [
-    { "card": "MISS", "quantity": 5 },
     { "card": "IRON_MACE", "quantity": 3 },
     { "card": "IRON_LONGSWORD", "quantity": 5 },
     { "card": "IRON_HELM", "quantity": 4 },

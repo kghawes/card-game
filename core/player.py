@@ -9,14 +9,14 @@ class Player(Combatant):
     """
     This class represents the player character.
     """
-    def __init__(self, card_cache, status_registry, character_class):
+    def __init__(self, card_cache, status_registry, character_class, event_manager):
         """
         Initialize a new Player.
         """
         deck_list = load_json(c.STARTING_DECKS_PATH).get(character_class)
         super().__init__(
             "", c.STARTING_HEALTH, c.STARTING_STAMINA, c.STARTING_MAGICKA, 
-            deck_list, card_cache, status_registry, False
+            deck_list, card_cache, status_registry, False, event_manager
             )
         self.character_class = character_class
         self.gold = 0
@@ -58,3 +58,12 @@ class Player(Combatant):
         text_interface.send_message(
             f"MAX {resource_to_increase} is now {new_max}!"
             )
+    
+    def combat_cleanup(self, status_registry):
+        """
+        Reset cards and stats after combat.
+        """
+        self.cards_played_this_turn = 0
+        self.card_manager.reset_cards()
+        self.modifier_manager.reset_all()
+        self.status_manager.reset_statuses(self, status_registry)

@@ -232,7 +232,7 @@ class ModifierManager:
         new_value = old_value + contribution
         self.damage_modifiers[status_id].contribution = new_value
 
-    def calculate_damage(self, damage_type, amount):
+    def calculate_damage(self, damage_type, amount, logger) -> float:
         """
         Return net damage after applying modifiers.
         """
@@ -240,6 +240,16 @@ class ModifierManager:
         for modifier in self.damage_modifiers.values():
             if modifier.matches(damage_type):
                 net_contribution += modifier.contribution
+                if modifier.contribution > 0:
+                    logger.log(
+                        f"Weakness to {damage_type} increased damage by {modifier.contribution:.0%}.",
+                        True
+                        )
+                elif modifier.contribution < 0:
+                    logger.log(
+                        f"Resistance to {damage_type} decreased damage by {-modifier.contribution:.0%}.",
+                        True
+                        )
         amount = max(round((1 + net_contribution) * amount), 0)
         return amount
 

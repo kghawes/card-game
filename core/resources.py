@@ -30,14 +30,14 @@ class Resource:
         new_value = self.clamp_value(new_value, modifier_manager)
         self.current = new_value
 
-    def try_spend(self, amount) -> bool:
+    def try_spend(self, amount, modifier_manager) -> bool:
         """
         Reduce the current value by the given amount or return false if there
         isn't enough.
         """
         if self.current < amount:
             return False
-        self.current = self.current - amount
+        self.change_value(-amount, modifier_manager)
         return True
 
     def get_max(self, modifier_manager) -> int:
@@ -52,4 +52,5 @@ class Resource:
         """
         Reset the current value to the maximum value.
         """
-        self.current = self.get_max(modifier_manager)
+        amount = self.get_max(modifier_manager) - self.current
+        self.change_value(amount, modifier_manager)

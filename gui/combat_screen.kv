@@ -1,0 +1,322 @@
+#:kivy 2.3.1
+
+<ScreenDarken>:
+    pos: 0, 0
+    size: 1500, 900
+    canvas:
+        Color:
+            rgba: (0, 0, 0, 0.33)
+        Rectangle:
+            pos: 0, 0
+            size: 1500, 900
+
+<CombatResults>:
+    id: combat_results
+    combat_results_label: combat_results_label
+    continue_button: continue_button
+
+    FloatLayout:
+        size: 300, 200
+        pos: 600, 450
+        canvas:
+            Color:
+                rgba: (0, 0, 0, 1)
+            Rectangle:
+                pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                size: self.size
+
+        Label:
+            id: combat_results_label
+            text: 'Combat Results'
+            font_size: 32
+            color: (1, 1, 1, 1)
+            pos: 650, 580
+            size: 200, 40
+            size_hint: None, None
+
+        Button:
+            id: continue_button
+            text: 'Back to Map'
+            size_hint: None, None
+            size: 200, 40
+            pos: 650, 490
+            on_release: root.back_to_quest()
+            background_normal: 'gui/assets/btn_up.9.png'
+            background_color: (1, 1, 1, 1)
+            color: (0.715, 0.676, 0.535, 1.0)
+            font_size: 21
+            font_name: 'gui/assets/fonts/romanantique.ttf'
+            bold: False
+            background_down: 'gui/assets/btn_down.9.png'
+            disabled_color: (0.715, 0.676, 0.535, 0.75)
+            background_disabled_normal: 'gui/assets/btn_down.9.png'
+            border: (27, 50, 4, 4)
+
+<CombatScreen>:
+    id: combat_screen
+    hand: hand
+    play_area: play_area
+    title: title
+    player_info: player_info
+    enemy_info: enemy_info
+    discard_pile: discard_pile
+    deck: deck
+    combat_log: combat_log
+    animation_layer: animation_layer
+    end_turn_button: end_turn_button
+
+    FloatLayout:
+        size: self.parent.size
+        pos: self.parent.pos
+
+        Widget:
+            id: play_area
+            pos: 316, 324
+            size: 868, 528
+            size_hint: None, None
+            canvas:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                Rectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
+
+        Label:
+            id: title
+            text: 'Card Game'
+            font_size: 32
+            color: (1, 1, 1, 1)
+            pos: 0, 860
+            size: 1500, 40
+            size_hint: None, None
+            canvas.before:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        FloatLayout:
+            id: player_info
+            player_name_label: player_name_label
+            player_health_label: player_health_label
+            player_stamina_label: player_stamina_label
+            player_magicka_label: player_magicka_label
+            player_statuses: player_statuses
+            pos: 8, 324
+            size: 300, 528
+            size_hint: None, None
+            orientation: 'vertical'
+            canvas:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            
+            Label:
+                id: player_name_label
+                text: ''
+                pos: 8, 812
+                size: 300, 40
+                size_hint: None, None
+            
+            Label:
+                id: player_health_label
+                text: ''
+                pos: 8, 782
+                size: 300, 30
+                size_hint: None, None
+            
+            Label:
+                id: player_stamina_label
+                text: ''
+                pos: 8, 752
+                size: 300, 30
+                size_hint: None, None
+            
+            Label:
+                id: player_magicka_label
+                text: ''
+                pos: 8, 722
+                size: 300, 30
+                size_hint: None, None
+            
+            FloatLayout:
+                id: player_statuses
+                pos: 8, 372
+                size: 300, 350
+            
+        FloatLayout:
+            id: enemy_info
+            enemy_name_label: enemy_name_label
+            enemy_health_label: enemy_health_label
+            enemy_stamina_label: enemy_stamina_label
+            enemy_magicka_label: enemy_magicka_label
+            enemy_statuses: enemy_statuses
+            pos: 1192, 372
+            size: 300, 480
+            size_hint: None, None
+            canvas:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                id: enemy_name_label
+                text: ''
+                pos: 1192, 812
+                size: 300, 40
+                size_hint: None, None
+            
+            Label:
+                id: enemy_health_label
+                text: ''
+                pos: 1192, 782
+                size: 300, 30
+                size_hint: None, None
+            
+            Label:
+                id: enemy_stamina_label
+                text: ''
+                pos: 1192, 752
+                size: 300, 30
+                size_hint: None, None
+            
+            Label:
+                id: enemy_magicka_label
+                text: ''
+                pos: 1192, 722
+                size: 300, 30
+                size_hint: None, None
+            
+            FloatLayout:
+                id: enemy_statuses
+                pos: 1192, 372
+                size: 300, 350
+
+        Widget:
+            id: discard_pile
+            pos: 1292, 8
+            size: 200, 300
+            size_hint: None, None
+            canvas.before:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
+                    radius: [20, 20, 20, 20]
+
+        Widget:
+            id: deck
+            pos: 8, 8
+            size: 200, 300
+            size_hint: None, None
+            canvas.before:
+                Color:
+                    rgba: (0.1, 0.1, 0.1, 1)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
+                    radius: [20, 20, 20, 20]
+            canvas:
+                Color:
+                    rgba: (0.62, 0.569, 0.443, 1.0) if self.parent.parent.show_deck else (0, 0, 0, 0)
+                RoundedRectangle:
+                    pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+                    size: self.size
+                    radius: [15, 15, 15, 15]
+                Color:
+                    rgba: (1, 1, 1, 1) if self.parent.parent.show_deck else (0, 0, 0, 0)
+                RoundedRectangle:
+                    source: 'gui/assets/cardbg.png'
+                    pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4
+                    size: self.width - 8, self.height - 8
+                    radius: [13, 13, 13, 13]
+                Rectangle:
+                    source: 'gui/assets/cardback1.png'
+                    pos: self.pos
+                    size: self.size
+
+        Button:
+            id: end_turn_button
+            text: 'End Turn'
+            size_hint: None, None
+            size: 148, 35
+            pos: 1344, 324
+            on_release: root.end_turn()
+            background_normal: 'gui/assets/btn_up.9.png'
+            background_color: (1, 1, 1, 1)
+            color: (0.715, 0.676, 0.535, 1.0)
+            font_size: 21
+            font_name: 'gui/assets/fonts/romanantique.ttf'
+            bold: False
+            background_down: 'gui/assets/btn_down.9.png'
+            disabled_color: (0.715, 0.676, 0.535, 0.75)
+            background_disabled_normal: 'gui/assets/btn_down.9.png'
+            border: (27, 50, 4, 4)
+            canvas.after:
+                Color:
+                    rgba: (0.715, 0.676, 0.535, 1.0)
+                Rectangle:
+                    texture: root.wait_texture
+                    pos: self.x + 6, self.y + 6
+                    size: 23, 23
+        
+        Button:
+            text: 'View Log'
+            size_hint: None, None
+            size: 148, 35
+            pos: 1192, 324
+            on_release: root.toggle_log()
+            background_normal: 'gui/assets/btn_up.9.png'
+            background_color: (1, 1, 1, 1)
+            color: (0.715, 0.676, 0.535, 1.0)
+            font_size: 21
+            font_name: 'gui/assets/fonts/romanantique.ttf'
+            bold: False
+            background_down: 'gui/assets/btn_down.9.png'
+            border: (27, 50, 4, 4)
+            canvas.after:
+                Color:
+                    rgba: (0.715, 0.676, 0.535, 1.0)
+                Rectangle:
+                    texture: root.log_texture
+                    pos: self.x + 6, self.y + 6
+                    size: 23, 23
+
+        CombatLog:
+            id: combat_log
+            combat_log_label: combat_log_label
+            pos: 316, 324
+            size: 868, combat_log_label.texture_size[1] + 4
+            size_hint: None, None
+            canvas.before:
+                Color:
+                    rgba: (0, 0, 0, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                id: combat_log_label
+                text: ''
+                font_size: 16
+                color: (1, 1, 1, 1)
+                size: self.parent.width, self.texture_size[1]
+                size_hint: None, None
+                pos: self.parent.pos
+
+        Hand:
+            id: hand
+            pos: 234, 8
+            size: 1032, 300
+            size_hint: None, None
+        
+        FloatLayout:
+            id: animation_layer
+            size: self.parent.size
+            size_hint: None, None

@@ -1,0 +1,23 @@
+#:kivy 2.3.1
+
+<TownScreen>:
+    id: town_screen
+    quest_button: quest_button
+    pos: 0, 0
+    size: 1500, 900
+    canvas.before:
+        Color:
+            rgba: (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Button:
+        id: quest_button
+        town_screen: town_screen
+        text: 'Embark on Quest'
+        size_hint: None, None
+        size: self.texture_size
+        pos: self.parent.center_x - self.width / 2, self.parent.center_y - self.height / 2
+        font_size: 24
+        on_release: self.town_screen.start_quest()

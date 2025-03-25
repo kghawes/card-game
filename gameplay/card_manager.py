@@ -2,6 +2,7 @@
 This module defines the CardManager class.
 """
 import random
+from typing import Tuple
 import utils.constants as c
 from gameplay.library import Library
 
@@ -9,7 +10,7 @@ class CardManager:
     """
     This class handles the movement of cards between piles.
     """
-    def __init__(self, starting_deck, card_cache):
+    def __init__(self, starting_deck, card_cache, event_manager):
         """
         Initialize a new CardManager.
         """
@@ -18,6 +19,7 @@ class CardManager:
         self.discard_pile = []
         self.consumed_pile = []
         self.library = Library()
+        self.event_manager = event_manager
 
     def _create_deck(self, deck_list, card_cache) -> list:
         """
@@ -31,7 +33,7 @@ class CardManager:
                 deck.append(card_cache.create_card(card_id))
         return deck
 
-    def try_add_to_deck(self, card) -> (bool, bool, bool):
+    def try_add_to_deck(self, card) -> Tuple[bool, bool, bool]:
         """
         Attempt to add the card to the deck and return success flag and error
         message.
@@ -73,11 +75,16 @@ class CardManager:
                 self.deck = self.discard_pile[:]
                 self.discard_pile = []
                 self.shuffle()
+                self.event_manager.dispatch('empty_discard_pile')
             if not self.deck:
                 break
             card = self.deck.pop(0)
             self.hand.append(card)
             cards_to_draw -= 1
+            if not subject.is_enemy:
+                self.event_manager.logger.log(
+                    f"{subject.name} drew {card.name}.", True
+                    )
         self.recalculate_for_new_card(subject, status_registry)
 
     def recalculate_for_new_card(self, subject, status_registry):
@@ -94,29 +101,29 @@ class CardManager:
                 subject, status_manager.get_status_level(levitate)
                 )
 
-    def draw_hand(self, subject, registries, text_interface):
+    def draw_hand(self, subject, registries):
         """
         Draw the appropriate number of cards at the beginning of a turn.
         """
         cards_to_draw = subject.modifier_manager.calculate_cards_to_draw()
 
-        wb = c.StatusNames.WATER_BREATHING.name
-        if subject.status_manager.has_status(wb, subject, registries.statuses):
-            wb_status = registries.statuses.get_status(wb)
-            wb_level = subject.status_manager.get_status_level(wb)
-            cards_to_draw -= wb_status.draw_from_discard(
-                subject, wb_level, text_interface, registries.statuses
-                )
+        # wb = c.StatusNames.WATER_BREATHING.name
+        # if subject.status_manager.has_status(wb, subject, registries.statuses):
+        #     wb_status = registries.statuses.get_status(wb)
+        #     wb_level = subject.status_manager.get_status_level(wb)
+        #     cards_to_draw -= wb_status.draw_from_discard(
+        #         subject, wb_level, registries.statuses
+        #         )
 
         self.draw(subject, registries.statuses, cards_to_draw)
 
-        ss = c.StatusNames.SWIFT_SWIM.name
-        if subject.status_manager.has_status(ss, subject, registries.statuses):
-            ss_status = registries.statuses.get_status(ss)
-            ss_level = subject.status_manager.get_status_level(ss)
-            ss_status.do_redraw(
-                subject, ss_level, text_interface, registries
-                )
+        # ss = c.StatusNames.SWIFT_SWIM.name
+        # if subject.status_manager.has_status(ss, subject, registries.statuses):
+        #     ss_status = registries.statuses.get_status(ss)
+        #     ss_level = subject.status_manager.get_status_level(ss)
+        #     ss_status.do_redraw(
+        #         subject, ss_level, registries
+        #         )
 
     def discard(self, card, subject, status_registry, is_being_played=False):
         """
@@ -129,12 +136,17 @@ class CardManager:
         card.reset_card()
         if card.matches(c.CardTypes.CONSUMABLE.name) and is_being_played:
             self.consumed_pile.insert(0, card)
+            # TODO: log
         elif subject.status_manager.has_status(
                 c.StatusNames.WATER_WALKING.name, subject, status_registry
                 ) and is_being_played:
             self.deck.insert(0, card)
+            # TODO: log
         else:
             self.discard_pile.insert(0, card)
+            self.event_manager.logger.log(
+                f"{subject.name} discarded {card.name}.", True
+                )
         self.hand.remove(card)
 
         status_manager = subject.status_manager
@@ -170,9 +182,14 @@ class CardManager:
         self.hand.append(card)
         self.recalculate_for_new_card(subject, status_registry)
 
-    def reset_consumed_cards(self):
+    def reset_cards(self):
         """
-        Return cards from the consumed pile to the deck at the end of combat.
+        Return cards to the deck at the end of combat.
         """
-        self.deck += self.consumed_pile
+        self.deck.extend(self.consumed_pile)
         self.consumed_pile = []
+        self.deck.extend(self.discard_pile)
+        self.discard_pile = []
+        self.deck.extend(self.hand)
+        self.hand = []
+        self.shuffle()

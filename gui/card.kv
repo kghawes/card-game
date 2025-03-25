@@ -1,0 +1,92 @@
+#:kivy 2.3.1
+
+<Card>:
+    size_hint: None, None
+    size: 200, 300
+    canvas:
+        Color:
+            rgba: self.border_color
+        RoundedRectangle:
+            pos: self.center_x - self.width / 2, self.center_y - self.height / 2
+            size: self.size
+            radius: [15, 15, 15, 15]
+        Color:
+            rgba: (0, 0, 0, 1)
+        RoundedRectangle:
+            source: 'gui/assets/cardbg.png'
+            pos: self.center_x - self.width / 2 + 4, self.center_y - self.height / 2 + 4
+            size: self.width - 8, self.height - 8
+            radius: [13, 13, 13, 13]
+        Color:
+            rgba: (1, 1, 1, 1)
+        RoundedRectangle:
+            texture: self.art_bg_texture
+            pos: self.center_x - self.width / 2 + 4, self.center_y - 4
+            size: 192, 148
+            radius: [13, 13, 0, 0]
+        Color:
+            rgba: self.border_color
+        RoundedRectangle:
+            pos: self.x + self.width - 40, self.y + self.height - 40
+            size: 40, 40
+            radius: [0, 15, 0, 15]
+        Color:
+            rgba: (0, 0, 0, 1)
+        RoundedRectangle:
+            pos: self.x + self.width - 38, self.y + self.height - 38
+            size: 36, 36
+            radius: [0, 13, 0, 13]
+        Color:
+            rgba: self.resource_cost_color
+        Triangle:
+            points: [self.x + self.width - self.cost_indicator[0], self.y + self.height - self.cost_indicator[1], self.x + self.width - self.cost_indicator[2], self.y + self.height - self.cost_indicator[3], self.x + self.width - self.cost_indicator[4], self.y + self.height - self.cost_indicator[5]]
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            texture: self.art_texture
+            pos: self.x + 4, self.y + 155
+            size: 192, 90
+
+    Label:
+        text: self.parent.cost
+        font_size: 18
+        font_name: 'gui/assets/fonts/rubik.ttf'
+        color: self.parent.resource_cost_color
+        pos: self.parent.x + self.parent.width - 69, self.parent.y + self.parent.height - 69
+    
+    Label:
+        text: self.parent.name
+        font_size: 19
+        font_name: 'gui/assets/fonts/planewalker.otf'
+        color: (0.715, 0.676, 0.535, 1.0)
+        pos: self.parent.x + 35, self.parent.y + self.parent.height - 110
+        text_size: 150, 100
+        halign: 'center'
+        valign: 'top'
+    
+    Label:
+        text: self.parent.formatted_type
+        font_size: 13
+        font_name: 'gui/assets/fonts/rubik.ttf'
+        color: (0.5, 0.5, 0.5, 1)
+        pos: self.parent.x + 50, self.parent.y + 96
+        text_size: 192, 20
+        halign: 'center'
+        valign: 'center'
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 1)
+            Rectangle:
+                source: 'gui/assets/mw-leather.png'
+                pos: self.x - 46, self.y + 40
+                size: 192, 20
+    
+    Label:
+        text: self.parent.effects
+        font_size: 15
+        font_name: 'gui/assets/fonts/rubik.ttf'
+        color: (1, 1, 1, 1)
+        pos: self.parent.x + 52, self.parent.y + 36
+        text_size: 190, 100
+        halign: 'center'
+        valign: 'center'
