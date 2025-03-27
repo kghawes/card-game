@@ -3,3 +3,4 @@
 /.vscode
 /kivy_env
 **/_test/
+/logs

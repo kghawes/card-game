@@ -18,7 +18,7 @@ class Logger:
             self.logs.append(message)
         if self.write_to_file:
             log_type = "DEBUG" if is_debug else "INFO"
-            with open(f"log_{self.timestamp}.txt", "a") as file:
+            with open(f"logs/log_{self.timestamp}.txt", "a") as file:
                 file.write(f"[{log_type}] {message}" + "\n")
         elif is_debug:
             print(f"[DEBUG] {message}")
