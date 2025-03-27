@@ -18,7 +18,7 @@
             size: self.width - 8, self.height - 8
             radius: [13, 13, 13, 13]
         Color:
-            rgba: (1, 1, 1, 1)
+            rgba: (0, 0, 0, 1)
         RoundedRectangle:
             texture: self.art_bg_texture
             pos: self.center_x - self.width / 2 + 4, self.center_y - 4
@@ -41,7 +41,7 @@
         Triangle:
             points: [self.x + self.width - self.cost_indicator[0], self.y + self.height - self.cost_indicator[1], self.x + self.width - self.cost_indicator[2], self.y + self.height - self.cost_indicator[3], self.x + self.width - self.cost_indicator[4], self.y + self.height - self.cost_indicator[5]]
         Color:
-            rgba: (1, 1, 1, 1)
+            rgba: (0, 0, 0, 1)
         Rectangle:
             texture: self.art_texture
             pos: self.x + 4, self.y + 155
