@@ -87,10 +87,18 @@ class ChangeStatusEffect(Effect):
 
         if self.matches(c.EffectNames.REMOVE.name):
             level *= -1
+            sign_str = "-"
+        else:
+            sign_str = "+"
 
         subject.status_manager.change_status(
             status_id, level, subject, status_registry
             )
+        
+        status_name = status_registry.get_status(status_id).name
+        status_registry.event_manager.logger.log(
+            f"{sign_str}{level} {status_name} applied to {subject.name}."
+        )
 
 
 class DispelEffect(Effect):

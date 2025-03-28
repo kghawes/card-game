@@ -498,11 +498,12 @@ class StatusRegistry:
     """
     Holds Status objects in a dictionary to be looked up when needed.
     """
-    def __init__(self, statuses_path):
+    def __init__(self, statuses_path, event_manager):
         """
         Initialize a new StatusRegistry.
         """
         self.statuses = self._initialize_statuses(statuses_path)
+        self.event_manager = event_manager
 
     def _initialize_statuses(self, filepath) -> dict:
         """
