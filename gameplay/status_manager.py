@@ -9,11 +9,12 @@ class StatusManager:
     This class maintains a list of active statuses and handles their
     application, removal, and activation.
     """
-    def __init__(self):
+    def __init__(self, event_manager):
         """
         Initialize a new StatusManager.
         """
         self.statuses = {}
+        self.event_manager = event_manager
 
     def _kill_zombie(self, status_id, subject, status_registry):
         """
@@ -26,7 +27,7 @@ class StatusManager:
         """
         Remove the status, making sure it cleans up after itself.
         """
-        status_registry.get_status(status_id).expire(subject)
+        status_registry.get_status(status_id).expire(subject, self.event_manager.logger)
         del self.statuses[status_id]
 
     def has_status(self, status_id, subject, status_registry) -> bool:

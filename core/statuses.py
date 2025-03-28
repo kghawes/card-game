@@ -41,12 +41,14 @@ class Status:
         """
         return
 
-    def expire(self, subject):
+    def expire(self, subject, logger):
         """
         Base method for polymorphism. Clean up the status effects when the
-        Status goes away.
+        Status goes away and log the expiration.
         """
-        return
+        logger.log(
+            f"{self.name} expires."
+            )
 
 
 class ModifyEffectStatus(Status):
@@ -93,10 +95,11 @@ class ModifyEffectStatus(Status):
             card_type, effect, subject.card_manager
             )
 
-    def expire(self, subject):
+    def expire(self, subject, logger):
         """
         Clear contributions when the status expires.
         """
+        super().expire(subject)
         subject.modifier_manager.clear_effect_modifiers(
             self, subject.card_manager
             )
@@ -142,10 +145,11 @@ class ModifyCostStatus(Status):
             card_type, subject.card_manager
             )
 
-    def expire(self, subject):
+    def expire(self, subject, logger):
         """
         Clear contributions when the status expires.
         """
+        super().expire(subject)
         subject.modifier_manager.clear_cost_modifiers(
             self, subject.card_manager
             )
@@ -408,10 +412,11 @@ class AverageCostStatus(Status):
         for card in subject.card_manager.hand:
             card.override_cost = average_cost
 
-    def expire(self, subject):
+    def expire(self, subject, logger):
         """
         Reset costs.
         """
+        super().expire(subject)
         for card in subject.card_manager.hand:
             card.reset_override_cost()
 

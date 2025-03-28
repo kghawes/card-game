@@ -30,7 +30,7 @@ class Combatant:
             magicka_id: Resource(magicka_id, max_magicka)
         }
         self.card_manager = CardManager(starting_deck, card_cache, event_manager)
-        self.status_manager = StatusManager()
+        self.status_manager = StatusManager(event_manager)
         self.modifier_manager = ModifierManager(status_registry)
         self.cards_played_this_turn = 0
         self.event_manager = event_manager

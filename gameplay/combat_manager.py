@@ -55,6 +55,12 @@ class CombatManager:
                 c.StatusNames.SLOWFALLING.name, combatant, status_registry
                 ):
             combatant.card_manager.discard_hand(combatant, status_registry)
+        decrement_message = ""
+        if combatant.status_manager.statuses:
+            decrement_message = " Active statuses decremented."
+        self.event_manager.logger.log(
+            f"{combatant.name} ended their turn.{decrement_message}"
+            )
         combatant.status_manager.decrement_statuses(
             combatant, status_registry
             )
