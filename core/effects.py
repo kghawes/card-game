@@ -60,6 +60,14 @@ class NoEffect(Effect):
         effect_id = c.EffectNames.NO_EFFECT.name
         effect_name = c.EffectNames.NO_EFFECT.value
         super().__init__(effect_id, effect_name, None)
+    
+    def resolve(self, source, opponent, level=1, status_registry=None):
+        """
+        This effect does nothing.
+        """
+        status_registry.event_manager.logger.log(
+            f"Nothing happened!"
+            )
 
 
 class ChangeStatusEffect(Effect):
@@ -170,6 +178,10 @@ class ChangeResourceEffect(Effect):
         """
         subject = self.get_target_combatant(source, opponent)
         subject.change_resource(self.resource_enum.name, level)
+        action_string = "restored" if level > 0 else "drained"
+        status_registry.event_manager.logger.log(
+            f"{abs(level)} {self.resource_enum.value} {action_string}!"
+        )
 
 
 class HandEffect(Effect):
@@ -194,9 +206,15 @@ class HandEffect(Effect):
             return
         if self.is_draw_effect:
             subject.card_manager.draw(subject, status_registry, level)
+            status_registry.event_manager.logger.log(
+                f"{level} cards drawn!"
+                )
         else:
             subject.card_manager.discard_random(
                 level, subject, status_registry
+                )
+            status_registry.event_manager.logger.log(
+                f"{level} cards discarded!"
                 )
 
 
@@ -233,6 +251,10 @@ class JumpEffect(Effect):
             status_registry.get_status(levitate).trigger_on_change(
                 subject, status_manager.get_status_level(levitate)
                 )
+        
+        status_registry.event_manager.logger.log(
+            f"{highest_cost_card.name} cost reduced by {level}!"
+            )
 
 class EffectRegistry:
     """
