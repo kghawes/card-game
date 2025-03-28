@@ -278,6 +278,7 @@ class CombatScreen(Widget):
     def show_combat_results(self, player_wins, rewards):
         """Shows the combat results."""
         Clock.unschedule(self.loop_textures)
+        self.combat_log.flush_log_messages(self.event_manager)
         self.animation_layer.add_widget(ScreenDarken())
         combat_results = CombatResults(self.event_manager)
         self.add_widget(combat_results)
