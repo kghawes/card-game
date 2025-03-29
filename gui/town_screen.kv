@@ -16,8 +16,5 @@
         id: quest_button
         town_screen: town_screen
         text: 'Embark on Quest'
-        size_hint: None, None
-        size: self.texture_size
         pos: self.parent.center_x - self.width / 2, self.parent.center_y - self.height / 2
-        font_size: 24
         on_release: self.town_screen.start_quest()

@@ -1,5 +1,20 @@
 #:kivy 2.3.1
 
+<Button>:
+    size_hint: None, None
+    height: 35
+    width: 148
+    background_normal: 'gui/assets/btn_up.9.png'
+    background_color: (1, 1, 1, 1)
+    color: (0.715, 0.676, 0.535, 1.0)
+    font_size: 21
+    font_name: 'gui/assets/fonts/romanantique.ttf'
+    bold: False
+    background_down: 'gui/assets/btn_down.9.png'
+    disabled_color: (0.715, 0.676, 0.535, 0.75)
+    background_disabled_normal: 'gui/assets/btn_down.9.png'
+    border: (27, 50, 4, 4)
+
 <ScreenDarken>:
     pos: 0, 0
     size: 1500, 900
@@ -37,20 +52,8 @@
         Button:
             id: continue_button
             text: 'Back to Map'
-            size_hint: None, None
-            size: 200, 40
-            pos: 650, 490
+            pos: 676, 490
             on_release: root.back_to_quest()
-            background_normal: 'gui/assets/btn_up.9.png'
-            background_color: (1, 1, 1, 1)
-            color: (0.715, 0.676, 0.535, 1.0)
-            font_size: 21
-            font_name: 'gui/assets/fonts/romanantique.ttf'
-            bold: False
-            background_down: 'gui/assets/btn_down.9.png'
-            disabled_color: (0.715, 0.676, 0.535, 0.75)
-            background_disabled_normal: 'gui/assets/btn_down.9.png'
-            border: (27, 50, 4, 4)
 
 <CombatScreen>:
     id: combat_screen
@@ -244,20 +247,8 @@
         Button:
             id: end_turn_button
             text: 'End Turn'
-            size_hint: None, None
-            size: 148, 35
             pos: 1344, 324
             on_release: root.end_turn()
-            background_normal: 'gui/assets/btn_up.9.png'
-            background_color: (1, 1, 1, 1)
-            color: (0.715, 0.676, 0.535, 1.0)
-            font_size: 21
-            font_name: 'gui/assets/fonts/romanantique.ttf'
-            bold: False
-            background_down: 'gui/assets/btn_down.9.png'
-            disabled_color: (0.715, 0.676, 0.535, 0.75)
-            background_disabled_normal: 'gui/assets/btn_down.9.png'
-            border: (27, 50, 4, 4)
             canvas.after:
                 Color:
                     rgba: (0.715, 0.676, 0.535, 1.0)
@@ -268,18 +259,8 @@
         
         Button:
             text: 'View Log'
-            size_hint: None, None
-            size: 148, 35
             pos: 1192, 324
             on_release: root.toggle_log()
-            background_normal: 'gui/assets/btn_up.9.png'
-            background_color: (1, 1, 1, 1)
-            color: (0.715, 0.676, 0.535, 1.0)
-            font_size: 21
-            font_name: 'gui/assets/fonts/romanantique.ttf'
-            bold: False
-            background_down: 'gui/assets/btn_down.9.png'
-            border: (27, 50, 4, 4)
             canvas.after:
                 Color:
                     rgba: (0.715, 0.676, 0.535, 1.0)

@@ -16,8 +16,5 @@
         id: encounter_button
         quest_screen: quest_screen
         text: 'Enter combat'
-        size_hint: None, None
-        size: self.texture_size
         pos: self.parent.center_x - self.width / 2, self.parent.center_y - self.height / 2
-        font_size: 24
         on_release: self.quest_screen.start_encounter()
