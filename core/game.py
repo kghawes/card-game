@@ -29,7 +29,7 @@ class Game:
             self.card_cache, self.card_rewards.card_groups
             )
         self.player = Player(
-            self.card_cache, self.registries.statuses,
+            self.card_cache, self.registries,
             c.ClassSpecializations.FIGHTER.name, self.event_manager
             )
         self.player.name = "Player"

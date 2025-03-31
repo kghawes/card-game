@@ -32,5 +32,5 @@ class Registries:
         """
         self.quests = QuestRegistry(
             quests_path, enemy_groups_path, enemy_cache, card_cache,
-            self.statuses, card_rewards
+            self, card_rewards
             )

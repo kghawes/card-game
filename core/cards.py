@@ -4,12 +4,13 @@ the CardPrototype and CardCache.
 """
 from utils.utils import Prototype
 import utils.constants as c
+from core.leveled_mechanics import LeveledMechanic
 
 class Card:
     """
     Represents a card in game.
     """
-    def __init__(self, name, card_type, cost, value, effects, subtype=None):
+    def __init__(self, name, card_type, cost, value, effects, subtype=None, effect_registry=None):
         """
         Initialize a new Card.
         """
@@ -22,12 +23,10 @@ class Card:
         self.override_cost = -1
         self.value = value
         self.subtype = subtype
-        self.effects = {}
+        self.effects = []
 
         for effect, level in effects.items():
-            if isinstance(level, EffectLevel):
-                level = level.base_level
-            self.effects[effect] = EffectLevel(level)
+            self.effects.append(LeveledMechanic(effect_registry.get_effect(effect), level))
 
     def get_card_data(self) -> dict:
         """
@@ -107,36 +106,6 @@ class Card:
         return card_property in (self.card_type, self.subtype)
 
 
-class EffectLevel():
-    """
-    This class represents the power level of an Effect on the card.
-    """
-    def __init__(self, base_level):
-        """
-        Initialize a new EffectLevel.
-        """
-        self.base_level = base_level
-        self.modifier = 0
-
-    def get_level(self):
-        """
-        Get the current level of the effect.
-        """
-        return max(round(self.base_level * (1 + self.modifier)), c.MIN_EFFECT)
-
-    def change_level(self, amount):
-        """
-        Change the level of the effect.
-        """
-        self.modifier += amount
-
-    def reset_level(self):
-        """
-        Reset the effect to its original level.
-        """
-        self.modifier = 0
-
-
 class CardPrototype(Card, Prototype):
     """
     This class represents a specific card that may be 'printed' any number of
@@ -155,13 +124,13 @@ class CardPrototype(Card, Prototype):
 
     required_fields = ["name", "card_type", "cost", "value", "effects"]
 
-    def clone(self):
+    def clone(self, effect_registry) -> Card:
         """
         Create an instance of this card.
         """
         return Card(
             self.name, self.card_type, self.cost, self.value, self.effects,
-            self.subtype
+            self.subtype, effect_registry
             )
 
 
@@ -218,13 +187,13 @@ class CardCache:
 
             self.card_prototypes[enchanted_card.card_id] = enchanted_card
 
-    def create_card(self, card_id: str) -> Card:
+    def create_card(self, card_id: str, effect_registry) -> Card:
         """
         Get an instance of a Card based on the prototype id.
         """
         if card_id not in self.card_prototypes:
             raise KeyError(f"Card ID '{card_id}' not found.")
-        return self.card_prototypes[card_id].clone()
+        return self.card_prototypes[card_id].clone(effect_registry)
 
     def list_cards(self):
         """

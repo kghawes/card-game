@@ -13,11 +13,11 @@ class Enemy(Combatant):
     """
     def __init__(
             self, name, max_health, max_stamina, max_magicka, deck, card_cache,
-            status_registry, loot, card_rewards, event_manager
+            registries, loot, card_rewards, event_manager
             ):
         super().__init__(
             name, max_health, max_stamina, max_magicka, deck, card_cache,
-            status_registry, True, event_manager
+            registries, True, event_manager
             )
         self.loot = Treasure(loot, card_rewards)
     
@@ -50,7 +50,7 @@ class EnemyPrototype(Prototype):
         self.loot = loot
         self.event_manager = event_manager
 
-    def clone(self, card_cache, status_registry, card_rewards) -> Enemy:
+    def clone(self, card_cache, registries, card_rewards) -> Enemy:
         """
         Create an Enemy based on the prototype.
         """
@@ -61,7 +61,7 @@ class EnemyPrototype(Prototype):
             max_magicka=self.max_magicka,
             deck=self.deck,  # Pass raw deck to Enemy
             card_cache=card_cache,
-            status_registry = status_registry,
+            registries = registries,
             loot=self.loot,
             card_rewards=card_rewards,
             event_manager=self.event_manager
@@ -109,7 +109,7 @@ class EnemyCache:
         return prototypes
 
     def create_enemy(
-            self, enemy_id, card_cache, status_registry, card_rewards
+            self, enemy_id, card_cache, registries, card_rewards
             ) -> Enemy:
         """
         Get a new Enemy using the given prototype id.
@@ -117,7 +117,7 @@ class EnemyCache:
         if enemy_id not in self.enemy_prototypes:
             raise KeyError(f"Enemy ID '{enemy_id}' not found.")
         prototype = self.enemy_prototypes[enemy_id]
-        enemy = prototype.clone(card_cache, status_registry, card_rewards)
+        enemy = prototype.clone(card_cache, registries, card_rewards)
         return enemy
 
     def list_enemy_prototypes(self) -> list:

@@ -11,7 +11,7 @@ class Quest:
     """
     def __init__(
             self, quest_id, description, encounters, enemy_cache, card_cache,
-            status_registry, card_rewards
+            registries, card_rewards
             ):
         """
         Initialize a new Quest.
@@ -21,7 +21,7 @@ class Quest:
         self.encounters = []
         for encounter in encounters:
             enemy = enemy_cache.create_enemy(
-                encounter, card_cache, status_registry, card_rewards
+                encounter, card_cache, registries, card_rewards
                 )
             self.encounters.append(Encounter(enemy))
 
@@ -31,7 +31,7 @@ class QuestRegistry:
     """
     def __init__(
             self, quests_path, enemy_groups_path, enemy_cache, card_cache,
-            status_registry, card_rewards
+            registries, card_rewards
             ):
         """
         Initialize a new QuestRegistry.
@@ -47,7 +47,7 @@ class QuestRegistry:
             encounters = self.setup_encounters(encounters, enemy_group_data)
             quest = Quest(
                 quest_id, description, encounters, enemy_cache, card_cache,
-                status_registry, card_rewards
+                registries, card_rewards
                 )
             self.quests.append(quest)
 

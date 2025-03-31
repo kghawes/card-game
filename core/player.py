@@ -9,14 +9,14 @@ class Player(Combatant):
     """
     This class represents the player character.
     """
-    def __init__(self, card_cache, status_registry, character_class, event_manager):
+    def __init__(self, card_cache, registries, character_class, event_manager):
         """
         Initialize a new Player.
         """
         deck_list = load_json(c.STARTING_DECKS_PATH).get(character_class)
         super().__init__(
             "", c.STARTING_HEALTH, c.STARTING_STAMINA, c.STARTING_MAGICKA, 
-            deck_list, card_cache, status_registry, False, event_manager
+            deck_list, card_cache, registries, False, event_manager
             )
         self.character_class = character_class
         self.gold = 0
