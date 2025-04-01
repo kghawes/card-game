@@ -65,10 +65,9 @@ class CombatManager:
             combatant, status_registry
             )
 
-    def play_card(self, combatant, opponent, card, registries) -> bool:
+    def play_card(self, combatant, opponent, card, registries):
         """
-        Activate a card's effects, spend its cost, and discard it. Return
-        whether the card was successfully played.
+        Activate a card's effects, spend its cost, and discard it.
         """
         if not self.card_can_be_played(combatant, card, registries.statuses) \
         or not combatant.resources[card.get_resource()].try_spend(
@@ -77,31 +76,30 @@ class CombatManager:
             # TODO make card_can_be_played return a reason
             self.event_manager.logger.log(f"This {card.name} can't be played.")
             self.event_manager.dispatch('card_not_playable')
-            return False            
+            return            
 
         self.event_manager.logger.log(
             f"{combatant.name} played {card.name}."
             )
 
-        for effect_id, effect_level in card.effects.items():
-            effect_name = registries.effects.get_effect(effect_id).name
+        for effect in card.effects:
             if not self.effect_can_resolve(
-                    combatant, effect_id, registries.statuses
+                    combatant, effect.effect_id, registries.statuses
                     ):
                 # TODO give a reason why the effect can't resolve
-                self.event_manager.logger.log(f"{effect_name} has no effect.")
+                self.event_manager.logger.log(f"{effect.name} has no effect.")
                 continue
-            effect = registries.effects.get_effect(effect_id)
-            level = effect_level.get_level()
+            effect = registries.effects.get_effect(effect.effect_id)
+            level = effect.effect_level.get_level()
             effect.resolve(
                 combatant, opponent, level, status_registry=registries.statuses
                 )
             self.event_manager.logger.log(
-                f"{card.name} resolved {effect_name} at level {level}.", True
+                f"{card.name} resolved {effect.effect_name} at level {level}.", True
                 )
             if self.is_combat_over(combatant, opponent):
                 self.event_manager.dispatch('end_combat')
-                return True
+                return
 
         combatant.card_manager.discard(
             card, combatant, registries.statuses, True
@@ -110,7 +108,6 @@ class CombatManager:
         combatant.cards_played_this_turn += 1
         if not combatant.is_enemy:
             self.event_manager.dispatch('card_resolved')
-        return True
 
     def card_can_be_played(self, combatant, card, status_registry) -> bool:
         """
