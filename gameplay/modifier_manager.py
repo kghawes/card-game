@@ -127,7 +127,7 @@ class ModifierManager:
         """
         Reset the effect level of the given effect on this card.
         """
-        for effect_id, effect_level in card.effects.items():
+        for effect_id, effect_level in card.effects.items(): # TODO
             if effect in effect_id or effect == c.EffectNames.ALL_EFFECTS.name:
                 effect_level.reset_level()
 

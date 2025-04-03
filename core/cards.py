@@ -10,7 +10,7 @@ class Card:
     """
     Represents a card in game.
     """
-    def __init__(self, name, card_type, cost, value, effects, subtype=None, effect_registry=None):
+    def __init__(self, name, card_type, cost, value, effects, subtype=None):
         """
         Initialize a new Card.
         """
@@ -23,10 +23,7 @@ class Card:
         self.override_cost = -1
         self.value = value
         self.subtype = subtype
-        self.effects = []
-
-        for effect, level in effects.items():
-            self.effects.append(LeveledMechanic(effect_registry.get_effect(effect), level))
+        self.effects = effects
 
     def get_card_data(self) -> dict:
         """
@@ -39,7 +36,7 @@ class Card:
             "cost": self.get_cost(),
             "value": self.value,
             "subtype": self.subtype,
-            "effects": {effect: level.get_level() for effect, level in self.effects.items()}
+            "effects": {effect: level.get_level() for effect, level in self.effects.items()} # TODO
         }
 
     def get_resource(self) -> str:
@@ -128,9 +125,13 @@ class CardPrototype(Card, Prototype):
         """
         Create an instance of this card.
         """
+        effects = []
+        for effect, level in self.effects.items():
+            # Use the effect registry to get the actual effect instance based on the prototype's effect
+            effects.append(LeveledMechanic(effect_registry.get_effect(effect), level))
         return Card(
-            self.name, self.card_type, self.cost, self.value, self.effects,
-            self.subtype, effect_registry
+            self.name, self.card_type, self.cost, self.value, effects,
+            self.subtype
             )
 
 
@@ -162,7 +163,7 @@ class CardCache:
                     f"Duplicate card '{card_id}' found in file '{filename}'."
                     )
             for effect, effect_level in prototype.effects.items():
-                if effect_level.base_level < 0:
+                if effect_level < 0:
                     raise ValueError(
                         f"Invalid effect level for '{effect}' on '{card_id}'."
                         )
