@@ -1,6 +1,9 @@
 """
 This module defines instances of leveled mechanics, which are effects or statuses.
 """
+import utils.constants as c
+from core.effects import Effect
+from core.statuses import Status
 
 class LeveledMechanic:
     """
@@ -10,7 +13,14 @@ class LeveledMechanic:
         """
         Initialize a new LeveledMechanic.
         """
-        self.reference = reference  # This can be an effect or status reference
+        self.reference = reference
+        if isinstance(reference, Effect):
+            self.str_id = reference.effect_id
+        elif isinstance(reference, Status):
+            self.str_id = reference.status_id
+        else:
+            raise ValueError("Reference must be an Effect or Status instance.")
+        self.name = self.reference.name
         self.base_level = level
         self.modifier = 0
     
@@ -31,6 +41,6 @@ class LeveledMechanic:
 
     def reset_level(self):
         """
-        Reset the effect to its original level.
+        Reset the effect to its base level.
         """
         self.modifier = 0

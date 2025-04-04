@@ -84,7 +84,7 @@ class CombatManager:
 
         for effect in card.effects:
             if not self.effect_can_resolve(
-                    combatant, effect.effect_id, registries.statuses
+                    combatant, effect.str_id, registries.statuses
                     ):
                 # TODO give a reason why the effect can't resolve
                 self.event_manager.logger.log(f"{effect.name} has no effect.")

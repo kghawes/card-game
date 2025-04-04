@@ -36,7 +36,7 @@ class Card:
             "cost": self.get_cost(),
             "value": self.value,
             "subtype": self.subtype,
-            "effects": {effect: level.get_level() for effect, level in self.effects.items()} # TODO
+            "effects": {effect.name: effect.get_level() for effect in self.effects}
         }
 
     def get_resource(self) -> str:
