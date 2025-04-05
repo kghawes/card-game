@@ -89,13 +89,12 @@ class CombatManager:
                 # TODO give a reason why the effect can't resolve
                 self.event_manager.logger.log(f"{effect.name} has no effect.")
                 continue
-            effect = registries.effects.get_effect(effect.effect_id)
-            level = effect.effect_level.get_level()
-            effect.resolve(
+            level = effect.get_level()
+            effect.reference.resolve(
                 combatant, opponent, level, status_registry=registries.statuses
                 )
             self.event_manager.logger.log(
-                f"{card.name} resolved {effect.effect_name} at level {level}.", True
+                f"{card.name} resolved {effect.name} at level {level}.", True
                 )
             if self.is_combat_over(combatant, opponent):
                 self.event_manager.dispatch('end_combat')

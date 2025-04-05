@@ -90,8 +90,8 @@ class Card:
         """
         Reset all modified values on the card.
         """
-        for level in self.effects.values():
-            level.reset_level()
+        for effect in self.effects:
+            effect.reset_level()
         self.reset_cost_modifier()
         self.reset_temp_cost_modifier()
         self.reset_override_cost()
