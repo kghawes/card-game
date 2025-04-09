@@ -13,6 +13,7 @@ Builder.load_file('gui/combat_screen.kv')
 Builder.load_file('gui/town_screen.kv')
 Builder.load_file('gui/quest_screen.kv')
 Builder.load_file('gui/card.kv')
+Builder.load_file('gui/tooltips.kv')
 
 class CardGame(Widget):
     """Main widget for the card game."""

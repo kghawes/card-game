@@ -9,6 +9,7 @@ from kivy.clock import Clock
 import gui.gui_constants as constants
 from gui.asset_cache import AssetCache
 from gui.card import Card
+from gui.tooltips import Tooltip
 
 class Hand(FloatLayout):
     """Widget representing the player's hand of cards."""
