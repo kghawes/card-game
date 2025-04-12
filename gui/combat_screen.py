@@ -166,6 +166,8 @@ class CombatScreen(Widget):
         self.update_enemy_stats()
         self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
         self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
+        self.tooltip = Tooltip()
+        self.add_widget(self.tooltip)
     
     def start_player_turn(self, statuses, hand):
         """Starts the player's turn."""
