@@ -14,6 +14,7 @@ class Tooltip(FloatLayout):
         super().__init__(**kwargs)
         Window.bind(on_motion=self.on_mouse_move)
         self.tooltips = {}
+        self.enabled = True
     
     def _update_pos(self, pos):
         """
@@ -39,7 +40,7 @@ class Tooltip(FloatLayout):
         """
         Show the tooltip with the given text.
         """
-        if not self.visible and text:
+        if self.enabled and not self.visible and text:
             self.tip_label.text = text
             self.visible = True
             self.height = self.tip_label.texture_size[1] + 8
@@ -57,11 +58,25 @@ class Tooltip(FloatLayout):
         Handle mouse movement to update tooltip position.
         """
         pos = event.to_absolute_pos(event.sx, event.sy, window.width, window.height, 0)
-        if self.visible:
-            self._update_pos(pos)
-        for widget, text in self.tooltips.items():
-            if widget.collide_point(*pos):
-                self.show(text)
+        if self.enabled:
+            if self.visible:
                 self._update_pos(pos)
-                return
+            for widget, text in self.tooltips.items():
+                if widget.collide_point(*pos):
+                    self.show(text)
+                    self._update_pos(pos)
+                    return
         self.hide()
+    
+    def disable(self):
+        """
+        Disable the tooltip.
+        """
+        self.enabled = False
+        self.hide()
+    
+    def enable(self):
+        """
+        Enable the tooltip.
+        """
+        self.enabled = True

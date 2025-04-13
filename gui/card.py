@@ -70,6 +70,7 @@ class Card(Widget):
             card.is_draggable = False
         hand.remove_from_hand(self)
         self.animation_layer.add_widget(self)
+        self.screen.tooltip.disable()
         return True
 
     def on_touch_move(self, touch) -> bool:
@@ -85,6 +86,7 @@ class Card(Widget):
     def on_touch_up(self, touch) -> bool:
         """Release a held card."""
         if touch.grab_current is self:
+            self.screen.tooltip.enable()
             touch.ungrab(self)
             if self.play_area.collide_point(self.center_x, self.center_y):
                 self.center_x = self.play_area.center_x
