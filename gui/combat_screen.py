@@ -168,6 +168,8 @@ class CombatScreen(Widget):
         self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
         self.tooltip = Tooltip()
         self.add_widget(self.tooltip)
+        self.tooltip.add_tooltip(self.deck, "Deck")
+        self.tooltip.add_tooltip(self.discard_pile, "Discard Pile")
     
     def start_player_turn(self, statuses, hand):
         """Starts the player's turn."""
@@ -277,12 +279,6 @@ class CombatScreen(Widget):
             self.combat_log.show_history()
             self.combat_log.log_shown = True
             self.log_texture = AssetCache.get_texture('gui/assets/logbookopen.png')
-        # test
-        if self.tooltip.visible:
-            self.tooltip.hide()
-        else:
-            self.tooltip.show("Test tooltip")
-        # end test
     
     def show_combat_results(self, player_wins, rewards):
         """Shows the combat results."""
