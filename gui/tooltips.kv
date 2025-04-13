@@ -1,12 +1,19 @@
 #:kivy 2.3.1
 
 <Tooltip>:
+    tiptext: tiptext
     pos: 0, 0
     size_hint: None, None
-    size: 150, 100
+    size: tiptext.size
     canvas:
         Color:
             rgba: 1, 0, 1, 1
         Rectangle:
             pos: self.pos
             size: self.size
+    Label:
+        id: tiptext
+        text: "test"
+        pos: self.parent.pos
+        size: self.texture_size[0] + 8, self.texture_size[1] + 8
+        color: 0, 0, 0, 1
