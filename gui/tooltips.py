@@ -18,5 +18,5 @@ class Tooltip(FloatLayout):
         Handle mouse movement to update tooltip position.
         """
         pos = event.to_absolute_pos(event.sx, event.sy, window.width, window.height, 0)
-        self.x = pos[0] + 10
-        self.y = pos[1] - 20 - self.height
+        self.x = pos[0] + 15
+        self.y = pos[1] - 15 - self.height
