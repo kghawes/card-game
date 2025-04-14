@@ -5,25 +5,25 @@
     pos: 0, 0
     size_hint: None, None
     size: tip_label.size
-    canvas:
-        Color:
-            rgba: 0, 0, 0, 1 if self.visible else 0
-        Rectangle:
-            pos: self.pos
-            size: self.size
-        Color:
-            rgba: 1, 1, 1, 1 if self.visible else 0
-        BorderImage:
-            source: "gui/assets/thinframe.png"
-            border: 2, 2, 2, 2
-            pos: self.pos
-            size: self.size
     Label:
         id: tip_label
         text: ""
-        text_size: 256, None
         font_size: 18
         font_name: 'gui/assets/fonts/planewalker.otf'
         pos: self.parent.pos
-        size: 256, self.texture_size[1] + 8
+        size: self.texture_size
         color: 0.715, 0.676, 0.535, 1 if self.parent.visible else 0
+        padding: 8, 8, 8, 8
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1 if self.parent.visible else 0
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgba: 1, 1, 1, 1 if self.parent.visible else 0
+            BorderImage:
+                source: "gui/assets/thinframe.png"
+                border: 2, 2, 2, 2
+                pos: self.pos
+                size: self.size
