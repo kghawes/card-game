@@ -23,12 +23,12 @@ class Tooltip(FloatLayout):
         if not self.tip_label.texture_size[1] or self.tip_label.width > 200:
             self.x = 99999
             self.y = 99999
-        elif pos[0] + self.width + 15 >= 1500:
-            self.x = 1500 - self.width
-            self.y = pos[1] - 15 - self.height
         else:
-            self.x = pos[0] + 15
-            self.y = pos[1] - 15 - self.height
+            if pos[0] + self.width + 15 >= 1500:
+                self.x = 1500 - self.width
+            else:
+                self.x = pos[0] + 15
+            self.y = max(pos[1] - 15 - self.height, 0)
 
     def add_tooltip(self, widget, text):
         """
@@ -55,13 +55,8 @@ class Tooltip(FloatLayout):
             self.height = self.tip_label.texture_size[1] + 8
 
             self.tip_label.texture_update()
-            # Get natural (no-wrap) width
             natural_width = self.tip_label.texture_size[0]
-
-            # Clamp to max
             final_width = min(natural_width, 200)
-
-            # Apply wrapping width
             self.tip_label.text_size = (final_width, None)
             self.tip_label.size = self.tip_label.texture_size
     
