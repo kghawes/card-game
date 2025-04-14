@@ -20,8 +20,12 @@ class Tooltip(FloatLayout):
         """
         Update the position of the tooltip.
         """
-        self.x = pos[0] + 15
-        self.y = pos[1] - 15 - self.height
+        if not self.tip_label.texture_size[1]:
+            self.x = 99999
+            self.y = 99999
+        else:
+            self.x = pos[0] + 15
+            self.y = pos[1] - 15 - self.height
 
     def add_tooltip(self, widget, text):
         """
@@ -51,7 +55,7 @@ class Tooltip(FloatLayout):
         """
         if self.visible or self.tip_label.text:
             self.visible = False
-            self.tip_label.text = " "
+            self.tip_label.text = ""
     
     def on_mouse_move(self, window, event_type, event):
         """

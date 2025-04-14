@@ -20,9 +20,10 @@
             size: self.size
     Label:
         id: tip_label
-        text: " "
+        text: ""
+        text_size: 256, None
         font_size: 18
         font_name: 'gui/assets/fonts/planewalker.otf'
         pos: self.parent.pos
-        size: self.texture_size[0] + 8, self.texture_size[1] + 8
+        size: 256, self.texture_size[1] + 8
         color: 0.715, 0.676, 0.535, 1 if self.parent.visible else 0
