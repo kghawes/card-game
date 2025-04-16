@@ -1,9 +1,14 @@
+"""
+This module defines the Tooltip class, which is used to display tooltips in the GUI.
+"""
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty
 from kivy.core.window import Window
 
 class Tooltip(FloatLayout):
-    """Tooltip class to display a tooltip in the GUI."""
+    """
+    Tooltip class to display a tooltip in the GUI.
+    """
     visible = ObjectProperty(False)
     tip_label = ObjectProperty(None)
 
