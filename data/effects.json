@@ -1,0 +1,8 @@
+{
+    "JUMP": {
+        "description": "Reduce the cost of the most costly card in your hand by {} this turn."
+    },
+    "DISPEL": {
+        "description": "Reduce all active statuses (except Defense) by {}."
+    }
+}
