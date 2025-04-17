@@ -168,8 +168,6 @@ class CombatScreen(Widget):
         self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
         self.tooltip = Tooltip()
         self.add_widget(self.tooltip)
-        self.tooltip.add_tooltip(self.deck, "Deck\n and some test text this is some long text to fill up the tooltip and force word wrapping")
-        self.tooltip.add_tooltip(self.discard_pile, "Discard Pile")
     
     def start_player_turn(self, statuses, hand):
         """Starts the player's turn."""
