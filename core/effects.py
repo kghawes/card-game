@@ -74,7 +74,7 @@ class ChangeStatusEffect(Effect):
     """
     This type of effect applies or removes a Status.
     """
-    def __init__(self, effect_name_enum, target_type_enum, status_enum):
+    def __init__(self, effect_name_enum, target_type_enum, status_enum): # TODO: use status object instead of enum
         """
         Initialize a new ChangeStatusEffect.
         """
