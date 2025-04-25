@@ -23,7 +23,7 @@ class LeveledMechanic:
         self.name = self.reference.name
         self.base_level = level
         self.modifier = 0
-        # TODO create a numerical id
+        self.num_id = hash(self.str_id)
     
     def __str__(self):
         return f"{self.reference.name} {self.get_level()}"
