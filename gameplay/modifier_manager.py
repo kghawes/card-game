@@ -116,12 +116,12 @@ class ModifierManager:
 
     def modify_card_effect(self, card, effect_id, modifier):
         """
-        Change the effect level of the given effect on this card.
+        Change the effect level modifier of the given effect on this card.
         """
         for effect in card.effects:
             if effect_id in effect.str_id or effect_id == c.EffectNames.ALL_EFFECTS.name:
                 amount = modifier.contribution
-                effect.change_level(amount)
+                effect.change_level_modifier(amount)
 
     def reset_card_effect(self, card, effect_id):
         """

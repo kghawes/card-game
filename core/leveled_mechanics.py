@@ -30,18 +30,24 @@ class LeveledMechanic:
 
     def get_level(self):
         """
-        Get the current level of the effect.
+        Get the current level of the effect or status.
         """
         return max(round(self.base_level * (1 + self.modifier)), c.MIN_EFFECT)
 
-    def change_level(self, amount):
+    def change_level_modifier(self, amount):
         """
-        Change the level of the effect.
+        Change the level modifier of the effect or status.
         """
         self.modifier += amount
 
     def reset_level(self):
         """
-        Reset the effect to its base level.
+        Reset the effect or status to its base level.
         """
         self.modifier = 0
+
+    def change_level(self, amount):
+        """
+        Change the base level of the effect or status.
+        """
+        self.base_level += amount

@@ -92,21 +92,20 @@ class ChangeStatusEffect(Effect):
         Change the status by the amount indicated.
         """
         subject = self.get_target_combatant(source, opponent)
-        status_id = self.status_enum.name
+        status = self.status_ref
+
+        subject.status_manager.change_status(
+            status, level, subject, status_registry
+            )
 
         if self.matches(c.EffectNames.REMOVE.name):
             level *= -1
             sign_str = "-"
         else:
             sign_str = "+"
-
-        subject.status_manager.change_status(
-            status_id, level, subject, status_registry
-            )
         
-        status_name = status_registry.get_status(status_id).name
         status_registry.event_manager.logger.log(
-            f"{sign_str}{level} {status_name} applied to {subject.name}."
+            f"{sign_str}{level} {status.name} applied to {subject.name}."
         )
 
 
