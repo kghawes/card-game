@@ -3,6 +3,7 @@ This module defines the Effect class, its child classes, and the
 EffectRegistry.
 """
 import utils.constants as c
+#from core.leveled_mechanics import LeveledMechanic
 
 class Effect:
     """
@@ -74,16 +75,16 @@ class ChangeStatusEffect(Effect):
     """
     This type of effect applies or removes a Status.
     """
-    def __init__(self, effect_name_enum, target_type_enum, status_enum): # TODO: use status object instead of enum
+    def __init__(self, effect_name_enum, target_type_enum, status_ref):
         """
         Initialize a new ChangeStatusEffect.
         """
         self.target_type_enum = target_type_enum
-        self.status_enum = status_enum
+        self.status_ref = status_ref
         base_id = effect_name_enum.name
         base_name = effect_name_enum.value
-        self.effect_id = self.format_id(base_id, status_enum.name)
-        self.name = self.format_name(base_name, status_enum.value)
+        self.effect_id = self.format_id(base_id, status_ref.status_id)
+        self.name = self.format_name(base_name, status_ref.name)
         super().__init__(self.effect_id, self.name, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
@@ -282,11 +283,12 @@ class EffectRegistry:
         # Multi-target effects:
         for target_type in c.TargetTypes:
             for status_id in status_registry.list_statuses():
+                status_ref = status_registry.get_status(status_id)
                 apply_status_effect = ChangeStatusEffect(
-                    c.EffectNames.APPLY, target_type, c.StatusNames[status_id]
+                    c.EffectNames.APPLY, target_type, status_ref
                     )
                 remove_status_effect = ChangeStatusEffect(
-                    c.EffectNames.REMOVE, target_type, c.StatusNames[status_id]
+                    c.EffectNames.REMOVE, target_type, status_ref
                     )
                 effects[apply_status_effect.effect_id] = apply_status_effect
                 effects[remove_status_effect.effect_id] = remove_status_effect
