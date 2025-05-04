@@ -201,7 +201,7 @@ class HandEffect(Effect):
         """
         Draw or discard card(s).
         """
-        subject = self.get_target_combatant(source, opponent)
+        subject = source
         if level == 0:
             return
         if self.is_draw_effect:
