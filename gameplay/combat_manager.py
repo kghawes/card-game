@@ -51,10 +51,8 @@ class CombatManager:
         """
         Discard hand and decrement active status levels.
         """
-        if not combatant.status_manager.has_status(
-                c.StatusNames.SLOWFALLING.name, combatant, status_registry
-                ):
-            combatant.card_manager.discard_hand(combatant, status_registry)
+        if c.StatusNames.SLOWFALLING.name not in combatant.status_manager.statuses:
+            combatant.card_manager.discard_hand(combatant)
         decrement_message = ""
         if combatant.status_manager.statuses:
             decrement_message = " Active statuses decremented."
@@ -69,7 +67,7 @@ class CombatManager:
         """
         Activate a card's effects, spend its cost, and discard it.
         """
-        if not self.card_can_be_played(combatant, card, registries.statuses) \
+        if not self.card_can_be_played(combatant, card) \
         or not combatant.resources[card.get_resource()].try_spend(
             card.get_cost(), combatant.modifier_manager
         ):
@@ -83,9 +81,7 @@ class CombatManager:
             )
 
         for effect in card.effects:
-            if not self.effect_can_resolve(
-                    combatant, effect.str_id, registries.statuses
-                    ):
+            if not self.effect_can_resolve(combatant, effect.str_id):
                 # TODO give a reason why the effect can't resolve
                 self.event_manager.logger.log(f"{effect.name} has no effect.")
                 continue
@@ -100,21 +96,19 @@ class CombatManager:
                 self.event_manager.dispatch('end_combat')
                 return
 
-        combatant.card_manager.discard(
-            card, combatant, registries.statuses, True
-            )
+        combatant.card_manager.discard(card, combatant, True)
 
         combatant.cards_played_this_turn += 1
         if not combatant.is_enemy:
             self.event_manager.dispatch('card_resolved')
 
-    def card_can_be_played(self, combatant, card, status_registry) -> bool:
+    def card_can_be_played(self, combatant, card) -> bool:
         """
         Check if the given card can be played based on current status effects
         and player class.
         """
-        for status_id in combatant.status_manager.statuses:
-            status = status_registry.get_status(status_id)
+        for leveled_status in combatant.status_manager.statuses.values():
+            status = leveled_status.reference
             if isinstance(status, RestrictCardTypeStatus):
                 if not status.is_card_playable(card.card_type):
                     return False
@@ -130,13 +124,12 @@ class CombatManager:
             return True
         return False
 
-    def effect_can_resolve(self, combatant, effect_id, status_registry) -> bool:
+    def effect_can_resolve(self, combatant, effect_id) -> bool:
         """
-        Check if the given card effect can resolve based on current status
-        effects.
+        Check if the given card effect can resolve based on current status effects.
         """
-        for status_id in combatant.status_manager.statuses:
-            status = status_registry.get_status(status_id)
+        for leveled_status in combatant.status_manager.statuses.values():
+            status = leveled_status.reference
             if isinstance(status, FilterEffectStatus):
                 if not status.effect_can_resolve(effect_id):
                     return False
@@ -153,7 +146,7 @@ class CombatManager:
             for card in enemy.card_manager.hand:
                 resource_id = card.get_resource()
                 if card.get_cost() <= enemy.resources[resource_id].current and \
-                    self.card_can_be_played(enemy, card, registries.statuses):
+                    self.card_can_be_played(enemy, card):
                     playable_card_exists = True
                     self.play_card(enemy, player, card, registries)
                     if self.is_combat_over(player, enemy):

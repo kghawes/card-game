@@ -27,23 +27,17 @@ class StatusManager:
         leveled_status.reference.expire(subject, self.event_manager.logger)
         del self.statuses[status_id]
 
-    def has_status(self, status_id) -> bool:
-        """
-        Check if the given status is currently active.
-        """
-        return status_id in self.statuses
-
     def get_leveled_status(self, status_id) -> LeveledMechanic:
         """
         Return the LeveledMechanic object representing the status and its level.
         Return None if the status is not active.
         """
-        if self.has_status(status_id):
+        if status_id in self.statuses:
             return self.statuses[status_id]
         return None
 
     def change_status(
-            self, status, amount, subject, status_registry,
+            self, status_id, amount, subject, status_registry,
             remove_all_levels=False
             ):
         """
@@ -52,38 +46,46 @@ class StatusManager:
         if amount == 0:
             return
         
-        leveled_status = self.get_leveled_status(status.status_id, subject, status_registry)
-        current_level = leveled_status.get_level() if leveled_status is not None else 0
+        # Get the leveled status or create a new one if it doesn't exist
+        leveled_status = self.get_leveled_status(status_id)
+        if leveled_status is None:
+            status = status_registry.get_status(status_id)
+            if status is None:
+                return
+            leveled_status = LeveledMechanic(status, 0)
+
+        current_level = leveled_status.get_level()
         new_level = max(current_level + amount, 0)
         change = new_level - current_level
 
-        if leveled_status is not None:
+        if leveled_status.get_level() > 0:
             if remove_all_levels or new_level == 0:
-                self._delete(status.status_id, subject)
+                self._delete(status_id, subject)
             else:
                 leveled_status.change_level(change)
         elif new_level > 0:
-            self.statuses[status.status_id] = LeveledMechanic(status, new_level)
+            self.statuses[status_id] = leveled_status
 
         # Handle consequences of statuses being changed or removed
         if status.applies_immediately:
             status.trigger_on_change(subject, change)
 
-        if status.status_id not in self.statuses:
+        if status_id not in self.statuses:
             subject.modifier_manager.clear_effect_modifiers(
                 status, subject.card_manager
                 )
+            
         subject.modifier_manager.recalculate_all_effects(
             status_registry, subject.card_manager
             )
 
         levitate_id = StatusNames.LEVITATE.name
-        if isinstance(status, ModifyCostStatus) \
-        and self.has_status(levitate_id, subject, status_registry):
-            levitate = status_registry.get_status(levitate_id)
-            levitate_level = self.get_status_level(levitate_id)
-            levitate.trigger_on_change(subject, levitate_level)
-        elif status.status_id == levitate_id:
+        if isinstance(status, ModifyCostStatus) and levitate_id in self.statuses:
+            # If the status is a cost modifier and levitate is active, trigger recalculation
+            levitate = self.get_leveled_status(levitate_id)
+            levitate_level = levitate.get_level()
+            levitate.reference.trigger_on_change(subject, levitate_level)
+        elif status_id == levitate_id:
             subject.modifier_manager.recalculate_all_costs(
                 status_registry, subject.card_manager
                 )
@@ -92,7 +94,7 @@ class StatusManager:
         """
         Change the level of every active status by the same amount.
         """
-        for status_id in self.statuses:
+        for status_id in self.statuses.copy():
             self.change_status(status_id, amount, subject, status_registry)
 
     def decrement_statuses(self, subject, status_registry):
@@ -101,7 +103,7 @@ class StatusManager:
         """
         self.change_all_statuses(-1, subject, status_registry)
 
-    def reset_statuses(self, subject, status_registry):
+    def reset_statuses(self, subject):
         """
         Remove all active statuses.
         """

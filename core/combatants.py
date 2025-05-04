@@ -94,12 +94,10 @@ class Combatant:
         if amount <= 0:
             return
 
-        hidden = s.HIDDEN.name
-        if attacker.status_manager.has_status(
-                hidden, attacker, status_registry
-                ):
-            hidden_level = attacker.status_manager.get_status_level(hidden)
-            hidden_status = status_registry.get_status(hidden)
+        hidden = attacker.status_manager.get_leveled_status(s.HIDDEN.name)
+        if hidden is not None:
+            hidden_level = hidden.get_level()
+            hidden_status = hidden.reference
             mult = hidden_status.calculate_damage_multiplier(hidden_level)
             amount *= mult
             if mult > 1:
@@ -110,24 +108,24 @@ class Combatant:
         old_amount = amount
         amount = self.modifier_manager.calculate_damage(damage_type, amount, self.event_manager.logger)
         if amount > old_amount:
-            increase = (amount - old_amount) / old_amount
+            increase_percent = (amount - old_amount) / old_amount
             self.event_manager.logger.log(
-                f"The attack is super effective against {self.name}! (+{increase:.0%} damage)"
+                f"The attack is super effective against {self.name}! (+{increase_percent:.0%} damage)"
                 )
         elif amount < old_amount:
-            decrease = (old_amount - amount) / old_amount
+            decrease_percent = (old_amount - amount) / old_amount
             self.event_manager.logger.log(
-                f"{self.name} resists the attack! (-{decrease:.0%} damage)"
+                f"{self.name} resists the attack! (-{decrease_percent:.0%} damage)"
                 )
 
         if amount <= 0:
             return
 
         if damage_type == d.PHYSICAL.name:
-            defense = s.DEFENSE.name
-            if self.status_manager.has_status(defense, self, status_registry):
-                defense_status = status_registry.get_status(defense)
-                defense_level = self.status_manager.get_status_level(defense)
+            defense = self.status_manager.get_leveled_status(s.DEFENSE.name)
+            if defense is not None:
+                defense_status = defense.reference
+                defense_level = defense.get_level()
                 old_amount = amount
                 amount = defense_status.calculate_net_damage(
                     self, defense_level, amount, status_registry
@@ -140,10 +138,10 @@ class Combatant:
                 if amount <= 0:
                     return
         elif attacker != self:
-            reflect = s.REFLECT.name
-            if self.status_manager.has_status(reflect, self, status_registry):
-                reflect_status = status_registry.get_status(reflect)
-                reflect_level = self.status_manager.get_status_level(reflect)
+            reflect = self.status_manager.get_leveled_status(s.REFLECT.name)
+            if reflect is not None:
+                reflect_status = reflect.reference
+                reflect_level = reflect.get_level()
                 amount, reflected_amount = reflect_status.calculate_block(
                     amount, damage_type, reflect_level
                     )
@@ -151,39 +149,37 @@ class Combatant:
                     self.event_manager.logger.log(
                         f"{self.name} reflected {reflected_amount} damage back to {attacker.name}!"
                         )
-                if amount == 0 and attacker.status_manager.has_status(
-                        reflect, attacker, status_registry
-                        ):
-                    attacker_reflect_level = attacker.status_manager.get_status_level(
-                        reflect
-                        )
-                    if reflected_amount <= attacker_reflect_level:
-                        return # Prevent infinite reflecting back and forth
+                    
+                # If attacker also has reflect, prevent infinite reflecting
+                attacker_reflect = attacker.status_manager.get_leveled_status(
+                    s.REFLECT.name
+                    )
+                if amount == 0 and attacker_reflect is not None:
+                    if reflected_amount <= attacker_reflect.get_level():
+                        return
+                
                 attacker.take_damage(
                     self, reflected_amount, damage_type, status_registry
                     )
                 if amount <= 0:
                     return
 
-            spell_absorb = s.SPELL_ABSORPTION.name
-            if self.status_manager.has_status(
-                    spell_absorb, self, status_registry
-                    ):
-                absorb_status = status_registry.get_status(spell_absorb)
-                absorb_level = self.status_manager.get_status_level(
-                    spell_absorb
-                    )
-                amount, absorbed_amount = absorb_status.calculate_block(
-                    amount, damage_type, absorb_level
+            spell_absorb = self.status_manager.get_leveled_status(s.SPELL_ABSORPTION.name)
+            if spell_absorb is not None:
+                spell_absorb_status = spell_absorb.reference
+                spell_absorb_level = spell_absorb.get_level()
+                amount, absorbed_amount = spell_absorb_status.calculate_block(
+                    amount, damage_type, spell_absorb_level
                     )
                 if absorbed_amount > 0:
                     self.event_manager.logger.log(
                         f"{self.name} absorbed {absorbed_amount} damage from {attacker.name}!"
                         )
-                fortify_int = s.FORTIFY_INTELLIGENCE.name
                 self.status_manager.change_status(
-                    fortify_int, absorbed_amount, self, status_registry
+                    s.FORTIFY_INTELLIGENCE.name, absorbed_amount, self, status_registry
                     )
+                if amount <= 0:
+                    return
 
         health = self.resources[r.HEALTH.name]
         health.change_value(-amount, self.modifier_manager)

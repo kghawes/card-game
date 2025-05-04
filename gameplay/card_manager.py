@@ -95,11 +95,9 @@ class CardManager:
         modifier_manager.recalculate_all_costs(status_registry, self)
         modifier_manager.recalculate_all_effects(status_registry, self)
         status_manager = subject.status_manager
-        levitate = c.StatusNames.LEVITATE.name
-        if status_manager.has_status(levitate, subject, status_registry):
-            status_registry.get_status(levitate).trigger_on_change(
-                subject, status_manager.get_status_level(levitate)
-                )
+        levitate = status_manager.get_leveled_status(c.StatusNames.LEVITATE.name)
+        if levitate is not None:
+            levitate.reference.trigger_on_change(subject, levitate.get_level())
 
     def draw_hand(self, subject, registries):
         """
@@ -125,52 +123,49 @@ class CardManager:
         #         subject, ss_level, registries
         #         )
 
-    def discard(self, card, subject, status_registry, is_being_played=False):
+    def discard(self, card, subject, is_being_played=False):
         """
         Move the card from the hand to the discard pile, consumed pile, or
         deck.
         """
         if card not in self.hand:
             return
+        status_manager = subject.status_manager
 
         card.reset_card()
         if card.matches(c.CardTypes.CONSUMABLE.name) and is_being_played:
             self.consumed_pile.insert(0, card)
             # TODO: log
-        elif subject.status_manager.has_status(
-                c.StatusNames.WATER_WALKING.name, subject, status_registry
-                ) and is_being_played:
-            self.deck.insert(0, card)
-            # TODO: log
         else:
-            self.discard_pile.insert(0, card)
-            self.event_manager.logger.log(
-                f"{subject.name} discarded {card.name}.", True
-                )
+            water_walking_id = c.StatusNames.WATER_WALKING.name
+            if water_walking_id in status_manager.statuses and is_being_played:
+                self.deck.insert(0, card) # TODO: log
+            else:
+                self.discard_pile.insert(0, card)
+                self.event_manager.logger.log(
+                    f"{subject.name} discarded {card.name}.", True
+                    )
         self.hand.remove(card)
 
-        status_manager = subject.status_manager
-        levitate = c.StatusNames.LEVITATE.name
-        if status_manager.has_status(levitate, subject, status_registry):
-            status_registry.get_status(levitate).trigger_on_change(
-                subject, status_manager.get_status_level(levitate)
-                )
+        levitate = status_manager.get_leveled_status(c.StatusNames.LEVITATE.name)
+        if levitate is not None:
+            levitate.reference.trigger_on_change(subject, levitate.get_level())
 
-    def discard_random(self, quantity, subject, status_registry):
+    def discard_random(self, quantity, subject):
         """
         Randomly discard up to the given quantity of cards.
         """
         while len(self.hand) > 0 and quantity > 0:
             card = random.choice(self.hand)
-            self.discard(card, subject, status_registry)
+            self.discard(card, subject)
             quantity -= 1
 
-    def discard_hand(self, subject, status_registry):
+    def discard_hand(self, subject):
         """
         Discard the hand after each turn.
         """
         while len(self.hand) > 0:
-            self.discard(self.hand[0], subject, status_registry)
+            self.discard(self.hand[0], subject)
 
     def undiscard(self, card_index, subject, status_registry):
         """

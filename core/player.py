@@ -59,11 +59,11 @@ class Player(Combatant):
             f"MAX {resource_to_increase} is now {new_max}!"
             )
     
-    def combat_cleanup(self, status_registry):
+    def combat_cleanup(self):
         """
         Reset cards and stats after combat.
         """
         self.cards_played_this_turn = 0
         self.card_manager.reset_cards()
         self.modifier_manager.reset_all()
-        self.status_manager.reset_statuses(self, status_registry)
+        self.status_manager.reset_statuses(self)
