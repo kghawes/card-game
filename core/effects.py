@@ -128,7 +128,7 @@ class DispelEffect(Effect):
         """
         subject = self.get_target_combatant(source, opponent)
         subject.status_manager.change_all_statuses(
-            -level, subject, status_registry
+            -level, subject, status_registry # should exclude defense
             )
 
 

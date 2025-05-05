@@ -1,8 +1,29 @@
 {
+    "NO_EFFECT": {
+        "description": ""
+    },
+    "DAMAGE": {
+        "description": ""
+    },
+    "RESTORE": {
+        "description": ""
+    },
+    "APPLY": {
+        "description": "Apply {level} {status_name} to {target}.\n\n{status_description}"
+    },
+    "REMOVE": {
+        "description": "Remove {level} {status_name} from {target}.\n\n{status_description}"
+    },
+    "DRAW": {
+        "description": ""
+    },
+    "DISCARD": {
+        "description": "Discard {level} random cards from your hand."
+    },
     "JUMP": {
-        "description": "Reduce the cost of the most costly card in your hand by {} this turn."
+        "description": "Reduce the cost of the most costly card in your hand by {level} this turn."
     },
     "DISPEL": {
-        "description": "Reduce all active statuses (except Defense) by {}."
+        "description": "Reduce all active statuses (except Defense) by {level}."
     }
 }
