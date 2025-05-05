@@ -12,12 +12,12 @@ class Registries:
     Wraps StatusRegistry, EffectRegistry, EnchantmentRegistry, and
     QuestRegistry since these are frequently used together.
     """
-    def __init__(self, statuses_path, enchantments_path, event_manager):
+    def __init__(self, effects_path, statuses_path, enchantments_path, event_manager):
         """
         Initialize a new Registries.
         """
         self.statuses = StatusRegistry(statuses_path, event_manager)
-        self.effects = EffectRegistry(self.statuses)
+        self.effects = EffectRegistry(effects_path, self.statuses)
         self.enchantments = EnchantmentRegistry(
             enchantments_path, self.effects
             )

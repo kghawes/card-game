@@ -9,10 +9,10 @@
         "description": ""
     },
     "APPLY": {
-        "description": "Apply {level} {status_name} to {target}.\n\n{status_description}"
+        "description": "Apply {level} {status_name} {target}.\n\n{status_description}"
     },
     "REMOVE": {
-        "description": "Remove {level} {status_name} from {target}.\n\n{status_description}"
+        "description": "Remove {level} {status_name} {target}.\n\n{status_description}"
     },
     "DRAW": {
         "description": ""

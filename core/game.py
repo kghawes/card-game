@@ -20,7 +20,9 @@ class Game:
         """
         self.event_manager = event_manager
         self.combat_manager = CombatManager(self.event_manager)
-        self.registries = Registries(c.STATUSES_PATH, c.ENCHANTMENTS_PATH, self.event_manager)
+        self.registries = Registries(
+            c.EFFECTS_PATH, c.STATUSES_PATH, c.ENCHANTMENTS_PATH, self.event_manager
+            )
         self.card_cache = CardCache(c.CARD_PATHS, self.registries)
         self.enemy_cache = EnemyCache(c.ENEMIES_PATHS, self.event_manager)
         self.card_rewards = CardRewards(c.CARD_REWARDS_PATH)

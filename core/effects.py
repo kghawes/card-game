@@ -8,12 +8,13 @@ class Effect:
     """
     Base class representing a card's immediate effect when played.
     """
-    def __init__(self, effect_id, name, target_type_enum=None):
+    def __init__(self, effect_id, name, description, target_type_enum=None):
         """
         Initialize a new Effect.
         """
         self.effect_id = effect_id
         self.name = name
+        self.description = description
         self.target_type_enum = target_type_enum
 
     def resolve(self, source, opponent, level=1, status_registry=None):
@@ -59,7 +60,7 @@ class NoEffect(Effect):
         """
         effect_id = c.EffectNames.NO_EFFECT.name
         effect_name = c.EffectNames.NO_EFFECT.value
-        super().__init__(effect_id, effect_name, None)
+        super().__init__(effect_id, effect_name, "", None)
     
     def resolve(self, source, opponent, level=1, status_registry=None):
         """
@@ -74,7 +75,7 @@ class ChangeStatusEffect(Effect):
     """
     This type of effect applies or removes a Status.
     """
-    def __init__(self, effect_name_enum, target_type_enum, status_enum):
+    def __init__(self, effect_name_enum, description, target_type_enum, status_enum):
         """
         Initialize a new ChangeStatusEffect.
         """
@@ -84,7 +85,7 @@ class ChangeStatusEffect(Effect):
         base_name = effect_name_enum.value
         self.effect_id = self.format_id(base_id, status_enum.name)
         self.name = self.format_name(base_name, status_enum.value)
-        super().__init__(self.effect_id, self.name, target_type_enum)
+        super().__init__(self.effect_id, self.name, description, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
         """
@@ -113,14 +114,14 @@ class DispelEffect(Effect):
     """
     This type of effect decreases levels from all active statuses.
     """
-    def __init__(self, target_type_enum):
+    def __init__(self, effect_name_enum, description, target_type_enum):
         """
         Initialize a new DispelEffect.
         """
+        self.effect_id = self.format_id(effect_name_enum.name)
+        self.name = self.format_name(effect_name_enum.value)
         self.target_type_enum = target_type_enum
-        effect_id = self.format_id(c.EffectNames.DISPEL.name)
-        name = self.format_name(c.EffectNames.DISPEL.value)
-        super().__init__(effect_id, name, target_type_enum)
+        super().__init__(self.effect_id, self.name, description, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
         """
@@ -136,7 +137,7 @@ class DamageEffect(Effect):
     """
     This type of effect deals damage.
     """
-    def __init__(self, target_type_enum, damage_type_enum):
+    def __init__(self, description, target_type_enum, damage_type_enum):
         """
         Initialize a new DamageEffect.
         """
@@ -146,7 +147,7 @@ class DamageEffect(Effect):
         base_name = damage_type_enum.value
         effect_id = self.format_id(base_id, c.EffectNames.DAMAGE.name)
         name = self.format_name(base_name, c.EffectNames.DAMAGE.value)
-        super().__init__(effect_id, name, target_type_enum)
+        super().__init__(effect_id, name, description, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
         """
@@ -162,7 +163,7 @@ class ChangeResourceEffect(Effect):
     """
     This type of effect changes the current value of a Resource.
     """
-    def __init__(self, effect_name_enum, target_type_enum, resource_enum):
+    def __init__(self, effect_name_enum, description, target_type_enum, resource_enum):
         """
         Initialize a new ChangeResourceEffect.
         """
@@ -170,7 +171,7 @@ class ChangeResourceEffect(Effect):
         self.target_type_enum = target_type_enum
         effect_id = self.format_id(effect_name_enum.name, resource_enum.name)
         name = self.format_name(effect_name_enum.value, resource_enum.value)
-        super().__init__(effect_id, name, target_type_enum)
+        super().__init__(effect_id, name, description, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
         """
@@ -188,13 +189,13 @@ class HandEffect(Effect):
     """
     This type of effect draws or discards cards.
     """
-    def __init__(self, effect_name_enum, is_draw_effect):
+    def __init__(self, effect_name_enum, description, is_draw_effect):
         """
         Initialize a new HandEffect.
         """
         effect_id = effect_name_enum.name
         name = effect_name_enum.value
-        super().__init__(effect_id, name, c.TargetTypes.SELF)
+        super().__init__(effect_id, name, description, c.TargetTypes.SELF)
         self.is_draw_effect = is_draw_effect
 
     def resolve(self, source, opponent, level, status_registry):
@@ -222,13 +223,13 @@ class JumpEffect(Effect):
     """
     This effect reduces the cost of the most costly card in hand.
     """
-    def __init__(self):
+    def __init__(self, description):
         """
         Initialize a new JumpEffect.
         """
         effect_id = c.EffectNames.JUMP.name
         name = c.EffectNames.JUMP.value
-        super().__init__(effect_id, name)
+        super().__init__(effect_id, name, description, c.TargetTypes.SELF)
 
     def resolve(self, source, opponent, level, status_registry):
         """
@@ -260,48 +261,73 @@ class EffectRegistry:
     """
     This class holds effect data and provides access to the effects.
     """
-    def __init__(self, status_registry):
+    def __init__(self, effects_path, status_registry):
         """
         Initialize a new EffectRegistry.
         """
-        self.effects = self._register_effects(status_registry)
+        self.effects = self._register_effects(effects_path, status_registry)
 
-    def _register_effects(self, status_registry) -> dict:
+    def _register_effects(self, effects_path, status_registry) -> dict:
         """
         Create the Effect objects and file them in the dict.
         """
         effects = {}
 
+        descriptions = c.load_json(effects_path)
+
+        # Single-target effects:
         effects[c.EffectNames.NO_EFFECT.name] = NoEffect()
-        effects[c.EffectNames.DRAW.name] = HandEffect(c.EffectNames.DRAW, True)
-        effects[c.EffectNames.DISCARD.name] = HandEffect(
-            c.EffectNames.DISCARD, False
-            )
-        effects[c.EffectNames.JUMP.name] = JumpEffect()
+
+        draw = c.EffectNames.DRAW
+        effects[draw.name] = HandEffect(draw, descriptions[draw.name], True)
+
+        discard = c.EffectNames.DISCARD
+        effects[discard.name] = HandEffect(discard, descriptions[discard.name], False)
+
+        jump = c.EffectNames.JUMP
+        effects[jump.name] = JumpEffect(descriptions[jump.name])
+
+        restore = c.EffectNames.RESTORE
+        for resource in c.Resources:
+            restore_effect = ChangeResourceEffect(
+                restore, descriptions[restore.name], c.TargetTypes.SELF, resource
+                )
+            effects[restore_effect.effect_id] = restore_effect
 
         # Multi-target effects:
         for target_type in c.TargetTypes:
+            apply = c.EffectNames.APPLY
+            remove = c.EffectNames.REMOVE
+            apply_description = descriptions[apply.name]
+            remove_description = descriptions[remove.name]
             for status_id in status_registry.list_statuses():
+                status = status_registry.get_status(status_id)
+                description = apply_description.format(
+                    status_name=status.name,
+                    target=target_type.value,
+                    status_description=status.description
+                    )
                 apply_status_effect = ChangeStatusEffect(
-                    c.EffectNames.APPLY, target_type, c.StatusNames[status_id]
+                    c.EffectNames.APPLY, description, target_type, c.StatusNames[status_id]
+                    )
+                description = remove_description.format(
+                    status_name=status.name,
+                    target=target_type.value,
+                    status_description=status.description
                     )
                 remove_status_effect = ChangeStatusEffect(
-                    c.EffectNames.REMOVE, target_type, c.StatusNames[status_id]
+                    c.EffectNames.REMOVE, description, target_type, c.StatusNames[status_id]
                     )
                 effects[apply_status_effect.effect_id] = apply_status_effect
                 effects[remove_status_effect.effect_id] = remove_status_effect
 
             for damage_type in c.DamageTypes:
-                damage_effect = DamageEffect(target_type, damage_type)
+                description = descriptions[c.EffectNames.DAMAGE.name]
+                damage_effect = DamageEffect(description, target_type, damage_type)
                 effects[damage_effect.effect_id] = damage_effect
 
-            for resource in c.Resources:
-                restore_effect = ChangeResourceEffect(
-                    c.EffectNames.RESTORE, c.TargetTypes.SELF, resource
-                    )
-                effects[restore_effect.effect_id] = restore_effect
-
-            dispel_effect = DispelEffect(target_type)
+            description = descriptions[c.EffectNames.DISPEL.name]
+            dispel_effect = DispelEffect(c.EffectNames.DISPEL, description, target_type)
             effects[dispel_effect.effect_id] = dispel_effect
 
         return effects
