@@ -53,8 +53,10 @@ class Card(Widget):
     def format_effects(self, effects) -> str:
         """Formats the effects of the card for display."""
         formatted_effects = []
-        for effect, level in effects.items():
-            formatted_effects.append(f"{effect} {level}")
+        for effect in effects:
+            name = effect['name']
+            level = effect['level']
+            formatted_effects.append(f"{name} {level}")
         return '\n'.join(formatted_effects)
 
     def on_touch_down(self, touch) -> bool:

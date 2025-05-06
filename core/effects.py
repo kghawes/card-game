@@ -302,32 +302,22 @@ class EffectRegistry:
             remove_description = descriptions[remove.name]
             for status_id in status_registry.list_statuses():
                 status = status_registry.get_status(status_id)
-                description = apply_description.format(
-                    status_name=status.name,
-                    target=target_type.value,
-                    status_description=status.description
-                    )
                 apply_status_effect = ChangeStatusEffect(
-                    c.EffectNames.APPLY, description, target_type, status
-                    )
-                description = remove_description.format(
-                    status_name=status.name,
-                    target=target_type.value,
-                    status_description=status.description
+                    c.EffectNames.APPLY, apply_description, target_type, status
                     )
                 remove_status_effect = ChangeStatusEffect(
-                    c.EffectNames.REMOVE, description, target_type, status
+                    c.EffectNames.REMOVE, remove_description, target_type, status
                     )
                 effects[apply_status_effect.effect_id] = apply_status_effect
                 effects[remove_status_effect.effect_id] = remove_status_effect
 
             for damage_type in c.DamageTypes:
-                description = descriptions[c.EffectNames.DAMAGE.name]
-                damage_effect = DamageEffect(description, target_type, damage_type)
+                damage_description = descriptions[c.EffectNames.DAMAGE.name]
+                damage_effect = DamageEffect(damage_description, target_type, damage_type)
                 effects[damage_effect.effect_id] = damage_effect
 
-            description = descriptions[c.EffectNames.DISPEL.name]
-            dispel_effect = DispelEffect(c.EffectNames.DISPEL, description, target_type)
+            dispel_description = descriptions[c.EffectNames.DISPEL.name]
+            dispel_effect = DispelEffect(c.EffectNames.DISPEL, dispel_description, target_type)
             effects[dispel_effect.effect_id] = dispel_effect
 
         return effects

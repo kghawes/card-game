@@ -29,6 +29,20 @@ class Card:
         """
         Get a dictionary of the card's data.
         """
+        # effect_data = { }
+        # for effect in self.effects:
+        #     if hasattr(effect.reference, "status_ref"):
+        #         status_name = effect.reference.status_ref.name
+        #         status_desc
+        #     description = effect.reference.description.format(
+        #         level=effect.get_level()
+        #     )
+        #     effect_data[effect.str_id] = {
+        #         "name": effect.name,
+        #         "level": effect.get_level(),
+        #         "description": description######################
+        #     }
+
         return {
             "name": self.name,
             "id": self.card_id,
@@ -36,7 +50,7 @@ class Card:
             "cost": self.get_cost(),
             "value": self.value,
             "subtype": self.subtype,
-            "effects": {effect.name: effect.get_level() for effect in self.effects}
+            "effects": effect_data
         }
 
     def get_resource(self) -> str:

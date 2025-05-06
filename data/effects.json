@@ -9,21 +9,21 @@
         "description": ""
     },
     "APPLY": {
-        "description": "Apply {{level}} {status_name} {target}.\n\n{status_description}"
+        "description": "Apply {level} {status_name} {target}.\n\n{status_description}"
     },
     "REMOVE": {
-        "description": "Remove {{level}} {status_name} {target}.\n\n{status_description}"
+        "description": "Remove {level} {status_name} {target}.\n\n{status_description}"
     },
     "DRAW": {
         "description": ""
     },
     "DISCARD": {
-        "description": "Discard {{level}} random cards from your hand."
+        "description": "Discard {level} random cards from your hand."
     },
     "JUMP": {
-        "description": "Reduce the cost of the most costly card in your hand by {{level}} this turn."
+        "description": "Reduce the cost of the most costly card in your hand by {level} this turn."
     },
     "DISPEL": {
-        "description": "Reduce all active statuses (except Defense) by {{level}}."
+        "description": "Reduce all active statuses (except Defense) by {level}."
     }
 }

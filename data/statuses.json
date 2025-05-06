@@ -1,23 +1,23 @@
 {
   "DEFENSE": {
     "class": "DefenseStatus",
-    "description": "Block up to {} Physical Damage and if you do, remove that much Defense."
+    "description": "Block up to {level} Physical Damage and if you do, remove that much Defense."
   },
   "POISON": {
     "class": "PoisonStatus",
-    "description": "Take {} Poison Damage at the start of your turn."
+    "description": "Take {level} Poison Damage at the start of your turn."
   },
   "REGENERATION": {
     "class": "RegenerationStatus",
-    "description": "Restore {} Health at the start of your turn."
+    "description": "Restore {level} Health at the start of your turn."
   },
   "EVASION": {
     "class": "EvasionStatus",
-    "description": "{} chance to take no damage from an incoming attack."
+    "description": "{evasion_probability} chance to take no damage from an incoming attack."
   },
   "HIDDEN": {
     "class": "CriticalHitStatus",
-    "description": "{} chance to deal double damage when you attack."
+    "description": "{crit_probability} chance to deal double damage when you attack."
   },
   "PARALYZE": {
     "class": "RestrictCardTypeStatus",
@@ -48,243 +48,243 @@
   },
   "RESISTANCE_PHYSICAL": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} less damage from Physical attacks.",
+    "description": "Take {percent_decrease} less damage from Physical attacks.",
     "damage_type": "PHYSICAL",
     "sign_factor": -1
   },
   "RESISTANCE_FIRE": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} less damage from Fire attacks.",
+    "description": "Take {percent_decrease} less damage from Fire attacks.",
     "damage_type": "FIRE",
     "sign_factor": -1
   },
   "RESISTANCE_FROST": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} less damage from Frost attacks.",
+    "description": "Take {percent_decrease} less damage from Frost attacks.",
     "damage_type": "FROST",
     "sign_factor": -1
   },
   "RESISTANCE_SHOCK": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} less damage from Shock attacks.",
+    "description": "Take {percent_decrease} less damage from Shock attacks.",
     "damage_type": "SHOCK",
     "sign_factor": -1
   },
   "RESISTANCE_POISON": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} less damage from Poison attacks.",
+    "description": "Take {percent_decrease} less damage from Poison attacks.",
     "damage_type": "POISON",
     "sign_factor": -1
   },
   "WEAKNESS_PHYSICAL": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} more damage from Physical attacks.",
+    "description": "Take {percent_increase} more damage from Physical attacks.",
     "damage_type": "PHYSICAL",
     "sign_factor": 1
   },
   "WEAKNESS_FIRE": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} more damage from Fire attacks.",
+    "description": "Take {percent_increase} more damage from Fire attacks.",
     "damage_type": "FIRE",
     "sign_factor": 1
   },
   "WEAKNESS_FROST": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} more damage from Frost attacks.",
+    "description": "Take {percent_increase} more damage from Frost attacks.",
     "damage_type": "FROST",
     "sign_factor": 1
   },
   "WEAKNESS_SHOCK": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} more damage from Shock attacks.",
+    "description": "Take {percent_increase} more damage from Shock attacks.",
     "damage_type": "SHOCK",
     "sign_factor": 1
   },
   "WEAKNESS_POISON": {
     "class": "ModifyDamageStatus",
-    "description": "Take {} more damage from Poison attacks.",
+    "description": "Take {percent_increase} more damage from Poison attacks.",
     "damage_type": "POISON",
     "sign_factor": 1
   },
   "FORTIFY_AGILITY": {
     "class": "ModifyMaxResourceStatus",
-    "description": "Increase your maximum Stamina by {}.",
+    "description": "Increase your maximum Stamina by {level}.",
     "resource_id": "STAMINA",
     "sign_factor": 1
   },
   "DAMAGE_AGILITY": {
     "class": "ModifyMaxResourceStatus",
-    "description": "Decrease your maximum Stamina by {}.",
+    "description": "Decrease your maximum Stamina by {level}.",
     "resource_id": "STAMINA",
     "sign_factor": -1
   },
   "FORTIFY_INTELLIGENCE": {
     "class": "ModifyMaxResourceStatus",
-    "description": "Increase your maximum Magicka by {}.",
+    "description": "Increase your maximum Magicka by {level}.",
     "resource_id": "MAGICKA",
     "sign_factor": 1
   },
   "DAMAGE_INTELLIGENCE": {
     "class": "ModifyMaxResourceStatus",
-    "description": "Decrease your maximum Magicka by {}.",
+    "description": "Decrease your maximum Magicka by {level}.",
     "resource_id": "MAGICKA",
     "sign_factor": -1
   },
   "FORTIFY_STRENGTH": {
     "class": "ModifyEffectStatus",
-    "description": "Weapons you play deal {} more damage.",
+    "description": "Weapons you play deal {percent_increase} more damage.",
     "affected_card_type": "WEAPON",
     "affected_effect": "PHYSICAL_DAMAGE",
     "sign_factor": 1
   },
   "DAMAGE_STRENGTH": {
     "class": "ModifyEffectStatus",
-    "description": "Weapons you play deal {} less damage.",
+    "description": "Weapons you play deal {percent_decrease} less damage.",
     "affected_card_type": "WEAPON",
     "affected_effect": "PHYSICAL_DAMAGE",
     "sign_factor": -1
   },
   "FORTIFY_ENDURANCE": {
     "class": "ModifyEffectStatus",
-    "description": "Armor you play provides {} more Defense.",
+    "description": "Armor you play provides {percent_increase} more Defense.",
     "affected_card_type": "ARMOR",
     "affected_effect": "DEFENSE",
     "sign_factor": 1
   },
   "DAMAGE_ENDURANCE": {
     "class": "ModifyEffectStatus",
-    "description": "Armor you play provides {} less Defense.",
+    "description": "Armor you play provides {percent_decrease} less Defense.",
     "affected_card_type": "ARMOR",
     "affected_effect": "DEFENSE",
     "sign_factor": -1
   },
   "FORTIFY_WILLPOWER": {
     "class": "ModifyEffectStatus",
-    "description": "Spells you play deal {} more damage.",
+    "description": "Spells you play deal {percent_increase} more damage.",
     "affected_card_type": "SPELL",
     "affected_effect": "DAMAGE",
     "sign_factor": 1
   },
   "DAMAGE_WILLPOWER": {
     "class": "ModifyEffectStatus",
-    "description": "Spells you play deal {} less damage.",
+    "description": "Spells you play deal {percent_decrease} less damage.",
     "affected_card_type": "SPELL",
     "affected_effect": "DAMAGE",
     "sign_factor": -1
   },
   "FORTIFY_SPEED": {
     "class": "ModifyDrawStatus",
-    "description": "Draw {} more cards at the start of your turn.",
+    "description": "Draw {level} more cards at the start of your turn.",
     "sign_factor": 1
   },
   "DAMAGE_SPEED": {
     "class": "ModifyDrawStatus",
-    "description": "Draw {} fewer cards at the start of your turn.",
+    "description": "Draw {level} fewer cards at the start of your turn.",
     "sign_factor": -1
   },
   "FEATHER": {
     "class": "ModifyCostStatus",
-    "description": "Your Skills cost {} less Stamina.",
+    "description": "Your Skills cost {level} less Stamina.",
     "affected_card_type": "SKILL",
     "sign_factor": -1
   },
   "BURDEN": {
     "class": "ModifyCostStatus",
-    "description": "Your Skills cost {} more Stamina.",
+    "description": "Your Skills cost {level} more Stamina.",
     "affected_card_type": "SKILL",
     "sign_factor": 1
   },
   "FORTIFY_LONG_BLADE": {
     "class": "ModifyCostStatus",
-    "description": "Your Long Blades cost {} less Stamina.",
+    "description": "Your Long Blades cost {level} less Stamina.",
     "affected_card_type": "LONG_BLADE",
     "sign_factor": -1
   },
   "FORTIFY_BLUNT_WEAPON": {
     "class": "ModifyCostStatus",
-    "description": "Your Blunt Weapons cost {} less Stamina.",
+    "description": "Your Blunt Weapons cost {level} less Stamina.",
     "affected_card_type": "BLUNT_WEAPON",
     "sign_factor": -1
   },
   "FORTIFY_SHORT_BLADE": {
     "class": "ModifyCostStatus",
-    "description": "Your Short Blades cost {} less Stamina.",
+    "description": "Your Short Blades cost {level} less Stamina.",
     "affected_card_type": "SHORT_BLADE",
     "sign_factor": -1
   },
   "FORTIFY_MARKSMAN": {
     "class": "ModifyCostStatus",
-    "description": "Your Marksman Weapons cost {} less Stamina.",
+    "description": "Your Marksman Weapons cost {level} less Stamina.",
     "affected_card_type": "MARKSMAN",
     "sign_factor": -1
   },
   "FORTIFY_STAFF": {
     "class": "ModifyCostStatus",
-    "description": "Your Staves cost {} less Stamina.",
+    "description": "Your Staves cost {level} less Stamina.",
     "affected_card_type": "STAFF",
     "sign_factor": -1
   },
   "FORTIFY_LIGHT_ARMOR": {
     "class": "ModifyCostStatus",
-    "description": "Your Light Armor costs {} less Stamina.",
+    "description": "Your Light Armor costs {level} less Stamina.",
     "affected_card_type": "LIGHT",
     "sign_factor": -1
   },
   "FORTIFY_MEDIUM_ARMOR": {
     "class": "ModifyCostStatus",
-    "description": "Your Medium Armor costs {} less Stamina.",
+    "description": "Your Medium Armor costs {level} less Stamina.",
     "affected_card_type": "MEDIUM",
     "sign_factor": -1
   },
   "FORTIFY_HEAVY_ARMOR": {
     "class": "ModifyCostStatus",
-    "description": "Your Heavy Armor costs {} less Stamina.",
+    "description": "Your Heavy Armor costs {level} less Stamina.",
     "affected_card_type": "HEAVY",
     "sign_factor": -1
   },
   "FORTIFY_ALTERATION": {
     "class": "ModifyCostStatus",
-    "description": "Your Alteration Spells costs {} less Stamina.",
+    "description": "Your Alteration Spells costs {level} less Magicka.",
     "affected_card_type": "ALTERATION",
     "sign_factor": -1
   },
   "FORTIFY_CONJURATION": {
     "class": "ModifyCostStatus",
-    "description": "Your Conjuration Spells costs {} less Stamina.",
+    "description": "Your Conjuration Spells costs {level} less Magicka.",
     "affected_card_type": "CONJURATION",
     "sign_factor": -1
   },
   "FORTIFY_DESTRUCTION": {
     "class": "ModifyCostStatus",
-    "description": "Your Destruction Spells costs {} less Stamina.",
+    "description": "Your Destruction Spells costs {level} less Magicka.",
     "affected_card_type": "DESTRUCTION",
     "sign_factor": -1
   },
   "FORTIFY_ILLUSION": {
     "class": "ModifyCostStatus",
-    "description": "Your Illusion Spells costs {} less Stamina.",
+    "description": "Your Illusion Spells costs {level} less Magicka.",
     "affected_card_type": "ILLUSION",
     "sign_factor": -1
   },
   "FORTIFY_MYSTICISM": {
     "class": "ModifyCostStatus",
-    "description": "Your Mysticism Spells costs {} less Stamina.",
+    "description": "Your Mysticism Spells costs {level} less Magicka.",
     "affected_card_type": "MYSTICISM",
     "sign_factor": -1
   },
   "FORTIFY_RESTORATION": {
     "class": "ModifyCostStatus",
-    "description": "Your Restoration Spells costs {} less Stamina.",
+    "description": "Your Restoration Spells costs {level} less Magicka.",
     "affected_card_type": "RESTORATION",
     "sign_factor": -1
   },
   "REFLECT": {
     "class": "BlockMagicStatus",
-    "description": "Block up to {} non-Physical damage, and if you do, deal that much damage to the attacker."
+    "description": "Block up to {level} non-Physical damage, and if you do, deal that much damage to the attacker."
   },
   "SPELL_ABSORPTION": {
     "class": "BlockMagicStatus",
-    "description": "Block up to {} non-Physical damage, and if you do, gain that many points of Fortify Intelligence."
+    "description": "Block up to {level} non-Physical damage, and if you do, gain that many points of Fortify Intelligence."
   },
   "DISEASE": {
     "class": "LimitCardPlayStatus",
@@ -298,14 +298,14 @@
   },
   "ALCHEMIST": {
     "class": "ModifyEffectStatus",
-    "description": "Your Potions are {} more effective.",
+    "description": "Your Potions are {percent_increase} more effective.",
     "affected_card_type": "POTION",
     "affected_effect": "ALL_EFFECTS",
     "sign_factor": 1
   },
   "ENCHANTER": {
     "class": "ModifyEffectStatus",
-    "description": "Your Scrolls are {} more effective.",
+    "description": "Your Scrolls are {percent_increase} more effective.",
     "affected_card_type": "SCROLL",
     "affected_effect": "ALL_EFFECTS",
     "sign_factor": 1
@@ -324,10 +324,10 @@
   },
   "SWIFT_SWIM": {
     "class": "MulliganStatus",
-    "description": "When you draw your hand, you may discard up to {} cards then draw that many cards."
+    "description": "When you draw your hand, you may discard up to {level} cards then draw that many cards."
   },
   "WATER_BREATHING": {
     "class": "ReturnFromDiscardStatus",
-    "description": "When you would draw your hand, instead select up to {} cards from your Discard Pile to add to your hand. Then draw the rest of your cards."
+    "description": "When you would draw your hand, instead select up to {level} cards from your Discard Pile to add to your hand. Then draw the rest of your cards."
   }
 }
