@@ -3,7 +3,7 @@ This module defines the Effect class, its child classes, and the
 EffectRegistry.
 """
 import utils.constants as c
-#from core.leveled_mechanics import LeveledMechanic
+from utils.utils import load_json
 
 class Effect:
     """
@@ -117,9 +117,9 @@ class DispelEffect(Effect):
         """
         Initialize a new DispelEffect.
         """
+        self.target_type_enum = target_type_enum
         self.effect_id = self.format_id(effect_name_enum.name)
         self.name = self.format_name(effect_name_enum.value)
-        self.target_type_enum = target_type_enum
         super().__init__(self.effect_id, self.name, description, target_type_enum)
 
     def resolve(self, source, opponent, level, status_registry):
@@ -272,7 +272,8 @@ class EffectRegistry:
         """
         effects = {}
 
-        descriptions = c.load_json(effects_path)
+        data = load_json(effects_path)
+        descriptions = { effect_id: effect_data["description"] for effect_id, effect_data in data.items() }
 
         # Single-target effects:
         effects[c.EffectNames.NO_EFFECT.name] = NoEffect()
