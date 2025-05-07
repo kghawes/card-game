@@ -52,7 +52,7 @@ class Card(Widget):
         self.tooltip_text = card_data['effects']['tooltip_text']
 
     def on_touch_down(self, touch) -> bool:
-        """When clicked, pick up the card."""
+        """When clicked, pick up the card. Return true to stop event propagation."""
         if not self.is_draggable or not self.collide_point(touch.x, touch.y):
             return False
         self.click_location = (touch.x, touch.y)
@@ -78,7 +78,7 @@ class Card(Widget):
         return False
 
     def on_touch_up(self, touch) -> bool:
-        """Release a held card."""
+        """Release a held card. Return true to stop event propagation."""
         if touch.grab_current is self:
             self.screen.tooltip.enable()
             touch.ungrab(self)
@@ -92,6 +92,7 @@ class Card(Widget):
         return False
 
     def return_to_hand(self):
+        """Return the card to the hand."""
         self.parent.remove_widget(self)
         self.hand.add_to_hand(self, index=self.hand_index)
         for card in self.hand.children:
