@@ -11,18 +11,41 @@ class Formatter:
         """
         formatted_data = { }
         for leveled_effect in effects:
-            name = leveled_effect.reference.name
+            effect = leveled_effect.reference
+            name = effect.name
             level = leveled_effect.get_level()
-            description = leveled_effect.reference.description
+            description = effect.description
+            if hasattr(effect, 'status_ref'):
+                # Apply and Remove Status-type effects
+                status = effect.status_ref
+                target = effect.target_type_enum.value
+                status_description = self.format_status_data(status, level)
+                description = description.format(
+                    level=level,
+                    status_name=status.name,
+                    target=target,
+                    status_description=status_description
+                )
+            else:
+                description = description.format(level=level)
+            display_string = f"{name} {level}: {description}"
 
         return formatted_data
 
-    def format_status_data(self, leveled_status) -> str:
+    def format_status_data(self, status, level) -> str:
         """
         Format the status data for display.
         """
-        status = leveled_status.reference
         name = status.name
-        level = leveled_status.get_level()
         description = status.description
-        #
+        # description strings
+        evasion_probability = c.BASE_EVASION_PROBABILITY * level
+        crit_probability = c.BASE_CRIT_PROBABILITY * level
+        percent_change = c.SCALE_FACTOR * level
+        description = description.format(
+            level=level,
+            percent_change=percent_change,
+            evasion_probability=evasion_probability,
+            crit_probability=crit_probability
+        )
+        return f"{name} (Level {level}): {description}"

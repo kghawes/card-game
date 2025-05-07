@@ -3,6 +3,7 @@ This module defines the Card class, the helper class EffectLevel, as well as
 the CardPrototype and CardCache.
 """
 from utils.utils import Prototype
+from utils.formatter import Formatter
 import utils.constants as c
 from core.leveled_mechanics import LeveledMechanic
 
@@ -24,24 +25,13 @@ class Card:
         self.value = value
         self.subtype = subtype
         self.effects = effects
+        self.formatter = Formatter()
 
     def get_card_data(self) -> dict:
         """
         Get a dictionary of the card's data.
         """
-        # effect_data = { }
-        # for effect in self.effects:
-        #     if hasattr(effect.reference, "status_ref"):
-        #         status_name = effect.reference.status_ref.name
-        #         status_desc
-        #     description = effect.reference.description.format(
-        #         level=effect.get_level()
-        #     )
-        #     effect_data[effect.str_id] = {
-        #         "name": effect.name,
-        #         "level": effect.get_level(),
-        #         "description": description######################
-        #     }
+        effect_data = self.formatter.format_effect_data(self.effects)
 
         return {
             "name": self.name,

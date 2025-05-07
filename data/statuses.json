@@ -48,61 +48,61 @@
   },
   "RESISTANCE_PHYSICAL": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_decrease} less damage from Physical attacks.",
+    "description": "Take {percent_change} less damage from Physical attacks.",
     "damage_type": "PHYSICAL",
     "sign_factor": -1
   },
   "RESISTANCE_FIRE": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_decrease} less damage from Fire attacks.",
+    "description": "Take {percent_change} less damage from Fire attacks.",
     "damage_type": "FIRE",
     "sign_factor": -1
   },
   "RESISTANCE_FROST": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_decrease} less damage from Frost attacks.",
+    "description": "Take {percent_change} less damage from Frost attacks.",
     "damage_type": "FROST",
     "sign_factor": -1
   },
   "RESISTANCE_SHOCK": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_decrease} less damage from Shock attacks.",
+    "description": "Take {percent_change} less damage from Shock attacks.",
     "damage_type": "SHOCK",
     "sign_factor": -1
   },
   "RESISTANCE_POISON": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_decrease} less damage from Poison attacks.",
+    "description": "Take {percent_change} less damage from Poison attacks.",
     "damage_type": "POISON",
     "sign_factor": -1
   },
   "WEAKNESS_PHYSICAL": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_increase} more damage from Physical attacks.",
+    "description": "Take {percent_change} more damage from Physical attacks.",
     "damage_type": "PHYSICAL",
     "sign_factor": 1
   },
   "WEAKNESS_FIRE": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_increase} more damage from Fire attacks.",
+    "description": "Take {percent_change} more damage from Fire attacks.",
     "damage_type": "FIRE",
     "sign_factor": 1
   },
   "WEAKNESS_FROST": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_increase} more damage from Frost attacks.",
+    "description": "Take {percent_change} more damage from Frost attacks.",
     "damage_type": "FROST",
     "sign_factor": 1
   },
   "WEAKNESS_SHOCK": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_increase} more damage from Shock attacks.",
+    "description": "Take {percent_change} more damage from Shock attacks.",
     "damage_type": "SHOCK",
     "sign_factor": 1
   },
   "WEAKNESS_POISON": {
     "class": "ModifyDamageStatus",
-    "description": "Take {percent_increase} more damage from Poison attacks.",
+    "description": "Take {percent_change} more damage from Poison attacks.",
     "damage_type": "POISON",
     "sign_factor": 1
   },
@@ -132,42 +132,42 @@
   },
   "FORTIFY_STRENGTH": {
     "class": "ModifyEffectStatus",
-    "description": "Weapons you play deal {percent_increase} more damage.",
+    "description": "Weapons you play deal {percent_change} more damage.",
     "affected_card_type": "WEAPON",
     "affected_effect": "PHYSICAL_DAMAGE",
     "sign_factor": 1
   },
   "DAMAGE_STRENGTH": {
     "class": "ModifyEffectStatus",
-    "description": "Weapons you play deal {percent_decrease} less damage.",
+    "description": "Weapons you play deal {percent_change} less damage.",
     "affected_card_type": "WEAPON",
     "affected_effect": "PHYSICAL_DAMAGE",
     "sign_factor": -1
   },
   "FORTIFY_ENDURANCE": {
     "class": "ModifyEffectStatus",
-    "description": "Armor you play provides {percent_increase} more Defense.",
+    "description": "Armor you play provides {percent_change} more Defense.",
     "affected_card_type": "ARMOR",
     "affected_effect": "DEFENSE",
     "sign_factor": 1
   },
   "DAMAGE_ENDURANCE": {
     "class": "ModifyEffectStatus",
-    "description": "Armor you play provides {percent_decrease} less Defense.",
+    "description": "Armor you play provides {percent_change} less Defense.",
     "affected_card_type": "ARMOR",
     "affected_effect": "DEFENSE",
     "sign_factor": -1
   },
   "FORTIFY_WILLPOWER": {
     "class": "ModifyEffectStatus",
-    "description": "Spells you play deal {percent_increase} more damage.",
+    "description": "Spells you play deal {percent_change} more damage.",
     "affected_card_type": "SPELL",
     "affected_effect": "DAMAGE",
     "sign_factor": 1
   },
   "DAMAGE_WILLPOWER": {
     "class": "ModifyEffectStatus",
-    "description": "Spells you play deal {percent_decrease} less damage.",
+    "description": "Spells you play deal {percent_change} less damage.",
     "affected_card_type": "SPELL",
     "affected_effect": "DAMAGE",
     "sign_factor": -1
@@ -298,14 +298,14 @@
   },
   "ALCHEMIST": {
     "class": "ModifyEffectStatus",
-    "description": "Your Potions are {percent_increase} more effective.",
+    "description": "Your Potions are {percent_change} more effective.",
     "affected_card_type": "POTION",
     "affected_effect": "ALL_EFFECTS",
     "sign_factor": 1
   },
   "ENCHANTER": {
     "class": "ModifyEffectStatus",
-    "description": "Your Scrolls are {percent_increase} more effective.",
+    "description": "Your Scrolls are {percent_change} more effective.",
     "affected_card_type": "SCROLL",
     "affected_effect": "ALL_EFFECTS",
     "sign_factor": 1
