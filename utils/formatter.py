@@ -30,8 +30,10 @@ class Formatter:
                 )
             else:
                 description = description.format(level=level)
+            if description:
+                description = f": {description}"
             card_strings.append(f"{name} {level}")
-            tooltip_strings.append(f"{name} {level}: {description}")
+            tooltip_strings.append(f"{name} {level}{description}")
 
         formatted_strings = {
             'card_text': '\n'.join(card_strings),
@@ -55,4 +57,4 @@ class Formatter:
             evasion_probability=evasion_probability,
             crit_probability=crit_probability
         )
-        return f"{name} (Level {level}): {description}"
+        return f"{name} {level}: {description}"
