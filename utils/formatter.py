@@ -9,7 +9,9 @@ class Formatter:
         """
         Format the effect data for display.
         """
-        formatted_data = { }
+        card_strings = [ ]
+        tooltip_strings = [ ]
+
         for leveled_effect in effects:
             effect = leveled_effect.reference
             name = effect.name
@@ -28,9 +30,14 @@ class Formatter:
                 )
             else:
                 description = description.format(level=level)
-            display_string = f"{name} {level}: {description}"
+            card_strings.append(f"{name} {level}")
+            tooltip_strings.append(f"{name} {level}: {description}")
 
-        return formatted_data
+        formatted_strings = {
+            'card_text': '\n'.join(card_strings),
+            'tooltip_text': '\n'.join(tooltip_strings)
+        }
+        return formatted_strings
 
     def format_status_data(self, status, level) -> str:
         """

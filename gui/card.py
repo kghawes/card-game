@@ -47,17 +47,9 @@ class Card(Widget):
         self.art_texture = AssetCache.get_texture(f'gui/assets/cards/{self.card_id}.png')
         self.art_bg_texture = AssetCache.get_texture(f'gui/assets/cards/{self.card_type}_bg.png')
         self.cost = str(card_data['cost'])
-        self.effects = self.format_effects(card_data['effects'])
+        self.effects = card_data['effects']['card_text']
         self.formatted_type = f"{self.card_type} ({card_data['subtype']})" if 'subtype' in card_data else self.card_type
-    
-    def format_effects(self, effects) -> str:
-        """Formats the effects of the card for display."""
-        formatted_effects = []
-        for effect in effects:
-            name = effect['name']
-            level = effect['level']
-            formatted_effects.append(f"{name} {level}")
-        return '\n'.join(formatted_effects)
+        self.tooltip_text = card_data['effects']['tooltip_text']
 
     def on_touch_down(self, touch) -> bool:
         """When clicked, pick up the card."""

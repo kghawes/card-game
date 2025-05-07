@@ -169,7 +169,7 @@ class CombatScreen(Widget):
         self.tooltip = Tooltip()
         self.add_widget(self.tooltip)
     
-    def start_player_turn(self, statuses, hand):
+    def start_player_turn(self, statuses):
         """Starts the player's turn."""
         self.end_turn_button.disabled = False
         Clock.unschedule(self.loop_textures)

@@ -117,8 +117,7 @@ class Controller:
         self.event_manager.logger.log("GUI event fired: start_player_turn", True)
         self.game.combat_manager.beginning_of_turn(self.game.player, self.game.enemy, self.game.registries)
         statuses = self.game.player.get_combatant_data()['statuses']
-        hand = [card.get_card_data() for card in self.game.player.card_manager.hand]
-        self.app.game.screen.start_player_turn(statuses, hand)
+        self.app.game.screen.start_player_turn(statuses)
 
     def handle_play_card(self, index_in_hand):
         """Handle playing a card."""
