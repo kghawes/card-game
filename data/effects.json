@@ -9,10 +9,10 @@
         "description": ""
     },
     "APPLY": {
-        "description": "Apply {level} {status_name} {target}.\n\n{status_description}"
+        "description": ""
     },
     "REMOVE": {
-        "description": "Remove {level} {status_name} {target}.\n\n{status_description}"
+        "description": ""
     },
     "DRAW": {
         "description": ""
@@ -24,6 +24,6 @@
         "description": "Reduce the cost of the most costly card in your hand by {level} this turn."
     },
     "DISPEL": {
-        "description": "Reduce all active statuses (except Defense) by {level}."
+        "description": "Reduce all active statuses (except Defense) {target} by {level}."
     }
 }
