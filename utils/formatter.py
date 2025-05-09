@@ -17,15 +17,20 @@ class Formatter:
             name = effect.name
             level = leveled_effect.get_level()
             description = effect.description
+            tooltip_line = f"{name} level {level}"
 
             if hasattr(effect, 'status_ref'):
                 status = effect.status_ref
                 is_remove = effect.matches(c.EffectNames.REMOVE.name)
                 description = self.format_status_data(status, level, use_generic=is_remove)
-            else:
+                if is_remove:
+                    tooltip_line = f"{tooltip_line}\n({status.name}: {description})"
+                else:
+                    tooltip_line = f"{tooltip_line}:\n{description}"
+            elif description:
                 description = description.format(level=level)
+                tooltip_line = f"{tooltip_line}:\n{description}"                
 
-            tooltip_line = f"{name} {level}:\n{description}"
             card_line = f"{name} {level}"
 
             tooltip_strings.append(tooltip_line)
@@ -57,7 +62,7 @@ class Formatter:
 
         return description.format(
             level=level,
-            percent_change=f"{percent_change}%",
+            percent_change=f"{int(percent_change * 100)}%",
             evasion_probability=f"{int(evasion_probability * 100)}%",
             crit_probability=f"{int(crit_probability * 100)}%"
         )
