@@ -50,6 +50,7 @@ class Card(Widget):
         self.effects = card_data['effects']['card_text']
         self.formatted_type = f"{self.card_type} ({card_data['subtype']})" if 'subtype' in card_data else self.card_type
         self.tooltip_text = card_data['effects']['tooltip_text']
+        self.screen.tooltip.add_tooltip(self, self.tooltip_text)
 
     def on_touch_down(self, touch) -> bool:
         """When clicked, pick up the card. Return true to stop event propagation."""
@@ -112,3 +113,4 @@ class Card(Widget):
         self.is_draggable = False
         for card in self.hand.children:
             card.is_draggable = True
+        self.screen.tooltip.remove_tooltip(self)
