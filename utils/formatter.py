@@ -9,8 +9,8 @@ class Formatter:
         """
         Format the effect data for display.
         """
-        card_strings = []
-        tooltip_strings = []
+        card_strings = [ ]
+        tooltip_strings = [ ]
 
         for leveled_effect in effects:
             effect = leveled_effect.reference
@@ -19,10 +19,9 @@ class Formatter:
             description = effect.description
 
             if hasattr(effect, 'status_ref'):
-                # For status effects, use the status description instead
                 status = effect.status_ref
-                use_generic = effect.matches("REMOVE")
-                description = self.format_status_data(status, level, use_generic=use_generic)
+                is_remove = effect.matches(c.EffectNames.REMOVE.name)
+                description = self.format_status_data(status, level, use_generic=is_remove)
             else:
                 description = description.format(level=level)
 
