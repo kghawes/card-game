@@ -19,6 +19,7 @@ class Formatter:
             level = leveled_effect.get_level()
             description = effect.description
             tooltip_line = f"{name} level {level}"
+            tooltip_line = self.apply_font_color(tooltip_line, 'ffffff')
 
             if hasattr(effect, 'status_ref'):
                 status = effect.status_ref
@@ -29,7 +30,7 @@ class Formatter:
                 else:
                     tooltip_line = f"{tooltip_line}:\n{description}"
             elif description:
-                description = description.format(level=level)
+                description = description.format(level=self.apply_font_color(level, '6486ff'))
                 tooltip_line = f"{tooltip_line}:\n{description}"                
 
             card_line = f"{name} {level}"
@@ -63,6 +64,9 @@ class Formatter:
                 'evasion_probability': f"{int(c.BASE_EVASION_PROBABILITY * level * 100)}%",
                 'crit_probability': f"{int(c.BASE_CRIT_PROBABILITY * level * 100)}%"
             }
+        
+        for key, value in values.items():
+            values[key] = self.apply_font_color(value, '6486ff')
 
         description = self.subjectify(description, is_player)
         description = description.format(**values)
@@ -76,3 +80,9 @@ class Formatter:
             left, right = match.group(1).split('|', 1)
             return left if is_player else right
         return re.sub(r'\{([^{}|]+?\|[^{}|]+?)\}', repl, text)
+    
+    def apply_font_color(self, text, color):
+        """
+        Apply font color to the text.
+        """
+        return f"[color={color}]{text}[/color]"
