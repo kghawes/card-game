@@ -1,6 +1,7 @@
 """
 This module defines the Tooltip class, which is used to display tooltips in the GUI.
 """
+from gui import gui_constants as constants
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty
 from kivy.core.window import Window
@@ -25,7 +26,7 @@ class Tooltip(FloatLayout):
         """
         Update the position of the tooltip.
         """
-        if not self.tip_label.texture_size[1] or self.tip_label.width > 200:
+        if not self.tip_label.texture_size[1] or self.tip_label.width > constants.TOOLTIP_WIDTH:
             self.x = 99999
             self.y = 99999
         else:
@@ -52,16 +53,17 @@ class Tooltip(FloatLayout):
         """
         Show the tooltip with the given text.
         """
-        if self.enabled and not self.visible and text:
+        to_show = self.enabled and text and not self.visible
+        to_update = self.enabled and text and text != self.tip_label.text
+        if to_show or to_update:
             self.tip_label.text_size = (None, None)
             self.tip_label.size = (0, 0)
             self.tip_label.text = text
             self.visible = True
             self.height = self.tip_label.texture_size[1] + 8
-
             self.tip_label.texture_update()
             natural_width = self.tip_label.texture_size[0]
-            final_width = min(natural_width, 200)
+            final_width = min(natural_width, constants.TOOLTIP_WIDTH)
             self.tip_label.text_size = (final_width, None)
             self.tip_label.size = self.tip_label.texture_size
     

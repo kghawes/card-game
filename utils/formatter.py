@@ -1,5 +1,6 @@
 """This module defines the Formatter class"""
 import utils.constants as c
+import re
 
 class Formatter:
     """
@@ -38,31 +39,40 @@ class Formatter:
 
         formatted_strings = {
             'card_text': '\n'.join(card_strings),
-            'tooltip_text': '\n'.join(tooltip_strings)
+            'tooltip_text': '\n\n'.join(tooltip_strings)
         }
         return formatted_strings
 
-    def format_status_data(self, status, level, use_generic=False) -> str:
+    def format_status_data(self, status, level, use_generic=False, is_player=True) -> str:
         """
         Format the status data for display.
         """
         description = status.description
 
         if use_generic:
-            return description.format(
-                level="X",
-                percent_change="X%",
-                evasion_probability="X%",
-                crit_probability="X%"
-            )
+            values = {
+                'level': 'X',
+                'percent_change': 'X%',
+                'evasion_probability': 'X%',
+                'crit_probability': 'X%'
+            }
+        else:
+            values = {
+                'level': level,
+                'percent_change': f"{int(c.SCALE_FACTOR * level * 100)}%",
+                'evasion_probability': f"{int(c.BASE_EVASION_PROBABILITY * level * 100)}%",
+                'crit_probability': f"{int(c.BASE_CRIT_PROBABILITY * level * 100)}%"
+            }
 
-        evasion_probability = c.BASE_EVASION_PROBABILITY * level
-        crit_probability = c.BASE_CRIT_PROBABILITY * level
-        percent_change = c.SCALE_FACTOR * level
+        description = self.subjectify(description, is_player)
+        description = description.format(**values)
+        return description
 
-        return description.format(
-            level=level,
-            percent_change=f"{int(percent_change * 100)}%",
-            evasion_probability=f"{int(evasion_probability * 100)}%",
-            crit_probability=f"{int(crit_probability * 100)}%"
-        )
+    def subjectify(self, text, is_player):
+        """
+        Replace conditional subject forms like {you|the enemy} based on subject.
+        """
+        def repl(match):
+            left, right = match.group(1).split('|', 1)
+            return left if is_player else right
+        return re.sub(r'\{([^{}|]+?\|[^{}|]+?)\}', repl, text)
