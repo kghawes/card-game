@@ -1,6 +1,5 @@
 """
-This module defines the Effect class, its child classes, and the
-EffectRegistry.
+This module defines the Effect class, its child classes, and the EffectRegistry.
 """
 import utils.constants as c
 from utils.utils import load_json
@@ -127,8 +126,9 @@ class DispelEffect(Effect):
         Reduce active statuses on the subject.
         """
         subject = self.get_target_combatant(source, opponent)
+        exclude = [c.StatusNames.DEFENSE.name]
         subject.status_manager.change_all_statuses(
-            -level, subject, status_registry # should exclude defense
+            -level, subject, status_registry, exclude
             )
 
 
@@ -245,12 +245,13 @@ class JumpEffect(Effect):
 
         highest_cost_card.change_temp_cost_modifier(-level)
 
+        # If Levitate is active, trigger cost recalculation
         status_manager = subject.status_manager
-        levitate = c.StatusNames.LEVITATE.name
-        if status_manager.has_status(levitate, subject, status_registry):
-            status_registry.get_status(levitate).trigger_on_change(
-                subject, status_manager.get_status_level(levitate)
-                )
+        levitate = status_manager.get_leveled_status(c.StatusNames.LEVITATE.name)
+        if levitate:
+            status = levitate.reference
+            level = levitate.get_level()
+            status.trigger_on_change(subject, level)
         
         status_registry.event_manager.logger.log(
             f"{highest_cost_card.name} cost reduced by {level}!"

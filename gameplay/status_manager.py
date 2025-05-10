@@ -36,10 +36,7 @@ class StatusManager:
             return self.statuses[status_id]
         return None
 
-    def change_status(
-            self, status_id, amount, subject, status_registry,
-            remove_all_levels=False
-            ):
+    def change_status(self, status_id, amount, subject, status_registry, delete=False):
         """
         Change the level of the status with the given id.
         """
@@ -54,12 +51,13 @@ class StatusManager:
                 return
             leveled_status = LeveledMechanic(status, 0)
 
+        # Update the leveled status
         current_level = leveled_status.get_level()
         new_level = max(current_level + amount, 0)
         change = new_level - current_level
 
         if leveled_status.get_level() > 0:
-            if remove_all_levels or new_level == 0:
+            if delete or new_level == 0:
                 self._delete(status_id, subject)
             else:
                 leveled_status.change_level(change)
@@ -79,9 +77,10 @@ class StatusManager:
             status_registry, subject.card_manager
             )
 
+        # If the status is a cost modifier and Levitate is active,
+        # trigger cost recalculation
         levitate_id = StatusNames.LEVITATE.name
         if isinstance(status, ModifyCostStatus) and levitate_id in self.statuses:
-            # If the status is a cost modifier and levitate is active, trigger recalculation
             levitate = self.get_leveled_status(levitate_id)
             levitate_level = levitate.get_level()
             levitate.reference.trigger_on_change(subject, levitate_level)
@@ -90,11 +89,13 @@ class StatusManager:
                 status_registry, subject.card_manager
                 )
 
-    def change_all_statuses(self, amount, subject, status_registry):
+    def change_all_statuses(self, amount, subject, status_registry, exclude=None):
         """
         Change the level of every active status by the same amount.
         """
         for status_id in self.statuses.copy():
+            if exclude and status_id in exclude:
+                continue
             self.change_status(status_id, amount, subject, status_registry)
 
     def decrement_statuses(self, subject, status_registry):
@@ -113,8 +114,7 @@ class StatusManager:
 
     def trigger_statuses_on_turn(self, subject, status_registry):
         """
-        Loop over active statuses and invite them to trigger their on-turn
-        effects.
+        Loop over active statuses and invite them to trigger their on-turn effects.
         """
         for leveled_status in self.statuses.values():
             status = leveled_status.reference

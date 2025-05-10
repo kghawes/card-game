@@ -1,5 +1,5 @@
 """
-This module defined the ModifierManager class and modifier classes.
+This module defines the ModifierManager class and modifier classes.
 """
 import utils.constants as c
 from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus, \
@@ -7,28 +7,24 @@ from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus, \
 
 class ModifierManager:
     """
-    This class holds the details of currently active status modifications and
+    This class holds the details of currently active status modifiers and
     controls their update and application.
+
+    Modifiers are grouped by type, and each type has its own pool of
+    modifiers. For example, damage modifiers include specific weaknesses and
+    resistances. Each modifier lists contributions by status id, and the
+    ModifierManager is responsible for accumulating these contributions and
+    applying them to the game state.
     """
     def __init__(self, status_registry):
         """
         Initialize a new ModifierManager.
         """
-        self.effect_modifiers = self._initialize_effect_modifiers(
-            status_registry
-            )
-        self.resource_modifiers = self._initialize_resource_modifiers(
-            status_registry
-            )
-        self.draw_modifiers = self._initialize_draw_modifiers(
-            status_registry
-            )
-        self.damage_modifiers = self._initialize_damage_modifiers(
-            status_registry
-            )
-        self.cost_modifiers = self._initialize_cost_modifiers(
-            status_registry
-            )
+        self.effect_modifiers = self._initialize_effect_modifiers(status_registry)
+        self.resource_modifiers = self._initialize_resource_modifiers(status_registry)
+        self.draw_modifiers = self._initialize_draw_modifiers(status_registry)
+        self.damage_modifiers = self._initialize_damage_modifiers(status_registry)
+        self.cost_modifiers = self._initialize_cost_modifiers(status_registry)
         self.modifier_pools = [
             self.effect_modifiers,
             self.resource_modifiers,
