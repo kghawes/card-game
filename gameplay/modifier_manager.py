@@ -41,7 +41,7 @@ class ModifierManager:
 
     def reset_all(self):
         """
-        Clear all active modifiers for all statuses.
+        Clear all active modifiers for all statuses of all types.
         """
         for pool in self.modifier_pools:
             self.reset_modifier_pool(pool)
@@ -326,7 +326,7 @@ class Modifier:
         """
         Initialize a new Modifier.
         """
-        self.contribution = 0
+        self.reset()
 
     def reset(self):
         """

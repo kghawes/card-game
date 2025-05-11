@@ -53,9 +53,9 @@ class Resources(Enum):
     """
     Combatant stats.
     """
-    HEALTH = "health"
-    STAMINA = "stamina"
-    MAGICKA = "magicka"
+    HEALTH = "Health"
+    STAMINA = "Stamina"
+    MAGICKA = "Magicka"
 
 
 class DamageTypes(Enum):
@@ -266,7 +266,6 @@ STATUSES_PATH = "data/statuses.json"
 EFFECTS_PATH = "data/effects.json"
 CARD_REWARDS_PATH = "data/card_rewards.json"
 ENEMY_GROUPS_PATH = "data/enemy_groups.json"
-
 
 # Experience
 EXP_TO_LEVEL = [
