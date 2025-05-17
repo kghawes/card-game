@@ -24,7 +24,10 @@ class Formatter:
             if hasattr(effect, 'status_ref'):
                 status = effect.status_ref
                 is_remove = effect.matches(c.EffectNames.REMOVE.name)
-                description = self.format_status_data(status, level, use_generic=is_remove)
+                is_player = effect.target_type_enum.name == c.TargetTypes.SELF.name
+                description = self.format_status_data(
+                    status, level, use_generic=is_remove, is_player=is_player
+                    )
                 if is_remove:
                     tooltip_line = f"{tooltip_line}\n({status.name}: {description})"
                 else:
