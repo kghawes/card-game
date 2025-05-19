@@ -46,23 +46,24 @@ class StatusManager:
         # Get the leveled status or create a new one if it doesn't exist
         leveled_status = self.get_leveled_status(status_id)
         if leveled_status is None:
+            if amount < 0 or delete:
+                return
             status = status_registry.get_status(status_id)
             if status is None:
                 return
-            leveled_status = LeveledMechanic(status, 0)
-
-        # Update the leveled status
-        current_level = leveled_status.get_level()
-        new_level = max(current_level + amount, 0)
-        change = new_level - current_level
-
-        if leveled_status.get_level() > 0:
+            leveled_status = LeveledMechanic(status, amount)
+            self.statuses[status_id] = leveled_status
+            change = amount
+        else:
+            # Update the leveled status
+            status = leveled_status.reference
+            current_level = leveled_status.base_level
+            new_level = max(current_level + amount, 0)
+            change = new_level - current_level
             if delete or new_level == 0:
                 self._delete(status_id, subject)
             else:
                 leveled_status.change_level(change)
-        elif new_level > 0:
-            self.statuses[status_id] = leveled_status
 
         # Handle consequences of statuses being changed or removed
         if status.applies_immediately:

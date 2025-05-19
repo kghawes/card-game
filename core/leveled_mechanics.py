@@ -22,6 +22,7 @@ class LeveledMechanic:
             raise ValueError("Reference must be an Effect or Status instance.")
         self.name = self.reference.name
         self.base_level = level
+        self.min_level = c.MIN_EFFECT if isinstance(self.reference, Effect) else 0
         self.modifier = 0
         self.num_id = hash(self.str_id)
     
@@ -32,7 +33,7 @@ class LeveledMechanic:
         """
         Get the current level of the effect or status.
         """
-        return max(round(self.base_level * (1 + self.modifier)), c.MIN_EFFECT)
+        return max(round(self.base_level * (1 + self.modifier)), self.min_level)
 
     def change_level_modifier(self, amount):
         """
