@@ -6,6 +6,7 @@ from gameplay.status_manager import StatusManager
 from gameplay.modifier_manager import ModifierManager
 from core.resources import Resource
 from utils.constants import Resources as r, StatusNames as s, DamageTypes as d
+from utils.formatter import Formatter
 
 class Combatant:
     """
@@ -34,11 +35,21 @@ class Combatant:
         self.modifier_manager = ModifierManager(registries.statuses)
         self.cards_played_this_turn = 0
         self.event_manager = event_manager
+        self.formatter = Formatter()
 
     def get_combatant_data(self):
         """
         Get the data to display in the UI.
         """
+        statuses = {}
+        for status_id, leveled_status in self.status_manager.statuses.items():
+            status = leveled_status.reference
+            level = leveled_status.get_level()
+            statuses[status_id] = {
+                'name': leveled_status.name,
+                'level': level,
+                'description': self.formatter.format_status_data(status, level, is_player=not self.is_enemy)
+            }
         return {
             'name': self.name,
             'health': self.get_health(),
@@ -47,7 +58,7 @@ class Combatant:
             'max_stamina': self.get_max_stamina(),
             'magicka': self.get_magicka(),
             'max_magicka': self.get_max_magicka(),
-            'statuses': dict(self.status_manager.statuses)
+            'statuses': statuses
         }
 
     def get_health(self) -> int:

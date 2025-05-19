@@ -180,8 +180,11 @@ class CombatScreen(Widget):
         """Updates the player's statuses on the screen."""
         self.player_info.player_statuses.clear_widgets()
         y_offset = 0
-        for status_id, level in statuses.items():
-            status_label = Label(text=f"{status_id} ({level})")
+        for status_id, status_data in statuses.items():
+            name = status_data['name']
+            level = status_data['level']
+            description = status_data['description']
+            status_label = Label(text=f"{name} ({level})")
             self.player_info.player_statuses.add_widget(status_label)
             status_label.size = (300, 33)
             status_label.size_hint = (None, None)
