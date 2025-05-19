@@ -178,12 +178,14 @@ class CombatScreen(Widget):
 
     def update_player_statuses(self, statuses):
         """Updates the player's statuses on the screen."""
+        for label in self.player_info.player_statuses.children:
+            self.tooltip.remove_tooltip(label)
         self.player_info.player_statuses.clear_widgets()
         y_offset = 0
+
         for status_id, status_data in statuses.items():
             name = status_data['name']
             level = status_data['level']
-            description = status_data['description']
             status_label = Label(text=f"{name} ({level})")
             self.player_info.player_statuses.add_widget(status_label)
             status_label.size = (300, 33)
@@ -192,6 +194,9 @@ class CombatScreen(Widget):
             y_offset += 33
             y = self.player_info.player_magicka_label.y - y_offset
             status_label.pos = (x, y)
+
+            description = status_data['description']
+            self.tooltip.add_tooltip(status_label, description)
     
     def update_enemy_statuses(self, statuses):
         """Updates the enemy's statuses on the screen."""

@@ -37,7 +37,7 @@ class Combatant:
         self.event_manager = event_manager
         self.formatter = Formatter()
 
-    def get_combatant_data(self):
+    def get_combatant_data(self) -> dict:
         """
         Get the data to display in the UI.
         """
