@@ -122,21 +122,20 @@ class CombatResults(Widget):
         self.event_manager.dispatch('back_to_quest')
 
 
-# class StatusIcon(Widget):
-#     """Widget representing a status icon."""
-#     status_texture = ObjectProperty(None)
-#     status_name = ObjectProperty(None)
-#     status_level = ObjectProperty(None)
+class StatusIcon(Widget):
+    """Widget representing a status icon."""
+    status_texture = ObjectProperty(None)
+    level = ObjectProperty(None)
+    description = ObjectProperty(None)
 
-#     def __init__(self, status_data, **kwargs):
-#         """Initializes the status icon with the given data."""
-#         super().__init__(**kwargs)
-#         self.status_texture = AssetCache.get_texture(status_data['texture'])
-#         self.status_name.text = status_data['name']
-#         self.status_level.text = str(status_data['level'])
-        # implement a method to load all the statuses on startup
-        # implement status name and status data on game side
-        # consider simpler implementation first
+    def __init__(self, status_id, level, description, **kwargs):
+        """Initialize a new StatusIcon."""
+        super().__init__(**kwargs)
+        image_path = status_id.lower().replace(' ', '_')
+        image_path = constants.STATUS_ICONS_PATH.format(image_path)
+        self.status_texture = AssetCache.get_texture(image_path)
+        self.level = str(level)
+        self.description = description
 
 
 class CombatScreen(Widget):

@@ -55,6 +55,23 @@
             pos: 676, 490
             on_release: root.back_to_quest()
 
+<StatusIcon>:
+    size: 50, 32
+    size_hint: None, None
+    canvas:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+
+    Label:
+        size: self.texture_size
+        size_hint: None, None
+        pos: parent.pos[0] + 33, parent.pos[1]
+        text: self.level
+        font_size: 10
+        font_name: '/gui/assets/fonts/minecraftstandard.otf'
+    
+
 <CombatScreen>:
     id: combat_screen
     hand: hand

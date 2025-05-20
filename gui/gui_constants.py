@@ -48,3 +48,5 @@ CARD_BORDER_RADIUS = [15, 15, 15, 15]
 CARD_BODY_RADIUS = [13, 13, 13, 13]
 
 TOOLTIP_WIDTH = 360
+
+STATUS_ICONS_PATH = "gui/assets/statusimages/{}.png"
