@@ -128,14 +128,13 @@ class StatusIcon(Widget):
     level = ObjectProperty(None)
     description = ObjectProperty(None)
 
-    def __init__(self, status_id, level, description, **kwargs):
+    def __init__(self, status_id, level, **kwargs):
         """Initialize a new StatusIcon."""
-        super().__init__(**kwargs)
         image_path = status_id.lower().replace(' ', '_')
         image_path = constants.STATUS_ICONS_PATH.format(image_path)
         self.status_texture = AssetCache.get_texture(image_path)
         self.level = str(level)
-        self.description = description
+        super().__init__(**kwargs)
 
 
 class CombatScreen(Widget):
@@ -185,17 +184,15 @@ class CombatScreen(Widget):
         for status_id, status_data in statuses.items():
             name = status_data['name']
             level = status_data['level']
-            status_label = Label(text=f"{name} ({level})")
-            self.player_info.player_statuses.add_widget(status_label)
-            status_label.size = (300, 33)
-            status_label.size_hint = (None, None)
+            status_icon = StatusIcon(status_id, level)
+            self.player_info.player_statuses.add_widget(status_icon)
             x = 8
             y_offset += 33
             y = self.player_info.player_magicka_label.y - y_offset
-            status_label.pos = (x, y)
+            status_icon.pos = (x, y)
 
             description = status_data['description']
-            self.tooltip.add_tooltip(status_label, description)
+            self.tooltip.add_tooltip(status_icon, description)
     
     def update_enemy_statuses(self, statuses):
         """Updates the enemy's statuses on the screen."""

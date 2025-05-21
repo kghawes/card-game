@@ -56,20 +56,22 @@
             on_release: root.back_to_quest()
 
 <StatusIcon>:
-    size: 50, 32
-    size_hint: None, None
     canvas:
         Color:
             rgba: (1, 1, 1, 1)
         Rectangle:
+            texture: self.status_texture
+            size: 32, 32
+            pos: self.pos
 
     Label:
         size: self.texture_size
         size_hint: None, None
-        pos: parent.pos[0] + 33, parent.pos[1]
-        text: self.level
+        pos: self.parent.pos[0] + 33, self.parent.pos[1]
+        color: (1, 1, 1, 1)
+        text: self.parent.level
         font_size: 10
-        font_name: '/gui/assets/fonts/minecraftstandard.otf'
+        font_name: 'gui/assets/fonts/minecraftstandard.otf'
     
 
 <CombatScreen>:
