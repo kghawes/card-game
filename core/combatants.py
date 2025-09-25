@@ -105,28 +105,29 @@ class Combatant:
         if amount <= 0:
             return
 
-        hidden = attacker.status_manager.get_leveled_status(s.HIDDEN.name)
-        if hidden is not None:
-            hidden_level = hidden.get_level()
-            hidden_status = hidden.reference
-            mult = hidden_status.calculate_damage_multiplier(hidden_level)
-            amount *= mult
-            if mult > 1:
-                self.event_manager.logger.log(
-                    f"{attacker.name} took {self.name} by surprise! Critical strike! ({mult}x damage)"
-                    )
+        if not attacker is None:
+            hidden = attacker.status_manager.get_leveled_status(s.HIDDEN.name)
+            if hidden is not None:
+                hidden_level = hidden.get_level()
+                hidden_status = hidden.reference
+                mult = hidden_status.calculate_damage_multiplier(hidden_level)
+                amount *= mult
+                if mult > 1:
+                    self.event_manager.logger.log(
+                        f"Critical strike! ({mult}x damage)"
+                        )
 
         old_amount = amount
         amount = self.modifier_manager.calculate_damage(damage_type, amount, self.event_manager.logger)
         if amount > old_amount:
             increase_percent = (amount - old_amount) / old_amount
             self.event_manager.logger.log(
-                f"The attack is super effective against {self.name}! (+{increase_percent:.0%} damage)"
+                f"The damage is super effective against {self.name}! (+{increase_percent:.0%} damage)"
                 )
         elif amount < old_amount:
             decrease_percent = (old_amount - amount) / old_amount
             self.event_manager.logger.log(
-                f"{self.name} resists the attack! (-{decrease_percent:.0%} damage)"
+                f"{self.name} resists the damage! (-{decrease_percent:.0%} damage)"
                 )
 
         if amount <= 0:
@@ -148,7 +149,7 @@ class Combatant:
                         )
                 if amount <= 0:
                     return
-        elif attacker != self:
+        elif not attacker is None and attacker != self:
             reflect = self.status_manager.get_leveled_status(s.REFLECT.name)
             if reflect is not None:
                 reflect_status = reflect.reference
