@@ -69,16 +69,17 @@ class CombatLog(Widget):
 
     def flush_log_messages(self, event_manager):
         """Writes all pending log messages to the log display."""
-        self.pending = event_manager.logger.get_combat_logs()
+        self.pending += event_manager.logger.get_combat_logs()
         if self.pending:
             Clock.schedule_interval(self.log_message, 0.33)
     
     def log_message(self, dt):
-        message = self.pending.pop(0)
-        self.history.append(message)
-        if self.combat_log_label.text:
-            self.combat_log_label.text += "\n"
-        self.combat_log_label.text += message
+        if self.pending:
+            message = self.pending.pop(0)
+            self.history.append(message)
+            if self.combat_log_label.text:
+                self.combat_log_label.text += "\n"
+            self.combat_log_label.text += message
         if not self.pending:
             Clock.unschedule(self.log_message)
             if not self.log_shown:
