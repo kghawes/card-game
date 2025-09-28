@@ -83,7 +83,7 @@ class Tooltip(FloatLayout):
         if self.enabled:
             if self.visible:
                 self._update_pos(pos)
-            for widget, text in self.tooltips.items():
+            for widget, text in list(self.tooltips.items())[::-1]:
                 if widget.collide_point(*pos):
                     self.show(text)
                     self._update_pos(pos)
