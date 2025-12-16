@@ -278,6 +278,7 @@ STATUSES_PATH = "data/statuses.json"
 EFFECTS_PATH = "data/effects.json"
 CARD_REWARDS_PATH = "data/card_rewards.json"
 ENEMY_GROUPS_PATH = "data/enemy_groups.json"
+ATTRIBUTES_PATH = "data/attributes.json"
 
 # Experience
 EXP_TO_LEVEL = [

@@ -5,6 +5,7 @@ statuses, effects, enchantments, and quests.
 from core.effects import EffectRegistry
 from core.statuses import StatusRegistry
 from core.enchantments import EnchantmentRegistry
+from core.attributes import AttributeRegistry
 from gameplay.quests import QuestRegistry
 
 class Registries:
@@ -12,7 +13,8 @@ class Registries:
     Wraps StatusRegistry, EffectRegistry, EnchantmentRegistry, and
     QuestRegistry since these are frequently used together.
     """
-    def __init__(self, effects_path, statuses_path, enchantments_path, event_manager):
+    def __init__(self, effects_path, statuses_path, enchantments_path, \
+                 attributes_path, event_manager):
         """
         Initialize a new Registries.
         """
@@ -21,6 +23,7 @@ class Registries:
         self.enchantments = EnchantmentRegistry(
             enchantments_path, self.effects
             )
+        self.attributes = AttributeRegistry(attributes_path)
         self.quests = None
 
     def register_quests(
