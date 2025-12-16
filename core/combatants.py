@@ -5,7 +5,8 @@ from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
 from gameplay.modifier_manager import ModifierManager
 from core.resources import Resource
-from utils.constants import Resources as r, StatusNames as s, DamageTypes as d
+from utils.constants import Resources as r, \
+    StatusNames as s, DamageTypes as d, Attributes as a
 from utils.formatter import Formatter
 
 class Combatant:
@@ -15,7 +16,7 @@ class Combatant:
     """
     def __init__(
             self, name, max_health, max_stamina, max_magicka, starting_deck,
-            card_cache, registries, is_enemy, event_manager
+            card_cache, registries, is_enemy, event_manager, starting_attributes=None
             ):
         """
         Initialize a new Combatant.
@@ -36,6 +37,18 @@ class Combatant:
         self.cards_played_this_turn = 0
         self.event_manager = event_manager
         self.formatter = Formatter()
+        self.initialize_attributes(starting_attributes)
+
+    def initialize_attributes(self, initial_values=None):
+        """
+        Setup character attributes.
+        """
+        self.attributes = {}
+        for attribute in a:
+            if initial_values and attribute.name in initial_values:
+                self.attributes[attribute.name] = initial_values[attribute.name]
+            else:
+                self.attributes[attribute.name] = 0
 
     def get_combatant_data(self) -> dict:
         """

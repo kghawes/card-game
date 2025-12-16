@@ -229,6 +229,18 @@ ALLOWED_TYPES = {
         "MAGIC"
         ]
     }
+class Attributes(Enum):
+    """
+    Character attributes.
+    """
+    STRENGTH = "Strength"
+    ENDURANCE = "Endurance"
+    AGILITY = "Agility"
+    SPEED = "Speed"
+    INTELLIGENCE = "Intelligence"
+    WILLPOWER = "Willpower"
+    PERSONALITY = "Personality"
+    LUCK = "Luck"
 
 # Paths to JSON files
 CARD_PATHS = [
