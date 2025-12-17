@@ -67,12 +67,6 @@ class ModifyEffectStatus(Status):
         self.affected_effect = affected_effect
         self.sign_factor = sign_factor
 
-    def calculate_contribution(self, level):
-        """
-        Calculate the contribution of this status to the modifier pool.
-        """
-        return self.sign_factor * c.SCALE_FACTOR * level
-
     def trigger_on_turn(self, subject, level, status_registry):
         """
         Recalculate effects at the start of each turn.
@@ -87,7 +81,7 @@ class ModifyEffectStatus(Status):
         """
         Accumulate contributions to the modifier pool when level changes.
         """
-        contribution = self.calculate_contribution(level)
+        contribution = self.sign_factor * level
         subject.modifier_manager.accumulate_effect_modifier(self, contribution)
         card_type = self.affected_card_type
         effect = self.affected_effect
@@ -119,12 +113,6 @@ class ModifyCostStatus(Status):
         self.affected_card_type = affected_card_type
         self.sign_factor = sign_factor
 
-    def calculate_contribution(self, level):
-        """
-        Calculate the contribution of this status to the modifier pool.
-        """
-        return self.sign_factor * level
-
     def trigger_on_turn(self, subject, level, status_registry):
         """
         Recalculate costs at the start of each turn.
@@ -138,7 +126,7 @@ class ModifyCostStatus(Status):
         """
         Accumulate contributions to the modifier pool when level changes.
         """
-        contribution = self.calculate_contribution(level)
+        contribution = self.sign_factor * level
         subject.modifier_manager.accumulate_cost_modifier(self, contribution)
         card_type = self.affected_card_type
         subject.modifier_manager.recalculate_cost_modifiers(
@@ -209,10 +197,11 @@ class ModifyDamageStatus(Status):
 
     def trigger_on_change(self, subject, level):
         """
-        Update the modifier pool with the new contribution.
+        Update the modifier pool with the new contribution factor.
+        Does not factor in the multiplier for the specific status.
         """
         modifier_manager = subject.modifier_manager
-        amount = level * self.sign_factor * c.SCALE_FACTOR
+        amount = level * self.sign_factor
         modifier_manager.accumulate_damage_modifier(self.status_id, amount)
 
 
