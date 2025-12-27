@@ -169,7 +169,7 @@ class ModifyDrawStatus(Status):
     """
     def __init__(self, status_id, description, sign_factor):
         """
-        Initialize a new DrawStatus
+        Initialize a new ModifyDrawStatus
         """
         super().__init__(status_id, description, True)
         self.sign_factor = sign_factor
@@ -203,6 +203,40 @@ class ModifyDamageStatus(Status):
         modifier_manager = subject.modifier_manager
         amount = level * self.sign_factor
         modifier_manager.accumulate_damage_modifier(self.status_id, amount)
+
+
+class ModifyAttributeStatus(Status):
+    """
+    Statuses that affect combatant attribute values.
+    """
+    def __init__(self, status_id, description, sign_factor, attribute_id):
+        """
+        Initialize a new ModifyAttributeStatus
+        """
+        super().__init__(status_id, description, True)
+        self.sign_factor = sign_factor
+        self.attribute_id = attribute_id
+
+    def trigger_on_change(self, subject, change):
+        """
+        Update the subject's attribute delta.
+        """
+        amount = change * self.sign_factor
+        subject.attribute_deltas[self.attribute_id] += amount
+    
+    def expire(self, subject, logger):
+        """
+        Remove the attribute modification when the status expires.
+        """
+        super().expire(subject, logger)
+        current_level = subject.status_manager.get_leveled_status(
+            self.status_id
+            )
+        if current_level is not None:
+            level = current_level.base_level
+            amount = level * self.sign_factor
+            subject.attribute_deltas[self.attribute_id] -= amount
+        
 
 
 class DefenseStatus(Status):
@@ -511,6 +545,7 @@ class StatusRegistry:
             "ModifyMaxResourceStatus": ModifyMaxResourceStatus,
             "ModifyDrawStatus": ModifyDrawStatus,
             "ModifyDamageStatus": ModifyDamageStatus,
+            "ModifyAttributeStatus": ModifyAttributeStatus,
             "DefenseStatus": DefenseStatus,
             "PoisonStatus": PoisonStatus,
             "RegenerationStatus": RegenerationStatus,
