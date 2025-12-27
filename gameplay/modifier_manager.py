@@ -29,19 +29,22 @@ class ModifierManager:
             self.effect_modifiers,
             self.resource_modifiers,
             self.draw_modifiers,
-            self.cost_modifiers
+            self.cost_modifiers,
+            self.damage_modifiers
             ]
 
     def reset_modifier_pool(self, modifier_pool):
         """
-        Clear all active modifiers for all statuses of a certain type.
+        Clear all active modifiers of a certain type, defined by the given pool.
+        modifier_pool: dict
+            The pool of modifiers to reset.
         """
         for modifier in modifier_pool.values():
             modifier.reset()
 
     def reset_all(self):
         """
-        Clear all active modifiers for all statuses of all types.
+        Clear all active modifiers of all types.
         """
         for pool in self.modifier_pools:
             self.reset_modifier_pool(pool)
@@ -50,14 +53,15 @@ class ModifierManager:
 
     def _initialize_effect_modifiers(self, status_registry) -> dict:
         """
-        Populate the effect modifier pool with statuses.
+        Populate the effect modifier pool with statuses and attributes.
         """
-        effect_modifiers = {} # Tracks accumulated contributions by status
+        effect_modifiers = {} # Tracks accumulated contributions by source
         for status_id, status in status_registry.statuses.items():
             if isinstance(status, ModifyEffectStatus):
                 card_type = status.affected_card_type
                 effect = status.affected_effect
                 effect_modifiers[status_id] = EffectModifier(card_type, effect)
+        # 
         return effect_modifiers
 
     def accumulate_effect_modifier(self, status, contribution):
@@ -155,7 +159,7 @@ class ModifierManager:
         Remove max value modifier contribution from a specific status.
         """
         if status_id in self.resource_modifiers:
-            self.resource_modifiers[status_id] = 0
+            self.resource_modifiers[status_id].contribution = 0
 
     def get_max_resource(self, resource_id, base_max_value) -> int:
         """
