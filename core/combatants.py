@@ -44,11 +44,20 @@ class Combatant:
         Setup character attributes.
         """
         self.attributes = {}
+        self.attribute_deltas = {}
         for attribute in a:
+            self.attribute_deltas[attribute.name] = 0
             if initial_values and attribute.name in initial_values:
                 self.attributes[attribute.name] = initial_values[attribute.name]
             else:
                 self.attributes[attribute.name] = 0
+    
+    def reset_attribute_deltas(self):
+        """
+        Reset attribute deltas to zero.
+        """
+        for attribute in a:
+            self.attribute_deltas[attribute.name] = 0
 
     def get_combatant_data(self) -> dict:
         """
@@ -63,6 +72,9 @@ class Combatant:
                 'level': level,
                 'description': self.formatter.format_status_data(status, level, is_player=not self.is_enemy)
             }
+        attributes = {}
+        for attribute_id, value in self.attributes.items():
+            attributes[attribute_id] = value + self.attribute_deltas[attribute_id]
         return {
             'name': self.name,
             'health': self.get_health(),
@@ -71,7 +83,8 @@ class Combatant:
             'max_stamina': self.get_max_stamina(),
             'magicka': self.get_magicka(),
             'max_magicka': self.get_max_magicka(),
-            'statuses': statuses
+            'statuses': statuses,
+            'attributes': attributes
         }
 
     def get_health(self) -> int:

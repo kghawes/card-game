@@ -40,7 +40,7 @@ class StatusManager:
         """
         Change the level of the status with the given id.
         """
-        if amount == 0:
+        if amount == 0 and not delete:
             return
         
         # Get the leveled status or create a new one if it doesn't exist
@@ -59,7 +59,7 @@ class StatusManager:
             status = leveled_status.reference
             current_level = leveled_status.base_level
             new_level = max(current_level + amount, 0)
-            change = new_level - current_level
+            change = current_level if delete else new_level - current_level
             if delete or new_level == 0:
                 self._delete(status_id, subject)
             else:
@@ -105,13 +105,14 @@ class StatusManager:
         """
         self.change_all_statuses(-1, subject, status_registry)
 
-    def reset_statuses(self, subject):
+    def reset_statuses(self, subject, status_registry):
         """
         Remove all active statuses.
         """
         while len(self.statuses) > 0:
             status_id = next(iter(self.statuses))
-            self._delete(status_id, subject)
+            change = -self.statuses[status_id].get_level()
+            self.change_status(status_id, change, subject, status_registry, delete=True)
 
     def trigger_statuses_on_turn(self, subject, status_registry):
         """

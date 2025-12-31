@@ -8,9 +8,10 @@ class Effect:
     """
     Base class representing a card's immediate effect when played.
     """
-    def __init__(self, effect_id, name, description, target_type_enum=None):
+    def __init__(self, effect_id, name, description, target_type_enum: c.TargetTypes=None):
         """
         Initialize a new Effect.
+
         """
         self.effect_id = effect_id
         self.name = name

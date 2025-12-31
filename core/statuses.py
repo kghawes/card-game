@@ -62,7 +62,7 @@ class ModifyEffectStatus(Status):
         """
         Initialize a new ModifyEffectStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.affected_card_type = affected_card_type
         self.affected_effect = affected_effect
         self.sign_factor = sign_factor
@@ -93,7 +93,7 @@ class ModifyEffectStatus(Status):
         """
         Clear contributions when the status expires.
         """
-        super().expire(subject)
+        super().expire(subject, logger)
         subject.modifier_manager.clear_effect_modifiers(
             self, subject.card_manager
             )
@@ -109,7 +109,7 @@ class ModifyCostStatus(Status):
         """
         Initialize a new ModifyCostStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.affected_card_type = affected_card_type
         self.sign_factor = sign_factor
 
@@ -137,7 +137,7 @@ class ModifyCostStatus(Status):
         """
         Clear contributions when the status expires.
         """
-        super().expire(subject)
+        super().expire(subject, logger)
         subject.modifier_manager.clear_cost_modifiers(
             self, subject.card_manager
             )
@@ -151,7 +151,7 @@ class ModifyMaxResourceStatus(Status):
         """
         Initialize a new ModifyMaxResourceStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.resource_id = resource_id
         self.sign_factor = sign_factor
 
@@ -171,7 +171,7 @@ class ModifyDrawStatus(Status):
         """
         Initialize a new ModifyDrawStatus
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.sign_factor = sign_factor
 
     def trigger_on_change(self, subject, level):
@@ -191,7 +191,7 @@ class ModifyDamageStatus(Status):
         """
         Initialize a new ModifyDamageStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.damage_type = damage_type
         self.sign_factor = sign_factor
 
@@ -213,7 +213,7 @@ class ModifyAttributeStatus(Status):
         """
         Initialize a new ModifyAttributeStatus
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.sign_factor = sign_factor
         self.attribute_id = attribute_id
 
@@ -221,21 +221,7 @@ class ModifyAttributeStatus(Status):
         """
         Update the subject's attribute delta.
         """
-        amount = change * self.sign_factor
-        subject.attribute_deltas[self.attribute_id] += amount
-    
-    def expire(self, subject, logger):
-        """
-        Remove the attribute modification when the status expires.
-        """
-        super().expire(subject, logger)
-        current_level = subject.status_manager.get_leveled_status(
-            self.status_id
-            )
-        if current_level is not None:
-            level = current_level.base_level
-            amount = level * self.sign_factor
-            subject.attribute_deltas[self.attribute_id] -= amount
+        subject.attribute_deltas[self.attribute_id] += change
         
 
 
@@ -247,7 +233,7 @@ class DefenseStatus(Status):
         """
         Initialize a new DefenseStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def calculate_net_damage(
             self, subject, level, incoming_damage, status_registry
@@ -272,7 +258,7 @@ class PoisonStatus(Status):
         """
         Initialize a new PoisonStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def trigger_on_turn(self, subject, level, status_registry):
         """
@@ -290,7 +276,7 @@ class RegenerationStatus(Status):
         """
         Initialize a new RegenerationStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def trigger_on_turn(self, subject, level, status_registry):
         subject.change_resource(c.Resources.HEALTH.name, level)
@@ -304,7 +290,7 @@ class EvasionStatus(Status):
         """
         Initialize a new EvasionStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def calculate_evasion_damage(self, level, incoming_damage) -> int:
         """
@@ -324,7 +310,7 @@ class CriticalHitStatus(Status):
         """
         Initialize a new CriticalHitStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def calculate_damage_multiplier(self, level) -> int:
         """
@@ -344,7 +330,7 @@ class RestrictCardTypeStatus(Status):
         """
         Initialize a new RestrictCardStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.restricted_types = restricted_types
 
     def is_card_playable(self, card_type) -> bool:
@@ -362,7 +348,7 @@ class FilterEffectStatus(Status):
         """
         Initialize a new FilterEffectStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
         self.allowed_effect = allowed_effect
         self.blocked_effect = blocked_effect
 
@@ -386,7 +372,7 @@ class LimitCardPlayStatus(Status):
         """
         Initialize a new LimitCardPlayStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
         self.card_limit = max_cards_per_turn
 
 
@@ -398,7 +384,7 @@ class BlockMagicStatus(Status):
         """
         Initialize a new BlockMagicStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def calculate_block(self, damage_amount, damage_type, status_level):
         """
@@ -420,7 +406,7 @@ class AverageCostStatus(Status):
         """
         Initialize a new AverageCostStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
 
     def trigger_on_change(self, subject, level):
         """
@@ -439,7 +425,7 @@ class AverageCostStatus(Status):
         """
         Reset costs.
         """
-        super().expire(subject)
+        super().expire(subject, logger)
         for card in subject.card_manager.hand:
             card.reset_override_cost()
 
@@ -453,7 +439,7 @@ class FlagStatus(Status):
         """
         Initialize a new FlagStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
 
 class MulliganStatus(Status):
@@ -465,7 +451,7 @@ class MulliganStatus(Status):
         """
         Initialize a new MulliganStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def do_redraw(self, subject, level, text_interface, registries):
         """
@@ -498,7 +484,7 @@ class ReturnFromDiscardStatus(Status):
         """
         Initialize a new ReturnFromDiscardStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def draw_from_discard(
             self, subject, level, text_interface, status_registry
