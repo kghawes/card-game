@@ -2,7 +2,7 @@
   "HEAL_MINOR_WOUNDS": {
     "name": "Heal Minor Wounds",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 1,
     "value": 30,
     "effects": { "RESTORE_HEALTH_SELF": 1 }
@@ -10,7 +10,7 @@
   "HEAL_LESSER_WOUNDS": {
     "name": "Heal Lesser Wounds",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 50,
     "effects": { "RESTORE_HEALTH_SELF": 2 }
@@ -18,7 +18,7 @@
   "HEAL_WOUNDS": {
     "name": "Heal Wounds",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 4,
     "value": 70,
     "effects": { "RESTORE_HEALTH_SELF": 3 }
@@ -26,7 +26,7 @@
   "HEAL_GREATER_WOUNDS": {
     "name": "Heal Greater Wounds",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 5,
     "value": 90,
     "effects": { "RESTORE_HEALTH_SELF": 4 }
@@ -34,7 +34,7 @@
   "HEAL_MAJOR_WOUNDS": {
     "name": "Heal Major Wounds",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 7,
     "value": 110,
     "effects": { "RESTORE_HEALTH_SELF": 6 }
@@ -42,7 +42,7 @@
   "CURE_BLIGHT_DISEASE": {
     "name": "Cure Blight Disease",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 30,
     "effects": { "REMOVE_BLIGHT_SELF": 10 }
@@ -50,7 +50,7 @@
   "CURE_COMMON_DISEASE": {
     "name": "Cure Common Disease",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 1,
     "value": 25,
     "effects": { "REMOVE_DISEASE_SELF": 10 }
@@ -58,7 +58,7 @@
   "CURE_POISON": {
     "name": "Cure Poison",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 1,
     "value": 30,
     "effects": { "REMOVE_POISON_SELF": 5 }
@@ -66,7 +66,7 @@
   "PANACEA": {
     "name": "Panacea",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 4,
     "value": 50,
     "effects": {
@@ -78,7 +78,7 @@
   "FORTITUDE": {
     "name": "Fortitude",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 3,
     "value": 35,
     "effects": { "APPLY_FORTIFY_ENDURANCE_SELF": 4 }
@@ -86,7 +86,7 @@
   "IRON_WILL": {
     "name": "Iron Will",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 3,
     "value": 35,
     "effects": { "APPLY_FORTIFY_WILLPOWER_SELF": 4 }
@@ -94,7 +94,7 @@
   "NIMBLENESS": {
     "name": "Nimbleness",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 3,
     "value": 50,
     "effects": { "APPLY_FORTIFY_AGILITY_SELF": 4 }
@@ -102,7 +102,7 @@
   "QUICKSILVER": {
     "name": "Quicksilver",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 3,
     "value": 40,
     "effects": { "APPLY_FORTIFY_SPEED_SELF": 4 }
@@ -110,7 +110,7 @@
   "TROLL_STRENGTH": {
     "name": "Troll Strength",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 3,
     "value": 35,
     "effects": { "APPLY_FORTIFY_STRENGTH_SELF": 4 }
@@ -118,7 +118,7 @@
   "WISDOM": {
     "name": "Wisdom",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 3,
     "value": 45,
     "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 4 }
@@ -126,7 +126,7 @@
   "POWERWELL": {
     "name": "Powerwell",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 6,
     "value": 99,
     "effects": { "APPLY_FORTIFY_INTELLIGENCE_SELF": 6 }
@@ -134,7 +134,7 @@
   "RESIST_FIRE": {
     "name": "Resist Fire",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 1,
     "value": 30,
     "effects": { "APPLY_RESISTANCE_FIRE_SELF": 2 }
@@ -142,7 +142,7 @@
   "RESIST_FROST": {
     "name": "Resist Frost",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 1,
     "value": 30,
     "effects": { "APPLY_RESISTANCE_FROST_SELF": 2 }
@@ -150,7 +150,7 @@
   "RESIST_SHOCK": {
     "name": "Resist Shock",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 1,
     "value": 30,
     "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 2 }
@@ -158,7 +158,7 @@
   "RESIST_POISON": {
     "name": "Resist Poison",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 1,
     "value": 30,
     "effects": { "APPLY_RESISTANCE_POISON_SELF": 2 }
@@ -166,7 +166,7 @@
   "STRONG_RESIST_FIRE": {
     "name": "Strong Resist Fire",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_RESISTANCE_FIRE_SELF": 3 }
@@ -174,7 +174,7 @@
   "STRONG_RESIST_FROST": {
     "name": "Strong Resist Frost",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_RESISTANCE_FROST_SELF": 3 }
@@ -182,7 +182,7 @@
   "STRONG_RESIST_SHOCK": {
     "name": "Strong Resist Shock",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 3 }
@@ -190,7 +190,7 @@
   "STRONG_RESIST_POISON": {
     "name": "Strong Resist Poison",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_RESISTANCE_POISON_SELF": 3 }
@@ -198,7 +198,7 @@
   "GREAT_RESIST_FIRE": {
     "name": "Great Resist Fire",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 4,
     "value": 50,
     "effects": { "APPLY_RESISTANCE_FIRE_SELF": 5 }
@@ -206,7 +206,7 @@
   "GREAT_RESIST_FROST": {
     "name": "Great Resist Frost",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 4,
     "value": 50,
     "effects": { "APPLY_RESISTANCE_FROST_SELF": 5 }
@@ -214,7 +214,7 @@
   "GREAT_RESIST_SHOCK": {
     "name": "Great Resist Shock",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 4,
     "value": 50,
     "effects": { "APPLY_RESISTANCE_SHOCK_SELF": 5 }
@@ -222,7 +222,7 @@
   "GREAT_RESIST_POISON": {
     "name": "Great Resist Poison",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 4,
     "value": 50,
     "effects": { "APPLY_RESISTANCE_POISON_SELF": 5 }
@@ -230,7 +230,7 @@
   "RESTORE_AGILITY": {
     "name": "Restore Agility",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 30,
     "effects": { "REMOVE_DAMAGE_AGILITY_SELF": 4 }
@@ -238,7 +238,7 @@
   "RESTORE_ENDURANCE": {
     "name": "Restore Endurance",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 30,
     "effects": { "REMOVE_DAMAGE_ENDURANCE_SELF": 4 }
@@ -246,7 +246,7 @@
   "RESTORE_INTELLIGENCE": {
     "name": "Restore Intelligence",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 30,
     "effects": { "REMOVE_DAMAGE_INTELLIGENCE_SELF": 4 }
@@ -254,7 +254,7 @@
   "RESTORE_SPEED": {
     "name": "Restore Speed",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 30,
     "effects": { "REMOVE_DAMAGE_SPEED_SELF": 4 }
@@ -262,7 +262,7 @@
   "RESTORE_STRENGTH": {
     "name": "Restore Strength",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 30,
     "effects": { "REMOVE_DAMAGE_STRENGTH_SELF": 4 }
@@ -270,7 +270,7 @@
   "RESTORE_WILLPOWER": {
     "name": "Restore Willpower",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 30,
     "effects": { "REMOVE_DAMAGE_WILLPOWER_SELF": 4 }
@@ -278,7 +278,7 @@
   "REST_ST_MERRIS": {
     "name": "Rest of St. Merris",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "RESTORE_STAMINA_SELF": 2 }
@@ -286,7 +286,7 @@
   "MASTERFUL_GOLDEN_WISDOM": {
     "name": "Masterful Golden Wisdom",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_ALTERATION_SELF": 2 }
@@ -294,7 +294,7 @@
   "MASTERFUL_GREEN_WISDOM": {
     "name": "Masterful Green Wisdom",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_RESTORATION_SELF": 2 }
@@ -302,7 +302,7 @@
   "MASTERFUL_RED_WISDOM": {
     "name": "Masterful Red Wisdom",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_DESTRUCTION_SELF": 2 }
@@ -310,7 +310,7 @@
   "MASTERFUL_SILVER_WISDOM": {
     "name": "Masterful Silver Wisdom",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_ILLUSION_SELF": 2 }
@@ -318,7 +318,7 @@
   "MASTERFUL_SMITING": {
     "name": "Masterful Smiting",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_BLUNT_WEAPON_SELF": 2 }
@@ -326,7 +326,7 @@
   "MASTERFUL_STOLID_ARMOR": {
     "name": "Masterful Stolid Armor",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_HEAVY_SELF": 2 }
@@ -334,7 +334,7 @@
   "MASTERFUL_SWIFTBLADE": {
     "name": "Masterful Swiftblade",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_SHORT_BLADE_SELF": 2 }
@@ -342,7 +342,7 @@
   "MASTERFUL_UNSEEN_WISDOM": {
     "name": "Masterful Unseen Wisdom",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_MYSTICISM_SELF": 2 }
@@ -350,7 +350,7 @@
   "MASTERFUL_HEWING": {
     "name": "Masterful Hewing",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_LONG_BLADE_SELF": 2 }
@@ -358,7 +358,7 @@
   "MASTERFUL_BALANCED_ARMOR": {
     "name": "Masterful Balanced Armor",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_MEDIUM_SELF": 2 }
@@ -366,7 +366,7 @@
   "MASTERFUL_NIMBLE_ARMOR": {
     "name": "Masterful Nimble Armor",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_LIGHT_SELF": 2 }
@@ -374,7 +374,7 @@
   "MASTERFUL_SUREFLIGHT": {
     "name": "Masterful Sureflight",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_FORTIFY_MARKSMAN_SELF": 2 }
@@ -382,7 +382,7 @@
   "REGENERATE": {
     "name": "Regenerate",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 3,
     "value": 40,
     "effects": { "APPLY_REGENERATION_SELF": 4 }
@@ -390,7 +390,7 @@
   "RAPID_REGENERATE": {
     "name": "Rapid Regenerate",
     "card_type": "SPELL",
-    "subtype": "RESTORATION",
+    "subtypes": ["RESTORATION"],
     "cost": 6,
     "value": 40,
     "effects": { "APPLY_REGENERATION_SELF": 6 }

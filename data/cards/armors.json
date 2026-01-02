@@ -2,7 +2,7 @@
   "IRON_GAUNTLETS": {
     "name": "Iron Gauntlets",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 1,
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 2 }
@@ -10,7 +10,7 @@
   "IRON_HELM": {
     "name": "Iron Helm",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 2,
     "value": 13,
     "effects": { "APPLY_DEFENSE_SELF": 3 }
@@ -18,7 +18,7 @@
   "IRON_BOOTS": {
     "name": "Iron Boots",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 3,
     "value": 10,
     "effects": { "APPLY_DEFENSE_SELF": 3 }
@@ -26,7 +26,7 @@
   "IRON_CUIRASS": {
     "name": "Iron Cuirass",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 4,
     "value": 17,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -34,7 +34,7 @@
   "IRON_SHIELD": {
     "name": "Iron Shield",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 4,
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
@@ -42,7 +42,7 @@
   "IRON_TOWER_SHIELD": {
     "name": "Iron Tower Shield",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 5,
     "value": 21,
     "effects": { "APPLY_DEFENSE_SELF": 6 }
@@ -50,7 +50,7 @@
   "STEEL_GAUNTLETS": {
     "name": "Steel Gauntlets",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 1,
     "value": 25,
     "effects": { "APPLY_DEFENSE_SELF": 2 }
@@ -58,7 +58,7 @@
   "STEEL_HELM": {
     "name": "Steel Helm",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 2,
     "value": 25,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -66,7 +66,7 @@
   "STEEL_BOOTS": {
     "name": "Steel Boots",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 3,
     "value": 23,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -74,7 +74,7 @@
   "STEEL_CUIRASS": {
     "name": "Steel Cuirass",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 4,
     "value": 23,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
@@ -82,7 +82,7 @@
   "STEEL_SHIELD": {
     "name": "Steel Shield",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 4,
     "value": 27,
     "effects": { "APPLY_DEFENSE_SELF": 6 }
@@ -90,7 +90,7 @@
   "STEEL_TOWER_SHIELD": {
     "name": "Steel Tower Shield",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 5,
     "value": 28,
     "effects": { "APPLY_DEFENSE_SELF": 7 }
@@ -98,7 +98,7 @@
   "EBONY_BRACERS": {
     "name": "Ebony Bracers",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 1,
     "value": 60,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -106,7 +106,7 @@
   "EBONY_HELM": {
     "name": "Ebony Helm",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 2,
     "value": 30,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -114,7 +114,7 @@
   "EBONY_BOOTS": {
     "name": "Ebony Boots",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 3,
     "value": 70,
     "effects": { "APPLY_DEFENSE_SELF": 8 }
@@ -122,7 +122,7 @@
   "EBONY_CUIRASS": {
     "name": "Ebony Cuirass",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 5,
     "value": 100,
     "effects": { "APPLY_DEFENSE_SELF": 12 }
@@ -130,7 +130,7 @@
   "EBONY_SHIELD": {
     "name": "Ebony Shield",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 5,
     "value": 140,
     "effects": { "APPLY_DEFENSE_SELF": 15 }
@@ -138,7 +138,7 @@
   "EBONY_TOWER_SHIELD": {
     "name": "Ebony Tower Shield",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 6,
     "value": 200,
     "effects": { "APPLY_DEFENSE_SELF": 18 }
@@ -146,7 +146,7 @@
   "DAEDRIC_GAUNTLETS": {
     "name": "Daedric Gauntlets",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 2,
     "value": 250,
     "effects": { "APPLY_DEFENSE_SELF": 8 }
@@ -154,7 +154,7 @@
   "DAEDRIC_FACE_INSPIRATION": {
     "name": "Daedric Face of Inspiration",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 3,
     "value": 240,
     "effects": { "APPLY_DEFENSE_SELF": 9 }
@@ -162,7 +162,7 @@
   "DAEDRIC_FACE_TERROR": {
     "name": "Daedric Face of Terror",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 3,
     "value": 250,
     "effects": { "APPLY_DEFENSE_SELF": 10 }
@@ -170,7 +170,7 @@
   "DAEDRIC_FACE_GOD": {
     "name": "Daedric Face of God",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 3,
     "value": 275,
     "effects": { "APPLY_DEFENSE_SELF": 11 }
@@ -178,7 +178,7 @@
   "DAEDRIC_BOOTS": {
     "name": "Daedric Boots",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 4,
     "value": 200,
     "effects": { "APPLY_DEFENSE_SELF": 10 }
@@ -186,7 +186,7 @@
   "DAEDRIC_CUIRASS": {
     "name": "Daedric Cuirass",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 6,
     "value": 225,
     "effects": { "APPLY_DEFENSE_SELF": 20 }
@@ -194,7 +194,7 @@
   "DAEDRIC_SHIELD": {
     "name": "Daedric Shield",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 5,
     "value": 250,
     "effects": { "APPLY_DEFENSE_SELF": 20 }
@@ -202,7 +202,7 @@
   "DAEDRIC_TOWER_SHIELD": {
     "name": "Daedric Tower Shield",
     "card_type": "ARMOR",
-    "subtype": "HEAVY",
+    "subtypes": ["HEAVY"],
     "cost": 6,
     "value": 280,
     "effects": { "APPLY_DEFENSE_SELF": 23 }
@@ -210,7 +210,7 @@
   "ORCISH_BRACERS": {
     "name": "Orcish Bracers",
     "card_type": "ARMOR",
-    "subtype": "MEDIUM",
+    "subtypes": ["MEDIUM"],
     "cost": 1,
     "value": 30,
     "effects": { "APPLY_DEFENSE_SELF": 3 }
@@ -218,7 +218,7 @@
   "ORCISH_HELM": {
     "name": "Orcish Helm",
     "card_type": "ARMOR",
-    "subtype": "MEDIUM",
+    "subtypes": ["MEDIUM"],
     "cost": 2,
     "value": 28,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -226,7 +226,7 @@
   "ORCISH_BOOTS": {
     "name": "Orcish Boots",
     "card_type": "ARMOR",
-    "subtype": "MEDIUM",
+    "subtypes": ["MEDIUM"],
     "cost": 2,
     "value": 35,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
@@ -234,7 +234,7 @@
   "ORCISH_CUIRASS": {
     "name": "Orcish Cuirass",
     "card_type": "ARMOR",
-    "subtype": "MEDIUM",
+    "subtypes": ["MEDIUM"],
     "cost": 3,
     "value": 36,
     "effects": { "APPLY_DEFENSE_SELF": 6 }
@@ -242,7 +242,7 @@
   "ADAMANTIUM_BRACERS": {
     "name": "Adamantium Bracers",
     "card_type": "ARMOR",
-    "subtype": "MEDIUM",
+    "subtypes": ["MEDIUM"],
     "cost": 1,
     "value": 50,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -250,7 +250,7 @@
   "ADAMANTIUM_HELM": {
     "name": "Adamantium Helm",
     "card_type": "ARMOR",
-    "subtype": "MEDIUM",
+    "subtypes": ["MEDIUM"],
     "cost": 2,
     "value": 40,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
@@ -258,7 +258,7 @@
   "ADAMANTIUM_BOOTS": {
     "name": "Adamantium Boots",
     "card_type": "ARMOR",
-    "subtype": "MEDIUM",
+    "subtypes": ["MEDIUM"],
     "cost": 2,
     "value": 60,
     "effects": { "APPLY_DEFENSE_SELF": 6 }
@@ -266,7 +266,7 @@
   "ADAMANTIUM_CUIRASS": {
     "name": "Adamantium Cuirass",
     "card_type": "ARMOR",
-    "subtype": "MEDIUM",
+    "subtypes": ["MEDIUM"],
     "cost": 3,
     "value": 65,
     "effects": { "APPLY_DEFENSE_SELF": 9 }
@@ -274,7 +274,7 @@
   "CHITIN_GAUNTLETS": {
     "name": "Chitin Gauntlets",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 1,
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 2 }
@@ -282,7 +282,7 @@
   "CHITIN_HELM": {
     "name": "Chitin Helm",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 1,
     "value": 25,
     "effects": { "APPLY_DEFENSE_SELF": 3 }
@@ -290,7 +290,7 @@
   "CHITIN_BOOTS": {
     "name": "Chitin Boots",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 1,
     "value": 25,
     "effects": { "APPLY_DEFENSE_SELF": 3 }
@@ -298,7 +298,7 @@
   "CHITIN_CUIRASS": {
     "name": "Chitin Cuirass",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 2,
     "value": 20,
     "effects": { "APPLY_DEFENSE_SELF": 3 }
@@ -306,7 +306,7 @@
   "CHITIN_SHIELD": {
     "name": "Chitin Shield",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 2,
     "value": 30,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -314,7 +314,7 @@
   "GLASS_BRACERS": {
     "name": "Glass Bracers",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 1,
     "value": 80,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -322,7 +322,7 @@
   "GLASS_HELM": {
     "name": "Glass Helm",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 1,
     "value": 100,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
@@ -330,7 +330,7 @@
   "GLASS_BOOTS": {
     "name": "Glass Boots",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 1,
     "value": 100,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
@@ -338,7 +338,7 @@
   "GLASS_CUIRASS": {
     "name": "Glass Cuirass",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 2,
     "value": 150,
     "effects": { "APPLY_DEFENSE_SELF": 9 }
@@ -346,7 +346,7 @@
   "GLASS_SHIELD": {
     "name": "Glass Shield",
     "card_type": "ARMOR",
-    "subtype": "LIGHT",
+    "subtypes": ["LIGHT"],
     "cost": 2,
     "value": 200,
     "effects": { "APPLY_DEFENSE_SELF": 10 }

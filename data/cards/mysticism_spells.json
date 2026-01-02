@@ -2,7 +2,7 @@
   "PURGE_MAGIC": {
     "name": "Purge Magic",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 2,
     "value": 30,
     "effects": { "DISPEL_TARGET": 2 }
@@ -10,7 +10,7 @@
   "NULLIFY_MAGIC": {
     "name": "Nullify Magic",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 4,
     "value": 90,
     "effects": { "DISPEL_TARGET": 10 }
@@ -18,7 +18,7 @@
   "ALMALEXIAS_GRACE": {
     "name": "Almalexia's Grace",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 2,
     "value": 30,
     "effects": { "DISPEL_SELF": 2 }
@@ -26,7 +26,7 @@
   "DISPEL": {
     "name": "Dispel",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 4,
     "value": 90,
     "effects": { "DISPEL_SELF": 10 }
@@ -34,7 +34,7 @@
   "SOTHAS_MIRROR": {
     "name": "Sotha's Mirror",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 2,
     "value": 70,
     "effects": { "APPLY_REFLECT_SELF": 2 }
@@ -42,7 +42,7 @@
   "SHALIDORS_MIRROR": {
     "name": "Shalidor's Mirror",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 4,
     "value": 180,
     "effects": { "APPLY_REFLECT_SELF": 4 }
@@ -50,7 +50,7 @@
   "LLIVAMS_REVERSAL": {
     "name": "Llivam's Reversal",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 6,
     "value": 390,
     "effects": { "APPLY_REFLECT_SELF": 8 }
@@ -58,7 +58,7 @@
   "WEAK_SPELLDRINKER": {
     "name": "Weak Spelldrinker",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 2,
     "value": 69,
     "effects": { "APPLY_SPELL_ABSORPTION_SELF": 2 }
@@ -66,7 +66,7 @@
   "STRONG_SPELLDRINKER": {
     "name": "Strong Spelldrinker",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 4,
     "value": 200,
     "effects": { "APPLY_SPELL_ABSORPTION_SELF": 4 }
@@ -74,7 +74,7 @@
   "TRANASAS_SPELLTRAP": {
     "name": "Tranasa's Spelltrap",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 8,
     "value": 390,
     "effects": { "APPLY_SPELL_ABSORPTION_SELF": 8 }
@@ -82,7 +82,7 @@
   "ABSORB_AGILITY": {
     "name": "Absorb Agility",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 3,
     "value": 50,
     "effects": {
@@ -93,7 +93,7 @@
   "ABSORB_ENDURANCE": {
     "name": "Absorb Endurance",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 3,
     "value": 50,
     "effects": {
@@ -104,7 +104,7 @@
   "ABSORB_INTELLIGENCE": {
     "name": "Absorb Intelligence",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 3,
     "value": 50,
     "effects": {
@@ -115,7 +115,7 @@
   "ABSORB_SPEED": {
     "name": "Absorb Speed",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 3,
     "value": 50,
     "effects": {
@@ -126,7 +126,7 @@
   "ABSORB_STRENGTH": {
     "name": "Absorb Strength",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 3,
     "value": 50,
     "effects": {
@@ -137,7 +137,7 @@
   "ABSORB_WILLPOWER": {
     "name": "Absorb Willpower",
     "card_type": "SPELL",
-    "subtype": "MYSTICISM",
+    "subtypes": ["MYSTICISM"],
     "cost": 3,
     "value": 50,
     "effects": {
