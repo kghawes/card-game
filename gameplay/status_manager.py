@@ -46,6 +46,7 @@ class StatusManager:
         # Get the leveled status or create a new one if it doesn't exist
         leveled_status = self.get_leveled_status(status_id)
         if leveled_status is None:
+            # Create a new leveled status
             if amount < 0 or delete:
                 return
             status = status_registry.get_status(status_id)
@@ -69,17 +70,17 @@ class StatusManager:
         if status.applies_immediately:
             status.trigger_on_change(subject, change)
 
+        # For statuses that modify effects, recalculate all effect modifiers
         if status_id not in self.statuses:
             subject.modifier_manager.clear_effect_modifiers(
                 status, subject.card_manager
                 )
-            
         subject.modifier_manager.recalculate_all_effects(
             status_registry, subject.card_manager
             )
 
         # If the status is a cost modifier and Levitate is active,
-        # trigger cost recalculation
+        # then trigger cost recalculation
         levitate_id = StatusNames.LEVITATE.name
         if isinstance(status, ModifyCostStatus) and levitate_id in self.statuses:
             levitate = self.get_leveled_status(levitate_id)

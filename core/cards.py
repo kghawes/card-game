@@ -1,6 +1,5 @@
 """
-This module defines the Card class, the helper class EffectLevel, as well as
-the CardPrototype and CardCache.
+This module defines the Card class, CardPrototype and CardCache.
 """
 from utils.utils import Prototype
 from utils.formatter import Formatter

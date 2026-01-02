@@ -221,7 +221,7 @@ class ModifyAttributeStatus(Status):
         """
         Update the subject's attribute delta.
         """
-        subject.attribute_deltas[self.attribute_id] += change
+        subject.attribute_deltas[self.attribute_id] += change * self.sign_factor
         
 
 
