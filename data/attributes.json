@@ -2,6 +2,8 @@
     "ATTRIBUTES": {
         "STRENGTH": {
             "description": "Increases physical damage dealt by weapons. Heavier weapons benefit more.",
+            "card_type": "WEAPON",
+            "affected_effect": "PHYSICAL_DAMAGE",
             "modifiers": {
                 "HEAVY": 0.1,
                 "MEDIUM": 0.03,
@@ -10,6 +12,8 @@
         },
         "ENDURANCE": {
             "description": "Increases defense from armor. Heavier armor benefits more.",
+            "card_type": "ARMOR",
+            "affected_effect": "APPLY_DEFENSE_SELF",
             "modifiers": {
                 "HEAVY": 0.1,
                 "MEDIUM": 0.03,
@@ -18,6 +22,7 @@
         },
         "AGILITY": {
             "description": "Reduces the stamina cost of skills.",
+            "card_type": "SKILL",
             "modifiers": {
                 "ALL": 0.02
             }
@@ -30,6 +35,7 @@
         },
         "INTELLIGENCE": {
             "description": "Reduces the magicka cost of spells.",
+            "card_type": "SPELL",
             "modifiers": {
                 "ALL": 0.02
             }
