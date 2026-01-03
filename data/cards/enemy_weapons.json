@@ -12,7 +12,7 @@
   "SHARP_BEAK": {
     "name": "Sharp Beak",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "LIGHT"],
     "cost": 1,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
@@ -20,7 +20,7 @@
   "RAZOR_BEAK": {
     "name": "Razor Beak",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "MEDIUM"],
     "cost": 2,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 2 }
@@ -28,7 +28,7 @@
   "SHARP_TAIL": {
     "name": "Sharp Tail",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "LIGHT"],
     "cost": 1,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
@@ -36,7 +36,7 @@
   "SHARP_TEETH": {
     "name": "Sharp Teeth",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "LIGHT"],
     "cost": 1,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
@@ -44,7 +44,7 @@
   "RAZOR_TEETH": {
     "name": "Razor Teeth",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "MEDIUM"],
     "cost": 2,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 2 }
@@ -52,7 +52,7 @@
   "VICIOUS_TEETH": {
     "name": "Vicious Teeth",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "HEAVY"],
     "cost": 3,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 5 }
@@ -60,7 +60,7 @@
   "SHARP_CLAWS": {
     "name": "Sharp Claws",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "LIGHT"],
     "cost": 1,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 1 }
@@ -68,7 +68,7 @@
   "RAZOR_CLAWS": {
     "name": "Razor Claws",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "MEDIUM"],
     "cost": 1,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 2 }
@@ -76,7 +76,7 @@
   "VICIOUS_CLAWS": {
     "name": "Vicious Claws",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "HEAVY"],
     "cost": 2,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 5 }
@@ -84,7 +84,7 @@
   "VENOM": {
     "name": "Venom",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "LIGHT"],
     "cost": 1,
     "value": 0,
     "effects": { "POISON_DAMAGE_TARGET": 1 }
@@ -92,7 +92,7 @@
   "BLUDGEONING_FISTS": {
     "name": "Bludgeoning Fists",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "HEAVY"],
     "cost": 3,
     "value": 0,
     "effects": { "PHYSICAL_DAMAGE_TARGET": 4 }
@@ -100,7 +100,7 @@
   "TENTACLES": {
     "name": "Tentacles",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "MEDIUM"],
     "cost": 2,
     "value": 0,
     "effects": {
@@ -111,7 +111,7 @@
   "SPIKED_CLUB": {
     "name": "Spiked Club",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "MEDIUM"],
     "cost": 2,
     "value": 0,
     "effects": {
@@ -121,7 +121,7 @@
   "SPECTRAL_STRIKE": {
     "name": "Spectral Strike",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "LIGHT"],
     "cost": 2,
     "value": 0,
     "effects": {
@@ -131,7 +131,7 @@
   "SPIKE": {
     "name": "Spike",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "LIGHT"],
     "cost": 2,
     "value": 0,
     "effects": {
@@ -141,7 +141,7 @@
   "ARM_WEAPON": {
     "name": "Arm Weapon",
     "card_type": "WEAPON",
-    "subtypes": ["ENEMY"],
+    "subtypes": ["ENEMY", "MEDIUM"],
     "cost": 3,
     "value": 0,
     "effects": {
