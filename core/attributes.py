@@ -49,24 +49,24 @@ class AttributeRegistry:
         """
         return self.starting_attributes.get(char_class, {})
 
-    def get_attribute_by_context(self, card_type, subtype=None, effect_id=None) -> str:
+    def get_attribute_by_context(self, card_type, subtypes, effect_id=None) -> str:
         """
-        Get the relevant attribute for a given card type, subtype, and effect.
+        Get the relevant attribute for a given card type, subtypes, and effect.
         """
         attr_name = self.card_type_index.get(card_type, None)
         # If no attribute affects this card type, return None
         if not attr_name:
             return None
-        # If no subtype specified, match by card type alone
-        if not subtype:
+        # If no subtypes specified, match by card type alone
+        if len(subtypes) == 0:
             return attr_name
         # If effect_id and affected_effect are specified,
         # ensure the effect matches the attribute's affected effect
         affected_effect = self.get_attribute_affected_effect(attr_name)
         if effect_id and affected_effect and affected_effect != effect_id:
             return None
-        # Check if the subtype matches the attribute's modifiers
+        # Check if the subtypes match the attribute's modifiers
         modifiers = list(self.get_attribute_modifiers(attr_name).keys())
-        if subtype in modifiers or "ALL" in modifiers:
+        if "ALL" in modifiers or any(subtype in modifiers for subtype in subtypes):
             return attr_name
         return None

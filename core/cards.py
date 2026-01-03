@@ -10,7 +10,7 @@ class Card:
     """
     Represents a card in game.
     """
-    def __init__(self, name, card_type, cost, value, effects, subtype=None):
+    def __init__(self, name, card_type, cost, value, effects, subtypes):
         """
         Initialize a new Card.
         """
@@ -22,7 +22,7 @@ class Card:
         self.temp_cost_modifier = 0
         self.override_cost = -1
         self.value = value
-        self.subtype = subtype
+        self.subtypes = subtypes
         self.effects = effects
         self.formatter = Formatter()
 
@@ -38,7 +38,7 @@ class Card:
             "type": self.card_type,
             "cost": self.get_cost(),
             "value": self.value,
-            "subtype": self.subtype,
+            "subtypes": self.subtypes,
             "effects": effect_data
         }
 
@@ -103,7 +103,7 @@ class Card:
         """
         Check if a card has a certain type or subtype.
         """
-        return card_property in (self.card_type, self.subtype)
+        return card_property == self.card_type or card_property in self.subtypes
 
 
 class CardPrototype(Card, Prototype):
@@ -113,12 +113,16 @@ class CardPrototype(Card, Prototype):
     """
     def __init__(
             self, name, card_type, cost, value, effects,
-            subtype=c.DEFAULT_SUBTYPE, enchantments=None, enchanted_name=None
+            subtypes=None, enchantments=None, enchanted_name=None
             ):
         """
         Initialize a new CardPrototype.
         """
-        super().__init__(name, card_type, cost, value, effects, subtype)
+        if subtypes is None:
+            subtypes = []
+        elif isinstance(subtypes, str):
+            subtypes = [subtypes]
+        super().__init__(name, card_type, cost, value, effects, subtypes)
         self.enchantments = enchantments
         self.enchanted_name = enchanted_name
 
@@ -134,7 +138,7 @@ class CardPrototype(Card, Prototype):
             effects.append(LeveledMechanic(effect_registry.get_effect(effect), level))
         return Card(
             self.name, self.card_type, self.cost, self.value, effects,
-            self.subtype
+            self.subtypes
             )
 
 
