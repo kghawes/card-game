@@ -40,9 +40,9 @@ class CombatManager:
             )
         if self.is_combat_over(combatant, opponent):
             self.event_manager.dispatch('end_combat')
-        combatant.modifier_manager.recalculate_all_effects(
-            registries.statuses, combatant.card_manager
-            )
+        # combatant.modifier_manager.recalculate_all_effects(
+        #     registries.statuses, combatant.card_manager
+        #     )
         combatant.replenish_resources_for_turn()
         if not combatant.is_enemy:
             self.event_manager.dispatch('start_action_phase', combatant.card_manager.hand)
@@ -115,14 +115,14 @@ class CombatManager:
             elif (isinstance(status, LimitCardPlayStatus) and
                   combatant.cards_played_this_turn >= status.card_limit):
                 return False
+        return True
+        # if combatant.is_enemy:
+        #     return True
 
-        if combatant.is_enemy:
-            return True
-
-        if card.subtype in c.ALLOWED_TYPES["ALL"] or \
-            card.subtype in c.ALLOWED_TYPES[combatant.character_class]:
-            return True
-        return False
+        # if any(subtype in c.ALLOWED_TYPES["ALL"] for subtype in card.subtypes) or \
+        #    any(subtype in c.ALLOWED_TYPES[combatant.character_class] for subtype in card.subtypes):
+        #     return True
+        # return False
 
     def effect_can_resolve(self, combatant, effect_id) -> bool:
         """

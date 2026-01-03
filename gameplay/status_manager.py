@@ -71,13 +71,13 @@ class StatusManager:
             status.trigger_on_change(subject, change)
 
         # For statuses that modify effects, recalculate all effect modifiers
-        if status_id not in self.statuses:
-            subject.modifier_manager.clear_effect_modifiers(
-                status, subject.card_manager
-                )
-        subject.modifier_manager.recalculate_all_effects(
-            status_registry, subject.card_manager
-            )
+        # if status_id not in self.statuses:
+        #     subject.modifier_manager.clear_effect_modifiers(
+        #         status, subject.card_manager
+        #         )
+        # subject.modifier_manager.recalculate_all_effects(
+        #     status_registry, subject.card_manager
+        #     )
 
         # If the status is a cost modifier and Levitate is active,
         # then trigger cost recalculation
@@ -126,6 +126,6 @@ class StatusManager:
             if not subject.is_alive():
                 return
         # Trigger recalculations after statuses resolve
-        subject.modifier_manager.recalculate_all_effects(
-            status_registry, subject.card_manager
-            )
+        # subject.modifier_manager.recalculate_all_effects(
+        #     status_registry, subject.card_manager
+        #     )

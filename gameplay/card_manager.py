@@ -93,7 +93,7 @@ class CardManager:
         """
         modifier_manager = subject.modifier_manager
         modifier_manager.recalculate_all_costs(status_registry, self)
-        modifier_manager.recalculate_all_effects(status_registry, self)
+        # modifier_manager.recalculate_all_effects(status_registry, self)
         status_manager = subject.status_manager
         levitate = status_manager.get_leveled_status(c.StatusNames.LEVITATE.name)
         if levitate is not None:
