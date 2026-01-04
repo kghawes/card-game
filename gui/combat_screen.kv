@@ -124,6 +124,14 @@
             player_health_label: player_health_label
             player_stamina_label: player_stamina_label
             player_magicka_label: player_magicka_label
+            player_strength_label: player_strength_label
+            player_endurance_label: player_endurance_label
+            player_agility_label: player_agility_label
+            player_speed_label: player_speed_label
+            player_intelligence_label: player_intelligence_label
+            player_willpower_label: player_willpower_label
+            player_personality_label: player_personality_label
+            player_luck_label: player_luck_label
             player_statuses: player_statuses
             pos: 8, 324
             size: 300, 528
@@ -144,31 +152,151 @@
                 size_hint: None, None
             
             Label:
+                text: 'Health'
+                pos: 8, 782
+                size: 90, 30
+                size_hint: None, None
+
+            Label:
                 id: player_health_label
                 text: ''
-                pos: 8, 782
-                size: 300, 30
+                pos: 108, 782
+                size: 200, 30
                 size_hint: None, None
             
+            Label:
+                text: 'Stamina'
+                pos: 8, 752
+                size: 90, 30
+                size_hint: None, None
+
             Label:
                 id: player_stamina_label
                 text: ''
-                pos: 8, 752
-                size: 300, 30
+                pos: 108, 752
+                size: 200, 30
                 size_hint: None, None
             
             Label:
+                text: 'Magicka'
+                pos: 8, 722
+                size: 90, 30
+                size_hint: None, None
+
+            Label:
                 id: player_magicka_label
                 text: ''
-                pos: 8, 722
-                size: 300, 30
+                pos: 108, 722
+                size: 200, 30
+                size_hint: None, None
+
+            Label:
+                text: 'Strength'
+                pos: 8, 690
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: player_strength_label
+                text: ''
+                pos: 108, 690
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Endurance'
+                pos: 158, 690
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: player_endurance_label
+                text: ''
+                pos: 258, 690
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Agility'
+                pos: 8, 666
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: player_agility_label
+                text: ''
+                pos: 108, 666
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Speed'
+                pos: 158, 666
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: player_speed_label
+                text: ''
+                pos: 258, 666
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Intelligence'
+                pos: 8, 642
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: player_intelligence_label
+                text: ''
+                pos: 108, 642
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Willpower'
+                pos: 158, 642
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: player_willpower_label
+                text: ''
+                pos: 258, 642
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Personality'
+                pos: 8, 618
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: player_personality_label
+                text: ''
+                pos: 108, 618
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Luck'
+                pos: 158, 618
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: player_luck_label
+                text: ''
+                pos: 258, 618
+                size: 40, 24
                 size_hint: None, None
             
-            GridLayout:
+            FloatLayout:
                 id: player_statuses
-                cols: 5
-                pos: 8, 372
-                spacing: 4, 4
+                pos: 8, 324
             
         FloatLayout:
             id: enemy_info
@@ -176,6 +304,14 @@
             enemy_health_label: enemy_health_label
             enemy_stamina_label: enemy_stamina_label
             enemy_magicka_label: enemy_magicka_label
+            enemy_strength_label: enemy_strength_label
+            enemy_endurance_label: enemy_endurance_label
+            enemy_agility_label: enemy_agility_label
+            enemy_speed_label: enemy_speed_label
+            enemy_intelligence_label: enemy_intelligence_label
+            enemy_willpower_label: enemy_willpower_label
+            enemy_personality_label: enemy_personality_label
+            enemy_luck_label: enemy_luck_label
             enemy_statuses: enemy_statuses
             pos: 1192, 372
             size: 300, 480
@@ -195,24 +331,146 @@
                 size_hint: None, None
             
             Label:
+                text: 'Health'
+                pos: 1192, 782
+                size: 90, 30
+                size_hint: None, None
+
+            Label:
                 id: enemy_health_label
                 text: ''
-                pos: 1192, 782
-                size: 300, 30
+                pos: 1292, 782
+                size: 200, 30
                 size_hint: None, None
             
+            Label:
+                text: 'Stamina'
+                pos: 1192, 752
+                size: 90, 30
+                size_hint: None, None
+
             Label:
                 id: enemy_stamina_label
                 text: ''
-                pos: 1192, 752
-                size: 300, 30
+                pos: 1292, 752
+                size: 200, 30
                 size_hint: None, None
             
             Label:
+                text: 'Magicka'
+                pos: 1192, 722
+                size: 90, 30
+                size_hint: None, None
+
+            Label:
                 id: enemy_magicka_label
                 text: ''
-                pos: 1192, 722
-                size: 300, 30
+                pos: 1292, 722
+                size: 200, 30
+                size_hint: None, None
+
+            Label:
+                text: 'Strength'
+                pos: 1192, 690
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: enemy_strength_label
+                text: ''
+                pos: 1292, 690
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Endurance'
+                pos: 1342, 690
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: enemy_endurance_label
+                text: ''
+                pos: 1442, 690
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Agility'
+                pos: 1192, 666
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: enemy_agility_label
+                text: ''
+                pos: 1292, 666
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Speed'
+                pos: 1342, 666
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: enemy_speed_label
+                text: ''
+                pos: 1442, 666
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Intelligence'
+                pos: 1192, 642
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: enemy_intelligence_label
+                text: ''
+                pos: 1292, 642
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Willpower'
+                pos: 1342, 642
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: enemy_willpower_label
+                text: ''
+                pos: 1442, 642
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Personality'
+                pos: 1192, 618
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: enemy_personality_label
+                text: ''
+                pos: 1292, 618
+                size: 40, 24
+                size_hint: None, None
+
+            Label:
+                text: 'Luck'
+                pos: 1342, 618
+                size: 100, 24
+                size_hint: None, None
+
+            Label:
+                id: enemy_luck_label
+                text: ''
+                pos: 1442, 618
+                size: 40, 24
                 size_hint: None, None
             
             FloatLayout:
