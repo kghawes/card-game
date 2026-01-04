@@ -174,13 +174,13 @@ class CombatScreen(Widget):
         self.hand.screen = self
         self.player = player
         self.player_info.player_name_label.text = self.player['name']
-        self.update_combatant_stats(self.player_info, self.player, "player")
+        self.update_combatant_resources(self.player_info, self.player, "player")
         self.update_combatant_attributes(
             self.player_info, self.player.get('attributes', {}), "player"
         )
         self.enemy = enemy
         self.enemy_info.enemy_name_label.text = self.enemy['name']
-        self.update_combatant_stats(self.enemy_info, self.enemy, "enemy")
+        self.update_combatant_resources(self.enemy_info, self.enemy, "enemy")
         self.update_combatant_attributes(
             self.enemy_info, self.enemy.get('attributes', {}), "enemy"
         )
@@ -252,8 +252,8 @@ class CombatScreen(Widget):
             y = base_y - y_offset
             status_label.pos = (x, y)
 
-    def update_combatant_stats(self, info_widget, combatant, label_prefix):
-        """Updates the stats of a combatant on the screen."""
+    def update_combatant_resources(self, info_widget, combatant, label_prefix):
+        """Updates the resource stats of a combatant on the screen."""
         for stat_key, max_key, _ in self.STAT_LABELS:
             label_widget = getattr(info_widget, f"{label_prefix}_{stat_key}_label")
             label_widget.text = f"{combatant[stat_key]}/{combatant[max_key]}"
@@ -271,13 +271,13 @@ class CombatScreen(Widget):
             if key in target:
                 target[key] = value
         if subject == 'player':
-            self.update_combatant_stats(self.player_info, self.player, "player")
+            self.update_combatant_resources(self.player_info, self.player, "player")
             self.update_combatant_attributes(
                 self.player_info, self.player.get('attributes', {}), "player"
             )
             self.update_player_statuses(stats_data['statuses'])
         else:
-            self.update_combatant_stats(self.enemy_info, self.enemy, "enemy")
+            self.update_combatant_resources(self.enemy_info, self.enemy, "enemy")
             self.update_combatant_attributes(
                 self.enemy_info, self.enemy.get('attributes', {}), "enemy"
             )
