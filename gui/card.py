@@ -23,7 +23,7 @@ class Card(Widget):
     art_bg_texture = ObjectProperty(None)
     formatted_type = StringProperty('None')
 
-    def __init__(self, card_data, screen, **kwargs):
+    def __init__(self, card_data: dict, screen: Widget, **kwargs):
         """Initializes a card with the given data."""
         super().__init__(**kwargs)
         self.screen = screen
@@ -36,20 +36,31 @@ class Card(Widget):
         self.hand_index = 0
         self.render_card(card_data)
 
-    def render_card(self, card_data):
+    def render_card(self, card_data: dict):
         """Renders the card with the given data."""
-        self.card_type = card_data['type']
-        self.border_color = constants.CARD_TYPE_COLORS[self.card_type]['border']
-        self.resource_cost_color = constants.RESOURCE_COLORS[constants.CARD_TYPE_COLORS[self.card_type]['resource']]
-        self.cost_indicator = constants.RESOURCE_INDICATOR_OFFSETS[constants.CARD_TYPE_COLORS[self.card_type]['indicator']]
+        card_type = card_data['type']
+        type_colors = constants.CARD_TYPE_COLORS[card_type]
+        self.card_type = card_type
+        self.border_color = type_colors['border']
+        self.resource_cost_color = constants.RESOURCE_COLORS[type_colors['resource']]
+        self.cost_indicator = constants.RESOURCE_INDICATOR_OFFSETS[type_colors['indicator']]
         self.name = card_data['name']
         self.card_id = card_data['id']
         self.art_texture = AssetCache.get_texture(f'gui/assets/cards/{self.card_id}.png')
         self.art_bg_texture = AssetCache.get_texture(f'gui/assets/cards/{self.card_type}_bg.png')
         self.cost = str(card_data['cost'])
-        self.effects = card_data['effects']['card_text']
-        self.formatted_type = f"{self.card_type} ({card_data['subtype']})" if 'subtype' in card_data else self.card_type
-        self.tooltip_text = card_data['effects']['tooltip_text']
+        effects = card_data['effects']
+        self.effects = effects['card_text']
+        subtypes = card_data.get('subtypes') or card_data.get('subtype')
+        if subtypes:
+            if isinstance(subtypes, (list, tuple, set)):
+                subtype_text = ", ".join(subtypes)
+            else:
+                subtype_text = subtypes
+            self.formatted_type = f"{self.card_type} ({subtype_text})"
+        else:
+            self.formatted_type = self.card_type
+        self.tooltip_text = effects['tooltip_text']
         self.screen.tooltip.add_tooltip(self, self.tooltip_text)
 
     def on_touch_down(self, touch) -> bool:
