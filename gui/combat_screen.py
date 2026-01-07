@@ -29,18 +29,18 @@ class Hand(FloatLayout):
             for i, card in enumerate(cards):
                 card.center_x = i * (832 / (len(cards) - 1)) + 334
                 card.center_y = y
-    
-    def add_to_hand(self, card, index=0):
+
+    def add_to_hand(self, card: Card, index=0):
         """Adds a card to the hand and repositions the cards."""
         self.add_widget(card, index=index)
         self.position_cards()
     
-    def remove_from_hand(self, card):
+    def remove_from_hand(self, card: Card):
         """Removes a card from the hand and repositions the cards."""
         self.remove_widget(card)
         self.position_cards()
-    
-    def draw(self, card_data):
+
+    def draw(self, card_data: dict):
         """Draws a card from the deck and adds it to the hand."""
         card = Card(card_data, self.screen)
         self.add_to_hand(card)
@@ -100,7 +100,8 @@ class CombatLog(Widget):
         self.log_shown = False
 
 
-class ScreenDarken(Widget):    
+class ScreenDarken(Widget):
+    """Widget that darkens the screen and blocks input."""
     def on_touch_down(self, touch):
         return True
     
@@ -167,7 +168,7 @@ class CombatScreen(Widget):
     log_texture = ObjectProperty(None)
     combat_log = ObjectProperty(CombatLog)
 
-    def __init__(self, player, enemy, event_manager, **kwargs):
+    def __init__(self, player: dict, enemy: dict, event_manager, **kwargs):
         """Initializes the combat screen with the given properties."""
         super().__init__(**kwargs)
         self.event_manager = event_manager
@@ -189,14 +190,14 @@ class CombatScreen(Widget):
         self.tooltip = Tooltip()
         self.add_widget(self.tooltip)
     
-    def start_player_turn(self, statuses):
+    def start_player_turn(self, statuses: dict):
         """Starts the player's turn."""
         self.end_turn_button.disabled = False
         Clock.unschedule(self.loop_textures)
         self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
         self.update_player_statuses(statuses)
 
-    def update_player_statuses(self, statuses):
+    def update_player_statuses(self, statuses: dict):
         """Updates the player's statuses on the screen."""
         for label in self.player_info.player_statuses.children:
             self.tooltip.remove_tooltip(label)
@@ -237,7 +238,7 @@ class CombatScreen(Widget):
             self.tooltip.add_tooltip(status_icon, description)
             x += icon_width + x_spacing
 
-    def update_enemy_statuses(self, statuses):
+    def update_enemy_statuses(self, statuses: dict):
         """Updates the enemy's statuses on the screen."""
         self.enemy_info.enemy_statuses.clear_widgets()
         y_offset = 0
@@ -263,8 +264,8 @@ class CombatScreen(Widget):
         for attribute_key, label_suffix in self.ATTRIBUTE_KEYS:
             label_widget = getattr(info_widget, f"{label_prefix}_{label_suffix}_label")
             label_widget.text = str(attributes.get(attribute_key, 0))
-    
-    def update_stats(self, subject, stats_data):
+
+    def update_stats(self, subject: str, stats_data: dict):
         """Updates the stats of the player or enemy."""
         target = self.player if subject == 'player' else self.enemy
         for key, value in stats_data.items():
@@ -301,8 +302,8 @@ class CombatScreen(Widget):
                 self.event_manager.dispatch('end_turn')
 
         Clock.schedule_interval(discard_card, 0.1)
-    
-    def enemy_played_card(self, enemy_name, card_data):
+
+    def enemy_played_card(self, enemy_name: str, card_data: dict):
         """Handles the enemy playing a card."""
         pass
 
