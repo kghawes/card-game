@@ -66,10 +66,10 @@ class LeveledMechanic:
             card.card_type, card.subtypes, self.str_id
             )
         if attribute is None:
-            return self.get_level()
+            return self.base_level
         # Get the level of the attribute and calculate the modifier
         attribute_level = owner.get_attribute_level(attribute)
         base_modifier = attribute_registry.get_modifier(attribute, card.subtypes)
         modifier = base_modifier * attribute_level
         # Calculate and return the final level
-        return max(floor(self.get_level() * (1 + modifier)), self.min_level)
+        return max(floor(self.base_level * (1 + modifier)), self.min_level)
