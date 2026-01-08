@@ -85,7 +85,7 @@ class CombatManager:
                 # TODO give a reason why the effect can't resolve
                 self.event_manager.logger.log(f"{effect.name} has no effect.")
                 continue
-            level = effect.get_level()
+            level = effect.get_level(card, combatant, registries.attributes)
             effect.reference.resolve(
                 combatant, opponent, level, status_registry=registries.statuses
                 )

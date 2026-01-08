@@ -26,12 +26,13 @@ class Card:
         self.effects = effects
         self.formatter = Formatter()
 
-    def get_card_data(self) -> dict:
+    def get_card_data(self, card=None, owner=None, attribute_registry=None) -> dict:
         """
         Get a dictionary of the card's data.
         """
-        effect_data = self.formatter.format_effect_data(self.effects)
-
+        effect_data = self.formatter.format_effect_data(
+            self.effects, card, owner, attribute_registry
+            )
         return {
             "name": self.name,
             "id": self.card_id,
