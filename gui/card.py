@@ -54,7 +54,7 @@ class Card(Widget):
         subtypes = card_data.get('subtypes') or card_data.get('subtype')
         if subtypes:
             if isinstance(subtypes, (list, tuple, set)):
-                subtype_text = ", ".join(subtypes)
+                subtype_text = ", ".join(subtypes).replace("_", " ")
             else:
                 subtype_text = subtypes
             self.formatted_type = f"{self.card_type} ({subtype_text})"
