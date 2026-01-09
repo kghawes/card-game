@@ -37,6 +37,7 @@ class Combatant:
         self.cards_played_this_turn = 0
         self.event_manager = event_manager
         self.formatter = Formatter()
+        # Initialize self.attributes and self.attribute_deltas
         self.initialize_attributes(starting_attributes)
 
     def initialize_attributes(self, initial_values=None):
@@ -95,7 +96,7 @@ class Combatant:
 
     def get_max_health(self) -> int:
         """
-        Get maximum health.
+        Get maximum health, including modifiers.
         """
         return self.resources[r.HEALTH.name].get_max(self.modifier_manager)
 
@@ -107,7 +108,7 @@ class Combatant:
 
     def get_max_stamina(self) -> int:
         """
-        Get maximum stamina.
+        Get maximum stamina, including modifiers.
         """
         return self.resources[r.STAMINA.name].get_max(self.modifier_manager)
 
@@ -119,9 +120,17 @@ class Combatant:
 
     def get_max_magicka(self) -> int:
         """
-        Get maximum magicka.
+        Get maximum magicka, including modifiers.
         """
         return self.resources[r.MAGICKA.name].get_max(self.modifier_manager)
+
+    def get_attribute_level(self, attribute_id) -> int:
+        """
+        Get the level of a character attribute, including deltas.
+        """
+        base_level = self.attributes.get(attribute_id, 0)
+        delta = self.attribute_deltas.get(attribute_id, 0)
+        return base_level + delta
 
     def take_damage(self, attacker, amount, damage_type, status_registry):
         """

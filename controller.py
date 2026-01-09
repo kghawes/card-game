@@ -52,7 +52,9 @@ class Controller:
         self.send_logs()
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         for card in reversed(hand[:]):
-            self.app.game.screen.hand.draw(card.get_card_data())
+            self.app.game.screen.hand.draw(
+                card.get_card_data(self.game.player, self.game.registries.attributes)
+                )
 
     def handle_card_not_playable(self):
         """Handle a card that cannot be played."""
