@@ -111,7 +111,7 @@ class Card(Widget):
             card.is_draggable = True
     
     def show_card_effect(self):
-        """Show the card play effects."""
+        """Show the card play effects, then move to discard."""
         Clock.schedule_once(self.move_to_discard, 1)
 
     def move_to_discard(self, dt=0):
