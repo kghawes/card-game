@@ -18,6 +18,14 @@ class Controller:
         """Send logs to the GUI."""
         self.app.game.screen.combat_log.flush_log_messages(self.event_manager)
     
+    def display_hand(self, hand):
+        """Display the player's hand in the GUI."""
+        self.app.game.screen.hand.clear_hand()
+        for card in reversed(hand[:]):
+            self.app.game.screen.hand.draw(
+                card.get_card_data(self.game.player, self.game.registries.attributes)
+                )
+
     # Game events
 
     def subscribe_to_game_events(self):
@@ -51,10 +59,7 @@ class Controller:
         self.event_manager.logger.log("Game event fired: start_action_phase", True)
         self.send_logs()
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
-        for card in reversed(hand[:]):
-            self.app.game.screen.hand.draw(
-                card.get_card_data(self.game.player, self.game.registries.attributes)
-                )
+        self.display_hand(hand)
 
     def handle_card_not_playable(self):
         """Handle a card that cannot be played."""
@@ -69,6 +74,7 @@ class Controller:
         self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
         self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
         self.app.game.screen.animation_layer.children[-1].show_card_effect()
+        self.display_hand(self.game.player.card_manager.hand)
 
     def handle_end_enemy_turn(self):
         """Handle end of enemy turn."""

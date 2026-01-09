@@ -54,6 +54,12 @@ class Hand(FloatLayout):
         if card:
             card.move_to_discard()
             self.position_cards()
+    
+    def clear_hand(self):
+        """Clears all cards from the hand."""
+        for card in self.children[:]:
+            self.remove_widget(card)
+        self.position_cards()
 
 
 class CombatLog(Widget):
