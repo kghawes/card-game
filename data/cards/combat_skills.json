@@ -6,8 +6,7 @@
     "cost": 1,
     "value": 40,
     "effects": {
-      "APPLY_FORTIFY_SPEED_SELF": 5,
-      "APPLY_DAMAGE_SPEED_SELF": 4
+      "APPLY_FORTIFY_SPEED_SELF": 9
       }
   },
   "FURY": {
