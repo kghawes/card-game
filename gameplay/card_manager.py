@@ -1,6 +1,7 @@
 """
 This module defines the CardManager class.
 """
+from math import floor
 import random
 from typing import Tuple
 import utils.constants as c
@@ -103,7 +104,13 @@ class CardManager:
         """
         Draw the appropriate number of cards at the beginning of a turn.
         """
-        cards_to_draw = subject.modifier_manager.calculate_cards_to_draw()
+        attr_reg = registries.attributes
+        speed_name = c.Attributes.SPEED.name
+        base_mult = attr_reg.get_attribute_modifier(speed_name)
+        speed_lvl = subject.get_attribute_level(speed_name)
+        cards_to_draw = floor(base_mult * speed_lvl) + c.HAND_SIZE
+
+        # cards_to_draw = subject.modifier_manager.calculate_cards_to_draw()
 
         # wb = c.StatusNames.WATER_BREATHING.name
         # if subject.status_manager.has_status(wb, subject, registries.statuses):

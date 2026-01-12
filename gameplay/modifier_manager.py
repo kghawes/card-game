@@ -2,8 +2,7 @@
 This module defines the ModifierManager class and modifier classes.
 """
 import utils.constants as c
-from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus, \
-    ModifyDrawStatus, ModifyDamageStatus, ModifyCostStatus
+from core.statuses import ModifyMaxResourceStatus, ModifyDamageStatus, ModifyCostStatus
 
 class ModifierManager:
     """
@@ -22,13 +21,13 @@ class ModifierManager:
         """
         # self.effect_modifiers = self._initialize_effect_modifiers(status_registry)
         self.resource_modifiers = self._initialize_resource_modifiers(status_registry)
-        self.draw_modifiers = self._initialize_draw_modifiers(status_registry)
+        # self.draw_modifiers = self._initialize_draw_modifiers(status_registry)
         self.damage_modifiers = self._initialize_damage_modifiers(status_registry)
         self.cost_modifiers = self._initialize_cost_modifiers(status_registry)
         self.modifier_pools = [
             # self.effect_modifiers,
             self.resource_modifiers,
-            self.draw_modifiers,
+            # self.draw_modifiers,
             self.cost_modifiers,
             self.damage_modifiers
             ]
@@ -183,33 +182,33 @@ class ModifierManager:
 
     # Draw modifiers
 
-    def _initialize_draw_modifiers(self, status_registry) -> dict:
-        """
-        Populate the resource modifier pool with statuses.
-        """
-        draw_modifiers = {} # Tracks accumulated contributions by status
-        for status_id, status in status_registry.statuses.items():
-            if isinstance(status, ModifyDrawStatus):
-                draw_modifiers[status_id] = Modifier()
-        return draw_modifiers
+    # def _initialize_draw_modifiers(self, status_registry) -> dict:
+    #     """
+    #     Populate the resource modifier pool with statuses.
+    #     """
+    #     draw_modifiers = {} # Tracks accumulated contributions by status
+    #     for status_id, status in status_registry.statuses.items():
+    #         if isinstance(status, ModifyDrawStatus):
+    #             draw_modifiers[status_id] = Modifier()
+    #     return draw_modifiers
 
-    def modify_cards_to_draw(self, status_id, amount):
-        """
-        Change the number of cards to draw by the given amount.
-        """
-        if status_id in self.draw_modifiers:
-            old_value = self.draw_modifiers[status_id].contribution
-            new_value = old_value + amount
-            self.draw_modifiers[status_id].contribution = new_value
+    # def modify_cards_to_draw(self, status_id, amount):
+    #     """
+    #     Change the number of cards to draw by the given amount.
+    #     """
+    #     if status_id in self.draw_modifiers:
+    #         old_value = self.draw_modifiers[status_id].contribution
+    #         new_value = old_value + amount
+    #         self.draw_modifiers[status_id].contribution = new_value
 
-    def calculate_cards_to_draw(self) -> int:
-        """
-        Get the modified number of cards to draw for a turn.
-        """
-        net_contribution = 0
-        for modifier in self.draw_modifiers.values():
-            net_contribution += modifier.contribution
-        return max(c.HAND_SIZE + net_contribution, c.MIN_HAND_SIZE)
+    # def calculate_cards_to_draw(self) -> int:
+    #     """
+    #     Get the modified number of cards to draw for a turn.
+    #     """
+    #     net_contribution = 0
+    #     for modifier in self.draw_modifiers.values():
+    #         net_contribution += modifier.contribution
+    #     return max(c.HAND_SIZE + net_contribution, c.MIN_HAND_SIZE)
 
     # Damage modifiers
 
@@ -339,26 +338,26 @@ class Modifier:
         self.contribution = 0
 
 
-class EffectModifier(Modifier):
-    """
-    This class represents a modifier that applies to all cards of a specified
-    type and modifies the level of the specified effect on those cards.
-    """
-    def __init__(self, affected_card_type, affected_effect_id):
-        """
-        Initialize a new EffectModifier.
-        """
-        super().__init__()
-        self.card_type = affected_card_type
-        self.effect_id = affected_effect_id
+# class EffectModifier(Modifier):
+#     """
+#     This class represents a modifier that applies to all cards of a specified
+#     type and modifies the level of the specified effect on those cards.
+#     """
+#     def __init__(self, affected_card_type, affected_effect_id):
+#         """
+#         Initialize a new EffectModifier.
+#         """
+#         super().__init__()
+#         self.card_type = affected_card_type
+#         self.effect_id = affected_effect_id
 
-    def matches(self, card_type, effect_id) -> bool:
-        """
-        Checks if the given card type and effect are subject to this modifier.
-        """
-        matches_type = self.card_type == card_type
-        matches_effect = self.effect_id == effect_id
-        return matches_type and matches_effect
+#     def matches(self, card_type, effect_id) -> bool:
+#         """
+#         Checks if the given card type and effect are subject to this modifier.
+#         """
+#         matches_type = self.card_type == card_type
+#         matches_effect = self.effect_id == effect_id
+#         return matches_type and matches_effect
 
 
 class ResourceModifier(Modifier):

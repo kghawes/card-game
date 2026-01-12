@@ -50,10 +50,12 @@ class AttributeRegistry:
             return modifiers["ALL"]
         return None
 
-    def get_attribute_modifier(self, name, subtypes) -> float:
+    def get_attribute_modifier(self, name, subtypes=None) -> float:
         """
         Get the modifier value associated with a specific attribute and subtypes.
         """
+        if not subtypes:
+            subtypes = []
         modifier = self._get_modifier_for_subtypes(
             self.get_attribute_modifiers(name),
             subtypes,
