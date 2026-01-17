@@ -51,54 +51,55 @@ class Card:
             return c.Resources.MAGICKA.name
         return c.Resources.STAMINA.name
 
-    def get_cost(self, enable_override=True) -> int:
+    def get_cost(self) -> int:
         """
         Get the stamina or magicka cost of the card.
         """
-        if enable_override and self.override_cost >= c.MIN_COST:
-            return self.override_cost
-        net_cost = self.cost + self.cost_modifier + self.temp_cost_modifier
-        return max(net_cost, c.MIN_COST)
+        return max(self.cost, c.MIN_COST)
+        # if enable_override and self.override_cost >= c.MIN_COST:
+        #     return self.override_cost
+        # net_cost = self.cost + self.cost_modifier + self.temp_cost_modifier
+        # return max(net_cost, c.MIN_COST)
 
-    def change_cost_modifier(self, amount):
-        """
-        Change the cost of the card.
-        """
-        self.cost_modifier += amount
+    # def change_cost_modifier(self, amount):
+    #     """
+    #     Change the cost of the card.
+    #     """
+    #     self.cost_modifier += amount
 
-    def reset_cost_modifier(self):
-        """
-        Reset the cost of the card to its base value.
-        """
-        self.cost_modifier = 0
+    # def reset_cost_modifier(self):
+    #     """
+    #     Reset the cost of the card to its base value.
+    #     """
+    #     self.cost_modifier = 0
 
-    def change_temp_cost_modifier(self, amount):
-        """
-        Add a temporary cost change.
-        """
-        self.temp_cost_modifier += amount
+    # def change_temp_cost_modifier(self, amount):
+    #     """
+    #     Add a temporary cost change.
+    #     """
+    #     self.temp_cost_modifier += amount
 
-    def reset_temp_cost_modifier(self):
-        """
-        Remove temporary cost changes.
-        """
-        self.temp_cost_modifier = 0
+    # def reset_temp_cost_modifier(self):
+    #     """
+    #     Remove temporary cost changes.
+    #     """
+    #     self.temp_cost_modifier = 0
 
-    def reset_override_cost(self):
-        """
-        Stop using the override cost.
-        """
-        self.override_cost = -1
+    # def reset_override_cost(self):
+    #     """
+    #     Stop using the override cost.
+    #     """
+    #     self.override_cost = -1
 
-    def reset_card(self):
-        """
-        Reset all modified values on the card.
-        """
+    # def reset_card(self):
+    #     """
+    #     Reset all modified values on the card.
+    #     """
         # for effect in self.effects:
         #     effect.reset_level()
-        self.reset_cost_modifier()
-        self.reset_temp_cost_modifier()
-        self.reset_override_cost()
+        # self.reset_cost_modifier()
+        # self.reset_temp_cost_modifier()
+        # self.reset_override_cost()
 
     def matches(self, card_property) -> bool:
         """

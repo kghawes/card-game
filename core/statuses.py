@@ -104,43 +104,43 @@ class ModifyCostStatus(Status):
     Statuses that change the stamina or magicka cost on cards.
     """
     def __init__(
-            self, status_id, description, affected_card_type, sign_factor
+            self, status_id, description#, affected_card_type, sign_factor
             ):
         """
         Initialize a new ModifyCostStatus.
         """
         super().__init__(status_id, description, applies_immediately=True)
-        self.affected_card_type = affected_card_type
-        self.sign_factor = sign_factor
+    #     self.affected_card_type = affected_card_type
+    #     self.sign_factor = sign_factor
 
-    def trigger_on_turn(self, subject, level, status_registry):
-        """
-        Recalculate costs at the start of each turn.
-        """
-        card_type = self.affected_card_type
-        subject.modifier_manager.recalculate_cost_modifiers(
-            card_type, subject.card_manager
-            )
+    # def trigger_on_turn(self, subject, level, status_registry):
+    #     """
+    #     Recalculate costs at the start of each turn.
+    #     """
+    #     card_type = self.affected_card_type
+    #     subject.modifier_manager.recalculate_cost_modifiers(
+    #         card_type, subject.card_manager
+    #         )
 
-    def trigger_on_change(self, subject, level):
-        """
-        Accumulate contributions to the modifier pool when level changes.
-        """
-        contribution = self.sign_factor * level
-        subject.modifier_manager.accumulate_cost_modifier(self, contribution)
-        card_type = self.affected_card_type
-        subject.modifier_manager.recalculate_cost_modifiers(
-            card_type, subject.card_manager
-            )
+    # def trigger_on_change(self, subject, level):
+    #     """
+    #     Accumulate contributions to the modifier pool when level changes.
+    #     """
+    #     contribution = self.sign_factor * level
+    #     subject.modifier_manager.accumulate_cost_modifier(self, contribution)
+    #     card_type = self.affected_card_type
+    #     subject.modifier_manager.recalculate_cost_modifiers(
+    #         card_type, subject.card_manager
+    #         )
 
-    def expire(self, subject, logger):
-        """
-        Clear contributions when the status expires.
-        """
-        super().expire(subject, logger)
-        subject.modifier_manager.clear_cost_modifiers(
-            self, subject.card_manager
-            )
+    # def expire(self, subject, logger):
+    #     """
+    #     Clear contributions when the status expires.
+    #     """
+    #     super().expire(subject, logger)
+    #     subject.modifier_manager.clear_cost_modifiers(
+    #         self, subject.card_manager
+    #         )
 
 
 class ModifyMaxResourceStatus(Status):
@@ -408,26 +408,26 @@ class AverageCostStatus(Status):
         """
         super().__init__(status_id, description, applies_immediately=True)
 
-    def trigger_on_change(self, subject, level):
-        """
-        Perform the cost averaging.
-        """
-        if level <= 0 or not subject.card_manager.hand:
-            return
-        sum_cost = 0
-        for card in subject.card_manager.hand:
-            sum_cost += card.get_cost(False)
-        average_cost = round(sum_cost / len(subject.card_manager.hand))
-        for card in subject.card_manager.hand:
-            card.override_cost = average_cost
+    # def trigger_on_change(self, subject, level):
+    #     """
+    #     Perform the cost averaging.
+    #     """
+    #     if level <= 0 or not subject.card_manager.hand:
+    #         return
+    #     sum_cost = 0
+    #     for card in subject.card_manager.hand:
+    #         sum_cost += card.get_cost(False)
+    #     average_cost = round(sum_cost / len(subject.card_manager.hand))
+    #     for card in subject.card_manager.hand:
+    #         card.override_cost = average_cost
 
-    def expire(self, subject, logger):
-        """
-        Reset costs.
-        """
-        super().expire(subject, logger)
-        for card in subject.card_manager.hand:
-            card.reset_override_cost()
+    # def expire(self, subject, logger):
+    #     """
+    #     Reset costs.
+    #     """
+    #     super().expire(subject, logger)
+    #     for card in subject.card_manager.hand:
+    #         card.reset_override_cost()
 
 
 class FlagStatus(Status):

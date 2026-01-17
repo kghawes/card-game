@@ -92,13 +92,13 @@ class CardManager:
         """
         Recalculate modifiers and costs when a card is added to the hand.
         """
-        modifier_manager = subject.modifier_manager
-        modifier_manager.recalculate_all_costs(status_registry, self)
+        # modifier_manager = subject.modifier_manager
+        # modifier_manager.recalculate_all_costs(status_registry, self)
         # modifier_manager.recalculate_all_effects(status_registry, self)
-        status_manager = subject.status_manager
-        levitate = status_manager.get_leveled_status(c.StatusNames.LEVITATE.name)
-        if levitate is not None:
-            levitate.reference.trigger_on_change(subject, levitate.get_level())
+        # status_manager = subject.status_manager
+        # levitate = status_manager.get_leveled_status(c.StatusNames.LEVITATE.name)
+        # if levitate is not None:
+        #     levitate.reference.trigger_on_change(subject, levitate.get_level())
 
     def draw_hand(self, subject, registries):
         """
@@ -139,7 +139,7 @@ class CardManager:
             return
         status_manager = subject.status_manager
 
-        card.reset_card()
+        # card.reset_card()
         if card.matches(c.CardTypes.CONSUMABLE.name) and is_being_played:
             self.consumed_pile.insert(0, card)
             # TODO: log
