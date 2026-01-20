@@ -69,7 +69,7 @@ class CombatManager:
         """
         if not self.card_can_be_played(combatant, card) \
         or not combatant.resources[card.get_resource()].try_spend(
-            card.get_cost(), combatant.modifier_manager
+            card.get_cost(combatant, registries.attributes), combatant.modifier_manager
         ):
             # TODO make card_can_be_played return a reason
             self.event_manager.logger.log(f"This {card.name} can't be played.")
@@ -145,7 +145,7 @@ class CombatManager:
             playable_card_exists = False
             for card in enemy.card_manager.hand:
                 resource_id = card.get_resource()
-                if card.get_cost() <= enemy.resources[resource_id].current and \
+                if card.get_cost(enemy, registries.attributes) <= enemy.resources[resource_id].current and \
                     self.card_can_be_played(enemy, card):
                     playable_card_exists = True
                     self.play_card(enemy, player, card, registries)

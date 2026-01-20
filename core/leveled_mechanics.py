@@ -62,12 +62,11 @@ class LeveledMechanic:
         """
         modifier = 0
         # Find the attribute that modifies this effect for this card type, if any
-        attribute_context = attribute_registry.get_attribute_by_context(
+        attribute, base_modifier = attribute_registry.get_attribute_by_context(
             card.card_type, card.subtypes, self.str_id
             )
-        if attribute_context is None:
+        if attribute is None or base_modifier is None:
             return self.base_level
-        attribute, base_modifier = attribute_context
         # Get the level of the attribute and calculate the modifier
         attribute_level = owner.get_attribute_level(attribute)
         modifier = base_modifier * attribute_level

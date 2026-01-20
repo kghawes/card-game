@@ -1,6 +1,7 @@
 """
 This module defines the Card class, CardPrototype and CardCache.
 """
+from math import floor
 from utils.utils import Prototype
 from utils.formatter import Formatter
 import utils.constants as c
@@ -37,7 +38,7 @@ class Card:
             "name": self.name,
             "id": self.card_id,
             "type": self.card_type,
-            "cost": self.get_cost(),
+            "cost": self.get_cost(owner, attribute_registry),
             "value": self.value,
             "subtypes": self.subtypes,
             "effects": effect_data
@@ -61,8 +62,8 @@ class Card:
                     self.card_type, self.subtypes
                 )
                 if attribute is not None:
-                    multiplier = 1 - modifier * owner.get_attribute_value(attribute)
-                    modified_cost = self.cost * multiplier
+                    multiplier = 1 - modifier * owner.get_attribute_level(attribute)
+                    modified_cost = floor(self.cost * multiplier)
                     return max(modified_cost, c.MIN_COST)
         return max(self.cost, c.MIN_COST)
         # if enable_override and self.override_cost >= c.MIN_COST:

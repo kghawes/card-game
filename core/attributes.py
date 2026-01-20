@@ -82,15 +82,15 @@ class AttributeRegistry:
         attr_name = self.card_type_index.get(card_type, None)
         # If no attribute affects this card type, return None
         if not attr_name:
-            return None
+            return None, None
         # If effect_id and affected_effect are specified,
         # ensure the effect matches the attribute's affected effect
         affected_effect = self.get_attribute_affected_effect(attr_name)
         if effect_id and affected_effect and affected_effect not in effect_id:
-            return None
+            return None, None
         # Check if the subtypes match the attribute's modifiers
         modifiers = self._get_attribute_modifier_map(attr_name)
         modifier_value = self._get_modifier_for_subtypes(modifiers, subtypes)
         if modifier_value is not None:
             return attr_name, modifier_value
-        return None
+        return None, None
