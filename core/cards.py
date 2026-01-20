@@ -51,10 +51,19 @@ class Card:
             return c.Resources.MAGICKA.name
         return c.Resources.STAMINA.name
 
-    def get_cost(self) -> int:
+    def get_cost(self, owner=None, attribute_registry=None) -> int:
         """
         Get the stamina or magicka cost of the card.
         """
+        if owner is not None:
+            if attribute_registry is not None:
+                attribute, modifier = attribute_registry.get_attribute_by_context(
+                    self.card_type, self.subtypes
+                )
+                if attribute is not None:
+                    multiplier = 1 - modifier * owner.get_attribute_value(attribute)
+                    modified_cost = self.cost * multiplier
+                    return max(modified_cost, c.MIN_COST)
         return max(self.cost, c.MIN_COST)
         # if enable_override and self.override_cost >= c.MIN_COST:
         #     return self.override_cost
