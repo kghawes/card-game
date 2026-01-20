@@ -31,13 +31,13 @@ class AttributeRegistry:
         """
         return self.attributes.get(name, {}).get("description", "")
 
-    def get_attribute_modifiers(self, name) -> dict:
+    def _get_attribute_modifier_map(self, name) -> dict:
         """
         Get the modifier map associated with a specific attribute.
         """
         return self.attributes.get(name, {}).get("modifiers", {})
 
-    def _get_modifier_for_subtypes(self, modifiers, subtypes):
+    def _get_modifier_for_subtypes(self, modifiers, subtypes) -> float:
         """
         Get the matching modifier value for the provided subtypes.
         """
@@ -57,7 +57,7 @@ class AttributeRegistry:
         if not subtypes:
             subtypes = []
         modifier = self._get_modifier_for_subtypes(
-            self.get_attribute_modifiers(name),
+            self._get_attribute_modifier_map(name),
             subtypes,
         )
         return 0 if modifier is None else modifier
@@ -74,7 +74,7 @@ class AttributeRegistry:
         """
         return self.starting_attributes.get(char_class, {})
 
-    def get_attribute_by_context(self, card_type, subtypes, effect_id=None):
+    def get_attribute_by_context(self, card_type, subtypes, effect_id=None) -> tuple:
         """
         Get the relevant attribute and modifier for a given card type, subtypes,
         and effect.
@@ -89,7 +89,7 @@ class AttributeRegistry:
         if effect_id and affected_effect and affected_effect not in effect_id:
             return None
         # Check if the subtypes match the attribute's modifiers
-        modifiers = self.get_attribute_modifiers(attr_name)
+        modifiers = self._get_attribute_modifier_map(attr_name)
         modifier_value = self._get_modifier_for_subtypes(modifiers, subtypes)
         if modifier_value is not None:
             return attr_name, modifier_value
