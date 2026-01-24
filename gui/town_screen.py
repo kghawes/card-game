@@ -1,3 +1,7 @@
+"""
+This module defines the TownScreen class.
+"""
+
 from kivy.uix.widget import Widget
 
 class TownScreen(Widget):

@@ -33,7 +33,7 @@ class CardManager:
                 deck.append(card_cache.create_card(card_id, effect_registry))
         return deck
 
-    def try_add_to_deck(self, card) -> Tuple[bool, bool, bool]:
+    def try_add_to_deck(self, card) -> tuple[bool, bool, bool]:
         """
         Attempt to add the card to the deck and return success flag and error
         message.

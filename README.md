@@ -1,19 +1,20 @@
 # Journeys in the Land of Ash
 
 ## Overview
-***Journeys in the Land of Ash*** ("Land of Ash") is a single-player roguelike deckbuilding game inspired by *Slay the Spire*, set in the world of *The Elder Scrolls III: Morrowind*. Players take on the role of a new recruit in one of the major guilds, navigating a series of encounters and quests while building their deck, battling enemies, and acquiring powerful cards.
+***Journeys in the Land of Ash*** ("Land of Ash") is a single-player roguelike deckbuilding game inspired by *Slay the Spire* and set in the world of *The Elder Scrolls III: Morrowind*. Players take on the role of a new recruit in one of the major guilds, navigating a series of quests while building their deck, battling enemies, and leveling up their character.
 
 ## Features
-- **Turn-based card combat**: Engage in strategic battles where every action is a card.
-- **Deckbuilding progression**: Acquire new cards, optimize your deck, and develop unique playstyles.
-- **Dual-resource system**: Manage both stamina and magicka for tactical gameplay.
-- **Exp and leveling**: Increase health, magicka, or stamina each level.
-- **Dynamic status effects**: Apply buffs, debuffs, and ongoing effects.
-- **Guild-based classes**: Choose from Fighters Guild, Thieves Guild, or Mages Guild, each with unique starting decks and abilities.
-- **Randomized encounters**: Battle various enemies, find treasures, and experience unique events.
-- **Persistent unlocks**: Earn rewards after defeat to improve future runs.
+- **Turn-based card combat**
+- **Deckbuilding progression**
+- **Dual-resource system**
+- **Exp and leveling**
+- **Dynamic status effects**
+- **Guild-based classes**
+- **Randomized encounters**
+- **Persistent unlocks**
+- **Permadeath**
 
-## Gameplay
+### Gameplay
 The game follows a loop of:
 1. **Start in Town**: Adjust deck, visit merchants, and select quests.
 2. **Embark on a Quest**: Progress through enemy encounters, events, and treasure.
@@ -22,33 +23,45 @@ The game follows a loop of:
 5. **Return to Town**: Use rewards to strengthen your deck for the next quest.
 6. **Defeat and Restart**: Death is the permanent end of that character, and unlocks a card for future runs.
 
-## Card Types
-A card has a **type**, a **cost** to play, and one or more **effects**.
-- **Weapon** (stamina): Deals physical damage, may have enchantments.
-- **Armor** (stamina): Provides defense and other effects.
+### Card Types
+A card has a **type**, a **resource cost** to play, and one or more **effects**.
+- **Weapon** (stamina): Deals physical damage.
+- **Armor** (stamina): Provides defense.
 - **Skill** (stamina): Various non-damage effects.
-- **Spell** (magicka): Powerful and versatile magic-based cards.
-- **Item** (free): Rare cards with unique effects.
-- **Consumable** (free, single-use): Potions and scrolls with potent effects.
+- **Spell** (magicka): Powerful and versatile magic effects.
+- **Item** (free): Rare cards with limited magic effects.
+- **Consumable** (free, single-use per encounter): Potions and scrolls with magic effects.
 
-## Statuses and Effects
+### Statuses and Effects
 **Effects** take place immediately upon playing a card. Some notable effects include **inflicting damage**, **drawing cards**, and **applying statuses** to either yourself or the enemy.
 
 **Statuses** impact combat dynamically. Some key examples:
-- **Defense**: Reduces incoming damage.
+- **Defense**: Reduces incoming physical damage.
 - **Poison**: Deals damage over time.
-- **Fortify [Attribute]**: Boosts a resource or effect.
-- **Weakness [Damage Type]**: Increases damage taken.
+- **Fortify [Attribute]**: Boosts a character attribute.
+- **Weakness to [Damage Type]**: Increases damage taken.
 - **Reflect**: Bounces elemental damage back at the attacker.
 - **Disease**: Limits the number of cards you can play in a turn.
 
 Statuses decay over time and can also be removed through effects.
 
-## Enemies
-Enemies come with their own decks and abilities, ranging from **Cliff Racers** to **Dremora Lords**. They play cards similarly to the player, drawing, attacking, and defending each turn.
+### Character Stats
+Resources: **Health**, **Stamina**, and **Magicka**.
+
+- **Strength**: Gives a bonus to weapon damage.
+- **Endurance**: Gives a bonus to armor defense.
+- **Agility**: Gives a cost reduction to skill cards.
+- **Intelligence**: Gives a cost reduction to spell cards.
+- **Willpower**: Provides damage reduction from spell attacks.
+- **Speed**: Determines card draw.
+- **Personality**: Provides better card prices with merchants.
+- **Luck**: Provides a small improvement to any random dice rolls.
+
+### Enemies
+Enemies come with their own decks and abilities, ranging from **Cave Rats** and **Cliff Racers** to **Dremora Lords**. They play cards similarly to the player, drawing, attacking, and defending each turn.
 
 ## Development
-The game is structured with modular, object-oriented programming in Python. Key components:
+The game is structured with modular, object-oriented programming in Python. Key components include:
 - **Card System** (`cards.py` and `card_manager.py`): Defines card behavior and effects.
 - **Combat System** (`combat_manager.py` and `combatant.py`): Handles turn-based battle logic.
 - **Status System** (`statuses.py` and `status_manager.py`): Manages buffs, debuffs, and conditions.

@@ -1,3 +1,7 @@
+"""
+This module defines constants needed for the gui.
+"""
+
 RESOURCE_COLORS = {
     "HEALTH": [0.68, 0.281, 0.168, 1.0], # red
     "STAMINA": [0.0, 0.574, 0.32, 1.0], # green

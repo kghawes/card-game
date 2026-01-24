@@ -1,17 +1,17 @@
-When you are attacked, your Resistances and Weaknesses apply before your Defense does.
-
 Weapons, Armor, and Skills cost Stamina to play. Spells cost Magicka. Items and Consumables cost nothing.
 
 Consumable cards can normally only be played once per combat. Rather than being discarded, they are sent to the Consumed Pile.
 
-Percent buffs and debuffs stack additively: A 20% buff stacked with a 30% buff results in a net 50% buff.
+Percent buffs and debuffs stack additively.
 
 All active statuses decay by one level at the end of each turn. 
 
-Stamina and Magicka replenish between turns. Health replenishes between quests.
+Stamina replenishes between turns. Magicka replenishes between encounters. Health replenishes between quests.
 
 Statuses are reset after each combat encounter.
 
 Your deck must contain 10 to 50 cards (inclusive). You can have up to five copies of a card in your deck.
 
-Defense is reduced by the amount of damage blocked when it blocks damage. 
+Defense is reduced by the amount of damage blocked when it blocks damage.
+
+Strength and Endurance have a greater scaling effect the heavier the Weapon or Armor.

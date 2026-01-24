@@ -300,7 +300,7 @@ class TextInterface:
             response = response.upper()
         return response
 
-    def parse_numeric_input(self, response, min_value, max_value) -> (bool, int):
+    def parse_numeric_input(self, response, min_value, max_value) -> tuple[bool, int]:
         """
         Parse player input as an int and return a success flag.
         """
