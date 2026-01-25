@@ -104,9 +104,9 @@ class CardManager:
         """
         Draw the appropriate number of cards at the beginning of a turn.
         """
-        attr_reg = registries.attributes
+        attribute_registry = registries.attributes
         speed_name = c.Attributes.SPEED.name
-        base_mult = attr_reg.get_attribute_modifier(speed_name)
+        base_mult = attribute_registry.get_attribute_modifier(speed_name)
         speed_lvl = subject.get_attribute_level(speed_name)
         cards_to_draw = floor(base_mult * speed_lvl) + c.HAND_SIZE
 

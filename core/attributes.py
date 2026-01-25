@@ -1,3 +1,7 @@
+"""
+This module defines the AttributeRegistry class.
+"""
+
 from utils.utils import load_json
 
 class AttributeRegistry:
@@ -11,11 +15,11 @@ class AttributeRegistry:
         data = load_json(attributes_path)
         self.attributes = data["ATTRIBUTES"]
         self.starting_attributes = data["STARTING_ATTRIBUTES"]
-        self.card_type_index = self.setup_card_type_index()
+        self.card_type_index = self._setup_card_type_index()
 
-    def setup_card_type_index(self) -> dict:
+    def _setup_card_type_index(self) -> dict:
         """
-        Setup index for quick lookup of attributes by card type.
+        Set up index for quick lookup of attributes by card type.
         Assumes max one attribute per card type.
         """
         card_types = {}
@@ -24,16 +28,11 @@ class AttributeRegistry:
             if attr_type:
                 card_types[attr_type] = attr_name
         return card_types
-    
-    def get_attribute_description(self, name) -> str:
-        """
-        Get the description of a specific attribute.
-        """
-        return self.attributes.get(name, {}).get("description", "")
 
     def _get_attribute_modifier_map(self, name) -> dict:
         """
         Get the modifier map associated with a specific attribute.
+        For attributes that have different modifiers for different contexts.
         """
         return self.attributes.get(name, {}).get("modifiers", {})
 
@@ -49,24 +48,6 @@ class AttributeRegistry:
         if "ALL" in modifiers:
             return modifiers["ALL"]
         return None
-
-    def get_attribute_modifier(self, name, subtypes=None) -> float:
-        """
-        Get the modifier value associated with a specific attribute and subtypes.
-        """
-        if not subtypes:
-            subtypes = []
-        modifier = self._get_modifier_for_subtypes(
-            self._get_attribute_modifier_map(name),
-            subtypes,
-        )
-        return 0 if modifier is None else modifier
-    
-    def get_attribute_affected_effect(self, name) -> str:
-        """
-        Get the string ID of the effect that is affected by a specific attribute.
-        """
-        return self.attributes.get(name, {}).get("affected_effect", "")
     
     def get_starting_attributes(self, char_class) -> dict:
         """
@@ -74,7 +55,7 @@ class AttributeRegistry:
         """
         return self.starting_attributes.get(char_class, {})
 
-    def get_attribute_by_context(self, card_type, subtypes, effect_id=None) -> tuple:
+    def get_attribute_by_context(self, card_type, subtypes, effect_id=None) -> tuple[str, float]:
         """
         Get the relevant attribute and modifier for a given card type, subtypes,
         and effect.
@@ -94,3 +75,29 @@ class AttributeRegistry:
         if modifier_value is not None:
             return attr_name, modifier_value
         return None, None
+    
+    def get_attribute_description(self, name) -> str:
+        """
+        Get the description of a specific attribute.
+        """
+        return self.attributes.get(name, {}).get("description", "")
+
+    def get_attribute_modifier(self, name, subtypes=None) -> float:
+        """
+        Get the modifier value associated with a specific attribute
+        for specific card subtypes, if any.
+        """
+        if not subtypes:
+            subtypes = []
+        modifier = self._get_modifier_for_subtypes(
+            self._get_attribute_modifier_map(name),
+            subtypes,
+        )
+        return 0 if modifier is None else modifier
+    
+    def get_attribute_affected_effect(self, name) -> str:
+        """
+        Get the string ID of the effect that is affected by a specific attribute.
+        For attributes that modify specific effects only.
+        """
+        return self.attributes.get(name, {}).get("affected_effect", "")

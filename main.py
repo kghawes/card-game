@@ -1,4 +1,6 @@
-"""Main entry point for the card game application."""
+"""
+Main entry point for the card game application.
+"""
 from core.game import Game
 from gui.app import CardGameApp
 from controller import Controller
