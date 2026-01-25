@@ -19,9 +19,9 @@ class Card:
         self.card_id = hash(name)
         self.card_type = card_type
         self.cost = cost
-        self.cost_modifier = 0
-        self.temp_cost_modifier = 0
-        self.override_cost = -1
+        # self.cost_modifier = 0
+        # self.temp_cost_modifier = 0
+        # self.override_cost = -1
         self.value = value
         self.subtypes = subtypes
         self.effects = effects
