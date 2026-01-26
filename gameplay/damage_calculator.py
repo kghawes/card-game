@@ -8,36 +8,58 @@ class DamageCalculator:
     Class responsible for calculating damage dealt from one combatant to another.
     """
     def calculate_damage(
-            self, defender, attacker, amount, damage_type, status_registry
+            self, defender, attacker, amount, damage_type, registries
             ) -> int:
         """
         Calculate the final damage amount after applying statuses and attributes.
         """
+        status_registry = registries.statuses
+        attribute_registry = registries.attributes
+
         amount = self.process_hidden(defender, attacker, amount)
 
         amount = self.process_weakness_resist(defender, amount, damage_type)
         if amount <= 0:
             return 0
 
-        amount = self.process_defense(defender, amount, damage_type, status_registry)
-        if amount <= 0:
-            return 0
-        
-        is_magic_attack = (
-            damage_type != damage_types.PHYSICAL.name
-            and not attacker is None
-            and attacker != defender
-        )
-        if is_magic_attack:
-            amount = self.process_reflect(defender, attacker, amount, damage_type, status_registry)
+        if damage_type == damage_types.PHYSICAL.name:
+            amount = self.process_defense(defender, amount, damage_type, status_registry)
             if amount <= 0:
                 return 0
+        else:
+            amount = self.process_willpower(defender, amount, attribute_registry)
+            if amount <= 0:
+                return 0
+            
+            if attacker is not None and attacker != defender:
+                amount = self.process_reflect(defender, attacker, amount, damage_type, status_registry)
+                if amount <= 0:
+                    return 0
 
-            amount = self.process_spell_absorb(defender, attacker, amount, damage_type, status_registry)
-            # TODO: consider changing to restore magicka instead of fortify intelligence
-            if amount <= 0:
-                return 0
+                amount = self.process_spell_absorb(defender, attacker, amount, damage_type, status_registry)
+                # TODO: consider changing to restore magicka instead of fortify intelligence
+                if amount <= 0:
+                    return 0
         
+        return amount
+    
+    def process_willpower(self, defender, amount, attribute_registry) -> int:
+        """
+        Process willpower attribute for the defender.
+        """
+        willpower_level = defender.get_attribute_level(
+            attribute_registry.WILLPOWER.id
+            )
+        if willpower_level > 0:
+            reduction_percent = 0.02 * willpower_level
+            reduced_amount = int(amount * (1 - reduction_percent))
+            difference = amount - reduced_amount
+            if difference > 0:
+                defender.event_manager.logger.log(
+                    f"{defender.name}'s willpower reduced damage by {difference}!"
+                    )
+            amount = reduced_amount
+            
         return amount
 
     def process_spell_absorb(self, defender, attacker, amount, damage_type, status_registry) -> int:
@@ -99,19 +121,18 @@ class DamageCalculator:
         """
         Process defense status for the defender.
         """
-        if damage_type == damage_types.PHYSICAL.name:
-            defense = defender.status_manager.get_leveled_status(status_names.DEFENSE.name)
-            if defense is not None:
-                defense_status = defense.reference
-                defense_level = defense.get_level()
-                old_amount = amount
-                amount = defense_status.calculate_net_damage(
-                    defender, defense_level, amount, status_registry
-                    )
-                if amount < old_amount:
-                    difference = old_amount - amount
-                    defender.event_manager.logger.log(
-                        f"{defender.name}'s defense blocked {difference} damage!"
+        defense = defender.status_manager.get_leveled_status(status_names.DEFENSE.name)
+        if defense is not None:
+            defense_status = defense.reference
+            defense_level = defense.get_level()
+            old_amount = amount
+            amount = defense_status.calculate_net_damage(
+                defender, defense_level, amount, status_registry
+                )
+            if amount < old_amount:
+                difference = old_amount - amount
+                defender.event_manager.logger.log(
+                    f"{defender.name}'s defense blocked {difference} damage!"
                         )
                         
         return amount

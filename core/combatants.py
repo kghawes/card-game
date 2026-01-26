@@ -133,7 +133,7 @@ class Combatant:
         delta = self.attribute_deltas.get(attribute_id, 0)
         return base_level + delta
 
-    def take_damage(self, attacker, amount, damage_type, status_registry):
+    def take_damage(self, attacker, amount, damage_type, registries):
         """
         Accounting for statuses that modify incoming damage, change health to
         register damage taken.
@@ -142,7 +142,7 @@ class Combatant:
             return
 
         amount = self.damage_calculator.calculate_damage(
-                self, attacker, amount, damage_type, status_registry
+                self, attacker, amount, damage_type, registries
                 )
 
         health = self.resources[r.HEALTH.name]
