@@ -1,7 +1,9 @@
 """
 This module defines the DamageCalculator class.
 """
-from utils.constants import DamageTypes as damage_types, StatusNames as status_names
+from math import floor
+from utils.constants import DamageTypes as damage_types, StatusNames as status_names, \
+    Attributes as attribute_names
 
 class DamageCalculator:
     """
@@ -48,11 +50,12 @@ class DamageCalculator:
         Process willpower attribute for the defender.
         """
         willpower_level = defender.get_attribute_level(
-            attribute_registry.WILLPOWER.id
+            attribute_names.WILLPOWER.name
             )
         if willpower_level > 0:
-            reduction_percent = 0.02 * willpower_level
-            reduced_amount = int(amount * (1 - reduction_percent))
+            modifier = attribute_registry.get_attribute_modifier(attribute_names.WILLPOWER.name)
+            reduction_percent = modifier * willpower_level
+            reduced_amount = floor(amount * (1 - reduction_percent))
             difference = amount - reduced_amount
             if difference > 0:
                 defender.event_manager.logger.log(

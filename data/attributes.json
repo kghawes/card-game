@@ -43,7 +43,7 @@
         "WILLPOWER": {
             "description": "Increases resistance to magical damage.",
             "modifiers": {
-                "ALL": 0.05
+                "ALL": 0.02
             }
         },
         "PERSONALITY": {
