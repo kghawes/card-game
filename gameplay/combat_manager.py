@@ -87,7 +87,7 @@ class CombatManager:
                 continue
             level = effect.get_level(card, combatant, registries.attributes)
             effect.reference.resolve(
-                combatant, opponent, level, status_registry=registries.statuses
+                combatant, opponent, level, registries
                 )
             self.event_manager.logger.log(
                 f"{card.name} resolved {effect.name} at level {level}.", True

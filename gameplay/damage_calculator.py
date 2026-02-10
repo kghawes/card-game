@@ -34,7 +34,7 @@ class DamageCalculator:
                 return 0
             
             if attacker is not None and attacker != defender:
-                amount = self.process_reflect(defender, attacker, amount, damage_type, status_registry)
+                amount = self.process_reflect(defender, attacker, amount, damage_type, registries)
                 if amount <= 0:
                     return 0
 
@@ -55,7 +55,7 @@ class DamageCalculator:
         if willpower_level > 0:
             modifier = attribute_registry.get_attribute_modifier(attribute_names.WILLPOWER.name)
             reduction_percent = modifier * willpower_level
-            reduced_amount = floor(amount * (1 - reduction_percent))
+            reduced_amount = max(floor(amount * (1 - reduction_percent)), 0)
             difference = amount - reduced_amount
             if difference > 0:
                 defender.event_manager.logger.log(
@@ -86,7 +86,7 @@ class DamageCalculator:
                 
         return amount
 
-    def process_reflect(self, defender, attacker, amount, damage_type, status_registry) -> int:
+    def process_reflect(self, defender, attacker, amount, damage_type, registries) -> int:
         """
         Process reflect status for the defender.
         """
@@ -115,7 +115,7 @@ class DamageCalculator:
                 # Otherwise, just stop reflection here
             if will_damage_attacker or will_damage_defender:
                 attacker.take_damage(
-                        defender, reflected_amount, damage_type, status_registry
+                        defender, reflected_amount, damage_type, registries
                         )
                     
         return amount

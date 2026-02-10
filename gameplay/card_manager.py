@@ -36,8 +36,7 @@ class CardManager:
 
     def try_add_to_deck(self, card) -> Tuple[bool, bool, bool]:
         """
-        Attempt to add the card to the deck and return success flag and error
-        message.
+        Attempt to add the card to the deck and return success flag and errors.
         """
         allowed = True
         too_many_copies = False
@@ -62,7 +61,7 @@ class CardManager:
         """
         random.shuffle(self.deck)
 
-    def draw(self, subject, status_registry, cards_to_draw=1):
+    def draw(self, subject, registries, cards_to_draw=1):
         """
         Draw the indicated number of cards, shuffling the discard pile back
         into the deck if necessary.
@@ -86,9 +85,9 @@ class CardManager:
                 self.event_manager.logger.log(
                     f"{subject.name} drew {card.name}.", True
                     )
-        self.recalculate_for_new_card(subject, status_registry)
+        # self.recalculate_for_new_card(subject, registries)
 
-    def recalculate_for_new_card(self, subject, status_registry):
+    def recalculate_for_new_card(self, subject, registries):
         """
         Recalculate modifiers and costs when a card is added to the hand.
         """
@@ -182,7 +181,7 @@ class CardManager:
         assert self.discard_pile and len(self.hand) < hand_size
         card = self.discard_pile.pop(card_index)
         self.hand.append(card)
-        self.recalculate_for_new_card(subject, status_registry)
+        # self.recalculate_for_new_card(subject, status_registry)
 
     def reset_cards(self):
         """

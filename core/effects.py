@@ -18,7 +18,7 @@ class Effect:
         self.description = description
         self.target_type_enum = target_type_enum
 
-    def resolve(self, source, opponent, level=1, status_registry=None):
+    def resolve(self, source, opponent, level=1, registries=None):
         """
         Base method for polymorphism. Do the thing the effect does.
         """
@@ -63,11 +63,11 @@ class NoEffect(Effect):
         effect_name = c.EffectNames.NO_EFFECT.value
         super().__init__(effect_id, effect_name, "", None)
     
-    def resolve(self, source, opponent, level=1, status_registry=None):
+    def resolve(self, source, opponent, level=1, registries=None):
         """
         This effect does nothing.
         """
-        status_registry.event_manager.logger.log(
+        registries.statuses.event_manager.logger.log(
             f"Nothing happened!"
             )
 
@@ -88,14 +88,14 @@ class ChangeStatusEffect(Effect):
         self.name = self.format_name(base_name, status_ref.name)
         super().__init__(self.effect_id, self.name, description, target_type_enum)
         
-    def resolve(self, source, opponent, level, status_registry):
+    def resolve(self, source, opponent, level, registries):
         """
         Change the status by the amount indicated.
         """
         subject = self.get_target_combatant(source, opponent)
 
         subject.status_manager.change_status(
-            self.status_ref.status_id, level, subject, status_registry
+            self.status_ref.status_id, level, subject, registries.statuses
             )
 
         if self.matches(c.EffectNames.REMOVE.name):
@@ -104,7 +104,7 @@ class ChangeStatusEffect(Effect):
         else:
             sign_str = "+"
         
-        status_registry.event_manager.logger.log(
+        registries.statuses.event_manager.logger.log(
             f"{sign_str}{level} {self.status_ref.name} applied to {subject.name}."
         )
 
@@ -122,14 +122,14 @@ class DispelEffect(Effect):
         self.name = self.format_name(effect_name_enum.value)
         super().__init__(self.effect_id, self.name, description, target_type_enum)
 
-    def resolve(self, source, opponent, level, status_registry):
+    def resolve(self, source, opponent, level, registries):
         """
         Reduce active statuses on the subject.
         """
         subject = self.get_target_combatant(source, opponent)
         exclude = [c.StatusNames.DEFENSE.name]
         subject.status_manager.change_all_statuses(
-            -level, subject, status_registry, exclude
+            -level, subject, registries.statuses, exclude
             )
 
 
@@ -149,13 +149,13 @@ class DamageEffect(Effect):
         name = self.format_name(base_name, c.EffectNames.DAMAGE.value)
         super().__init__(effect_id, name, description, target_type_enum)
 
-    def resolve(self, source, opponent, level, status_registry):
+    def resolve(self, source, opponent, level, registries):
         """
         The target of the effect takes damage.
         """
         subject = self.get_target_combatant(source, opponent)
         subject.take_damage(
-            source, level, self.damage_type_enum.name, status_registry
+            source, level, self.damage_type_enum.name, registries
             )
 
 
@@ -173,14 +173,14 @@ class ChangeResourceEffect(Effect):
         name = self.format_name(effect_name_enum.value, resource_enum.value)
         super().__init__(effect_id, name, description, target_type_enum)
 
-    def resolve(self, source, opponent, level, status_registry):
+    def resolve(self, source, opponent, level, registries):
         """
         Change the resource's current value by the amount indicated.
         """
         subject = self.get_target_combatant(source, opponent)
         subject.change_resource(self.resource_enum.name, level)
         action_string = "restored" if level > 0 else "drained"
-        status_registry.event_manager.logger.log(
+        registries.statuses.event_manager.logger.log(
             f"{abs(level)} {self.resource_enum.value} {action_string}!"
         )
 
@@ -198,7 +198,7 @@ class HandEffect(Effect):
         super().__init__(effect_id, name, description, c.TargetTypes.SELF)
         self.is_draw_effect = is_draw_effect
 
-    def resolve(self, source, opponent, level, status_registry):
+    def resolve(self, source, opponent, level, registries):
         """
         Draw or discard card(s).
         """
@@ -206,15 +206,13 @@ class HandEffect(Effect):
         if level == 0:
             return
         if self.is_draw_effect:
-            subject.card_manager.draw(subject, status_registry, level)
-            status_registry.event_manager.logger.log(
+            subject.card_manager.draw(subject, registries, level)
+            registries.statuses.event_manager.logger.log(
                 f"{level} cards drawn!"
                 )
         else:
-            subject.card_manager.discard_random(
-                level, subject, status_registry
-                )
-            status_registry.event_manager.logger.log(
+            subject.card_manager.discard_random(level, subject)
+            registries.statuses.event_manager.logger.log(
                 f"{level} cards discarded!"
                 )
 
@@ -231,7 +229,7 @@ class JumpEffect(Effect):
         name = c.EffectNames.JUMP.value
         super().__init__(effect_id, name, description, c.TargetTypes.SELF)
 
-    def resolve(self, source, opponent, level, status_registry):
+    def resolve(self, source, opponent, level, registries):
         """
         Reduce the cost of the most costly card in hand.
         """
@@ -254,7 +252,7 @@ class JumpEffect(Effect):
             level = levitate.get_level()
             status.trigger_on_change(subject, level)
         
-        status_registry.event_manager.logger.log(
+        registries.statuses.event_manager.logger.log(
             f"{highest_cost_card.name} cost reduced by {level}!"
             )
 
