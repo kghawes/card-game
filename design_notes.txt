@@ -1,0 +1,216 @@
+1. Game Structure and Program Flow
+	The entry point is main.py, which sets up the following three systems and then presses "go."
+
+	1.I. Game Logic (Backend)
+		The central coordinator is the Game class in core.game. In terms of code organization, game logic is divided into core, gameplay, and utils. Core is intended to hold game objects, gameplay is intended to hold all the additional logic to make features work, and utils is intended to hold more general tools that are needed at various points. The game logic code uses data from JSON files.
+
+	1.II. GUI (Frontend)
+		The GUI is a Kivy app. It's responsive to player input and does not process any game functionality. 
+
+		Kivy is a GUI library for Python that works using two parts, Python code and kv markup code. A Kivy app consists of one or more screens. The basic building block of a screen is a Widget. A Widget can have a position on the screen, visual elements and text, interactivity, and can contain child Widgets. The positions and visuals of Widgets are defined in kv markup, and their interactive behavior is defined in Python.
+
+		Kivy is not suited to complex visuals like 3D graphics and shaders.
+
+	1.III. Controller and Event Manager
+		These classes are responsible for communication and handing off control between the backend and frontend. Either side raises an event when control needs to be sent to the other side. The Controller consists of all the event handlers, and each of these calls into either the backend or frontend.
+
+		Game Logic <-> Controller <-> GUI
+
+		After the game starts up, it enters its idle state in which the GUI has program control and it's waiting for user input. When the player performs a game action (like playing a card), the GUI raises an event and control is handed to the Controller to handle it. The Controller does whatever's necessary to get all needed information together, then it calls into the game logic. Control shifts to the backend, it does whatever processing it needs to do, and when finished it raises an event to give control back to the Controller. The Controller again gathers any needed information, then calls into the GUI. Once the GUI is finished changing what's displayed on screen, the app returns to its idle state.
+
+2. Game Rules
+	The Game consists of a Player, a Combat Manager, and several Registries for looking up data. A Player has a name, a Character Class (Fighter, Thief, or Mage), Resources (Health, Stamina, and Magicka) and Character Attributes (Strength, Agility, Endurance, Intelligence, Willpower, Speed, Personality, and Luck), as well as a Card Manager and a Status Manager.
+
+	The Card Manager holds the Player's Deck, Hand, and other stacks of Cards, and is responsible for moving Cards between stacks. The Status Manager holds the player's active Statuses and is responsible for adding, removing, changing, and triggering Statuses. The Combat Manager controls the flow of combat.
+
+	Registries include the Card Registry, the Effect Registry, the Status Registry, the Attribute Registry, and the Quest Registry. In general, Registries hold data (usually from JSON) that might be needed at various points in the game and can be looked up by an ID. For example, we can use the Status Registry to get a reference to the Status object given the Status ID, which grants us access to the Status' functionality.
+
+	2.I. Combatants
+		The Player and each Enemy are instances of the Combatant class. A basic Combatant has all the stats and managers necessary to participate in Combat. The Player and Enemy classes include functionality specific to those entities.
+
+		Each Combatant comes with a starting Deck (for Players this is determined by Character Class). Character Class also determines starting Character Attributes and available Skill Cards.
+
+		i. Character Stats
+			Every Combatant has three Resource stats and eight Character Attributes. Players additionally have a Level and Experience Points (EXP). Players gain EXP from defeating Enemies, and each increase in Level allows them to select a limited number of Resources and Attributes to increase.
+
+			Resources:
+				a. Health: Determines when combat is over and who won. Refills after each Quest.
+				b. Stamina: Resource used to play Weapon, Armor, and Skill Cards. Refills after each turn.
+				c. Magicka: Resource used to play Spell Cards. Refills after each combat.
+
+			Attributes:
+				a. Strength: Buffs the Physical Damage of Weapon Cards based on their weight Subtype, with heavier Weapons benefiting more.
+				b. Endurance: Buffs the Defense of Armor Cards based on their weight Subtype, with heavier Armor benefiting more.
+				c. Agility: Discounts the Stamina cost of Skill Cards.
+				d. Intelligence: Discounts the Magicka cost of Spell Cards.
+				e. Willpower: Reduces incoming magical Damage.
+				f. Speed: Determines cards drawn per turn.
+				g. Personality: Improves prices with Card Merchant.
+				h. Luck: Improves chance of success of any "dice roll."
+
+		ii. Character Classes
+			a. The Fighter
+				This character is a new recruit in the Imperial Fighters Guild in Morrowind. They have higher starting Strength and Endurance, and their starting Deck features Heavy Armor and Medium Weapons. Strategies for the Fighter include glass cannon barbarian, turtle tank, and spellsword.
+			b. The Thief
+				This character is a new recruit in the Imperial Thieves Guild in Morrowind. They have higher starting Agility and Speed, and their starting Deck features Light Armor and Light Weapons. Strategies for the Thief include using Skills and Statuses to disable the Enemy, evade attacks, and deal Critical Damage.
+			c. The Mage
+				This character is a new recruit in the Imperial Mages Guild in Morrowind. They have higher starting Intelligence and Willpower, and their starting Deck features Spells, Scrolls, and Potions. Strategies for the Mage are varied, but may be difficult to execute.
+
+	2.II. Cards
+		Card data is stored in the Card Registry in the form of Card Prototypes. These are created from JSON during initial setup. 
+		
+		A Card Prototype is a general instance of a specific card, and individual Cards are created by cloning a prototype. By analogy, in Magic: The Gathering, the card "Black Lotus" (in general) would be a Card Prototype object, and any particular physical copy of "Black Lotus" would be a Card object. There can multiple Cards corresponding to the same Card Prototype in the Hand at once for example, and they are distinct objects.
+
+		A Card has a name, a Card Type, zero or more Subtypes, a Resource cost, one or more Effects, and a monetary value. The Card Types and Subtypes are as follows. Some Subtypes are mutually exclusive.
+
+		i. Weapon
+			a. Light
+			b. Medium
+			c. Heavy
+			d. Long Blade
+			e. Short Blade
+			f. Blunt Weapon
+			g. Axe
+			h. Spear
+			i. Marksman Weapon
+			j. Staff
+			k. Enemy Weapon
+		ii. Armor
+			a. Light
+			b. Medium
+			c. Heavy
+			d. Enemy Armor
+		iii. Skills
+			a. Fighter Skill
+			b. Thief Skill
+			c. Mage Skill
+			d. Enemy Skill
+		iv. Spells
+			a. Alteration
+			b. Destruction
+			c. Conjuration
+			d. Restoration
+			e. Mysticism
+			f. Illusion
+		v. Consumables
+			a. Potion
+			b. Scroll
+		vi. Items
+			(e.g. enchanted rings)
+
+		A Card may either cost Stamina or Magicka (or nothing, but not both). Weapons, Armor, and Skills cost Stamina. Spells cost Magicka. Consumables and Items can be played at no Resource cost.
+
+		Some Card Types are restricted in what Effects they can have. Armor and Skills should not deal Damage. Weapons and Skills should not provide Defense. Only Weapons should deal Physical Damage.
+
+		Skills are play-restricted by Character Class, and some other cards may be as well.
+
+		The Enemy Subtypes are for Cards that the Player should never have access to. This includes something like a claw attack Weapon Card. In general Enemies can also use ordinary Cards.
+
+	2.III. Effects and Statuses
+		Effects are how Cards do things. When a Card is played, each of its Effects resolve one-by-one (with some exceptions). Each Effect targets a Combatant (self or opponent). The kinds of Effects in the game include the following.
+
+		i. Deal Damage of type (Physical, Fire, Frost, Shock, Poison)
+		ii. Restore a Resource (Health, Stamina, Magicka)
+		iii. Apply or remove a Status
+		iv. Draw or discard Card(s)
+
+		Once an Effect resolves, it's gone and forgotten. Statuses are used for ongoing changes to the game state. A Status is applied at a specific level, and the level decrements at the end of each turn. When the level reaches zero, the Status expires. Statuses in the game include the following.
+
+		i. Defense (block up to X Physical Damage and, if you do, remove that many levels of Defense)
+		ii. Poison (take X Poison Damage each turn)
+		iii. Weakness or Resistance to a Damage type
+		iv. Fortify or Damage Attribute (Strength, Endurance, etc.)
+		v. Restrict the kinds of Cards that can be played
+		vi. Restrict the kinds of Effects that can resolve
+		vii. Reflect non-Physical Damage
+
+		Each Effect object is a general instance of a specific Effect, similar to Card Prototypes, and likewise for Statuses. An Effect on a specific Card, or an active Status on a Combatant, is a specific, leveled instance of that specific Effect or Status. It's the difference between the "Physical Damage on Target" Effect in general and "Deal 5 Physical Damage on Target" as it appears on an Iron Longsword Card currently in the Player's Hand. Or, for Statuses, it's the difference between the "Poison" Status in general and the "Poison level 3" currently active on the Enemy.
+
+		This is where Leveled Mechanics come in. The specific, leveled instances of both Effects and Statuses are represented by the LeveledMechanic class.
+
+		So, for example, a Combatant's Status Manager holds LeveledMechanic objects, and each of these holds a reference to the corresponding Status object. When a Status needs to do something functionally, the Status Manager gets the Status reference from the Leveled Mechanic. When a Status is first applied, no Leveled Mechanic exists, so the Status Manager gets the Status from the Status Registry and creates a new Leveled Mechanic.
+
+	2.IV. Gameplay Loop
+		The game has a roguelike permadeath feature. A run consists of a series of Quests interspersed with visits to Town to modify the Deck. A Quest consists of a series of Encounters, which are primarily Combat Encounters but may include events, treasure, dialogue, etc. In Town, the Player can access the Card Merchant and their personal Card Library (storage).
+
+		At the end of each run, the Player gets to unlock a card for future runs based on how far they progressed.
+
+		Each Character Class has a unique line of thematic Quests corresponding to their guild.
+
+	2.V. Combat
+		In each Combat Encounter, the Player fights one Enemy. Combat is turn-based, with a turn having three phases.
+
+		i. Beginning of Turn
+			a. The Combatant's Stamina is replenished to full.
+			b. A Hand of Cards is drawn (number depends on Speed).
+			c. Trigger active Statuses that do something each turn (like Poison).
+		ii. Action Phase
+			During this phase, the Combatant plays Cards until they are unable to do so or choose to end their turn. Enemies play Cards randomly until they can't anymore.
+		iii. End of Turn
+			a. Any Cards remaining in the Combatant's Hand are discarded.
+			b. The Combatant's active Statuses are decremented 1 level.
+
+		Combat ends as soon as a Combatant's Health reaches zero. For victory, the Player is rewarded with EXP and a new Card. 
+
+	2.VI Deckbuilding
+		The Player begins with a starting Deck depending on their Character Class. When Card rewards are offered, the Player may accept or reject the Card. If accepted, the Card is immediately added to their Deck.
+
+		Between Quests, the Player may edit their Deck by storing or selling unneeded Cards and purchasing new ones. The Card Library is the Player's personal storage, and is only accessible in Town. Likewise for the Card Merchant.
+
+3. Gameplay Ideas
+	3.I Cards and Strategies
+		a. Stamina Economy
+			Stamina is used for Weapons, Armor, and Skills, thus the Player's strategy must balance their use of these Card Types. For the Thief and especially the Fighter, Weapons are the main way of dealing Damage, so they are a necessity. Armor provides Defense from Physical Damage, and Skills include buffs, debuffs, etc.
+
+			Weapons generally range from low-Cost, low-Damage, lightweight options to high-cost, high-damage, heavier alternatives. Lighter Weapons are more Stamina-efficient by default, and heavier Weapons rely more on Strength scaling (but can reach high efficiency at high Strength). Beyond the early-game, lightweight Weapons will be inadequate because of the limited number of Weapons that can be drawn each turn.
+
+			For example, maybe the Player has enough Stamina to deal 40 Damage in one turn if they had 8 Weapons in their hand at once, but they only draw 2 Weapons per turn on average.
+
+			What can be done in this situation is to spend extra Stamina on Armor (to last enough turns to kill the Enemy) or Skills (to draw extra Cards, buff Damage, disable the Enemy, etc.).
+
+			So, for example, a strategy could prioritize Endurance and Willpower and turtle up, dealing a little damage each turn and outlasting the Enemy. Or, a strategy could prioritize Speed and Agility, taking a lot of actions each turn and maintaining control of the battle.
+
+			One thing that pushes Character Classes into certain strategies (and away from others) are Class-restricted Cards. The Fighter has fewer skills and they focus mostly on being better at combat. The Thief has more Skill options but fewer Weapon and Armor options. The other major factor is starting stats.
+
+		b. Magicka Economy
+			The Magicka Economy is different because only Spells use Magicka and Magicka doesn't replenish between turns, only after combat ends. Spells can have all the effects of other Cards except for dealing Physical Damage.
+
+			The Mage is meant to be a more complex, more challenging, and potentially more powerful Character Class (the Fighter is meant to be the simplest). Spells are powerful, but the resource limitation and lack of many other options make it a difficult playstyle to master.
+
+			Fighters and especially Thieves can add on the use of Spells to their normal repertoires, but overinvestment in magic stats will spread fighting stats too thin.
+	
+	3.II. Quest Design and Progression
+		Each Character Class has their own line of Quests. These might be partly randomized each run and/or the Player may be given a choice of Quests to take next. Completing a Quest grants the Player Gold and EXP.
+
+		An average Quest might include 8-16 Enemies and a Boss. Enemy Encounters are partly random, for example pulling from groups of similar wild animals or diseased variants.
+
+		Quests may have various objectives like saving an NPC or retrieving a stolen item, but generally consist of clearing a location of Enemies.
+
+		Locations may include:
+		a. Caves
+			i. Animal Caves
+			ii. Smuggler Dens
+			iii. Necromancer Hideouts
+		b. Ancestral Tombs
+			i. Undisturbed Tombs
+			ii. Vampire Nests
+		c. Dwemer Ruins
+			i. Undisturbed Ruins
+			ii. Smuggler Dens
+			iii. Vampire Nests
+		d. Dunmer Stronghold
+			i. Gang Headquarters
+			ii. Necromancer Hideouts
+		e. Wilderness
+		f. Daedric Ruins
+
+		Quest progression should feature numerous difficulty spikes to encourage the Player to develop different strategies, try different Character Classes, and/or grind for better Card unlocks and RNG. Bosses should be designed to exploit specific weaknesses of common strategies, for example a Boss for the Fighter that deals non-Physical Damage rendering Armor useless. Over the course of several Quests these abilities should be picked up by regular Enemies to maintain challenge regardless of the Player's strategy.
+
+4. Setting, Story, and Theme
+	The Game takes place in Morrowind between the end of The Elder Scrolls II: Daggerfall and the beginning of The Elder Scrolls III: Morrowind, in the year 3E420. Think basically the same setting as TES III, but unrelated to the events of that game.
+
+	The Player Character is a new recruit in one of the Imperial guilds. In The Elder Scrolls games, the guilds are generally a bunch of do-nothings who make the player do all their work for them. Useful for single player RPG quest progression, but unrealistic. This Game intends to portray the guilds as the "meat grinders" they are only suggested to be in the TES series.
+
+	Plot is minimal. Focus on creating small, self-contained stories rather than an overarching narrative.
+
+	The Game draws inspiration for Cards and mechanics from TES III. Some features are direct carry-overs, like expending Magicka to use Spells, and others are creative reinterpretations or just meant to be evocative.
