@@ -2,9 +2,8 @@
 This module defines the Status class, its child classes, and the
 StatusRegistry.
 """
-import random
 import utils.constants as c
-from utils.utils import load_json
+from utils.utils import load_json, roll_random_chance
 
 class Status:
     """
@@ -62,16 +61,10 @@ class ModifyEffectStatus(Status):
         """
         Initialize a new ModifyEffectStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.affected_card_type = affected_card_type
         self.affected_effect = affected_effect
         self.sign_factor = sign_factor
-
-    def calculate_contribution(self, level):
-        """
-        Calculate the contribution of this status to the modifier pool.
-        """
-        return self.sign_factor * c.SCALE_FACTOR * level
 
     def trigger_on_turn(self, subject, level, status_registry):
         """
@@ -87,7 +80,7 @@ class ModifyEffectStatus(Status):
         """
         Accumulate contributions to the modifier pool when level changes.
         """
-        contribution = self.calculate_contribution(level)
+        contribution = self.sign_factor * level
         subject.modifier_manager.accumulate_effect_modifier(self, contribution)
         card_type = self.affected_card_type
         effect = self.affected_effect
@@ -99,7 +92,7 @@ class ModifyEffectStatus(Status):
         """
         Clear contributions when the status expires.
         """
-        super().expire(subject)
+        super().expire(subject, logger)
         subject.modifier_manager.clear_effect_modifiers(
             self, subject.card_manager
             )
@@ -110,49 +103,43 @@ class ModifyCostStatus(Status):
     Statuses that change the stamina or magicka cost on cards.
     """
     def __init__(
-            self, status_id, description, affected_card_type, sign_factor
+            self, status_id, description#, affected_card_type, sign_factor
             ):
         """
         Initialize a new ModifyCostStatus.
         """
-        super().__init__(status_id, description, True)
-        self.affected_card_type = affected_card_type
-        self.sign_factor = sign_factor
+        super().__init__(status_id, description, applies_immediately=True)
+    #     self.affected_card_type = affected_card_type
+    #     self.sign_factor = sign_factor
 
-    def calculate_contribution(self, level):
-        """
-        Calculate the contribution of this status to the modifier pool.
-        """
-        return self.sign_factor * level
+    # def trigger_on_turn(self, subject, level, status_registry):
+    #     """
+    #     Recalculate costs at the start of each turn.
+    #     """
+    #     card_type = self.affected_card_type
+    #     subject.modifier_manager.recalculate_cost_modifiers(
+    #         card_type, subject.card_manager
+    #         )
 
-    def trigger_on_turn(self, subject, level, status_registry):
-        """
-        Recalculate costs at the start of each turn.
-        """
-        card_type = self.affected_card_type
-        subject.modifier_manager.recalculate_cost_modifiers(
-            card_type, subject.card_manager
-            )
+    # def trigger_on_change(self, subject, level):
+    #     """
+    #     Accumulate contributions to the modifier pool when level changes.
+    #     """
+    #     contribution = self.sign_factor * level
+    #     subject.modifier_manager.accumulate_cost_modifier(self, contribution)
+    #     card_type = self.affected_card_type
+    #     subject.modifier_manager.recalculate_cost_modifiers(
+    #         card_type, subject.card_manager
+    #         )
 
-    def trigger_on_change(self, subject, level):
-        """
-        Accumulate contributions to the modifier pool when level changes.
-        """
-        contribution = self.calculate_contribution(level)
-        subject.modifier_manager.accumulate_cost_modifier(self, contribution)
-        card_type = self.affected_card_type
-        subject.modifier_manager.recalculate_cost_modifiers(
-            card_type, subject.card_manager
-            )
-
-    def expire(self, subject, logger):
-        """
-        Clear contributions when the status expires.
-        """
-        super().expire(subject)
-        subject.modifier_manager.clear_cost_modifiers(
-            self, subject.card_manager
-            )
+    # def expire(self, subject, logger):
+    #     """
+    #     Clear contributions when the status expires.
+    #     """
+    #     super().expire(subject, logger)
+    #     subject.modifier_manager.clear_cost_modifiers(
+    #         self, subject.card_manager
+    #         )
 
 
 class ModifyMaxResourceStatus(Status):
@@ -163,7 +150,7 @@ class ModifyMaxResourceStatus(Status):
         """
         Initialize a new ModifyMaxResourceStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.resource_id = resource_id
         self.sign_factor = sign_factor
 
@@ -181,9 +168,9 @@ class ModifyDrawStatus(Status):
     """
     def __init__(self, status_id, description, sign_factor):
         """
-        Initialize a new DrawStatus
+        Initialize a new ModifyDrawStatus
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.sign_factor = sign_factor
 
     def trigger_on_change(self, subject, level):
@@ -203,17 +190,38 @@ class ModifyDamageStatus(Status):
         """
         Initialize a new ModifyDamageStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.damage_type = damage_type
         self.sign_factor = sign_factor
 
     def trigger_on_change(self, subject, level):
         """
-        Update the modifier pool with the new contribution.
+        Update the modifier pool with the new contribution factor.
+        Does not factor in the multiplier for the specific status.
         """
         modifier_manager = subject.modifier_manager
-        amount = level * self.sign_factor * c.SCALE_FACTOR
+        amount = level * self.sign_factor
         modifier_manager.accumulate_damage_modifier(self.status_id, amount)
+
+
+class ModifyAttributeStatus(Status):
+    """
+    Statuses that affect combatant attribute values.
+    """
+    def __init__(self, status_id, description, sign_factor, attribute_id):
+        """
+        Initialize a new ModifyAttributeStatus
+        """
+        super().__init__(status_id, description, applies_immediately=True)
+        self.sign_factor = sign_factor
+        self.attribute_id = attribute_id
+
+    def trigger_on_change(self, subject, change):
+        """
+        Update the subject's attribute delta.
+        """
+        subject.attribute_deltas[self.attribute_id] += change * self.sign_factor
+        
 
 
 class DefenseStatus(Status):
@@ -224,7 +232,7 @@ class DefenseStatus(Status):
         """
         Initialize a new DefenseStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def calculate_net_damage(
             self, subject, level, incoming_damage, status_registry
@@ -249,7 +257,7 @@ class PoisonStatus(Status):
         """
         Initialize a new PoisonStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def trigger_on_turn(self, subject, level, status_registry):
         """
@@ -267,7 +275,7 @@ class RegenerationStatus(Status):
         """
         Initialize a new RegenerationStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def trigger_on_turn(self, subject, level, status_registry):
         subject.change_resource(c.Resources.HEALTH.name, level)
@@ -281,16 +289,16 @@ class EvasionStatus(Status):
         """
         Initialize a new EvasionStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
-    def calculate_evasion_damage(self, level, incoming_damage) -> int:
+    def calculate_evasion_damage(self, level, incoming_damage, luck) -> int:
         """
         Return the damage to be taken after winning or losing the dice roll.
         """
         base_probability = c.BASE_EVASION_PROBABILITY
         success_probability = min(base_probability * level, 1.0)
-        roll = random.random()
-        return 0 if roll >= success_probability else incoming_damage
+        success = roll_random_chance(success_probability, luck)
+        return 0 if success else incoming_damage
 
 
 class CriticalHitStatus(Status):
@@ -301,16 +309,16 @@ class CriticalHitStatus(Status):
         """
         Initialize a new CriticalHitStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
-    def calculate_damage_multiplier(self, level) -> int:
+    def calculate_damage_multiplier(self, level, luck) -> int:
         """
         Randomly calculate the damage multiplier.
         """
         base_probability = c.BASE_CRIT_PROBABILITY
         success_probability = min(base_probability * level, 1.0)
-        roll = random.random()
-        return c.CRIT_MULTIPLIER if roll >= success_probability else 1
+        success = roll_random_chance(success_probability, luck)
+        return c.CRIT_MULTIPLIER if success else 1
 
 
 class RestrictCardTypeStatus(Status):
@@ -321,7 +329,7 @@ class RestrictCardTypeStatus(Status):
         """
         Initialize a new RestrictCardStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
         self.restricted_types = restricted_types
 
     def is_card_playable(self, card_type) -> bool:
@@ -339,7 +347,7 @@ class FilterEffectStatus(Status):
         """
         Initialize a new FilterEffectStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
         self.allowed_effect = allowed_effect
         self.blocked_effect = blocked_effect
 
@@ -363,7 +371,7 @@ class LimitCardPlayStatus(Status):
         """
         Initialize a new LimitCardPlayStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
         self.card_limit = max_cards_per_turn
 
 
@@ -375,7 +383,7 @@ class BlockMagicStatus(Status):
         """
         Initialize a new BlockMagicStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def calculate_block(self, damage_amount, damage_type, status_level):
         """
@@ -397,28 +405,28 @@ class AverageCostStatus(Status):
         """
         Initialize a new AverageCostStatus.
         """
-        super().__init__(status_id, description, True)
+        super().__init__(status_id, description, applies_immediately=True)
 
-    def trigger_on_change(self, subject, level):
-        """
-        Perform the cost averaging.
-        """
-        if level <= 0 or not subject.card_manager.hand:
-            return
-        sum_cost = 0
-        for card in subject.card_manager.hand:
-            sum_cost += card.get_cost(False)
-        average_cost = round(sum_cost / len(subject.card_manager.hand))
-        for card in subject.card_manager.hand:
-            card.override_cost = average_cost
+    # def trigger_on_change(self, subject, level):
+    #     """
+    #     Perform the cost averaging.
+    #     """
+    #     if level <= 0 or not subject.card_manager.hand:
+    #         return
+    #     sum_cost = 0
+    #     for card in subject.card_manager.hand:
+    #         sum_cost += card.get_cost(False)
+    #     average_cost = round(sum_cost / len(subject.card_manager.hand))
+    #     for card in subject.card_manager.hand:
+    #         card.override_cost = average_cost
 
-    def expire(self, subject, logger):
-        """
-        Reset costs.
-        """
-        super().expire(subject)
-        for card in subject.card_manager.hand:
-            card.reset_override_cost()
+    # def expire(self, subject, logger):
+    #     """
+    #     Reset costs.
+    #     """
+    #     super().expire(subject, logger)
+    #     for card in subject.card_manager.hand:
+    #         card.reset_override_cost()
 
 
 class FlagStatus(Status):
@@ -430,7 +438,7 @@ class FlagStatus(Status):
         """
         Initialize a new FlagStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
 
 class MulliganStatus(Status):
@@ -442,7 +450,7 @@ class MulliganStatus(Status):
         """
         Initialize a new MulliganStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def do_redraw(self, subject, level, text_interface, registries):
         """
@@ -475,7 +483,7 @@ class ReturnFromDiscardStatus(Status):
         """
         Initialize a new ReturnFromDiscardStatus.
         """
-        super().__init__(status_id, description, False)
+        super().__init__(status_id, description, applies_immediately=False)
 
     def draw_from_discard(
             self, subject, level, text_interface, status_registry
@@ -522,6 +530,7 @@ class StatusRegistry:
             "ModifyMaxResourceStatus": ModifyMaxResourceStatus,
             "ModifyDrawStatus": ModifyDrawStatus,
             "ModifyDamageStatus": ModifyDamageStatus,
+            "ModifyAttributeStatus": ModifyAttributeStatus,
             "DefenseStatus": DefenseStatus,
             "PoisonStatus": PoisonStatus,
             "RegenerationStatus": RegenerationStatus,

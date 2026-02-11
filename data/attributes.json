@@ -1,0 +1,94 @@
+{
+    "ATTRIBUTES": {
+        "STRENGTH": {
+            "description": "Increases physical damage dealt by weapons. Heavier weapons benefit more.",
+            "card_type": "WEAPON",
+            "affected_effect": "PHYSICAL_DAMAGE",
+            "modifiers": {
+                "HEAVY": 0.1,
+                "MEDIUM": 0.03,
+                "LIGHT": 0.015
+            }
+        },
+        "ENDURANCE": {
+            "description": "Increases defense from armor. Heavier armor benefits more.",
+            "card_type": "ARMOR",
+            "affected_effect": "APPLY_DEFENSE_SELF",
+            "modifiers": {
+                "HEAVY": 0.1,
+                "MEDIUM": 0.03,
+                "LIGHT": 0.015
+            }
+        },
+        "AGILITY": {
+            "description": "Reduces the stamina cost of skills.",
+            "card_type": "SKILL",
+            "modifiers": {
+                "ALL": 0.02
+            }
+        },
+        "SPEED": {
+            "description": "Increases card draw per turn.",
+            "modifiers": {
+                "ALL": 0.2
+            }
+        },
+        "INTELLIGENCE": {
+            "description": "Reduces the magicka cost of spells.",
+            "card_type": "SPELL",
+            "modifiers": {
+                "ALL": 0.02
+            }
+        },
+        "WILLPOWER": {
+            "description": "Increases resistance to magical damage.",
+            "modifiers": {
+                "ALL": 0.02
+            }
+        },
+        "PERSONALITY": {
+            "description": "Improves buy/sell prices with merchants.",
+            "modifiers": {
+                "ALL": 0.03
+            }
+        },
+        "LUCK": {
+            "description": "Randomness is more likely to work out in your favor.",
+            "modifiers": {
+                "ALL": 0.01
+            }
+        }
+    },
+    "STARTING_ATTRIBUTES": {
+        "FIGHTER": {
+            "STRENGTH": 10,
+            "ENDURANCE": 10,
+            "AGILITY": 5,
+            "SPEED": 5,
+            "INTELLIGENCE": 0,
+            "WILLPOWER": 0,
+            "PERSONALITY": 0,
+            "LUCK": 0
+        },
+        "THIEF": {
+            "STRENGTH": 0,
+            "ENDURANCE": 0,
+            "AGILITY": 10,
+            "SPEED": 10,
+            "INTELLIGENCE": 0,
+            "WILLPOWER": 0,
+            "PERSONALITY": 5,
+            "LUCK": 5
+        },
+        "MAGE": {
+            "STRENGTH": 0,
+            "ENDURANCE": 0,
+            "AGILITY": 5,
+            "SPEED": 5,
+            "INTELLIGENCE": 10,
+            "WILLPOWER": 10,
+            "PERSONALITY": 0,
+            "LUCK": 0
+        }
+    }
+}

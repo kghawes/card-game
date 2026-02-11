@@ -1,7 +1,7 @@
 """
-This module defines the Card class, the helper class EffectLevel, as well as
-the CardPrototype and CardCache.
+This module defines the Card class, CardPrototype and CardCache.
 """
+from math import floor
 from utils.utils import Prototype
 from utils.formatter import Formatter
 import utils.constants as c
@@ -11,7 +11,7 @@ class Card:
     """
     Represents a card in game.
     """
-    def __init__(self, name, card_type, cost, value, effects, subtype=None):
+    def __init__(self, name, card_type, cost, value, effects, subtypes):
         """
         Initialize a new Card.
         """
@@ -19,27 +19,28 @@ class Card:
         self.card_id = hash(name)
         self.card_type = card_type
         self.cost = cost
-        self.cost_modifier = 0
-        self.temp_cost_modifier = 0
-        self.override_cost = -1
+        # self.cost_modifier = 0
+        # self.temp_cost_modifier = 0
+        # self.override_cost = -1
         self.value = value
-        self.subtype = subtype
+        self.subtypes = subtypes
         self.effects = effects
         self.formatter = Formatter()
 
-    def get_card_data(self) -> dict:
+    def get_card_data(self, owner=None, attribute_registry=None) -> dict:
         """
         Get a dictionary of the card's data.
         """
-        effect_data = self.formatter.format_effect_data(self.effects)
-
+        effect_data = self.formatter.format_effect_data(
+            self.effects, self, owner, attribute_registry
+            )
         return {
             "name": self.name,
             "id": self.card_id,
             "type": self.card_type,
-            "cost": self.get_cost(),
+            "cost": self.get_cost(owner, attribute_registry),
             "value": self.value,
-            "subtype": self.subtype,
+            "subtypes": self.subtypes,
             "effects": effect_data
         }
 
@@ -51,60 +52,70 @@ class Card:
             return c.Resources.MAGICKA.name
         return c.Resources.STAMINA.name
 
-    def get_cost(self, enable_override=True) -> int:
+    def get_cost(self, owner=None, attribute_registry=None) -> int:
         """
         Get the stamina or magicka cost of the card.
         """
-        if enable_override and self.override_cost >= c.MIN_COST:
-            return self.override_cost
-        net_cost = self.cost + self.cost_modifier + self.temp_cost_modifier
-        return max(net_cost, c.MIN_COST)
+        if owner is not None:
+            if attribute_registry is not None:
+                attribute, modifier = attribute_registry.get_attribute_by_context(
+                    self.card_type, self.subtypes
+                )
+                if attribute is not None:
+                    multiplier = 1 - modifier * owner.get_attribute_level(attribute)
+                    modified_cost = floor(self.cost * multiplier)
+                    return max(modified_cost, c.MIN_COST)
+        return max(self.cost, c.MIN_COST)
+        # if enable_override and self.override_cost >= c.MIN_COST:
+        #     return self.override_cost
+        # net_cost = self.cost + self.cost_modifier + self.temp_cost_modifier
+        # return max(net_cost, c.MIN_COST)
 
-    def change_cost_modifier(self, amount):
-        """
-        Change the cost of the card.
-        """
-        self.cost_modifier += amount
+    # def change_cost_modifier(self, amount):
+    #     """
+    #     Change the cost of the card.
+    #     """
+    #     self.cost_modifier += amount
 
-    def reset_cost_modifier(self):
-        """
-        Reset the cost of the card to its base value.
-        """
-        self.cost_modifier = 0
+    # def reset_cost_modifier(self):
+    #     """
+    #     Reset the cost of the card to its base value.
+    #     """
+    #     self.cost_modifier = 0
 
-    def change_temp_cost_modifier(self, amount):
-        """
-        Add a temporary cost change.
-        """
-        self.temp_cost_modifier += amount
+    # def change_temp_cost_modifier(self, amount):
+    #     """
+    #     Add a temporary cost change.
+    #     """
+    #     self.temp_cost_modifier += amount
 
-    def reset_temp_cost_modifier(self):
-        """
-        Remove temporary cost changes.
-        """
-        self.temp_cost_modifier = 0
+    # def reset_temp_cost_modifier(self):
+    #     """
+    #     Remove temporary cost changes.
+    #     """
+    #     self.temp_cost_modifier = 0
 
-    def reset_override_cost(self):
-        """
-        Stop using the override cost.
-        """
-        self.override_cost = -1
+    # def reset_override_cost(self):
+    #     """
+    #     Stop using the override cost.
+    #     """
+    #     self.override_cost = -1
 
-    def reset_card(self):
-        """
-        Reset all modified values on the card.
-        """
-        for effect in self.effects:
-            effect.reset_level()
-        self.reset_cost_modifier()
-        self.reset_temp_cost_modifier()
-        self.reset_override_cost()
+    # def reset_card(self):
+    #     """
+    #     Reset all modified values on the card.
+    #     """
+        # for effect in self.effects:
+        #     effect.reset_level()
+        # self.reset_cost_modifier()
+        # self.reset_temp_cost_modifier()
+        # self.reset_override_cost()
 
     def matches(self, card_property) -> bool:
         """
         Check if a card has a certain type or subtype.
         """
-        return card_property in (self.card_type, self.subtype)
+        return card_property == self.card_type or card_property in self.subtypes
 
 
 class CardPrototype(Card, Prototype):
@@ -114,12 +125,16 @@ class CardPrototype(Card, Prototype):
     """
     def __init__(
             self, name, card_type, cost, value, effects,
-            subtype=c.DEFAULT_SUBTYPE, enchantments=None, enchanted_name=None
+            subtypes=None, enchantments=None, enchanted_name=None
             ):
         """
         Initialize a new CardPrototype.
         """
-        super().__init__(name, card_type, cost, value, effects, subtype)
+        if subtypes is None:
+            subtypes = []
+        elif isinstance(subtypes, str):
+            subtypes = [subtypes]
+        super().__init__(name, card_type, cost, value, effects, subtypes)
         self.enchantments = enchantments
         self.enchanted_name = enchanted_name
 
@@ -135,7 +150,7 @@ class CardPrototype(Card, Prototype):
             effects.append(LeveledMechanic(effect_registry.get_effect(effect), level))
         return Card(
             self.name, self.card_type, self.cost, self.value, effects,
-            self.subtype
+            self.subtypes
             )
 
 

@@ -2,7 +2,7 @@
   "ACROBACY": {
     "name": "Acrobacy",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 3,
     "value": 50,
     "effects": {
@@ -13,7 +13,7 @@
   "DODGE": {
     "name": "Dodge",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 1,
     "value": 20,
     "effects": {
@@ -23,7 +23,7 @@
   "BACKFLIP": {
     "name": "Backflip",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 3,
     "value": 60,
     "effects": {
@@ -33,7 +33,7 @@
   "KNOCK_OFF_BALANCE": {
     "name": "Knock Off Balance",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 1,
     "value": 38,
     "effects": {
@@ -43,7 +43,7 @@
   "PRESSURE_POINT": {
     "name": "Pressure Point",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 1,
     "value": 20,
     "effects": {
@@ -53,7 +53,7 @@
   "DISGUISE": {
     "name": "Disguise",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 2,
     "value": 30,
     "effects": {
@@ -63,7 +63,7 @@
   "PERSUASION": {
     "name": "Persuasion",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 2,
     "value": 70,
     "effects": {
@@ -73,7 +73,7 @@
   "CONFUSION": {
     "name": "Confusion",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 3,
     "value": 55,
     "effects": {
@@ -83,7 +83,7 @@
   "KNIFE_SKILLS": {
     "name": "Knife Skills",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 2,
     "value": 80,
     "effects": {
@@ -93,7 +93,7 @@
   "EAGLE_EYE": {
     "name": "Eagle Eye",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 2,
     "value": 80,
     "effects": {
@@ -103,7 +103,7 @@
   "RANGERS_EXPERTISE": {
     "name": "Ranger's Expertise",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 2,
     "value": 80,
     "effects": {
@@ -113,7 +113,7 @@
   "ROGUES_EXPERTISE": {
     "name": "Rogue's Expertise",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 2,
     "value": 80,
     "effects": {
@@ -123,7 +123,7 @@
   "ON_A_MISSION": {
     "name": "On a Mission",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 3,
     "value": 90,
     "effects": {
@@ -133,7 +133,7 @@
   "TRICKSTERS_WIT": {
     "name": "Trickster's Wit",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 2,
     "value": 80,
     "effects": {
@@ -143,7 +143,7 @@
   "STRATEGIC_MASTER": {
     "name": "Strategic Master",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 5,
     "value": 100,
     "effects": {
@@ -155,7 +155,7 @@
   "WALL_JUMP": {
     "name": "Wall Jump",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 3,
     "value": 90,
     "effects": {
@@ -165,7 +165,7 @@
   "BACKSTAB": {
     "name": "Backstab",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 3,
     "value": 90,
     "effects": {
@@ -175,7 +175,7 @@
   "RETREAT": {
     "name": "Retreat",
     "card_type": "SKILL",
-    "subtype": "STEALTH",
+    "subtypes": ["STEALTH"],
     "cost": 5,
     "value": 90,
     "effects": {

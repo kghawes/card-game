@@ -1,6 +1,7 @@
 """
 This module defines the CardManager class.
 """
+from math import floor
 import random
 from typing import Tuple
 import utils.constants as c
@@ -35,8 +36,7 @@ class CardManager:
 
     def try_add_to_deck(self, card) -> tuple[bool, bool, bool]:
         """
-        Attempt to add the card to the deck and return success flag and error
-        message.
+        Attempt to add the card to the deck and return success flag and errors.
         """
         allowed = True
         too_many_copies = False
@@ -61,7 +61,7 @@ class CardManager:
         """
         random.shuffle(self.deck)
 
-    def draw(self, subject, status_registry, cards_to_draw=1):
+    def draw(self, subject, registries, cards_to_draw=1):
         """
         Draw the indicated number of cards, shuffling the discard pile back
         into the deck if necessary.
@@ -85,25 +85,31 @@ class CardManager:
                 self.event_manager.logger.log(
                     f"{subject.name} drew {card.name}.", True
                     )
-        self.recalculate_for_new_card(subject, status_registry)
+        # self.recalculate_for_new_card(subject, registries)
 
-    def recalculate_for_new_card(self, subject, status_registry):
+    def recalculate_for_new_card(self, subject, registries):
         """
         Recalculate modifiers and costs when a card is added to the hand.
         """
-        modifier_manager = subject.modifier_manager
-        modifier_manager.recalculate_all_costs(status_registry, self)
-        modifier_manager.recalculate_all_effects(status_registry, self)
-        status_manager = subject.status_manager
-        levitate = status_manager.get_leveled_status(c.StatusNames.LEVITATE.name)
-        if levitate is not None:
-            levitate.reference.trigger_on_change(subject, levitate.get_level())
+        # modifier_manager = subject.modifier_manager
+        # modifier_manager.recalculate_all_costs(status_registry, self)
+        # modifier_manager.recalculate_all_effects(status_registry, self)
+        # status_manager = subject.status_manager
+        # levitate = status_manager.get_leveled_status(c.StatusNames.LEVITATE.name)
+        # if levitate is not None:
+        #     levitate.reference.trigger_on_change(subject, levitate.get_level())
 
     def draw_hand(self, subject, registries):
         """
         Draw the appropriate number of cards at the beginning of a turn.
         """
-        cards_to_draw = subject.modifier_manager.calculate_cards_to_draw()
+        attribute_registry = registries.attributes
+        speed_name = c.Attributes.SPEED.name
+        base_mult = attribute_registry.get_attribute_modifier(speed_name)
+        speed_lvl = subject.get_attribute_level(speed_name)
+        cards_to_draw = floor(base_mult * speed_lvl) + c.HAND_SIZE
+
+        # cards_to_draw = subject.modifier_manager.calculate_cards_to_draw()
 
         # wb = c.StatusNames.WATER_BREATHING.name
         # if subject.status_manager.has_status(wb, subject, registries.statuses):
@@ -132,7 +138,7 @@ class CardManager:
             return
         status_manager = subject.status_manager
 
-        card.reset_card()
+        # card.reset_card()
         if card.matches(c.CardTypes.CONSUMABLE.name) and is_being_played:
             self.consumed_pile.insert(0, card)
             # TODO: log
@@ -175,7 +181,7 @@ class CardManager:
         assert self.discard_pile and len(self.hand) < hand_size
         card = self.discard_pile.pop(card_index)
         self.hand.append(card)
-        self.recalculate_for_new_card(subject, status_registry)
+        # self.recalculate_for_new_card(subject, status_registry)
 
     def reset_cards(self):
         """

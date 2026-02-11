@@ -107,176 +107,140 @@
     "sign_factor": 1
   },
   "FORTIFY_AGILITY": {
-    "class": "ModifyMaxResourceStatus",
-    "description": "{Increase your|Increases the Enemy's} maximum Stamina by {level}.",
-    "resource_id": "STAMINA",
+    "class": "ModifyAttributeStatus",
+    "description": "{Increase your|Increases the Enemy's} Agility by {level}.",
+    "attribute_id": "AGILITY",
     "sign_factor": 1
   },
   "DAMAGE_AGILITY": {
-    "class": "ModifyMaxResourceStatus",
-    "description": "{Decrease your|Descreases the Enemy's} maximum Stamina by {level}.",
-    "resource_id": "STAMINA",
+    "class": "ModifyAttributeStatus",
+    "description": "{Decrease your|Descreases the Enemy's} Agility by {level}.",
+    "attribute_id": "AGILITY",
     "sign_factor": -1
   },
   "FORTIFY_INTELLIGENCE": {
-    "class": "ModifyMaxResourceStatus",
-    "description": "{Increase your|Increases the Enemy's} your maximum Magicka by {level}.",
-    "resource_id": "MAGICKA",
+    "class": "ModifyAttributeStatus",
+    "description": "{Increase your|Increases the Enemy's} Intelligence by {level}.",
+    "attribute_id": "INTELLIGENCE",
     "sign_factor": 1
   },
   "DAMAGE_INTELLIGENCE": {
-    "class": "ModifyMaxResourceStatus",
-    "description": "{Decrease your|Descreases the Enemy's} your maximum Magicka by {level}.",
-    "resource_id": "MAGICKA",
+    "class": "ModifyAttributeStatus",
+    "description": "{Decrease your|Descreases the Enemy's} Intelligence by {level}.",
+    "attribute_id": "INTELLIGENCE",
     "sign_factor": -1
   },
   "FORTIFY_STRENGTH": {
-    "class": "ModifyEffectStatus",
-    "description": "Weapons {you play|the Enemy plays} deal {percent_change} more damage.",
-    "affected_card_type": "WEAPON",
-    "affected_effect": "PHYSICAL_DAMAGE",
+    "class": "ModifyAttributeStatus",
+    "description": "{Increase your|Increases the Enemy's} Strength by {level}.",
+    "attribute_id": "STRENGTH",
     "sign_factor": 1
   },
   "DAMAGE_STRENGTH": {
-    "class": "ModifyEffectStatus",
-    "description": "Weapons {you play|the Enemy plays} deal {percent_change} less damage.",
-    "affected_card_type": "WEAPON",
-    "affected_effect": "PHYSICAL_DAMAGE",
+    "class": "ModifyAttributeStatus",
+    "description": "{Decrease your|Descreases the Enemy's} Strength by {level}.",
+    "attribute_id": "STRENGTH",
     "sign_factor": -1
   },
   "FORTIFY_ENDURANCE": {
-    "class": "ModifyEffectStatus",
-    "description": "Armor {you play|the Enemy plays} provides {percent_change} more Defense.",
-    "affected_card_type": "ARMOR",
-    "affected_effect": "DEFENSE",
+    "class": "ModifyAttributeStatus",
+    "description": "{Increase your|Increases the Enemy's} Endurance by {level}.",
+    "attribute_id": "ENDURANCE",
     "sign_factor": 1
   },
   "DAMAGE_ENDURANCE": {
-    "class": "ModifyEffectStatus",
-    "description": "Armor {you play|the Enemy plays} provides {percent_change} less Defense.",
-    "affected_card_type": "ARMOR",
-    "affected_effect": "DEFENSE",
+    "class": "ModifyAttributeStatus",
+    "description": "{Decrease your|Descreases the Enemy's} Endurance by {level}.",
+    "attribute_id": "ENDURANCE",
     "sign_factor": -1
   },
   "FORTIFY_WILLPOWER": {
-    "class": "ModifyEffectStatus",
-    "description": "Spells {you play|the Enemy plays} deal {percent_change} more damage.",
-    "affected_card_type": "SPELL",
-    "affected_effect": "DAMAGE",
+    "class": "ModifyAttributeStatus",
+    "description": "{Increase your|Increases the Enemy's} Willpower by {level}.",
+    "attribute_id": "WILLPOWER",
     "sign_factor": 1
   },
   "DAMAGE_WILLPOWER": {
-    "class": "ModifyEffectStatus",
-    "description": "Spells {you play|the Enemy plays} deal {percent_change} less damage.",
-    "affected_card_type": "SPELL",
-    "affected_effect": "DAMAGE",
+    "class": "ModifyAttributeStatus",
+    "description": "{Decrease your|Descreases the Enemy's} Willpower by {level}.",
+    "attribute_id": "WILLPOWER",
     "sign_factor": -1
   },
   "FORTIFY_SPEED": {
-    "class": "ModifyDrawStatus",
-    "description": "{Draw|Draws} {level} more cards at the start of {your|the Enemy's} turn.",
+    "class": "ModifyAttributeStatus",
+    "description": "{Increase your|Increases the Enemy's} Speed by {level}.",
+    "attribute_id": "SPEED",
     "sign_factor": 1
   },
   "DAMAGE_SPEED": {
-    "class": "ModifyDrawStatus",
-    "description": "{Draw|Draws} {level} fewer cards at the start of {your|the Enemy's} turn.",
+    "class": "ModifyAttributeStatus",
+    "description": "{Decrease your|Descreases the Enemy's} Speed by {level}.",
+    "attribute_id": "SPEED",
     "sign_factor": -1
   },
   "FEATHER": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Skills cost {level} less Stamina.",
-    "affected_card_type": "SKILL",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Skills cost {level} less Stamina."
   },
   "BURDEN": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Skills cost {level} more Stamina.",
-    "affected_card_type": "SKILL",
-    "sign_factor": 1
+    "description": "{Your|The Enemy's} Skills cost {level} more Stamina."
   },
   "FORTIFY_LONG_BLADE": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Long Blades cost {level} less Stamina.",
-    "affected_card_type": "LONG_BLADE",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Long Blades cost {level} less Stamina."
   },
   "FORTIFY_BLUNT_WEAPON": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Blunt Weapons cost {level} less Stamina.",
-    "affected_card_type": "BLUNT_WEAPON",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Blunt Weapons cost {level} less Stamina."
   },
   "FORTIFY_SHORT_BLADE": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Short Blades cost {level} less Stamina.",
-    "affected_card_type": "SHORT_BLADE",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Short Blades cost {level} less Stamina."
   },
   "FORTIFY_MARKSMAN": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Marksman Weapons cost {level} less Stamina.",
-    "affected_card_type": "MARKSMAN",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Marksman Weapons cost {level} less Stamina."
   },
   "FORTIFY_STAFF": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Staves cost {level} less Stamina.",
-    "affected_card_type": "STAFF",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Staves cost {level} less Stamina."
   },
   "FORTIFY_LIGHT_ARMOR": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Light Armor costs {level} less Stamina.",
-    "affected_card_type": "LIGHT",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Light Armor costs {level} less Stamina."
   },
   "FORTIFY_MEDIUM_ARMOR": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Medium Armor costs {level} less Stamina.",
-    "affected_card_type": "MEDIUM",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Medium Armor costs {level} less Stamina."
   },
   "FORTIFY_HEAVY_ARMOR": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Heavy Armor costs {level} less Stamina.",
-    "affected_card_type": "HEAVY",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Heavy Armor costs {level} less Stamina."
   },
   "FORTIFY_ALTERATION": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Alteration Spells costs {level} less Magicka.",
-    "affected_card_type": "ALTERATION",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Alteration Spells costs {level} less Magicka."
   },
   "FORTIFY_CONJURATION": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Conjuration Spells costs {level} less Magicka.",
-    "affected_card_type": "CONJURATION",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Conjuration Spells costs {level} less Magicka."
   },
   "FORTIFY_DESTRUCTION": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Destruction Spells costs {level} less Magicka.",
-    "affected_card_type": "DESTRUCTION",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Destruction Spells costs {level} less Magicka."
   },
   "FORTIFY_ILLUSION": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Illusion Spells costs {level} less Magicka.",
-    "affected_card_type": "ILLUSION",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Illusion Spells costs {level} less Magicka."
   },
   "FORTIFY_MYSTICISM": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Mysticism Spells costs {level} less Magicka.",
-    "affected_card_type": "MYSTICISM",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Mysticism Spells costs {level} less Magicka."
   },
   "FORTIFY_RESTORATION": {
     "class": "ModifyCostStatus",
-    "description": "{Your|The Enemy's} Restoration Spells costs {level} less Magicka.",
-    "affected_card_type": "RESTORATION",
-    "sign_factor": -1
+    "description": "{Your|The Enemy's} Restoration Spells costs {level} less Magicka."
   },
   "REFLECT": {
     "class": "BlockMagicStatus",

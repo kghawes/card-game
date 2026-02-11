@@ -4,8 +4,9 @@ This module defines the Combatant class.
 from gameplay.card_manager import CardManager
 from gameplay.status_manager import StatusManager
 from gameplay.modifier_manager import ModifierManager
+from gameplay.damage_calculator import DamageCalculator
 from core.resources import Resource
-from utils.constants import Resources as r, StatusNames as s, DamageTypes as d
+from utils.constants import Resources as r, Attributes as a
 from utils.formatter import Formatter
 
 class Combatant:
@@ -15,7 +16,7 @@ class Combatant:
     """
     def __init__(
             self, name, max_health, max_stamina, max_magicka, starting_deck,
-            card_cache, registries, is_enemy, event_manager
+            card_cache, registries, is_enemy, event_manager, starting_attributes=None
             ):
         """
         Initialize a new Combatant.
@@ -36,6 +37,29 @@ class Combatant:
         self.cards_played_this_turn = 0
         self.event_manager = event_manager
         self.formatter = Formatter()
+        self.damage_calculator = DamageCalculator()
+        # Initialize self.attributes and self.attribute_deltas
+        self.initialize_attributes(starting_attributes)
+
+    def initialize_attributes(self, initial_values=None):
+        """
+        Setup character attributes.
+        """
+        self.attributes = {}
+        self.attribute_deltas = {}
+        for attribute in a:
+            self.attribute_deltas[attribute.name] = 0
+            if initial_values and attribute.name in initial_values:
+                self.attributes[attribute.name] = initial_values[attribute.name]
+            else:
+                self.attributes[attribute.name] = 0
+    
+    def reset_attribute_deltas(self):
+        """
+        Reset attribute deltas to zero.
+        """
+        for attribute in a:
+            self.attribute_deltas[attribute.name] = 0
 
     def get_combatant_data(self) -> dict:
         """
@@ -50,6 +74,9 @@ class Combatant:
                 'level': level,
                 'description': self.formatter.format_status_data(status, level, is_player=not self.is_enemy)
             }
+        attributes = {}
+        for attribute_id, value in self.attributes.items():
+            attributes[attribute_id] = value + self.attribute_deltas[attribute_id]
         return {
             'name': self.name,
             'health': self.get_health(),
@@ -58,7 +85,8 @@ class Combatant:
             'max_stamina': self.get_max_stamina(),
             'magicka': self.get_magicka(),
             'max_magicka': self.get_max_magicka(),
-            'statuses': statuses
+            'statuses': statuses,
+            'attributes': attributes
         }
 
     def get_health(self) -> int:
@@ -69,7 +97,7 @@ class Combatant:
 
     def get_max_health(self) -> int:
         """
-        Get maximum health.
+        Get maximum health, including modifiers.
         """
         return self.resources[r.HEALTH.name].get_max(self.modifier_manager)
 
@@ -81,7 +109,7 @@ class Combatant:
 
     def get_max_stamina(self) -> int:
         """
-        Get maximum stamina.
+        Get maximum stamina, including modifiers.
         """
         return self.resources[r.STAMINA.name].get_max(self.modifier_manager)
 
@@ -93,11 +121,19 @@ class Combatant:
 
     def get_max_magicka(self) -> int:
         """
-        Get maximum magicka.
+        Get maximum magicka, including modifiers.
         """
         return self.resources[r.MAGICKA.name].get_max(self.modifier_manager)
 
-    def take_damage(self, attacker, amount, damage_type, status_registry):
+    def get_attribute_level(self, attribute_id) -> int:
+        """
+        Get the level of a character attribute, including deltas.
+        """
+        base_level = self.attributes.get(attribute_id, 0)
+        delta = self.attribute_deltas.get(attribute_id, 0)
+        return base_level + delta
+
+    def take_damage(self, attacker, amount, damage_type, registries):
         """
         Accounting for statuses that modify incoming damage, change health to
         register damage taken.
@@ -105,93 +141,9 @@ class Combatant:
         if amount <= 0:
             return
 
-        if not attacker is None:
-            hidden = attacker.status_manager.get_leveled_status(s.HIDDEN.name)
-            if hidden is not None:
-                hidden_level = hidden.get_level()
-                hidden_status = hidden.reference
-                mult = hidden_status.calculate_damage_multiplier(hidden_level)
-                amount *= mult
-                if mult > 1:
-                    self.event_manager.logger.log(
-                        f"Critical strike! ({mult}x damage)"
-                        )
-
-        old_amount = amount
-        amount = self.modifier_manager.calculate_damage(damage_type, amount, self.event_manager.logger)
-        if amount > old_amount:
-            increase_percent = (amount - old_amount) / old_amount
-            self.event_manager.logger.log(
-                f"The damage is super effective against {self.name}! (+{increase_percent:.0%} damage)"
+        amount = self.damage_calculator.calculate_damage(
+                self, attacker, amount, damage_type, registries
                 )
-        elif amount < old_amount:
-            decrease_percent = (old_amount - amount) / old_amount
-            self.event_manager.logger.log(
-                f"{self.name} resists the damage! (-{decrease_percent:.0%} damage)"
-                )
-
-        if amount <= 0:
-            return
-
-        if damage_type == d.PHYSICAL.name:
-            defense = self.status_manager.get_leveled_status(s.DEFENSE.name)
-            if defense is not None:
-                defense_status = defense.reference
-                defense_level = defense.get_level()
-                old_amount = amount
-                amount = defense_status.calculate_net_damage(
-                    self, defense_level, amount, status_registry
-                    )
-                if amount < old_amount:
-                    difference = old_amount - amount
-                    self.event_manager.logger.log(
-                        f"{self.name}'s defense blocked {difference} damage!"
-                        )
-                if amount <= 0:
-                    return
-        elif not attacker is None and attacker != self:
-            reflect = self.status_manager.get_leveled_status(s.REFLECT.name)
-            if reflect is not None:
-                reflect_status = reflect.reference
-                reflect_level = reflect.get_level()
-                amount, reflected_amount = reflect_status.calculate_block(
-                    amount, damage_type, reflect_level
-                    )
-                if reflected_amount > 0:
-                    self.event_manager.logger.log(
-                        f"{self.name} reflected {reflected_amount} damage back to {attacker.name}!"
-                        )
-                    
-                # If attacker also has reflect, prevent infinite reflecting
-                attacker_reflect = attacker.status_manager.get_leveled_status(
-                    s.REFLECT.name
-                    )
-                if amount == 0 and attacker_reflect is not None:
-                    if reflected_amount <= attacker_reflect.get_level():
-                        return
-                
-                attacker.take_damage(
-                    self, reflected_amount, damage_type, status_registry
-                    )
-                if amount <= 0:
-                    return
-
-            spell_absorb = self.status_manager.get_leveled_status(s.SPELL_ABSORPTION.name)
-            if spell_absorb is not None:
-                spell_absorb_status = spell_absorb.reference
-                spell_absorb_level = spell_absorb.get_level()
-                amount, absorbed_amount = spell_absorb_status.calculate_block(
-                    amount, damage_type, spell_absorb_level
-                    )
-                if absorbed_amount > 0:
-                    self.event_manager.logger.log(
-                        f"{self.name} absorbed {absorbed_amount} damage from {attacker.name}!"
-                        )
-                self.status_manager.change_status(
-                    s.FORTIFY_INTELLIGENCE.name, absorbed_amount, self, status_registry
-                    )
-                if amount <= 0:
-                    return
 
         health = self.resources[r.HEALTH.name]
         health.change_value(-amount, self.modifier_manager)

@@ -188,7 +188,7 @@ STARTING_HEALTH = 10
 STARTING_STAMINA = 4
 STARTING_MAGICKA = 0
 MAX_NAME_LENGTH = 20
-HAND_SIZE = 6
+HAND_SIZE = 4
 MIN_HAND_SIZE = 2
 MAX_HAND_SIZE = 12
 MIN_DECK_SIZE = 10
@@ -197,6 +197,7 @@ MAX_CARD_FREQUENCY = 5
 NORMAL_CARD_REWARD = 1
 BOSS_CARD_REWARD = 2
 BOSS_ID = "BOSS"
+MERCHANT_PENALTY = 0.5
 DEFAULT_SUBTYPE = "MISC"
 ALLOWED_TYPES = {
     "ALL": [
@@ -229,6 +230,29 @@ ALLOWED_TYPES = {
         "MAGIC"
         ]
     }
+
+
+class Attributes(Enum):
+    """
+    Character attributes.
+    """
+    STRENGTH = "Strength"
+    ENDURANCE = "Endurance"
+    AGILITY = "Agility"
+    SPEED = "Speed"
+    INTELLIGENCE = "Intelligence"
+    WILLPOWER = "Willpower"
+    PERSONALITY = "Personality"
+    LUCK = "Luck"
+
+
+class WeightClasses(Enum):
+    """
+    Weapon/armor weight classes.
+    """
+    LIGHT = "Light"
+    MEDIUM = "Medium"
+    HEAVY = "Heavy"
 
 # Paths to JSON files
 CARD_PATHS = [
@@ -266,6 +290,7 @@ STATUSES_PATH = "data/statuses.json"
 EFFECTS_PATH = "data/effects.json"
 CARD_REWARDS_PATH = "data/card_rewards.json"
 ENEMY_GROUPS_PATH = "data/enemy_groups.json"
+ATTRIBUTES_PATH = "data/attributes.json"
 
 # Experience
 EXP_TO_LEVEL = [

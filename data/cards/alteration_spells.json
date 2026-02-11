@@ -2,7 +2,7 @@
   "FIRST_BARRIER": {
     "name": "First Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 2,
     "value": 30,
     "effects": { "APPLY_DEFENSE_SELF": 2 }
@@ -10,7 +10,7 @@
   "SECOND_BARRIER": {
     "name": "Second Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 3,
     "value": 40,
     "effects": { "APPLY_DEFENSE_SELF": 4 }
@@ -18,7 +18,7 @@
   "THIRD_BARRIER": {
     "name": "Third Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 3,
     "value": 50,
     "effects": { "APPLY_DEFENSE_SELF": 5 }
@@ -26,7 +26,7 @@
   "FOURTH_BARRIER": {
     "name": "First Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 4,
     "value": 75,
     "effects": { "APPLY_DEFENSE_SELF": 7 }
@@ -34,7 +34,7 @@
   "FIFTH_BARRIER": {
     "name": "Fifth Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 5,
     "value": 100,
     "effects": {
@@ -44,7 +44,7 @@
   "SIXTH_BARRIER": {
     "name": "Sixth Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 6,
     "value": 125,
     "effects": {
@@ -54,7 +54,7 @@
   "FLAME_BARRIER": {
     "name": "Flame Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 2,
     "value": 60,
     "effects": {
@@ -65,7 +65,7 @@
   "SHARD_BARRIER": {
     "name": "Shard Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 2,
     "value": 60,
     "effects": {
@@ -76,7 +76,7 @@
   "SHOCK_BARRIER": {
     "name": "Shock Barrier",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 2,
     "value": 60,
     "effects": {
@@ -87,7 +87,7 @@
   "FIRE_SHIELD": {
     "name": "Fire Shield",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 4,
     "value": 90,
     "effects": {
@@ -99,7 +99,7 @@
   "FROST_SHIELD": {
     "name": "Frost Shield",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 4,
     "value": 90,
     "effects": {
@@ -111,7 +111,7 @@
   "LIGHTNING_SHIELD": {
     "name": "Lightning Shield",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 4,
     "value": 90,
     "effects": {
@@ -123,7 +123,7 @@
   "GREATER_FIRE_SHIELD": {
     "name": "Greater Fire Shield",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 8,
     "value": 150,
     "effects": {
@@ -136,7 +136,7 @@
   "GREATER_FROST_SHIELD": {
     "name": "Greater Frost Shield",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 8,
     "value": 150,
     "effects": {
@@ -149,7 +149,7 @@
   "GREATER_LIGHTNING_SHIELD": {
     "name": "Greater Lightning Shield",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 8,
     "value": 150,
     "effects": {
@@ -162,7 +162,7 @@
   "TINURS_HOPTOAD": {
     "name": "Tinur's Hoptoad",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 2,
     "value": 55,
     "effects": {
@@ -172,7 +172,7 @@
   "JUMP": {
     "name": "Jump",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 3,
     "value": 77,
     "effects": {
@@ -182,7 +182,7 @@
   "FLYING_LEAP": {
     "name": "Flying Leap",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 5,
     "value": 100,
     "effects": {
@@ -192,7 +192,7 @@
   "WEAK_LEVITATE": {
     "name": "Weak Levitate",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 1,
     "value": 30,
     "effects": {
@@ -202,7 +202,7 @@
   "LEVITATE": {
     "name": "Levitate",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 2,
     "value": 50,
     "effects": {
@@ -212,7 +212,7 @@
   "STRONG_LEVITATE": {
     "name": "Strong Levitate",
     "card_type": "SPELL",
-    "subtype": "ALTERATION",
+    "subtypes": ["ALTERATION"],
     "cost": 4,
     "value": 60,
     "effects": {

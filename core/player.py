@@ -14,9 +14,10 @@ class Player(Combatant):
         Initialize a new Player.
         """
         deck_list = load_json(c.STARTING_DECKS_PATH).get(character_class)
+        attributes = registries.attributes.get_starting_attributes(character_class)
         super().__init__(
             "", c.STARTING_HEALTH, c.STARTING_STAMINA, c.STARTING_MAGICKA, 
-            deck_list, card_cache, registries, False, event_manager
+            deck_list, card_cache, registries, False, event_manager, attributes
             )
         self.character_class = character_class
         self.gold = 0
@@ -59,11 +60,11 @@ class Player(Combatant):
             f"MAX {resource_to_increase} is now {new_max}!"
             )
     
-    def combat_cleanup(self):
+    def combat_cleanup(self, registries):
         """
         Reset cards and stats after combat.
         """
         self.cards_played_this_turn = 0
         self.card_manager.reset_cards()
         self.modifier_manager.reset_all()
-        self.status_manager.reset_statuses(self)
+        self.status_manager.reset_statuses(self, registries.statuses)

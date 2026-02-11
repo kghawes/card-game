@@ -2,7 +2,7 @@
   "SCROLL_ELEVRAMS_STY": {
     "name": "Scroll of Elevram's Sty",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": { "APPLY_BLIND_TARGET": 3 }
@@ -10,7 +10,7 @@
   "SCROLL_FADERS_LEADEN_FLESH": {
     "name": "Scroll of Fader's Leaden Flesh",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": { "APPLY_BURDEN_TARGET": 3 }
@@ -18,7 +18,7 @@
   "SCROLL_GOLNARAS_EYEMAZE": {
     "name": "Scroll of Golnara's Eye-Maze",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": { "APPLY_EVASION_SELF": 6 }
@@ -26,7 +26,7 @@
   "SCROLL_SALENS_VIVICATION": {
     "name": "Scroll of Salen's Vivication",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -38,7 +38,7 @@
   "SCROLL_BLACK_DESPAIR": {
     "name": "Scroll of Black Dispair",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": { "APPLY_DAMAGE_WILLPOWER_TARGET": 4 }
@@ -46,7 +46,7 @@
   "SCROLL_BLACK_MIND": {
     "name": "Scroll of Black Mind",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": { "APPLY_DAMAGE_INTELLIGENCE_TARGET": 4 }
@@ -54,7 +54,7 @@
   "SCROLL_BLACK_SLOTH": {
     "name": "Scroll of Black Sloth",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": { "APPLY_DAMAGE_AGILITY_TARGET": 4 }
@@ -62,7 +62,7 @@
   "SCROLL_BLACK_WEAKNESS": {
     "name": "Scroll of Black Weakness",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": { "APPLY_DAMAGE_STRENGTH_TARGET": 4 }
@@ -70,7 +70,7 @@
   "SCROLL_BLACK_STORM": {
     "name": "Scroll of Black Storm",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -81,7 +81,7 @@
   "SCROLL_ULMS_JUICEDAWS_FEATHER": {
     "name": "Scroll of Ulm's Juicedaw's Feather",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -91,7 +91,7 @@
   "SCROLL_TALDAMS_SCORCHER": {
     "name": "Scroll of Taldam's Scorcher",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -101,7 +101,7 @@
   "SCROLL_ELEMENTAL_BURST_FIRE": {
     "name": "Scroll of Elemental Burst: Fire",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 200,
     "effects": {
@@ -111,7 +111,7 @@
   "SCROLL_HELLFIRE": {
     "name": "Scroll of Hellfire",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 380,
     "effects": {
@@ -122,7 +122,7 @@
   "SCROLL_SELIS_FIERY_WARD": {
     "name": "Scroll of Selis' Fiery Ward",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 100,
     "effects": {
@@ -133,7 +133,7 @@
   "SCROLL_WARRIORS_BLESSING": {
     "name": "Scroll of Warrior's Blessing",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 150,
     "effects": {
@@ -145,7 +145,7 @@
   "SCROLL_DAWN_SPRITE": {
     "name": "Scroll of the Dawn Sprite",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -155,7 +155,7 @@
   "SCROLL_INSIGHT": {
     "name": "Scroll of Insight",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -165,7 +165,7 @@
   "SCROLL_CELERITY": {
     "name": "Scroll of Celerity",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -175,7 +175,7 @@
   "SCROLL_SAVAGE_MIGHT": {
     "name": "Scroll of Savage Might",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -185,7 +185,7 @@
   "SCROLL_OATHFAST": {
     "name": "Scroll of the Oathfast",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -195,7 +195,7 @@
   "SCROLL_GONARS_GOAD": {
     "name": "Scroll of Gonar's Goad",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -205,7 +205,7 @@
   "SCROLL_MONDENS_INSTIGATOR": {
     "name": "Scroll of Monden's Instigator",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 190,
     "effects": {
@@ -215,7 +215,7 @@
   "SCROLL_ILLNEAS_BREATH": {
     "name": "Scroll of Illnea's Breath",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -226,7 +226,7 @@
   "SCROLL_DRATHIS_WINTER_GUEST": {
     "name": "Scroll of Drathis' Winter Guest",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 110,
     "effects": {
@@ -236,7 +236,7 @@
   "SCROLL_ELEMENTAL_BURST_FROST": {
     "name": "Scroll of Elemental Burst: Frost",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 200,
     "effects": {
@@ -246,7 +246,7 @@
   "SCROLL_RADIYAS_ICY_MASK": {
     "name": "Scroll of Radiya's Icy Mask",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 100,
     "effects": {
@@ -257,7 +257,7 @@
   "SCROLL_BREVAS_AVERTED_EYES": {
     "name": "Scroll of Breva's Averted Eyes",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -267,7 +267,7 @@
   "SCROLL_WINDFORM": {
     "name": "Scroll of Windform",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 800,
     "effects": {
@@ -279,7 +279,7 @@
   "SCROLL_STORMWARD": {
     "name": "Scroll of Stormward",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 100,
     "effects": {
@@ -290,7 +290,7 @@
   "SCROLL_LLIROS_GLOWING_EYE": {
     "name": "Scroll of Lliros' Glowing Eye",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 75,
     "effects": {
@@ -301,7 +301,7 @@
   "SCROLL_SERTISES_PORPHYRY": {
     "name": "Scroll of Sertises' Porphyry",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 225,
     "effects": {
@@ -311,7 +311,7 @@
   "SCROLL_FLAMEGUARD": {
     "name": "Scroll of Flameguard",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 60,
     "effects": {
@@ -321,7 +321,7 @@
   "SCROLL_FROSTGUARD": {
     "name": "Scroll of Frostguard",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 60,
     "effects": {
@@ -331,7 +331,7 @@
   "SCROLL_SHOCKGUARD": {
     "name": "Scroll of Shockguard",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 60,
     "effects": {
@@ -341,7 +341,7 @@
   "SCROLL_ARGENT_GLOW": {
     "name": "Scroll of the Argent Glow",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 180,
     "effects": {
@@ -354,7 +354,7 @@
   "SCROLL_PURITY_BODY": {
     "name": "Scroll of Purity of Body",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 100,
     "effects": {
@@ -366,7 +366,7 @@
   "SCROLL_VIGOR": {
     "name": "Scroll of Vigor",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -376,7 +376,7 @@
   "SCROLL_VITALITY": {
     "name": "Scroll of Flameguard",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 99,
     "effects": {
@@ -386,7 +386,7 @@
   "SCROLL_FIRST_BARRIER": {
     "name": "Scroll of the First Barrier",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 50,
     "effects": {
@@ -396,7 +396,7 @@
   "SCROLL_SECOND_BARRIER": {
     "name": "Scroll of the Second Barrier",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 115,
     "effects": {
@@ -406,7 +406,7 @@
   "SCROLL_THIRD_BARRIER": {
     "name": "Scroll of the Third Barrier",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 140,
     "effects": {
@@ -416,7 +416,7 @@
   "SCROLL_FOURTH_BARRIER": {
     "name": "Scroll of the Fourth Barrier",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 200,
     "effects": {
@@ -426,7 +426,7 @@
   "SCROLL_FIFTH_BARRIER": {
     "name": "Scroll of the Fifth Barrier",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 275,
     "effects": {
@@ -436,7 +436,7 @@
   "SCROLL_SIXTH_BARRIER": {
     "name": "Scroll of the Sixth Barrier",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 400,
     "effects": {
@@ -446,7 +446,7 @@
   "SCROLL_NINTH_BARRIER": {
     "name": "Scroll of the Ninth Barrier",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 600,
     "effects": {
@@ -460,7 +460,7 @@
   "SCROLL_INAS_CHASTENING": {
     "name": "Scroll of Inas' Chastening",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 100,
     "effects": {
@@ -470,7 +470,7 @@
   "SCROLL_ELEMENTAL_BURST_SHOCK": {
     "name": "Scroll of Elemental Burst: Shock",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 200,
     "effects": {
@@ -480,7 +480,7 @@
   "SCROLL_NERUSIS_LOCKJAW": {
     "name": "Scroll of Nerusi's Lockjaw",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -490,7 +490,7 @@
   "SCROLL_INASIS_MYSTIC_FINGER": {
     "name": "Scroll of Inasi's Mystic Finger",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 90,
     "effects": {
@@ -500,7 +500,7 @@
   "SCROLL_FLAMEBANE": {
     "name": "Scroll of Flamebane",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 60,
     "effects": {
@@ -510,7 +510,7 @@
   "SCROLL_FROSTBANE": {
     "name": "Scroll of Frostbane",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 60,
     "effects": {
@@ -520,7 +520,7 @@
   "SCROLL_SHOCKBANE": {
     "name": "Scroll of Shockbane",
     "card_type": "CONSUMABLE",
-    "subtype": "SCROLL",
+    "subtypes": ["SCROLL"],
     "cost": 0,
     "value": 60,
     "effects": {

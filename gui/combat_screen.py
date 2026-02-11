@@ -29,18 +29,18 @@ class Hand(FloatLayout):
             for i, card in enumerate(cards):
                 card.center_x = i * (832 / (len(cards) - 1)) + 334
                 card.center_y = y
-    
-    def add_to_hand(self, card, index=0):
+
+    def add_to_hand(self, card: Card, index=0):
         """Adds a card to the hand and repositions the cards."""
         self.add_widget(card, index=index)
         self.position_cards()
     
-    def remove_from_hand(self, card):
+    def remove_from_hand(self, card: Card):
         """Removes a card from the hand and repositions the cards."""
         self.remove_widget(card)
         self.position_cards()
-    
-    def draw(self, card_data):
+
+    def draw(self, card_data: dict):
         """Draws a card from the deck and adds it to the hand."""
         card = Card(card_data, self.screen)
         self.add_to_hand(card)
@@ -54,6 +54,12 @@ class Hand(FloatLayout):
         if card:
             card.move_to_discard()
             self.position_cards()
+    
+    def clear_hand(self):
+        """Clears all cards from the hand."""
+        for card in self.children[:]:
+            self.remove_widget(card)
+        self.position_cards()
 
 
 class CombatLog(Widget):
@@ -100,7 +106,8 @@ class CombatLog(Widget):
         self.log_shown = False
 
 
-class ScreenDarken(Widget):    
+class ScreenDarken(Widget):
+    """Widget that darkens the screen and blocks input."""
     def on_touch_down(self, touch):
         return True
     
@@ -140,6 +147,21 @@ class StatusIcon(Widget):
 
 class CombatScreen(Widget):
     """Widget representing the combat screen of the card game."""
+    STAT_LABELS = (
+        ("health", "max_health", "Health"),
+        ("stamina", "max_stamina", "Stamina"),
+        ("magicka", "max_magicka", "Magicka"),
+    )
+    ATTRIBUTE_KEYS = (
+        ("STRENGTH", "strength"),
+        ("ENDURANCE", "endurance"),
+        ("AGILITY", "agility"),
+        ("SPEED", "speed"),
+        ("INTELLIGENCE", "intelligence"),
+        ("WILLPOWER", "willpower"),
+        ("PERSONALITY", "personality"),
+        ("LUCK", "luck"),
+    )
     play_area = ObjectProperty(None)
     hand = ObjectProperty(Hand)
     deck = ObjectProperty(None)
@@ -152,53 +174,81 @@ class CombatScreen(Widget):
     log_texture = ObjectProperty(None)
     combat_log = ObjectProperty(CombatLog)
 
-    def __init__(self, player, enemy, event_manager, **kwargs):
+    def __init__(self, player: dict, enemy: dict, event_manager, **kwargs):
         """Initializes the combat screen with the given properties."""
         super().__init__(**kwargs)
         self.event_manager = event_manager
         self.hand.screen = self
         self.player = player
         self.player_info.player_name_label.text = self.player['name']
-        self.update_player_stats()
+        self.update_combatant_resources(self.player_info, self.player, "player")
+        self.update_combatant_attributes(
+            self.player_info, self.player.get('attributes', {}), "player"
+        )
         self.enemy = enemy
         self.enemy_info.enemy_name_label.text = self.enemy['name']
-        self.update_enemy_stats()
+        self.update_combatant_resources(self.enemy_info, self.enemy, "enemy")
+        self.update_combatant_attributes(
+            self.enemy_info, self.enemy.get('attributes', {}), "enemy"
+        )
         self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
         self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
         self.tooltip = Tooltip()
         self.add_widget(self.tooltip)
     
-    def start_player_turn(self, statuses):
+    def start_player_turn(self, statuses: dict):
         """Starts the player's turn."""
         self.end_turn_button.disabled = False
         Clock.unschedule(self.loop_textures)
         self.wait_texture = AssetCache.get_texture('gui/assets/hourglass0.png')
         self.update_player_statuses(statuses)
 
-    def update_player_statuses(self, statuses):
+    def update_player_statuses(self, statuses: dict):
         """Updates the player's statuses on the screen."""
         for label in self.player_info.player_statuses.children:
             self.tooltip.remove_tooltip(label)
         self.player_info.player_statuses.clear_widgets()
-        y_offset = 0
+
+        icon_size = 32
+        x_spacing = 4
+        y_spacing = 4
+        label_offset = 33
+        base_x = self.player_info.x
+        base_y = self.player_info.y
+        max_width = self.player_info.width
+        x = base_x
+        y = base_y
 
         for status_id, status_data in statuses.items():
-            name = status_data['name']
             level = status_data['level']
             status_icon = StatusIcon(status_id, level)
-            self.player_info.player_statuses.add_widget(status_icon)
-            x = 8
-            y_offset += 33
-            y = self.player_info.player_magicka_label.y - y_offset
+            status_icon.size_hint = (None, None)
+
+            label_width = 0
+            for child in status_icon.children:
+                if isinstance(child, Label):
+                    child.texture_update()
+                    label_width = child.texture_size[0]
+                    break
+
+            icon_width = max(icon_size, label_offset + label_width)
+            if x != base_x and x + icon_width > base_x + max_width:
+                x = base_x
+                y += icon_size + y_spacing
+
+            status_icon.size = (icon_width, icon_size)
             status_icon.pos = (x, y)
+            self.player_info.player_statuses.add_widget(status_icon)
 
             description = status_data['description']
             self.tooltip.add_tooltip(status_icon, description)
-    
-    def update_enemy_statuses(self, statuses):
+            x += icon_width + x_spacing
+
+    def update_enemy_statuses(self, statuses: dict):
         """Updates the enemy's statuses on the screen."""
         self.enemy_info.enemy_statuses.clear_widgets()
         y_offset = 0
+        base_y = self.enemy_info.enemy_luck_label.y
         for status_id, level in statuses.items():
             status_label = Label(text=f"{status_id} ({level})")
             self.enemy_info.enemy_statuses.add_widget(status_label)
@@ -206,32 +256,38 @@ class CombatScreen(Widget):
             status_label.size_hint = (None, None)
             x = 1192
             y_offset += 33
-            y = self.enemy_info.enemy_magicka_label.y - y_offset
+            y = base_y - y_offset
             status_label.pos = (x, y)
 
-    def update_player_stats(self):
-        """Updates the player's stats on the screen."""
-        self.player_info.player_health_label.text = f"Health: {self.player['health']}/{self.player['max_health']}"
-        self.player_info.player_stamina_label.text = f"Stamina: {self.player['stamina']}/{self.player['max_stamina']}"
-        self.player_info.player_magicka_label.text = f"Magicka: {self.player['magicka']}/{self.player['max_magicka']}"
+    def update_combatant_resources(self, info_widget, combatant, label_prefix):
+        """Updates the resource stats of a combatant on the screen."""
+        for stat_key, max_key, _ in self.STAT_LABELS:
+            label_widget = getattr(info_widget, f"{label_prefix}_{stat_key}_label")
+            label_widget.text = f"{combatant[stat_key]}/{combatant[max_key]}"
 
-    def update_enemy_stats(self):
-        """Updates the enemy's stats on the screen."""
-        self.enemy_info.enemy_health_label.text = f"Health: {self.enemy['health']}/{self.enemy['max_health']}"
-        self.enemy_info.enemy_stamina_label.text = f"Stamina: {self.enemy['stamina']}/{self.enemy['max_stamina']}"
-        self.enemy_info.enemy_magicka_label.text = f"Magicka: {self.enemy['magicka']}/{self.enemy['max_magicka']}"
-    
-    def update_stats(self, subject, stats_data):
+    def update_combatant_attributes(self, info_widget, attributes, label_prefix):
+        """Updates the attributes of a combatant on the screen."""
+        for attribute_key, label_suffix in self.ATTRIBUTE_KEYS:
+            label_widget = getattr(info_widget, f"{label_prefix}_{label_suffix}_label")
+            label_widget.text = str(attributes.get(attribute_key, 0))
+
+    def update_stats(self, subject: str, stats_data: dict):
         """Updates the stats of the player or enemy."""
         target = self.player if subject == 'player' else self.enemy
         for key, value in stats_data.items():
             if key in target:
                 target[key] = value
         if subject == 'player':
-            self.update_player_stats() 
+            self.update_combatant_resources(self.player_info, self.player, "player")
+            self.update_combatant_attributes(
+                self.player_info, self.player.get('attributes', {}), "player"
+            )
             self.update_player_statuses(stats_data['statuses'])
         else:
-            self.update_enemy_stats()
+            self.update_combatant_resources(self.enemy_info, self.enemy, "enemy")
+            self.update_combatant_attributes(
+                self.enemy_info, self.enemy.get('attributes', {}), "enemy"
+            )
             self.update_enemy_statuses(stats_data['statuses'])
 
     def invalid_play(self):
@@ -252,8 +308,8 @@ class CombatScreen(Widget):
                 self.event_manager.dispatch('end_turn')
 
         Clock.schedule_interval(discard_card, 0.1)
-    
-    def enemy_played_card(self, enemy_name, card_data):
+
+    def enemy_played_card(self, enemy_name: str, card_data: dict):
         """Handles the enemy playing a card."""
         pass
 

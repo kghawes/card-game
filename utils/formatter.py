@@ -6,7 +6,7 @@ class Formatter:
     """
     This class is responsible for formatting strings and data for display.
     """
-    def format_effect_data(self, effects) -> dict:
+    def format_effect_data(self, effects, card=None, owner=None, attribute_registry=None) -> dict:
         """
         Format the effect data for display.
         """
@@ -16,7 +16,7 @@ class Formatter:
         for leveled_effect in effects:
             effect = leveled_effect.reference
             name = effect.name
-            level = leveled_effect.get_level()
+            level = leveled_effect.get_level(card, owner, attribute_registry)
             description = effect.description
             tooltip_line = f"{name} level {level}"
             tooltip_line = self.apply_font_color(tooltip_line, 'ffffff')

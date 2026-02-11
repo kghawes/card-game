@@ -40,9 +40,9 @@ class CombatManager:
             )
         if self.is_combat_over(combatant, opponent):
             self.event_manager.dispatch('end_combat')
-        combatant.modifier_manager.recalculate_all_effects(
-            registries.statuses, combatant.card_manager
-            )
+        # combatant.modifier_manager.recalculate_all_effects(
+        #     registries.statuses, combatant.card_manager
+        #     )
         combatant.replenish_resources_for_turn()
         if not combatant.is_enemy:
             self.event_manager.dispatch('start_action_phase', combatant.card_manager.hand)
@@ -69,7 +69,7 @@ class CombatManager:
         """
         if not self.card_can_be_played(combatant, card) \
         or not combatant.resources[card.get_resource()].try_spend(
-            card.get_cost(), combatant.modifier_manager
+            card.get_cost(combatant, registries.attributes), combatant.modifier_manager
         ):
             # TODO make card_can_be_played return a reason
             self.event_manager.logger.log(f"This {card.name} can't be played.")
@@ -85,9 +85,9 @@ class CombatManager:
                 # TODO give a reason why the effect can't resolve
                 self.event_manager.logger.log(f"{effect.name} has no effect.")
                 continue
-            level = effect.get_level()
+            level = effect.get_level(card, combatant, registries.attributes)
             effect.reference.resolve(
-                combatant, opponent, level, status_registry=registries.statuses
+                combatant, opponent, level, registries
                 )
             self.event_manager.logger.log(
                 f"{card.name} resolved {effect.name} at level {level}.", True
@@ -115,14 +115,14 @@ class CombatManager:
             elif (isinstance(status, LimitCardPlayStatus) and
                   combatant.cards_played_this_turn >= status.card_limit):
                 return False
+        return True
+        # if combatant.is_enemy:
+        #     return True
 
-        if combatant.is_enemy:
-            return True
-
-        if card.subtype in c.ALLOWED_TYPES["ALL"] or \
-            card.subtype in c.ALLOWED_TYPES[combatant.character_class]:
-            return True
-        return False
+        # if any(subtype in c.ALLOWED_TYPES["ALL"] for subtype in card.subtypes) or \
+        #    any(subtype in c.ALLOWED_TYPES[combatant.character_class] for subtype in card.subtypes):
+        #     return True
+        # return False
 
     def effect_can_resolve(self, combatant, effect_id) -> bool:
         """
@@ -145,7 +145,7 @@ class CombatManager:
             playable_card_exists = False
             for card in enemy.card_manager.hand:
                 resource_id = card.get_resource()
-                if card.get_cost() <= enemy.resources[resource_id].current and \
+                if card.get_cost(enemy, registries.attributes) <= enemy.resources[resource_id].current and \
                     self.card_can_be_played(enemy, card):
                     playable_card_exists = True
                     self.play_card(enemy, player, card, registries)

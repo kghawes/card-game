@@ -2,8 +2,7 @@
 This module defines the ModifierManager class and modifier classes.
 """
 import utils.constants as c
-from core.statuses import ModifyEffectStatus, ModifyMaxResourceStatus, \
-    ModifyDrawStatus, ModifyDamageStatus, ModifyCostStatus
+from core.statuses import ModifyMaxResourceStatus, ModifyDamageStatus, ModifyCostStatus
 
 class ModifierManager:
     """
@@ -20,112 +19,116 @@ class ModifierManager:
         """
         Initialize a new ModifierManager.
         """
-        self.effect_modifiers = self._initialize_effect_modifiers(status_registry)
+        # self.effect_modifiers = self._initialize_effect_modifiers(status_registry)
         self.resource_modifiers = self._initialize_resource_modifiers(status_registry)
-        self.draw_modifiers = self._initialize_draw_modifiers(status_registry)
+        # self.draw_modifiers = self._initialize_draw_modifiers(status_registry)
         self.damage_modifiers = self._initialize_damage_modifiers(status_registry)
-        self.cost_modifiers = self._initialize_cost_modifiers(status_registry)
+        # self.cost_modifiers = self._initialize_cost_modifiers(status_registry)
         self.modifier_pools = [
-            self.effect_modifiers,
+            # self.effect_modifiers,
             self.resource_modifiers,
-            self.draw_modifiers,
-            self.cost_modifiers
+            # self.draw_modifiers,
+            # self.cost_modifiers,
+            self.damage_modifiers
             ]
 
     def reset_modifier_pool(self, modifier_pool):
         """
-        Clear all active modifiers for all statuses of a certain type.
+        Clear all active modifiers of a certain type, defined by the given pool.
+        modifier_pool: dict
+            The pool of modifiers to reset.
         """
         for modifier in modifier_pool.values():
             modifier.reset()
 
     def reset_all(self):
         """
-        Clear all active modifiers for all statuses of all types.
+        Clear all active modifiers of all types.
         """
         for pool in self.modifier_pools:
             self.reset_modifier_pool(pool)
 
     # Effect modifiers
 
-    def _initialize_effect_modifiers(self, status_registry) -> dict:
-        """
-        Populate the effect modifier pool with statuses.
-        """
-        effect_modifiers = {} # Tracks accumulated contributions by status
-        for status_id, status in status_registry.statuses.items():
-            if isinstance(status, ModifyEffectStatus):
-                card_type = status.affected_card_type
-                effect = status.affected_effect
-                effect_modifiers[status_id] = EffectModifier(card_type, effect)
-        return effect_modifiers
+    # def _initialize_effect_modifiers(self, status_registry) -> dict:
+    #     """
+    #     Populate the effect modifier pool with statuses and attributes.
+    #     """
+    #     effect_modifiers = {} # Tracks accumulated contributions by source
+    #     for status_id, status in status_registry.statuses.items():
+    #         if isinstance(status, ModifyEffectStatus):
+    #             card_type = status.affected_card_type
+    #             effect = status.affected_effect
+    #             effect_modifiers[status_id] = EffectModifier(card_type, effect)
+    #     # 
+    #     return effect_modifiers
 
-    def accumulate_effect_modifier(self, status, contribution):
-        """
-        Accumulate contributions to effect modifiers in the pool.
-        """
-        old_value = self.effect_modifiers[status.status_id].contribution
-        new_value = old_value + contribution
-        self.effect_modifiers[status.status_id].contribution = new_value
+    # def accumulate_effect_modifier(self, status, contribution):
+    #     """
+    #     Accumulate contributions to effect modifiers in the pool.
+    #     """
+    #     old_value = self.effect_modifiers[status.status_id].contribution
+    #     new_value = old_value + contribution
+    #     self.effect_modifiers[status.status_id].contribution = new_value
 
-    def clear_effect_modifiers(self, status, card_manager):
-        """
-        Clear contributions for a specific status.
-        """
-        if isinstance(status, ModifyEffectStatus):
-            self.effect_modifiers[status.status_id].contribution = 0
-            card_type = status.affected_card_type
-            effect = status.affected_effect
-            self.recalculate_effect_modifiers(card_type, effect, card_manager)
+    # def clear_effect_modifiers(self, status, card_manager):
+    #     """
+    #     Clear contributions for a specific status.
+    #     """
+    #     if isinstance(status, ModifyEffectStatus):
+    #         self.effect_modifiers[status.status_id].contribution = 0
+    #         card_type = status.affected_card_type
+    #         effect = status.affected_effect
+    #         self.recalculate_effect_modifiers(card_type, effect, card_manager)
 
-    def reset_effect_modifiers(self, card_type, effect, card_manager):
-        """
-        Set effect modifiers affecting this card type and effect to 0.
-        """
-        for card in card_manager.hand:
-            if card.matches(card_type):
-                self.reset_card_effect(card, effect)
+    # def reset_effect_modifiers(self, card_type, effect, card_manager):
+    #     """
+    #     Set effect modifiers affecting this card type and effect to 0.
+    #     """
+    #     for card in card_manager.hand:
+    #         if card.matches(card_type):
+    #             self.reset_card_effect(card, effect)
 
-    def recalculate_effect_modifiers(self, card_type, effect, card_manager):
-        """
-        Recalculate affected effect modifiers for affected cards.
-        """
-        self.reset_effect_modifiers(card_type, effect, card_manager)
-        for modifier in self.effect_modifiers.values():
-            if modifier.matches(card_type, effect):
-                for card in card_manager.hand:
-                    if card.matches(card_type):
-                        self.modify_card_effect(card, effect, modifier)
+    # def recalculate_effect_modifiers(self, card_type, effect, card_manager):
+    #     """
+    #     Recalculate affected effect modifiers for affected cards.
+    #     """
+    #     self.reset_effect_modifiers(card_type, effect, card_manager)
+    #     for modifier in self.effect_modifiers.values():
+    #         if modifier.matches(card_type, effect):
+    #             for card in card_manager.hand:
+    #                 if card.matches(card_type):
+    #                     self.modify_card_effect(card, effect, modifier)
 
-    def recalculate_all_effects(self, status_registry, card_manager):
-        """
-        Recalculate all effect modifiers for all cards.
-        """
-        for status_id in status_registry.list_statuses():
-            status = status_registry.get_status(status_id)
-            if isinstance(status, ModifyEffectStatus):
-                card_type = status.affected_card_type
-                effect = status.affected_effect
-                self.recalculate_effect_modifiers(
-                    card_type, effect, card_manager
-                    )
+    # def recalculate_all_effects(self, status_registry, card_manager):
+    #     """
+    #     Recalculate all effect modifiers for all cards.
+    #     """
+    #     for status_id in status_registry.list_statuses():
+    #         status = status_registry.get_status(status_id)
+    #         if isinstance(status, ModifyEffectStatus):
+    #             card_type = status.affected_card_type
+    #             effect = status.affected_effect
+    #             self.recalculate_effect_modifiers(
+    #                 card_type, effect, card_manager
+    #                 )
 
-    def modify_card_effect(self, card, effect_id, modifier):
-        """
-        Change the effect level modifier of the given effect on this card.
-        """
-        for effect in card.effects:
-            if effect_id in effect.str_id or effect_id == c.EffectNames.ALL_EFFECTS.name:
-                amount = modifier.contribution
-                effect.change_level_modifier(amount)
+    # def modify_card_effect(self, card, effect_id, modifier):
+    #     """
+    #     Change the effect level modifier of the given effect on this card.
+    #     """
+    #     for effect in card.effects:
+    #         if effect_id in effect.str_id or effect_id == c.EffectNames.ALL_EFFECTS.name:
+    #             amount = modifier.contribution
+    #             effect.change_level_modifier(amount)
 
-    def reset_card_effect(self, card, effect_id):
-        """
-        Reset the effect level of the given effect on this card.
-        """
-        for effect in card.effects:
-            if effect_id in effect.str_id or effect_id == c.EffectNames.ALL_EFFECTS.name:
-                effect.reset_level()
+    # def reset_card_effect(self, card, effect_id):
+    #     """
+    #     Reset the effect level of the given effect on this card.
+    #     """
+    #     for effect in card.effects:
+    #         if effect_id in effect.str_id or effect_id == c.EffectNames.ALL_EFFECTS.name:
+    #             effect.reset_level()
 
     # Max resource modifiers
 
@@ -155,7 +158,7 @@ class ModifierManager:
         Remove max value modifier contribution from a specific status.
         """
         if status_id in self.resource_modifiers:
-            self.resource_modifiers[status_id] = 0
+            self.resource_modifiers[status_id].contribution = 0
 
     def get_max_resource(self, resource_id, base_max_value) -> int:
         """
@@ -179,33 +182,33 @@ class ModifierManager:
 
     # Draw modifiers
 
-    def _initialize_draw_modifiers(self, status_registry) -> dict:
-        """
-        Populate the resource modifier pool with statuses.
-        """
-        draw_modifiers = {} # Tracks accumulated contributions by status
-        for status_id, status in status_registry.statuses.items():
-            if isinstance(status, ModifyDrawStatus):
-                draw_modifiers[status_id] = Modifier()
-        return draw_modifiers
+    # def _initialize_draw_modifiers(self, status_registry) -> dict:
+    #     """
+    #     Populate the resource modifier pool with statuses.
+    #     """
+    #     draw_modifiers = {} # Tracks accumulated contributions by status
+    #     for status_id, status in status_registry.statuses.items():
+    #         if isinstance(status, ModifyDrawStatus):
+    #             draw_modifiers[status_id] = Modifier()
+    #     return draw_modifiers
 
-    def modify_cards_to_draw(self, status_id, amount):
-        """
-        Change the number of cards to draw by the given amount.
-        """
-        if status_id in self.draw_modifiers:
-            old_value = self.draw_modifiers[status_id].contribution
-            new_value = old_value + amount
-            self.draw_modifiers[status_id].contribution = new_value
+    # def modify_cards_to_draw(self, status_id, amount):
+    #     """
+    #     Change the number of cards to draw by the given amount.
+    #     """
+    #     if status_id in self.draw_modifiers:
+    #         old_value = self.draw_modifiers[status_id].contribution
+    #         new_value = old_value + amount
+    #         self.draw_modifiers[status_id].contribution = new_value
 
-    def calculate_cards_to_draw(self) -> int:
-        """
-        Get the modified number of cards to draw for a turn.
-        """
-        net_contribution = 0
-        for modifier in self.draw_modifiers.values():
-            net_contribution += modifier.contribution
-        return max(c.HAND_SIZE + net_contribution, c.MIN_HAND_SIZE)
+    # def calculate_cards_to_draw(self) -> int:
+    #     """
+    #     Get the modified number of cards to draw for a turn.
+    #     """
+    #     net_contribution = 0
+    #     for modifier in self.draw_modifiers.values():
+    #         net_contribution += modifier.contribution
+    #     return max(c.HAND_SIZE + net_contribution, c.MIN_HAND_SIZE)
 
     # Damage modifiers
 
@@ -251,68 +254,68 @@ class ModifierManager:
 
     # Cost modifiers
 
-    def _initialize_cost_modifiers(self, status_registry) -> dict:
-        """
-        Populate the resource modifier pool with statuses.
-        """
-        cost_modifiers = {}
-        for status_id, status in status_registry.statuses.items():
-            if isinstance(status, ModifyCostStatus):
-                modifier = CostModifier(status.affected_card_type)
-                cost_modifiers[status_id] = modifier
-        return cost_modifiers
+    # def _initialize_cost_modifiers(self, status_registry) -> dict:
+    #     """
+    #     Populate the resource modifier pool with statuses.
+    #     """
+    #     cost_modifiers = {}
+    #     for status_id, status in status_registry.statuses.items():
+    #         if isinstance(status, ModifyCostStatus):
+    #             modifier = CostModifier(status.affected_card_type)
+    #             cost_modifiers[status_id] = modifier
+    #     return cost_modifiers
 
-    def accumulate_cost_modifier(self, status, contribution):
-        """
-        Accumulate contributions to cost modifiers in the pool.
-        """
-        old_value = self.cost_modifiers[status.status_id].contribution
-        new_value = old_value + contribution
-        self.cost_modifiers[status.status_id].contribution = new_value
+    # def accumulate_cost_modifier(self, status, contribution):
+    #     """
+    #     Accumulate contributions to cost modifiers in the pool.
+    #     """
+    #     old_value = self.cost_modifiers[status.status_id].contribution
+    #     new_value = old_value + contribution
+    #     self.cost_modifiers[status.status_id].contribution = new_value
 
-    def clear_cost_modifiers(self, status, card_manager):
-        """
-        Clear contributions for a specific status.
-        """
-        if isinstance(status, ModifyCostStatus):
-            self.cost_modifiers[status.status_id].contribution = 0
-            card_type = status.affected_card_type
-            self.recalculate_cost_modifiers(card_type, card_manager)
+    # def clear_cost_modifiers(self, status, card_manager):
+    #     """
+    #     Clear contributions for a specific status.
+    #     """
+    #     if isinstance(status, ModifyCostStatus):
+    #         self.cost_modifiers[status.status_id].contribution = 0
+    #         card_type = status.affected_card_type
+    #         self.recalculate_cost_modifiers(card_type, card_manager)
 
-    def reset_cost_modifiers(self, card_type, card_manager):
-        """
-        Set cost modifiers affecting this card type to 0.
-        """
-        for card in card_manager.hand:
-            if card.matches(card_type):
-                card.reset_cost_modifier()
+    # def reset_cost_modifiers(self, card_type, card_manager):
+    #     """
+    #     Set cost modifiers affecting this card type to 0.
+    #     """
+    #     for card in card_manager.hand:
+    #         if card.matches(card_type):
+    #             card.reset_cost_modifier()
 
-    def recalculate_cost_modifiers(self, card_type, card_manager):
-        """
-        Recalculate affected cost modifiers for affected cards.
-        """
-        self.reset_cost_modifiers(card_type, card_manager)
-        for modifier in self.cost_modifiers.values():
-            if modifier.matches(card_type):
-                for card in card_manager.hand:
-                    if card.matches(card_type):
-                        self.modify_card_cost(card, modifier)
+    # def recalculate_cost_modifiers(self, card_type, card_manager):
+    #     """
+    #     Recalculate affected cost modifiers for affected cards.
+    #     """
+    #     self.reset_cost_modifiers(card_type, card_manager)
+    #     for modifier in self.cost_modifiers.values():
+    #         if modifier.matches(card_type):
+    #             for card in card_manager.hand:
+    #                 if card.matches(card_type):
+    #                     self.modify_card_cost(card, modifier)
 
-    def recalculate_all_costs(self, status_registry, card_manager):
-        """
-        Recalculate all cost modifiers for all cards.
-        """
-        for status_id in status_registry.list_statuses():
-            status = status_registry.get_status(status_id)
-            if isinstance(status, ModifyCostStatus):
-                card_type = status.affected_card_type
-                self.recalculate_cost_modifiers(card_type, card_manager)
+    # def recalculate_all_costs(self, status_registry, card_manager):
+    #     """
+    #     Recalculate all cost modifiers for all cards.
+    #     """
+    #     for status_id in status_registry.list_statuses():
+    #         status = status_registry.get_status(status_id)
+    #         if isinstance(status, ModifyCostStatus):
+    #             card_type = status.affected_card_type
+    #             self.recalculate_cost_modifiers(card_type, card_manager)
 
-    def modify_card_cost(self, card, modifier):
-        """
-        Change the cost of the given card.
-        """
-        card.change_cost_modifier(modifier.contribution)
+    # def modify_card_cost(self, card, modifier):
+    #     """
+    #     Change the cost of the given card.
+    #     """
+    #     card.change_cost_modifier(modifier.contribution)
 
 
 # Modifier classes
@@ -335,26 +338,26 @@ class Modifier:
         self.contribution = 0
 
 
-class EffectModifier(Modifier):
-    """
-    This class represents a modifier that applies to all cards of a specified
-    type and modifies the level of the specified effect on those cards.
-    """
-    def __init__(self, affected_card_type, affected_effect_id):
-        """
-        Initialize a new EffectModifier.
-        """
-        super().__init__()
-        self.card_type = affected_card_type
-        self.effect_id = affected_effect_id
+# class EffectModifier(Modifier):
+#     """
+#     This class represents a modifier that applies to all cards of a specified
+#     type and modifies the level of the specified effect on those cards.
+#     """
+#     def __init__(self, affected_card_type, affected_effect_id):
+#         """
+#         Initialize a new EffectModifier.
+#         """
+#         super().__init__()
+#         self.card_type = affected_card_type
+#         self.effect_id = affected_effect_id
 
-    def matches(self, card_type, effect_id) -> bool:
-        """
-        Checks if the given card type and effect are subject to this modifier.
-        """
-        matches_type = self.card_type == card_type
-        matches_effect = self.effect_id == effect_id
-        return matches_type and matches_effect
+#     def matches(self, card_type, effect_id) -> bool:
+#         """
+#         Checks if the given card type and effect are subject to this modifier.
+#         """
+#         matches_type = self.card_type == card_type
+#         matches_effect = self.effect_id == effect_id
+#         return matches_type and matches_effect
 
 
 class ResourceModifier(Modifier):
@@ -395,20 +398,20 @@ class DamageModifier(Modifier):
         return damage_type == self.damage_type
 
 
-class CostModifier(Modifier):
-    """
-    This class represents a modifier that changes the resource cost of a
-    specific type of card.
-    """
-    def __init__(self, affected_card_type):
-        """
-        Initialize a new CostModifier.
-        """
-        super().__init__()
-        self.affected_card_type = affected_card_type
+# class CostModifier(Modifier):
+#     """
+#     This class represents a modifier that changes the resource cost of a
+#     specific type of card.
+#     """
+#     def __init__(self, affected_card_type):
+#         """
+#         Initialize a new CostModifier.
+#         """
+#         super().__init__()
+#         self.affected_card_type = affected_card_type
 
-    def matches(self, card_type):
-        """
-        Checks if the given card type (or subtype) is subject to this modifier.
-        """
-        return card_type == self.affected_card_type
+#     def matches(self, card_type):
+#         """
+#         Checks if the given card type (or subtype) is subject to this modifier.
+#         """
+#         return card_type == self.affected_card_type
