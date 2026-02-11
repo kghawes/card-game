@@ -4,6 +4,7 @@ This module contains prototyping and JSON loading logic.
 import json
 import sys
 from abc import ABC, abstractmethod
+from random import random
 
 def load_json(filepath: str):
     """
@@ -15,6 +16,14 @@ def load_json(filepath: str):
     except Exception as e:
         print(f"Error loading JSON file {filepath}:")
         sys.exit(e)
+
+def roll_random_chance(chance: float, luck: int = 0) -> bool:
+    """
+    Determine if a random chance roll is successful.
+    """
+    chance += luck * (1 - chance) * 0.01
+    chance = min(max(chance, 0), 1)
+    return random() <= chance
 
 class Prototype(ABC):
     """

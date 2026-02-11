@@ -2,9 +2,8 @@
 This module defines the Status class, its child classes, and the
 StatusRegistry.
 """
-import random
 import utils.constants as c
-from utils.utils import load_json
+from utils.utils import load_json, roll_random_chance
 
 class Status:
     """
@@ -292,14 +291,14 @@ class EvasionStatus(Status):
         """
         super().__init__(status_id, description, applies_immediately=False)
 
-    def calculate_evasion_damage(self, level, incoming_damage) -> int:
+    def calculate_evasion_damage(self, level, incoming_damage, luck) -> int:
         """
         Return the damage to be taken after winning or losing the dice roll.
         """
         base_probability = c.BASE_EVASION_PROBABILITY
         success_probability = min(base_probability * level, 1.0)
-        roll = random.random()
-        return 0 if roll >= success_probability else incoming_damage
+        success = roll_random_chance(success_probability, luck)
+        return 0 if success else incoming_damage
 
 
 class CriticalHitStatus(Status):
@@ -312,14 +311,14 @@ class CriticalHitStatus(Status):
         """
         super().__init__(status_id, description, applies_immediately=False)
 
-    def calculate_damage_multiplier(self, level) -> int:
+    def calculate_damage_multiplier(self, level, luck) -> int:
         """
         Randomly calculate the damage multiplier.
         """
         base_probability = c.BASE_CRIT_PROBABILITY
         success_probability = min(base_probability * level, 1.0)
-        roll = random.random()
-        return c.CRIT_MULTIPLIER if roll >= success_probability else 1
+        success = roll_random_chance(success_probability, luck)
+        return c.CRIT_MULTIPLIER if success else 1
 
 
 class RestrictCardTypeStatus(Status):
