@@ -1,0 +1,13 @@
+#:kivy 2.3.1
+
+<DevConsole>:
+    text_input: text_input
+    text_output: text_output
+    TextInput:
+        id: text_input
+        multiline: False
+        size_hint: (1, None)
+        height: 30
+        hint_text: "/h[elp] for commands, ` to close"
+    Label:
+        id: text_output

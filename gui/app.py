@@ -3,6 +3,7 @@ Main application module for the card game GUI.
 """
 
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
@@ -52,7 +53,13 @@ class CardGameApp(App):
     def build(self):
         """Builds the card game application."""
         self.game = CardGame(self.event_manager)
+        Window.bind(on_key_down=self.on_key_down)
         town_screen = TownScreen(self.game)
         self.game.add_widget(town_screen)
         return self.game
+    
+    def on_key_down(self, window, key, scancode, codepoint, modifier):
+        """Handles key down events for the application."""
+        if self.game.screen:
+            self.game.screen.on_key_down(window, key, scancode, codepoint, modifier)
     
