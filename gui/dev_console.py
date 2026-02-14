@@ -78,3 +78,13 @@ class DevConsole(Widget):
                 self.text_input.text = ""
         else:
             raise RuntimeError("Cannot submit command when dev console is not open!")
+    
+    def show_result(self, command, success, message):
+        """
+        Displays the result of a debug command execution.
+        """
+        if success:
+            result_text = f"Successfully executed '{command}'\\n{message}"
+        else:
+            result_text = f"Failed to execute '{command}'\\n{message}"
+        self.text_output.text += result_text + "\\n"

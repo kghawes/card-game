@@ -98,6 +98,11 @@ class Controller:
             # TODO make rewards optional
         else:
             self.app.game.screen.show_combat_results(False, None)
+    
+    def handle_debug_command_executed(self, command, success, message):
+        """Handle a debug command being executed."""
+        self.event_manager.logger.log(f"Game event fired: debug_command_executed with success={success} and message='{message}'", True)
+        self.app.game.screen.dev_console.show_result(command, success, message)
 
     # GUI events
 
@@ -110,6 +115,7 @@ class Controller:
         self.app.event_manager.subscribe('end_turn', self.handle_end_turn)
         self.app.event_manager.subscribe('back_to_quest', self.handle_back_to_quest)
         self.app.event_manager.subscribe('game_over', self.handle_game_over) 
+        self.app.event_manager.subscribe('debug_command_submitted', self.handle_debug_command_submitted)
 
     def handle_initiate_quest(self):
         """Handle initiating a quest."""
@@ -149,3 +155,8 @@ class Controller:
         """Handle game over."""
         self.event_manager.logger.log("GUI event fired: game_over", True)
         self.app.stop()
+    
+    def handle_debug_command_submitted(self, command):
+        """Handle a debug command entered in the dev console."""
+        self.event_manager.logger.log(f"GUI event fired: debug_command with command '{command}'", True)
+        # TODO implement debug commands
