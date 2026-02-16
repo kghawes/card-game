@@ -96,7 +96,22 @@ class DebugTools:
         """
         Adds a card to the player's hand given its ID.
         """
-        pass
+        quantity = 1
+        if args[-1].isdigit():
+            quantity = int(args.pop())
+            if quantity <= 0:
+                return False, "Quantity must be a positive integer."
+        card_id = "_".join(args)
+        for _ in range(quantity):
+            try:
+                card = self.registries.cards.create_card(card_id, self.registries.effects)
+                if card:
+                    result = player.card_manager.try_add_to_deck(card)
+                    if not result[0]:
+                        return False, "Card won't fit in deck."
+                    player.card_manager.draw(player, self.registries)
+            except Exception as e:
+                return False, str(e)
 
     def set_stat_cmd(self, player, enemy, *args) -> tuple:
         """
