@@ -102,6 +102,9 @@ class Controller:
     def handle_debug_command_executed(self, command, success, message):
         """Handle a debug command being executed."""
         self.event_manager.logger.log(f"Game event fired: debug_command_executed with success={success} and message='{message}'", True)
+        self.display_hand(self.game.player.card_manager.hand)
+        self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
+        self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
         self.app.game.screen.dev_console.show_result(command, success, message)
 
     # GUI events
@@ -159,4 +162,4 @@ class Controller:
     def handle_debug_command_submitted(self, command):
         """Handle a debug command entered in the dev console."""
         self.event_manager.logger.log(f"GUI event fired: debug_command with command '{command}'", True)
-        # TODO implement debug commands
+        self.game.debug_tools.execute_command(command, self.game.player, self.game.enemy)

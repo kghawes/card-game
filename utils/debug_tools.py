@@ -37,7 +37,7 @@ class DebugTools:
             )
         }
     
-    def parse_command(self, input_str, player, enemy):
+    def execute_command(self, input_str, player, enemy):
         """
         Parses a debug command and executes the corresponding action.
         """
@@ -54,13 +54,13 @@ class DebugTools:
         for command_name, command in self.commands.items():
             if command_name.startswith(cmd):
                 try:
-                    success, message = command.execute(*args)
+                    success, message = command.execute(player, enemy, args)
                 except Exception as e:
                     message = str(e)
                 break
         self.event_manager.dispatch("debug_command_executed", input_str, success, message)
     
-    def help_cmd(self, player, enemy, *args) -> tuple:
+    def help_cmd(self, player, enemy, args) -> tuple:
         """
         Shows a help message with available debug commands.
         """
@@ -76,7 +76,7 @@ class DebugTools:
                         message += f"{command.name}\\n{command.description}\\n{command.help_text}\\n"
             return True, message
 
-    def resolve_effect_cmd(self, player, enemy, *args) -> tuple:
+    def resolve_effect_cmd(self, player, enemy, args) -> tuple:
         """
         Resolves an effect given its ID and level.
         """
@@ -91,8 +91,11 @@ class DebugTools:
         effect = self.registries.effects.get_effect(effect_id)
         if effect:
             effect.resolve(player, enemy, level, self.registries.statuses)
+            return True, f"Resolved {effect_id} {level}."
+        else:
+            return False, "Effect not found."
 
-    def add_card_cmd(self, player, enemy, *args) -> tuple:
+    def add_card_cmd(self, player, enemy, args) -> tuple:
         """
         Adds a card to the player's hand given its ID.
         """
@@ -115,8 +118,9 @@ class DebugTools:
                     return False, "Card not found."
             except Exception as e:
                 return False, str(e)
+        return True, f"Added {quantity} {card_id}(s)."
 
-    def set_stat_cmd(self, player, enemy, *args) -> tuple:
+    def set_stat_cmd(self, player, enemy, args) -> tuple:
         """
         Sets a combatant's stat to a given value.
         """
@@ -140,14 +144,20 @@ class DebugTools:
         stat_id = args.pop(0)
 
         value_str = args.pop(0)
-        if not value_str.isdigit():
+        if not value_str.isdigit(): #TODO allow negative values
             return False, "Value must be an integer."
         value = int(value_str)
 
         if stat_id in list(c.Resources.__members__):
             if is_max:
-                # how does combatant data get updated in gui?
-
+                target.resources[stat_id].max_value = value
+            else:
+                target.resources[stat_id].current = value
+        elif stat_id in list(c.Attributes.__members__):
+            target.attributes[stat_id] = value
+        else:
+            return False, "Stat must be a valid resource or attribute."
+        return True, f"Set {target_str.lower()} {stat_id.lower()} = {value}."
 
 class DebugCommand():
     """

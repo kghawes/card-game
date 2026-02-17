@@ -9,6 +9,7 @@ from core.cards import CardCache
 from core.enemies import EnemyCache
 from core.player import Player
 import utils.constants as c
+from utils.debug_tools import DebugTools
 
 class Game:
     """
@@ -37,6 +38,7 @@ class Game:
             )
         self.player.name = "Player"
         self.town = Town()
+        self.debug_tools = DebugTools(self.event_manager, self.registries)
 
     def start_game(self):
         """
