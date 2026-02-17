@@ -82,11 +82,11 @@ class DebugTools:
         """
         level = args.pop()
         effect_id = "_".join(args)
-        if level.isdigit():
+        try:
             level = int(level)
             if level <= 0:
                 return False, "Level must be a positive integer."
-        else:
+        except ValueError:
             return False, "Level must be a positive integer."
         effect = self.registries.effects.get_effect(effect_id)
         if effect:
@@ -100,10 +100,14 @@ class DebugTools:
         Adds a card to the player's hand given its ID.
         """
         quantity = 1
-        if args[-1].isdigit():
-            quantity = int(args.pop())
+        try:
+            quantity = int(args[-1])
             if quantity <= 0:
                 return False, "Quantity must be a positive integer."
+            args = args[:-1]
+        except (ValueError, IndexError):
+            # No quantity provided, default to 1
+            pass
         card_id = "_".join(args)
         for _ in range(quantity):
             try:
@@ -144,9 +148,10 @@ class DebugTools:
         stat_id = args.pop(0)
 
         value_str = args.pop(0)
-        if not value_str.isdigit(): #TODO allow negative values
+        try:
+            value = int(value_str)
+        except ValueError:
             return False, "Value must be an integer."
-        value = int(value_str)
 
         if stat_id in list(c.Resources.__members__):
             if is_max:
