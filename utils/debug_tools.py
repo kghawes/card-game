@@ -105,11 +105,14 @@ class DebugTools:
         for _ in range(quantity):
             try:
                 card = self.registries.cards.create_card(card_id, self.registries.effects)
+                # TODO: roll card cache into registries
                 if card:
                     result = player.card_manager.try_add_to_deck(card)
                     if not result[0]:
                         return False, "Card won't fit in deck."
                     player.card_manager.draw(player, self.registries)
+                else:
+                    return False, "Card not found."
             except Exception as e:
                 return False, str(e)
 
@@ -117,7 +120,33 @@ class DebugTools:
         """
         Sets a combatant's stat to a given value.
         """
-        pass
+        if len(args) < 3:
+            return False, "Not enough arguments."
+        
+        target_str = args.pop(0)
+        if target_str == "SELF":
+            target = player
+        elif target_str == "ENEMY":
+            target = enemy
+        else:
+            return False, "Target must be self or enemy."
+        
+        if args[0] == "MAX":
+            args.pop(0)
+            is_max = True
+        else:
+            is_max = False
+
+        stat_id = args.pop(0)
+
+        value_str = args.pop(0)
+        if not value_str.isdigit():
+            return False, "Value must be an integer."
+        value = int(value_str)
+
+        if stat_id in list(c.Resources.__members__):
+            if is_max:
+                # how does combatant data get updated in gui?
 
 
 class DebugCommand():
