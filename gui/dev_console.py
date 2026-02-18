@@ -17,6 +17,7 @@ class DevConsole(Widget):
         self.history = [] # most recent first
         self.history_index = -1
         self.current_buffer = ""
+        self.visible = False
     
     def show(self, screen):
         """Shows the console and restores unsubmitted text."""
@@ -25,6 +26,7 @@ class DevConsole(Widget):
             self.text_input.focus = True
             if self.history_index == -1 and self.current_buffer:
                 self.text_input.text = self.current_buffer
+            self.visible = True
     
     def hide(self):
         """Hides the console and preserves unsubmitted text."""
@@ -32,6 +34,7 @@ class DevConsole(Widget):
             if self.history_index < 0 and self.text_input.text.strip():
                 self.current_buffer = self.text_input.text
             self.parent.remove_widget(self.text_input)
+            self.visible = False
     
     def previous_command(self):
         """

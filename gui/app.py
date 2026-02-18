@@ -5,7 +5,6 @@ Main application module for the card game GUI.
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
-from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.config import Config
 from gui.combat_screen import CombatScreen
@@ -60,6 +59,6 @@ class CardGameApp(App):
     
     def on_key_down(self, window, key, scancode, codepoint, modifier):
         """Handles key down events for the application."""
-        if self.game.screen:
+        if isinstance(self.game.screen, CombatScreen):
             self.game.screen.on_key_down(window, key, scancode, codepoint, modifier)
     
