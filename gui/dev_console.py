@@ -4,14 +4,38 @@ The module defines the debug console in the GUI.
 
 from kivy.uix.widget import Widget
 from kivy.uix.textinput import TextInput
-from kivy.uix.label import Label
 from kivy.properties import ObjectProperty
+
+class DevConsoleInput(TextInput):
+    """
+    Text input for the dev console that handles command submission and history navigation.
+    """
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+    
+    def keyboard_on_key_down(self, window, keycode, text, modifiers):
+        if keycode[1] == 'enter':
+            self.parent.on_text_validate()
+            return True
+        elif keycode[1] == 'up':
+            self.parent.previous_command()
+            return True
+        elif keycode[1] == 'down':
+            self.parent.next_command()
+            return True
+        else:
+            return super().keyboard_on_key_down(window, keycode, text, modifiers)
+    
+    def insert_text(self, substring, from_undo=False):
+        substring = substring.replace("`", "")
+        return super().insert_text(substring, from_undo)
+
 
 class DevConsole(Widget):
     """
     Console for entering debug commands.
     """
-    text_input = ObjectProperty(None)
+    text_input = ObjectProperty(DevConsoleInput)
     text_output = ObjectProperty(None)
 
     def __init__(self, **kwargs):
@@ -52,6 +76,7 @@ class DevConsole(Widget):
                 self.text_input.text = self.history[self.history_index]
             else:
                 self.history_index -= 1
+        print(self.history_index)
     
     def next_command(self):
         """
@@ -62,9 +87,10 @@ class DevConsole(Widget):
             if self.history_index > -1:
                 self.history_index -= 1
                 if self.history_index == -1:
-                    self.text = self.current_buffer
+                    self.text_input.text = self.current_buffer
                 else:
-                    self.text = self.history[self.history_index]
+                    self.text_input.text = self.history[self.history_index]
+        print(self.history_index)
     
     def on_text_validate(self):
         """

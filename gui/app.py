@@ -25,6 +25,7 @@ class CardGame(Widget):
         """Initializes the card game widget."""
         super().__init__(**kwargs)
         self.event_manager = event_manager
+        self.screen = None
 
     def start_quest(self, quest):
         """Starts a quest in the game."""
