@@ -76,7 +76,6 @@ class DevConsole(Widget):
                 self.text_input.text = self.history[self.history_index]
             else:
                 self.history_index -= 1
-        print(self.history_index)
     
     def next_command(self):
         """
@@ -90,7 +89,6 @@ class DevConsole(Widget):
                     self.text_input.text = self.current_buffer
                 else:
                     self.text_input.text = self.history[self.history_index]
-        print(self.history_index)
     
     def on_text_validate(self):
         """
@@ -115,7 +113,7 @@ class DevConsole(Widget):
         Displays the result of a debug command execution.
         """
         if success:
-            result_text = f"Successfully executed '{command}'\\n{message}"
+            result_text = f"Successfully executed '{command}'\n{message}"
         else:
-            result_text = f"Failed to execute '{command}'\\n{message}"
-        self.text_output.text += result_text + "\\n"
+            result_text = f"Failed to execute '{command}'\n{message}"
+        self.text_output.text += result_text + "\n"

@@ -20,7 +20,7 @@ class DebugTools:
             "RESOLVE": DebugCommand(
                 "/r[esolve] <effect> <target> <level>",
                 "Resolves an effect by name, target, and level.",
-                "Usage: <effect> must be a valid effect name (use either spaces or underscores). <target> must be self or enemy. <level> must be a positive integer.\\nUse /r apply [status] [target] [level] to apply a status.",
+                "Usage: <effect> must be a valid effect name (use either spaces or underscores). <target> must be self or enemy. <level> must be a positive integer.\nUse /r apply [status] [target] [level] to apply a status.",
                 self.resolve_effect_cmd
             ),
             "ADD": DebugCommand(
@@ -32,7 +32,7 @@ class DebugTools:
             "SET": DebugCommand(
                 "/s[et] <target> [max] <stat> <value>",
                 "Sets a player's resource or attribute to a given value.",
-                "Usage: <target> must be self or enemy. <stat> must be the name of a resource or character attribute. <value> must be an integer.\\nUse /s <target> max <resource> <value> to set a resource's maximum value.",
+                "Usage: <target> must be self or enemy. <stat> must be the name of a resource or character attribute. <value> must be an integer.\nUse /s <target> max <resource> <value> to set a resource's maximum value.",
                 self.set_stat_cmd
             )
         }
@@ -64,16 +64,16 @@ class DebugTools:
         """
         Shows a help message with available debug commands.
         """
-        if args.count == 0:
-            message = "Available commands:\\n"
+        if len(args) == 0:
+            message = "Available commands:\n"
             for command in self.commands.values():
-                message += f"{command.name}\\n{command.description}\\n"
+                message += f"{command.name}\n{command.description}\n"
             return True, message
         else:
             for cmd in args:
                 for command_name, command in self.commands.items():
                     if command_name.startswith(cmd):
-                        message += f"{command.name}\\n{command.description}\\n{command.help_text}\\n"
+                        message += f"{command.name}\n{command.description}\n{command.help_text}\n"
             return True, message
 
     def resolve_effect_cmd(self, player, enemy, args) -> tuple:

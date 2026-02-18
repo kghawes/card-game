@@ -38,6 +38,7 @@ class Controller:
         self.event_manager.subscribe('card_resolved', self.handle_card_resolved)
         self.event_manager.subscribe('end_enemy_turn', self.handle_end_enemy_turn)
         self.event_manager.subscribe('end_combat', self.handle_end_combat)
+        self.event_manager.subscribe('debug_command_executed', self.handle_debug_command_executed)
 
     def handle_start_game(self):
         """Handle starting the game."""
