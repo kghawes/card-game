@@ -61,4 +61,3 @@ class CardGameApp(App):
         """Handles key down events for the application."""
         if isinstance(self.game.screen, CombatScreen):
             self.game.screen.on_key_down(window, key, scancode, codepoint, modifier)
-    

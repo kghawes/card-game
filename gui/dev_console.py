@@ -5,15 +5,17 @@ The module defines the debug console in the GUI.
 from kivy.uix.widget import Widget
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
+from kivy.properties import ObjectProperty
 
 class DevConsole(Widget):
     """
     Console for entering debug commands.
     """
+    text_input = ObjectProperty(None)
+    text_output = ObjectProperty(None)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.text_input = TextInput()
-        self.text_output = Label()
         self.history = [] # most recent first
         self.history_index = -1
         self.current_buffer = ""
@@ -33,7 +35,7 @@ class DevConsole(Widget):
         if self.parent:
             if self.history_index < 0 and self.text_input.text.strip():
                 self.current_buffer = self.text_input.text
-            self.parent.remove_widget(self.text_input)
+            self.parent.remove_widget(self)
             self.visible = False
     
     def previous_command(self):

@@ -1,5 +1,30 @@
 #:kivy 2.3.1
 
+<DevConsole>:
+    text_input: text_input
+    text_output: text_output
+    TextInput:
+        id: text_input
+        multiline: False
+        hint_text: '/help for commands, ` to close'
+        pos: 0, 0
+        size: 1500, 40
+        color: (1, 1, 1, 1)
+    Label:
+        id: text_output
+        pos: 0, 40
+        size: 1500, 40
+        color: (1, 1, 1, 1)
+        text: 'output goes here'
+        text_size: self.size
+        padding: 4
+        canvas.before:
+            Color:
+                rgba: (0, 0, 0, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
 <Button>:
     size_hint: None, None
     height: 35
