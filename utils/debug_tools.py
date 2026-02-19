@@ -18,9 +18,9 @@ class DebugTools:
                 self.help_cmd
             ),
             "RESOLVE": DebugCommand(
-                "/r[esolve] <effect> <target> <level>",
+                "/r[esolve] <effect> <combatant> <level>",
                 "Resolves an effect by name, target, and level.",
-                "Usage: <effect> must be a valid effect name (use either spaces or underscores). <target> must be self or enemy. <level> must be a positive integer.\nUse /r apply [status] [target] [level] to apply a status.",
+                "Usage: <effect> must be a valid effect name (use either spaces or underscores). <combatant> must be self or target. <level> must be a positive integer.\nUse /r apply [status] [combatant] [level] to apply a status.",
                 self.resolve_effect_cmd
             ),
             "ADD": DebugCommand(
@@ -30,9 +30,9 @@ class DebugTools:
                 self.add_card_cmd
             ),
             "SET": DebugCommand(
-                "/s[et] <target> [max] <stat> <value>",
+                "/s[et] <combatant> [max] <stat> <value>",
                 "Sets a player's resource or attribute to a given value.",
-                "Usage: <target> must be self or enemy. <stat> must be the name of a resource or character attribute. <value> must be an integer.\nUse /s <target> max <resource> <value> to set a resource's maximum value.",
+                "Usage: <combatant> must be self or target. <stat> must be the name of a resource or character attribute. <value> must be an integer.\nUse /s <combatant> max <resource> <value> to set a resource's maximum value.",
                 self.set_stat_cmd
             )
         }
@@ -53,10 +53,7 @@ class DebugTools:
         success, message = False, "Unknown command."
         for command_name, command in self.commands.items():
             if command_name.startswith(cmd):
-                try:
-                    success, message = command.execute(player, enemy, args)
-                except Exception as e:
-                    message = str(e)
+                success, message = command.execute(player, enemy, args)
                 break
         self.event_manager.dispatch("debug_command_executed", input_str, success, message)
     
@@ -64,22 +61,32 @@ class DebugTools:
         """
         Shows a help message with available debug commands.
         """
-        if len(args) == 0:
-            message = "Available commands:\n"
-            for command in self.commands.values():
-                message += f"{command.name}\n{command.description}\n"
-            return True, message
-        else:
+        message = ""
+        if len(args) > 0:
+            found_command = False
             for cmd in args:
+                if cmd.startswith("/"):
+                    cmd = cmd[1:]
                 for command_name, command in self.commands.items():
                     if command_name.startswith(cmd):
                         message += f"{command.name}\n{command.description}\n{command.help_text}\n"
-            return True, message
+                        found_command = True
+                        break
+            if found_command:
+                return True, message
+            else:
+                message = "Command not found.\n"
+        message += "Available commands:\n"
+        for command in self.commands.values():
+            message += f"{command.name}\n{command.description}\n"
+        return True, message
 
     def resolve_effect_cmd(self, player, enemy, args) -> tuple:
         """
         Resolves an effect given its ID and level.
         """
+        if len(args) < 3:
+            return False, "Not enough arguments."
         level = args.pop()
         effect_id = "_".join(args)
         try:
@@ -90,7 +97,7 @@ class DebugTools:
             return False, "Level must be a positive integer."
         effect = self.registries.effects.get_effect(effect_id)
         if effect:
-            effect.resolve(player, enemy, level, self.registries.statuses)
+            effect.resolve(player, enemy, level, self.registries)
             return True, f"Resolved {effect_id} {level}."
         else:
             return False, "Effect not found."
@@ -99,6 +106,8 @@ class DebugTools:
         """
         Adds a card to the player's hand given its ID.
         """
+        if len(args) < 1:
+            return False, "Not enough arguments."
         quantity = 1
         try:
             quantity = int(args[-1])
@@ -134,10 +143,10 @@ class DebugTools:
         target_str = args.pop(0)
         if target_str == "SELF":
             target = player
-        elif target_str == "ENEMY":
+        elif target_str == "TARGET":
             target = enemy
         else:
-            return False, "Target must be self or enemy."
+            return False, "Combatant must be self or target."
         
         if args[0] == "MAX":
             args.pop(0)

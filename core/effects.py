@@ -326,6 +326,6 @@ class EffectRegistry:
         """
         Get the Effect object with the given id.
         """
-        if effect_id not in self.effects:
-            raise KeyError(f"Effect ID '{effect_id}' not found.")
-        return self.effects[effect_id]
+        if effect_id in self.effects:
+            return self.effects[effect_id]
+        return None
