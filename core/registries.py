@@ -1,6 +1,6 @@
 """
 This module defines the Registries class, containing lookup dictionaries for
-statuses, effects, enchantments, and quests.
+statuses, effects, enchantments, cards, enemies, and quests.
 """
 from core.effects import EffectRegistry
 from core.statuses import StatusRegistry
@@ -13,12 +13,11 @@ from utils.constants import JSON_PATHS as paths
 
 class Registries:
     """
-    Wraps StatusRegistry, EffectRegistry, EnchantmentRegistry, and
-    QuestRegistry since these are frequently used together.
+    This class holds all the registries for the game.
     """
     def __init__(self, event_manager):
         """
-        Initialize a new Registries.
+        Initialize the Registries.
         """
         self.attributes = AttributeRegistry(paths['attributes'])
         self.statuses = StatusRegistry(paths['statuses'], event_manager)
