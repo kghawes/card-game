@@ -40,7 +40,7 @@ class Combatant:
         self.event_manager = event_manager
         self.formatter = Formatter()
         self.damage_calculator = DamageCalculator()
-        # Initialize self.attributes and self.attribute_deltas
+        # Initialize self.attributes and self.attribute_deltas:
         self.initialize_attributes(starting_attributes)
 
     def initialize_attributes(self, initial_values=None):
