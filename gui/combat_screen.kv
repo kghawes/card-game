@@ -9,21 +9,20 @@
         hint_text: '/help for commands, ` to close'
         pos: 0, 0
         size: 1500, 40
-        color: (1, 1, 1, 1)
-    Label:
+        background_color: [0, 0, 0, 1]
+        foreground_color: [1, 1, 1, 1]
+    TextInput:
         id: text_output
-        pos: 0, 39
+        pos: 0, 38
         size: 1500, 400
-        color: (1, 1, 1, 1)
+        background_color: [0, 0, 0, 0.9]
+        foreground_color: [1, 1, 1, 1]
         text: ''
+        readonly: True
+        multiline: True
+        markup: True
         text_size: self.size
         padding: 4
-        canvas.before:
-            Color:
-                rgba: (0, 0, 0, 1)
-            Rectangle:
-                size: self.size
-                pos: self.pos
 
 <Button>:
     size_hint: None, None
