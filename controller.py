@@ -92,7 +92,7 @@ class Controller:
             self.game.player.combat_cleanup(self.game.registries)
             rewards = self.game.enemy.get_rewards(
                 self.game.player.character_class,
-                self.game.card_cache
+                self.game.registries.cards
                 )
             # TODO give rewards to player
             self.app.game.screen.show_combat_results(True, rewards)

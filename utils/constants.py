@@ -254,43 +254,44 @@ class WeightClasses(Enum):
     MEDIUM = "Medium"
     HEAVY = "Heavy"
 
-# Paths to JSON files
-CARD_PATHS = [
-    "data/cards/weapons.json",
-    "data/cards/armors.json",
-    "data/cards/alteration_spells.json",
-    "data/cards/destruction_spells.json",
-    "data/cards/illusion_spells.json",
-    "data/cards/mysticism_spells.json",
-    "data/cards/restoration_spells.json",
-    "data/cards/combat_skills.json",
-    "data/cards/stealth_skills.json",
-    "data/cards/magic_skills.json",
-    "data/cards/potion_consumables.json",
-    "data/cards/scroll_consumables.json",
-    "data/cards/items.json",
-    "data/cards/enemy_weapons.json",
-    "data/cards/enemy_armors.json",
-    "data/cards/enemy_spells.json",
-    "data/cards/enemy_skills.json"
-    ]
-ENEMIES_PATHS = [
-    "data/enemies/beasts.json",
-    "data/enemies/daedra.json",
-    "data/enemies/npcs.json",
-    "data/enemies/undead.json",
-    "data/enemies/dagoth.json",
-    "data/enemies/constructs.json",
-    "data/enemies/goblins.json"
-    ]
-STARTING_DECKS_PATH = "data/starting_decks.json"
-QUESTS_PATH = "data/quests.json"
-ENCHANTMENTS_PATH = "data/enchantments.json"
-STATUSES_PATH = "data/statuses.json"
-EFFECTS_PATH = "data/effects.json"
-CARD_REWARDS_PATH = "data/card_rewards.json"
-ENEMY_GROUPS_PATH = "data/enemy_groups.json"
-ATTRIBUTES_PATH = "data/attributes.json"
+JSON_PATHS = {
+    "cards": [
+        "data/cards/weapons.json",
+        "data/cards/armors.json",
+        "data/cards/alteration_spells.json",
+        "data/cards/destruction_spells.json",
+        "data/cards/illusion_spells.json",
+        "data/cards/mysticism_spells.json",
+        "data/cards/restoration_spells.json",
+        "data/cards/combat_skills.json",
+        "data/cards/stealth_skills.json",
+        "data/cards/magic_skills.json",
+        "data/cards/potion_consumables.json",
+        "data/cards/scroll_consumables.json",
+        "data/cards/items.json",
+        "data/cards/enemy_weapons.json",
+        "data/cards/enemy_armors.json",
+        "data/cards/enemy_spells.json",
+        "data/cards/enemy_skills.json"
+    ],
+    "enemies": [
+        "data/enemies/beasts.json",
+        "data/enemies/daedra.json",
+        "data/enemies/npcs.json",
+        "data/enemies/undead.json",
+        "data/enemies/dagoth.json",
+        "data/enemies/constructs.json",
+        "data/enemies/goblins.json"
+    ],
+    "starting_decks": "data/starting_decks.json",
+    "quests": "data/quests.json",
+    "enchantments": "data/enchantments.json",
+    "statuses": "data/statuses.json",
+    "effects": "data/effects.json",
+    "card_rewards": "data/card_rewards.json",
+    "enemy_groups": "data/enemy_groups.json",
+    "attributes": "data/attributes.json"
+}
 
 # Experience
 EXP_TO_LEVEL = [

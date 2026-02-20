@@ -1,7 +1,5 @@
 """
-This module defines the Enemy, EnemyPrototype, and EnemyCache classes. It is
-responsible for building a cache of enemy prototypes and generating new enemies
-when requested.
+This module defines the Enemy, EnemyPrototype, and EnemyRegistry classes.
 """
 from utils.utils import Prototype, load_json
 from core.combatants import Combatant
@@ -12,16 +10,16 @@ class Enemy(Combatant):
     Represents an enemy combatant.
     """
     def __init__(
-            self, name, max_health, max_stamina, max_magicka, deck, card_cache,
+            self, name, max_health, max_stamina, max_magicka, deck,
             registries, loot, card_rewards, event_manager
             ):
         super().__init__(
-            name, max_health, max_stamina, max_magicka, deck, card_cache,
+            name, max_health, max_stamina, max_magicka, deck,
             registries, True, event_manager
             )
         self.loot = Treasure(loot, card_rewards)
     
-    def get_rewards(self, player_class, card_cache) -> dict:
+    def get_rewards(self, player_class, card_registry) -> dict:
         """
         Get the loot rewards for defeating this enemy.
         """
@@ -29,7 +27,7 @@ class Enemy(Combatant):
             'gold': self.loot.gold,
             'exp': self.loot.exp,
             'cards': self.loot.select_cards(
-                1, player_class, card_cache
+                1, player_class, card_registry
                 )
         }
 
@@ -50,7 +48,7 @@ class EnemyPrototype(Prototype):
         self.loot = loot
         self.event_manager = event_manager
 
-    def clone(self, card_cache, registries, card_rewards) -> Enemy:
+    def clone(self, registries, card_rewards) -> Enemy:
         """
         Create an Enemy based on the prototype.
         """
@@ -60,21 +58,20 @@ class EnemyPrototype(Prototype):
             max_stamina=self.max_stamina,
             max_magicka=self.max_magicka,
             deck=self.deck,  # Pass raw deck to Enemy
-            card_cache=card_cache,
-            registries = registries,
+            registries=registries,
             loot=self.loot,
             card_rewards=card_rewards,
             event_manager=self.event_manager
         )
 
 
-class EnemyCache:
+class EnemyRegistry:
     """
-    Holds all the enemy prototype data.
+    Holds all the enemy prototype data and creates enemy instances.
     """
     def __init__(self, filenames, event_manager):
         """
-        Initialize a new EnemyCache.
+        Initialize a new EnemyRegistry.
         """
         self.enemy_prototypes = self._load_enemy_prototypes(filenames, event_manager)
 
@@ -109,7 +106,7 @@ class EnemyCache:
         return prototypes
 
     def create_enemy(
-            self, enemy_id, card_cache, registries, card_rewards
+            self, enemy_id, registries, card_rewards
             ) -> Enemy:
         """
         Get a new Enemy using the given prototype id.
@@ -117,11 +114,11 @@ class EnemyCache:
         if enemy_id not in self.enemy_prototypes:
             raise KeyError(f"Enemy ID '{enemy_id}' not found.")
         prototype = self.enemy_prototypes[enemy_id]
-        enemy = prototype.clone(card_cache, registries, card_rewards)
+        enemy = prototype.clone(registries, card_rewards)
         return enemy
 
     def list_enemy_prototypes(self) -> list:
         """
-        List all enemy prototype ids in the cache.
+        List all enemy prototype ids in the registry.
         """
         return list(self.enemy_prototypes.keys())

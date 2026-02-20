@@ -6,7 +6,7 @@ from gameplay.status_manager import StatusManager
 from gameplay.modifier_manager import ModifierManager
 from gameplay.damage_calculator import DamageCalculator
 from core.resources import Resource
-from utils.constants import Resources as r, Attributes as a
+from utils.constants import Resources as Res, Attributes
 from utils.formatter import Formatter
 
 class Combatant:
@@ -16,22 +16,24 @@ class Combatant:
     """
     def __init__(
             self, name, max_health, max_stamina, max_magicka, starting_deck,
-            card_cache, registries, is_enemy, event_manager, starting_attributes=None
+            registries, is_enemy, event_manager, starting_attributes=None
             ):
         """
         Initialize a new Combatant.
         """
         self.name = name
         self.is_enemy = is_enemy
-        health_id = r.HEALTH.name
-        stamina_id = r.STAMINA.name
-        magicka_id = r.MAGICKA.name
+        health_id = Res.HEALTH.name
+        stamina_id = Res.STAMINA.name
+        magicka_id = Res.MAGICKA.name
         self.resources = {
             health_id: Resource(health_id, max_health),
             stamina_id: Resource(stamina_id, max_stamina),
             magicka_id: Resource(magicka_id, max_magicka)
         }
-        self.card_manager = CardManager(starting_deck, card_cache, event_manager, registries.effects)
+        self.card_manager = CardManager(
+            starting_deck, registries.cards, event_manager, registries.effects
+            )
         self.status_manager = StatusManager(event_manager)
         self.modifier_manager = ModifierManager(registries.statuses)
         self.cards_played_this_turn = 0
@@ -47,7 +49,7 @@ class Combatant:
         """
         self.attributes = {}
         self.attribute_deltas = {}
-        for attribute in a:
+        for attribute in Attributes:
             self.attribute_deltas[attribute.name] = 0
             if initial_values and attribute.name in initial_values:
                 self.attributes[attribute.name] = initial_values[attribute.name]
@@ -58,7 +60,7 @@ class Combatant:
         """
         Reset attribute deltas to zero.
         """
-        for attribute in a:
+        for attribute in Attributes:
             self.attribute_deltas[attribute.name] = 0
 
     def get_combatant_data(self) -> dict:
@@ -72,7 +74,9 @@ class Combatant:
             statuses[status_id] = {
                 'name': leveled_status.name,
                 'level': level,
-                'description': self.formatter.format_status_data(status, level, is_player=not self.is_enemy)
+                'description': self.formatter.format_status_data(
+                    status, level, is_player=not self.is_enemy
+                    )
             }
         attributes = {}
         for attribute_id, value in self.attributes.items():
@@ -93,37 +97,37 @@ class Combatant:
         """
         Get current health.
         """
-        return self.resources[r.HEALTH.name].current
+        return self.resources[Res.HEALTH.name].current
 
     def get_max_health(self) -> int:
         """
         Get maximum health, including modifiers.
         """
-        return self.resources[r.HEALTH.name].get_max(self.modifier_manager)
+        return self.resources[Res.HEALTH.name].get_max(self.modifier_manager)
 
     def get_stamina(self) -> int:
         """
         Get current stamina.
         """
-        return self.resources[r.STAMINA.name].current
+        return self.resources[Res.STAMINA.name].current
 
     def get_max_stamina(self) -> int:
         """
         Get maximum stamina, including modifiers.
         """
-        return self.resources[r.STAMINA.name].get_max(self.modifier_manager)
+        return self.resources[Res.STAMINA.name].get_max(self.modifier_manager)
 
     def get_magicka(self) -> int:
         """
         Get current magicka.
         """
-        return self.resources[r.MAGICKA.name].current
+        return self.resources[Res.MAGICKA.name].current
 
     def get_max_magicka(self) -> int:
         """
         Get maximum magicka, including modifiers.
         """
-        return self.resources[r.MAGICKA.name].get_max(self.modifier_manager)
+        return self.resources[Res.MAGICKA.name].get_max(self.modifier_manager)
 
     def get_attribute_level(self, attribute_id) -> int:
         """
@@ -145,7 +149,7 @@ class Combatant:
                 self, attacker, amount, damage_type, registries
                 )
 
-        health = self.resources[r.HEALTH.name]
+        health = self.resources[Res.HEALTH.name]
         health.change_value(-amount, self.modifier_manager)
         self.event_manager.logger.log(
             f"{self.name} took {amount} damage!"
@@ -161,9 +165,9 @@ class Combatant:
         """
         Reset current stamina and magicka to their maximum values.
         """
-        stamina = self.resources[r.STAMINA.name]
+        stamina = self.resources[Res.STAMINA.name]
         stamina.replenish(self.modifier_manager)
-        magicka = self.resources[r.MAGICKA.name]
+        magicka = self.resources[Res.MAGICKA.name]
         magicka.replenish(self.modifier_manager)
 
     def reset_for_turn(self):

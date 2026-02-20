@@ -3,7 +3,6 @@ This module defines the CardManager class.
 """
 from math import floor
 import random
-from typing import Tuple
 import utils.constants as c
 from gameplay.library import Library
 
@@ -11,18 +10,18 @@ class CardManager:
     """
     This class handles the movement of cards between piles.
     """
-    def __init__(self, starting_deck, card_cache, event_manager, effect_registry):
+    def __init__(self, starting_deck, card_registry, event_manager, effect_registry):
         """
         Initialize a new CardManager.
         """
-        self.deck = self._create_deck(starting_deck, card_cache, effect_registry)
+        self.deck = self._create_deck(starting_deck, card_registry, effect_registry)
         self.hand = []
         self.discard_pile = []
         self.consumed_pile = []
         self.library = Library()
         self.event_manager = event_manager
 
-    def _create_deck(self, deck_list, card_cache, effect_registry) -> list:
+    def _create_deck(self, deck_list, card_registry, effect_registry) -> list:
         """
         From a list of card ids, generate Card objects.
         """
@@ -31,7 +30,7 @@ class CardManager:
             card_id = entry.get("card")
             quantity = entry.get("quantity")
             for _ in range(quantity):
-                deck.append(card_cache.create_card(card_id, effect_registry))
+                deck.append(card_registry.create_card(card_id, effect_registry))
         return deck
 
     def try_add_to_deck(self, card) -> tuple[bool, bool, bool]:
