@@ -163,15 +163,22 @@ class DebugTools:
             return False, "Value must be an integer."
 
         if stat_id in list(c.Resources.__members__):
+            if value < 0:
+                return False, "Resources must be non-negative."
+            mm = target.modifier_manager
+            resource = target.resources[stat_id]
             if is_max:
-                target.resources[stat_id].max_value = value
+                resource.max_value = value
+                resource.current = resource.clamp_value(resource.current, mm)
+                return True, f"Set {target_str.lower()} max {stat_id.lower()} = {value}."
             else:
-                target.resources[stat_id].current = value
+                value = resource.clamp_value(value, mm)
+                resource.current = value
+                return True, f"Set {target_str.lower()} {stat_id.lower()} = {value}."
         elif stat_id in list(c.Attributes.__members__):
             target.attributes[stat_id] = value
-        else:
-            return False, "Stat must be a valid resource or attribute."
-        return True, f"Set {target_str.lower()} {stat_id.lower()} = {value}."
+            return True, f"Set {target_str.lower()} {stat_id.lower()} = {value}."
+        return False, "Stat must be a valid resource or attribute."
 
 class DebugCommand():
     """
