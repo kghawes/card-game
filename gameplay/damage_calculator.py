@@ -102,7 +102,7 @@ class DamageCalculator:
                         f"{defender.name} reflected {reflected_amount} damage back to {attacker.name}!"
                         )
                     
-                # If attacker also has reflect, prevent infinite reflecting
+            # If attacker also has reflect, prevent infinite reflecting
             attacker_reflect = attacker.status_manager.get_leveled_status(
                     status_names.REFLECT.name
                     )
@@ -111,8 +111,8 @@ class DamageCalculator:
                     or reflected_amount > attacker_reflect.get_level()
                 )
             will_damage_defender = amount > 0
-                # The reflection will go away if any portion of the damage is taken by either side
-                # Otherwise, just stop reflection here
+            # The reflection will vanish if any portion of the damage is taken by either side
+            # Otherwise, just stop reflection here
             if will_damage_attacker or will_damage_defender:
                 attacker.take_damage(
                         defender, reflected_amount, damage_type, registries
@@ -167,8 +167,9 @@ class DamageCalculator:
             hidden = attacker.status_manager.get_leveled_status(status_names.HIDDEN.name)
             if hidden is not None:
                 hidden_level = hidden.get_level()
-                hidden_status = hidden.reference
-                mult = hidden_status.calculate_damage_multiplier(hidden_level)
+                hidden_ref = hidden.reference
+                luck = attacker.get_attribute_level(attribute_names.LUCK.name)
+                mult = hidden_ref.calculate_damage_multiplier(hidden_level, luck)
                 amount *= mult
                 if mult > 1:
                     defender.event_manager.logger.log(
