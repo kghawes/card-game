@@ -106,6 +106,7 @@ class DebugTools:
         """
         Adds a card to the player's hand given its ID.
         """
+        partial_success = False
         if len(args) < 1:
             return False, "Not enough arguments."
         quantity = 1
@@ -121,12 +122,23 @@ class DebugTools:
         for _ in range(quantity):
             try:
                 card = self.registries.cards.create_card(card_id, self.registries.effects)
-                # TODO: roll card cache into registries
                 if card:
                     result = player.card_manager.try_add_to_deck(card)
                     if not result[0]:
-                        return False, "Card won't fit in deck."
-                    player.card_manager.draw(player, self.registries)
+                        if partial_success:
+                            return True, f"Added {quantity} {card_id}(s), but the rest won't fit in deck."
+                        elif result[1]:
+                            return False, f"Cannot add {card_id}: too many copies in deck."
+                        elif result[2]:
+                            return False, f"Cannot add {card_id}: deck is at maximum capacity."
+                    card_drawn = player.card_manager.draw(player, self.registries)
+                    if not card_drawn:
+                        if partial_success:
+                            return True, f"Added {quantity} {card_id}(s), but the rest won't fit in hand."
+                        else:
+                            return False, f"Cannot add {card_id}: hand is at maximum capacity."
+                    else:
+                        partial_success = True
                 else:
                     return False, "Card not found."
             except Exception as e:
