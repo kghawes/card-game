@@ -10,6 +10,7 @@ from kivy.config import Config
 from gui.combat_screen import CombatScreen
 from gui.town_screen import TownScreen
 from gui.quest_screen import QuestScreen
+from gui.dev_console import DevConsole
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'resizable', '0')
@@ -26,6 +27,7 @@ class CardGame(Widget):
         super().__init__(**kwargs)
         self.event_manager = event_manager
         self.screen = None
+        self.dev_console = DevConsole()
 
     def start_quest(self, quest):
         """Starts a quest in the game."""
@@ -34,7 +36,8 @@ class CardGame(Widget):
 
     def start_combat(self, player_data, enemy_data):
         """Starts a combat encounter in the game."""
-        self.change_screen(CombatScreen(player_data, enemy_data, self.event_manager))
+        screen = CombatScreen(player_data, enemy_data, self.event_manager, self.dev_console)
+        self.change_screen(screen)
         self.event_manager.dispatch('start_player_turn')
 
     def change_screen(self, screen):

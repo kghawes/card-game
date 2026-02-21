@@ -9,7 +9,6 @@ import gui.gui_constants as constants
 from gui.asset_cache import AssetCache
 from gui.card import Card
 from gui.tooltips import Tooltip
-from gui.dev_console import DevConsole
 
 class Hand(FloatLayout):
     """Widget representing the player's hand of cards."""
@@ -174,7 +173,9 @@ class CombatScreen(Widget):
     log_texture = ObjectProperty(None)
     combat_log = ObjectProperty(CombatLog)
 
-    def __init__(self, player: dict, enemy: dict, event_manager, **kwargs):
+    def __init__(
+            self, player: dict, enemy: dict, event_manager, dev_console, **kwargs
+            ):
         """Initializes the combat screen with the given properties."""
         super().__init__(**kwargs)
         self.event_manager = event_manager
@@ -195,7 +196,7 @@ class CombatScreen(Widget):
         self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
         self.tooltip = Tooltip()
         self.add_widget(self.tooltip)
-        self.dev_console = DevConsole()
+        self.dev_console = dev_console
     
     def start_player_turn(self, statuses: dict):
         """Starts the player's turn."""
