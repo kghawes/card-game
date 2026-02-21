@@ -10,8 +10,8 @@ class Quest:
     This class represents a series of encounters.
     """
     def __init__(
-            self, quest_id, description, encounters, enemy_cache, card_cache,
-            registries, card_rewards
+            self, quest_id, description, encounters,
+            registries
             ):
         """
         Initialize a new Quest.
@@ -20,8 +20,8 @@ class Quest:
         self.description = description
         self.encounters = []
         for encounter in encounters:
-            enemy = enemy_cache.create_enemy(
-                encounter, card_cache, registries, card_rewards
+            enemy = registries.enemies.create_enemy(
+                encounter, registries, None
                 )
             self.encounters.append(Encounter(enemy))
 
@@ -30,8 +30,7 @@ class QuestRegistry:
     This class holds quest data loaded from JSON.
     """
     def __init__(
-            self, quests_path, enemy_groups_path, enemy_cache, card_cache,
-            registries, card_rewards
+            self, quests_path, enemy_groups_path, registries
             ):
         """
         Initialize a new QuestRegistry.
@@ -46,8 +45,8 @@ class QuestRegistry:
             encounters = quest_details.get("ENCOUNTERS", [])
             encounters = self.setup_encounters(encounters, enemy_group_data)
             quest = Quest(
-                quest_id, description, encounters, enemy_cache, card_cache,
-                registries, card_rewards
+                quest_id, description, encounters,
+                registries
                 )
             self.quests.append(quest)
 

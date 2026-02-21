@@ -86,6 +86,6 @@ class Formatter:
     
     def apply_font_color(self, text, color):
         """
-        Apply font color to the text.
+        Apply font color to the text. Color should be a hex string without the #, e.g. 'ff0000' for red.
         """
         return f"[color={color}]{text}[/color]"

@@ -1,39 +1,32 @@
 """
 This module defines the Registries class, containing lookup dictionaries for
-statuses, effects, enchantments, and quests.
+statuses, effects, enchantments, cards, enemies, and quests.
 """
 from core.effects import EffectRegistry
 from core.statuses import StatusRegistry
 from core.enchantments import EnchantmentRegistry
 from core.attributes import AttributeRegistry
+from core.cards import CardRegistry
+from core.enemies import EnemyRegistry
 from gameplay.quests import QuestRegistry
+from utils.constants import JSON_PATHS as paths
 
 class Registries:
     """
-    Wraps StatusRegistry, EffectRegistry, EnchantmentRegistry, and
-    QuestRegistry since these are frequently used together.
+    This class holds all the registries for the game.
     """
-    def __init__(self, effects_path, statuses_path, enchantments_path, \
-                 attributes_path, event_manager):
+    def __init__(self, event_manager):
         """
-        Initialize a new Registries.
+        Initialize the Registries.
         """
-        self.statuses = StatusRegistry(statuses_path, event_manager)
-        self.effects = EffectRegistry(effects_path, self.statuses)
+        self.attributes = AttributeRegistry(paths['attributes'])
+        self.statuses = StatusRegistry(paths['statuses'], event_manager)
+        self.effects = EffectRegistry(paths['effects'], self.statuses)
         self.enchantments = EnchantmentRegistry(
-            enchantments_path, self.effects
+            paths['enchantments'], self.effects
             )
-        self.attributes = AttributeRegistry(attributes_path)
-        self.quests = None
-
-    def register_quests(
-            self, quests_path, enemy_groups_path, enemy_cache, card_cache,
-            card_rewards
-            ):
-        """
-        Create the quest registry.
-        """
+        self.cards = CardRegistry(paths['cards'], self.enchantments)
+        self.enemies = EnemyRegistry(paths['enemies'], event_manager)
         self.quests = QuestRegistry(
-            quests_path, enemy_groups_path, enemy_cache, card_cache,
-            self, card_rewards
+            paths['quests'], paths['enemy_groups'], self
             )

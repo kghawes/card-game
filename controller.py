@@ -38,6 +38,7 @@ class Controller:
         self.event_manager.subscribe('card_resolved', self.handle_card_resolved)
         self.event_manager.subscribe('end_enemy_turn', self.handle_end_enemy_turn)
         self.event_manager.subscribe('end_combat', self.handle_end_combat)
+        self.event_manager.subscribe('debug_command_executed', self.handle_debug_command_executed)
 
     def handle_start_game(self):
         """Handle starting the game."""
@@ -91,13 +92,21 @@ class Controller:
             self.game.player.combat_cleanup(self.game.registries)
             rewards = self.game.enemy.get_rewards(
                 self.game.player.character_class,
-                self.game.card_cache
+                self.game.registries.cards
                 )
             # TODO give rewards to player
             self.app.game.screen.show_combat_results(True, rewards)
             # TODO make rewards optional
         else:
             self.app.game.screen.show_combat_results(False, None)
+    
+    def handle_debug_command_executed(self, command, success, message):
+        """Handle a debug command being executed."""
+        self.event_manager.logger.log(f"Game event fired: debug_command_executed with success={success} and message='{message}'", True)
+        self.display_hand(self.game.player.card_manager.hand)
+        self.app.game.screen.update_stats('player', self.game.player.get_combatant_data())
+        self.app.game.screen.update_stats('enemy', self.game.enemy.get_combatant_data())
+        self.app.game.screen.dev_console.show_result(command, success, message)
 
     # GUI events
 
@@ -110,6 +119,7 @@ class Controller:
         self.app.event_manager.subscribe('end_turn', self.handle_end_turn)
         self.app.event_manager.subscribe('back_to_quest', self.handle_back_to_quest)
         self.app.event_manager.subscribe('game_over', self.handle_game_over) 
+        self.app.event_manager.subscribe('debug_command_submitted', self.handle_debug_command_submitted)
 
     def handle_initiate_quest(self):
         """Handle initiating a quest."""
@@ -149,3 +159,8 @@ class Controller:
         """Handle game over."""
         self.event_manager.logger.log("GUI event fired: game_over", True)
         self.app.stop()
+    
+    def handle_debug_command_submitted(self, command):
+        """Handle a debug command entered in the dev console."""
+        self.event_manager.logger.log(f"GUI event fired: debug_command with command '{command}'", True)
+        self.game.debug_tools.execute_command(command, self.game.player, self.game.enemy)

@@ -1,10 +1,10 @@
 """
-This module defines the Card class, CardPrototype and CardCache.
+This module defines the Card class, CardPrototype and CardRegistry.
 """
 from math import floor
 from utils.utils import Prototype
 from utils.formatter import Formatter
-import utils.constants as c
+from utils.constants import CardTypes, Resources, MIN_COST
 from core.leveled_mechanics import LeveledMechanic
 
 class Card:
@@ -48,9 +48,9 @@ class Card:
         """
         Get the id of the resource corresponding to this card's cost.
         """
-        if self.card_type == c.CardTypes.SPELL.name:
-            return c.Resources.MAGICKA.name
-        return c.Resources.STAMINA.name
+        if self.card_type == CardTypes.SPELL.name:
+            return Resources.MAGICKA.name
+        return Resources.STAMINA.name
 
     def get_cost(self, owner=None, attribute_registry=None) -> int:
         """
@@ -64,12 +64,12 @@ class Card:
                 if attribute is not None:
                     multiplier = 1 - modifier * owner.get_attribute_level(attribute)
                     modified_cost = floor(self.cost * multiplier)
-                    return max(modified_cost, c.MIN_COST)
-        return max(self.cost, c.MIN_COST)
-        # if enable_override and self.override_cost >= c.MIN_COST:
+                    return max(modified_cost, MIN_COST)
+        return max(self.cost, MIN_COST)
+        # if enable_override and self.override_cost >= MIN_COST:
         #     return self.override_cost
         # net_cost = self.cost + self.cost_modifier + self.temp_cost_modifier
-        # return max(net_cost, c.MIN_COST)
+        # return max(net_cost, MIN_COST)
 
     # def change_cost_modifier(self, amount):
     #     """
@@ -154,19 +154,19 @@ class CardPrototype(Card, Prototype):
             )
 
 
-class CardCache:
+class CardRegistry:
     """
-    Holds all the card prototype data.
+    Holds all the card prototype data and creates card instances.
     """
-    def __init__(self, filenames, registries):
+    def __init__(self, filenames, enchantment_registry):
         """
-        Initialize a new CardCache.
+        Initialize a new CardRegistry.
         """
         self.card_prototypes = {}
         for filename in filenames:
-            self._load_prototypes_from_file(filename, registries)
+            self._load_prototypes_from_file(filename, enchantment_registry)
 
-    def _load_prototypes_from_file(self, filename, registries):
+    def _load_prototypes_from_file(self, filename, enchantment_registry):
         """
         Load card data from JSON and populate the dictionary.
         """
@@ -192,14 +192,14 @@ class CardCache:
 
             # Generate enchanted versions if specified
             if prototype.enchantments is not None:
-                self._generate_enchanted_prototypes(prototype, registries)
+                self._generate_enchanted_prototypes(prototype, enchantment_registry)
 
-    def _generate_enchanted_prototypes(self, prototype, registries):
+    def _generate_enchanted_prototypes(self, prototype, enchantment_registry):
         """
         Create variants of a card for generic enchantments.
         """
         for enchant_id in prototype.enchantments:
-            enchantment = registries.enchantments.get_enchantment(enchant_id)
+            enchantment = enchantment_registry.get_enchantment(enchant_id)
             enchanted_card = enchantment.create_enchanted_card(prototype)
 
             if enchanted_card.card_id in self.card_prototypes:
@@ -217,6 +217,6 @@ class CardCache:
 
     def list_cards(self):
         """
-        List all card prototype ids in the cache.
+        List all card prototype ids in the registry.
         """
         return list(self.card_prototypes.keys())

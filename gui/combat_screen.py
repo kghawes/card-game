@@ -1,6 +1,5 @@
 """Combat Screen Module for Card Game"""
 from operator import indexOf
-from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
@@ -174,7 +173,9 @@ class CombatScreen(Widget):
     log_texture = ObjectProperty(None)
     combat_log = ObjectProperty(CombatLog)
 
-    def __init__(self, player: dict, enemy: dict, event_manager, **kwargs):
+    def __init__(
+            self, player: dict, enemy: dict, event_manager, dev_console, **kwargs
+            ):
         """Initializes the combat screen with the given properties."""
         super().__init__(**kwargs)
         self.event_manager = event_manager
@@ -195,6 +196,7 @@ class CombatScreen(Widget):
         self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
         self.tooltip = Tooltip()
         self.add_widget(self.tooltip)
+        self.dev_console = dev_console
     
     def start_player_turn(self, statuses: dict):
         """Starts the player's turn."""
@@ -354,3 +356,11 @@ class CombatScreen(Widget):
             combat_results.continue_button.text = "Too bad"
             combat_results.continue_button.bind(on_release=lambda x: self.event_manager.dispatch('game_over'))
             # TODO implement game over logic and return to main menu instead of quitting
+
+    def on_key_down(self, window, key, scancode, codepoint, modifier):
+        """Handles key down events for the combat screen."""
+        if key == 96:  # Tilde key
+            if self.dev_console.visible:
+                self.dev_console.hide()
+            else:
+                self.dev_console.show(self)
