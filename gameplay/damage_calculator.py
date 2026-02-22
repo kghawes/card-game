@@ -179,7 +179,7 @@ class DamageCalculator:
             evasion_status = evasion.reference
             evasion_level = evasion.get_level()
             luck = defender.get_attribute_level(Attributes.LUCK.name)
-            amount = evasion_status.calculate_evasion_damage(defender, evasion_level, luck)
+            amount = evasion_status.calculate_evasion_damage(evasion_level, amount, luck)
             if amount == 0:
                 defender.event_manager.logger.log(
                     f"{defender.name} evaded the attack!"
