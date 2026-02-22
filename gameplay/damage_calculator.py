@@ -2,8 +2,7 @@
 This module defines the DamageCalculator class.
 """
 from math import floor
-from utils.constants import DamageTypes as damage_types, StatusNames as status_names, \
-    Attributes as attribute_names
+from utils.constants import DamageTypes, StatusNames, Attributes, Resources
 
 class DamageCalculator:
     """
@@ -24,8 +23,8 @@ class DamageCalculator:
         if amount <= 0:
             return 0
 
-        if damage_type == damage_types.PHYSICAL.name:
-            amount = self.process_defense(defender, amount, damage_type, status_registry)
+        if damage_type == DamageTypes.PHYSICAL.name:
+            amount = self.process_defense(defender, amount, status_registry)
             if amount <= 0:
                 return 0
         else:
@@ -38,10 +37,9 @@ class DamageCalculator:
                 if amount <= 0:
                     return 0
 
-                amount = self.process_spell_absorb(defender, attacker, amount, damage_type, status_registry)
-                # TODO: consider changing to restore magicka instead of fortify intelligence
-                if amount <= 0:
-                    return 0
+            amount = self.process_spell_absorb(defender, amount, damage_type)
+            if amount <= 0:
+                return 0
         
         return amount
     
@@ -50,10 +48,10 @@ class DamageCalculator:
         Process willpower attribute for the defender.
         """
         willpower_level = defender.get_attribute_level(
-            attribute_names.WILLPOWER.name
+            Attributes.WILLPOWER.name
             )
         if willpower_level > 0:
-            modifier = attribute_registry.get_attribute_modifier(attribute_names.WILLPOWER.name)
+            modifier = attribute_registry.get_attribute_modifier(Attributes.WILLPOWER.name)
             reduction_percent = modifier * willpower_level
             reduced_amount = max(floor(amount * (1 - reduction_percent)), 0)
             difference = amount - reduced_amount
@@ -62,14 +60,13 @@ class DamageCalculator:
                     f"{defender.name}'s willpower reduced damage by {difference}!"
                     )
             amount = reduced_amount
-            
         return amount
 
-    def process_spell_absorb(self, defender, attacker, amount, damage_type, status_registry) -> int:
+    def process_spell_absorb(self, defender, amount, damage_type) -> int:
         """
         Process spell absorption status for the defender.
         """
-        spell_absorb = defender.status_manager.get_leveled_status(status_names.SPELL_ABSORPTION.name)
+        spell_absorb = defender.status_manager.get_leveled_status(StatusNames.SPELL_ABSORPTION.name)
         if spell_absorb is not None:
             spell_absorb_status = spell_absorb.reference
             spell_absorb_level = spell_absorb.get_level()
@@ -77,20 +74,17 @@ class DamageCalculator:
                     amount, damage_type, spell_absorb_level
                     )
             if absorbed_amount > 0:
+                defender.resources[Resources.MAGICKA.name].change_value(absorbed_amount, defender.modifier_manager)
                 defender.event_manager.logger.log(
-                        f"{defender.name} absorbed {absorbed_amount} damage from {attacker.name}!"
+                        f"{defender.name} absorbed {absorbed_amount} magical damage!"
                         )
-            defender.status_manager.change_status(
-                    status_names.FORTIFY_INTELLIGENCE.name, absorbed_amount, defender, status_registry
-                    )
-                
         return amount
 
     def process_reflect(self, defender, attacker, amount, damage_type, registries) -> int:
         """
         Process reflect status for the defender.
         """
-        reflect = defender.status_manager.get_leveled_status(status_names.REFLECT.name)
+        reflect = defender.status_manager.get_leveled_status(StatusNames.REFLECT.name)
         if reflect is not None:
             reflect_status = reflect.reference
             reflect_level = reflect.get_level()
@@ -103,9 +97,7 @@ class DamageCalculator:
                         )
                     
             # If attacker also has reflect, prevent infinite reflecting
-            attacker_reflect = attacker.status_manager.get_leveled_status(
-                    status_names.REFLECT.name
-                    )
+            attacker_reflect = attacker.status_manager.get_leveled_status(StatusNames.REFLECT.name)
             will_damage_attacker = (
                     attacker_reflect is None 
                     or reflected_amount > attacker_reflect.get_level()
@@ -116,15 +108,14 @@ class DamageCalculator:
             if will_damage_attacker or will_damage_defender:
                 attacker.take_damage(
                         defender, reflected_amount, damage_type, registries
-                        )
-                    
+                        )    
         return amount
 
-    def process_defense(self, defender, amount, damage_type, status_registry) -> int:
+    def process_defense(self, defender, amount, status_registry) -> int:
         """
         Process defense status for the defender.
         """
-        defense = defender.status_manager.get_leveled_status(status_names.DEFENSE.name)
+        defense = defender.status_manager.get_leveled_status(StatusNames.DEFENSE.name)
         if defense is not None:
             defense_status = defense.reference
             defense_level = defense.get_level()
@@ -136,8 +127,7 @@ class DamageCalculator:
                 difference = old_amount - amount
                 defender.event_manager.logger.log(
                     f"{defender.name}'s defense blocked {difference} damage!"
-                        )
-                        
+                        )        
         return amount
 
     def process_weakness_resist(self, defender, amount, damage_type) -> int:
@@ -156,7 +146,6 @@ class DamageCalculator:
             defender.event_manager.logger.log(
                 f"{defender.name} resists the damage! (-{decrease_percent:.0%} damage)"
                 )
-                
         return amount
 
     def process_hidden(self, defender, attacker, amount) -> int:
@@ -164,16 +153,15 @@ class DamageCalculator:
         Process hidden status for the attacker.
         """
         if not attacker is None:
-            hidden = attacker.status_manager.get_leveled_status(status_names.HIDDEN.name)
+            hidden = attacker.status_manager.get_leveled_status(StatusNames.HIDDEN.name)
             if hidden is not None:
                 hidden_level = hidden.get_level()
                 hidden_ref = hidden.reference
-                luck = attacker.get_attribute_level(attribute_names.LUCK.name)
+                luck = attacker.get_attribute_level(Attributes.LUCK.name)
                 mult = hidden_ref.calculate_damage_multiplier(hidden_level, luck)
                 amount *= mult
                 if mult > 1:
                     defender.event_manager.logger.log(
                         f"Critical strike! ({mult}x damage)"
                         )
-                        
         return amount
