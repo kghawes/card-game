@@ -17,6 +17,10 @@ class DamageCalculator:
         status_registry = registries.statuses
         attribute_registry = registries.attributes
 
+        amount = self.process_evasion(defender, amount)
+        if amount <= 0:
+            return 0
+
         amount = self.process_hidden(defender, attacker, amount)
 
         amount = self.process_weakness_resist(defender, amount, damage_type)
@@ -156,12 +160,28 @@ class DamageCalculator:
             hidden = attacker.status_manager.get_leveled_status(StatusNames.HIDDEN.name)
             if hidden is not None:
                 hidden_level = hidden.get_level()
-                hidden_ref = hidden.reference
+                hidden_status = hidden.reference
                 luck = attacker.get_attribute_level(Attributes.LUCK.name)
-                mult = hidden_ref.calculate_damage_multiplier(hidden_level, luck)
+                mult = hidden_status.calculate_damage_multiplier(hidden_level, luck)
                 amount *= mult
                 if mult > 1:
                     defender.event_manager.logger.log(
                         f"Critical strike! ({mult}x damage)"
                         )
+        return amount
+    
+    def process_evasion(self, defender, amount) -> int:
+        """
+        Process evasion status for the defender.
+        """
+        evasion = defender.status_manager.get_leveled_status(StatusNames.EVASION.name)
+        if evasion is not None:
+            evasion_status = evasion.reference
+            evasion_level = evasion.get_level()
+            luck = defender.get_attribute_level(Attributes.LUCK.name)
+            amount = evasion_status.calculate_evasion_damage(defender, evasion_level, luck)
+            if amount == 0:
+                defender.event_manager.logger.log(
+                    f"{defender.name} evaded the attack!"
+                    )
         return amount
