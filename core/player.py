@@ -68,3 +68,4 @@ class Player(Combatant):
         self.card_manager.reset_cards()
         self.modifier_manager.reset_all()
         self.status_manager.reset_statuses(self, registries.statuses)
+        self.reset_attribute_deltas()
