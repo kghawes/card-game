@@ -28,7 +28,6 @@ class CombatLog(Widget):
         self.timer_is_running = False
         self.log_toggled_on = False
         self.flush_in_progress = False
-        self.message = ""
         self.remove_widget(self.combat_log_scrollview)  # temporary fix to hide the log until it's needed
 
     def get_log_messages(self, event_manager):
@@ -46,24 +45,25 @@ class CombatLog(Widget):
             delay = 0.0
             while self.queue:
                 # message_info = self.queue.pop(0)
-                # self.message = message_info.get("message", "")
+                # message = message_info.get("message", "")
                 # sound = message_info.get("sound", None)
                 # animation = message_info.get("animation", None)
-                self.message = self.queue.pop(0)
-                Clock.schedule_once(self.display, delay)
+                message = self.queue.pop(0)
+                Clock.schedule_once(self.create_log_updater(message), delay)
                 delay = 0.3 # message_info.get("delay", 0.3)
             self.flush_in_progress = False
             self.timer_is_running = True
             Clock.schedule_once(self.auto_hide_log, delay + 2)
     
-    def display(self, dt):
-        """Displays the current message."""
-        if self.message:
-            if self.combat_log_label.text:
-                self.combat_log_label.text += "\n"
-            self.combat_log_label.text += self.message
-            self.message = ""
-            self.combat_log_scrollview.scroll_y = 0
+    def create_log_updater(self, message):
+        """Create a function that adds a message to the combat log."""
+        def update_log(dt):
+            if message:
+                if self.combat_log_label.text:
+                    self.combat_log_label.text += "\n"
+                self.combat_log_label.text += message
+                self.combat_log_scrollview.scroll_y = 0
+        return update_log
     
     def show_log(self):
         """Shows the combat log if it's not already visible."""
