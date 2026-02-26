@@ -289,19 +289,20 @@ class CombatScreen(Widget):
     
     def toggle_log(self):
         """Toggles the log display."""
-        if self.combat_log.log_shown:
-            self.combat_log.hide_history()
-            self.combat_log.log_shown = False
+        if self.combat_log.log_toggled_on:
+            self.combat_log.log_toggled_on = False
             self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
+            if not self.combat_log.timer_is_running:
+                self.combat_log.hide_log()
         else:
-            self.combat_log.show_history()
-            self.combat_log.log_shown = True
+            self.combat_log.log_toggled_on = True
             self.log_texture = AssetCache.get_texture('gui/assets/logbookopen.png')
-    
+            self.combat_log.show_log()
+
     def show_combat_results(self, player_wins, rewards):
         """Shows the combat results."""
         Clock.unschedule(self.loop_textures)
-        self.combat_log.flush_log_messages(self.event_manager)
+        self.combat_log.flush_queue(self.event_manager)
         self.animation_layer.add_widget(ScreenDarken())
         combat_results = CombatResults(self.event_manager)
         self.add_widget(combat_results)
