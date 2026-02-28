@@ -28,7 +28,6 @@ class CombatLog(Widget):
         self.timer_is_running = False
         self.log_toggled_on = False
         self.flush_in_progress = False
-        self.remove_widget(self.combat_log_scrollview)  # temporary fix to hide the log until it's needed
 
     def get_log_messages(self, event_manager):
         """Fetches new log messages from the event manager."""
