@@ -574,24 +574,32 @@
         CombatLog:
             id: combat_log
             combat_log_label: combat_log_label
+            combat_log_scrollview: combat_log_scrollview
             pos: 316, 324
-            size: 868, combat_log_label.texture_size[1] + 4
+            size: 868, 100
             size_hint: None, None
-            canvas.before:
-                Color:
-                    rgba: (0, 0, 0, 1)
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
 
-            Label:
-                id: combat_log_label
-                text: ''
-                font_size: 16
-                color: (1, 1, 1, 1)
-                size: self.parent.width, self.texture_size[1]
-                size_hint: None, None
-                pos: self.parent.pos
+            ScrollView:
+                id: combat_log_scrollview
+                do_scroll_x: False
+                do_scroll_y: True
+                pos: 316, 324
+                size: 868, 100
+                canvas.before:
+                    Color:
+                        rgba: (0, 0, 0, 1)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    id: combat_log_label
+                    text: ''
+                    font_size: 16
+                    color: (1, 1, 1, 1)
+                    size: self.parent.width, self.texture_size[1]
+                    size_hint: None, None
+                    pos: self.parent.pos
+                    padding: 10, 10
 
         Hand:
             id: hand
