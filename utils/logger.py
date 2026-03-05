@@ -9,6 +9,7 @@ class Logger:
         self.write_to_file = write_to_file
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
+    # TODO: log messages with more structured data (e.g. type, source, etc.) and use that to enhance the combat log display (e.g. different colors for different types of messages)
     def log(self, message, is_debug=False):
         """
         Add a new log entry.

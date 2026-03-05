@@ -24,7 +24,7 @@ class StatusManager:
         if status_id not in self.statuses:
             return
         leveled_status = self.statuses[status_id]
-        leveled_status.reference.expire(subject, self.event_manager.logger)
+        # leveled_status.reference.expire(subject, self.event_manager.logger)
         del self.statuses[status_id]
 
     def get_leveled_status(self, status_id) -> LeveledMechanic:
