@@ -69,7 +69,8 @@ class Card(Widget):
 
     def on_touch_down(self, touch) -> bool:
         """When clicked, pick up the card. Return true to stop event propagation."""
-        if not self.is_draggable or not self.collide_point(touch.x, touch.y):
+        if self.screen.combat_log.timer_is_running or self.screen.combat_log.flush_in_progress \
+            or not self.is_draggable or not self.collide_point(touch.x, touch.y):
             return False
         self.click_location = (touch.x, touch.y)
         self.starting_position = (self.center_x, self.center_y)
