@@ -9,6 +9,7 @@ import gui.gui_constants as constants
 from gui.asset_cache import AssetCache
 from gui.card import Card
 from gui.tooltips import Tooltip
+from gui.combat_log import CombatLog
 
 class Hand(FloatLayout):
     """Widget representing the player's hand of cards."""
@@ -59,50 +60,6 @@ class Hand(FloatLayout):
         for card in self.children[:]:
             self.remove_widget(card)
         self.position_cards()
-
-
-class CombatLog(Widget):
-    """Widget representing the combat log."""
-    combat_log_label = ObjectProperty(None)
-
-    def __init__(self, **kwargs):
-        """Initialize a new CombatLog."""
-        super().__init__(**kwargs)
-        self.history = []
-        self.pending = []
-        self.log_shown = False
-
-    def flush_log_messages(self, event_manager):
-        """Writes all pending log messages to the log display."""
-        self.pending += event_manager.logger.get_combat_logs()
-        if self.pending:
-            Clock.schedule_interval(self.log_message, 0.33)
-    
-    def log_message(self, dt):
-        if self.pending:
-            message = self.pending.pop(0)
-            self.history.append(message)
-            if self.combat_log_label.text:
-                self.combat_log_label.text += "\n"
-            self.combat_log_label.text += message
-        if not self.pending:
-            Clock.unschedule(self.log_message)
-            if not self.log_shown:
-                Clock.schedule_once(self.hide_message, 2)  
-    
-    def hide_message(self, dt):
-        """Hides the current message after a delay."""
-        self.combat_log_label.text = ""
-
-    def show_history(self):
-        """Displays the combat log history."""
-        self.combat_log_label.text = "\n".join(self.history)
-        self.log_shown = True
-    
-    def hide_history(self):
-        """Hides the combat log history."""
-        self.combat_log_label.text = ""
-        self.log_shown = False
 
 
 class ScreenDarken(Widget):
@@ -332,19 +289,20 @@ class CombatScreen(Widget):
     
     def toggle_log(self):
         """Toggles the log display."""
-        if self.combat_log.log_shown:
-            self.combat_log.hide_history()
-            self.combat_log.log_shown = False
+        if self.combat_log.log_toggled_on:
+            self.combat_log.log_toggled_on = False
             self.log_texture = AssetCache.get_texture('gui/assets/logbookclosed.png')
+            if not self.combat_log.timer_is_running:
+                self.combat_log.hide_log()
         else:
-            self.combat_log.show_history()
-            self.combat_log.log_shown = True
+            self.combat_log.log_toggled_on = True
             self.log_texture = AssetCache.get_texture('gui/assets/logbookopen.png')
-    
+            self.combat_log.show_log()
+
     def show_combat_results(self, player_wins, rewards):
         """Shows the combat results."""
         Clock.unschedule(self.loop_textures)
-        self.combat_log.flush_log_messages(self.event_manager)
+        self.combat_log.flush_queue(self.event_manager)
         self.animation_layer.add_widget(ScreenDarken())
         combat_results = CombatResults(self.event_manager)
         self.add_widget(combat_results)

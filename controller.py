@@ -16,7 +16,7 @@ class Controller:
     
     def send_logs(self):
         """Send logs to the GUI."""
-        self.app.game.screen.combat_log.flush_log_messages(self.event_manager)
+        self.app.game.screen.combat_log.flush_queue(self.event_manager)
     
     def display_hand(self, hand):
         """Display the player's hand in the GUI."""

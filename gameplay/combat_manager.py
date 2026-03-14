@@ -14,6 +14,7 @@ class CombatManager:
         Initialize a new CombatManager.
         """
         self.event_manager = event_manager
+        self.turn_number = 0
 
     def is_combat_over(self, player, enemy) -> bool:
         """
@@ -25,6 +26,7 @@ class CombatManager:
         """
         Set up for combat.
         """
+        self.turn_number = 0
         player.card_manager.shuffle()
         enemy.card_manager.shuffle()
         self.event_manager.dispatch('start_combat', enemy)
@@ -44,7 +46,9 @@ class CombatManager:
         #     registries.statuses, combatant.card_manager
         #     )
         combatant.replenish_resources_for_turn()
-        if not combatant.is_enemy:
+        if not combatant.is_enemy:  # Player turn
+            if self.turn_number == 0:
+                self.event_manager.logger.log(f"Enemy {opponent.name} appears!")
             self.event_manager.dispatch('start_action_phase', combatant.card_manager.hand)
 
     def end_of_turn(self, combatant, status_registry):
@@ -153,4 +157,5 @@ class CombatManager:
                         return
                     break
         self.end_of_turn(enemy, registries.statuses)
+        self.turn_number += 1
         self.event_manager.dispatch('end_enemy_turn')

@@ -178,10 +178,17 @@ class ChangeResourceEffect(Effect):
         Change the resource's current value by the amount indicated.
         """
         subject = self.get_target_combatant(source, opponent)
+        old_value = subject.resources[self.resource_enum.name].current
         subject.change_resource(self.resource_enum.name, level)
-        action_string = "restored" if level > 0 else "drained"
+        new_value = subject.resources[self.resource_enum.name].current
+        if level > 0:
+            action_string = "restored"
+            actual_change = new_value - old_value
+        else:
+            action_string = "drained"
+            actual_change = old_value - new_value
         registries.statuses.event_manager.logger.log(
-            f"{abs(level)} {self.resource_enum.value} {action_string}!"
+            f"{actual_change} {self.resource_enum.value} {action_string}!"
         )
 
 
