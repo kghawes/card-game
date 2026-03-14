@@ -3,18 +3,17 @@ This module defines the Card widget class.
 """
 
 from kivy.uix.widget import Widget
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.label import Label
-from kivy.graphics import Rectangle, Color, RoundedRectangle
 from kivy.vector import Vector
-from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty, NumericProperty
+from kivy.properties import ObjectProperty, BooleanProperty, ColorProperty, StringProperty
 from kivy.clock import Clock
 from kivy.core.window import Window
 import gui.gui_constants as constants
 from gui.asset_cache import AssetCache
 
 class Card(Widget):
-    """Widget representing a card."""
+    """
+    Widget representing a card.
+    """
     is_draggable = BooleanProperty(True)
     border_color = ColorProperty([0, 0, 0, 0])
     resource_cost_color = ColorProperty([0, 0, 0, 0])
@@ -28,7 +27,9 @@ class Card(Widget):
     formatted_type = StringProperty('None')
 
     def __init__(self, card_data: dict, screen: Widget, **kwargs):
-        """Initializes a card with the given data."""
+        """
+        Initializes a card with the given data.
+        """
         super().__init__(**kwargs)
         self.screen = screen
         self.animation_layer = screen.animation_layer
@@ -41,7 +42,9 @@ class Card(Widget):
         self.render_card(card_data)
 
     def render_card(self, card_data: dict):
-        """Renders the card with the given data."""
+        """
+        Renders the card with the given data.
+        """
         card_type = card_data['type']
         type_colors = constants.CARD_TYPE_COLORS[card_type]
         self.card_type = card_type
@@ -68,7 +71,9 @@ class Card(Widget):
         self.screen.tooltip.add_tooltip(self, self.tooltip_text)
 
     def on_touch_down(self, touch) -> bool:
-        """When clicked, pick up the card. Return true to stop event propagation."""
+        """
+        When clicked, pick up the card. Return true to stop event propagation.
+        """
         if self.screen.combat_log.timer_is_running or self.screen.combat_log.flush_in_progress \
             or not self.is_draggable or not self.collide_point(touch.x, touch.y):
             return False
@@ -85,7 +90,9 @@ class Card(Widget):
         return True
 
     def on_touch_move(self, touch) -> bool:
-        """Drag the card with the mouse."""
+        """
+        Drag the card with the mouse.
+        """
         if touch.grab_current is self:
             offset = tuple(Vector(*touch.pos) - Vector(*self.click_location))
             new_position = tuple(Vector(*self.starting_position) + Vector(*offset))
@@ -95,7 +102,9 @@ class Card(Widget):
         return False
 
     def on_touch_up(self, touch) -> bool:
-        """Release a held card. Return true to stop event propagation."""
+        """
+        Release a held card. Return true to stop event propagation.
+        """
         if touch.grab_current is self:
             self.screen.tooltip.enable()
             touch.ungrab(self)
@@ -109,18 +118,24 @@ class Card(Widget):
         return False
 
     def return_to_hand(self):
-        """Return the card to the hand."""
+        """
+        Return the card to the hand.
+        """
         self.parent.remove_widget(self)
         self.hand.add_to_hand(self, index=self.hand_index)
         for card in self.hand.children:
             card.is_draggable = True
     
     def show_card_effect(self):
-        """Show the card play effects, then move to discard."""
+        """
+        Show the card play effects, then move to discard.
+        """
         Clock.schedule_once(self.move_to_discard, 1)
 
     def move_to_discard(self, dt=0):
-        """Moves the card to the discard pile."""
+        """
+        Moves the card to the discard pile.
+        """
         self.center_x = self.discard_pile.center_x
         self.center_y = self.discard_pile.center_y
         self.parent.remove_widget(self)
